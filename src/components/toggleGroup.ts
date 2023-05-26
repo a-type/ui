@@ -1,1 +1,1 @@
-export * from './toggleGroup/toggleGroup.jsx';
+export * from './toggleGroup/toggleGroup.js';

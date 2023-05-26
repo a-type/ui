@@ -1,7 +1,7 @@
-export { ParticleLayer } from './ParticleLayer.jsx';
-export { useParticles } from './ParticleContext.jsx';
+export { ParticleLayer } from './ParticleLayer.js';
+export { useParticles } from './ParticleContext.js';
 export {
-	createCircleParticles,
-	elementExplosion as circleParticleExplosion,
-	createElementBorderInitializer,
+  createCircleParticles,
+  elementExplosion as circleParticleExplosion,
+  createElementBorderInitializer,
 } from './particlesState.js';

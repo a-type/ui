@@ -4,4 +4,4 @@ export * from './useStableCallback.js';
 export * from './useToggle.js';
 export * from './useVisualViewportOffset.js';
 export * from './useOnUnmount.js';
-export * from './withClassName.jsx';
+export * from './withClassName.js';
