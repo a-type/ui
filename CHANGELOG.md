@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- b875296: add files field to package
+
 ## 0.1.2
 
 ### Patch Changes
