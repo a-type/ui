@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.4
+
+### Patch Changes
+
+- f4eda44: replace all .jsx imports with .js
+
 ## 0.1.3
 
 ### Patch Changes
