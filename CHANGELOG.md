@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.5
+
+### Patch Changes
+
+- c255926: Tweak some styles
+
 ## 0.1.4
 
 ### Patch Changes
