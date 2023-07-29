@@ -1,80 +1,81 @@
 {
-  "name": "@a-type/ui",
-  "version": "0.1.5",
-  "type": "module",
-  "files": [
-    "/dist"
-  ],
-  "exports": {
-    "./components/*": {
-      "types": "./dist/esm/components/*.d.ts",
-      "import": "./dist/esm/components/*.js",
-      "node": "./dist/esm/components/*.js",
-      "require": "./dist/cjs/components/*.js",
-      "default": "./dist/cjs/components/*.js"
-    },
-    "./hooks": {
-      "types": "./dist/esm/hooks.d.ts",
-      "import": "./dist/esm/hooks.js",
-      "node": "./dist/esm/hooks.js",
-      "require": "./dist/cjs/hooks.js",
-      "default": "./dist/cjs/hooks.js"
-    },
-    "./uno-preset": {
-      "types": "./dist/esm/uno.preset.d.ts",
-      "import": "./dist/esm/uno.preset.js",
-      "node": "./dist/esm/uno.preset.js",
-      "require": "./dist/cjs/uno.preset.js",
-      "default": "./dist/cjs/uno.preset.js"
-    }
-  },
-  "scripts": {
-    "build": "tsc && tsc -P tsconfig-cjs.json",
-    "ci:version": "pnpm changeset version",
-    "ci:publish": "pnpm changeset publish --access=public",
-    "prepublish": "pnpm run build"
-  },
-  "dependencies": {
-    "@a-type/utils": "^1.0.3",
-    "@radix-ui/react-accordion": "^1.0.0",
-    "@radix-ui/react-checkbox": "^1.0.0",
-    "@radix-ui/react-collapsible": "^1.0.2",
-    "@radix-ui/react-context-menu": "^2.1.3",
-    "@radix-ui/react-dialog": "^1.0.0",
-    "@radix-ui/react-dropdown-menu": "^1.0.0",
-    "@radix-ui/react-icons": "^1.1.1",
-    "@radix-ui/react-menu": "^1.0.0",
-    "@radix-ui/react-popover": "^1.0.0",
-    "@radix-ui/react-select": "^1.2.1",
-    "@radix-ui/react-slot": "^1.0.0",
-    "@radix-ui/react-switch": "^1.0.1",
-    "@radix-ui/react-tabs": "^1.0.3",
-    "@radix-ui/react-toast": "^1.0.0",
-    "@radix-ui/react-toggle-group": "^1.0.3",
-    "@radix-ui/react-tooltip": "^1.0.0",
-    "@tiptap/core": "^2.0.3",
-    "@tiptap/extension-document": "^2.0.3",
-    "@tiptap/extension-paragraph": "^2.0.3",
-    "@tiptap/pm": "^2.0.3",
-    "@tiptap/react": "^2.0.3",
-    "@tiptap/starter-kit": "^2.0.3",
-    "browser-image-resizer": "^2.4.1",
-    "classnames": "^2.3.2",
-    "color-interpolate": "^1.0.5",
-    "date-fns": "^2.29.3",
-    "formik": "^2.2.9",
-    "pluralize": "^8.0.0",
-    "prosemirror-model": "^1.18.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.25.0",
-    "@types/pluralize": "^0.0.29",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
-    "@unocss/transformer-variant-group": "^0.51.12",
-    "typescript": "^5.0.2",
-    "unocss": "^0.51.12"
-  }
+	"name": "@a-type/ui",
+	"version": "0.1.5",
+	"type": "module",
+	"files": [
+		"/dist"
+	],
+	"exports": {
+		"./components/*": {
+			"types": "./dist/esm/components/*.d.ts",
+			"import": "./dist/esm/components/*.js",
+			"node": "./dist/esm/components/*.js",
+			"require": "./dist/cjs/components/*.js",
+			"default": "./dist/cjs/components/*.js"
+		},
+		"./hooks": {
+			"types": "./dist/esm/hooks.d.ts",
+			"import": "./dist/esm/hooks.js",
+			"node": "./dist/esm/hooks.js",
+			"require": "./dist/cjs/hooks.js",
+			"default": "./dist/cjs/hooks.js"
+		},
+		"./uno-preset": {
+			"types": "./dist/esm/uno.preset.d.ts",
+			"import": "./dist/esm/uno.preset.js",
+			"node": "./dist/esm/uno.preset.js",
+			"require": "./dist/cjs/uno.preset.js",
+			"default": "./dist/cjs/uno.preset.js"
+		}
+	},
+	"scripts": {
+		"build": "tsc && tsc -P tsconfig-cjs.json",
+		"ci:version": "pnpm changeset version",
+		"ci:publish": "pnpm changeset publish --access=public",
+		"prepublish": "pnpm run build"
+	},
+	"dependencies": {
+		"@a-type/utils": "^1.0.3",
+		"@radix-ui/react-accordion": "^1.0.0",
+		"@radix-ui/react-checkbox": "^1.0.0",
+		"@radix-ui/react-collapsible": "^1.0.2",
+		"@radix-ui/react-context-menu": "^2.1.3",
+		"@radix-ui/react-dialog": "^1.0.0",
+		"@radix-ui/react-dropdown-menu": "^1.0.0",
+		"@radix-ui/react-icons": "^1.1.1",
+		"@radix-ui/react-menu": "^1.0.0",
+		"@radix-ui/react-popover": "^1.0.0",
+		"@radix-ui/react-select": "^1.2.1",
+		"@radix-ui/react-slot": "^1.0.0",
+		"@radix-ui/react-switch": "^1.0.1",
+		"@radix-ui/react-tabs": "^1.0.3",
+		"@radix-ui/react-toast": "^1.0.0",
+		"@radix-ui/react-toggle-group": "^1.0.3",
+		"@radix-ui/react-tooltip": "^1.0.0",
+		"@tiptap/core": "^2.0.3",
+		"@tiptap/extension-document": "^2.0.3",
+		"@tiptap/extension-paragraph": "^2.0.3",
+		"@tiptap/pm": "^2.0.3",
+		"@tiptap/react": "^2.0.3",
+		"@tiptap/starter-kit": "^2.0.3",
+		"browser-image-resizer": "^2.4.1",
+		"classnames": "^2.3.2",
+		"color-interpolate": "^1.0.5",
+		"date-fns": "^2.29.3",
+		"formik": "^2.2.9",
+		"pluralize": "^8.0.0",
+		"prosemirror-model": "^1.18.0",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.25.0",
+		"@types/pluralize": "^0.0.29",
+		"@types/react": "^18.0.14",
+		"@types/react-dom": "^18.0.5",
+		"@unocss/transformer-variant-group": "^0.54.0",
+		"@unocss/core": "^0.54.0",
+		"typescript": "^5.0.2",
+		"unocss": "^0.54.0"
+	}
 }
