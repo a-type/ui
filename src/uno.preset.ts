@@ -1,5 +1,5 @@
 import { PreflightContext, Preset, presetUno } from 'unocss';
-import { entriesToCss } from '@unocss/core';
+import { entriesToCss, toArray } from '@unocss/core';
 
 export default function presetAglio(): Preset {
 	return {
