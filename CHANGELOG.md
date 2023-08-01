@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.6
+
+### Patch Changes
+
+- 1de61b9: fix preflight and css layer conflict issue
+
 ## 0.1.5
 
 ### Patch Changes
