@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.7
+
+### Patch Changes
+
+- 16336a6: Add Dialog gestures, Card components
+
 ## 0.1.6
 
 ### Patch Changes
