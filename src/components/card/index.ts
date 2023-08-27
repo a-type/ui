@@ -1,1 +1,1 @@
-export * from './index.js';
+export * from './Card.jsx';

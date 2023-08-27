@@ -1,9 +1,13 @@
 import { PreflightContext, Preset, presetUno } from 'unocss';
 import { entriesToCss, toArray } from '@unocss/core';
 
-export default function presetAglio(): Preset {
+export default function presetAglio({
+	spacingIncrement = 0.5,
+}: {
+	spacingIncrement?: number;
+}): Preset {
 	return {
-		name: 'aglio',
+		name: 'atype',
 		enforce: 'post',
 		theme: {
 			colors: {
@@ -73,22 +77,7 @@ export default function presetAglio(): Preset {
 				'8xl': ['6rem', '6.5rem'],
 				'9xl': ['7rem', '7.5rem'],
 			},
-			spacing: {
-				0: '0',
-				1: '0.25rem',
-				2: '0.5rem',
-				3: '0.75rem',
-				4: '1rem',
-				5: '1.25rem',
-				6: '1.5rem',
-				7: '1.75rem',
-				8: '2rem',
-				9: '2.25rem',
-				10: '2.5rem',
-				11: '2.75rem',
-				12: '3rem',
-				20: '5rem',
-			},
+			spacing: makeSpacing(spacingIncrement),
 			borderRadius: {
 				sm: '0.25rem',
 				md: '0.5rem',
@@ -705,3 +694,13 @@ function generateColors(from: number, to: number) {
 
 const lightColors = generateColors(90, 40);
 const darkColors = generateColors(0, 60);
+
+function makeSpacing(increment: number) {
+	return new Array(20)
+		.fill(0)
+		.map((_, i) => `${(i * increment).toFixed(2)}rem`)
+		.reduce((acc, cur, i) => {
+			acc[i] = cur;
+			return acc;
+		}, {} as Record<string, string>);
+}
