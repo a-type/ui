@@ -5,7 +5,7 @@ export default function presetAglio({
 	spacingIncrement = 0.5,
 }: {
 	spacingIncrement?: number;
-}): Preset {
+} = {}): Preset {
 	return {
 		name: 'atype',
 		enforce: 'post',
