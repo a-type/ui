@@ -2,7 +2,7 @@ import { PreflightContext, Preset, presetUno } from 'unocss';
 import { entriesToCss, toArray } from '@unocss/core';
 
 export default function presetAglio({
-	spacingIncrement = 0.5,
+	spacingIncrement = 0.25,
 }: {
 	spacingIncrement?: number;
 } = {}): Preset {
