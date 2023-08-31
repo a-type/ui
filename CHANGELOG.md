@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.10
+
+### Patch Changes
+
+- 90fd295: Revert spacing increment default
+
 ## 0.1.9
 
 ### Patch Changes
