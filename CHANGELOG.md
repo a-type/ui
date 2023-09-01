@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.1.11
+
+### Patch Changes
+
+- 7a65c0a: tweak animations
+- 1fee5b7: Add icons
+
 ## 0.1.10
 
 ### Patch Changes
