@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { withClassName } from '../../hooks.js';
-import { forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 export const navBarItemClass = classNames(
@@ -14,6 +14,7 @@ export const navBarItemClass = classNames(
 export interface NavBarItemProps {
 	asChild?: boolean;
 	className?: string;
+	children?: ReactNode;
 }
 
 export const NavBarItem = forwardRef<HTMLDivElement, NavBarItemProps>(
