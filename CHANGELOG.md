@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.13
+
+### Patch Changes
+
+- f86e452: Add missing prop to navbaritem
+
 ## 0.1.12
 
 ### Patch Changes
