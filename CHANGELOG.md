@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.12
+
+### Patch Changes
+
+- b108df2: Simplify page layout, add navbar primitives
+
 ## 0.1.11
 
 ### Patch Changes
