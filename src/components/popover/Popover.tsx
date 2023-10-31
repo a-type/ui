@@ -10,17 +10,13 @@ const StyledContent = withClassName(
 	PopoverPrimitive.Content,
 	'layer-components:(rounded-xl min-w-120px bg-white z-menu shadow-lg border-default op-0 display-none max-w-90vw)',
 	'will-change-transform',
-	'animate-ease-springy animate-duration-200',
+	'layer-components:transform-origin-[var(--radix-popover-transform-origin)]',
+	'layer-components:[&[data-state=open]]:animate-popover-in',
+	'layer-components:[&[data-state=closed]]:animate-popover-out',
 	'important:motion-reduce:animate-none',
-	'[&[data-state=open][data-side=top]]:animate-name-fade-in-down',
-	'[&[data-state=open][data-side=right]]:animate-name-fade-in-left',
-	'[&[data-state=open][data-side=bottom]]:animate-name-fade-in-up',
-	'[&[data-state=open][data-side=left]]:animate-name-fade-in-right',
-	'[&[data-state=closed][data-side=top]]:animate-name-fade-out-up',
-	'[&[data-state=closed][data-side=right]]:animate-name-fade-out-right',
-	'[&[data-state=closed][data-side=bottom]]:animate-name-fade-out-down',
-	'[&[data-state=closed][data-side=left]]:animate-name-fade-out-left',
+	'layer-components:(max-h-[var(--radix-popover-content-available-height)] overflow-y-auto)',
 	'layer-components:[&[data-state=open]]:(opacity-100 flex flex-col)',
+	'layer-components:[&[data-state=closed]]:pointer-events-none',
 );
 
 const StyledArrow = withClassName(
