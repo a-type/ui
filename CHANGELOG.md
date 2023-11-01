@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.14
+
+### Patch Changes
+
+- 8bb1ebe: Tighten up some animations
+
 ## 0.1.13
 
 ### Patch Changes
