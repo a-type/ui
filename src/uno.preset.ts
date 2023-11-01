@@ -278,6 +278,7 @@ export default function presetAglio({
 					'fade-out-right': '200ms',
 					'fade-in-up-big': '300ms',
 					'fade-in-down-big': '300ms',
+					'fade-out-down-big': '300ms',
 					'fade-in-left-big': '300ms',
 					'fade-in-right-big': '300ms',
 					'fade-in': '200ms',
@@ -713,21 +714,24 @@ function asPaletteValue(num: number) {
 }
 function generateColors(from: number, to: number) {
 	const increment = (to - from) / 3;
-	const map = themeColors.reduce((acc, color) => {
-		acc[`--color-${color}-wash`] = `var(--palette-${color}-${asPaletteValue(
-			from,
-		)})`;
-		acc[`--color-${color}-light`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment),
-		)})`;
-		acc[`--color-${color}`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment * 2),
-		)})`;
-		acc[`--color-${color}-dark`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment * 3),
-		)})`;
-		return acc;
-	}, {} as Record<string, string>);
+	const map = themeColors.reduce(
+		(acc, color) => {
+			acc[`--color-${color}-wash`] = `var(--palette-${color}-${asPaletteValue(
+				from,
+			)})`;
+			acc[`--color-${color}-light`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment),
+			)})`;
+			acc[`--color-${color}`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment * 2),
+			)})`;
+			acc[`--color-${color}-dark`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment * 3),
+			)})`;
+			return acc;
+		},
+		{} as Record<string, string>,
+	);
 	return Object.entries(map).reduce(
 		(str, [key, value]) => str + `${key}: ${value};\n`,
 		'',
@@ -741,8 +745,11 @@ function makeSpacing(increment: number) {
 	return new Array(20)
 		.fill(0)
 		.map((_, i) => `${(i * increment).toFixed(2)}rem`)
-		.reduce((acc, cur, i) => {
-			acc[i] = cur;
-			return acc;
-		}, {} as Record<string, string>);
+		.reduce(
+			(acc, cur, i) => {
+				acc[i] = cur;
+				return acc;
+			},
+			{} as Record<string, string>,
+		);
 }
