@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.15
+
+### Patch Changes
+
+- 76e114b: Speed up dialog exit on mobile
+
 ## 0.1.14
 
 ### Patch Changes
