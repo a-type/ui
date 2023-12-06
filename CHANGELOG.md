@@ -1,5 +1,23 @@
 # @a-type/ui
 
+## 0.1.15
+
+### Patch Changes
+
+- 76e114b: Speed up dialog exit on mobile
+
+## 0.1.14
+
+### Patch Changes
+
+- 8bb1ebe: Tighten up some animations
+
+## 0.1.13
+
+### Patch Changes
+
+- f86e452: Add missing prop to navbaritem
+
 ## 0.1.12
 
 ### Patch Changes

@@ -227,11 +227,19 @@ export default function presetAglio({
 						0% { opacity: 1; transform: translate3d(0, 0, 0); }
 						100% { opacity: 0; transform: translate3d(100px, 0, 0); }
 					}`,
+					'popover-in': `{
+						0% { opacity: 0; transform: scale(0.95); }
+						100% { opacity: 1; transform: scale(1); }
+					}`,
+					'popover-out': `{
+						0% { opacity: 1; transform: scale(1); }
+						100% { opacity: 0; transform: scale(0.95); }
+					}`,
 				},
 				timingFns: {
 					linear: 'linear',
 					springy: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-					'ease-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+					'ease-out': 'ease-out',
 					'fade-in-up': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'fade-in-down': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'fade-in-left': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
@@ -260,28 +268,31 @@ export default function presetAglio({
 					'item-disappear': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 				},
 				durations: {
-					'fade-in-up': '300ms',
-					'fade-in-down': '300ms',
-					'fade-in-left': '300ms',
-					'fade-in-right': '300ms',
-					'fade-out-up': '300ms',
-					'fade-out-down': '300ms',
-					'fade-out-left': '300ms',
-					'fade-out-right': '300ms',
-					'fade-in-up-big': '400ms',
-					'fade-in-down-big': '400ms',
-					'fade-in-left-big': '400ms',
-					'fade-in-right-big': '400ms',
+					'fade-in-up': '200ms',
+					'fade-in-down': '200ms',
+					'fade-in-left': '200ms',
+					'fade-in-right': '200ms',
+					'fade-out-up': '200ms',
+					'fade-out-down': '200ms',
+					'fade-out-left': '200ms',
+					'fade-out-right': '200ms',
+					'fade-in-up-big': '300ms',
+					'fade-in-down-big': '300ms',
+					'fade-out-down-big': '300ms',
+					'fade-in-left-big': '300ms',
+					'fade-in-right-big': '300ms',
 					'fade-in': '200ms',
 					'fade-out': '200ms',
 					'scan-line': '1.5s',
-					'radix-collapsible-open-vertical': '300ms',
-					'radix-collapsible-close-vertical': '300ms',
-					'radix-collapsible-open-horizontal': '300ms',
-					'radix-collapsible-close-horizontal': '300ms',
-					'radix-collapsible-open-both': '300ms',
-					'radix-collapsible-close-both': '300ms',
+					'radix-collapsible-open-vertical': '200ms',
+					'radix-collapsible-close-vertical': '200ms',
+					'radix-collapsible-open-horizontal': '200ms',
+					'radix-collapsible-close-horizontal': '200ms',
+					'radix-collapsible-open-both': '200ms',
+					'radix-collapsible-close-both': '200ms',
 					'item-disappear': '300ms',
+					'popover-in': '100ms',
+					'popover-out': '100ms',
 				},
 			},
 		},
@@ -703,21 +714,24 @@ function asPaletteValue(num: number) {
 }
 function generateColors(from: number, to: number) {
 	const increment = (to - from) / 3;
-	const map = themeColors.reduce((acc, color) => {
-		acc[`--color-${color}-wash`] = `var(--palette-${color}-${asPaletteValue(
-			from,
-		)})`;
-		acc[`--color-${color}-light`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment),
-		)})`;
-		acc[`--color-${color}`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment * 2),
-		)})`;
-		acc[`--color-${color}-dark`] = `var(--palette-${color}-${asPaletteValue(
-			from + roundTens(increment * 3),
-		)})`;
-		return acc;
-	}, {} as Record<string, string>);
+	const map = themeColors.reduce(
+		(acc, color) => {
+			acc[`--color-${color}-wash`] = `var(--palette-${color}-${asPaletteValue(
+				from,
+			)})`;
+			acc[`--color-${color}-light`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment),
+			)})`;
+			acc[`--color-${color}`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment * 2),
+			)})`;
+			acc[`--color-${color}-dark`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment * 3),
+			)})`;
+			return acc;
+		},
+		{} as Record<string, string>,
+	);
 	return Object.entries(map).reduce(
 		(str, [key, value]) => str + `${key}: ${value};\n`,
 		'',
@@ -731,8 +745,11 @@ function makeSpacing(increment: number) {
 	return new Array(20)
 		.fill(0)
 		.map((_, i) => `${(i * increment).toFixed(2)}rem`)
-		.reduce((acc, cur, i) => {
-			acc[i] = cur;
-			return acc;
-		}, {} as Record<string, string>);
+		.reduce(
+			(acc, cur, i) => {
+				acc[i] = cur;
+				return acc;
+			},
+			{} as Record<string, string>,
+		);
 }
