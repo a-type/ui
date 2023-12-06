@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.16
+
+### Patch Changes
+
+- c14bd67: new icons: snowflake and clock
+
 ## 0.1.15
 
 ### Patch Changes
