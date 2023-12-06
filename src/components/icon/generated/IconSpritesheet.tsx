@@ -272,13 +272,47 @@ export const IconSpritesheet = (props: any) => (
 					strokeLinecap="round"
 				/>
 			</symbol>
-			<symbol id="icon-name24" viewBox="0 0 15 15">
+			<symbol id="icon-check" viewBox="0 0 15 15">
 				<path
 					d="M1.5 7.5L5.5 11.5L12.5 3.5"
 					stroke="currentColor"
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				/>
+			</symbol>
+			<symbol id="icon-snowflake" viewBox="0 0 15 15">
+				<path
+					d="M7.5 4V11M7.5 4L5.5 2M7.5 4L9.5 2M7.5 4V1M7.5 11L5.5 13M7.5 11L9.5 13M7.5 11V14"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M4.46893 9.25L10.5311 5.75M4.46893 9.25L3.73687 11.9821M4.46893 9.25L1.73687 8.51795M4.46893 9.25L1.87085 10.75M10.5311 5.75L13.2632 6.48206M10.5311 5.75L11.2632 3.01795M10.5311 5.75L13.1292 4.25"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M4.46893 5.75L10.5311 9.25M4.46893 5.75L1.73687 6.48206M4.46893 5.75L3.73687 3.01795M4.46893 5.75L1.87085 4.25M10.5311 9.25L11.2632 11.9821M10.5311 9.25L13.2632 8.51795M10.5311 9.25L13.1292 10.75"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-clock" viewBox="0 0 15 15">
+				<g clipPath="url(#clip0_816_59)">
+					<path
+						d="M7.50004 2.5V7.49998L10.5 9.5M14.1667 7.49998C14.1667 11.1819 11.1819 14.1666 7.50004 14.1666C3.81814 14.1666 0.833374 11.1819 0.833374 7.49998C0.833374 3.81808 3.81814 0.833313 7.50004 0.833313C11.1819 0.833313 14.1667 3.81808 14.1667 7.49998Z"
+						stroke="currentColor"
+						strokeLinecap="round"
+					/>
+				</g>
+				<defs>
+					<clipPath id="clip0_816_59">
+						<rect width="15" height="15" fill="white" />
+					</clipPath>
+				</defs>
 			</symbol>
 		</defs>
 	</svg>
