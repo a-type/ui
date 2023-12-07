@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.1.17
+
+### Patch Changes
+
+- 874bfba: Style update for tabs, wording change for relative time
+
 ## 0.1.16
 
 ### Patch Changes
