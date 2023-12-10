@@ -1,5 +1,15 @@
 # @a-type/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- ce562d7: Add Avatar and AvatarList components
+
+### Patch Changes
+
+- 84b623c: Allow asChild for Button (slotting)
+
 ## 0.1.17
 
 ### Patch Changes
