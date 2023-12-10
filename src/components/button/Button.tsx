@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { Spinner } from '../spinner.js';
 import { getButtonClassName } from './classes.js';
+import { Slot } from '@radix-ui/react-slot';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?:
@@ -16,6 +17,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
+	asChild?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -30,12 +32,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			loading,
 			children,
 			disabled,
+			asChild,
 			...props
 		},
 		ref,
 	) {
+		const Comp = asChild ? Slot : 'button';
+
 		return (
-			<button
+			<Comp
 				ref={ref}
 				{...props}
 				disabled={disabled || loading}
@@ -48,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			>
 				{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
 				{children}
-			</button>
+			</Comp>
 		);
 	},
 );
