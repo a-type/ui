@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@a-type/utils':
-    specifier: ^1.0.3
-    version: 1.0.3
+    specifier: ^1.0.5
+    version: 1.0.5
   '@radix-ui/react-accordion':
     specifier: ^1.0.0
     version: 1.0.0(react-dom@18.2.0)(react@18.2.0)
@@ -187,8 +187,8 @@ devDependencies:
 
 packages:
 
-  /@a-type/utils@1.0.3:
-    resolution: {integrity: sha512-qLYzci9fwxdYp7oM1s9j6EOx8bBWeLA80hkd9JPbktrc1C9OOTAAb3vqFSVh+VauL065UEUYcuE2DAoF123SlA==}
+  /@a-type/utils@1.0.5:
+    resolution: {integrity: sha512-1MEpaLVUVAnshysXY5+wMBLR6dBoutukdY2sFoxH2jghuSDRhMSXfUy6ai6voaVOIMqgZf3+QI06HBJDvmqikw==}
     dev: false
 
   /@adobe/css-tools@4.3.2:
