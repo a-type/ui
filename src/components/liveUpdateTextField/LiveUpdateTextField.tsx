@@ -27,6 +27,7 @@ export type LiveUpdateTextFieldProps = {
 	required?: boolean;
 	placeholder?: string;
 	type?: InputProps['type'];
+	id?: string;
 };
 
 /**
