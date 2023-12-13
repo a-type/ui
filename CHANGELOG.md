@@ -1,5 +1,13 @@
 # @a-type/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- 1c95cf7: Add id to LiveUpdateTextField
+- 40d1918: Add chip component
+- b05878e: Export CheckboxRoot
+
 ## 0.2.0
 
 ### Minor Changes
