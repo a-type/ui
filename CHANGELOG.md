@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.2.4
+
+### Patch Changes
+
+- 2ba2d9c1: Just get rid of color interpolation dependency
+
 ## 0.2.3
 
 ### Patch Changes
