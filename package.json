@@ -67,6 +67,8 @@
 		"browser-image-resizer": "^2.4.1",
 		"classnames": "^2.3.2",
 		"color-interpolate": "^1.0.5",
+		"color-parse": "^2.0.0",
+		"color-space": "^2.0.1",
 		"date-fns": "^2.29.3",
 		"formik": "^2.2.9",
 		"pluralize": "^8.0.0",

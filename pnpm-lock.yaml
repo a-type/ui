@@ -92,6 +92,12 @@ dependencies:
   color-interpolate:
     specifier: ^1.0.5
     version: 1.0.5
+  color-parse:
+    specifier: ^2.0.0
+    version: 2.0.0
+  color-space:
+    specifier: ^2.0.1
+    version: 2.0.1
   date-fns:
     specifier: ^2.29.3
     version: 2.29.3
@@ -6531,11 +6537,21 @@ packages:
       color-name: 1.1.4
     dev: false
 
+  /color-parse@2.0.0:
+    resolution: {integrity: sha512-g2Z+QnWsdHLppAbrpcFWo629kLOnOPtpxYV69GCqm92gqSgyXbzlfyN3MXs0412fPBkFmiuS+rXposgBgBa6Kg==}
+    dependencies:
+      color-name: 1.1.4
+    dev: false
+
   /color-space@1.16.0:
     resolution: {integrity: sha512-A6WMiFzunQ8KEPFmj02OnnoUnqhmSaHaZ/0LVFcPTdlvm8+3aMJ5x1HRHy3bDHPkovkf4sS0f4wsVvwk71fKkg==}
     dependencies:
       hsluv: 0.0.3
       mumath: 3.3.4
+    dev: false
+
+  /color-space@2.0.1:
+    resolution: {integrity: sha512-nKqUYlo0vZATVOFHY810BSYjmCARrG7e5R3UE3CQlyjJTvv5kSSmPG1kzm/oDyyqjehM+lW1RnEt9It9GNa5JA==}
     dev: false
 
   /colorette@2.0.20:

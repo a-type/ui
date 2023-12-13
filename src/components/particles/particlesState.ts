@@ -1,5 +1,4 @@
-// @ts-ignore
-import mixColor from 'color-interpolate';
+import { colorInterpolate } from '../../util/colorInterpolate.js';
 
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
@@ -233,10 +232,13 @@ export function createCircleParticles({
 	color?: string | [string, string];
 }): ParticleSpawn {
 	const colorMixer =
-		typeof color === 'string' ? mixColor([color, color]) : mixColor(color);
+		typeof color === 'string'
+			? colorInterpolate([color, color])
+			: colorInterpolate(color);
 	return {
 		count,
 		behavior: (ctx, x, y, lifetime, lifespan) => {
+			console.log('hi');
 			const lifetimePercentage = Math.max(0, Math.min(1, lifetime / lifespan));
 			const finalColor = colorMixer(lifetimePercentage);
 			const radius = Math.max(
