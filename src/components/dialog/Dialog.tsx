@@ -62,7 +62,18 @@ export const Content = forwardRef<
 						particles.elementExplosion({
 							count: 20,
 							borders: ['top'],
-							color: ['#00000002', '#00000000'],
+							color: [
+								{
+									space: 'rgb',
+									values: [0, 0, 0],
+									opacity: 0.02,
+								},
+								{
+									space: 'rgb',
+									values: [0, 0, 0],
+									opacity: 0,
+								},
+							],
 							element,
 							startRadius: 15,
 							endRadius: 0,
