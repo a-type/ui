@@ -1,5 +1,3 @@
-import { colorInterpolate } from '../../util/colorInterpolate.js';
-
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
 	private ctx: CanvasRenderingContext2D | null = null;
@@ -223,18 +221,17 @@ export function createCircleParticles({
 	startRadius = 4,
 	endRadius = 0,
 	initializer,
-	color = 'red',
+	color = YELLOW,
 }: {
 	count: number;
 	startRadius?: number;
 	endRadius?: number;
 	initializer: ParticleInitializer;
-	color?: string | [string, string];
+	color?: Color | [Color, Color];
 }): ParticleSpawn {
-	const colorMixer =
-		typeof color === 'string'
-			? colorInterpolate([color, color])
-			: colorInterpolate(color);
+	const colorMixer = Array.isArray(color)
+		? colorInterpolate(color)
+		: colorInterpolate([color, color]);
 	return {
 		count,
 		behavior: (ctx, x, y, lifetime, lifespan) => {
@@ -246,7 +243,7 @@ export function createCircleParticles({
 				startRadius + (endRadius - startRadius) * lifetimePercentage,
 			);
 			ctx.beginPath();
-			ctx.fillStyle = finalColor;
+			ctx.fillStyle = colorToString(finalColor);
 			ctx.arc(x, y, radius, 0, 2 * Math.PI);
 			ctx.fill();
 		},
@@ -348,9 +345,26 @@ export const createElementBorderInitializer = ({
 	};
 };
 
+export type Color = {
+	space: 'rgb';
+	values: [number, number, number];
+	opacity: number;
+};
+
+const YELLOW: Color = {
+	space: 'rgb',
+	values: [249, 231, 148],
+	opacity: 1,
+};
+const TRANSPARENT: Color = {
+	space: 'rgb',
+	values: [255, 255, 255],
+	opacity: 0,
+};
+
 export const elementExplosion = ({
 	element,
-	color = ['#f9e794', '#f9e79400'],
+	color = [YELLOW, TRANSPARENT],
 	borders,
 	lifespan,
 	force,
@@ -360,7 +374,7 @@ export const elementExplosion = ({
 	...rest
 }: {
 	element: HTMLElement;
-	color?: string | [string, string];
+	color?: Color | [Color, Color];
 	count: number;
 	startRadius?: number;
 	endRadius?: number;
@@ -429,12 +443,12 @@ export const createWindowBorderInitializer = ({
 };
 
 export const windowBorderExplosion = ({
-	color = ['#f9e794', '#f9e79400'],
+	color = [YELLOW, TRANSPARENT],
 	border = 'top',
 	lifespan,
 	...rest
 }: {
-	color?: string | [string, string];
+	color?: Color | [Color, Color];
 	count: number;
 	startRadius?: number;
 	endRadius?: number;
@@ -449,3 +463,41 @@ export const windowBorderExplosion = ({
 		color,
 		...rest,
 	});
+
+function colorInterpolate(colors: [Color, Color]) {
+	return function interpolate(value: number): Color {
+		if (colors[0].space !== colors[1].space) {
+			throw new Error('Cannot interpolate between colors of different spaces');
+		}
+		if (colors[0].space === 'rgb') {
+			return interpolateRgb(colors[0], colors[1], value);
+		} else {
+			throw new Error(`Unsupported color space ${colors[0].space}`);
+		}
+	};
+}
+
+function interpolateRgb(color1: Color, color2: Color, value: number): Color {
+	const result: Color = {
+		space: 'rgb' as const,
+		values: [0, 0, 0],
+		opacity: 0,
+	};
+	for (let i = 0; i < 3; i++) {
+		result.values[i] =
+			color1.values[i] + (color2.values[i] - color1.values[i]) * value;
+	}
+	result.opacity = color1.opacity + (color2.opacity - color1.opacity) * value;
+	return result;
+}
+
+function colorToString(color: Color): string {
+	if (color.space === 'rgb') {
+		return colorRgbToString(color);
+	}
+	throw new Error(`Unsupported color space ${color.space}`);
+}
+
+function colorRgbToString(color: Color) {
+	return `rgb(${color.values[0]}, ${color.values[1]}, ${color.values[2]})`;
+}
