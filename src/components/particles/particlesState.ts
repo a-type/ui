@@ -1,5 +1,4 @@
-import { MouseEvent } from 'react';
-import mixColor from 'color-interpolate';
+import { colors as colorMix } from 'just-mix';
 
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
@@ -233,7 +232,9 @@ export function createCircleParticles({
 	color?: string | [string, string];
 }): ParticleSpawn {
 	const colorMixer =
-		typeof color === 'string' ? mixColor([color, color]) : mixColor(color);
+		typeof color === 'string'
+			? colorMix(color, color)
+			: colorMix(color[0], color[1]);
 	return {
 		count,
 		behavior: (ctx, x, y, lifetime, lifespan) => {

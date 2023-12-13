@@ -98,6 +98,9 @@ dependencies:
   formik:
     specifier: ^2.2.9
     version: 2.2.9(react@18.2.0)
+  just-mix:
+    specifier: ^0.3.3
+    version: 0.3.3
   pluralize:
     specifier: ^8.0.0
     version: 8.0.0
@@ -8411,6 +8414,10 @@ packages:
     optionalDependencies:
       graceful-fs: 4.2.11
     dev: true
+
+  /just-mix@0.3.3:
+    resolution: {integrity: sha512-JLuyd7yFx8g1hLlYAZ9qHKrr0Y1/1wqxsjUYk5utUVz0nzZlLWLH2iSrzSWyttSPpjFNvReMzp6iNRr+WykYwg==}
+    dev: false
 
   /kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
