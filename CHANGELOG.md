@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- 4242bf9: Change color interpolation library
+
 ## 0.2.1
 
 ### Patch Changes
