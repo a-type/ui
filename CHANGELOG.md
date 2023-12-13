@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.2.3
+
+### Patch Changes
+
+- a018b1c: Remove particle color interpolation dependency
+
 ## 0.2.2
 
 ### Patch Changes
