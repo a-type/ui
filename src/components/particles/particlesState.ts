@@ -1,4 +1,5 @@
-import { colors as colorMix } from 'just-mix';
+// @ts-ignore
+import mixColor from 'color-interpolate';
 
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
@@ -232,9 +233,7 @@ export function createCircleParticles({
 	color?: string | [string, string];
 }): ParticleSpawn {
 	const colorMixer =
-		typeof color === 'string'
-			? colorMix(color, color)
-			: colorMix(color[0], color[1]);
+		typeof color === 'string' ? mixColor([color, color]) : mixColor(color);
 	return {
 		count,
 		behavior: (ctx, x, y, lifetime, lifespan) => {
