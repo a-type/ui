@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.2.5
+
+### Patch Changes
+
+- fc553195: Update utility library dependency
+
 ## 0.2.4
 
 ### Patch Changes
