@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 526e5f0e: Add Camera components
+- c53bcaaf: rounded corners
+
 ## 0.2.5
 
 ### Patch Changes
