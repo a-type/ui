@@ -235,7 +235,6 @@ export function createCircleParticles({
 	return {
 		count,
 		behavior: (ctx, x, y, lifetime, lifespan) => {
-			console.log('hi');
 			const lifetimePercentage = Math.max(0, Math.min(1, lifetime / lifespan));
 			const finalColor = colorMixer(lifetimePercentage);
 			const radius = Math.max(

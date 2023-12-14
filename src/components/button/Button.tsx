@@ -11,7 +11,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 		| 'ghost'
 		| 'destructive'
 		| 'ghostDestructive'
-		| 'accent';
+		| 'accent'
+		| 'contrast';
 	size?: 'default' | 'small' | 'icon';
 	toggled?: boolean;
 	align?: 'start' | 'stretch' | 'end';
