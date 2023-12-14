@@ -21,17 +21,20 @@ import { useDrag } from '@use-gesture/react';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'bg-overlay fixed inset-0 z-dialog-backdrop animate-fade-in [&[data-state=closed]]:animate-fade-out animate-duration-200 motion-reduce:animate-none',
+	'layer-components(bg-overlay fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200)',
+	'layer-components:[&[data-state=closed]]:animate-fade-out',
+	'motion-reduce:animate-none',
 );
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'z-dialog fixed bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] left-0 right-0 h-min-content max-h-[calc(0.85*var(--viewport-height,100vh))]',
-	'translate-0 transform-gpu',
+	'layer-components:(translate-0 z-dialog fixed bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] left-0 right-0 h-min-content max-h-[calc(0.85*var(--viewport-height,100vh))])',
+	'transform-gpu',
 	'animate-ease-out',
-	'shadow-xl bg-white rounded-tl-xl rounded-tr-xl p-6 pt-8 border-default border-b-0 overflow-y-auto flex flex-col pb-[calc(3rem+env(safe-area-inset-bottom,0px))]',
+	'layer-components:(shadow-xl bg-white rounded-tl-xl rounded-tr-xl p-6 pt-8 border-default border-b-0 overflow-y-auto flex flex-col pb-[calc(3rem+env(safe-area-inset-bottom,0px))])',
 	'animate-fade-in-up-big animate-duration-200 [&[data-state=closed]]:animate-fade-out-down-big animate-ease-in motion-reduce:animate-none',
-	'sm:(animate-duration-200 left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh pb-6 rounded-lg border-b-1 animate-keyframes-fade-in [&[data-state=closed]]:animate-keyframes-fade-out motion-reduce:animate-none pt-6)',
+	'layer-components:sm:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh pb-6 rounded-lg border-b-1 pt-6)',
+	'sm:(animate-duration-200 animate-keyframes-fade-in [&[data-state=closed]]:animate-keyframes-fade-out motion-reduce:animate-none)',
 );
 
 export const Content = forwardRef<
