@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.3.2
+
+### Patch Changes
+
+- 0a342c88: Fix camera getting stuck on
+- 39bf6a29: Upgrade imageuploader with camera function
+
 ## 0.3.1
 
 ### Patch Changes
