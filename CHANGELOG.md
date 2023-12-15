@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.3.1
+
+### Patch Changes
+
+- 38b6a2fd: Better dialog animation
+
 ## 0.3.0
 
 ### Minor Changes
