@@ -34,7 +34,7 @@ const StyledContent = withClassName(
 	'layer-components:(shadow-xl bg-white rounded-tl-xl rounded-tr-xl p-6 pt-8 border-default border-b-0 overflow-y-auto flex flex-col pb-[calc(3rem+env(safe-area-inset-bottom,0px))])',
 	'animate-fade-in-up-big animate-duration-200 [&[data-state=closed]]:animate-fade-out-down-big animate-ease-in motion-reduce:animate-none',
 	'layer-components:sm:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh pb-6 rounded-lg border-b-1 pt-6)',
-	'sm:(animate-duration-200 animate-keyframes-fade-in [&[data-state=closed]]:animate-keyframes-fade-out motion-reduce:animate-none)',
+	'sm:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
 );
 
 export const Content = forwardRef<

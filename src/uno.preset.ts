@@ -235,6 +235,14 @@ export default function presetAglio({
 						0% { opacity: 1; transform: scale(1); }
 						100% { opacity: 0; transform: scale(0.95); }
 					}`,
+					'dialog-in': `{
+						0% { opacity: 0; transform: translateY(20px) translate(-50%, -50%); }
+						100% { opacity: 1; transform: translateY(0) translate(-50%, -50%); }
+					}`,
+					'dialog-out': `{
+						0% { opacity: 1; transform: translateY(0) translate(-50%, -50%); }
+						100% { opacity: 0; transform: translateY(20px) translate(-50%, -50%); }
+					}`,
 				},
 				timingFns: {
 					linear: 'linear',
@@ -266,6 +274,8 @@ export default function presetAglio({
 					'radix-collapsible-open-both': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'radix-collapsible-close-both': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'item-disappear': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+					'dialog-in': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+					'dialog-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 				},
 				durations: {
 					'fade-in-up': '200ms',
@@ -293,6 +303,8 @@ export default function presetAglio({
 					'item-disappear': '300ms',
 					'popover-in': '100ms',
 					'popover-out': '100ms',
+					'dialog-in': '200ms',
+					'dialog-out': '200ms',
 				},
 			},
 		},
