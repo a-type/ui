@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.3.3
+
+### Patch Changes
+
+- b24b2eb2: include source files in module
+
 ## 0.3.2
 
 ### Patch Changes
