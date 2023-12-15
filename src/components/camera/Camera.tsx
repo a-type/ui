@@ -62,28 +62,33 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 		const [selectedDeviceId, setSelectedDeviceId] = useState<
 			string | undefined
 		>();
+		const [stream, setStream] = useState<MediaStream | undefined>();
+		useEffect(() => {
+			navigator.mediaDevices
+				.getUserMedia({
+					video: {
+						deviceId: selectedDeviceId,
+					},
+				})
+				.then((s) => {
+					setStream(s);
+				});
+		}, [selectedDeviceId]);
+		useEffect(() => {
+			return () => {
+				stream?.getTracks().forEach((track) => track.stop());
+			};
+		}, [stream]);
 
 		useEffect(() => {
 			const video = videoRef.current;
-			if (video) {
-				navigator.mediaDevices
-					.getUserMedia({
-						video: {
-							deviceId: selectedDeviceId,
-						},
-					})
-					.then((stream) => {
-						video.srcObject = stream;
-					});
-
+			if (video && stream) {
+				video.srcObject = stream;
 				return () => {
-					const src = video.srcObject;
-					if (src instanceof MediaStream) {
-						src.getTracks().forEach((track) => track.stop());
-					}
+					video.srcObject = null;
 				};
 			}
-		}, [devices, selectedDeviceId]);
+		}, [stream]);
 
 		return (
 			<CameraContext.Provider
