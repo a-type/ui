@@ -29,6 +29,16 @@ export const iconNames = [
 	'plus',
 	'x',
 	'refresh',
+	'new_window',
+	'warning',
+	'upload',
+	'undo',
+	'grabby',
+	'copy',
+	'maximize',
+	'email',
+	'link',
+	'camera',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

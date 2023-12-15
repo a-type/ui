@@ -1,14 +1,20 @@
 'use client';
 
 import classNames from 'classnames';
-import { useCallback, useState } from 'react';
-import { UploadIcon } from './UploadIcon.js';
+import { useCallback, useId, useState } from 'react';
+import { Icon } from '../icon.js';
+import { Button } from '../button.js';
+import {
+	CameraDeviceSelector,
+	CameraRoot,
+	CameraShutterButton,
+} from '../camera.js';
 
 export interface ImageUploaderProps {
-  value: string | null;
-  onChange: (value: File | null) => void;
-  className?: string;
-  maxDimension?: number;
+	value: string | null;
+	onChange: (value: File | null) => void;
+	className?: string;
+	maxDimension?: number;
 }
 
 /**
@@ -17,127 +23,181 @@ export interface ImageUploaderProps {
  * component to replace the existing one.
  */
 export function ImageUploader({
-  value,
-  onChange: handleChange,
-  maxDimension,
-  ...rest
+	value,
+	onChange: handleChange,
+	maxDimension,
+	...rest
 }: ImageUploaderProps) {
-  const [dragging, setDragging] = useState(false);
-  const [draggingOver, setDraggingOver] = useState(false);
+	const inputId = useId();
+	const [dragging, setDragging] = useState(false);
+	const [draggingOver, setDraggingOver] = useState(false);
 
-  const onDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDraggingOver(true);
-  }, []);
+	const onDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDraggingOver(true);
+	}, []);
 
-  const onDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDraggingOver(false);
-  }, []);
+	const onDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDraggingOver(false);
+	}, []);
 
-  const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDraggingOver(true);
-  }, []);
+	const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDraggingOver(true);
+	}, []);
 
-  const onChange = useCallback(
-    async (file: File | null) => {
-      if (!file) {
-        handleChange(null);
-      } else if (maxDimension) {
-        const { readAndCompressImage } = await import('browser-image-resizer');
-        const resizedImage = await readAndCompressImage(file, {
-          maxWidth: maxDimension,
-          maxHeight: maxDimension,
-          mimeType: file.type,
-        });
-        handleChange(new File([resizedImage], file.name, { type: file.type }));
-      } else {
-        handleChange(file);
-      }
-    },
-    [handleChange, maxDimension],
-  );
+	const onChange = useCallback(
+		async (file: File | null) => {
+			if (!file) {
+				handleChange(null);
+			} else if (maxDimension) {
+				const { readAndCompressImage } = await import('browser-image-resizer');
+				const resizedImage = await readAndCompressImage(file, {
+					maxWidth: maxDimension,
+					maxHeight: maxDimension,
+					mimeType: file.type,
+				});
+				handleChange(new File([resizedImage], file.name, { type: file.type }));
+			} else {
+				handleChange(file);
+			}
+		},
+		[handleChange, maxDimension],
+	);
 
-  const onDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setDraggingOver(false);
-      if (e.dataTransfer.files.length > 0) {
-        onChange(e.dataTransfer.files[0]);
-      }
-    },
-    [onChange],
-  );
+	const onDrop = useCallback(
+		(e: React.DragEvent<HTMLDivElement>) => {
+			e.preventDefault();
+			e.stopPropagation();
+			setDraggingOver(false);
+			if (e.dataTransfer.files.length > 0) {
+				onChange(e.dataTransfer.files[0]);
+			}
+		},
+		[onChange],
+	);
 
-  const onDragStart = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragging(true);
-  }, []);
+	const onDragStart = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragging(true);
+	}, []);
 
-  const onDragEnd = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragging(false);
-  }, []);
+	const onDragEnd = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragging(false);
+	}, []);
 
-  const onFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files.length > 0) {
-        onChange(e.target.files[0]);
-      }
-    },
-    [onChange],
-  );
+	const onFileChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			if (e.target.files && e.target.files.length > 0) {
+				onChange(e.target.files[0]);
+			}
+		},
+		[onChange],
+	);
 
-  const onFileClick = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-  }, []);
+	const onFileClick = useCallback((e: React.MouseEvent<HTMLInputElement>) => {
+		e.stopPropagation();
+	}, []);
 
-  return (
-    <div
-      className={classNames('relative overflow-hidden', rest.className)}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDragOver={onDragOver}
-      onDrop={onDrop}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-    >
-      {value ? (
-        <img src={value} className="w-full h-full object-cover object-center" />
-      ) : null}
-      <input
-        type="file"
-        accept="image/*"
-        onChange={onFileChange}
-        onClick={onFileClick}
-        className="absolute inset-0 op-0 w-full h-full cursor-pointer"
-      />
-      <div
-        className={classNames(
-          'bg-[rgba(30,20,0,0.1)] flex flex-col items-center justify-center w-full h-full absolute inset-0 gap-3 pointer-events-none',
-          draggingOver && 'bg-[rgba(0,0,0,0.2)]',
-        )}
-      >
-        <UploadIcon className="w-50px h-50px color-white" />
-        <div className="color-white">
-          {dragging ? 'Drop' : 'Tap'} to upload image
-        </div>
-      </div>
-      {value && (
-        <button
-          className="absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-full transition-colors shadow-sm hover:bg-gray2"
-          onClick={() => onChange(null)}
-        >
-          ✕
-        </button>
-      )}
-    </div>
-  );
+	const [cameraOpen, setCameraOpen] = useState(false);
+	const openCamera = () => setCameraOpen(true);
+
+	return (
+		<div
+			className={classNames('relative overflow-hidden', rest.className)}
+			onDragEnter={onDragEnter}
+			onDragLeave={onDragLeave}
+			onDragOver={onDragOver}
+			onDrop={onDrop}
+			onDragStart={onDragStart}
+			onDragEnd={onDragEnd}
+		>
+			{value ? (
+				<img src={value} className="w-full h-full object-cover object-center" />
+			) : null}
+			{!value && (
+				<div
+					className={classNames(
+						'absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[rgba(0,0,0,0.05)]',
+						{
+							'!bg-[rgba(0,0,0,0.1)]': draggingOver,
+						},
+					)}
+				>
+					<input
+						type="file"
+						accept="image/*"
+						onChange={onFileChange}
+						onClick={onFileClick}
+						className="absolute inset--99999 op-0"
+						id={inputId}
+					/>
+					<Button color="ghost" asChild>
+						<label htmlFor={inputId}>
+							<Icon name="upload" />
+							<span>{dragging ? 'Drop' : 'Upload'}</span>
+						</label>
+					</Button>
+					<Button color="ghost" onClick={openCamera}>
+						<Icon name="camera" />
+						<span>Camera</span>
+					</Button>
+				</div>
+			)}
+			{!value && cameraOpen && (
+				<CameraRoot
+					className="absolute w-full h-full z-1"
+					format="image/png"
+					onCapture={(dataUrl) => {
+						onChange(dataURItoBlob(dataUrl));
+						setCameraOpen(false);
+					}}
+				>
+					<CameraShutterButton />
+					<CameraDeviceSelector />
+					<Button
+						onClick={() => setCameraOpen(false)}
+						color="ghost"
+						size="icon"
+						className="text-white absolute top-2 right-2"
+					>
+						<Icon name="x" />
+					</Button>
+				</CameraRoot>
+			)}
+			{value && (
+				<Button
+					color="ghost"
+					size="icon"
+					className="absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-full transition-colors shadow-sm"
+					onClick={() => onChange(null)}
+				>
+					<Icon name="x" />
+				</Button>
+			)}
+		</div>
+	);
+}
+
+function dataURItoBlob(dataURI: string) {
+	// convert base64/URLEncoded data component to raw binary data held in a string
+	var byteString;
+	if (dataURI.split(',')[0].indexOf('base64') >= 0)
+		byteString = atob(dataURI.split(',')[1]);
+	else byteString = unescape(dataURI.split(',')[1]);
+	// separate out the mime component
+	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+	// write the bytes of the string to a typed array
+	var ia = new Uint8Array(byteString.length);
+	for (var i = 0; i < byteString.length; i++) {
+		ia[i] = byteString.charCodeAt(i);
+	}
+	return new File([ia], 'image.png', { type: mimeString });
 }

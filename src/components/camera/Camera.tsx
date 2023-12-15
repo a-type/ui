@@ -31,10 +31,14 @@ export interface CameraRootProps {
 	className?: string;
 	onCapture?: (data: string) => void;
 	children?: ReactNode;
+	format?: 'image/png' | 'image/jpeg';
 }
 
 export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
-	function Camera({ className, onCapture, children, ...rest }, ref) {
+	function Camera(
+		{ className, onCapture, children, format = 'image/png', ...rest },
+		ref,
+	) {
 		const videoRef = useRef<HTMLVideoElement>(null);
 
 		const triggerCapture = () => {
@@ -44,7 +48,7 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 				canvas.width = video.videoWidth;
 				canvas.height = video.videoHeight;
 				canvas.getContext('2d')?.drawImage(video, 0, 0);
-				const data = canvas.toDataURL('image/png');
+				const data = canvas.toDataURL(format);
 				onCapture?.(data);
 			}
 		};
@@ -93,7 +97,7 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 				<div
 					ref={ref}
 					className={classNames(
-						'layer-components:([font-family:inherit] text-white rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
+						'layer-components:([font-family:inherit] text-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
 						className,
 					)}
 					{...rest}

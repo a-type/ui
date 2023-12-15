@@ -39,19 +39,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		ref,
 	) {
 		const Comp = asChild ? Slot : 'button';
+		const buttonProps = {
+			ref: ref,
+			...props,
+			disabled: disabled || loading,
+			'data-disabled': visuallyDisabled,
+			tabIndex: visuallyDisabled ? -1 : undefined,
+			className: classNames(
+				getButtonClassName({ color, size, toggled, align }),
+				className,
+			),
+		};
+
+		if (asChild) {
+			// avoid rendering loading spinner with asChild
+			return <Comp {...buttonProps}>{children}</Comp>;
+		}
 
 		return (
-			<Comp
-				ref={ref}
-				{...props}
-				disabled={disabled || loading}
-				data-disabled={visuallyDisabled}
-				tabIndex={visuallyDisabled ? -1 : undefined}
-				className={classNames(
-					getButtonClassName({ color, size, toggled, align }),
-					className,
-				)}
-			>
+			<Comp {...buttonProps}>
 				{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
 				{children}
 			</Comp>
