@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.3
+
+### Patch Changes
+
+- 7c056c4e: Mark confirmed button as client-only
+
 ## 0.4.2
 
 ### Patch Changes
