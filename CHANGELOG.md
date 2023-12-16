@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.2
+
+### Patch Changes
+
+- 3b5be4e0: Fix relative time not updating
+
 ## 0.4.1
 
 ### Patch Changes
