@@ -5,7 +5,6 @@ import {
 } from 'calendar-blocks';
 import { Button } from '../button.js';
 import { Icon } from '../icon.js';
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import classNames from 'classnames';
@@ -50,7 +49,7 @@ export function DatePicker({
 						}))
 					}
 				>
-					<ArrowLeftIcon />
+					<Icon name="arrowLeft" />
 				</MonthButton>
 				<MonthLabel>{monthLabel}</MonthLabel>
 				<MonthButton
@@ -63,7 +62,7 @@ export function DatePicker({
 						}))
 					}
 				>
-					<ArrowRightIcon />
+					<Icon name="arrowRight" />
 				</MonthButton>
 			</MonthRow>
 			<Calendar
@@ -154,10 +153,10 @@ export function DateRangePicker({
 						}))
 					}
 				>
-					<ArrowLeftIcon />
+					<Icon name="arrowLeft" />
 				</MonthButton>
 				<MonthLabel className="[grid-area:leftMonth]">{monthLabel}</MonthLabel>
-				<MonthLabel className="[grid-area:rightMonth]">
+				<MonthLabel className="[grid-area:rightMonth] !hidden !sm:block">
 					{nextMonthLabel}
 				</MonthLabel>
 				<MonthButton
@@ -171,7 +170,7 @@ export function DateRangePicker({
 						}))
 					}
 				>
-					<ArrowRightIcon />
+					<Icon name="arrowRight" />
 				</MonthButton>
 				<CalendarGrid className="[grid-area:leftGrid]">
 					<DayLabels />
@@ -179,7 +178,7 @@ export function DateRangePicker({
 						{(value) => <CalendarDay value={value} key={value.key} />}
 					</CalendarDays>
 				</CalendarGrid>
-				<CalendarGrid className="[grid-area:rightGrid]">
+				<CalendarGrid className="[grid-area:rightGrid] !hidden !sm:grid">
 					<DayLabels />
 					<CalendarDays monthOffset={1}>
 						{(value) => <CalendarDay value={value} key={value.key} />}
@@ -255,6 +254,7 @@ const DayLabels = () => (
 
 const RangeLayout = withClassName(
 	'div',
-	'grid [grid-template-areas:"prevMonth_leftMonth_rightMonth_nextMonth""leftGrid_leftGrid_rightGrid_rightGrid"]',
-	'[grid-template-columns:auto_1fr_1fr_auto] [grid-template-rows:auto_1fr] gap-2',
+	'grid [grid-template-areas:"prevMonth_leftMonth_nextMonth""leftGrid_leftGrid_leftGrid"] [grid-template-columns:auto_1fr_auto]',
+	'[grid-template-rows:auto_1fr] gap-2',
+	'sm:([grid-template-areas:"prevMonth_leftMonth_rightMonth_nextMonth""leftGrid_leftGrid_rightGrid_rightGrid"] [grid-template-columns:auto_1fr_1fr_auto])',
 );

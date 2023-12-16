@@ -41,6 +41,20 @@ export const iconNames = [
 	'camera',
 	'calendar',
 	'page',
+	'gear',
+	'lock',
+	'lockOpen',
+	'send',
+	'pencil',
+	'eye',
+	'stopwatch',
+	'zoomIn',
+	'zoomOut',
+	'picture',
+	'arrowLeft',
+	'arrowRight',
+	'arrowUp',
+	'arrowDown',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
