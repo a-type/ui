@@ -29,13 +29,15 @@ export function RelativeTime({ value, abbreviate }: RelativeTimeProps) {
 	);
 
 	useEffect(() => {
-		const interval = setInterval(() => {
+		const update = () => {
 			setTime(
 				abbreviate
 					? shortenTimeUnits(formatDistanceToNow(asDate))
 					: formatDistanceToNow(asDate),
 			);
-		}, 60 * 1000);
+		};
+		const interval = setInterval(update, 60 * 1000);
+		update();
 		return () => clearInterval(interval);
 	}, [asDate, abbreviate]);
 
