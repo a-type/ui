@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.0
+
+### Minor Changes
+
+- c5e6fe62: Added date picker components
+
 ## 0.3.3
 
 ### Patch Changes
