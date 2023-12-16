@@ -17,18 +17,19 @@ export default defineConfig({
 	presets: [atype()],
 	// required to support styling in this library
 	transformers: [variantGroup()],
-	// modify the content sources to include
-	// this library when extracting styles
-	content: {
-		pipeline: {
-			include: [
-				// include js/ts files as well as defaults.
-				/\.(vue|svelte|[jt]sx?|mdx?|astro|elm|php|phtml|html)($|\?)/,
-			],
-		},
-	},
 });
 ```
+
+The source files of this library include a directive which tells UnoCSS to include them when extracting styles in your app, but for it to work you must exclude `@a-type/ui` from Vite's `optimizeDeps`:
+
+```ts
+// in vite.config.ts config definition
+optimizeDeps: {
+	exclude: ['@a-type/ui'],
+},
+```
+
+Then, styles from library components should be properly added to your CSS.
 
 ### Customizing theme colors
 
