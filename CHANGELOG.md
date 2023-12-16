@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.9
+
+### Patch Changes
+
+- ecb6a215: More icons! And responsive date range picker.
+
 ## 0.4.8
 
 ### Patch Changes
