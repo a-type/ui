@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.6
+
+### Patch Changes
+
+- 8bfc3d5f: fix var bg usage
+
 ## 0.4.5
 
 ### Patch Changes
