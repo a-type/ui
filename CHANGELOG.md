@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.7
+
+### Patch Changes
+
+- 21f11753: Add uno include directive to all built files
+
 ## 0.4.6
 
 ### Patch Changes
