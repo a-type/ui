@@ -40,33 +40,23 @@ export const PopoverContent = forwardRef<
 	HTMLDivElement,
 	ComponentPropsWithoutRef<typeof StyledContent> & {
 		disableBlur?: boolean;
-		containerClassName?: string;
 		padding?: 'none' | 'default';
 		radius?: 'none' | 'default' | 'md';
-		zIndex?: number;
 	}
 >(function PopoverContent(
 	{
 		children,
 		forceMount,
 		disableBlur,
-		containerClassName,
 		className,
 		radius = 'default',
 		padding = 'default',
-		zIndex,
 		...props
 	},
 	ref,
 ) {
-	const style = zIndex ? { zIndex } : undefined;
-
 	return (
-		<PopoverPrimitive.Portal
-			forceMount={forceMount}
-			className={containerClassName}
-			style={style}
-		>
+		<PopoverPrimitive.Portal forceMount={forceMount}>
 			<StyledContent
 				{...props}
 				forceMount={forceMount}
