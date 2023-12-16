@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.5
+
+### Patch Changes
+
+- c1e80889: New icons, z index config for popover
+
 ## 0.4.4
 
 ### Patch Changes
