@@ -43,6 +43,7 @@ export const PopoverContent = forwardRef<
 		containerClassName?: string;
 		padding?: 'none' | 'default';
 		radius?: 'none' | 'default' | 'md';
+		zIndex?: number;
 	}
 >(function PopoverContent(
 	{
@@ -53,14 +54,18 @@ export const PopoverContent = forwardRef<
 		className,
 		radius = 'default',
 		padding = 'default',
+		zIndex,
 		...props
 	},
 	ref,
 ) {
+	const style = zIndex ? { zIndex } : undefined;
+
 	return (
 		<PopoverPrimitive.Portal
 			forceMount={forceMount}
 			className={containerClassName}
+			style={style}
 		>
 			<StyledContent
 				{...props}
