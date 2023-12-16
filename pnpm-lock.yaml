@@ -86,6 +86,9 @@ dependencies:
   browser-image-resizer:
     specifier: ^2.4.1
     version: 2.4.1
+  calendar-blocks:
+    specifier: ^0.3.0
+    version: 0.3.0(react@18.2.0)
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
@@ -6289,6 +6292,14 @@ packages:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /calendar-blocks@0.3.0(react@18.2.0):
+    resolution: {integrity: sha512-p1wo0JP8B03rdnlSVFUudHkpbxJZ5Nb8rLawVCsnfDqn3Y0GfQkA7UR3E4fpDzJpHqHEdjJVjSTmcC5L9oExTg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /call-bind@1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
