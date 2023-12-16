@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.1
+
+### Patch Changes
+
+- b32727bb: Export datepickers (oops)
+
 ## 0.4.0
 
 ### Minor Changes
