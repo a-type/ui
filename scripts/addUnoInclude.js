@@ -16,7 +16,15 @@ const addInclude = (dir) => {
 
 		if (stat.isDirectory()) {
 			addInclude(filePath);
-		} else {
+			// only .js files
+		} else if (filePath.endsWith('.d.ts')) {
+			// do nothing
+		} else if (
+			path.extname(filePath) === '.js' ||
+			path.extname(filePath) === '.mjs' ||
+			path.extname(filePath) === '.cjs' ||
+			path.extname(filePath) === '.ts'
+		) {
 			const fileContents = fs.readFileSync(filePath, 'utf8');
 			const lines = fileContents.split('\n');
 			lines.splice(0, 0, '// @unocss-include');
