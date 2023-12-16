@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.8
+
+### Patch Changes
+
+- 317151fb: Fix built files - remove comments in non-js files
+
 ## 0.4.7
 
 ### Patch Changes
