@@ -30,7 +30,9 @@
 		}
 	},
 	"scripts": {
-		"build": "tsc && tsc -P tsconfig-cjs.json",
+		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
+		"build:prefix": "node ./scripts/addUnoInclude.js",
+		"build": "pnpm run build:transpile && pnpm run build:prefix",
 		"ci:version": "pnpm changeset version",
 		"ci:publish": "pnpm changeset publish --access=public",
 		"prepublish": "pnpm run build",
