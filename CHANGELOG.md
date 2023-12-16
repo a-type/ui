@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.4.4
+
+### Patch Changes
+
+- 5991ac21: Fix datepicker import casing error
+
 ## 0.4.3
 
 ### Patch Changes
