@@ -29,7 +29,7 @@ const CameraContext = createContext<{
 
 export interface CameraRootProps {
 	className?: string;
-	onCapture?: (data: string) => void;
+	onCapture?: (data: File) => void;
 	children?: ReactNode;
 	format?: 'image/png' | 'image/jpeg';
 }
@@ -49,7 +49,8 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 				canvas.height = video.videoHeight;
 				canvas.getContext('2d')?.drawImage(video, 0, 0);
 				const data = canvas.toDataURL(format);
-				onCapture?.(data);
+				const file = dataURItoFile(data);
+				onCapture?.(file);
 			}
 		};
 
@@ -213,3 +214,20 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 		</Select>
 	);
 };
+
+function dataURItoFile(dataURI: string) {
+	// convert base64/URLEncoded data component to raw binary data held in a string
+	var byteString;
+	if (dataURI.split(',')[0].indexOf('base64') >= 0)
+		byteString = atob(dataURI.split(',')[1]);
+	else byteString = unescape(dataURI.split(',')[1]);
+	// separate out the mime component
+	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+	// write the bytes of the string to a typed array
+	var ia = new Uint8Array(byteString.length);
+	for (var i = 0; i < byteString.length; i++) {
+		ia[i] = byteString.charCodeAt(i);
+	}
+	const fileExt = mimeString.split('/')[1];
+	return new File([ia], `image.${fileExt}`, { type: mimeString });
+}

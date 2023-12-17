@@ -4,7 +4,7 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from './Camera.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const meta = {
 	title: 'Camera',
@@ -26,7 +26,11 @@ export const Default: Story = {
 };
 
 function CameraDemo() {
-	const [latest, setLatest] = useState<string | undefined>();
+	const [latest, setLatest] = useState<File | undefined>();
+	const dataUri = useMemo(
+		() => (latest ? URL.createObjectURL(latest) : undefined),
+		[latest],
+	);
 
 	return (
 		<div>
@@ -34,7 +38,7 @@ function CameraDemo() {
 				<CameraShutterButton />
 				<CameraDeviceSelector />
 			</CameraRoot>
-			{latest && <img src={latest} className="w-full" />}
+			{latest && <img src={dataUri} className="w-full" />}
 		</div>
 	);
 }
