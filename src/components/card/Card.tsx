@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 export const CardRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1)',
+	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1 text-black)',
 );
 
 export const CardMain = forwardRef<
@@ -23,7 +23,7 @@ export const CardMain = forwardRef<
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col gap-1 cursor-pointer transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start)',
+				'layer-components:(flex flex-col gap-1 cursor-pointer transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start text-inherit)',
 				'layer-components:hover:(bg-lightBlend color-black)',
 				'layer-components:md:pt-4',
 				compact && 'layer-variants:(p-1 bg-white gap-0)',
@@ -37,7 +37,7 @@ export const CardMain = forwardRef<
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-auto bg-white p-2 rounded-lg w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full)',
+	'layer-components:(flex flex-col gap-1 mt-auto bg-white p-2 rounded-lg w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit)',
 	'[data-compact=true]>&:(bg-transparent border-none p-2 whitespace-nowrap text-ellipsis overflow-hidden)',
 );
 
