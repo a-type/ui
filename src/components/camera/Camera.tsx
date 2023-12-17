@@ -74,18 +74,32 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 		const [selectedDeviceId, setSelectedDeviceId] = useState<
 			string | undefined
 		>();
+
 		useEffect(() => {
-			navigator.mediaDevices
-				?.getUserMedia({
-					video: {
-						deviceId: selectedDeviceId,
-						facingMode,
-					},
-				})
-				.then((s) => {
-					setStream(s);
-				});
+			const init = () => {
+				navigator.mediaDevices
+					?.getUserMedia({
+						video: {
+							deviceId: selectedDeviceId,
+							facingMode,
+						},
+					})
+					.then((s) => {
+						setStream(s);
+					});
+			};
+			init();
+
+			// reconnect if browser was backgrounded
+			const reconnect = () => {
+				if (stream?.active || document.visibilityState !== 'visible') {
+					return;
+				}
+				init();
+			};
+			document.addEventListener('visibilitychange', reconnect);
 		}, [selectedDeviceId, facingMode]);
+
 		useEffect(() => {
 			return () => {
 				stream?.getTracks().forEach((track) => track.stop());
