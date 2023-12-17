@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.5.1
+
+### Patch Changes
+
+- 1d365b8c: Allow specifying facingMode for camera
+
 ## 0.5.0
 
 ### Minor Changes
