@@ -32,11 +32,19 @@ export interface CameraRootProps {
 	onCapture?: (data: File) => void;
 	children?: ReactNode;
 	format?: 'image/png' | 'image/jpeg';
+	facingMode?: 'user' | 'environment';
 }
 
 export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 	function Camera(
-		{ className, onCapture, children, format = 'image/png', ...rest },
+		{
+			className,
+			onCapture,
+			children,
+			facingMode,
+			format = 'image/png',
+			...rest
+		},
 		ref,
 	) {
 		const videoRef = useRef<HTMLVideoElement>(null);
@@ -55,26 +63,29 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 		};
 
 		const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+		const [stream, setStream] = useState<MediaStream | undefined>();
+
 		useEffect(() => {
-			navigator.mediaDevices.enumerateDevices().then((devices): void => {
+			navigator.mediaDevices?.enumerateDevices().then((devices): void => {
 				setDevices(devices.filter((device) => device.kind === 'videoinput'));
 			});
-		}, []);
+		}, [!!stream]);
+
 		const [selectedDeviceId, setSelectedDeviceId] = useState<
 			string | undefined
 		>();
-		const [stream, setStream] = useState<MediaStream | undefined>();
 		useEffect(() => {
 			navigator.mediaDevices
-				.getUserMedia({
+				?.getUserMedia({
 					video: {
 						deviceId: selectedDeviceId,
+						facingMode,
 					},
 				})
 				.then((s) => {
 					setStream(s);
 				});
-		}, [selectedDeviceId]);
+		}, [selectedDeviceId, facingMode]);
 		useEffect(() => {
 			return () => {
 				stream?.getTracks().forEach((track) => track.stop());

@@ -4,7 +4,7 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from './Camera.js';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const meta = {
 	title: 'Camera',
@@ -25,7 +25,13 @@ export const Default: Story = {
 	},
 };
 
-function CameraDemo() {
+export const BackCamera: Story = {
+	render() {
+		return <CameraDemo facingMode="environment" />;
+	},
+};
+
+function CameraDemo({ facingMode }: { facingMode?: 'user' | 'environment' }) {
 	const [latest, setLatest] = useState<File | undefined>();
 	const dataUri = useMemo(
 		() => (latest ? URL.createObjectURL(latest) : undefined),
@@ -34,7 +40,11 @@ function CameraDemo() {
 
 	return (
 		<div>
-			<CameraRoot onCapture={setLatest} className="w-64 h-64">
+			<CameraRoot
+				facingMode={facingMode}
+				onCapture={setLatest}
+				className="w-64 h-64"
+			>
 				<CameraShutterButton />
 				<CameraDeviceSelector />
 			</CameraRoot>
