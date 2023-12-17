@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- f14cc109: Camera now exports a file
+
 ## 0.4.9
 
 ### Patch Changes
