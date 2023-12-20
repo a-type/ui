@@ -333,7 +333,7 @@ export default function presetAglio({
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			'hidden-input':
-				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:display-none',
+				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:hidden',
 			center: 'left-50% top-50%',
 			'z-nav': 'z-[var(--z-nav)]',
 			'z-menu': 'z-[var(--z-menu)]',

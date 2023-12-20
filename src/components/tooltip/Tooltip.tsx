@@ -13,7 +13,7 @@ function Content({
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Content
 				className={classNames(
-					'layer-components:(relative rounded-lg py-2 px-3 border-default text-sm leading-tight color-inherit bg-white shadow-sm select-none display-none z-tooltip sm:display-initial)',
+					'layer-components:(relative rounded-lg py-2 px-3 border-default text-sm leading-tight color-inherit bg-white shadow-sm select-none hidden z-tooltip sm:display-initial)',
 					'[&[data-state=delayed-open]]:display-initial',
 					'[&[data-state=instant-open]]:display-initial',
 					'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',

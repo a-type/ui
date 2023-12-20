@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 const StyledContent = withClassName(
 	PopoverPrimitive.Content,
-	'layer-components:(rounded-xl min-w-120px bg-white z-menu shadow-lg border-default op-0 display-none max-w-90vw)',
+	'layer-components:(rounded-xl min-w-120px bg-white z-menu shadow-lg border-default op-0 hidden max-w-90vw)',
 	'will-change-transform',
 	'layer-components:transform-origin-[var(--radix-popover-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',

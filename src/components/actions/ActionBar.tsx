@@ -26,7 +26,7 @@ export function ActionBar({
 			>
 				<div
 					className={classNames(
-						'flex flex-row items-center justify-start w-full overflow-y-hidden overflow-x-auto pr-80px relative h-full [&::-webkit-scrollbar]:display-none',
+						'flex flex-row items-center justify-start w-full overflow-y-hidden overflow-x-auto pr-80px relative h-full [&::-webkit-scrollbar]:hidden',
 						wrap && 'flex-wrap',
 					)}
 				>

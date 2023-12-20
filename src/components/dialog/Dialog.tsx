@@ -156,7 +156,7 @@ export const DialogSwipeHandle = forwardRef<
 			ref={finalRef}
 			{...props}
 			className={classNames(
-				'absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-full cursor-grab sm:display-none touch-none',
+				'absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-full cursor-grab sm:hidden touch-none',
 				className,
 			)}
 		>
