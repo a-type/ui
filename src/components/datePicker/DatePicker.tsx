@@ -221,7 +221,7 @@ const CalendarDay = withClassName(
 	'[&[data-range-end]]:(bg-accent-light rounded-r rounded-l-none z-1)',
 	'disabled:(opacity-50 cursor-default)',
 	// today dot
-	'[&[data-today]]:before:(content-[""] absolute left-[2px] top-[2px] w-[6px] h-[6px] rounded-full bg-primary)',
+	"[&[data-today]]:before:(content-[''] absolute left-[2px] top-[2px] w-[6px] h-[6px] rounded-full bg-primary)",
 	'[&[data-top-edge]]:(border-t-gray-5)',
 	'[&[data-bottom-edge]]:(border-b-gray-5)',
 	'[&[data-first-column]]:(border-l-gray-5)',
