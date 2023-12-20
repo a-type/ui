@@ -28,7 +28,7 @@
 			"require": "./dist/cjs/uno.preset.js",
 			"default": "./dist/cjs/uno.preset.js"
 		},
-		"./css": {
+		"./main.css": {
 			"default": "./dist/css/main.css",
 			"import": "./dist/css/main.css",
 			"node": "./dist/css/main.css",
