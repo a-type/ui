@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.1
+
+### Patch Changes
+
+- bd369d65: rename css export
+
 ## 0.6.0
 
 ### Minor Changes
