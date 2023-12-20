@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.2
+
+### Patch Changes
+
+- 22deeb53: Fix export definition in accordance with default ordering rules
+
 ## 0.6.1
 
 ### Patch Changes
