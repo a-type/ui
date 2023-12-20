@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.4
+
+### Patch Changes
+
+- 7180f1f7: trying to fix some issues with generated css file
+
 ## 0.6.3
 
 ### Patch Changes
