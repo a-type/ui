@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.5.3
+
+### Patch Changes
+
+- b7d1b004: Trying to fix weird css bug with display: none not working
+
 ## 0.5.2
 
 ### Patch Changes
