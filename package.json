@@ -27,12 +27,19 @@
 			"node": "./dist/esm/uno.preset.js",
 			"require": "./dist/cjs/uno.preset.js",
 			"default": "./dist/cjs/uno.preset.js"
+		},
+		"./css": {
+			"default": "./dist/css/main.css",
+			"import": "./dist/css/main.css",
+			"node": "./dist/css/main.css",
+			"require": "./dist/css/main.css"
 		}
 	},
 	"scripts": {
 		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
 		"build:prefix": "node ./scripts/addUnoInclude.js",
-		"build": "pnpm run build:transpile && pnpm run build:prefix",
+		"build:process": "unocss \"./dist/**/*.js\" -o ./dist/css/main.css --write-transformed -m -c uno.config.js",
+		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:process",
 		"ci:version": "pnpm changeset version",
 		"ci:publish": "pnpm changeset publish --access=public",
 		"prepublish": "pnpm run build",
@@ -93,8 +100,9 @@
 		"@types/pluralize": "^0.0.29",
 		"@types/react": "^18.0.14",
 		"@types/react-dom": "^18.0.5",
-		"@unocss/core": "^0.54.0",
-		"@unocss/transformer-variant-group": "^0.54.0",
+		"@unocss/core": "^0.58.0",
+		"@unocss/cli": "0.58.0",
+		"@unocss/transformer-variant-group": "^0.58.0",
 		"axios": "^1.5.0",
 		"change-case": "^4.1.2",
 		"dotenv": "^16.3.1",
@@ -102,6 +110,6 @@
 		"prettier": "^3.0.3",
 		"storybook": "7.6.3",
 		"typescript": "^5.0.2",
-		"unocss": "^0.54.0"
+		"unocss": "^0.58.0"
 	}
 }

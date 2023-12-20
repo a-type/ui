@@ -4,19 +4,16 @@ My personal UI component library. This exists mostly to reduce the startup cost 
 
 ## How to use
 
-Install `@a-type/ui unocss @unocss/transformer-variant-group`
+Install `@a-type/ui unocss`
 
 In your `uno.config.ts`:
 
 ```ts
 import { defineConfig } from 'unocss';
-import variantGroup from '@unocss/transformer-variant-group';
 import atype from '@a-type/ui/uno-preset';
 
 export default defineConfig({
 	presets: [atype()],
-	// required to support styling in this library
-	transformers: [variantGroup()],
 });
 ```
 
@@ -30,6 +27,10 @@ optimizeDeps: {
 ```
 
 Then, styles from library components should be properly added to your CSS.
+
+### Alternative: import full compiled CSS
+
+Rather than configuring your build pipeline to include this library's source files, you can opt to import the entire CSS needed to style it from `@a-type/ui/css`. However, this will be less efficient; when integrating with your build pipeline, components which aren't used won't have CSS included in your final build.
 
 ### Customizing theme colors
 
