@@ -498,5 +498,5 @@ function colorToString(color: Color): string {
 }
 
 function colorRgbToString(color: Color) {
-	return `rgb(${color.values[0]}, ${color.values[1]}, ${color.values[2]})`;
+	return `rgba(${color.values[0]}, ${color.values[1]}, ${color.values[2]}, ${color.opacity})`;
 }

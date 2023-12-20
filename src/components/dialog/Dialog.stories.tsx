@@ -7,6 +7,7 @@ import {
 	DialogClose,
 	DialogTitle,
 } from './Dialog.js';
+import { ParticleLayer } from '../particles.js';
 
 const meta = {
 	title: 'Dialog',
@@ -24,7 +25,7 @@ type Story = StoryObj<typeof Dialog>;
 export const Default: Story = {
 	args: {
 		children: (
-			<>
+			<ParticleLayer noPortal>
 				<DialogTrigger>Open</DialogTrigger>
 				<DialogContent>
 					<DialogTitle>Hello world</DialogTitle>
@@ -32,7 +33,7 @@ export const Default: Story = {
 						<DialogClose>Close</DialogClose>
 					</DialogActions>
 				</DialogContent>
-			</>
+			</ParticleLayer>
 		),
 	},
 };
