@@ -29,10 +29,10 @@
 			"default": "./dist/cjs/uno.preset.js"
 		},
 		"./main.css": {
-			"default": "./dist/css/main.css",
 			"import": "./dist/css/main.css",
 			"node": "./dist/css/main.css",
-			"require": "./dist/css/main.css"
+			"require": "./dist/css/main.css",
+			"default": "./dist/css/main.css"
 		}
 	},
 	"scripts": {
