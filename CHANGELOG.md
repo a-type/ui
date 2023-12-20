@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.5.2
+
+### Patch Changes
+
+- b6e1b4e6: Fix card title in dark mode
+- ec677c83: Reconnect camera on app resume
+
 ## 0.5.1
 
 ### Patch Changes
