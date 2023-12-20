@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.3
+
+### Patch Changes
+
+- 89fbc3b2: fix particle opacity
+
 ## 0.6.2
 
 ### Patch Changes
