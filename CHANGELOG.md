@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- 6b8c6525: Preprocess dist files so variant-group is no longer required. Add a compiled full CSS file to dist, too.
+
 ## 0.5.3
 
 ### Patch Changes
