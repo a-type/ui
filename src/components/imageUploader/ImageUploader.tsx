@@ -15,6 +15,7 @@ export interface ImageUploaderProps {
 	onChange: (value: File | null) => void;
 	className?: string;
 	maxDimension?: number;
+	facingMode?: 'user' | 'environment';
 }
 
 /**
@@ -26,6 +27,7 @@ export function ImageUploader({
 	value,
 	onChange: handleChange,
 	maxDimension,
+	facingMode,
 	...rest
 }: ImageUploaderProps) {
 	const inputId = useId();
@@ -159,6 +161,7 @@ export function ImageUploader({
 						onChange(file);
 						setCameraOpen(false);
 					}}
+					facingMode={facingMode}
 				>
 					<CameraShutterButton />
 					<CameraDeviceSelector />
