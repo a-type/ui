@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.6.5
+
+### Patch Changes
+
+- 01cb4f82: Fix textarea autosize
+- fff7d02e: Support facingMode in imageUploader
+
 ## 0.6.4
 
 ### Patch Changes
