@@ -1,8 +1,13 @@
 'use client';
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactElement, ReactNode } from 'react';
 
 export class ErrorBoundary extends Component<
-	{ children: ReactNode; fallback?: ReactNode },
+	{
+		children: ReactNode;
+		fallback?:
+			| ReactNode
+			| ((props: { clearError: () => void }) => ReactElement);
+	},
 	{ error: Error | null }
 > {
 	state = {
@@ -16,6 +21,11 @@ export class ErrorBoundary extends Component<
 
 	render() {
 		if (this.state.error) {
+			if (typeof this.props.fallback === 'function') {
+				return this.props.fallback({
+					clearError: () => this.setState({ error: null }),
+				});
+			}
 			return this.props.fallback || null;
 		}
 		return this.props.children;
