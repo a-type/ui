@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.6
+
+### Patch Changes
+
+- c02ea2bb: Support error boundary fallback that clears error
+
 ## 0.6.5
 
 ### Patch Changes
