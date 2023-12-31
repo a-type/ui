@@ -28,13 +28,14 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(translate-0 z-dialog fixed bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] left-0 right-0 h-min-content max-h-[calc(0.85*var(--viewport-height,100vh))])',
-	'transform-gpu',
-	'animate-ease-out',
-	'layer-components:(shadow-xl bg-white rounded-tl-xl rounded-tr-xl p-6 pt-8 border-default border-b-0 overflow-y-auto flex flex-col pb-[calc(3rem+env(safe-area-inset-bottom,0px))])',
-	'animate-fade-in-up-big animate-duration-200 [&[data-state=closed]]:animate-fade-out-down-big animate-ease-in motion-reduce:animate-none',
-	'layer-components:sm:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh pb-6 rounded-lg border-b-1 pt-6)',
-	'sm:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
+	'layer-components:(z-dialog fixed shadow-xl bg-white overflow-y-auto flex flex-col border-default)',
+	'transform-gpu !motion-reduce:animate-none',
+	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
+	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
+);
+const sheetClassName = classNames(
+	'layer-variants:lt-sm:(translate-0 bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] left-0 right-0 top-auto h-min-content max-h-[calc(0.85*var(--viewport-height,100vh))] rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
+	'layer-variants:lt-sm:(animate-ease-in animate-fade-in-up [&[data-state=closed]]:animate-fade-out-down)',
 );
 
 export const Content = forwardRef<
@@ -42,9 +43,10 @@ export const Content = forwardRef<
 	ComponentPropsWithoutRef<typeof StyledContent> & {
 		outerClassName?: string;
 		width?: 'lg' | 'md' | 'sm';
+		disableSheet?: boolean;
 	}
 >(function Content(
-	{ children, width, outerClassName, className, ...props },
+	{ children, width, outerClassName, className, disableSheet, ...props },
 	ref,
 ) {
 	const particles = useParticles();
@@ -57,13 +59,15 @@ export const Content = forwardRef<
 			) {
 				wasOpenRef.current = true;
 
-				const matchesSmall = !window.matchMedia('(min-width:600px)').matches;
+				const matchesSmall =
+					!disableSheet && !window.matchMedia('(min-width:600px)').matches;
 				if (!matchesSmall) return;
 
 				setTimeout(() => {
 					particles?.addParticles(
 						particles.elementExplosion({
 							count: 20,
+							margin: 40,
 							borders: ['top'],
 							color: [
 								{
@@ -92,7 +96,7 @@ export const Content = forwardRef<
 				wasOpenRef.current = false;
 			}
 		},
-		[particles],
+		[particles, disableSheet],
 	);
 
 	const gestureRef = useRef<HTMLDivElement>(null);
@@ -112,10 +116,11 @@ export const Content = forwardRef<
 						'max-w-600px': width === 'md',
 						'max-w-300px': width === 'sm',
 					},
+					!disableSheet && sheetClassName,
 					outerClassName || className,
 				)}
 			>
-				<DialogSwipeHandle />
+				{!disableSheet && <DialogSwipeHandle />}
 				{children}
 			</StyledContent>
 		</DialogPrimitive.Portal>

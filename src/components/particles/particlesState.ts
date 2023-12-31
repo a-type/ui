@@ -263,6 +263,7 @@ export const createElementBorderInitializer = ({
 	lifespan = 2000,
 	forceFuzz = 0.05,
 	angleFuzz = 0.02,
+	margin = 0,
 }: {
 	element: HTMLElement;
 	borders?: BorderName[];
@@ -271,12 +272,27 @@ export const createElementBorderInitializer = ({
 	lifespan?: number;
 	forceFuzz?: number;
 	angleFuzz?: number;
+	margin?: number;
 }): ParticleInitializer => {
 	// randomly spawn particles around the border of the element by 'unwrapping' the selected borders as
 	// a single theoretical line, picking a random point on the line, and then converting that point
 	// back to a point on the border.
 	return (index: number) => {
-		const rect = element.getBoundingClientRect();
+		const bounds = element.getBoundingClientRect();
+		const rect = {
+			left: bounds.left,
+			top: bounds.top,
+			right: bounds.right,
+			bottom: bounds.bottom,
+			width: bounds.width,
+			height: bounds.height,
+		};
+		if (margin) {
+			rect.left -= margin;
+			rect.top -= margin;
+			rect.right += margin;
+			rect.bottom += margin;
+		}
 
 		const borderLengths = borders.map((border) => {
 			switch (border) {
@@ -370,6 +386,7 @@ export const elementExplosion = ({
 	drag,
 	forceFuzz,
 	angleFuzz,
+	margin,
 	...rest
 }: {
 	element: HTMLElement;
@@ -383,6 +400,7 @@ export const elementExplosion = ({
 	drag?: number;
 	forceFuzz?: number;
 	angleFuzz?: number;
+	margin?: number;
 }) =>
 	createCircleParticles({
 		initializer: createElementBorderInitializer({
@@ -393,6 +411,7 @@ export const elementExplosion = ({
 			drag,
 			forceFuzz,
 			angleFuzz,
+			margin,
 		}),
 		color,
 		...rest,

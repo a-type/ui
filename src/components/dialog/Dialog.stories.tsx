@@ -37,3 +37,19 @@ export const Default: Story = {
 		),
 	},
 };
+
+export const NoSheet: Story = {
+	args: {
+		children: (
+			<ParticleLayer noPortal>
+				<DialogTrigger>Open</DialogTrigger>
+				<DialogContent disableSheet>
+					<DialogTitle>Hello world</DialogTitle>
+					<DialogActions>
+						<DialogClose>Close</DialogClose>
+					</DialogActions>
+				</DialogContent>
+			</ParticleLayer>
+		),
+	},
+};

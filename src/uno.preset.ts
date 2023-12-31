@@ -213,7 +213,7 @@ export default function presetAglio({
 					}`,
 					'fade-out-down': `{
 						0% { opacity: 1; transform: translate3d(0, 0, 0); }
-						100% { opacity: 0; transform: translate3d(0, -100px, 0); }
+						100% { opacity: 0; transform: translate3d(0, 100px, 0); }
 					}`,
 					'fade-out-left': `{
 						0% { opacity: 1; transform: translate3d(0, 0, 0); }
