@@ -5,3 +5,5 @@ export * from './useToggle.js';
 export * from './useVisualViewportOffset.js';
 export * from './useOnUnmount.js';
 export * from './withClassName.js';
+export * from './useAnimationFrame.js';
+export * from './useLongPress.js';
