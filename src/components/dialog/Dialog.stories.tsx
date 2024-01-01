@@ -53,3 +53,19 @@ export const NoSheet: Story = {
 		),
 	},
 };
+
+export const Positioned: Story = {
+	args: {
+		children: (
+			<ParticleLayer noPortal>
+				<DialogTrigger>Open</DialogTrigger>
+				<DialogContent className="top-auto bottom-0px">
+					<DialogTitle>Hello world</DialogTitle>
+					<DialogActions>
+						<DialogClose>Close</DialogClose>
+					</DialogActions>
+				</DialogContent>
+			</ParticleLayer>
+		),
+	},
+};
