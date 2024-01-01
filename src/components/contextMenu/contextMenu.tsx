@@ -1,7 +1,7 @@
 import * as ContextMenu from '@radix-ui/react-context-menu';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 export const ContextMenuRoot = ContextMenu.Root;
 

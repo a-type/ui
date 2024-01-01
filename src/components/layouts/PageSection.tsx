@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
 
 export function PageSection({

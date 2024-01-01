@@ -16,7 +16,7 @@ import {
 	forwardRef,
 	useContext,
 } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
 
 export const SelectItem = forwardRef<

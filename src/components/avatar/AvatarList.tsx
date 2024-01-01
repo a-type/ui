@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { Avatar, AvatarProps } from './Avatar.js';
 
 const AvatarListContext = createContext<{ size: number }>({

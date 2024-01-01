@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { forwardRef, ReactNode, useEffect, useRef, useState } from 'react';
 import { Button, ButtonProps } from '../button/Button.js';
 import { CollapsibleContent, CollapsibleRoot } from '../collapsible.js';

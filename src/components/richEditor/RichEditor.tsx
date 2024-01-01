@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { forwardRef, lazy } from 'react';
 
 const EditorContent = lazy(() => import('./EditorContent.js'));

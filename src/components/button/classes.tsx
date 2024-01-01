@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 import type { ButtonProps } from './Button.jsx';
 
 export function getButtonClassName({

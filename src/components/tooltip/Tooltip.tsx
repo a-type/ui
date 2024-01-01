@@ -2,7 +2,7 @@
 
 import React, { ComponentPropsWithoutRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 function Content({
 	children,

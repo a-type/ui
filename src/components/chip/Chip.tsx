@@ -1,5 +1,5 @@
 import { Slot } from '@radix-ui/react-slot';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { HTMLAttributes, forwardRef } from 'react';
 
 export interface ChipProps extends HTMLAttributes<HTMLElement> {

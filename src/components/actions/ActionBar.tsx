@@ -1,5 +1,5 @@
 import { ReactNode, Suspense } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 export interface ActionBarProps {
 	children: ReactNode;

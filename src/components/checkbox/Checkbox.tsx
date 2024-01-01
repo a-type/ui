@@ -3,7 +3,7 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { ComponentProps, forwardRef } from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
 
 export const CheckboxRoot = withClassName(

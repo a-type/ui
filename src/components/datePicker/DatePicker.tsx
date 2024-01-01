@@ -7,7 +7,7 @@ import { Button } from '../button.js';
 import { Icon } from '../icon.js';
 import { useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 export interface DatePickerProps {
 	value: Date | null;

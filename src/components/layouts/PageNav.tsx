@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
 
 export function PageNav({

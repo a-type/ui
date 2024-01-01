@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { useCallback, useId, useState } from 'react';
 import { Icon } from '../icon.js';
 import { Button } from '../button.js';

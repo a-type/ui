@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { Spinner } from '../spinner.js';
 import { getButtonClassName } from './classes.js';

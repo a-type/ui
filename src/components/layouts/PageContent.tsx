@@ -1,5 +1,5 @@
 'use client';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
 import { useBoundsCssVars } from '../../hooks/useSize.js';
 

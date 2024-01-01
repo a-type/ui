@@ -1,5 +1,5 @@
 import { ReactNode, forwardRef, useEffect, useRef } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { useStableCallback } from '../../hooks.js';
 

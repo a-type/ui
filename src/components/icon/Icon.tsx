@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { IconName } from './generated/iconNames.js';
 
 export interface IconProps extends HTMLAttributes<SVGSVGElement> {

@@ -1,6 +1,6 @@
 import { fractionToText } from '@a-type/utils';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { ReactNode } from 'react';
 import { Button } from '../button.js';
 

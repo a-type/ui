@@ -7,7 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '../select/Select.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { ReactNode } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 

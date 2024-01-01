@@ -14,7 +14,7 @@ import {
 import { withClassName } from '../../hooks/withClassName.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { useParticles } from '../particles.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { selectTriggerClassName } from '../select.js';
 import { useDrag } from '@use-gesture/react';

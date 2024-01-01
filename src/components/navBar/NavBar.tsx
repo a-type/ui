@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from 'clsx';
 import { withClassName } from '../../hooks.js';
 import { ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';

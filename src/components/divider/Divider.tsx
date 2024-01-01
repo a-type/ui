@@ -1,6 +1,6 @@
 import { HTMLAttributes, forwardRef } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 const DividerBase = withClassName('div', 'w-full h-1px bg-black relative');
 

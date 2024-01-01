@@ -2,7 +2,7 @@
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { withClassName } from '../../hooks/withClassName.js';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 const StyledContent = withClassName(
 	DropdownMenuPrimitive.Content,

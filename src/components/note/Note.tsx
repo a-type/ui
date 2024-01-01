@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 export interface NoteProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode;

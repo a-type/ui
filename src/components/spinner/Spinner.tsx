@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef } from 'react';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 const CIRCLE_SIZE = 44;
 

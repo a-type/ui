@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import classNames from 'clsx';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import {
 	ChangeEvent,

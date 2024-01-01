@@ -1,7 +1,7 @@
 import { MouseEvent, ReactNode, forwardRef } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Slot } from '@radix-ui/react-slot';
-import classNames from 'classnames';
+import classNames from 'clsx';
 
 export const CardRoot = withClassName(
 	'div',
