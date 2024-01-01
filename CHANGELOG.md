@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.8
+
+### Patch Changes
+
+- df9a536c: Replace classnames dep with clsx
+
 ## 0.6.7
 
 ### Patch Changes
