@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.7
+
+### Patch Changes
+
+- 13bf1b4d: Allow disabling sheet behavior in dialog
+
 ## 0.6.6
 
 ### Patch Changes
