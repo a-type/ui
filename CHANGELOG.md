@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.9
+
+### Patch Changes
+
+- 262e4ea0: Add useLongPress hook
+
 ## 0.6.8
 
 ### Patch Changes
