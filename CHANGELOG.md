@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.10
+
+### Patch Changes
+
+- 12aaf77e: Expose Slot re-export from Radix
+
 ## 0.6.9
 
 ### Patch Changes
