@@ -1,6 +1,6 @@
 'use client';
 
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 import {
 	ComponentProps,
 	InputHTMLAttributes,
@@ -8,6 +8,8 @@ import {
 	useRef,
 	Ref,
 	forwardRef,
+	KeyboardEvent,
+	useCallback,
 } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import classNames from 'clsx';
@@ -84,6 +86,7 @@ export type TextAreaFieldProps = {
 	disabled?: boolean;
 	className?: string;
 	inputRef?: Ref<HTMLTextAreaElement>;
+	submitOnEnter?: boolean;
 } & TextAreaProps;
 
 export function TextAreaField({
@@ -91,13 +94,31 @@ export function TextAreaField({
 	label,
 	className,
 	inputRef,
+	onKeyDown,
+	submitOnEnter,
 	...rest
 }: TextAreaFieldProps) {
 	const [props] = useField(name);
+	const { submitForm } = useFormikContext();
+	const onKeyDownInner = useCallback(
+		(e: KeyboardEvent<HTMLTextAreaElement>) => {
+			if (submitOnEnter && e.key === 'Enter' && !e.shiftKey) {
+				e.preventDefault();
+				submitForm();
+			}
+			onKeyDown?.(e);
+		},
+		[submitOnEnter, onKeyDown, submitForm],
+	);
 	return (
 		<FieldRoot className={className}>
 			{label && <FieldLabel>{label}</FieldLabel>}
-			<TextArea ref={inputRef} {...props} {...rest} />
+			<TextArea
+				ref={inputRef}
+				{...props}
+				{...rest}
+				onKeyDown={onKeyDownInner}
+			/>
 		</FieldRoot>
 	);
 }
