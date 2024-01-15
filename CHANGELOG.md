@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.12
+
+### Patch Changes
+
+- 88ef7ff2: actually export hooks lol
+
 ## 0.6.11
 
 ### Patch Changes
