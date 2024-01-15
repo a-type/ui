@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.6.11
+
+### Patch Changes
+
+- 56b60aba: Add form hooks
+- 7828f538: Allow submit on enter for textarea field
+
 ## 0.6.10
 
 ### Patch Changes
