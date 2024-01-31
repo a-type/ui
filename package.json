@@ -81,7 +81,7 @@
 		"color-parse": "^2.0.0",
 		"color-space": "^2.0.1",
 		"date-fns": "^2.29.3",
-		"formik": "^2.2.9",
+		"formik": "^2.4.5",
 		"pluralize": "^8.0.0",
 		"prosemirror-model": "^1.18.0",
 		"react": "18.2.0",
