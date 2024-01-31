@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.13
+
+### Patch Changes
+
+- e3a84293: Upgrade formik dependency
+
 ## 0.6.12
 
 ### Patch Changes
