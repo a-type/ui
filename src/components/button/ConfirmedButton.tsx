@@ -19,6 +19,7 @@ export interface ConfirmedButtonProps extends Omit<ButtonProps, 'onClick'> {
 	cancelAction?: string;
 	onConfirm: () => void | Promise<any>;
 	skip?: boolean;
+	confirmColor?: ButtonProps['color'];
 }
 
 export function ConfirmedButton({
@@ -26,6 +27,7 @@ export function ConfirmedButton({
 	confirmTitle = 'Are you sure?',
 	confirmAction = 'OK',
 	cancelAction = 'Nevermind',
+	confirmColor = 'primary',
 	onConfirm,
 	skip,
 	...rest
@@ -58,7 +60,7 @@ export function ConfirmedButton({
 					<DialogClose asChild>
 						<Button>{cancelAction}</Button>
 					</DialogClose>
-					<Button loading={loading} onClick={confirm} color="primary">
+					<Button loading={loading} onClick={confirm} color={confirmColor}>
 						{confirmAction}
 					</Button>
 				</DialogActions>
