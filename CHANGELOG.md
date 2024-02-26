@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.14
+
+### Patch Changes
+
+- 2b344fc2: allow changing confirm button color
+
 ## 0.6.13
 
 ### Patch Changes
