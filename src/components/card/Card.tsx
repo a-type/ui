@@ -18,15 +18,17 @@ export const CardMain = forwardRef<
 		compact?: boolean;
 	}
 >(function CardMain({ asChild, className, compact, ...rest }, ref) {
-	const Comp = asChild ? Slot : 'button';
+	const isInteractive = !!rest.onClick;
+	const Comp = asChild ? Slot : isInteractive ? 'button' : 'div';
 	return (
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col gap-1 cursor-pointer transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start text-inherit)',
-				'layer-components:hover:(bg-lightBlend color-black)',
+				'layer-components:(flex flex-col gap-1 transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start text-inherit)',
 				'layer-components:md:pt-4',
 				compact && 'layer-variants:(p-1 bg-white gap-0)',
+				isInteractive &&
+					'layer-components:cursor-pointer layer-components:hover:(bg-lightBlend color-black)',
 				className,
 			)}
 			data-compact={compact}

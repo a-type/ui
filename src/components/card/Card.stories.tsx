@@ -25,6 +25,42 @@ type Story = StoryObj<typeof CardRoot>;
 export const Default: Story = {
 	render: () => (
 		<CardRoot>
+			<CardMain onClick={() => alert('clicked')}>
+				<CardTitle>Card Title</CardTitle>
+			</CardMain>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Button</Button>
+					<Button size="icon" color="ghost">
+						<Icon name="placeholder" />
+					</Button>
+				</CardActions>
+			</CardFooter>
+		</CardRoot>
+	),
+};
+
+export const Compact: Story = {
+	render: () => (
+		<CardRoot>
+			<CardMain compact>
+				<CardTitle>Card Title</CardTitle>
+			</CardMain>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Button</Button>
+					<Button size="icon" color="ghost">
+						<Icon name="placeholder" />
+					</Button>
+				</CardActions>
+			</CardFooter>
+		</CardRoot>
+	),
+};
+
+export const NonInteractive: Story = {
+	render: () => (
+		<CardRoot>
 			<CardMain>
 				<CardTitle>Card Title</CardTitle>
 			</CardMain>
