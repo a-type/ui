@@ -16,9 +16,14 @@ export const CardMain = forwardRef<
 		onClick?: (ev: MouseEvent) => void;
 		children?: ReactNode;
 		compact?: boolean;
+		/** forces non-interactive version */
+		nonInteractive?: boolean;
 	}
->(function CardMain({ asChild, className, compact, ...rest }, ref) {
-	const isInteractive = !!rest.onClick;
+>(function CardMain(
+	{ asChild, className, compact, nonInteractive, ...rest },
+	ref,
+) {
+	const isInteractive = !nonInteractive && (!!asChild || !!rest.onClick);
 	const Comp = asChild ? Slot : isInteractive ? 'button' : 'div';
 	return (
 		<Comp

@@ -75,3 +75,43 @@ export const NonInteractive: Story = {
 		</CardRoot>
 	),
 };
+
+export const AsChild: Story = {
+	render: () => (
+		<CardRoot>
+			<CardMain asChild>
+				<a href="#here">
+					<CardTitle>Card Title</CardTitle>
+				</a>
+			</CardMain>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Button</Button>
+					<Button size="icon" color="ghost">
+						<Icon name="placeholder" />
+					</Button>
+				</CardActions>
+			</CardFooter>
+		</CardRoot>
+	),
+};
+
+export const AsChildNonInteractive: Story = {
+	render: () => (
+		<CardRoot>
+			<CardMain asChild nonInteractive>
+				<button>
+					<CardTitle>Card Title</CardTitle>
+				</button>
+			</CardMain>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Button</Button>
+					<Button size="icon" color="ghost">
+						<Icon name="placeholder" />
+					</Button>
+				</CardActions>
+			</CardFooter>
+		</CardRoot>
+	),
+};
