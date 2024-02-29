@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.15
+
+### Patch Changes
+
+- a00c0110: Allow non-clickable card main areaas
+
 ## 0.6.14
 
 ### Patch Changes
