@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.16
+
+### Patch Changes
+
+- 886051e2: Add CardContent, fix card font size
+
 ## 0.6.15
 
 ### Patch Changes
