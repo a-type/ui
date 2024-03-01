@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
 	CardActions,
+	CardContent,
 	CardFooter,
 	CardMain,
 	CardRoot,
@@ -27,6 +28,7 @@ export const Default: Story = {
 		<CardRoot>
 			<CardMain onClick={() => alert('clicked')}>
 				<CardTitle>Card Title</CardTitle>
+				<CardContent>Other stuff</CardContent>
 			</CardMain>
 			<CardFooter>
 				<CardActions>
@@ -63,6 +65,7 @@ export const NonInteractive: Story = {
 		<CardRoot>
 			<CardMain>
 				<CardTitle>Card Title</CardTitle>
+				<CardContent>Other stuff</CardContent>
 			</CardMain>
 			<CardFooter>
 				<CardActions>
@@ -82,6 +85,7 @@ export const AsChild: Story = {
 			<CardMain asChild>
 				<a href="#here">
 					<CardTitle>Card Title</CardTitle>
+					<CardContent>Other stuff</CardContent>
 				</a>
 			</CardMain>
 			<CardFooter>
@@ -102,6 +106,7 @@ export const AsChildNonInteractive: Story = {
 			<CardMain asChild nonInteractive>
 				<button>
 					<CardTitle>Card Title</CardTitle>
+					<CardContent>Other stuff</CardContent>
 				</button>
 			</CardMain>
 			<CardFooter>

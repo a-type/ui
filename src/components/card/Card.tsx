@@ -29,7 +29,7 @@ export const CardMain = forwardRef<
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col gap-1 transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start text-inherit)',
+				'layer-components:(flex flex-col gap-1 transition p-4 pb-2 flex-1 relative z-1 bg-transparent border-none text-start text-inherit text-sm)',
 				'layer-components:md:pt-4',
 				compact && 'layer-variants:(p-1 bg-white gap-0)',
 				isInteractive &&
@@ -46,6 +46,11 @@ export const CardTitle = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 mt-auto bg-white p-2 rounded-lg w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit)',
 	'[data-compact=true]>&:(bg-transparent border-none p-2 whitespace-nowrap text-ellipsis overflow-hidden)',
+);
+
+export const CardContent = withClassName(
+	'div',
+	'layer-components:(flex flex-col gap-1 p-2)',
 );
 
 export const CardImage = withClassName(
