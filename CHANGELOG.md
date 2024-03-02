@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.17
+
+### Patch Changes
+
+- 68ebd93a: new icons
+
 ## 0.6.16
 
 ### Patch Changes
