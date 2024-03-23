@@ -100,6 +100,7 @@
 		"@types/pluralize": "^0.0.29",
 		"@types/react": "^18.0.14",
 		"@types/react-dom": "^18.0.5",
+		"@types/w3c-image-capture": "^1.0.10",
 		"@unocss/cli": "0.58.0",
 		"@unocss/core": "^0.58.0",
 		"@unocss/transformer-variant-group": "^0.58.0",

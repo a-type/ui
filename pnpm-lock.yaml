@@ -157,6 +157,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.0.5
     version: 18.0.5
+  '@types/w3c-image-capture':
+    specifier: ^1.0.10
+    version: 1.0.10
   '@unocss/cli':
     specifier: 0.58.0
     version: 0.58.0
@@ -5542,6 +5545,16 @@ packages:
 
   /@types/uuid@9.0.7:
     resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
+    dev: true
+
+  /@types/w3c-image-capture@1.0.10:
+    resolution: {integrity: sha512-7DR36sb0os7qVy2HI9wW6BV9oFjZVA8xnKM0cZGdL5XKa6ZgurA+U8T8xUNccERiWkvk641bAItMWCU++1B7jg==}
+    dependencies:
+      '@types/webrtc': 0.0.42
+    dev: true
+
+  /@types/webrtc@0.0.42:
+    resolution: {integrity: sha512-YyrG3yzw/JvZs0q3f9SY+AiJr0FJw1qhBjvoQJEUy07udiyakAax2A87BHpB3qnaxsm2ExCvhyUvjTxdsn+qSw==}
     dev: true
 
   /@types/yargs-parser@21.0.3:

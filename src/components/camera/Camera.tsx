@@ -49,19 +49,6 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 	) {
 		const videoRef = useRef<HTMLVideoElement>(null);
 
-		const triggerCapture = () => {
-			const video = videoRef.current;
-			if (video) {
-				const canvas = document.createElement('canvas');
-				canvas.width = video.videoWidth;
-				canvas.height = video.videoHeight;
-				canvas.getContext('2d')?.drawImage(video, 0, 0);
-				const data = canvas.toDataURL(format);
-				const file = dataURItoFile(data);
-				onCapture?.(file);
-			}
-		};
-
 		const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
 		const [stream, setStream] = useState<MediaStream | undefined>();
 
@@ -115,6 +102,45 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 				};
 			}
 		}, [stream]);
+
+		const [capture, setCapture] = useState<ImageCapture>();
+
+		useEffect(() => {
+			if ('ImageCapture' in window) {
+				const videoTrack = stream?.getVideoTracks()[0];
+				if (videoTrack) {
+					const capturer = new ImageCapture(videoTrack);
+					setCapture(capturer);
+					capturer.getPhotoCapabilities().then((capabilities) => {
+						console.log('ImageCapture capabilities:', capabilities);
+					});
+				}
+			}
+		}, [stream]);
+
+		const triggerCapture = () => {
+			if (capture) {
+				capture.takePhoto().then((blob) => {
+					const file = new File([blob], `image.${format.split('/')[1]}`, {
+						type: format,
+					});
+					onCapture?.(file);
+				});
+			} else {
+				// ImageCapture not supported, fallback to
+				// canvas capture
+				const video = videoRef.current;
+				if (video) {
+					const canvas = document.createElement('canvas');
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+					canvas.getContext('2d')?.drawImage(video, 0, 0);
+					const data = canvas.toDataURL(format);
+					const file = dataURItoFile(data);
+					onCapture?.(file);
+				}
+			}
+		};
 
 		return (
 			<CameraContext.Provider
