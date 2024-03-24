@@ -392,11 +392,11 @@ export default function presetAglio({
 					--palette-yellow-70: #ffe17c;
 					--palette-yellow-60: #f7d352;
 					--palette-yellow-50: #c9a829;
-					--palette-yellow-40: #ac8e04;
-					--palette-yellow-30: #8e7500;
-					--palette-yellow-20: #715c00;
-					--palette-yellow-10: #635100;
-					--palette-yellow-00: #3b2f00;
+					--palette-yellow-40: #ac7c04;
+					--palette-yellow-30: #8e6600;
+					--palette-yellow-20: #715500;
+					--palette-yellow-10: #633600;
+					--palette-yellow-00: #3b1c00;
 					--palette-blue-90: #e3f3ff;
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #7bd0ff;
