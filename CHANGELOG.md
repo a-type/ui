@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.20
+
+### Patch Changes
+
+- d8571851: Tweak color palette darks
+
 ## 0.6.19
 
 ### Patch Changes
