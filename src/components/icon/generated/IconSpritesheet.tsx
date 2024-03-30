@@ -522,6 +522,21 @@ export const IconSpritesheet = (props: any) => (
 					</clipPath>
 				</defs>
 			</symbol>
+			<symbol id="icon-eyeClosed" viewBox="0 0 15 15">
+				<g clipPath="url(#clip0_834_23)">
+					<path
+						fillRule="evenodd"
+						clipRule="evenodd"
+						d="M14.9239 7.76501C15.0703 7.53084 14.9991 7.22236 14.7649 7.07601C14.5308 6.92965 14.2223 7.00084 14.0759 7.23501C12.6563 9.50637 10.3078 11 7.49994 11C4.69209 11 2.34355 9.50637 0.923943 7.23501C0.777588 7.00084 0.469112 6.92965 0.234944 7.07601C0.000776483 7.22236 -0.0704094 7.53084 0.0759463 7.76501C0.578759 8.5695 1.18999 9.29077 1.89256 9.90033L0.646447 11.1464C0.451184 11.3417 0.451184 11.6583 0.646447 11.8536C0.841709 12.0488 1.15829 12.0488 1.35355 11.8536L2.6903 10.5168C3.37492 10.9858 4.1275 11.3574 4.93584 11.6113L4.52566 12.8419C4.43833 13.1039 4.57991 13.387 4.84189 13.4743C5.10386 13.5617 5.38702 13.4201 5.47434 13.1581L5.90902 11.8541C6.42167 11.9499 6.95287 12 7.49994 12C7.8799 12 8.2522 11.9758 8.61594 11.929L9.02566 13.1581C9.11298 13.4201 9.39614 13.5617 9.65811 13.4743C9.92009 13.387 10.0617 13.1039 9.97434 12.8419L9.60728 11.7407C10.5901 11.4922 11.4977 11.073 12.3097 10.5168L13.6464 11.8536C13.8417 12.0488 14.1583 12.0488 14.3536 11.8536C14.5488 11.6583 14.5488 11.3417 14.3536 11.1464L13.1074 9.90028C13.8099 9.29073 14.4211 8.56948 14.9239 7.76501Z"
+						fill="currentColor"
+					/>
+				</g>
+				<defs>
+					<clipPath id="clip0_834_23">
+						<rect width="15" height="15" fill="white" />
+					</clipPath>
+				</defs>
+			</symbol>
 			<symbol id="icon-stopwatch" viewBox="0 0 15 15">
 				<path
 					fillRule="evenodd"
@@ -584,6 +599,102 @@ export const IconSpritesheet = (props: any) => (
 					clipRule="evenodd"
 					d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z"
 					fill="currentColor"
+				/>
+			</symbol>
+			<symbol id="icon-info" viewBox="0 0 15 15">
+				<circle cx="7.5" cy="5.5" r="0.5" fill="currentColor" />
+				<path
+					d="M7.5 7.5C7.5 9.9 7.5 10.5 7.5 10.5"
+					stroke="currentColor"
+					strokeLinecap="round"
+				/>
+				<circle cx="7.5" cy="7.5" r="5" stroke="currentColor" />
+			</symbol>
+			<symbol id="icon-cardsGrid" viewBox="0 0 15 15">
+				<rect
+					x="1.5"
+					y="1.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="8.5"
+					y="1.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="8.5"
+					y="8.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="1.5"
+					y="8.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-cardsMixed" viewBox="0 0 15 15">
+				<rect
+					x="1.5"
+					y="1.5"
+					width="12"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="8.5"
+					y="8.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="1.5"
+					y="8.5"
+					width="5"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-cardsRows" viewBox="0 0 15 15">
+				<rect
+					x="1.5"
+					y="1.5"
+					width="12"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+				<rect
+					x="1.5"
+					y="8.5"
+					width="12"
+					height="5"
+					rx="0.5"
+					stroke="currentColor"
+					strokeLinejoin="round"
 				/>
 			</symbol>
 		</defs>

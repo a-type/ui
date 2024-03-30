@@ -47,6 +47,7 @@ export const iconNames = [
 	'send',
 	'pencil',
 	'eye',
+	'eyeClosed',
 	'stopwatch',
 	'zoomIn',
 	'zoomOut',
@@ -55,6 +56,10 @@ export const iconNames = [
 	'arrowRight',
 	'arrowUp',
 	'arrowDown',
+	'info',
+	'cardsGrid',
+	'cardsMixed',
+	'cardsRows',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
