@@ -419,9 +419,9 @@ export default function presetAglio({
 					--palette-purple-00: #2c2f5e;
 					--palette-dark-blend-warm: rgba(10, 0, 0, 0.75);
 					--palette-dark-blend-cool: rgba(0, 10, 0, 0.75);
-					--palette-light-blend-warm: rgba(255, 250, 250, 0.5);
-					--palette-light-blend-cool: rgba(250, 255, 255, 0.5);
-					--palette-light-blend: rgba(255, 250, 250, 0.5);
+					--palette-light-blend-warm: rgba(255, 250, 250, 0.8);
+					--palette-light-blend-cool: rgba(250, 255, 255, 0.8);
+					--palette-light-blend: rgba(255, 250, 250, 0.8);
 					--palette-overlay: rgba(0, 0, 0, 0.025);
 					--palette-black: #303030;
 					--palette-white: #fff;

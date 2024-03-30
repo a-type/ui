@@ -210,7 +210,7 @@ const CalendarGrid = withClassName(
 
 const CalendarDay = withClassName(
 	BaseCalendarDay,
-	'border border-solid border-transparent bg-white mr--1px mb--1px relative',
+	'border border-solid border-transparent bg-white mr--1px mb--1px relative text-black',
 	'flex items-center justify-center transition cursor-pointer',
 	'[&[data-highlighted]]:(z-1 outline-accent)',
 	'hover:(z-1 outline-accent)',
@@ -256,5 +256,5 @@ const RangeLayout = withClassName(
 	'div',
 	'grid [grid-template-areas:"prevMonth_leftMonth_nextMonth""leftGrid_leftGrid_leftGrid"] [grid-template-columns:auto_1fr_auto]',
 	'[grid-template-rows:auto_1fr] gap-2',
-	'sm:([grid-template-areas:"prevMonth_leftMonth_rightMonth_nextMonth""leftGrid_leftGrid_rightGrid_rightGrid"] [grid-template-columns:auto_1fr_1fr_auto])',
+	'sm:[grid-template-areas:"prevMonth_leftMonth_rightMonth_nextMonth""leftGrid_leftGrid_rightGrid_rightGrid"] sm:[grid-template-columns:auto_1fr_1fr_auto]',
 );
