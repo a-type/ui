@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.19
+
+### Patch Changes
+
+- 6f7a1801: tweak tabs and yellow colors
+
 ## 0.6.18
 
 ### Patch Changes
