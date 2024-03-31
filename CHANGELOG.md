@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.22
+
+### Patch Changes
+
+- ec74ece9: New location icon
+
 ## 0.6.21
 
 ### Patch Changes
