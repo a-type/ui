@@ -28,9 +28,9 @@ export function useLongPress({
 	const [gestureState, setGestureState] = useState<'released' | 'pressed'>(
 		'released',
 	);
-	const [state, setState] = useState<'holding' | 'idle' | 'failed' | 'pending'>(
-		'idle',
-	);
+	const [state, setState] = useState<
+		'holding' | 'candidate' | 'idle' | 'failed' | 'pending'
+	>('idle');
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const ref = useRef<any>(null);
 
@@ -116,6 +116,9 @@ export function useLongPress({
 			} else if (distance > CANCEL_DISTANCE) {
 				// cancel if moved too far
 				setState('idle');
+			} else if (gestureDuration >= duration + delay) {
+				// not yet confirmed, but meets criteria
+				setState('candidate');
 			}
 		}
 	});
@@ -129,7 +132,7 @@ export function useLongPress({
 			return () => {
 				clearTimeout(timeout);
 			};
-		} else if (state === 'holding') {
+		} else if (state === 'candidate') {
 			onDurationReachedStable();
 		}
 	}, [state, onDurationReachedStable]);
