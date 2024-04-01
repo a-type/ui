@@ -94,7 +94,7 @@ export function useLongPress({
 		}
 
 		if (gestureState === 'released') {
-			if (state === 'holding') {
+			if (state === 'holding' || state === 'candidate') {
 				// holding for longer than duration - activate
 				if (gestureDuration >= duration + delay && distance < CANCEL_DISTANCE) {
 					onActivate();
