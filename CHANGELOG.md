@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.23
+
+### Patch Changes
+
+- 838c560b: more options for useLongPress
+
 ## 0.6.22
 
 ### Patch Changes
