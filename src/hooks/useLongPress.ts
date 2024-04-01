@@ -1,6 +1,8 @@
 import { useDrag } from '@use-gesture/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAnimationFrame } from './useAnimationFrame.js';
+import { useStableCallback } from './useStableCallback.js';
+import { preventDefault } from '@a-type/utils';
 
 /**
  * The press gesture must remain within THRESHOLD_DISTANCE until delay time has passed
@@ -14,10 +16,12 @@ const CANCEL_DISTANCE = 30;
 
 export function useLongPress({
 	onActivate,
+	onDurationReached,
 	duration = 2000,
 	delay = 200,
 }: {
 	onActivate: () => void;
+	onDurationReached: () => void;
 	duration?: number;
 	delay?: number;
 }) {
@@ -116,6 +120,7 @@ export function useLongPress({
 		}
 	});
 
+	const onDurationReachedStable = useStableCallback(onDurationReached);
 	useEffect(() => {
 		if (state === 'failed') {
 			const timeout = setTimeout(() => {
@@ -124,12 +129,25 @@ export function useLongPress({
 			return () => {
 				clearTimeout(timeout);
 			};
+		} else if (state === 'holding') {
+			onDurationReachedStable();
 		}
-	}, [state]);
+	}, [state, onDurationReachedStable]);
+
+	const props = useMemo(
+		() => ({
+			onContextMenu: preventDefault,
+			style: {
+				touchAction: 'none',
+			},
+		}),
+		[],
+	);
 
 	return {
 		ref,
 		timeoutRef,
 		state,
+		props,
 	};
 }
