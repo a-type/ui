@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.24
+
+### Patch Changes
+
+- 324710dd: fix long press gesture logic
+
 ## 0.6.23
 
 ### Patch Changes
