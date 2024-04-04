@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.25
+
+### Patch Changes
+
+- b2300640: fix long press logic again
+
 ## 0.6.24
 
 ### Patch Changes
