@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.26
+
+### Patch Changes
+
+- 26b857d9: Fix dialog backdrop
+
 ## 0.6.25
 
 ### Patch Changes
