@@ -1,5 +1,53 @@
 # @a-type/ui
 
+## 0.6.26
+
+### Patch Changes
+
+- 26b857d9: Fix dialog backdrop
+
+## 0.6.25
+
+### Patch Changes
+
+- b2300640: fix long press logic again
+
+## 0.6.24
+
+### Patch Changes
+
+- 324710dd: fix long press gesture logic
+
+## 0.6.23
+
+### Patch Changes
+
+- 838c560b: more options for useLongPress
+
+## 0.6.22
+
+### Patch Changes
+
+- ec74ece9: New location icon
+
+## 0.6.21
+
+### Patch Changes
+
+- 98a6a997: fix dark mode ghost button, datepicker colors
+
+## 0.6.20
+
+### Patch Changes
+
+- d8571851: Tweak color palette darks
+
+## 0.6.19
+
+### Patch Changes
+
+- 6f7a1801: tweak tabs and yellow colors
+
 ## 0.6.18
 
 ### Patch Changes

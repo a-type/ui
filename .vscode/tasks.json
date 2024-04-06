@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "storybook",
+			"problemMatcher": [],
+			"label": "Storybook",
+			"detail": "storybook dev -p 6006"
+		},
+		{
+			"type": "npm",
+			"script": "icons",
+			"problemMatcher": [],
+			"label": "npm: icons",
+			"detail": "node ./scripts/generateIcons.js"
+		}
+	]
+}

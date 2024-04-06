@@ -21,7 +21,7 @@ import { useDrag } from '@use-gesture/react';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'layer-components(bg-overlay fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200)',
+	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-gray-dark-blend)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
 );

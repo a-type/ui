@@ -11,7 +11,6 @@ export const iconNames = [
 	'tag',
 	'scan',
 	'filter',
-	'upload',
 	'add_note',
 	'drag_vertical',
 	'note',
@@ -32,6 +31,7 @@ export const iconNames = [
 	'new_window',
 	'warning',
 	'upload',
+	'download',
 	'undo',
 	'grabby',
 	'copy',
@@ -60,6 +60,7 @@ export const iconNames = [
 	'cardsGrid',
 	'cardsMixed',
 	'cardsRows',
+	'location',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
