@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.27
+
+### Patch Changes
+
+- ffd55622: fix layout content on mobile, maybe
+
 ## 0.6.26
 
 ### Patch Changes
