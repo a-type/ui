@@ -9,11 +9,13 @@ export function PageContent({
 	noPadding,
 	innerProps,
 	className,
+	scrollable = true,
 	...rest
 }: HTMLAttributes<HTMLDivElement> & {
 	fullHeight?: boolean;
 	noPadding?: boolean;
 	innerProps?: HTMLAttributes<HTMLDivElement>;
+	scrollable?: boolean;
 }) {
 	const innerRef = useBoundsCssVars<HTMLDivElement>(200, undefined, {
 		left: '--content-left',
@@ -39,6 +41,7 @@ export function PageContent({
 					{
 						'flex-1': fullHeight,
 						'important:(p-0 sm:p-4)': noPadding,
+						'overflow-y-auto': scrollable,
 					},
 					innerProps?.className,
 				)}
