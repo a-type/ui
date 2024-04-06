@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.30
+
+### Patch Changes
+
+- 931890f5: why can i never get mobile layout right
+
 ## 0.6.29
 
 ### Patch Changes
