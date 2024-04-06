@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.28
+
+### Patch Changes
+
+- e8256334: another attempt at mobile layout fix
+
 ## 0.6.27
 
 ### Patch Changes
