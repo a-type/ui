@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.6.29
+
+### Patch Changes
+
+- 51aff6d0: ugh im dumb
+
 ## 0.6.28
 
 ### Patch Changes
