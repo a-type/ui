@@ -29,6 +29,7 @@ export function PageContent({
 		<div
 			className={classNames(
 				'[grid-area:content] max-w-full min-w-0 w-full flex flex-col items-start relative flex-1 gap-3',
+				{ 'overflow-y-auto': scrollable },
 				className,
 			)}
 			{...rest}
@@ -41,7 +42,6 @@ export function PageContent({
 					{
 						'flex-1': fullHeight,
 						'important:(p-0 sm:p-4)': noPadding,
-						'overflow-y-auto': scrollable,
 					},
 					innerProps?.className,
 				)}
