@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- 03d749c0: Upgrade radix dependencies. Fix collapsible sizing
+
 ## 0.6.30
 
 ### Patch Changes
