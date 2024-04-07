@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.1
+
+### Patch Changes
+
+- 9b642f78: content layout
+
 ## 0.7.0
 
 ### Minor Changes
