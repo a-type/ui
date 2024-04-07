@@ -37,8 +37,8 @@ export function PageContent({
 			<div
 				{...innerProps}
 				className={classNames(
-					'w-full min-w-0 flex flex-col mb-120px px-4 py-4 min-h-0 flex-1',
-					'sm:(max-w-700px w-full min-h-auto)',
+					'w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1',
+					'sm:(max-w-700px w-full)',
 					{
 						'flex-1': fullHeight,
 						'important:(p-0 sm:p-4)': noPadding,
