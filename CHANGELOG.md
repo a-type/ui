@@ -1,5 +1,47 @@
 # @a-type/ui
 
+## 0.7.1
+
+### Patch Changes
+
+- 9b642f78: content layout
+
+## 0.7.0
+
+### Minor Changes
+
+- 03d749c0: Upgrade radix dependencies. Fix collapsible sizing
+
+## 0.6.30
+
+### Patch Changes
+
+- 931890f5: why can i never get mobile layout right
+
+## 0.6.29
+
+### Patch Changes
+
+- 51aff6d0: ugh im dumb
+
+## 0.6.28
+
+### Patch Changes
+
+- e8256334: another attempt at mobile layout fix
+
+## 0.6.27
+
+### Patch Changes
+
+- ffd55622: fix layout content on mobile, maybe
+
+## 0.6.26
+
+### Patch Changes
+
+- 26b857d9: Fix dialog backdrop
+
 ## 0.6.25
 
 ### Patch Changes

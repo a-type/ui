@@ -113,7 +113,7 @@ export const SelectContent = withPassthroughNativeRender(
 		SelectPrimitive.SelectContentProps & { inDialog?: boolean }
 	>(({ children, inDialog, className, ...props }, forwardedRef) => {
 		return (
-			<SelectPrimitive.Portal className={className} style={zIndex}>
+			<SelectPrimitive.Portal>
 				<SelectPrimitive.Content
 					className={classNames(
 						'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border-1 border-black z-menu shadow-lg)',
@@ -122,7 +122,9 @@ export const SelectContent = withPassthroughNativeRender(
 						'layer-components:[&[data-state=closed]]:animate-popover-out',
 						'layer-components:(min-w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)])',
 						inDialog && 'z-[calc(var(--z-dialog)+1)]',
+						className,
 					)}
+					style={zIndex}
 					{...props}
 					ref={forwardedRef}
 				>

@@ -14,7 +14,7 @@ const StyledContent = withClassName(
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
 	'important:motion-reduce:animate-none',
-	'layer-components:(max-h-[var(--radix-popover-content-available-height)] overflow-y-auto)',
+	'layer-components:(max-h-[var(--radix-popover-content-available-height)])',
 	'layer-components:[&[data-state=open]]:(opacity-100 flex flex-col)',
 	'layer-components:[&[data-state=closed]]:pointer-events-none',
 );

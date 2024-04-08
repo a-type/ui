@@ -2,4 +2,4 @@
 '@a-type/ui': patch
 ---
 
-Fix dialog backdrop
+dont scroll popovers

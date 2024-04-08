@@ -54,9 +54,10 @@ export function NumberStepper({
 	return (
 		<div
 			className={classNames(
-				'flex items-center border-default rounded-full overflow-hidden w-min-content flex-shrink-0',
+				'layer-components:(flex items-center border-default rounded-full overflow-hidden w-min-content flex-shrink-0 bg-white)',
 				{
-					'bg-accent-wash color-black': !!highlightChange && value !== 1,
+					'layer-variants:(bg-accent-wash color-black)':
+						!!highlightChange && value !== 1,
 				},
 				className,
 			)}

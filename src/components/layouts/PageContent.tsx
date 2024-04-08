@@ -9,11 +9,13 @@ export function PageContent({
 	noPadding,
 	innerProps,
 	className,
+	scrollable = true,
 	...rest
 }: HTMLAttributes<HTMLDivElement> & {
 	fullHeight?: boolean;
 	noPadding?: boolean;
 	innerProps?: HTMLAttributes<HTMLDivElement>;
+	scrollable?: boolean;
 }) {
 	const innerRef = useBoundsCssVars<HTMLDivElement>(200, undefined, {
 		left: '--content-left',
@@ -27,6 +29,7 @@ export function PageContent({
 		<div
 			className={classNames(
 				'[grid-area:content] max-w-full min-w-0 w-full flex flex-col items-start relative flex-1 gap-3',
+				{ 'overflow-y-auto h-full': scrollable },
 				className,
 			)}
 			{...rest}
@@ -34,7 +37,7 @@ export function PageContent({
 			<div
 				{...innerProps}
 				className={classNames(
-					'w-full min-w-0 flex flex-col mb-120px px-4 py-4',
+					'w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1',
 					'sm:(max-w-700px w-full)',
 					{
 						'flex-1': fullHeight,
