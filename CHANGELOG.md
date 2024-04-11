@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.3
+
+### Patch Changes
+
+- 7dc25ac1: disabled for number stepper
+
 ## 0.7.2
 
 ### Patch Changes
