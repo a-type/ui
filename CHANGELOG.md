@@ -1,5 +1,14 @@
 # @a-type/ui
 
+## 0.7.2
+
+### Patch Changes
+
+- 592b1959: fix ghost button colors, add ghost accent
+- ba704fc0: remove avatar padding
+- 7733c64e: dont scroll popovers
+- c6b36cbc: new icons
+
 ## 0.7.1
 
 ### Patch Changes
