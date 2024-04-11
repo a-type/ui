@@ -61,6 +61,8 @@ export const iconNames = [
 	'cardsMixed',
 	'cardsRows',
 	'location',
+	'waterDrop',
+	'chevron',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

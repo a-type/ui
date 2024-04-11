@@ -705,6 +705,20 @@ export const IconSpritesheet = (props: any) => (
 				/>
 				<circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" />
 			</symbol>
+			<symbol id="icon-waterDrop" viewBox="0 0 15 15">
+				<path
+					d="M11.4999 9.99999C10.4999 14 4.49988 14 3.49985 9.99999C2.49983 5.99997 7.49975 1 7.49975 1C7.49975 1 12.4998 5.99997 11.4999 9.99999Z"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-chevron" viewBox="0 0 15 15">
+				<path
+					d="M1.5 4.5L7.5 10L13.5 4.5"
+					stroke="currentColor"
+					strokeLinecap="round"
+				/>
+			</symbol>
 		</defs>
 	</svg>
 );
