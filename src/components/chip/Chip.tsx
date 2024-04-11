@@ -16,7 +16,7 @@ export const Chip = forwardRef<any, ChipProps>(function Chip(
 		<Component
 			ref={ref}
 			className={classNames(
-				'inline-flex flex-row gap-1 items-center whitespace-nowrap border-light border-solid border-1 rounded-full px-2 py-1',
+				'inline-flex flex-row gap-1 items-center whitespace-nowrap border-light border-solid border-1 rounded-full px-2 py-1 text-black',
 				{
 					'bg-primary-wash': color === 'primary',
 					'bg-accent-wash': color === 'accent',
