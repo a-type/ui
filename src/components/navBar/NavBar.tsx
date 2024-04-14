@@ -33,27 +33,27 @@ export const NavBarItem = forwardRef<HTMLDivElement, NavBarItemProps>(
 
 export const NavBarItemIconWrapper = withClassName(
 	'div',
-	'relative flex sm:(p-6px rounded-full bg-lightBlend)',
+	'layer-components:(relative flex) layer-components:sm:(p-6px rounded-full bg-lightBlend)',
 );
 
 export const NavBarItemText = withClassName(
 	'span',
-	'overflow-hidden pl-1 inline-block text-xxs whitespace-nowrap text-ellipsis sm:(text-md leading-normal)',
+	'layer-components:(overflow-hidden pl-1 inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:sm:(text-md leading-normal)',
 );
 
 export const NavBarItemIcon = withClassName(
 	'div',
-	'relative z-1 [a[data-active=true]_&]:fill-primary-light',
+	'layer-components:(relative z-1 fill-none [a[data-active=true]_&]:fill-primary-light)',
 );
 
 export const NavBarItemPip = withClassName(
 	'div',
-	'absolute top-6px right-6px w-6px h-6px rounded-full bg-attention shadow-sm',
+	'layer-components:(absolute top-6px right-6px w-6px h-6px rounded-full bg-attention shadow-sm)',
 );
 
 export const NavBarRoot = withClassName(
 	'div',
-	'flex flex-row items-stretch justify-around w-full rounded-0 overflow-hidden z-50 p-1 h-auto',
+	'layer-components:(flex flex-row items-stretch justify-around w-full rounded-0 overflow-hidden z-50 p-1 h-auto)',
 	'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
-	'sm:(bg-transparent flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
+	'layer-components:sm:(bg-transparent flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
 );
