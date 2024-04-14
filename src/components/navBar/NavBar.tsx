@@ -53,7 +53,7 @@ export const NavBarItemPip = withClassName(
 
 export const NavBarRoot = withClassName(
 	'div',
-	'flex flex-row items-stretch justify-around w-full rounded-0 rounded-t-lg shadow-lg overflow-hidden z-50 bg-wash border-t border-t-solid border-gray5 p-1 h-auto',
+	'flex flex-row items-stretch justify-around w-full rounded-0 overflow-hidden z-50 p-1 h-auto',
 	'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
 	'sm:(bg-transparent flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
 );
