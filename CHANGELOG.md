@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.4
+
+### Patch Changes
+
+- b12fd9c7: New styling for nav
+
 ## 0.7.3
 
 ### Patch Changes
