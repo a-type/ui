@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.5
+
+### Patch Changes
+
+- 27e610fe: navbar icon fill
+
 ## 0.7.4
 
 ### Patch Changes
