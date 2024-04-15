@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.7
+
+### Patch Changes
+
+- 563b4a59: navbar icon size in desktop
+
 ## 0.7.6
 
 ### Patch Changes
