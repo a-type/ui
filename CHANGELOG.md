@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.9
+
+### Patch Changes
+
+- 57022c7e: remove important modifier
+
 ## 0.7.8
 
 ### Patch Changes
