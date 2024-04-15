@@ -43,7 +43,7 @@ export const NavBarItemText = withClassName(
 
 export const NavBarItemIcon = withClassName(
 	'div',
-	'layer-components:(relative z-1 fill-none [a[data-active=true]_&]:fill-primary-light)',
+	'layer-components:(relative z-1 flex fill-none [a[data-active=true]_&]:fill-primary-light)',
 );
 
 export const NavBarItemPip = withClassName(
