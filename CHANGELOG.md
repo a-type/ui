@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.8
+
+### Patch Changes
+
+- 3b61b8c0: add css layers to page layout styles
+
 ## 0.7.7
 
 ### Patch Changes
