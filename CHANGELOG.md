@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.6
+
+### Patch Changes
+
+- c124302c: add shortcuts for flex stuff
+
 ## 0.7.5
 
 ### Patch Changes
