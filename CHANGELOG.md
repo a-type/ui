@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.10
+
+### Patch Changes
+
+- 2459fcef: try improving now playing position support on iphone
+
 ## 0.7.9
 
 ### Patch Changes
