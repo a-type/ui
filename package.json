@@ -33,6 +33,12 @@
 			"node": "./dist/css/main.css",
 			"require": "./dist/css/main.css",
 			"default": "./dist/css/main.css"
+		},
+		".": {
+			"import": "./dist/esm/index.js",
+			"node": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js",
+			"default": "./dist/cjs/index.js"
 		}
 	},
 	"scripts": {
@@ -99,8 +105,8 @@
 		"@storybook/react-vite": "7.6.3",
 		"@storybook/test": "7.6.3",
 		"@types/pluralize": "^0.0.29",
-		"@types/react": "^18.0.14",
-		"@types/react-dom": "^18.0.5",
+		"@types/react": "^18.2.79",
+		"@types/react-dom": "^18.2.25",
 		"@types/w3c-image-capture": "^1.0.10",
 		"@unocss/cli": "0.58.0",
 		"@unocss/core": "^0.58.0",
