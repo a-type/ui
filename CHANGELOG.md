@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.12
+
+### Patch Changes
+
+- d6e62bd4: large screen bg color
+
 ## 0.7.11
 
 ### Patch Changes
