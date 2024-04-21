@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.11
+
+### Patch Changes
+
+- d48439a1: Re export clsx utility. Bump React typings.
+
 ## 0.7.10
 
 ### Patch Changes
