@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.7.13
+
+### Patch Changes
+
+- 504e6e16: add a "responsive" layer to reduce precedence fighting
+
 ## 0.7.12
 
 ### Patch Changes
