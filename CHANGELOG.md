@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.0
+
+### Minor Changes
+
+- 648f6101: Add slider component
+
 ## 0.7.13
 
 ### Patch Changes
