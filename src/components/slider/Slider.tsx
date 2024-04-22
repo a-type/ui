@@ -3,7 +3,7 @@ import * as SliderPrimitive from '@radix-ui/react-slider';
 
 export const SliderRoot = withClassName(
 	SliderPrimitive.Root,
-	'layer-components:(relative flex items-center select-none touch-none w-full h-30px)',
+	'layer-components:(relative flex items-center select-none touch-none w-full h-30px translate-z-0)',
 );
 export const SliderTrack = withClassName(
 	SliderPrimitive.Track,
