@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.2
+
+### Patch Changes
+
+- 17116e57: add unstyled button
+
 ## 0.8.1
 
 ### Patch Changes
