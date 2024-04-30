@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.1
+
+### Patch Changes
+
+- c6efed5b: bolder slider styles
+- d3449531: fix for safari overflow behavior
+
 ## 0.8.0
 
 ### Minor Changes
