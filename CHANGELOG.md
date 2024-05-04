@@ -1,5 +1,66 @@
 # @a-type/ui
 
+## 0.8.2
+
+### Patch Changes
+
+- 17116e57: add unstyled button
+
+## 0.8.1
+
+### Patch Changes
+
+- c6efed5b: bolder slider styles
+- d3449531: fix for safari overflow behavior
+
+## 0.8.0
+
+### Minor Changes
+
+- 648f6101: Add slider component
+
+## 0.7.13
+
+### Patch Changes
+
+- 504e6e16: add a "responsive" layer to reduce precedence fighting
+
+## 0.7.12
+
+### Patch Changes
+
+- d6e62bd4: large screen bg color
+
+## 0.7.11
+
+### Patch Changes
+
+- d48439a1: Re export clsx utility. Bump React typings.
+
+## 0.7.10
+
+### Patch Changes
+
+- 2459fcef: try improving now playing position support on iphone
+
+## 0.7.9
+
+### Patch Changes
+
+- 57022c7e: remove important modifier
+
+## 0.7.8
+
+### Patch Changes
+
+- 3b61b8c0: add css layers to page layout styles
+
+## 0.7.7
+
+### Patch Changes
+
+- 563b4a59: navbar icon size in desktop
+
 ## 0.7.6
 
 ### Patch Changes

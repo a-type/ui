@@ -368,7 +368,7 @@ export default function presetAglio({
 			} as any,
 			{
 				getCSS: (ctx) => `
-				@layer preflightBase, components, variants, utilities;
+				@layer preflightBase, components, responsive, variants, utilities;
 
 				:root {
 					--palette-red-90: #ffede7;

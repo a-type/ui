@@ -12,8 +12,8 @@ export function PageNav({
 		<div
 			{...props}
 			className={classNames(
-				'[grid-area:nav] relative z-nav',
-				'sm:([grid-area:nav] sticky top-0 h-auto bottom-auto left-auto right-auto)',
+				'layer-components:([grid-area:nav] relative z-nav)',
+				'layer-components:sm:([grid-area:nav] sticky top-0 h-auto bottom-auto left-auto right-auto)',
 				className,
 			)}
 		>

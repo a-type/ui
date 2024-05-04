@@ -40,6 +40,7 @@ const colors = {
 	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg:transparent] [--hover:rgb(from_var(--color-attention-light)_r_g_b/0.25)] [--focus:var(--color-attention-light)] [--active:var(--color-attention-light)] color-attention-dark)`,
 	ghostAccent: `layer-variants:[&.btn-color-ghostAccent]:([--bg:transparent] [--hover:rgb(from_var(--color-accent-light)_r_g_b/0.25)] [--focus:var(--color-accent-light)] [--active:var(--color-accent-light)] color-accent-dark)`,
 	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] [--hover:var(--color-gray-7)] [--focus:var(--color-gray-7)] [--active:var(--color-gray-6)] color-white border-black)`,
+	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-none shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-0 text-size-inherit transition-none)`,
 };
 
 const sizes = {

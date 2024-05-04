@@ -28,9 +28,9 @@ export function PageContent({
 	return (
 		<div
 			className={classNames(
-				'[grid-area:content] max-w-full min-w-0 w-full flex flex-col items-start relative flex-1 gap-3',
-				'rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0',
-				{ 'overflow-y-auto h-full': scrollable },
+				'layer-components:([grid-area:content] max-w-full min-w-0 w-full flex flex-col items-start relative flex-1 gap-3)',
+				'layer-components:(rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0)',
+				{ 'layer-variants:(overflow-y-auto h-full)': scrollable },
 				className,
 			)}
 			{...rest}
@@ -38,11 +38,11 @@ export function PageContent({
 			<div
 				{...innerProps}
 				className={classNames(
-					'w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1',
-					'sm:(max-w-700px w-full)',
+					'layer-components:(w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1)',
+					'layer-components:sm:(max-w-700px w-full)',
 					{
-						'flex-1': fullHeight,
-						'important:(p-0 sm:p-4)': noPadding,
+						'layer-variants:flex-1': fullHeight,
+						'layer-variants:(p-0 sm:p-4)': noPadding,
 					},
 					innerProps?.className,
 				)}
