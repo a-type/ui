@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.3
+
+### Patch Changes
+
+- e710eec9: fix unstyled button transition
+- a6ec392f: Input autoSelect
+
 ## 0.8.2
 
 ### Patch Changes
