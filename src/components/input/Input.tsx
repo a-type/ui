@@ -1,5 +1,11 @@
 import classNames from 'clsx';
-import { ComponentProps, ComponentPropsWithRef, forwardRef } from 'react';
+import {
+	ComponentProps,
+	ComponentPropsWithRef,
+	FocusEvent,
+	forwardRef,
+	useCallback,
+} from 'react';
 
 export const inputClassName = classNames(
 	'layer-components:(px-4 py-2 text-md font-sans rounded-lg bg-white select-auto min-w-60px color-black border-default)',
@@ -8,15 +14,29 @@ export const inputClassName = classNames(
 	'layer-components:md:(min-w-120px)',
 );
 
-export const Input = forwardRef<
-	HTMLInputElement,
-	ComponentProps<'input'> & {
-		variant?: 'default' | 'primary';
-	}
->(function Input({ className, variant = 'default', ...props }, ref) {
+export interface InputProps extends ComponentProps<'input'> {
+	variant?: 'default' | 'primary';
+	autoSelect?: boolean;
+}
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+	{ className, autoSelect, onFocus, variant = 'default', ...props },
+	ref,
+) {
+	const handleFocus = useCallback(
+		(ev: FocusEvent<HTMLInputElement>) => {
+			if (autoSelect) {
+				ev.target.select();
+			}
+			onFocus?.(ev);
+		},
+		[onFocus, autoSelect],
+	);
+
 	return (
 		<input
 			{...props}
+			onFocus={handleFocus}
 			className={classNames(
 				inputClassName,
 				{
@@ -28,5 +48,3 @@ export const Input = forwardRef<
 		/>
 	);
 });
-
-export type InputProps = ComponentPropsWithRef<'input'>;

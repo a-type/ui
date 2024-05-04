@@ -6,6 +6,7 @@ import {
 	ChangeEvent,
 	forwardRef,
 	HTMLProps,
+	useCallback,
 	useLayoutEffect,
 	useRef,
 	useState,
@@ -16,13 +17,23 @@ export interface TextAreaProps
 	extends Omit<HTMLProps<HTMLTextAreaElement>, 'ref'> {
 	className?: string;
 	autoSize?: boolean;
+	autoSelect?: boolean;
 	// if auto-size, pad the height by this many px
 	padBottomPixels?: number;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 	function TextArea(
-		{ autoSize, className, rows, padBottomPixels = 0, onChange, ...rest },
+		{
+			autoSize,
+			autoSelect,
+			onFocus,
+			className,
+			rows,
+			padBottomPixels = 0,
+			onChange,
+			...rest
+		},
 		ref,
 	) {
 		const innerRef = useRef<HTMLTextAreaElement>(null);
@@ -43,12 +54,27 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 			}
 		}, [autoSize, padBottomPixels, finalValue]);
 
-		const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-			setInnerValue((e.target as HTMLTextAreaElement).value);
-			if (onChange) {
-				onChange(e);
-			}
-		};
+		const handleChange = useCallback(
+			(e: ChangeEvent<HTMLTextAreaElement>) => {
+				setInnerValue((e.target as HTMLTextAreaElement).value);
+				if (onChange) {
+					onChange(e);
+				}
+			},
+			[onChange],
+		);
+
+		const handleFocus = useCallback(
+			(e: React.FocusEvent<HTMLTextAreaElement>) => {
+				if (autoSelect) {
+					e.target.select();
+				}
+				if (onFocus) {
+					onFocus(e);
+				}
+			},
+			[autoSelect, onFocus],
+		);
 
 		return (
 			<textarea
@@ -64,6 +90,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				)}
 				rows={autoSize ? 1 : rows}
 				onChange={handleChange}
+				onFocus={handleFocus}
 				{...rest}
 			/>
 		);

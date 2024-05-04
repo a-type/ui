@@ -24,6 +24,7 @@ export type LiveUpdateTextFieldProps = {
 	onBlur?: (ev: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	autoComplete?: InputProps['autoComplete'];
 	autoFocus?: InputProps['autoFocus'];
+	autoSelect?: InputProps['autoSelect'];
 	required?: boolean;
 	placeholder?: string;
 	type?: InputProps['type'];
