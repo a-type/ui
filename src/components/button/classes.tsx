@@ -4,12 +4,12 @@ import type { ButtonProps } from './Button.jsx';
 export function getButtonClassName({
 	color,
 	size,
-	toggled,
+	toggleable,
 	align,
 }: {
 	color?: ButtonProps['color'];
 	size?: ButtonProps['size'];
-	toggled?: boolean;
+	toggleable?: boolean;
 	align?: ButtonProps['align'];
 }) {
 	return classNames(
@@ -24,10 +24,12 @@ export function getButtonClassName({
 		`btn-color-${color ?? 'default'}`,
 		sizes[size ?? 'default'],
 		`size-${size ?? 'default'}`,
-		toggled && toggledClass,
+		toggleable && toggledClass,
 		align && aligns[align],
 		// compound variants
-		color === 'ghost' && toggled && 'layer-variants:bg-primary-wash',
+		color === 'ghost' &&
+			toggleable &&
+			'layer-variants:[aria-pressed="true"]:bg-primary-wash',
 	);
 }
 
@@ -49,7 +51,8 @@ const sizes = {
 	icon: 'layer-variants:[&.size-icon]:(p-2 text-sm rounded-full) layer-variants:focus-visible:shadow-[0_0_0_2px_var(--focus,var(--hover))]',
 };
 
-const toggledClass = 'hover:(filter-brightness-[1.1])';
+const toggledClass =
+	'layer-variants:(bg-transparent aria-pressed:bg-[var(--bg)] hover:(filter-brightness-[1.1]))';
 
 const aligns = {
 	start: 'self-start',
