@@ -33,7 +33,7 @@ export const CardMain = forwardRef<
 				'layer-components:md:pt-4',
 				compact && 'layer-variants:(p-1 bg-white gap-0)',
 				isInteractive &&
-					'layer-components:cursor-pointer layer-components:hover:(bg-lightBlend color-black)',
+					'layer-components:cursor-pointer layer-components:hover:(bg-gray-blend color-black)',
 				className,
 			)}
 			data-compact={compact}
