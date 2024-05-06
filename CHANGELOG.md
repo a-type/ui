@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.5
+
+### Patch Changes
+
+- ab1392cd: How did I not have React as peerDeps this whole time
+
 ## 0.8.4
 
 ### Patch Changes
