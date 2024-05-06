@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.4
+
+### Patch Changes
+
+- 8ce6770c: Fix toggle button styles. Add new icons.
+
 ## 0.8.3
 
 ### Patch Changes
