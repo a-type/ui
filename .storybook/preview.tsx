@@ -2,6 +2,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import 'virtual:uno.css';
 import { IconSpritesheet } from '../src/components/icon/index.js';
+import { TooltipProvider } from '../src/components/tooltip/Tooltip.js';
 
 const preview: Preview = {
 	parameters: {
@@ -15,10 +16,10 @@ const preview: Preview = {
 	},
 	decorators: [
 		(Story) => (
-			<>
+			<TooltipProvider>
 				<Story />
 				<IconSpritesheet />
-			</>
+			</TooltipProvider>
 		),
 	],
 };
