@@ -37,17 +37,13 @@ export const Default: Story = {
 				<NavBarRoot>
 					<NavBarItem>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon>
-								<Icon name="placeholder" />
-							</NavBarItemIcon>
+							<NavBarItemIcon name="calendar" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 1</NavBarItemText>
 					</NavBarItem>
-					<NavBarItem>
+					<NavBarItem active={true}>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon>
-								<Icon name="placeholder" />
-							</NavBarItemIcon>
+							<NavBarItemIcon name="book" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 2</NavBarItemText>
 					</NavBarItem>

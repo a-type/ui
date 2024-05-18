@@ -29,7 +29,7 @@ export function PageContent({
 		<div
 			className={classNames(
 				'layer-components:([grid-area:content] max-w-full min-w-0 w-full flex flex-col items-start relative flex-1 gap-3)',
-				'layer-components:(rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0)',
+				'layer-components:(rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash [box-shadow:0_0_10px_0_#00000024] sm:border-none sm:rounded-0 sm:shadow-none)',
 				{ 'layer-variants:(overflow-y-auto h-full)': scrollable },
 				className,
 			)}

@@ -1,30 +1,34 @@
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { withClassName } from '../../hooks.js';
 import { ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import { Icon, IconProps } from '../icon.js';
 
 export const navBarItemClass = classNames(
-	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-inherit)',
+	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-7)',
 	'layer-components:sm:(flex-row-reverse h-auto justify-start gap-2 overflow-visible)',
-	'layer-components:hover:bg-primaryWash',
-	'layer-components:focus-visible:(outline-none bg-primaryWash)',
-	'layer-components:active:bg-primaryWash',
+	'layer-components:hover:bg-primary-wash',
+	'layer-components:focus-visible:(outline-none bg-primary-wash)',
+	'layer-components:active:bg-primary-wash layer-components:sm:active:bg-gray-dark-blend',
+	'layer-components:[&[data-active=true]]:(bg-light-blend text-primary-dark)',
 );
 
 export interface NavBarItemProps {
 	asChild?: boolean;
 	className?: string;
 	children?: ReactNode;
+	active?: boolean;
 }
 
 export const NavBarItem = forwardRef<HTMLDivElement, NavBarItemProps>(
-	function NavBarItem({ asChild, className, ...rest }, ref) {
+	function NavBarItem({ asChild, className, active, ...rest }, ref) {
 		const Comp = asChild ? Slot : 'div';
 
 		return (
 			<Comp
 				ref={ref}
 				className={classNames(navBarItemClass, className)}
+				data-active={active}
 				{...rest}
 			/>
 		);
@@ -41,9 +45,33 @@ export const NavBarItemText = withClassName(
 	'layer-components:(overflow-hidden pl-1 inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:sm:(text-md leading-normal)',
 );
 
-export const NavBarItemIcon = withClassName(
-	'div',
-	'layer-components:(relative z-1 flex fill-none [a[data-active=true]_&]:fill-primary-light)',
+interface NavBarItemIconProps {
+	asChild?: boolean;
+	name?: IconProps['name'];
+	className?: string;
+	children?: ReactNode;
+}
+export const NavBarItemIcon = forwardRef<any, NavBarItemIconProps>(
+	function NavBarItemIcon(
+		{ children, asChild, className, name = 'placeholder', ...rest },
+		ref,
+	) {
+		const Comp = asChild ? Slot : Icon;
+		return (
+			<Comp
+				name={name}
+				className={clsx(
+					'layer-components:(relative z-1 flex fill-none)',
+					'layer-variants:[*[data-active=true]_&]:fill-primary-light',
+					className,
+				)}
+				{...rest}
+				ref={ref}
+			>
+				{children}
+			</Comp>
+		);
+	},
 );
 
 export const NavBarItemPip = withClassName(
