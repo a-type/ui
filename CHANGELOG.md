@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.6
+
+### Patch Changes
+
+- 57f36b33: Dark tooltips
+- 9fb061ab: Fix button keyboard focus
+
 ## 0.8.5
 
 ### Patch Changes
