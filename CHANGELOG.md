@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.8
+
+### Patch Changes
+
+- 89eb9200: fix navbar icon bg
+
 ## 0.8.7
 
 ### Patch Changes
