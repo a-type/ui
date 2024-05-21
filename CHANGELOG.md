@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.9
+
+### Patch Changes
+
+- aea63169: Fix nav item alignment
+
 ## 0.8.8
 
 ### Patch Changes
