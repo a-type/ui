@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.7
+
+### Patch Changes
+
+- add08262: Fix navbar colors. Dialog refinements. New hook for title bar.
+- d2a62b95: fancier navbar
+
 ## 0.8.6
 
 ### Patch Changes
