@@ -7,3 +7,4 @@ export * from './useOnUnmount.js';
 export * from './withClassName.js';
 export * from './useAnimationFrame.js';
 export * from './useLongPress.js';
+export * from './useTitleBarColor.js';

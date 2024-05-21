@@ -6,6 +6,7 @@ import {
 	NavBarItem,
 	NavBarItemIcon,
 	NavBarItemIconWrapper,
+	NavBarItemPip,
 	NavBarItemText,
 	NavBarRoot,
 } from '../navBar.js';
@@ -46,6 +47,7 @@ export const Default: Story = {
 							<NavBarItemIcon name="book" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 2</NavBarItemText>
+						<NavBarItemPip />
 					</NavBarItem>
 				</NavBarRoot>
 			</PageNav>
