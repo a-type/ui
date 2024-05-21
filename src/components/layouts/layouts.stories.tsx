@@ -38,13 +38,15 @@ export const Default: Story = {
 				<NavBarRoot>
 					<NavBarItem>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon name="calendar" />
+							<NavBarItemIcon name="cart" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 1</NavBarItemText>
 					</NavBarItem>
 					<NavBarItem active={true}>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon name="book" />
+							<NavBarItemIcon asChild>
+								<Icon name="book" />
+							</NavBarItemIcon>
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />

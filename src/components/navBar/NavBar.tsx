@@ -38,7 +38,7 @@ export const NavBarItem = forwardRef<HTMLDivElement, NavBarItemProps>(
 export const NavBarItemIconWrapper = withClassName(
 	'div',
 	'layer-components:(relative flex) layer-components:sm:(p-6px rounded-full bg-gray-blend)',
-	'layer-variants:[*[data-active=true]_&]:bg-primary-light',
+	'layer-variants:sm:[*[data-active=true]_&]:bg-primary-light',
 );
 
 export const NavBarItemText = withClassName(
