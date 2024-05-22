@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.12
+
+### Patch Changes
+
+- 6c62d9c4: New select styling, using Button.
+
 ## 0.8.11
 
 ### Patch Changes
