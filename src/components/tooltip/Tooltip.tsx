@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
 
@@ -22,14 +22,13 @@ function Content({
 				)}
 				{...props}
 			>
-				{children}
+				<div className="max-w-80vw text-wrap relative">{children}</div>
 				<TooltipPrimitive.Arrow className="fill-black" />
 			</TooltipPrimitive.Content>
 		</TooltipPrimitive.Portal>
 	);
 }
 
-// Exports
 export const TooltipProvider = TooltipPrimitive.Provider;
 
 export function Tooltip({

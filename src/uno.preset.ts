@@ -429,8 +429,8 @@ export default function presetAglio({
 					--palette-overlay: rgba(0, 0, 0, 0.025);
 					--palette-black: #303030;
 					--palette-white: #fff;
-					--palette-light: #fdfdff;
-					--palette-dark: #080808;
+					--palette-light: #f8f8fb;
+					--palette-dark: #0a0a0b;
 					--palette-gray-1: #fafafa;
 					--palette-gray-2: #f5f5f5;
 					--palette-gray-3: #eeeef0;

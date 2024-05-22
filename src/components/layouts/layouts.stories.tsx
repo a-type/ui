@@ -40,7 +40,7 @@ export const Default: Story = {
 						<NavBarItemIconWrapper>
 							<NavBarItemIcon name="cart" />
 						</NavBarItemIconWrapper>
-						<NavBarItemText>Item 1</NavBarItemText>
+						<NavBarItemText>Item 1 long</NavBarItemText>
 					</NavBarItem>
 					<NavBarItem active={true}>
 						<NavBarItemIconWrapper>
