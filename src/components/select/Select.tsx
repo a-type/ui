@@ -18,6 +18,8 @@ import {
 } from 'react';
 import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
+import { Button, ButtonProps, getButtonClassName } from '../button.js';
+import { Icon } from '../icon.js';
 
 export const SelectItem = forwardRef<
 	HTMLDivElement,
@@ -69,13 +71,33 @@ export const SelectGroup = (props: SelectPrimitive.SelectGroupProps) => {
 };
 
 export const SelectRoot = SelectPrimitive.Root;
-export const selectTriggerClassName =
-	'layer-components:([all:unset] inline-flex items-center justify-center rounded-full px-3 py-1 text-sm gap-2 color-black border-solid border border-gray5 hover:border-gray7 focus:shadow-focus [&[data-placeholder]]:color-gray8) select-none';
-export const SelectTrigger = withNoNativeRender(
+export const selectTriggerClassName = classNames(
+	getButtonClassName({ color: 'default' }),
+	'layer-components:([all:unset] inline-flex [&[data-placeholder]]:color-gray8)',
+);
+export const SelectTriggerBase = withNoNativeRender(
 	withClassName(SelectPrimitive.Trigger, selectTriggerClassName),
 );
 export const UnstyledSelectTrigger = withNoNativeRender(
 	SelectPrimitive.Trigger,
+);
+
+export interface SelectTriggerProps extends ButtonProps {}
+export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
+	function SelectTrigger({ children, ...props }, ref) {
+		return (
+			<UnstyledSelectTrigger asChild {...props} ref={ref}>
+				<Button className="gap-2 font-normal">
+					{children || (
+						<>
+							<SelectValue />
+							<SelectIcon />
+						</>
+					)}
+				</Button>
+			</UnstyledSelectTrigger>
+		);
+	},
 );
 
 export const SelectValue = withNoNativeRender(
@@ -99,7 +121,7 @@ export const SelectIcon = withNoNativeRender(
 					{...props}
 					ref={forwardedRef}
 				>
-					<ChevronDownIcon />
+					<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
 				</SelectPrimitive.Icon>
 			);
 		},
