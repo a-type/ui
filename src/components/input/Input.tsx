@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 export const inputClassName = classNames(
-	'layer-components:(px-4 py-2 text-md font-sans rounded-lg bg-white select-auto min-w-60px color-black border-default)',
+	'layer-components:(px-4 py-2 text-md font-sans rounded-lg bg-white select-auto min-w-60px color-black border-default shadow-sm-inset)',
 	'layer-components:focus:(outline-none bg-gray2 ring-4	ring-white)',
 	'layer-components:focus-visible:(outline-none ring-primary-wash)',
 	'layer-components:md:(min-w-120px)',
