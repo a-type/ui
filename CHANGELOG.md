@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.13
+
+### Patch Changes
+
+- cf84250c: card shadow
+
 ## 0.8.12
 
 ### Patch Changes
