@@ -95,7 +95,7 @@ export default function presetAglio({
 				'max-content': 'max-content',
 			},
 			boxShadow: {
-				sm: '0 1px 2px 0 var(--color-shadow-2)',
+				sm: '0 1px 2px 0 var(--color-shadow-2), 0 0 1px 0 var(--color-shadow-2)',
 				md: '0 4px 6px -1px var(--color-shadow-1), 0 2px 4px -1px var(--color-shadow-2)',
 				lg: '0 10px 15px -3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
 				xl: '0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
@@ -314,6 +314,28 @@ export default function presetAglio({
 				/^gutter-bottom$/,
 				(_, { theme }) => ({ 'margin-bottom': (theme as any).spacing[2] }),
 			],
+			['shadow-1', { 'box-shadow': '0 1px 2px 0 var(--color-shadow-2)' }],
+			[
+				'shadow-2',
+				{
+					'box-shadow':
+						'0 4px 6px -1px var(--color-shadow-1), 0 2px 4px -1px var(--color-shadow-2)',
+				},
+			],
+			[
+				'shadow-3',
+				{
+					'box-shadow':
+						'0 10px 15px -3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
+				},
+			],
+			[
+				'shadow-4',
+				{
+					'box-shadow':
+						'0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
+				},
+			],
 		],
 
 		variants: [
@@ -431,18 +453,18 @@ export default function presetAglio({
 					--palette-white: #fff;
 					--palette-light: #f8f8fb;
 					--palette-dark: #0a0a0b;
-					--palette-gray-1: #fafafa;
-					--palette-gray-2: #f5f5f5;
-					--palette-gray-3: #eeeef0;
-					--palette-gray-4: #e0e0e3;
-					--palette-gray-5: #bdbdbf;
-					--palette-gray-6: #939ea0;
-					--palette-gray-7: #6f7a7c;
-					--palette-gray-8: #4d5658;
-					--palette-gray-9: #3c3c3c;
-					--palette-gray-0: #2b2b2b;
-					--palette-gray-ex-1: #232323;
-					--palette-gray-ex-2: #1b1b1b;
+					--palette-gray-1: #fafafc;
+					--palette-gray-2: #f5f5f8;
+					--palette-gray-3: #eeeef2;
+					--palette-gray-4: #e0e0e9;
+					--palette-gray-5: #bdbdc7;
+					--palette-gray-6: #939eaa;
+					--palette-gray-7: #6f7a86;
+					--palette-gray-8: #4d5660;
+					--palette-gray-9: #3c3c3f;
+					--palette-gray-0: #2b2b2f;
+					--palette-gray-ex-1: #232326;
+					--palette-gray-ex-2: #1b1b1f;
 					--palette-gray-blend: rgba(0, 0, 20, 0.025);
 					--palette-gray-dark-blend: rgba(0, 0, 20, 0.05);
 					--palette-light-gray-blend: rgba(255, 255, 255, 0.05);
