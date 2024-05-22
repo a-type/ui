@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.10
+
+### Patch Changes
+
+- 9beb3c33: Color tweaks
+
 ## 0.8.9
 
 ### Patch Changes
