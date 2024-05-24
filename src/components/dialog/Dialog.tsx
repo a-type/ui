@@ -60,7 +60,9 @@ export const Content = forwardRef<
 				wasOpenRef.current = true;
 
 				const matchesSmall =
-					!disableSheet && !window.matchMedia('(min-width:600px)').matches;
+					!disableSheet &&
+					typeof window !== 'undefined' &&
+					!window.matchMedia('(min-width:600px)').matches;
 				if (!matchesSmall) return;
 
 				setTimeout(() => {

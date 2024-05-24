@@ -106,7 +106,7 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 		const [capture, setCapture] = useState<ImageCapture>();
 
 		useEffect(() => {
-			if ('ImageCapture' in window) {
+			if (typeof window !== 'undefined' && 'ImageCapture' in window) {
 				const videoTrack = stream?.getVideoTracks()[0];
 				if (videoTrack) {
 					const capturer = new ImageCapture(videoTrack);

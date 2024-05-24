@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
  * Applies bottom offset px as a CSS custom property to the document root.
  */
 export function useVisualViewportOffset() {
-	const viewport = window.visualViewport;
-
 	useEffect(() => {
+		const viewport =
+			typeof window === 'undefined' ? undefined : window.visualViewport;
+
 		if (!viewport) {
 			return;
 		}

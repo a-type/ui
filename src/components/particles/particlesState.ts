@@ -22,9 +22,9 @@ export class Particles {
 
 	constructor({ initialPoolSize }: { initialPoolSize: number }) {
 		// if prefers-reduced-motion is set, disable particles
-		this.disabled = window.matchMedia(
-			'(prefers-reduced-motion: reduce)',
-		).matches;
+		this.disabled =
+			typeof window === 'undefined' ||
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		if (this.disabled) {
 			initialPoolSize = 0;
 		}
