@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.15
+
+### Patch Changes
+
+- cdcac119: Configurable font source. Default to CDN.
+
 ## 0.8.14
 
 ### Patch Changes
