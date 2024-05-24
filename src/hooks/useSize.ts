@@ -1,5 +1,5 @@
 import { debounce } from '@a-type/utils';
-import { RefObject, useLayoutEffect, useMemo, useRef } from 'react';
+import { RefObject, useEffect, useMemo, useRef } from 'react';
 import { useStableCallback } from './useStableCallback.js';
 interface ResizeObserverEntry {
 	target: Element;
@@ -17,7 +17,7 @@ export function useSize<E extends HTMLElement>(
 ) {
 	const ref = useRef<E>(null);
 	const cb = useStableCallback(callback);
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const target = ref.current;
 		if (!target) {
 			return () => {
@@ -78,7 +78,7 @@ export function useBounds<E extends HTMLElement>(
 ) {
 	const ref = useRef<E>(null);
 	const cb = useStableCallback(callback);
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const target = ref.current;
 		if (!target) {
 			return () => {

@@ -19,3 +19,11 @@ export const Default: Story = {
 		autoSize: true,
 	},
 };
+
+export const Tall: Story = {
+	args: {
+		value:
+			'This is a tall text area\nit has a lot\n of content!\nas in, quite a bit\nI think',
+		autoSize: true,
+	},
+};

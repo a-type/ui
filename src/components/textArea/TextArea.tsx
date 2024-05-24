@@ -7,6 +7,7 @@ import {
 	forwardRef,
 	HTMLProps,
 	useCallback,
+	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState,
@@ -42,6 +43,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 		const [innerValue, setInnerValue] = useState('');
 		const finalValue = rest.value ?? innerValue;
 
+		// TODO: can layout effect be avoided? useEffect shows a flash of the wrong size
 		useLayoutEffect(() => {
 			if (!autoSize) return;
 			const element = innerRef.current;
