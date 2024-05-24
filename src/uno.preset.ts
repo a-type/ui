@@ -3,8 +3,10 @@ import { entriesToCss, toArray } from '@unocss/core';
 
 export default function presetAglio({
 	spacingIncrement = 0.25,
+	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
 }: {
 	spacingIncrement?: number;
+	interFontLocation?: string;
 } = {}): Preset {
 	return {
 		name: 'atype',
@@ -734,17 +736,10 @@ export default function presetAglio({
 
         @font-face {
           font-family: "Inter";
-          src: url("/fonts/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
+          src: url(${interFontLocation}) format("truetype-variations");
           font-weight: 1 999;
           font-style: oblique 0deg 5deg;
           font-display: block;
-        }
-
-        @font-face {
-          font-family: "Londrina Outline";
-          src: url("/fonts/LondrinaOutline-Regular.ttf") format("truetype");
-          font-display: block;
-          font-style: normal;
         }
 
 				@media (display-mode: standalone) {
