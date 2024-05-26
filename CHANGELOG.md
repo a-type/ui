@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.16
+
+### Patch Changes
+
+- 5a9889b9: fix tooltip
+
 ## 0.8.15
 
 ### Patch Changes
