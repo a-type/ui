@@ -22,7 +22,7 @@ function Content({
 				)}
 				{...props}
 			>
-				<div className="max-w-80vw text-wrap relative">{children}</div>
+				{children}
 				<TooltipPrimitive.Arrow className="fill-black" />
 			</TooltipPrimitive.Content>
 		</TooltipPrimitive.Portal>

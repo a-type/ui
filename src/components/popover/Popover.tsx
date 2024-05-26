@@ -21,12 +21,12 @@ const StyledContent = withClassName(
 
 const StyledArrow = withClassName(
 	PopoverPrimitive.Arrow,
-	'fill-white stroke-black',
+	'layer-components:(fill-white stroke-black)',
 );
 
 const StyledClose = withClassName(
 	PopoverPrimitive.Close,
-	'[all:unset] [font-family:inherit] rounded-full h-25px w-25px inline-flex items-center justify-center color-dark-blend absolute top-5px right-5px hover:bg-light-blend focus:shadow-focus',
+	'layer-components:([all:unset] [font-family:inherit] rounded-full h-25px w-25px inline-flex items-center justify-center color-dark-blend absolute top-5px right-5px hover:bg-light-blend focus:shadow-focus)',
 );
 
 // Exports
