@@ -22,6 +22,7 @@ export default function presetAglio({
 				attention: 'var(--color-attention)',
 				attentionDark: 'var(--color-attention-dark)',
 				'attention-dark': 'var(--color-attention-dark)',
+				'attention-wash': 'var(--color-attention-wash)',
 				accent: 'var(--color-accent)',
 				accentWash: 'var(--color-accent-wash)',
 				'accent-wash': 'var(--color-accent-wash)',
@@ -527,6 +528,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-red-light);
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);
@@ -632,6 +634,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-red-light);
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);
@@ -648,6 +651,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-red-light);
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);
@@ -664,6 +668,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-red-light);
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);
@@ -680,6 +685,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-red-light);
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
 					--color-accent: var(--color-yellow);
 					--color-accent-wash: var(--color-yellow-wash);
 					--color-accent-light: var(--color-yellow-light);
@@ -696,6 +702,7 @@ export default function presetAglio({
 					--color-attention-light: var(--color-blue-light);
 					--color-attention: var(--color-blue);
 					--color-attention-dark: var(--color-blue-dark);
+					--color-attention-wash: var(--color-blue-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);

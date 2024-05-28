@@ -2,7 +2,8 @@
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { withClassName } from '../../hooks/withClassName.js';
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
+import { forwardRef } from 'react';
 
 const StyledContent = withClassName(
 	DropdownMenuPrimitive.Content,
@@ -15,12 +16,31 @@ const StyledContent = withClassName(
 	'will-change-transform',
 );
 const itemClassName = classNames(
-	'text-md leading-4 color-black rounded-sm flex items-center pr-4 pl-8 py-3 relative text-left select-none cursor-pointer',
-	'[&[data-disabled]]:(color-gray9 pointer-events-none)',
-	'focus-visible:(bg-gray2 color-gray9)',
-	'focus:outline-none',
+	'layer-components:(text-md leading-4 color-black rounded-sm flex items-center pr-4 pl-8 py-3 relative text-left select-none cursor-pointer)',
+	'layer-components:[&[data-disabled]]:(color-gray9 pointer-events-none)',
+	'layer-components:focus-visible:(bg-gray2 color-gray9)',
+	'layer-components:focus:outline-none',
 );
-const StyledItem = withClassName(DropdownMenuPrimitive.Item, itemClassName);
+const StyledItemBase = withClassName(DropdownMenuPrimitive.Item, itemClassName);
+export interface DropdownMenuItemProps
+	extends DropdownMenuPrimitive.DropdownMenuItemProps {
+	color?: 'default' | 'destructive';
+}
+const StyledItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
+	({ className, color, ...props }, forwardedRef) => {
+		return (
+			<StyledItemBase
+				{...props}
+				className={clsx(
+					color === 'destructive' &&
+						'layer-variants:(text-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
+					className,
+				)}
+				ref={forwardedRef}
+			/>
+		);
+	},
+);
 const StyledCheckboxItem = withClassName(
 	DropdownMenuPrimitive.CheckboxItem,
 	itemClassName,

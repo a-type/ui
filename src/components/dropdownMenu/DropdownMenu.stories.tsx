@@ -28,7 +28,7 @@ export const Default: Story = {
 			<>
 				<DropdownMenuTrigger>Open</DropdownMenuTrigger>
 				<DropdownMenuContent>
-					<DropdownMenuItem>
+					<DropdownMenuItem color="destructive">
 						<DropdownMenuLabel>Item 1</DropdownMenuLabel>
 						<DropdownMenuItemRightSlot>
 							<Icon name="flag" />
