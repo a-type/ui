@@ -79,12 +79,12 @@
 		"@radix-ui/react-toggle-group": "^1.0.4",
 		"@radix-ui/react-tooltip": "^1.0.7",
 		"@react-spring/web": "^9.7.3",
-		"@tiptap/core": "^2.2.4",
-		"@tiptap/extension-document": "^2.2.4",
-		"@tiptap/extension-paragraph": "^2.2.4",
-		"@tiptap/pm": "^2.2.4",
-		"@tiptap/react": "^2.2.4",
-		"@tiptap/starter-kit": "^2.2.4",
+		"@tiptap/core": "2.4.0",
+		"@tiptap/extension-document": "2.4.0",
+		"@tiptap/extension-paragraph": "2.4.0",
+		"@tiptap/pm": "2.4.0",
+		"@tiptap/react": "2.4.0",
+		"@tiptap/starter-kit": "2.4.0",
 		"@use-gesture/react": "^10.2.27",
 		"browser-image-resizer": "^2.4.1",
 		"calendar-blocks": "^0.3.0",
@@ -95,7 +95,7 @@
 		"date-fns": "^2.29.3",
 		"formik": "^2.4.5",
 		"pluralize": "^8.0.0",
-		"prosemirror-model": "^1.18.0"
+		"prosemirror-model": "1.21.1"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.25.0",

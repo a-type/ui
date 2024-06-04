@@ -365,10 +365,8 @@ export default function presetAglio({
 			'border-light': 'border border-solid border-gray5',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
-			row: 'flex flex-row gap-2 items-center',
-			col: 'flex flex-col gap-2 items-center',
-			'col-start': 'flex flex-col gap-2 items-start',
-			'col-end': 'flex flex-col gap-2 items-end',
+			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
+			col: 'layer-components:flex layer-components:flex-col layer-components:gap-2 layer-components:items-center',
 			'hidden-input':
 				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:hidden',
 			center: 'left-50% top-50%',
