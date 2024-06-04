@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.17
+
+### Patch Changes
+
+- 03c87819: destructive dropdown menu item
+- 3477d34c: update prosemirror stuff
+
 ## 0.8.16
 
 ### Patch Changes
