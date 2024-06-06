@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.18
+
+### Patch Changes
+
+- 8fd39cd9: fix button toggle eating aria-pressed, new icons
+
 ## 0.8.17
 
 ### Patch Changes
