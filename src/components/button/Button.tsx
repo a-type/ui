@@ -57,9 +57,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				}),
 				className,
 			),
-			// set state when toggleable
-			'aria-pressed': toggled,
 		};
+		// set state when toggleable
+		if (toggled !== undefined) {
+			buttonProps['aria-pressed'] = toggled;
+		}
 
 		if (asChild) {
 			// avoid rendering loading spinner with asChild

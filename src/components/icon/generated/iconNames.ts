@@ -67,6 +67,10 @@ export const iconNames = [
 	'cloud',
 	'cloudDisabled',
 	'trash',
+	'notAllowed',
+	'connection',
+	'connectionBreak',
+	'connectionSplit',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
