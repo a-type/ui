@@ -4,6 +4,8 @@ import {
 	ChangeEvent,
 	FocusEvent,
 	forwardRef,
+	KeyboardEventHandler,
+	MouseEventHandler,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -29,6 +31,9 @@ export type LiveUpdateTextFieldProps = {
 	placeholder?: string;
 	type?: InputProps['type'];
 	id?: string;
+	onKeyDown?: KeyboardEventHandler;
+	onKeyUp?: KeyboardEventHandler;
+	onClick?: MouseEventHandler;
 };
 
 /**
