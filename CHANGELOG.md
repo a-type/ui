@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.19
+
+### Patch Changes
+
+- 81b6950c: support more events on live input
+
 ## 0.8.18
 
 ### Patch Changes
