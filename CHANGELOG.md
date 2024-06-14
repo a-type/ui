@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.21
+
+### Patch Changes
+
+- ce71e322: add tooltips to provider
+
 ## 0.8.20
 
 ### Patch Changes
