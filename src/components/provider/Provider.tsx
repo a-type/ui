@@ -3,6 +3,7 @@ import { ParticleLayer } from '../particles.js';
 import { IconSpritesheet } from '../icon.js';
 import { Toaster, ToastPosition } from 'react-hot-toast';
 import { Tooltip, TooltipProvider } from '../tooltip.js';
+import { useVisualViewportOffset } from '../../hooks.js';
 
 export interface ProviderProps {
 	children?: ReactNode;
@@ -20,6 +21,8 @@ export function Provider({
 	toastPosition = 'top-center',
 	toastContainerClassName,
 }: ProviderProps) {
+	useVisualViewportOffset();
+
 	const otherStuff = (
 		<>
 			<IconSpritesheet />
