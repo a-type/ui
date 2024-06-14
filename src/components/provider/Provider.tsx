@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { ParticleLayer } from '../particles.js';
 import { IconSpritesheet } from '../icon.js';
 import { Toaster, ToastPosition } from 'react-hot-toast';
+import { Tooltip, TooltipProvider } from '../tooltip.js';
 
 export interface ProviderProps {
 	children?: ReactNode;
@@ -16,7 +17,7 @@ export interface ProviderProps {
 export function Provider({
 	children,
 	disableParticles,
-	toastPosition = 'bottom-center',
+	toastPosition = 'top-center',
 	toastContainerClassName,
 }: ProviderProps) {
 	const otherStuff = (
@@ -31,16 +32,18 @@ export function Provider({
 
 	if (disableParticles)
 		return (
-			<>
+			<TooltipProvider>
 				{children}
 				{otherStuff}
-			</>
+			</TooltipProvider>
 		);
 
 	return (
-		<ParticleLayer>
-			{children}
-			{otherStuff}
-		</ParticleLayer>
+		<TooltipProvider>
+			<ParticleLayer>
+				{children}
+				{otherStuff}
+			</ParticleLayer>
+		</TooltipProvider>
 	);
 }
