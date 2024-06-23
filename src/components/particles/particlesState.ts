@@ -1,3 +1,5 @@
+import { assert } from '@a-type/utils';
+
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
 	private ctx: CanvasRenderingContext2D | null = null;
@@ -8,6 +10,12 @@ export class Particles {
 	// an object pool of Particles
 	private particles: Particle[];
 	private freeParticles: Particle[] = [];
+
+	// when true, the final frame has rendered after all particles
+	// are drawn, and we can stop rendering until new particles are added
+	// called "latch" because after the last particle frame we wait one
+	// more frame before closing it
+	private lastDrawLatch = true;
 
 	// keep canvas render size the same as its actual size
 	private resizeObserver = new ResizeObserver((entries) => {
@@ -68,25 +76,34 @@ export class Particles {
 	};
 
 	private draw = (timestamp: number) => {
-		if (this.state === 'paused') {
-			return;
-		}
-		const ctx = this.ctx;
-
-		if (!ctx || !this.canvas) {
+		const skipDrawing =
+			this.disabled ||
+			this.lastDrawLatch ||
+			this.state === 'paused' ||
+			!this.ctx ||
+			!this.canvas;
+		if (!this.ctx || !this.canvas) {
 			console.warn('No canvas context');
 			this.pause();
-			return;
 		}
 
 		const delta = timestamp - this.lastFrameTimestamp;
+		this.lastFrameTimestamp = timestamp;
 
-		ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		if (skipDrawing) {
+			return;
+		}
 
-		this.renderParticles(ctx, delta);
+		this.ctx!.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
+
+		if (this.particles.length === 0) {
+			// skip drawing until we get particles again
+			this.lastDrawLatch = true;
+		} else {
+			this.renderParticles(this.ctx!, delta);
+		}
 
 		requestAnimationFrame(this.draw);
-		this.lastFrameTimestamp = timestamp;
 	};
 
 	private renderParticles = (ctx: CanvasRenderingContext2D, delta: number) => {
@@ -99,14 +116,12 @@ export class Particles {
 				freed++;
 			}
 		}
-		if (freed) {
-			console.log('Freed particles', freed);
-		}
 	};
 
 	addParticles = (spawn: ParticleSpawn) => {
 		// wrap in RAF because initializers often use element dimensions
 		requestAnimationFrame(() => {
+			this.lastDrawLatch = false;
 			if (this.freeParticles.length < spawn.count) {
 				this.extendPool(spawn.count - this.freeParticles.length);
 			}
@@ -126,7 +141,6 @@ export class Particles {
 					spawn.behavior,
 				);
 			}
-			console.log('Allocated particles', spawn.count);
 		});
 	};
 
