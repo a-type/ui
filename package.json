@@ -1,6 +1,6 @@
 {
 	"name": "@a-type/ui",
-	"version": "0.8.18",
+	"version": "0.8.21",
 	"type": "module",
 	"files": [
 		"/dist",
@@ -95,7 +95,8 @@
 		"date-fns": "^2.29.3",
 		"formik": "^2.4.5",
 		"pluralize": "^8.0.0",
-		"prosemirror-model": "1.21.1"
+		"prosemirror-model": "1.21.1",
+		"react-hot-toast": "^2.4.1"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.25.0",

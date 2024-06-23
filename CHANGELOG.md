@@ -1,5 +1,23 @@
 # @a-type/ui
 
+## 0.8.21
+
+### Patch Changes
+
+- ce71e322: add tooltips to provider
+
+## 0.8.20
+
+### Patch Changes
+
+- 8c2c1d33: Add toasts. Add convenience Provider component.
+
+## 0.8.19
+
+### Patch Changes
+
+- 81b6950c: support more events on live input
+
 ## 0.8.18
 
 ### Patch Changes
