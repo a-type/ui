@@ -18,6 +18,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 		| 'unstyled';
 	size?: 'default' | 'small' | 'icon';
 	toggled?: boolean;
+	toggleMode?: 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
@@ -31,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			color,
 			size,
 			toggled,
+			toggleMode = 'color',
 			align,
 			visuallyDisabled,
 			loading,
@@ -52,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				getButtonClassName({
 					color,
 					size,
-					toggleable: toggled !== undefined,
+					toggleable: toggled !== undefined && toggleMode === 'color',
 					align,
 				}),
 				className,
@@ -60,7 +62,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		};
 		// set state when toggleable
 		if (toggled !== undefined) {
-			buttonProps['aria-pressed'] = toggled;
+			buttonProps['aria-pressed'] = !!toggled;
 		}
 
 		if (asChild) {
@@ -71,7 +73,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		return (
 			<Comp {...buttonProps}>
 				{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
-				{toggled !== undefined && <ToggleIndicator value={toggled} />}
+				{toggled !== undefined && toggleMode !== 'state-only' && (
+					<ToggleIndicator value={toggled} />
+				)}
 				{children}
 			</Comp>
 		);
