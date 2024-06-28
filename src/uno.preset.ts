@@ -110,6 +110,14 @@ export default function presetAglio({
 				xl: '0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
 				'xl-inset':
 					'inset 0 20px 25px -5px var(--color-shadow-1), inset 0 10px 10px -5px var(--color-shadow-2)',
+				'sm-up':
+					'0 -1px 2px 0 var(--color-shadow-2), 0 0 1px 0 var(--color-shadow-2)',
+				'md-up':
+					'0 -4px 6px -1px var(--color-shadow-1), 0 -2px 4px -1px var(--color-shadow-2)',
+				'lg-up':
+					'0 -10px 15px -3px var(--color-shadow-1), 0 -4px 6px -2px var(--color-shadow-2)',
+				'xl-up':
+					'0 -20px 25px -5px var(--color-shadow-1), 0 -10px 10px -5px var(--color-shadow-2)',
 
 				// focus outlines
 				focus: `0 0 0 3px var(--color-primary-light)`,
@@ -457,7 +465,6 @@ export default function presetAglio({
 					--palette-light-blend-warm: rgba(255, 250, 250, 0.8);
 					--palette-light-blend-cool: rgba(250, 255, 255, 0.8);
 					--palette-light-blend: rgba(255, 250, 250, 0.8);
-					--palette-overlay: rgba(0, 0, 0, 0.025);
 					--palette-black: #303030;
 					--palette-white: #fff;
 					--palette-light: #f8f8fb;
@@ -482,6 +489,8 @@ export default function presetAglio({
 					--palette-shadow-2: rgba(0, 0, 0, 0.15);
 					--palette-shadow-3: rgba(0, 0, 0, 0.3);
 					--palette-shadow-4: rgba(0, 0, 0, 0.5);
+					--palette-white-overlay: rgba(255, 255, 255, 0.4);
+					--palette-black-overlay: rgba(0, 0, 0, 0.4);
 
 
 					--z-nowPlaying: 40;
@@ -502,7 +511,6 @@ export default function presetAglio({
 					--color-light-blend-warm: var(--palette-light-blend-warm);
 					--color-light-blend-cool: var(--palette-light-blend-cool);
 					--color-light-blend: var(--palette-light-blend);
-					--color-overlay: var(--palette-overlay);
 					--color-black: var(--palette-black);
 					--color-white: var(--palette-white);
 					--color-wash: var(--palette-light);
@@ -520,6 +528,7 @@ export default function presetAglio({
 					--color-gray-dark-blend: var(--palette-gray-dark-blend);
 					--color-shadow-1: var(--palette-shadow-2);
 					--color-shadow-2: var(--palette-shadow-1);
+					--color-overlay: var(--palette-white-overlay);
 
 
 					/* DEFAULT THEME (LEMON) */
@@ -547,8 +556,7 @@ export default function presetAglio({
 						--color-dark-blend-cool: var(--palette-light-blend-cool);
 						--color-light-blend-warm: var(--palette-dark-blend-warm);
 						--color-light-blend-cool: var(--palette-dark-blend-cool);
-						--color-light-blend: var(--palette-light-blend);
-						--color-overlay: var(--palette-overlay);
+						--color-light-blend: var(--palette-dark-blend);
 						--color-black: var(--palette-white);
 						--color-white: var(--palette-black);
 						--color-wash: var(--palette-dark);
@@ -566,6 +574,7 @@ export default function presetAglio({
 						--color-gray-dark-blend: var(--palette-light-gray-dark-blend);
 						--color-shadow-1: var(--palette-shadow-4);
 						--color-shadow-2: var(--palette-shadow-3);
+						--color-overlay: var(--palette-black-overlay);
 					}
 				}
 
@@ -578,7 +587,6 @@ export default function presetAglio({
 						--color-light-blend-warm: var(--palette-light-blend-warm);
 						--color-light-blend-cool: var(--palette-light-blend-cool);
 						--color-light-blend: var(--palette-light-blend);
-						--color-overlay: var(--palette-overlay);
 						--color-black: var(--palette-black);
 						--color-white: var(--palette-white);
 						--color-wash: var(--palette-light);
@@ -596,6 +604,7 @@ export default function presetAglio({
 						--color-gray-dark-blend: var(--palette-gray-dark-blend);
 						--color-shadow-1: var(--palette-shadow-2);
 						--color-shadow-2: var(--palette-shadow-1);
+						--color-overlay: var(--palette-white-overlay);
 					}
 				}
 
@@ -607,7 +616,6 @@ export default function presetAglio({
 						--color-light-blend-warm: var(--palette-dark-blend-warm);
 						--color-light-blend-cool: var(--palette-dark-blend-cool);
 						--color-light-blend: var(--palette-light-blend);
-						--color-overlay: var(--palette-overlay);
 						--color-black: var(--palette-white);
 						--color-white: var(--palette-black);
 						--color-wash: var(--palette-dark);
@@ -625,6 +633,7 @@ export default function presetAglio({
 						--color-gray-dark-blend: var(--palette-light-gray-dark-blend);
 						--color-shadow-1: var(--palette-shadow-4);
 						--color-shadow-2: var(--palette-shadow-3);
+						--color-overlay: var(--palette-black-overlay);
 					}
 				}
 

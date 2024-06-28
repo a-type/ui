@@ -21,14 +21,15 @@ import { useDrag } from '@use-gesture/react';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-gray-dark-blend [box-shadow:inset_0_30px_60px_0px_#00001020] border-top-1 border-top-solid border-top-gray-5)',
+	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-overlay [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray-5)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
 );
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl bg-white overflow-y-auto flex flex-col border-default)',
+	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto flex flex-col)',
+	'layer-components:sm:(shadow-xl)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
 	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
@@ -142,12 +143,12 @@ export const DialogSwipeHandle = forwardRef<
 
 			const contentHeight = content.clientHeight;
 
-			if (last) console.log(swipeY, dy, contentHeight);
-
-			if (last && (swipeY === 1 || dy > contentHeight / 2)) {
+			const shouldClose = last && (swipeY === 1 || dy > contentHeight / 2);
+			if (shouldClose) {
 				close();
 			}
-			const gestureY = last ? 0 : -Math.max(0, dy);
+			const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
+			console.log(gestureY, dy, vy, swipeY);
 			content.style.setProperty('--gesture-y', `${gestureY}px`);
 			content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
 		},
@@ -227,7 +228,7 @@ export type { DialogProps } from '@radix-ui/react-dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'flex justify-end sticky w-full gap-3 items-center bg-white py-3 translate-y-6 flex-wrap',
+	'flex justify-end sticky w-full gap-3 items-center bg-white py-4 translate-y-6 flex-wrap',
 	'bottom--6',
 	'sm:(bottom-0)',
 );
