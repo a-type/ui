@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.24
+
+### Patch Changes
+
+- 43af75dd: dialog styling update
+
 ## 0.8.23
 
 ### Patch Changes
