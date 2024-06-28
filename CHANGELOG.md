@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.23
+
+### Patch Changes
+
+- 2e4c3e84: More toggle button options
+- 264e8086: Tweaks to editable text
+
 ## 0.8.22
 
 ### Patch Changes
