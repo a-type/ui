@@ -1,5 +1,13 @@
 # @a-type/ui
 
+## 0.8.22
+
+### Patch Changes
+
+- 9b8826d5: Add EditableText component
+- 35ff1e50: Pause rerendering particle canvas when there are no particles
+- a5d46429: Add visual viewport offset hook to provider
+
 ## 0.8.21
 
 ### Patch Changes
