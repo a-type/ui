@@ -1,4 +1,12 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import {
+	ChangeEvent,
+	FocusEvent,
+	KeyboardEvent,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { Input, inputClassName } from '../input.js';
 import clsx from 'clsx';
 import { Icon } from '../icon.js';
@@ -12,6 +20,11 @@ export interface EditableTextProps {
 	id?: string;
 	autoSelect?: boolean;
 	autoFocus?: boolean;
+	onFocus?: (ev: FocusEvent) => void;
+	onBlur?: (ev: FocusEvent) => void;
+	onChange?: (ev: ChangeEvent<HTMLInputElement>) => void;
+	onKeyDown?: (ev: KeyboardEvent) => void;
+	onKeyUp?: (ev: KeyboardEvent) => void;
 }
 
 export function EditableText({
@@ -23,21 +36,34 @@ export function EditableText({
 	id,
 	autoSelect,
 	autoFocus,
+	onBlur,
+	onChange,
+	onKeyDown,
 	...rest
 }: EditableTextProps) {
 	const [editingInternal, setEditingInternal] = useState(editing || autoFocus);
 	const editingFinal = editing ?? editingInternal;
 	const setEditingFinal = onEditingChange ?? setEditingInternal;
 
-	const onChange = useCallback(
+	const handleChange = useCallback(
 		(ev: ChangeEvent<HTMLInputElement>) => {
 			onValueChange(ev.target.value);
+			onChange?.(ev);
 		},
-		[onValueChange],
+		[onValueChange, onChange],
+	);
+
+	const handleKeyDown = useCallback(
+		(ev: KeyboardEvent<HTMLInputElement>) => {
+			if (ev.key === 'Enter') {
+				setEditingFinal(false);
+			}
+			onKeyDown?.(ev);
+		},
+		[setEditingFinal, onKeyDown],
 	);
 
 	const inputRef = useRef<HTMLInputElement>(null);
-	const divRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (editingFinal && inputRef.current) {
@@ -47,28 +73,36 @@ export function EditableText({
 		}
 	}, [editingFinal, inputRef]);
 
+	const handleBlur = useCallback(
+		(ev: FocusEvent<HTMLInputElement>) => {
+			setEditingFinal(false);
+			onBlur?.(ev);
+		},
+		[setEditingFinal, onBlur],
+	);
+
 	if (editingFinal) {
 		return (
 			<Input
 				ref={inputRef}
 				value={value}
-				onChange={onChange}
-				onBlur={() => setEditingFinal(false)}
+				onChange={handleChange}
+				onBlur={handleBlur}
 				className={clsx('layer-variants:font-size-inherit', className)}
 				id={id}
 				autoSelect={autoSelect}
+				onKeyDown={handleKeyDown}
 				{...rest}
 			/>
 		);
 	}
 
 	return (
-		<div
-			ref={divRef}
+		<button
 			onClick={() => setEditingFinal(true)}
 			className={clsx(
 				inputClassName,
-				'layer-variants:(border-transparent bg-transparent w-auto inline-flex items-center gap-2 font-size-inherit shadow-none)',
+				'layer-variants:(border-transparent bg-transparent w-auto inline-flex items-center gap-2 font-size-inherit text-inherit shadow-none)',
 				'layer-variants:hover:(bg-gray-blend)',
 				'layer-variants:focus-visible:(outline-none bg-gray-dark-blend)',
 				'cursor-pointer',
@@ -79,6 +113,6 @@ export function EditableText({
 		>
 			{value}
 			<Icon name="pencil" className="stroke-gray-blend opacity-50" />
-		</div>
+		</button>
 	);
 }
