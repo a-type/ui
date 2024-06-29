@@ -39,7 +39,6 @@ export function PageContent({
 				{...innerProps}
 				className={classNames(
 					'layer-components:(w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1)',
-					'layer-components:sm:(max-w-700px w-full)',
 					{
 						'layer-variants:flex-1': fullHeight,
 						'layer-variants:(p-0 sm:p-4)': noPadding,
