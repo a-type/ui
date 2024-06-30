@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.25
+
+### Patch Changes
+
+- 3ec01ef9: adjust content width on desktop
+
 ## 0.8.24
 
 ### Patch Changes
