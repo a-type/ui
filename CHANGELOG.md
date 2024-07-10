@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.27
+
+### Patch Changes
+
+- cf18b5f9: Add search icon
+
 ## 0.8.26
 
 ### Patch Changes
