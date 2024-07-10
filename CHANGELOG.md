@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 0.8.26
+
+### Patch Changes
+
+- d23cdf28: Fancy tabs
+- 545c9049: Embrace rounded inputs
+
 ## 0.8.25
 
 ### Patch Changes
