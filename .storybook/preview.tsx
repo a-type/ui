@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import 'virtual:uno.css';
 import { IconSpritesheet } from '../src/components/icon/index.js';
@@ -15,13 +15,50 @@ const preview: Preview = {
 			},
 		},
 	},
+	globalTypes: {
+		theme: {
+			description: 'Color theme',
+			defaultValue: 'lemon',
+			toolbar: {
+				title: 'Theme',
+				icon: 'paintbrush',
+				items: ['lemon', 'eggplant', 'leek', 'tomato', 'blueberry'],
+				dynamicTitle: true,
+			},
+		},
+		mode: {
+			description: 'Device mode',
+			defaultValue: 'light',
+			toolbar: {
+				title: 'Mode',
+				icon: 'mirror',
+				items: ['light', 'dark'],
+				dynamicTitle: true,
+			},
+		},
+	},
 	decorators: [
-		(Story) => (
-			<TooltipProvider>
-				<Story />
-				<IconSpritesheet />
-			</TooltipProvider>
-		),
+		(Story, ctx) => {
+			useEffect(() => {
+				document.documentElement.classList.add(`theme-${ctx.globals.theme}`);
+				document.documentElement.classList.add(`override-${ctx.globals.mode}`);
+
+				return () => {
+					document.documentElement.classList.remove(
+						`theme-${ctx.globals.theme}`,
+					);
+					document.documentElement.classList.remove(
+						`override-${ctx.globals.mode}`,
+					);
+				};
+			}, [ctx.globals.mode, ctx.globals.theme]);
+			return (
+				<TooltipProvider>
+					<Story />
+					<IconSpritesheet />
+				</TooltipProvider>
+			);
+		},
 	],
 };
 

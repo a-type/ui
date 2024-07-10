@@ -10,7 +10,7 @@ export const navBarItemClass = classNames(
 	'layer-components:hover:bg-primary-wash',
 	'layer-components:focus-visible:(outline-none bg-primary-wash)',
 	'layer-components:active:bg-primary-wash layer-components:sm:active:bg-gray-dark-blend',
-	'layer-components:[&[data-active=true]]:(bg-primary-wash text-primary-dark)',
+	'layer-components:[&[data-active=true]]:(bg-primary-wash text-black)',
 );
 
 export interface NavBarItemProps {
@@ -62,7 +62,7 @@ export const NavBarItemIcon = forwardRef<any, NavBarItemIconProps>(
 			<Comp
 				name={name}
 				className={clsx(
-					'layer-components:(relative z-1 flex fill-none)',
+					'layer-components:(relative z-1 flex fill-none text-primary-dark)',
 					'layer-variants:[*[data-active=true]_&]:fill-primary-light',
 					className,
 				)}

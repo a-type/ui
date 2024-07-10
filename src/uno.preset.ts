@@ -4,10 +4,21 @@ import { entriesToCss, toArray } from '@unocss/core';
 export default function presetAglio({
 	spacingIncrement = 0.25,
 	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
+	colorRanges = {
+		light: [90, 40],
+		dark: [0, 60],
+	},
 }: {
 	spacingIncrement?: number;
 	interFontLocation?: string;
+	colorRanges?: {
+		light: [number, number];
+		dark: [number, number];
+	};
 } = {}): Preset {
+	const lightColors = generateColors(...colorRanges.light);
+	const darkColors = generateColors(...colorRanges.dark);
+
 	return {
 		name: 'atype',
 		enforce: 'post',
@@ -423,8 +434,8 @@ export default function presetAglio({
 					--palette-green-90: #e9fff1;
 					--palette-green-80: #c2ffe1;
 					--palette-green-70: #8ff8c4;
-					--palette-green-60: #73dba0;
-					--palette-green-50: #56bf80;
+					--palette-green-60: #71f0a8;
+					--palette-green-50: #56d187;
 					--palette-green-40: #499d6f;
 					--palette-green-30: #1f8355;
 					--palette-green-20: #24694b;
@@ -805,9 +816,6 @@ function generateColors(from: number, to: number) {
 		'',
 	);
 }
-
-const lightColors = generateColors(90, 40);
-const darkColors = generateColors(0, 60);
 
 function makeSpacing(increment: number) {
 	return new Array(20)
