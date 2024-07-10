@@ -9,20 +9,21 @@ import {
 import { Slot } from '@radix-ui/react-slot';
 
 export const inputClassName = classNames(
-	'layer-components:(px-4 py-2 text-md font-sans rounded-lg bg-white select-auto min-w-60px color-black border-default shadow-sm-inset)',
+	'layer-components:(px-4 py-2 text-md font-sans rounded-full bg-white select-auto min-w-60px color-black border-default shadow-sm-inset)',
 	'layer-components:focus:(outline-none bg-gray-1 ring-4	ring-white)',
 	'layer-components:focus-visible:(outline-none ring-gray-dark-blend)',
 	'layer-components:md:(min-w-120px)',
 );
 
 export interface InputProps extends ComponentProps<'input'> {
+	/** @deprecated */
 	variant?: 'default' | 'primary';
 	autoSelect?: boolean;
 	asChild?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-	{ className, autoSelect, onFocus, variant = 'default', asChild, ...props },
+	{ className, autoSelect, onFocus, variant: _, asChild, ...props },
 	ref,
 ) {
 	const handleFocus = useCallback(
@@ -41,13 +42,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 		<Component
 			{...props}
 			onFocus={handleFocus}
-			className={classNames(
-				inputClassName,
-				{
-					'rounded-full': variant === 'primary',
-				},
-				className,
-			)}
+			className={classNames(inputClassName, className)}
 			ref={ref}
 		/>
 	);

@@ -84,6 +84,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				className={classNames(
 					inputClassName,
 					'layer-components:([font-family:inherit] text-inherit overflow-hidden)',
+					'layer-variants:(rounded-20px)',
 					{
 						'layer-components:[resize:vertical]': !autoSize,
 						'layer-components:[resize:none]': autoSize,
