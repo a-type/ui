@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.28
+
+### Patch Changes
+
+- 6519b50c: Add ScrollArea and HorizontalList components
+
 ## 0.8.27
 
 ### Patch Changes
