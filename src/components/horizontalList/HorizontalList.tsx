@@ -84,6 +84,7 @@ export function HorizontalList({
 				'layer-components:max-h-300px',
 				className,
 			)}
+			data-state={open ? 'open' : 'closed'}
 			{...rest}
 		>
 			<ScrollAreaViewport ref={containerRef}>

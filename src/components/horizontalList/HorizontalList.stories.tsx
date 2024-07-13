@@ -35,7 +35,11 @@ const meta = {
 				<Button size="small">Twenty two</Button>
 				<Button size="small">Twenty three</Button>
 				<Button size="small">Twenty four</Button>
-				<Button size="icon" color="primary">
+				<Button
+					size="icon"
+					color="primary"
+					className="sticky right-2 bottom-2 flex-shrink-0 shadow-sm ml-auto"
+				>
 					<Icon name="plus" />
 				</Button>
 			</>
@@ -59,7 +63,7 @@ export const Default: Story = {
 					<Button
 						toggled={open}
 						onClick={() => setOpen(!open)}
-						className="mb-auto self-start"
+						className="mt-auto mb-1 mr-1 self-end"
 					>
 						{open ? 'Close' : 'Open'}
 					</Button>
