@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.31
+
+### Patch Changes
+
+- 4dfdbb47: remove logs, tweak horizontal list expander
+
 ## 0.8.30
 
 ### Patch Changes
