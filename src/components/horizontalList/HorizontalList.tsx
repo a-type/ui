@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { ReactNode, useEffect, useRef } from 'react';
 import {
+	ScrollAreaProps,
 	ScrollAreaRoot,
-	ScrollAreaViewport,
 	ScrollAreaScrollbar,
+	ScrollAreaViewport,
 } from '../scrollArea/ScrollArea.js';
 
 export interface HorizontalListProps {
@@ -11,6 +12,7 @@ export interface HorizontalListProps {
 	children: ReactNode;
 	className?: string;
 	contentClassName?: string;
+	background?: ScrollAreaProps['background'];
 }
 
 export function HorizontalList({
@@ -18,6 +20,7 @@ export function HorizontalList({
 	children,
 	className,
 	contentClassName,
+	background,
 	...rest
 }: HorizontalListProps) {
 	const contentRef = useRef<HTMLDivElement>(null);
@@ -84,6 +87,7 @@ export function HorizontalList({
 				'layer-components:max-h-300px',
 				className,
 			)}
+			background={background}
 			data-state={open ? 'open' : 'closed'}
 			{...rest}
 		>

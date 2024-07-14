@@ -1,13 +1,34 @@
 import * as Primitive from '@radix-ui/react-scroll-area';
 import { withClassName } from '../../hooks.js';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
-export const ScrollAreaRoot = withClassName(Primitive.Root, 'overflow-hidden');
+const ScrollAreaRootImpl = withClassName(
+	Primitive.Root,
+	'overflow-hidden bg-[var(--bg)]',
+	'layer-components:([--bg:var(--color-wash)] [--shadow:var(--color-shadow-1))])',
+);
+
+export interface ScrollAreaRootProps extends Primitive.ScrollAreaProps {
+	background?: 'white' | 'wash' | 'primary-wash' | 'primary' | 'black';
+}
+
+export const ScrollAreaRoot = forwardRef<any, ScrollAreaRootProps>(
+	function ScrollAreaRoot({ background = 'wash', ...props }, ref) {
+		const bgStyle: any = useMemo(
+			() => ({
+				'--bg': `var(--color-${background})`,
+				'--shadow': `var(--color-${shadowMap[background]})`,
+			}),
+			[background],
+		);
+		return <ScrollAreaRootImpl ref={ref} style={bgStyle} {...props} />;
+	},
+);
 
 export const ScrollAreaViewport = withClassName(
 	Primitive.Viewport,
 	'h-full w-full',
-	'[background:linear-gradient(var(--color-white)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--color-white)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,var(--color-shadow-1),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,var(--color-shadow-1),rgba(0,0,0,0))_center_bottom]',
+	'[background:linear-gradient(var(--bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,var(--shadow),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,var(--shadow),rgba(0,0,0,0))_center_bottom]',
 	'![background-repeat:no-repeat] ![background-size:100%_40px,100%_40px,100%_14px,100%_14px]',
 	'![background-attachment:local,local,scroll,scroll]',
 );
@@ -38,7 +59,8 @@ export const ScrollAreaScrollbar = forwardRef<
 });
 
 export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
-	orientation: 'vertical' | 'horizontal';
+	background?: ScrollAreaRootProps['background'];
+	orientation?: 'vertical' | 'both';
 }
 
 export const ScrollArea = forwardRef<any, ScrollAreaProps>(function ScrollArea(
@@ -48,7 +70,18 @@ export const ScrollArea = forwardRef<any, ScrollAreaProps>(function ScrollArea(
 	return (
 		<ScrollAreaRoot ref={ref} {...props}>
 			<ScrollAreaViewport>{children}</ScrollAreaViewport>
-			<ScrollAreaScrollbar orientation={orientation} />
+			<ScrollAreaScrollbar />
+			{orientation === 'both' && (
+				<ScrollAreaScrollbar orientation="horizontal" />
+			)}
 		</ScrollAreaRoot>
 	);
 });
+
+const shadowMap = {
+	white: 'shadow-1',
+	wash: 'shadow-1',
+	'primary-wash': 'shadow-2',
+	primary: 'shadow-1',
+	black: 'overlay',
+};
