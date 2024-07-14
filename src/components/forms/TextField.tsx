@@ -10,12 +10,14 @@ import {
 	forwardRef,
 	KeyboardEvent,
 	useCallback,
+	useId,
 } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import classNames from 'clsx';
 import { Input } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
 import { withClassName } from '../../hooks.js';
+import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 
 export type TextFieldProps = {
 	name: string;
@@ -44,6 +46,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 			onChange,
 			onFocus,
 			onBlur,
+			id: providedId,
 			...rest
 		},
 		ref,
@@ -55,6 +58,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 			onBlur,
 		});
 		const innerInputRef = useRef<HTMLInputElement>(null);
+		const id = useIdOrGenerated(providedId);
 
 		useEffect(() => {
 			if (autoFocusDelay) {
@@ -66,10 +70,11 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
 		return (
 			<FieldRoot className={className} ref={ref}>
-				{label && <FieldLabel>{label}</FieldLabel>}
+				{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
 				<Input
 					{...props}
 					{...rest}
+					id={id}
 					autoFocus={autoFocus}
 					ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
 				/>
@@ -96,6 +101,7 @@ export function TextAreaField({
 	inputRef,
 	onKeyDown,
 	submitOnEnter,
+	id: providedId,
 	...rest
 }: TextAreaFieldProps) {
 	const [props] = useField(name);
@@ -110,13 +116,16 @@ export function TextAreaField({
 		},
 		[submitOnEnter, onKeyDown, submitForm],
 	);
+	const id = useIdOrGenerated(providedId);
+
 	return (
 		<FieldRoot className={className}>
-			{label && <FieldLabel>{label}</FieldLabel>}
+			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
 			<TextArea
 				ref={inputRef}
 				{...props}
 				{...rest}
+				id={id}
 				onKeyDown={onKeyDownInner}
 			/>
 		</FieldRoot>
