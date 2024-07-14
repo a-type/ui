@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.32
+
+### Patch Changes
+
+- 3ba088cf: navbar icon stroke color change
+
 ## 0.8.31
 
 ### Patch Changes
