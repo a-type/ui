@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.33
+
+### Patch Changes
+
+- 845b5aae: Add checkbox field. Make input height match button height
+
 ## 0.8.32
 
 ### Patch Changes
