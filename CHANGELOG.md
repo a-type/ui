@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.29
+
+### Patch Changes
+
+- 2ed38a85: Fix bg color on scroll areas, make it configurable
+
 ## 0.8.28
 
 ### Patch Changes
