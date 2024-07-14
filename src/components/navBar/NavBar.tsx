@@ -62,7 +62,7 @@ export const NavBarItemIcon = forwardRef<any, NavBarItemIconProps>(
 			<Comp
 				name={name}
 				className={clsx(
-					'layer-components:(relative z-1 flex fill-none text-primary-dark)',
+					'layer-components:(relative z-1 flex fill-none text-inherit)',
 					'layer-variants:[*[data-active=true]_&]:fill-primary-light',
 					className,
 				)}
