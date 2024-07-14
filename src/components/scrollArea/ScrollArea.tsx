@@ -4,8 +4,8 @@ import { forwardRef, useMemo } from 'react';
 
 const ScrollAreaRootImpl = withClassName(
 	Primitive.Root,
-	'overflow-hidden bg-[var(--bg)]',
-	'layer-components:([--bg:var(--color-wash)] [--shadow:var(--color-shadow-1))])',
+	'overflow-hidden bg-[var(--scroll-bg)] rounded-lg',
+	'layer-components:([--scroll-bg:var(--color-wash)] [--scroll-shadow:var(--color-shadow-1))])',
 );
 
 export interface ScrollAreaRootProps extends Primitive.ScrollAreaProps {
@@ -16,8 +16,8 @@ export const ScrollAreaRoot = forwardRef<any, ScrollAreaRootProps>(
 	function ScrollAreaRoot({ background = 'wash', ...props }, ref) {
 		const bgStyle: any = useMemo(
 			() => ({
-				'--bg': `var(--color-${background})`,
-				'--shadow': `var(--color-${shadowMap[background]})`,
+				'--scroll-bg': `var(--color-${background})`,
+				'--scroll-shadow': `var(--color-${shadowMap[background]})`,
 			}),
 			[background],
 		);
@@ -28,7 +28,7 @@ export const ScrollAreaRoot = forwardRef<any, ScrollAreaRootProps>(
 export const ScrollAreaViewport = withClassName(
 	Primitive.Viewport,
 	'h-full w-full',
-	'[background:linear-gradient(var(--bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,var(--shadow),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,var(--shadow),rgba(0,0,0,0))_center_bottom]',
+	'[background:linear-gradient(var(--scroll-bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--scroll-bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,var(--scroll-shadow),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,var(--scroll-shadow),rgba(0,0,0,0))_center_bottom]',
 	'![background-repeat:no-repeat] ![background-size:100%_40px,100%_40px,100%_14px,100%_14px]',
 	'![background-attachment:local,local,scroll,scroll]',
 );
