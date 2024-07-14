@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 0.8.30
+
+### Patch Changes
+
+- 94a508b7: horizontal list now has a callback for tracking open-ability. it also has a default internal open toggle which shows up when it can be opened, plus default internal opened state
+
 ## 0.8.29
 
 ### Patch Changes
