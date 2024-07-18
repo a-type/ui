@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.0
+
+### Major Changes
+
+- bdc3f753: About time to finally 1.0 this. Also, reworked Card, which includes breaking changes to how CardImage needs to be used.
+
 ## 0.8.33
 
 ### Patch Changes
