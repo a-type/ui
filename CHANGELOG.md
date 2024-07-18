@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.8
+
+### Patch Changes
+
+- 3405066e: lower card min height
+
 ## 1.0.7
 
 ### Patch Changes
