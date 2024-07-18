@@ -5,6 +5,7 @@ import {
 	CardFooter,
 	CardImage,
 	CardMain,
+	CardMenu,
 	CardRoot,
 	CardTitle,
 } from './Card.js';
@@ -45,6 +46,11 @@ export const Default: Story = {
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>
+					<CardMenu>
+						<Button size="icon" color="ghost">
+							<Icon name="dots" />
+						</Button>
+					</CardMenu>
 				</CardFooter>
 			</CardRoot>
 			<CardRoot {...args}>

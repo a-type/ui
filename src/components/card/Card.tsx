@@ -71,7 +71,7 @@ export const CardActions = withClassName(
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(mr-0 ml-auto flex flex-row gap-1 items-center)',
+	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay rounded-full p-0)',
 );
 
 export const CardGrid = withClassName(
