@@ -27,7 +27,7 @@ type Story = StoryObj<typeof CardRoot>;
 export const Default: Story = {
 	render: (args) => (
 		<div className="col items-stretch">
-			<CardRoot {...args}>
+			<CardRoot {...args} className="min-h-20vh">
 				<CardImage asChild>
 					<img src="https://resources.biscuits.club/images/pashka.jpg" />
 				</CardImage>

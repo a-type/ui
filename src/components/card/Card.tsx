@@ -44,7 +44,7 @@ export const CardMain = forwardRef<
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-auto bg-white p-2 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit)',
+	'layer-components:(flex flex-col gap-1 mt-0 bg-white p-2 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm font-semibold)',
 );
 
