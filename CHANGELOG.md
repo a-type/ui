@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.2
+
+### Patch Changes
+
+- a57dd7a6: Don't lazy import image resizer. Component is already code-split.
+
 ## 1.0.1
 
 ### Patch Changes
