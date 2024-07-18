@@ -72,6 +72,7 @@ export const iconNames = [
 	'connectionBreak',
 	'connectionSplit',
 	'search',
+	'star',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
