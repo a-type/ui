@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.7
+
+### Patch Changes
+
+- 8baf56a3: simplify tabs again
+
 ## 1.0.6
 
 ### Patch Changes
