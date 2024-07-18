@@ -6,7 +6,7 @@ export interface AvatarProps {
 	className?: string;
 	popIn?: boolean;
 	style?: CSSProperties;
-	imageSrc?: string;
+	imageSrc?: string | null;
 	name?: string;
 }
 
@@ -41,7 +41,7 @@ function AvatarContent({
 	imageSrc,
 }: {
 	name?: string;
-	imageSrc?: string;
+	imageSrc?: string | null;
 }) {
 	if (imageSrc) {
 		return (
