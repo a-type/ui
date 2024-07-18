@@ -9,7 +9,7 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from '../camera.js';
-import * as resizer from 'browser-image-resizer';
+import { default as resizer } from 'browser-image-resizer';
 
 export interface ImageUploaderProps {
 	value: string | null;
