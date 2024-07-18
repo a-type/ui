@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.0.6
+
+### Patch Changes
+
+- eede168c: support null for avatar src
+- c90e93b3: make card footer not collapse
+
 ## 1.0.5
 
 ### Patch Changes
