@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.9
+
+### Patch Changes
+
+- 0b29ac3f: star icon
+
 ## 1.0.8
 
 ### Patch Changes
