@@ -9,7 +9,7 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from '../camera.js';
-import { readAndCompressImage } from 'browser-image-resizer';
+import * as resizer from 'browser-image-resizer';
 
 export interface ImageUploaderProps {
 	value: string | null;
@@ -58,7 +58,7 @@ export function ImageUploader({
 			if (!file) {
 				handleChange(null);
 			} else if (maxDimension) {
-				const resizedImage = await readAndCompressImage(file, {
+				const resizedImage = await resizer.readAndCompressImage(file, {
 					maxWidth: maxDimension,
 					maxHeight: maxDimension,
 					mimeType: file.type,
