@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.3
+
+### Patch Changes
+
+- 70479bc7: another attempt at fixing image resize
+
 ## 1.0.2
 
 ### Patch Changes
