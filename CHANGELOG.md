@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.5
+
+### Patch Changes
+
+- 65f798ca: card menu styling update
+
 ## 1.0.4
 
 ### Patch Changes
