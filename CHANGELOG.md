@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.4
+
+### Patch Changes
+
+- abd767f5: one more time
+
 ## 1.0.3
 
 ### Patch Changes
