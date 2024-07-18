@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.1
+
+### Patch Changes
+
+- d012d805: Fix card title positioning on larger cards
+
 ## 1.0.0
 
 ### Major Changes
