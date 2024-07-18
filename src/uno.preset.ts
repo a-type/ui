@@ -476,6 +476,7 @@ export default function presetAglio({
 					--palette-light-blend-warm: rgba(255, 250, 250, 0.8);
 					--palette-light-blend-cool: rgba(250, 255, 255, 0.8);
 					--palette-light-blend: rgba(255, 250, 250, 0.8);
+					--palette-dark-blend: rgba(0, 0, 0, 0.65);
 					--palette-black: #303030;
 					--palette-white: #fff;
 					--palette-light: #f8f8fb;
@@ -626,7 +627,7 @@ export default function presetAglio({
 						--color-dark-blend-cool: var(--palette-light-blend-cool);
 						--color-light-blend-warm: var(--palette-dark-blend-warm);
 						--color-light-blend-cool: var(--palette-dark-blend-cool);
-						--color-light-blend: var(--palette-light-blend);
+						--color-light-blend: var(--palette-dark-blend);
 						--color-black: var(--palette-white);
 						--color-white: var(--palette-black);
 						--color-wash: var(--palette-dark);

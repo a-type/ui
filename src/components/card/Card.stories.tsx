@@ -3,6 +3,7 @@ import {
 	CardActions,
 	CardContent,
 	CardFooter,
+	CardImage,
 	CardMain,
 	CardRoot,
 	CardTitle,
@@ -24,21 +25,45 @@ export default meta;
 type Story = StoryObj<typeof CardRoot>;
 
 export const Default: Story = {
-	render: () => (
-		<CardRoot>
-			<CardMain onClick={() => alert('clicked')}>
-				<CardTitle>Card Title</CardTitle>
-				<CardContent>Other stuff</CardContent>
-			</CardMain>
-			<CardFooter>
-				<CardActions>
-					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
-						<Icon name="placeholder" />
-					</Button>
-				</CardActions>
-			</CardFooter>
-		</CardRoot>
+	render: (args) => (
+		<div className="col items-stretch">
+			<CardRoot {...args}>
+				<CardImage asChild>
+					<img src="https://resources.biscuits.club/images/pashka.jpg" />
+				</CardImage>
+				<CardMain onClick={() => alert('clicked')}>
+					<CardTitle>Card Title</CardTitle>
+					<CardContent>
+						Other stuff you'd have on a card. Maybe a time?
+					</CardContent>
+					<CardContent>More things, if you want.</CardContent>
+				</CardMain>
+				<CardFooter>
+					<CardActions>
+						<Button size="small">Button</Button>
+						<Button size="icon" color="ghost">
+							<Icon name="placeholder" />
+						</Button>
+					</CardActions>
+				</CardFooter>
+			</CardRoot>
+			<CardRoot {...args}>
+				<CardMain onClick={() => alert('clicked')}>
+					<CardTitle>
+						Card Title which is very long and would normally wrap
+					</CardTitle>
+					<CardContent>Other stuff</CardContent>
+				</CardMain>
+				<CardFooter>
+					<CardActions>
+						<Button size="small">Button</Button>
+						<Button size="icon" color="ghost">
+							<Icon name="placeholder" />
+						</Button>
+					</CardActions>
+				</CardFooter>
+			</CardRoot>
+		</div>
 	),
 };
 
@@ -47,6 +72,8 @@ export const Compact: Story = {
 		<CardRoot>
 			<CardMain compact>
 				<CardTitle>Card Title</CardTitle>
+				<CardContent>Other stuff</CardContent>
+				<CardContent>More things, if you want.</CardContent>
 			</CardMain>
 			<CardFooter>
 				<CardActions>
