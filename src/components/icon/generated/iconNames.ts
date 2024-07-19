@@ -74,6 +74,7 @@ export const iconNames = [
 	'search',
 	'star',
 	'bell',
+	'home',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

@@ -837,6 +837,14 @@ export const IconSpritesheet = (props: any) => (
 					fill="currentColor"
 				/>
 			</symbol>
+			<symbol id="icon-home" viewBox="0 0 15 15">
+				<path
+					d="M12.5 4.92857V13.5H6.5M2.5 4.92857V13.5H4.5M0.5 6.5L7.5 1L14.5 6.5M4.5 13.5V9H6.5V13.5M4.5 13.5H6.5M10.5 5.5H8.5V7.5H10.5V5.5Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
 		</defs>
 	</svg>
 );
