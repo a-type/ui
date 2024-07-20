@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.0.10
+
+### Patch Changes
+
+- 3edf6eb5: add thermometer icon
+- 3d95b4ff: new icons
+
 ## 1.0.9
 
 ### Patch Changes
