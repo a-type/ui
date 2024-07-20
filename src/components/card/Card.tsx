@@ -30,7 +30,7 @@ export const CardMain = forwardRef<
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-sans)',
+				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-sans outline-none)',
 				!!compact && 'layer-variants:(pb-0)',
 				isInteractive &&
 					'layer-components:cursor-pointer layer-components:hover:(bg-gray-darkBlend color-black shadow-xl-inset) layer-components:focus:outline-none layer-components:focus-visible:(outline-none ring-inset ring-4 ring-gray-5)',
