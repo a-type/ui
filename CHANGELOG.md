@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.11
+
+### Patch Changes
+
+- 95274ff0: tweak card hover state
+
 ## 1.0.10
 
 ### Patch Changes
