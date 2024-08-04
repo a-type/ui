@@ -227,10 +227,10 @@ export const DialogDescription = StyledDescription;
 export const DialogClose = forwardRef<
 	HTMLButtonElement,
 	DialogPrimitive.DialogCloseProps
->(function DialogClose({ asChild = true, children, ...props }, ref) {
+>(function DialogClose({ asChild, children, ...props }, ref) {
 	return (
 		<DialogPrimitive.DialogClose asChild ref={ref} {...props}>
-			{asChild ? children : <Button>{children ?? 'Close'}</Button>}
+			{asChild === true ? children : <Button>{children ?? 'Close'}</Button>}
 		</DialogPrimitive.DialogClose>
 	);
 });
