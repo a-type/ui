@@ -18,7 +18,7 @@ export function getButtonClassName({
 		'layer-components:focus:outline-off',
 		'layer-components:focus-visible:(outline-off ring-6 ring-[var(--focus,var(--hover))])',
 		'layer-components:active:(bg-[var(--active)] ring-8 ring-[var(--active)])',
-		'important:disabled:(opacity-50 cursor-default bg-[var(--bg)] shadow-none)',
+		'important:disabled:(opacity-50 cursor-default bg-[var(--bg)] shadow-none ring-none)',
 		'important:[&[data-disabled=true]]:(opacity-50 cursor-default bg-[var(--bg)] shadow-none)',
 		colors[color ?? 'default'],
 		`btn-color-${color ?? 'default'}`,
