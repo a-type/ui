@@ -27,7 +27,7 @@ export const SliderThumb = withClassName(
 	'layer-variants:[&[data-color=primary]]:focus-visible:(bg-primary-light ring-primary)',
 );
 
-interface SliderProps extends SliderPrimitive.SliderProps {
+export interface SliderProps extends SliderPrimitive.SliderProps {
 	label?: string;
 	color?: 'default' | 'primary';
 }
