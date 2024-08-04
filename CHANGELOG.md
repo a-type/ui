@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.0.12
+
+### Patch Changes
+
+- e8a61bdc: Add easy access subcomponents
+- e8a61bdc: soften lines, update greens
+
 ## 1.0.11
 
 ### Patch Changes
