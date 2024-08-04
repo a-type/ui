@@ -1,17 +1,17 @@
-import * as ContextMenu from '@radix-ui/react-context-menu';
+import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import classNames from 'clsx';
 
-export const ContextMenuRoot = ContextMenu.Root;
+export const ContextMenuRoot = ContextMenuPrimitive.Root;
 
 export const ContextMenuContent = forwardRef<
 	HTMLDivElement,
-	ComponentPropsWithoutRef<typeof ContextMenu.Content>
+	ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
 >(function Content({ className, onClick, ...props }, ref) {
 	return (
-		<ContextMenu.Portal>
-			<ContextMenu.Content
+		<ContextMenuPrimitive.Portal>
+			<ContextMenuPrimitive.Content
 				className={classNames(
 					'layer-components:(min-w-120px bg-white rounded-md border-default overflow-hidden p-2 shadow-md z-menu)',
 					'layer-components:transform-origin-[var(--radix-context-menu-transform-origin)]',
@@ -28,16 +28,29 @@ export const ContextMenuContent = forwardRef<
 				ref={ref}
 				{...props}
 			/>
-		</ContextMenu.Portal>
+		</ContextMenuPrimitive.Portal>
 	);
 });
 
-export const ContextMenuArrow = withClassName(ContextMenu.Arrow, 'fill-white');
+export const ContextMenuArrow = withClassName(
+	ContextMenuPrimitive.Arrow,
+	'fill-white',
+);
 
 export const ContextMenuItem = withClassName(
-	ContextMenu.Item,
+	ContextMenuPrimitive.Item,
 	'flex items-center py-1 px-2 relative pl-25px select-none outline-none cursor-pointer',
 	'hover:bg-gray2 [&[data-highlighted=true]]:bg-gray2 [&[data-disabled=true]]:(opacity-50 cursor-default) disabled:(opacity-50 cursor-default)',
 );
 
-export const ContextMenuTrigger = withClassName(ContextMenu.Trigger, '');
+export const ContextMenuTrigger = withClassName(
+	ContextMenuPrimitive.Trigger,
+	'',
+);
+
+export const ContextMenu = Object.assign(ContextMenuRoot, {
+	Content: ContextMenuContent,
+	Arrow: ContextMenuArrow,
+	Item: ContextMenuItem,
+	Trigger: ContextMenuTrigger,
+});

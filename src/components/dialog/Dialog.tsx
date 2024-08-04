@@ -18,6 +18,7 @@ import classNames from 'clsx';
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { selectTriggerClassName } from '../select.js';
 import { useDrag } from '@use-gesture/react';
+import { Button } from '../button.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
@@ -28,7 +29,7 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto flex flex-col)',
+	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto flex flex-col border-top-1 border-top-solid border-top-gray-5)',
 	'layer-components:sm:(shadow-xl)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
@@ -193,7 +194,7 @@ const StyledDescription = withClassName(
 );
 
 // Exports
-export const Dialog = (props: DialogPrimitive.DialogProps) => {
+const DialogRoot = (props: DialogPrimitive.DialogProps) => {
 	const [innerOpen, innerOnOpenChange] = useState(props.defaultOpen);
 	const open = props.open ?? innerOpen;
 	const onOpenChange = useCallback(
@@ -218,11 +219,21 @@ export const Dialog = (props: DialogPrimitive.DialogProps) => {
 		</DialogCloseContext.Provider>
 	);
 };
+
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
-export const DialogClose = DialogPrimitive.Close;
+export const DialogClose = forwardRef<
+	HTMLButtonElement,
+	DialogPrimitive.DialogCloseProps
+>(function DialogClose({ asChild = true, children, ...props }, ref) {
+	return (
+		<DialogPrimitive.DialogClose asChild ref={ref} {...props}>
+			{children ?? asChild === false ? undefined : <Button>Close</Button>}
+		</DialogPrimitive.DialogClose>
+	);
+});
 
 export type { DialogProps } from '@radix-ui/react-dialog';
 
@@ -271,4 +282,16 @@ export const DialogSelectItem = forwardRef<
 			</RadioGroupPrimitive.Indicator>
 		</DialogSelectItemRoot>
 	);
+});
+
+export const Dialog = Object.assign(DialogRoot, {
+	Trigger: DialogTrigger,
+	Content,
+	Title: StyledTitle,
+	Description: StyledDescription,
+	Close: DialogClose,
+	Actions: DialogActions,
+	SelectTrigger: DialogSelectTrigger,
+	SelectList: DialogSelectList,
+	SelectItem: DialogSelectItem,
 });

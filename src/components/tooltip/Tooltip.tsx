@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
 
@@ -31,25 +31,33 @@ function Content({
 
 export const TooltipProvider = TooltipPrimitive.Provider;
 
-export function Tooltip({
-	content,
-	children,
-	open,
-	disabled,
-	...rest
-}: { content: React.ReactNode; open?: boolean } & ComponentPropsWithoutRef<
-	typeof TooltipPrimitive.TooltipTrigger
->) {
-	return (
-		<TooltipPrimitive.Root open={open}>
-			{disabled ? (
-				children
-			) : (
-				<TooltipPrimitive.TooltipTrigger asChild {...rest}>
-					{children}
-				</TooltipPrimitive.TooltipTrigger>
-			)}
-			<Content sideOffset={12}>{content}</Content>
-		</TooltipPrimitive.Root>
-	);
+export interface TooltipProps
+	extends Omit<TooltipPrimitive.TooltipTriggerProps, 'content'> {
+	content: React.ReactNode;
+	open?: boolean;
+	disabled?: boolean;
 }
+
+export const Tooltip = Object.assign(
+	forwardRef<HTMLButtonElement, TooltipProps>(function Tooltip(
+		{ content, children, open, disabled, ...rest },
+		ref,
+	) {
+		return (
+			<TooltipPrimitive.Root open={open}>
+				{disabled ? (
+					children
+				) : (
+					<TooltipPrimitive.TooltipTrigger asChild ref={ref} {...rest}>
+						{children}
+					</TooltipPrimitive.TooltipTrigger>
+				)}
+				<Content sideOffset={12}>{content}</Content>
+			</TooltipPrimitive.Root>
+		);
+	}),
+	{
+		Trigger: TooltipPrimitive.TooltipTrigger,
+		Content,
+	},
+);

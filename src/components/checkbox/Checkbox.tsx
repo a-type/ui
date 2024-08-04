@@ -35,13 +35,18 @@ export function CheckboxIndicator({
 	);
 }
 
-export const Checkbox = forwardRef<
-	HTMLButtonElement,
-	ComponentProps<typeof CheckboxRoot>
->(function Checkbox(props, ref) {
-	return (
-		<CheckboxRoot ref={ref} {...props}>
-			<CheckboxIndicator />
-		</CheckboxRoot>
-	);
-});
+export const Checkbox = Object.assign(
+	forwardRef<HTMLButtonElement, ComponentProps<typeof CheckboxRoot>>(
+		function Checkbox(props, ref) {
+			return (
+				<CheckboxRoot ref={ref} {...props}>
+					<CheckboxIndicator />
+				</CheckboxRoot>
+			);
+		},
+	),
+	{
+		Root: CheckboxRoot,
+		Indicator: CheckboxIndicator,
+	},
+);

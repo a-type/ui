@@ -79,3 +79,14 @@ export const CardGrid = withClassName(
 	'layer-components:(grid grid-cols-[1fr] [grid-auto-rows:auto] gap-4 p-0 m-0)',
 	'layer-components:md:(grid-cols-[repeat(2,1fr)] [grid-auto-rows:1fr] items-end)',
 );
+
+export const Card = Object.assign(CardRoot, {
+	Main: CardMain,
+	Title: CardTitle,
+	Content: CardContent,
+	Image: CardImage,
+	Footer: CardFooter,
+	Actions: CardActions,
+	Menu: CardMenu,
+	Grid: CardGrid,
+});

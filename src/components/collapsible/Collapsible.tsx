@@ -46,3 +46,9 @@ export const CollapsibleSimple = ({
 		</CollapsibleContent>
 	</CollapsibleRoot>
 );
+
+export const Collapsible = Object.assign(CollapsibleRoot, {
+	Content: CollapsibleContent,
+	Trigger: CollapsibleTrigger,
+	Simple: CollapsibleSimple,
+});

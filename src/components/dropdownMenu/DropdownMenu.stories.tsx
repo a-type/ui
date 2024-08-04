@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuItemRightSlot,
-	DropdownMenuTrigger,
-} from './DropdownMenu.js';
+import { DropdownMenu } from './DropdownMenu.js';
 import { Icon } from '../icon.js';
-import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
 
 const meta = {
 	title: 'DropdownMenu',
@@ -26,21 +19,21 @@ export const Default: Story = {
 	args: {
 		children: (
 			<>
-				<DropdownMenuTrigger>Open</DropdownMenuTrigger>
-				<DropdownMenuContent>
-					<DropdownMenuItem color="destructive">
-						<DropdownMenuLabel>Item 1</DropdownMenuLabel>
-						<DropdownMenuItemRightSlot>
+				<DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<DropdownMenu.Item color="destructive">
+						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
+						<DropdownMenu.ItemRightSlot>
 							<Icon name="flag" />
-						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<DropdownMenuLabel>Item 2</DropdownMenuLabel>
-						<DropdownMenuItemRightSlot>
+						</DropdownMenu.ItemRightSlot>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 2</DropdownMenu.Label>
+						<DropdownMenu.ItemRightSlot>
 							<Icon name="add_person" />
-						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
-				</DropdownMenuContent>
+						</DropdownMenu.ItemRightSlot>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
 			</>
 		),
 	},

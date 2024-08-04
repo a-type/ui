@@ -86,3 +86,11 @@ export const NavBarRoot = withClassName(
 	'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
 	'layer-components:sm:(bg-transparent flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
 );
+
+export const NavBar = Object.assign(NavBarRoot, {
+	Item: NavBarItem,
+	ItemIcon: NavBarItemIcon,
+	ItemText: NavBarItemText,
+	ItemIconWrapper: NavBarItemIconWrapper,
+	ItemPip: NavBarItemPip,
+});

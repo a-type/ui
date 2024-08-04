@@ -12,12 +12,16 @@ const SwitchThumb = withClassName(
 	'block w-21px h-21px bg-white rounded-full border-default transition-transform will-change-transform [&[data-state=checked]]:translate-x-19px',
 );
 
-export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
-	function Switch(props, ref) {
+export const Switch = Object.assign(
+	forwardRef<HTMLButtonElement, SwitchProps>(function Switch(props, ref) {
 		return (
 			<SwitchRoot {...props} ref={ref}>
 				<SwitchThumb />
 			</SwitchRoot>
 		);
+	}),
+	{
+		Root: SwitchRoot,
+		Thumb: SwitchThumb,
 	},
 );

@@ -433,13 +433,13 @@ export default function presetAglio({
 					--palette-red-00: #321f19;
 					--palette-green-90: #e9fff1;
 					--palette-green-80: #c2ffe1;
-					--palette-green-70: #8ff8c4;
-					--palette-green-60: #71f0a8;
-					--palette-green-50: #56d187;
-					--palette-green-40: #499d6f;
-					--palette-green-30: #1f8355;
-					--palette-green-20: #24694b;
-					--palette-green-10: #274e3c;
+					--palette-green-70: #8ff8e0;
+					--palette-green-60: #79efe7;
+					--palette-green-50: #63cec4;
+					--palette-green-40: #499d92;
+					--palette-green-30: #1f837c;
+					--palette-green-20: #246869;
+					--palette-green-10: #274e48;
 					--palette-green-00: #183527;
 					--palette-yellow-90: #fff9ef;
 					--palette-yellow-80: #fff1c7;
@@ -718,10 +718,10 @@ export default function presetAglio({
 				}
 
 				.theme-tomato {
-					--color-attention-light: var(--color-blue-light);
-					--color-attention: var(--color-blue);
-					--color-attention-dark: var(--color-blue-dark);
-					--color-attention-wash: var(--color-blue-wash);
+					--color-attention-light: var(--color-yellow-light);
+					--color-attention: var(--color-yellow);
+					--color-attention-dark: var(--color-yellow-dark);
+					--color-attention-wash: var(--color-yellow-wash);
 					--color-accent: var(--color-green);
 					--color-accent-wash: var(--color-green-wash);
 					--color-accent-light: var(--color-green-light);

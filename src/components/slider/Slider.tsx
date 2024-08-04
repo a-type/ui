@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { withClassName } from '../../hooks.js';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 
@@ -31,13 +32,24 @@ interface SliderProps extends SliderPrimitive.SliderProps {
 	color?: 'default' | 'primary';
 }
 
-export function Slider({ label, color, ...props }: SliderProps) {
-	return (
-		<SliderRoot {...props}>
-			<SliderTrack>
-				<SliderRange data-color={color} />
-			</SliderTrack>
-			<SliderThumb aria-label={label} data-color={color} />
-		</SliderRoot>
-	);
-}
+export const Slider = Object.assign(
+	forwardRef<HTMLDivElement, SliderProps>(function Slider(
+		{ label, color, ...props },
+		ref,
+	) {
+		return (
+			<SliderRoot ref={ref} {...props}>
+				<SliderTrack>
+					<SliderRange data-color={color} />
+				</SliderTrack>
+				<SliderThumb aria-label={label} data-color={color} />
+			</SliderRoot>
+		);
+	}),
+	{
+		Root: SliderRoot,
+		Track: SliderTrack,
+		Range: SliderRange,
+		Thumb: SliderThumb,
+	},
+);

@@ -30,7 +30,7 @@ const StyledClose = withClassName(
 );
 
 // Exports
-export const Popover = PopoverPrimitive.Root;
+export const PopoverRoot = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverArrow = StyledArrow;
 export const PopoverClose = StyledClose;
@@ -76,4 +76,12 @@ export const PopoverContent = forwardRef<
 			</StyledContent>
 		</PopoverPrimitive.Portal>
 	);
+});
+
+export const Popover = Object.assign(PopoverRoot, {
+	Content: PopoverContent,
+	Arrow: PopoverArrow,
+	Close: PopoverClose,
+	Trigger: PopoverTrigger,
+	Anchor: PopoverAnchor,
 });

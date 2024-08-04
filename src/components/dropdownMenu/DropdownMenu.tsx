@@ -78,7 +78,7 @@ const StyledTrigger = withClassName(
 const StyledPortal = DropdownMenuPrimitive.Portal;
 
 // Exports
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+export const DropdownMenuRoot = DropdownMenuPrimitive.Root;
 export const DropdownMenuTrigger = StyledTrigger;
 export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
@@ -107,3 +107,17 @@ export const DropdownMenuContent = ({
 };
 
 export const DropdownMenuItemRightSlot = withClassName('div', 'ml-auto');
+
+export const DropdownMenu = Object.assign(DropdownMenuRoot, {
+	Content: DropdownMenuContent,
+	Trigger: StyledTrigger,
+	Item: StyledItem,
+	CheckboxItem: StyledCheckboxItem,
+	RadioGroup: DropdownMenuPrimitive.RadioGroup,
+	RadioItem: StyledRadioItem,
+	ItemIndicator: StyledItemIndicator,
+	Label: StyledLabel,
+	Separator: StyledSeparator,
+	Arrow: StyledArrow,
+	ItemRightSlot: DropdownMenuItemRightSlot,
+});

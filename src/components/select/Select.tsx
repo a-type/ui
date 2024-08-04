@@ -201,7 +201,7 @@ export type SelectProps<T extends string = string> = {
 /**
  * A high-level Select which converts to native on mobile. Use with SelectItem.
  */
-export const Select = <T extends string = string>({
+const SelectBase = <T extends string = string>({
 	children,
 	value,
 	onValueChange,
@@ -232,6 +232,18 @@ export const Select = <T extends string = string>({
 		</SelectRoot>
 	);
 };
+
+export const Select = Object.assign(SelectBase, {
+	Root: SelectRoot,
+	Item: SelectItem,
+	Group: SelectGroup,
+	Trigger: SelectTrigger,
+	Value: SelectValue,
+	Label: SelectLabel,
+	Separator: SelectSeparator,
+	Icon: SelectIcon,
+	Content: SelectContent,
+});
 
 function isMobile() {
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(

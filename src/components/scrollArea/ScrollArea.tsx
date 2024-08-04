@@ -63,20 +63,27 @@ export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
 	orientation?: 'vertical' | 'both';
 }
 
-export const ScrollArea = forwardRef<any, ScrollAreaProps>(function ScrollArea(
-	{ children, orientation, ...props },
-	ref,
-) {
-	return (
-		<ScrollAreaRoot ref={ref} {...props}>
-			<ScrollAreaViewport>{children}</ScrollAreaViewport>
-			<ScrollAreaScrollbar />
-			{orientation === 'both' && (
-				<ScrollAreaScrollbar orientation="horizontal" />
-			)}
-		</ScrollAreaRoot>
-	);
-});
+export const ScrollArea = Object.assign(
+	forwardRef<any, ScrollAreaProps>(function ScrollArea(
+		{ children, orientation, ...props },
+		ref,
+	) {
+		return (
+			<ScrollAreaRoot ref={ref} {...props}>
+				<ScrollAreaViewport>{children}</ScrollAreaViewport>
+				<ScrollAreaScrollbar />
+				{orientation === 'both' && (
+					<ScrollAreaScrollbar orientation="horizontal" />
+				)}
+			</ScrollAreaRoot>
+		);
+	}),
+	{
+		Root: ScrollAreaRoot,
+		Viewport: ScrollAreaViewport,
+		Scrollbar: ScrollAreaScrollbar,
+	},
+);
 
 const shadowMap = {
 	white: 'shadow-1',

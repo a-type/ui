@@ -9,7 +9,7 @@ import {
 import { Slot } from '@radix-ui/react-slot';
 
 export const inputClassName = classNames(
-	'layer-components:(px-5 py-[5px] text-md font-sans rounded-full bg-white select-auto min-w-60px color-black border-default shadow-sm-inset)',
+	'layer-components:(px-5 py-[5px] text-md font-sans rounded-full bg-white select-auto min-w-60px color-black border-solid border-1 border-gray-7 shadow-sm-inset)',
 	'layer-components:focus:(outline-none bg-gray-1 ring-4	ring-white)',
 	'layer-components:focus-visible:(outline-none ring-gray-dark-blend)',
 	'layer-components:md:(min-w-120px)',
