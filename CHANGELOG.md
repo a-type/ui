@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.0.14
+
+### Patch Changes
+
+- 86899570: actually fix dialog close
+
 ## 1.0.13
 
 ### Patch Changes
