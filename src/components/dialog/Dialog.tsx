@@ -230,7 +230,7 @@ export const DialogClose = forwardRef<
 >(function DialogClose({ asChild = true, children, ...props }, ref) {
 	return (
 		<DialogPrimitive.DialogClose asChild ref={ref} {...props}>
-			{children ?? asChild === false ? undefined : <Button>Close</Button>}
+			{asChild ? children : <Button>{children ?? 'Close'}</Button>}
 		</DialogPrimitive.DialogClose>
 	);
 });
