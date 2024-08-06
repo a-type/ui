@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 interface MasonryLayoutConfig {
 	columns: number | ((containerWidth: number) => number);
@@ -35,6 +35,7 @@ class MasonryLayout {
 
 		container.style.setProperty('position', 'relative');
 		container.style.setProperty('overflow', 'hidden');
+		container.style.setProperty('visibility', 'visible');
 		container.childNodes.forEach((node) => {
 			if (node instanceof HTMLElement) {
 				node.style.setProperty('position', 'absolute');
@@ -147,7 +148,12 @@ export interface MasonryProps {
 	gap?: number;
 }
 
-const initialStyle = { height: 0 };
+const initialStyle: CSSProperties = {
+	height: 0,
+	position: 'relative',
+	overflow: 'hidden',
+	visibility: 'hidden',
+};
 
 export function Masonry({
 	className,
