@@ -1,8 +1,9 @@
 import { HTMLProps, MouseEvent, ReactNode, forwardRef } from 'react';
-import { withClassName } from '../../hooks.js';
+import { useStableCallback, withClassName } from '../../hooks.js';
 import { Slot } from '@radix-ui/react-slot';
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { SlotDiv } from '../utility/SlotDiv.js';
+import { Masonry, MasonryProps } from '../masonry/masonry.js';
 
 export const CardRoot = withClassName(
 	'div',
@@ -74,11 +75,23 @@ export const CardMenu = withClassName(
 	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay rounded-full p-0)',
 );
 
-export const CardGrid = withClassName(
-	'div',
-	'layer-components:(grid grid-cols-[1fr] [grid-auto-rows:auto] gap-4 p-0 m-0)',
-	'layer-components:md:(grid-cols-[repeat(2,1fr)] [grid-auto-rows:1fr] items-end)',
-);
+export const cardGridColumns = {
+	default: (size: number) => (size < 480 ? 1 : size < 800 ? 2 : 3),
+	small: (size: number) =>
+		size < 320 ? 1 : size < 480 ? 2 : size < 800 ? 3 : 4,
+};
+export const CardGrid = ({
+	children,
+	className,
+	columns = cardGridColumns.default,
+	gap,
+}: MasonryProps) => {
+	return (
+		<Masonry className={className} columns={columns} gap={gap}>
+			{children}
+		</Masonry>
+	);
+};
 
 export const Card = Object.assign(CardRoot, {
 	Main: CardMain,

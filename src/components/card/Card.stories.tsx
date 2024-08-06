@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
+	Card,
 	CardActions,
 	CardContent,
 	CardFooter,
@@ -11,6 +12,7 @@ import {
 } from './Card.js';
 import { Button } from '../button.js';
 import { Icon } from '../icon.js';
+import { useState } from 'react';
 
 const meta = {
 	title: 'Card',
@@ -153,3 +155,38 @@ export const AsChildNonInteractive: Story = {
 		</CardRoot>
 	),
 };
+
+export const Grid: Story = {
+	render: () => {
+		const [sizes, setSizes] = useState(() =>
+			Array.from(
+				{ length: 40 },
+				(_, i) => 50 + Math.floor(Math.random() * 300),
+			),
+		);
+		const remove = (index: number) =>
+			setSizes((v) => v.filter((_, i) => i !== index));
+		return (
+			<Card.Grid>
+				{sizes.map((size, i) => (
+					<GridCard key={i} size={size} remove={() => remove(i)} />
+				))}
+			</Card.Grid>
+		);
+	},
+};
+
+function GridCard({ size, remove }: { size: number; remove: () => void }) {
+	return (
+		<CardRoot style={{ height: size }}>
+			<CardMain>
+				<CardTitle>{size}</CardTitle>
+			</CardMain>
+			<CardActions>
+				<Button size="small" onClick={remove}>
+					Delete
+				</Button>
+			</CardActions>
+		</CardRoot>
+	);
+}
