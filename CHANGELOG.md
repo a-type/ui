@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.2
+
+### Patch Changes
+
+- aa4c0400: tweak masonry height
+
 ## 1.1.1
 
 ### Patch Changes
