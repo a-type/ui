@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- 9ba1b0d8: CardGrid is now a masonry layout
+
 ## 1.0.14
 
 ### Patch Changes
