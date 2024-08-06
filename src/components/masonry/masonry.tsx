@@ -35,6 +35,13 @@ class MasonryLayout {
 
 		container.style.setProperty('position', 'relative');
 		container.style.setProperty('overflow', 'hidden');
+		container.childNodes.forEach((node) => {
+			if (node instanceof HTMLElement) {
+				node.style.setProperty('position', 'absolute');
+				// hide until laid out
+				node.style.setProperty('visibility', 'hidden');
+			}
+		});
 
 		this.updateFromContainerSize(container.offsetWidth);
 
@@ -49,6 +56,18 @@ class MasonryLayout {
 		};
 	};
 
+	updateConfig = (config: MasonryLayoutConfig) => {
+		const gapChanged = config.gap !== this.config.gap;
+		this.config = config;
+		// hacky way to avoid updating twice...
+		if (
+			!this.updateFromContainerSize(this.container?.offsetWidth ?? 0) &&
+			gapChanged
+		) {
+			this.relayout();
+		}
+	};
+
 	private handleContainerResize = (entries: ResizeObserverEntry[]) => {
 		const containerWidth = entries[0].contentRect.width;
 		this.updateFromContainerSize(containerWidth);
@@ -60,11 +79,22 @@ class MasonryLayout {
 			if (newValue !== this.columns) {
 				this.columns = newValue;
 				this.relayout();
+				return true;
 			}
 		}
+		return false;
 	};
 
 	private handleContainerMutation = (entries: MutationRecord[]) => {
+		for (const entry of entries) {
+			entry.addedNodes.forEach((node) => {
+				if (node instanceof HTMLElement) {
+					node.style.setProperty('position', 'absolute');
+					// hide until laid out
+					node.style.setProperty('visibility', 'hidden');
+				}
+			});
+		}
 		// TODO: why is this timeout necessary?
 		setTimeout(this.relayout, 100);
 	};
@@ -94,10 +124,13 @@ class MasonryLayout {
 			const y = tracks[trackIndex];
 			const width = columnPercentageWidth;
 			child.style.setProperty('position', 'absolute');
+			child.style.setProperty('visibility', 'visible');
 			child.style.setProperty('width', `${width}%`);
 			child.style.setProperty('left', `${x}%`);
 			child.style.setProperty('top', `${y}px`);
-			child.classList.add('transition-all');
+			requestAnimationFrame(() => {
+				child.classList.add('transition-all');
+			});
 			tracks[trackIndex] += child.offsetHeight + gap;
 		});
 		this.container.style.setProperty(
@@ -114,6 +147,8 @@ export interface MasonryProps {
 	gap?: number;
 }
 
+const initialStyle = { height: 0 };
+
 export function Masonry({
 	className,
 	children,
@@ -121,6 +156,9 @@ export function Masonry({
 	gap = 16,
 }: MasonryProps) {
 	const [layout] = useState(() => new MasonryLayout({ columns, gap }));
+	useEffect(() => {
+		layout.updateConfig({ columns, gap });
+	}, [layout, columns, gap]);
 	const ref = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		if (ref.current) {
@@ -129,7 +167,7 @@ export function Masonry({
 	}, [layout, ref]);
 
 	return (
-		<div ref={ref} className={className}>
+		<div ref={ref} style={initialStyle} className={className}>
 			{children}
 		</div>
 	);

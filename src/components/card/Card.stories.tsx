@@ -4,6 +4,7 @@ import {
 	CardActions,
 	CardContent,
 	CardFooter,
+	cardGridColumns,
 	CardImage,
 	CardMain,
 	CardMenu,
@@ -168,6 +169,26 @@ export const Grid: Story = {
 			setSizes((v) => v.filter((_, i) => i !== index));
 		return (
 			<Card.Grid>
+				{sizes.map((size, i) => (
+					<GridCard key={i} size={size} remove={() => remove(i)} />
+				))}
+			</Card.Grid>
+		);
+	},
+};
+
+export const GridCompact: Story = {
+	render: () => {
+		const [sizes, setSizes] = useState(() =>
+			Array.from(
+				{ length: 40 },
+				(_, i) => 50 + Math.floor(Math.random() * 300),
+			),
+		);
+		const remove = (index: number) =>
+			setSizes((v) => v.filter((_, i) => i !== index));
+		return (
+			<Card.Grid columns={cardGridColumns.small}>
 				{sizes.map((size, i) => (
 					<GridCard key={i} size={size} remove={() => remove(i)} />
 				))}
