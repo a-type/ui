@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.3
+
+### Patch Changes
+
+- f647f0d8: masonry observe child sizes
+
 ## 1.1.2
 
 ### Patch Changes
