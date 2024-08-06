@@ -1,3 +1,4 @@
+import { debounce } from '@a-type/utils';
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 interface MasonryLayoutConfig {
@@ -8,6 +9,7 @@ interface MasonryLayoutConfig {
 class MasonryLayout {
 	private containerResizeObserver: ResizeObserver | null = null;
 	private containerMutationObserver: MutationObserver | null = null;
+	private childSizeObserver: ResizeObserver;
 
 	private container: HTMLElement | null = null;
 
@@ -16,6 +18,7 @@ class MasonryLayout {
 	constructor(private config: MasonryLayoutConfig) {
 		this.columns =
 			typeof config.columns === 'function' ? config.columns(0) : config.columns;
+		this.childSizeObserver = new ResizeObserver(this.handleChildResize);
 	}
 
 	attach = (container: HTMLElement) => {
@@ -41,6 +44,7 @@ class MasonryLayout {
 				node.style.setProperty('position', 'absolute');
 				// hide until laid out
 				node.style.setProperty('visibility', 'hidden');
+				this.childSizeObserver.observe(node);
 			}
 		});
 
@@ -93,6 +97,13 @@ class MasonryLayout {
 					node.style.setProperty('position', 'absolute');
 					// hide until laid out
 					node.style.setProperty('visibility', 'hidden');
+
+					this.childSizeObserver?.observe(node);
+				}
+			});
+			entry.removedNodes.forEach((node) => {
+				if (node instanceof HTMLElement) {
+					this.childSizeObserver?.unobserve(node);
 				}
 			});
 		}
@@ -100,12 +111,22 @@ class MasonryLayout {
 		setTimeout(this.relayout, 100);
 	};
 
-	private relayout = () => {
+	private handleChildResize = (entries: ResizeObserverEntry[]) => {
+		// only worry about height changes
+		for (const entry of entries) {
+			const lastSeenHeight = entry.target.getAttribute('data-last-height');
+			const currentHeight = entry.contentRect.height;
+			entry.target.setAttribute('data-last-height', currentHeight.toString());
+			if (lastSeenHeight && lastSeenHeight !== currentHeight.toString()) {
+				this.relayout();
+			}
+		}
+	};
+
+	private relayout = debounce(() => {
 		if (!this.container) {
 			return;
 		}
-
-		console.log('relayout');
 
 		const tracks = new Array(this.columns).fill(0);
 		const gap = this.config.gap;
@@ -119,7 +140,7 @@ class MasonryLayout {
 		const gapPercentageWidth = (gap / this.container.offsetWidth) * 100;
 
 		const children = Array.from(this.container.children) as HTMLElement[];
-		children.forEach((child) => {
+		children.forEach((child, index) => {
 			const trackIndex = tracks.indexOf(Math.min(...tracks));
 			const x = (columnPercentageWidth + gapPercentageWidth) * trackIndex;
 			const y = tracks[trackIndex];
@@ -129,13 +150,14 @@ class MasonryLayout {
 			child.style.setProperty('width', `${width}%`);
 			child.style.setProperty('left', `${x}%`);
 			child.style.setProperty('top', `${y}px`);
+			child.style.setProperty('z-index', index.toString());
 			requestAnimationFrame(() => {
 				child.classList.add('transition-all');
 			});
 			tracks[trackIndex] += child.offsetHeight + gap;
 		});
 		this.container.style.setProperty('height', `${Math.max(...tracks)}px`);
-	};
+	}, 100);
 }
 
 export interface MasonryProps {

@@ -167,10 +167,20 @@ export const Grid: Story = {
 		);
 		const remove = (index: number) =>
 			setSizes((v) => v.filter((_, i) => i !== index));
+		const resize = (index: number) =>
+			setSizes((v) => {
+				const size = 50 + Math.floor(Math.random() * 300);
+				return v.map((s, i) => (i === index ? size : s));
+			});
 		return (
 			<Card.Grid>
 				{sizes.map((size, i) => (
-					<GridCard key={i} size={size} remove={() => remove(i)} />
+					<GridCard
+						key={i}
+						size={size}
+						remove={() => remove(i)}
+						resize={() => resize(i)}
+					/>
 				))}
 			</Card.Grid>
 		);
@@ -197,17 +207,32 @@ export const GridCompact: Story = {
 	},
 };
 
-function GridCard({ size, remove }: { size: number; remove: () => void }) {
+function GridCard({
+	size,
+	remove,
+	resize,
+}: {
+	size: number;
+	remove: () => void;
+	resize?: () => void;
+}) {
 	return (
 		<CardRoot style={{ height: size }}>
 			<CardMain>
 				<CardTitle>{size}</CardTitle>
 			</CardMain>
-			<CardActions>
-				<Button size="small" onClick={remove}>
-					Delete
-				</Button>
-			</CardActions>
+			<CardFooter>
+				<CardActions>
+					<Button size="small" onClick={remove}>
+						Delete
+					</Button>
+					{resize && (
+						<Button size="small" onClick={resize}>
+							Resize
+						</Button>
+					)}
+				</CardActions>
+			</CardFooter>
 		</CardRoot>
 	);
 }
