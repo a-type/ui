@@ -134,10 +134,7 @@ class MasonryLayout {
 			});
 			tracks[trackIndex] += child.offsetHeight + gap;
 		});
-		this.container.style.setProperty(
-			'height',
-			`${Math.max(...tracks) - gap}px`,
-		);
+		this.container.style.setProperty('height', `${Math.max(...tracks)}px`);
 	};
 }
 
