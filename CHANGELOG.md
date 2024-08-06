@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- 846073e8: fix some masonry things
+
 ## 1.1.0
 
 ### Minor Changes
