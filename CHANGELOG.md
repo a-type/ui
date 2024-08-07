@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.1.4
+
+### Patch Changes
+
+- 15a6915d: support spans in masonry
+- ab29ee0a: add min/max to number stepper
+
 ## 1.1.3
 
 ### Patch Changes
