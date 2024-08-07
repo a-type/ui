@@ -1,23 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-	CameraDeviceSelector,
-	CameraRoot,
-	CameraShutterButton,
-} from './Camera.js';
+import { Camera } from './Camera.js';
 import { useMemo, useState } from 'react';
 
 const meta = {
 	title: 'Camera',
+	component: Camera,
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },
 	},
 	args: {},
-} satisfies Meta;
+} satisfies Meta<typeof Camera>;
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<typeof Camera>;
 
 export const Default: Story = {
 	render() {
@@ -40,14 +37,11 @@ function CameraDemo({ facingMode }: { facingMode?: 'user' | 'environment' }) {
 
 	return (
 		<div>
-			<CameraRoot
+			<Camera
 				facingMode={facingMode}
 				onCapture={setLatest}
 				className="w-64 h-64"
-			>
-				<CameraShutterButton />
-				<CameraDeviceSelector />
-			</CameraRoot>
+			/>
 			{latest && <img src={dataUri} className="w-full" />}
 		</div>
 	);

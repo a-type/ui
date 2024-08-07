@@ -9,7 +9,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { Button } from '../button.js';
+import { Button, ButtonProps } from '../button.js';
 import { Icon } from '../icon.js';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../select.js';
 import { Slot } from '@radix-ui/react-slot';
@@ -20,11 +20,15 @@ const CameraContext = createContext<{
 	selectedDeviceId: string | undefined;
 	selectDeviceId: (id: string) => void;
 	devices: MediaDeviceInfo[];
+	fullscreen: boolean;
+	setFullscreen: (fullscreen: boolean) => void;
 }>({
 	triggerCapture: () => {},
 	selectedDeviceId: 'default',
 	selectDeviceId: () => {},
 	devices: [],
+	fullscreen: false,
+	setFullscreen: () => {},
 });
 
 export interface CameraRootProps {
@@ -62,8 +66,10 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 			string | undefined
 		>();
 
+		const cleanupRef = useRef<() => void>();
 		useEffect(() => {
 			const init = () => {
+				cleanupRef.current?.();
 				navigator.mediaDevices
 					?.getUserMedia({
 						video: {
@@ -73,6 +79,8 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 					})
 					.then((s) => {
 						setStream(s);
+						cleanupRef.current = () =>
+							s.getTracks().forEach((track) => track.stop());
 					});
 			};
 			init();
@@ -85,13 +93,12 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 				init();
 			};
 			document.addEventListener('visibilitychange', reconnect);
-		}, [selectedDeviceId, facingMode]);
 
-		useEffect(() => {
 			return () => {
-				stream?.getTracks().forEach((track) => track.stop());
+				document.removeEventListener('visibilitychange', reconnect);
+				cleanupRef.current?.();
 			};
-		}, [stream]);
+		}, [selectedDeviceId, facingMode]);
 
 		useEffect(() => {
 			const video = videoRef.current;
@@ -142,6 +149,8 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 			}
 		};
 
+		const [fullscreen, setFullscreen] = useState(false);
+
 		return (
 			<CameraContext.Provider
 				value={{
@@ -149,12 +158,15 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 					triggerCapture,
 					selectedDeviceId,
 					selectDeviceId: setSelectedDeviceId,
+					setFullscreen,
+					fullscreen,
 				}}
 			>
 				<div
 					ref={ref}
 					className={classNames(
 						'layer-components:([font-family:inherit] text-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
+						fullscreen && 'fixed inset-0 w-full h-full z-1000 rounded-none',
 						className,
 					)}
 					{...rest}
@@ -265,6 +277,38 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 		</Select>
 	);
 };
+
+export const CameraFullscreenButton = (props: ButtonProps) => {
+	const { setFullscreen, fullscreen } = useContext(CameraContext);
+	return (
+		<Button
+			{...props}
+			size="icon"
+			color="ghost"
+			className="absolute top-2 right-2 text-white"
+			onClick={() => setFullscreen(!fullscreen)}
+		>
+			<Icon name={fullscreen ? 'x' : 'maximize'} />
+		</Button>
+	);
+};
+
+const CameraBase = (props: CameraRootProps) => {
+	return (
+		<CameraRoot {...props}>
+			<CameraShutterButton />
+			<CameraDeviceSelector />
+			<CameraFullscreenButton />
+		</CameraRoot>
+	);
+};
+
+export const Camera = Object.assign(CameraBase, {
+	Root: CameraRoot,
+	ShutterButton: CameraShutterButton,
+	DeviceSelector: CameraDeviceSelector,
+	FullscreenButton: CameraFullscreenButton,
+});
 
 function dataURItoFile(dataURI: string) {
 	// convert base64/URLEncoded data component to raw binary data held in a string

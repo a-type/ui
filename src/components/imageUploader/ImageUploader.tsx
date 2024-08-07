@@ -6,6 +6,7 @@ import { Icon } from '../icon.js';
 import { Button } from '../button.js';
 import {
 	CameraDeviceSelector,
+	CameraFullscreenButton,
 	CameraRoot,
 	CameraShutterButton,
 } from '../camera.js';
@@ -113,7 +114,10 @@ export function ImageUploader({
 
 	return (
 		<div
-			className={classNames('relative overflow-hidden', rest.className)}
+			className={classNames(
+				'relative overflow-hidden rounded-lg',
+				rest.className,
+			)}
 			onDragEnter={onDragEnter}
 			onDragLeave={onDragLeave}
 			onDragOver={onDragOver}
@@ -165,13 +169,14 @@ export function ImageUploader({
 				>
 					<CameraShutterButton />
 					<CameraDeviceSelector />
+					<CameraFullscreenButton />
 					<Button
 						onClick={() => setCameraOpen(false)}
 						color="ghost"
-						size="icon"
-						className="text-white absolute top-2 right-2"
+						size="small"
+						className="text-white absolute top-2 left-2"
 					>
-						<Icon name="x" />
+						Cancel
 					</Button>
 				</CameraRoot>
 			)}
