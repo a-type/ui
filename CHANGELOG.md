@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.6
+
+### Patch Changes
+
+- b2976d4e: support dynamic masonry spans
+
 ## 1.1.5
 
 ### Patch Changes
