@@ -13,6 +13,8 @@ export interface NumberStepperProps {
 	renderValue?: (value: number) => ReactNode;
 	className?: string;
 	disabled?: boolean;
+	min?: number;
+	max?: number;
 }
 
 export function NumberStepper({
@@ -24,6 +26,8 @@ export function NumberStepper({
 	renderValue = fractionToText,
 	className,
 	disabled,
+	min,
+	max,
 	...rest
 }: NumberStepperProps) {
 	const index = steps?.indexOf(value) ?? 0;
@@ -50,8 +54,14 @@ export function NumberStepper({
 		}
 	};
 
-	const canIncrement = !disabled && (steps ? index < steps.length - 1 : true);
-	const canDecrement = !disabled && (steps ? index > 0 : true);
+	const canIncrement =
+		!disabled &&
+		(steps ? index < steps.length - 1 : true) &&
+		(max === undefined || value < max);
+	const canDecrement =
+		!disabled &&
+		(steps ? index > 0 : true) &&
+		(min === undefined || value > min);
 
 	return (
 		<div
