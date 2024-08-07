@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.1.5
+
+### Patch Changes
+
+- b8deec3e: tweak colors
+- b8deec3e: camera maximize button
+
 ## 1.1.4
 
 ### Patch Changes
