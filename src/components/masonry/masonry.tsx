@@ -128,7 +128,7 @@ class MasonryLayout {
 			return;
 		}
 
-		const tracks = new Array(this.columns).fill(0);
+		const tracks: number[] = new Array(this.columns).fill(0);
 		const gap = this.config.gap;
 		// percentage-based width and x position so that items automatically
 		// layout correctly when the container is resized (as long as columns
@@ -141,10 +141,24 @@ class MasonryLayout {
 
 		const children = Array.from(this.container.children) as HTMLElement[];
 		children.forEach((child, index) => {
-			const trackIndex = tracks.indexOf(Math.min(...tracks));
+			let itemTrackSpan = parseInt(child.getAttribute('data-span') || '1');
+			if (isNaN(itemTrackSpan) || itemTrackSpan < 1) {
+				itemTrackSpan = 1;
+			}
+			if (itemTrackSpan > this.columns) {
+				itemTrackSpan = this.columns;
+			}
+
+			const trackIndex = pickTrack(tracks, itemTrackSpan);
+			const affectedTracks = tracks.slice(
+				trackIndex,
+				trackIndex + itemTrackSpan,
+			);
 			const x = (columnPercentageWidth + gapPercentageWidth) * trackIndex;
-			const y = tracks[trackIndex];
-			const width = columnPercentageWidth;
+			const y = Math.max(...affectedTracks);
+			const width =
+				columnPercentageWidth * itemTrackSpan +
+				gapPercentageWidth * (itemTrackSpan - 1);
 			child.style.setProperty('position', 'absolute');
 			child.style.setProperty('visibility', 'visible');
 			child.style.setProperty('width', `${width}%`);
@@ -154,10 +168,22 @@ class MasonryLayout {
 			requestAnimationFrame(() => {
 				child.classList.add('transition-all');
 			});
-			tracks[trackIndex] += child.offsetHeight + gap;
+			for (let i = 0; i < itemTrackSpan; i++) {
+				tracks[trackIndex + i] = y + child.offsetHeight + gap;
+			}
 		});
 		this.container.style.setProperty('height', `${Math.max(...tracks)}px`);
 	}, 100);
+}
+
+function pickTrack(tracks: number[], trackSpan: number) {
+	const subTracks = tracks.slice(0, tracks.length - trackSpan + 1);
+	const min = Math.min(...subTracks);
+	const index = subTracks.indexOf(min);
+	if (index === -1) {
+		return 0;
+	}
+	return index;
 }
 
 export interface MasonryProps {
@@ -196,4 +222,8 @@ export function Masonry({
 			{children}
 		</div>
 	);
+}
+
+export function masonrySpan(span: number) {
+	return { 'data-span': span };
 }
