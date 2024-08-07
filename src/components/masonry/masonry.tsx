@@ -10,6 +10,7 @@ class MasonryLayout {
 	private containerResizeObserver: ResizeObserver | null = null;
 	private containerMutationObserver: MutationObserver | null = null;
 	private childSizeObserver: ResizeObserver;
+	private childMutationObserver: MutationObserver;
 
 	private container: HTMLElement | null = null;
 
@@ -19,6 +20,7 @@ class MasonryLayout {
 		this.columns =
 			typeof config.columns === 'function' ? config.columns(0) : config.columns;
 		this.childSizeObserver = new ResizeObserver(this.handleChildResize);
+		this.childMutationObserver = new MutationObserver(this.relayout);
 	}
 
 	attach = (container: HTMLElement) => {
@@ -41,10 +43,7 @@ class MasonryLayout {
 		container.style.setProperty('visibility', 'visible');
 		container.childNodes.forEach((node) => {
 			if (node instanceof HTMLElement) {
-				node.style.setProperty('position', 'absolute');
-				// hide until laid out
-				node.style.setProperty('visibility', 'hidden');
-				this.childSizeObserver.observe(node);
+				this.setupChild(node);
 			}
 		});
 
@@ -59,6 +58,16 @@ class MasonryLayout {
 			container.style.removeProperty('overflow');
 			this.container = null;
 		};
+	};
+
+	private setupChild = (child: HTMLElement) => {
+		child.style.setProperty('position', 'absolute');
+		// hide until laid out
+		child.style.setProperty('visibility', 'hidden');
+		this.childSizeObserver.observe(child);
+		this.childMutationObserver.observe(child, {
+			attributeFilter: ['data-span'],
+		});
 	};
 
 	updateConfig = (config: MasonryLayoutConfig) => {
@@ -94,11 +103,7 @@ class MasonryLayout {
 		for (const entry of entries) {
 			entry.addedNodes.forEach((node) => {
 				if (node instanceof HTMLElement) {
-					node.style.setProperty('position', 'absolute');
-					// hide until laid out
-					node.style.setProperty('visibility', 'hidden');
-
-					this.childSizeObserver?.observe(node);
+					this.setupChild(node);
 				}
 			});
 			entry.removedNodes.forEach((node) => {
@@ -107,8 +112,7 @@ class MasonryLayout {
 				}
 			});
 		}
-		// TODO: why is this timeout necessary?
-		setTimeout(this.relayout, 100);
+		this.relayout();
 	};
 
 	private handleChildResize = (entries: ResizeObserverEntry[]) => {
