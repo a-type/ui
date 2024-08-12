@@ -433,9 +433,9 @@ export default function presetAglio({
 					--palette-red-00: #321f19;
 					--palette-green-90: #e9fff1;
 					--palette-green-80: #c2ffe1;
-					--palette-green-70: #8ff8e0;
-					--palette-green-60: #79efe7;
-					--palette-green-50: #63cec4;
+					--palette-green-70: #8ff8d3;
+					--palette-green-60: #79fdcd;
+					--palette-green-50: #63cea5;
 					--palette-green-40: #499d92;
 					--palette-green-30: #1f837c;
 					--palette-green-20: #246869;
