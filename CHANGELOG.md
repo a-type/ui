@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.8
+
+### Patch Changes
+
+- 367a0184: Card tweaks. Remove warm/cool gray overlay colors.
+
 ## 1.1.7
 
 ### Patch Changes
