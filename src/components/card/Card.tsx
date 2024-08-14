@@ -1,13 +1,14 @@
-import { HTMLProps, MouseEvent, ReactNode, forwardRef } from 'react';
-import { useStableCallback, withClassName } from '../../hooks.js';
 import { Slot } from '@radix-ui/react-slot';
-import classNames, { clsx } from 'clsx';
-import { SlotDiv } from '../utility/SlotDiv.js';
+import classNames from 'clsx';
+import { HTMLAttributes, MouseEvent, ReactNode, forwardRef } from 'react';
+import { withClassName } from '../../hooks.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	'div',
 	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
+	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
 export const CardMain = forwardRef<
@@ -45,14 +46,23 @@ export const CardMain = forwardRef<
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-0 bg-white p-2 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold)',
+	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
 );
 
-export const CardContent = withClassName(
+const CardContentRoot = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend text-black rounded-md mx-2 my-0.5 border border-solid border-grayDarkBlend text-xs)',
 	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
+	'layer-variants:[&[data-unstyled]]:(p-0 [background:unset] border-none)',
+);
+export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
+	unstyled?: boolean;
+}
+export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
+	function CardContent({ unstyled, ...rest }, ref) {
+		return <CardContentRoot ref={ref} data-unstyled={unstyled} {...rest} />;
+	},
 );
 
 export const CardImage = withClassName(

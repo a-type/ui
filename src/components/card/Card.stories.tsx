@@ -30,7 +30,7 @@ type Story = StoryObj<typeof CardRoot>;
 
 export const Default: Story = {
 	render: (args) => (
-		<div className="col items-stretch">
+		<div className="row items-stretch">
 			<CardRoot {...args} className="min-h-20vh">
 				<CardImage asChild>
 					<img src="https://resources.biscuits.club/images/pashka.jpg" />
@@ -56,12 +56,13 @@ export const Default: Story = {
 					</CardMenu>
 				</CardFooter>
 			</CardRoot>
-			<CardRoot {...args}>
+			<CardRoot {...args} className="max-w-300px">
 				<CardMain onClick={() => alert('clicked')}>
 					<CardTitle>
 						Card Title which is very long and would normally wrap
 					</CardTitle>
 					<CardContent>Other stuff</CardContent>
+					<CardContent unstyled>Styling optional</CardContent>
 				</CardMain>
 				<CardFooter>
 					<CardActions>
