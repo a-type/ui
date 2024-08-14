@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.7
+
+### Patch Changes
+
+- 5c3d9963: update green to be more green
+
 ## 1.1.6
 
 ### Patch Changes
