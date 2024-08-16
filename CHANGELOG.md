@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.9
+
+### Patch Changes
+
+- d1af87f4: add marquee component
+
 ## 1.1.8
 
 ### Patch Changes
