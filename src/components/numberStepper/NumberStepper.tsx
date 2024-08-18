@@ -15,6 +15,7 @@ export interface NumberStepperProps {
 	disabled?: boolean;
 	min?: number;
 	max?: number;
+	id?: string;
 }
 
 export function NumberStepper({
