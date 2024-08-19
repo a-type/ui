@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.11
+
+### Patch Changes
+
+- de0aab06: actually export numberstepperfield...
+
 ## 1.1.10
 
 ### Patch Changes
