@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 /**
  * Applies bottom offset px as a CSS custom property to the document root.
  */
-export function useVisualViewportOffset() {
+export function useVisualViewportOffset(disable?: boolean) {
 	useEffect(() => {
+		if (!disable) return;
+
 		const viewport =
 			typeof window === 'undefined' ? undefined : window.visualViewport;
 
@@ -32,5 +34,5 @@ export function useVisualViewportOffset() {
 			viewport.removeEventListener('resize', update);
 			window.removeEventListener('scroll', update);
 		};
-	}, []);
+	}, [disable]);
 }

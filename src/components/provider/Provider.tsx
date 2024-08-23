@@ -10,6 +10,7 @@ export interface ProviderProps {
 	disableParticles?: boolean;
 	toastPosition?: ToastPosition;
 	toastContainerClassName?: string;
+	disableViewportOffset?: boolean;
 }
 
 /**
@@ -20,8 +21,9 @@ export function Provider({
 	disableParticles,
 	toastPosition = 'top-center',
 	toastContainerClassName,
+	disableViewportOffset
 }: ProviderProps) {
-	useVisualViewportOffset();
+	useVisualViewportOffset(disableViewportOffset);
 
 	const otherStuff = (
 		<>
