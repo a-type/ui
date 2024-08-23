@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.13
+
+### Patch Changes
+
+- c78ba546: fix module ref
+
 ## 1.1.12
 
 ### Patch Changes
