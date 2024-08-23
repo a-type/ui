@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  */
 export function useVisualViewportOffset(disable?: boolean) {
 	useEffect(() => {
-		if (!disable) return;
+		if (disable) return;
 
 		const viewport =
 			typeof window === 'undefined' ? undefined : window.visualViewport;
