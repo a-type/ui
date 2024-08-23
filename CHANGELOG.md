@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.12
+
+### Patch Changes
+
+- 6af609b9: allow turning off viewport stuff
+
 ## 1.1.11
 
 ### Patch Changes
