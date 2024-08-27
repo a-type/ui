@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.15
+
+### Patch Changes
+
+- ccdd5c66: ssr support for masonry, maybe
+
 ## 1.1.14
 
 ### Patch Changes
