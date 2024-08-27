@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.16
+
+### Patch Changes
+
+- dfa8403b: layout masonry on mount
+
 ## 1.1.15
 
 ### Patch Changes
