@@ -1,12 +1,17 @@
 import { debounce } from '@a-type/utils';
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
+interface Layout {
+	attach(container: HTMLElement): () => void;
+	updateConfig(config: MasonryLayoutConfig): void;
+}
+
 interface MasonryLayoutConfig {
 	columns: number | ((containerWidth: number) => number);
 	gap: number;
 }
 
-class MasonryLayout {
+class MasonryLayout implements Layout {
 	private containerResizeObserver: ResizeObserver | null = null;
 	private containerMutationObserver: MutationObserver | null = null;
 	private childSizeObserver: ResizeObserver;
@@ -180,6 +185,13 @@ class MasonryLayout {
 	}, 100);
 }
 
+class ServerLayout implements Layout {
+	attach(container: HTMLElement): () => void {
+		return () => {};
+	}
+	updateConfig(config: MasonryLayoutConfig): void {}
+}
+
 function pickTrack(tracks: number[], trackSpan: number) {
 	const subTracks = tracks.slice(0, tracks.length - trackSpan + 1);
 	const min = Math.min(...subTracks);
@@ -210,7 +222,12 @@ export function Masonry({
 	columns = 3,
 	gap = 16,
 }: MasonryProps) {
-	const [layout] = useState(() => new MasonryLayout({ columns, gap }));
+	const [layout] = useState<Layout>(() => {
+		if (typeof window === 'undefined') {
+			return new ServerLayout();
+		}
+		return new MasonryLayout({ columns, gap });
+	});
 	useEffect(() => {
 		layout.updateConfig({ columns, gap });
 	}, [layout, columns, gap]);
