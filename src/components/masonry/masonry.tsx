@@ -26,6 +26,7 @@ class MasonryLayout implements Layout {
 			typeof config.columns === 'function' ? config.columns(0) : config.columns;
 		this.childSizeObserver = new ResizeObserver(this.handleChildResize);
 		this.childMutationObserver = new MutationObserver(this.relayout);
+		this.relayout();
 	}
 
 	attach = (container: HTMLElement) => {
