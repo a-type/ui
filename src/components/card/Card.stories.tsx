@@ -88,7 +88,7 @@ export const Compact: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
+					<Button size="icon-small" color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
