@@ -16,7 +16,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 		| 'accent'
 		| 'contrast'
 		| 'unstyled';
-	size?: 'default' | 'small' | 'icon';
+	size?: 'default' | 'small' | 'icon' | 'icon-small';
 	toggled?: boolean;
 	toggleMode?: 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';
@@ -49,6 +49,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			...props,
 			disabled: disabled || loading,
 			'data-disabled': visuallyDisabled,
+			'data-size': size,
 			tabIndex: visuallyDisabled ? -1 : undefined,
 			className: classNames(
 				getButtonClassName({

@@ -45,12 +45,12 @@ export const Default: Story = {
 				<CardFooter>
 					<CardActions>
 						<Button size="small">Button</Button>
-						<Button size="icon" color="ghost">
+						<Button size="icon-small" color="primary">
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>
 					<CardMenu>
-						<Button size="icon" color="ghost">
+						<Button size="icon-small" color="ghost">
 							<Icon name="dots" />
 						</Button>
 					</CardMenu>
@@ -67,7 +67,7 @@ export const Default: Story = {
 				<CardFooter>
 					<CardActions>
 						<Button size="small">Button</Button>
-						<Button size="icon" color="ghost">
+						<Button size="icon-small" color="ghost">
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>

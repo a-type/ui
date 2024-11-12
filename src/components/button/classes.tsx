@@ -48,7 +48,9 @@ const colors = {
 const sizes = {
 	default: '',
 	small: 'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-full)',
-	icon: 'layer-variants:[&.size-icon]:(p-2 text-sm rounded-full)',
+	icon: 'layer-variants:[&.size-icon]:(p-2.35 text-sm rounded-full)',
+	'icon-small':
+		'layer-variants:[&.size-icon-small]:(p-2 text-xs rounded-full -m-y-0.5)',
 };
 
 const toggledClass =

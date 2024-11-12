@@ -7,7 +7,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
+	'layer-components:(flex flex-col border-light rounded-xl text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -82,7 +82,7 @@ export const CardActions = withClassName(
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay rounded-full p-0)',
+	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay py-0.5 rounded-full p-0)',
 );
 
 export const cardGridColumns = {
