@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.17
+
+### Patch Changes
+
+- edc6c3e3: Tabs wrap
+
 ## 1.1.16
 
 ### Patch Changes
