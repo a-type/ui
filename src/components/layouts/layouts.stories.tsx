@@ -11,6 +11,7 @@ import {
 	NavBarRoot,
 } from '../navBar.js';
 import { Icon } from '../icon.js';
+import { PageNowPlaying } from './PageNowPlaying.js';
 
 const meta = {
 	title: 'layouts',
@@ -33,6 +34,7 @@ export const Default: Story = {
 					<h1 className="text-3xl font-bold">Hello, World!</h1>
 					<p className="text-lg">This is a simple page layout.</p>
 				</div>
+				<PageNowPlaying>Now playing</PageNowPlaying>
 			</PageContent>
 			<PageNav>
 				<NavBarRoot>
@@ -53,6 +55,20 @@ export const Default: Story = {
 					</NavBarItem>
 				</NavBarRoot>
 			</PageNav>
+		</PageRoot>
+	),
+};
+
+export const WithoutNav: Story = {
+	render: () => (
+		<PageRoot className="w-full h-full">
+			<PageContent>
+				<div className="text-center">
+					<h1 className="text-3xl font-bold">Hello, World!</h1>
+					<p className="text-lg">This is a simple page layout.</p>
+				</div>
+				<PageNowPlaying>Now playing</PageNowPlaying>
+			</PageContent>
 		</PageRoot>
 	),
 };

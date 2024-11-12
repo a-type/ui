@@ -1,13 +1,22 @@
 'use client';
 
 import classNames from 'clsx';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useRef } from 'react';
+import { useBoundsCssVars } from '../../hooks.js';
 
 export function PageNav({
 	className,
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
+	const bodyRef = useRef(document.body);
+	const ref = useBoundsCssVars<HTMLDivElement>(undefined, bodyRef, {
+		left: '--nav-left',
+		top: '--nav-top',
+		width: '--nav-width',
+		height: '--nav-height',
+		ready: '--nav-ready',
+	});
 	return (
 		<div
 			{...props}
@@ -16,6 +25,7 @@ export function PageNav({
 				'layer-components:sm:([grid-area:nav] sticky top-0 h-auto bottom-auto left-auto right-auto)',
 				className,
 			)}
+			ref={ref}
 		>
 			{children}
 		</div>
