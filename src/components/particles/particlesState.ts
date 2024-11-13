@@ -1,5 +1,3 @@
-import { assert } from '@a-type/utils';
-
 export class Particles {
 	private canvas: HTMLCanvasElement | null = null;
 	private ctx: CanvasRenderingContext2D | null = null;
@@ -96,7 +94,7 @@ export class Particles {
 
 		this.ctx!.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
 
-		if (this.particles.length === 0) {
+		if (this.particles.length === this.freeParticles.length) {
 			// skip drawing until we get particles again
 			this.lastDrawLatch = true;
 		} else {
@@ -121,6 +119,7 @@ export class Particles {
 	addParticles = (spawn: ParticleSpawn) => {
 		// wrap in RAF because initializers often use element dimensions
 		requestAnimationFrame(() => {
+			const wasLatch = this.lastDrawLatch;
 			this.lastDrawLatch = false;
 			if (this.freeParticles.length < spawn.count) {
 				this.extendPool(spawn.count - this.freeParticles.length);
@@ -140,6 +139,9 @@ export class Particles {
 					initials.lifespan,
 					spawn.behavior,
 				);
+			}
+			if (wasLatch) {
+				this.resume();
 			}
 		});
 	};

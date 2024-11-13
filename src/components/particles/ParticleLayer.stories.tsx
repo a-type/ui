@@ -19,15 +19,13 @@ export const Default: Story = {
 	render() {
 		return (
 			<div className="w-full h-[100vh] relative flex flex-col items-center justify-center">
-				<ParticleLayer noPortal>
-					<DemoButton />
-				</ParticleLayer>
+				<ExplodeButton />
 			</div>
 		);
 	},
 };
 
-function DemoButton() {
+function ExplodeButton() {
 	const particles = useParticles();
 	if (!particles) throw new Error('Must be used inside ParticleLayer');
 	const burst = (ev: MouseEvent) => {
