@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.1.19
+
+### Patch Changes
+
+- 4d157fd4: Roll back defaults for unsupported virtual keyboard stuff
+- 25ab1b46: fix particles
+
 ## 1.1.18
 
 ### Patch Changes
