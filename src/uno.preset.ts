@@ -399,6 +399,8 @@ export default function presetAglio({
 			'outline-off': '[outline:none]',
 			'bg-wash': 'bg-[var(--color-wash)]',
 			unset: '[all:unset]',
+			'bottom-keyboard':
+				'bottom-[var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))]',
 		},
 
 		preflights: [

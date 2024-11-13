@@ -10,6 +10,7 @@ import {
 import { ParticleLayer } from '../particles.js';
 import { H1, P } from '../typography.js';
 import { Button } from '../button.js';
+import { useEffect, useState } from 'react';
 
 const meta = {
 	title: 'Dialog',
@@ -104,5 +105,45 @@ export const Positioned: Story = {
 				</DialogContent>
 			</ParticleLayer>
 		),
+	},
+};
+
+export const VirtualKeyboard: Story = {
+	render: () => {
+		const [keyboard, setKeyboard] = useState(false);
+
+		useEffect(() => {
+			if (keyboard) {
+				document.body.style.setProperty(
+					'--mock-virtual-keyboard-height',
+					'300px',
+				);
+			} else {
+				document.body.style.removeProperty('--mock-virtual-keyboard-height');
+			}
+		}, [keyboard]);
+
+		return (
+			<ParticleLayer noPortal>
+				<Dialog>
+					<DialogTrigger asChild>
+						<Button>Open</Button>
+					</DialogTrigger>
+					<DummyContent />
+					<DialogContent>
+						<DialogTitle>Hello world</DialogTitle>
+						<DialogActions>
+							<DialogClose asChild>
+								<Button>Close</Button>
+							</DialogClose>
+							<Button onClick={() => setKeyboard((v) => !v)}>
+								Toggle fake virtual kb
+							</Button>
+						</DialogActions>
+					</DialogContent>
+				</Dialog>
+				<div className="fixed bottom-0 h-[var(--mock-virtual-keyboard-height,0)] bg-black w-full transition-height left-0 right-0" />
+			</ParticleLayer>
+		);
 	},
 };

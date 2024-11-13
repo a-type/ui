@@ -36,7 +36,7 @@ const StyledContent = withClassName(
 	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
 );
 const sheetClassName = classNames(
-	'layer-variants:lt-sm:(translate-0 bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] left-0 right-0 top-auto h-min-content max-h-[calc(0.85*var(--viewport-height,100vh))] rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
+	'layer-variants:lt-sm:(translate-0 bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] left-0 right-0 top-auto h-min-content max-h-[calc(85vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))] rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
 	'layer-variants:lt-sm:(animate-ease-in animate-fade-in-up [&[data-state=closed]]:animate-fade-out-down)',
 );
 

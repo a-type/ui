@@ -12,7 +12,10 @@ export function PageNowPlaying({
 		<div
 			{...props}
 			className={classNames(
-				'layer-components:(fixed bottom-[var(--nav-height,env(save-area-inset-bottom,0px))] left-0 right-0 z-now-playing flex flex-col gap-2 items-end)',
+				'layer-components:(fixed left-0 right-0 z-now-playing flex flex-col gap-2 items-end)',
+				// on mobile, this must be positioned above any nav bar that's present,
+				// or at minimum in the safe area
+				'layer-comopnents:bottom-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
 				'layer-components:sm:(fixed bottom-3 left-[var(--content-left,20%)] transition-opacity top-auto items-end w-[var(--content-width,100%)] max-w-80vw p-0 opacity-[var(--content-ready,0)])',
 				unstyled
 					? 'layer-variants:p-2'

@@ -2,8 +2,9 @@ import { ReactNode } from 'react';
 import { ParticleLayer } from '../particles.js';
 import { IconSpritesheet } from '../icon.js';
 import { Toaster, ToastPosition } from 'react-hot-toast';
-import { Tooltip, TooltipProvider } from '../tooltip.js';
+import { TooltipProvider } from '../tooltip.js';
 import { useVisualViewportOffset } from '../../hooks.js';
+import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 
 export interface ProviderProps {
 	children?: ReactNode;
@@ -11,6 +12,7 @@ export interface ProviderProps {
 	toastPosition?: ToastPosition;
 	toastContainerClassName?: string;
 	disableViewportOffset?: boolean;
+	virtualKeyboardBehavior?: 'overlay' | 'displace';
 }
 
 /**
@@ -21,9 +23,11 @@ export function Provider({
 	disableParticles,
 	toastPosition = 'top-center',
 	toastContainerClassName,
-	disableViewportOffset
+	disableViewportOffset = true,
+	virtualKeyboardBehavior = 'overlay',
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
+	useVirtualKeyboardBehavior(virtualKeyboardBehavior);
 
 	const otherStuff = (
 		<>
