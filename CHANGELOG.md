@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.1.18
+
+### Patch Changes
+
+- 36576e4a: Improve now playing positioning
+- c26faff7: Better virtual keyboard support
+
 ## 1.1.17
 
 ### Patch Changes
