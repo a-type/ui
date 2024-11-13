@@ -11,6 +11,7 @@ import { ParticleLayer } from '../particles.js';
 import { H1, P } from '../typography.js';
 import { Button } from '../button.js';
 import { useEffect, useState } from 'react';
+import { Provider } from '../provider.js';
 
 const meta = {
 	title: 'Dialog',
@@ -124,7 +125,7 @@ export const VirtualKeyboard: Story = {
 		}, [keyboard]);
 
 		return (
-			<ParticleLayer noPortal>
+			<Provider virtualKeyboardBehavior="overlay">
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button>Open</Button>
@@ -143,7 +144,7 @@ export const VirtualKeyboard: Story = {
 					</DialogContent>
 				</Dialog>
 				<div className="fixed bottom-0 h-[var(--mock-virtual-keyboard-height,0)] bg-black w-full transition-height left-0 right-0" />
-			</ParticleLayer>
+			</Provider>
 		);
 	},
 };

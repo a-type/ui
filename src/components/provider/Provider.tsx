@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import { ParticleLayer } from '../particles.js';
 import { IconSpritesheet } from '../icon.js';
 import { Toaster, ToastPosition } from 'react-hot-toast';
@@ -23,8 +23,8 @@ export function Provider({
 	disableParticles,
 	toastPosition = 'top-center',
 	toastContainerClassName,
-	disableViewportOffset = true,
-	virtualKeyboardBehavior = 'overlay',
+	disableViewportOffset,
+	virtualKeyboardBehavior = 'displace',
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
 	useVirtualKeyboardBehavior(virtualKeyboardBehavior);
@@ -41,18 +41,32 @@ export function Provider({
 
 	if (disableParticles)
 		return (
-			<TooltipProvider>
-				{children}
-				{otherStuff}
-			</TooltipProvider>
+			<ConfigContext.Provider value={{ virtualKeyboardBehavior }}>
+				<TooltipProvider>
+					{children}
+					{otherStuff}
+				</TooltipProvider>
+			</ConfigContext.Provider>
 		);
 
 	return (
-		<TooltipProvider>
-			<ParticleLayer>
-				{children}
-				{otherStuff}
-			</ParticleLayer>
-		</TooltipProvider>
+		<ConfigContext.Provider value={{ virtualKeyboardBehavior }}>
+			<TooltipProvider>
+				<ParticleLayer>
+					{children}
+					{otherStuff}
+				</ParticleLayer>
+			</TooltipProvider>
+		</ConfigContext.Provider>
 	);
+}
+
+export const ConfigContext = createContext<{
+	virtualKeyboardBehavior: 'overlay' | 'displace';
+}>({
+	virtualKeyboardBehavior: 'displace',
+});
+
+export function useConfig() {
+	return useContext(ConfigContext);
 }

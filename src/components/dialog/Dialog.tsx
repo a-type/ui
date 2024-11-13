@@ -19,6 +19,7 @@ import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { selectTriggerClassName } from '../select.js';
 import { useDrag } from '@use-gesture/react';
 import { Button } from '../button.js';
+import { useConfig } from '../provider.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
@@ -35,9 +36,15 @@ const StyledContent = withClassName(
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
 	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
 );
-const sheetClassName = classNames(
-	'layer-variants:lt-sm:(translate-0 bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] left-0 right-0 top-auto h-min-content max-h-[calc(85vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))] rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
+const sheetClassNames = classNames(
+	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
 	'layer-variants:lt-sm:(animate-ease-in animate-fade-in-up [&[data-state=closed]]:animate-fade-out-down)',
+);
+const sheetClassNameWithOverlayKeyboard = classNames(
+	'layer-variants:lt-sm:(bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))])',
+);
+const sheetClassNameWithDisplaceKeyboard = classNames(
+	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',
 );
 
 export const Content = forwardRef<
@@ -107,6 +114,8 @@ export const Content = forwardRef<
 
 	const finalRef = useMergedRef(ref, openRef, gestureRef);
 
+	const { virtualKeyboardBehavior } = useConfig();
+
 	return (
 		<DialogPrimitive.Portal>
 			<StyledOverlay />
@@ -120,7 +129,13 @@ export const Content = forwardRef<
 						'max-w-600px': width === 'md',
 						'max-w-300px': width === 'sm',
 					},
-					!disableSheet && sheetClassName,
+					!disableSheet && sheetClassNames,
+					!disableSheet &&
+						virtualKeyboardBehavior === 'overlay' &&
+						sheetClassNameWithOverlayKeyboard,
+					!disableSheet &&
+						virtualKeyboardBehavior === 'displace' &&
+						sheetClassNameWithDisplaceKeyboard,
 					outerClassName || className,
 				)}
 			>
