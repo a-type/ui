@@ -12,6 +12,7 @@ import { H1, P } from '../typography.js';
 import { Button } from '../button.js';
 import { useEffect, useState } from 'react';
 import { Provider } from '../provider.js';
+import { Input } from '../input.js';
 
 const meta = {
 	title: 'Dialog',
@@ -133,12 +134,13 @@ export const VirtualKeyboard: Story = {
 					<DummyContent />
 					<DialogContent>
 						<DialogTitle>Hello world</DialogTitle>
+						<Input />
 						<DialogActions>
 							<DialogClose asChild>
 								<Button>Close</Button>
 							</DialogClose>
 							<Button onClick={() => setKeyboard((v) => !v)}>
-								Toggle fake virtual kb
+								Toggle fake kb
 							</Button>
 						</DialogActions>
 					</DialogContent>

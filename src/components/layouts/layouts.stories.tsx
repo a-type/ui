@@ -14,6 +14,7 @@ import { Icon } from '../icon.js';
 import { PageNowPlaying } from './PageNowPlaying.js';
 import { useEffect, useState } from 'react';
 import { Button } from '../button.js';
+import { Input } from '../input.js';
 
 const meta = {
 	title: 'layouts',
@@ -99,8 +100,9 @@ export const WithVirtualKeyboard: Story = {
 					</div>
 					<PageNowPlaying keepAboveKeyboard>
 						<Button onClick={() => setKeyboard((v) => !v)}>
-							Toggle vkeyboard
+							Toggle fake kb
 						</Button>
+						<Input />
 					</PageNowPlaying>
 				</PageContent>
 				<PageNav>

@@ -2,6 +2,7 @@
 
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
+import { useConfig } from '../provider.js';
 
 export function PageNowPlaying({
 	className,
@@ -12,6 +13,8 @@ export function PageNowPlaying({
 	unstyled?: boolean;
 	keepAboveKeyboard?: boolean;
 }) {
+	const { virtualKeyboardBehavior } = useConfig();
+
 	return (
 		<div
 			{...props}
@@ -26,7 +29,11 @@ export function PageNowPlaying({
 					? 'layer-variants:p-2'
 					: 'layer-components:(bg-wash p-2px rounded-xl border-light shadow-md min-w-32px items-center justify-center m-2 w-auto)',
 				keepAboveKeyboard &&
+					virtualKeyboardBehavior === 'overlay' &&
 					'layer-variants:lt-sm:bottom-[max(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px),var(--nav-height,env(safe-area-inset-bottom,0px))))]',
+				keepAboveKeyboard &&
+					virtualKeyboardBehavior === 'displace' &&
+					'layer-variants:lt-sm:bottom-[max(var(--viewport-bottom-offset,0px),var(--nav-height,env(safe-area-inset-bottom,0px)))]',
 				className,
 			)}
 		/>

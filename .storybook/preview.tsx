@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
 import 'virtual:uno.css';
-import { IconSpritesheet } from '../src/components/icon/index.js';
-import { TooltipProvider } from '../src/components/tooltip/Tooltip.js';
 import './preview.css';
+import { Provider } from '../src/components/provider/Provider.js';
 
 const preview: Preview = {
 	parameters: {
@@ -53,10 +52,9 @@ const preview: Preview = {
 				};
 			}, [ctx.globals.mode, ctx.globals.theme]);
 			return (
-				<TooltipProvider>
+				<Provider>
 					<Story />
-					<IconSpritesheet />
-				</TooltipProvider>
+				</Provider>
 			);
 		},
 	],

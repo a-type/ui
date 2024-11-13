@@ -74,13 +74,17 @@ export function useBounds<E extends HTMLElement>(
 		top: number;
 		width: number;
 		height: number;
+		ref: RefObject<E>;
 	}) => void,
+	disconnectCallback: () => void = () => {},
 ) {
 	const ref = useRef<E>(null);
 	const cb = useStableCallback(callback);
+	const disconnectCb = useStableCallback(disconnectCallback);
 	useEffect(() => {
 		const target = ref.current;
 		if (!target) {
+			disconnectCb();
 			return () => {
 				//
 			};
@@ -89,7 +93,7 @@ export function useBounds<E extends HTMLElement>(
 			entries.forEach((entry) => {
 				const { left, top, width, height } =
 					entry.target.getBoundingClientRect();
-				cb({ left, top, width, height });
+				cb({ left, top, width, height, ref });
 			});
 		});
 		resizeObserver.observe(target);
@@ -97,7 +101,7 @@ export function useBounds<E extends HTMLElement>(
 			resizeObserver.unobserve(target);
 			resizeObserver.disconnect();
 		};
-	}, [ref, cb]);
+	}, [ref, cb, disconnectCb]);
 	return ref;
 }
 
@@ -118,11 +122,13 @@ export function useBoundsCssVars<E extends HTMLElement>(
 			top,
 			width,
 			height,
+			ref,
 		}: {
 			left: number;
 			top: number;
 			width: number;
 			height: number;
+			ref: RefObject<E>;
 		}) => {
 			const usedRef = applyToRef || ref;
 			usedRef.current?.style.setProperty(
@@ -159,6 +165,21 @@ export function useBoundsCssVars<E extends HTMLElement>(
 		propertyNames?.width,
 		propertyNames?.height,
 	]);
-	const ref = useBounds<E>(update);
+	const disconnect = () => {
+		if (applyToRef?.current) {
+			applyToRef.current.style.removeProperty(
+				propertyNames?.ready ?? '--ready',
+			);
+			applyToRef.current.style.removeProperty(propertyNames?.left ?? '--left');
+			applyToRef.current.style.removeProperty(propertyNames?.top ?? '--top');
+			applyToRef.current.style.removeProperty(
+				propertyNames?.width ?? '--width',
+			);
+			applyToRef.current.style.removeProperty(
+				propertyNames?.height ?? '--height',
+			);
+		}
+	};
+	const ref = useBounds<E>(update, disconnect);
 	return ref;
 }
