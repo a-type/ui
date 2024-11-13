@@ -27,7 +27,9 @@ export function Provider({
 	virtualKeyboardBehavior = 'displace',
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
-	useVirtualKeyboardBehavior(virtualKeyboardBehavior);
+	const supportedVirtualKeyboardBehavior =
+		'virtualKeyboard' in navigator ? virtualKeyboardBehavior : 'displace';
+	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
 
 	const otherStuff = (
 		<>
@@ -41,7 +43,9 @@ export function Provider({
 
 	if (disableParticles)
 		return (
-			<ConfigContext.Provider value={{ virtualKeyboardBehavior }}>
+			<ConfigContext.Provider
+				value={{ virtualKeyboardBehavior: supportedVirtualKeyboardBehavior }}
+			>
 				<TooltipProvider>
 					{children}
 					{otherStuff}
@@ -50,7 +54,9 @@ export function Provider({
 		);
 
 	return (
-		<ConfigContext.Provider value={{ virtualKeyboardBehavior }}>
+		<ConfigContext.Provider
+			value={{ virtualKeyboardBehavior: supportedVirtualKeyboardBehavior }}
+		>
 			<TooltipProvider>
 				<ParticleLayer>
 					{children}

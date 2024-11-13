@@ -3,6 +3,7 @@
 import classNames from 'clsx';
 import { HTMLAttributes, useRef } from 'react';
 import { useBoundsCssVars } from '../../hooks.js';
+import { HideWhileKeyboardOpen } from '../utility/HideWhileKeyboardOpen.js';
 
 export function PageNav({
 	className,
@@ -17,8 +18,9 @@ export function PageNav({
 		height: '--nav-height',
 		ready: '--nav-ready',
 	});
+
 	return (
-		<div
+		<HideWhileKeyboardOpen
 			{...props}
 			className={classNames(
 				'layer-components:([grid-area:nav] relative z-nav pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))])',
@@ -28,6 +30,6 @@ export function PageNav({
 			ref={ref}
 		>
 			{children}
-		</div>
+		</HideWhileKeyboardOpen>
 	);
 }
