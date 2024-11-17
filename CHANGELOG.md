@@ -1,5 +1,13 @@
 # @a-type/ui
 
+## 1.1.20
+
+### Patch Changes
+
+- 069dbd1f: hide nav when keyboard is open on mobile
+- 2c57d9ec: add default z index to masonry to force stacking context
+- 68687a80: input accepts a list of placeholders to shuffle between
+
 ## 1.1.19
 
 ### Patch Changes
