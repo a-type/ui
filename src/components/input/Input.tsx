@@ -1,10 +1,11 @@
 import classNames from 'clsx';
 import {
 	ComponentProps,
-	ComponentPropsWithRef,
 	FocusEvent,
 	forwardRef,
 	useCallback,
+	useEffect,
+	useState,
 } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
@@ -20,10 +21,23 @@ export interface InputProps extends ComponentProps<'input'> {
 	variant?: 'default' | 'primary';
 	autoSelect?: boolean;
 	asChild?: boolean;
+	/** Shuffle between random placeholders */
+	placeholders?: string[];
+	placeholdersIntervalMs?: number;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-	{ className, autoSelect, onFocus, variant: _, asChild, ...props },
+	{
+		className,
+		autoSelect,
+		onFocus,
+		variant: _,
+		asChild,
+		placeholders,
+		placeholder,
+		placeholdersIntervalMs = 5000,
+		...props
+	},
 	ref,
 ) {
 	const handleFocus = useCallback(
@@ -36,6 +50,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 		[onFocus, autoSelect],
 	);
 
+	const [randomPlaceholder, setRandomPlaceholder] = useState<
+		string | undefined
+	>(
+		placeholders
+			? placeholders[Math.floor(Math.random() * placeholders.length)]
+			: undefined,
+	);
+	useEffect(() => {
+		if (placeholders) {
+			const interval = setInterval(() => {
+				setRandomPlaceholder(
+					placeholders[Math.floor(Math.random() * placeholders.length)],
+				);
+			}, placeholdersIntervalMs);
+			return () => clearInterval(interval);
+		}
+	}, [placeholders, placeholdersIntervalMs]);
+
 	const Component = asChild ? Slot : 'input';
 
 	return (
@@ -44,6 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 			onFocus={handleFocus}
 			className={classNames(inputClassName, className)}
 			ref={ref}
+			placeholder={placeholder ?? randomPlaceholder}
 		/>
 	);
 });
