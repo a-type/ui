@@ -237,3 +237,22 @@ function GridCard({
 		</CardRoot>
 	);
 }
+
+export const VisuallyFocused: Story = {
+	render: () => (
+		<CardRoot>
+			<CardMain visuallyFocused onClick={() => {}}>
+				<CardTitle>Card Title</CardTitle>
+				<CardContent>Other stuff</CardContent>
+			</CardMain>
+			<CardFooter>
+				<CardActions>
+					<Button size="small">Button</Button>
+					<Button size="icon" color="ghost">
+						<Icon name="placeholder" />
+					</Button>
+				</CardActions>
+			</CardFooter>
+		</CardRoot>
+	),
+};
