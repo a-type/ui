@@ -244,7 +244,7 @@ export function Masonry({
 		<div
 			ref={ref}
 			style={initialStyle}
-			className={clsx('layer-components:z-1', className)}
+			className={clsx('layer-components:z-0', className)}
 		>
 			{children}
 		</div>
