@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.21
+
+### Patch Changes
+
+- b8e9c4fc: visually focused prop for button
+
 ## 1.1.20
 
 ### Patch Changes
