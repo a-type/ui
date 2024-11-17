@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.1.22
+
+### Patch Changes
+
+- be7657d6: change grid z index
+- b349e08a: visual focus for cards
+
 ## 1.1.21
 
 ### Patch Changes
