@@ -17,6 +17,7 @@ export function getButtonClassName({
 		'layer-components:hover:(bg-[var(--hover)] ring-4 ring-[var(--hover)])',
 		'layer-components:focus:outline-off',
 		'layer-components:focus-visible:(outline-off ring-6 ring-[var(--focus,var(--hover))])',
+		'layer-components:[&[data-focus=true]]:(ring-6 ring-[var(--focus,var(--hover))])',
 		'layer-components:active:(bg-[var(--active)] ring-8 ring-[var(--active)])',
 		'important:disabled:(opacity-50 cursor-default bg-[var(--bg)] shadow-none ring-none)',
 		'important:[&[data-disabled=true]]:(opacity-50 cursor-default bg-[var(--bg)] shadow-none)',

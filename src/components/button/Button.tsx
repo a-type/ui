@@ -23,6 +23,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	visuallyDisabled?: boolean;
 	loading?: boolean;
 	asChild?: boolean;
+	visuallyFocused?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,6 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			toggleMode = 'color',
 			align,
 			visuallyDisabled,
+			visuallyFocused,
 			loading,
 			children,
 			disabled,
@@ -49,6 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 			...props,
 			disabled: disabled || loading,
 			'data-disabled': visuallyDisabled,
+			'data-focus': visuallyFocused,
 			'data-size': size,
 			tabIndex: visuallyDisabled ? -1 : undefined,
 			className: classNames(
