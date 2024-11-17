@@ -1,4 +1,5 @@
 import { debounce } from '@a-type/utils';
+import clsx from 'clsx';
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
 
 interface Layout {
@@ -240,7 +241,11 @@ export function Masonry({
 	}, [layout, ref]);
 
 	return (
-		<div ref={ref} style={initialStyle} className={className}>
+		<div
+			ref={ref}
+			style={initialStyle}
+			className={clsx('layer-components:z-1', className)}
+		>
 			{children}
 		</div>
 	);
