@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.23
+
+### Patch Changes
+
+- ea2123bf: add progress component
+
 ## 1.1.22
 
 ### Patch Changes
