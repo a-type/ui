@@ -10,10 +10,8 @@ import {
 	forwardRef,
 	KeyboardEvent,
 	useCallback,
-	useId,
 } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import classNames from 'clsx';
 import { Input } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
 import { withClassName } from '../../hooks.js';
@@ -132,11 +130,11 @@ export function TextAreaField({
 	);
 }
 
-const FieldRoot = withClassName(
+export const FieldRoot = withClassName(
 	'div',
 	'flex flex-col items-stretch gap-1 self-stretch',
 );
-const FieldLabel = withClassName(
+export const FieldLabel = withClassName(
 	'label',
 	'inline-flex flex-col gap-1 text-sm font-bold text-dark-blend mb-1',
 );
