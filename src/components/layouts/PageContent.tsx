@@ -40,7 +40,7 @@ export function PageContent({
 				className={classNames(
 					'layer-components:(w-full min-w-0 flex flex-col mb-120px px-4 py-4 flex-1)',
 					{
-						'layer-variants:flex-1': fullHeight,
+						'layer-variants:(flex-1 mb-auto)': fullHeight,
 						'layer-variants:(p-0 sm:p-4)': noPadding,
 					},
 					innerProps?.className,

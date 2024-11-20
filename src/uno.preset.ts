@@ -465,9 +465,9 @@ export default function presetAglio({
 					--palette-blue-00: #00354a;
 					--palette-purple-90: #f1efff;
 					--palette-purple-80: #e0e0ff;
-					--palette-purple-70: #bdc2ff;
-					--palette-purple-60: #a0a8ff;
-					--palette-purple-50: #7c87f3;
+					--palette-purple-70: #c8cdff;
+					--palette-purple-60: #aab1ff;
+					--palette-purple-50: #8490f4;
 					--palette-purple-40: #6d78d7;
 					--palette-purple-30: #6068c0;
 					--palette-purple-20: #5a62a7;
