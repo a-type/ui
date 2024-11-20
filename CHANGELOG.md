@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.24
+
+### Patch Changes
+
+- 89314f5e: fix export
+
 ## 1.1.23
 
 ### Patch Changes
