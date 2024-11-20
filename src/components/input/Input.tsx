@@ -1,13 +1,7 @@
 import classNames from 'clsx';
-import {
-	ComponentProps,
-	FocusEvent,
-	forwardRef,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import { ComponentProps, FocusEvent, forwardRef, useCallback } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export const inputClassName = classNames(
 	'layer-components:(px-5 py-[5px] text-md font-sans rounded-full bg-white select-auto min-w-60px color-black border-solid border-1 border-gray-7 shadow-sm-inset)',
@@ -50,23 +44,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 		[onFocus, autoSelect],
 	);
 
-	const [randomPlaceholder, setRandomPlaceholder] = useState<
-		string | undefined
-	>(
-		placeholders
-			? placeholders[Math.floor(Math.random() * placeholders.length)]
-			: undefined,
+	const randomPlaceholder = useRotatingShuffledValue(
+		placeholders ?? [],
+		placeholdersIntervalMs,
 	);
-	useEffect(() => {
-		if (placeholders) {
-			const interval = setInterval(() => {
-				setRandomPlaceholder(
-					placeholders[Math.floor(Math.random() * placeholders.length)],
-				);
-			}, placeholdersIntervalMs);
-			return () => clearInterval(interval);
-		}
-	}, [placeholders, placeholdersIntervalMs]);
 
 	const Component = asChild ? Slot : 'input';
 

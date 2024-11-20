@@ -7,12 +7,12 @@ import {
 	forwardRef,
 	HTMLProps,
 	useCallback,
-	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState,
 } from 'react';
 import { inputClassName } from '../input.js';
+import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export interface TextAreaProps
 	extends Omit<HTMLProps<HTMLTextAreaElement>, 'ref'> {
@@ -21,6 +21,8 @@ export interface TextAreaProps
 	autoSelect?: boolean;
 	// if auto-size, pad the height by this many px
 	padBottomPixels?: number;
+	placeholders?: string[];
+	placeholdersIntervalMs?: number;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -33,6 +35,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 			rows,
 			padBottomPixels = 0,
 			onChange,
+			placeholder,
+			placeholders,
+			placeholdersIntervalMs = 5000,
 			...rest
 		},
 		ref,
@@ -78,6 +83,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 			[autoSelect, onFocus],
 		);
 
+		const randomPlaceholder = useRotatingShuffledValue(
+			placeholders ?? [],
+			placeholdersIntervalMs,
+		);
+
 		return (
 			<textarea
 				ref={finalRef}
@@ -94,6 +104,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				rows={autoSize ? 1 : rows}
 				onChange={handleChange}
 				onFocus={handleFocus}
+				placeholder={placeholder ?? randomPlaceholder}
 				{...rest}
 			/>
 		);
