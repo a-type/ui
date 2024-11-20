@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.25
+
+### Patch Changes
+
+- 1473a5ab: tweak purple, page content size
+
 ## 1.1.24
 
 ### Patch Changes
