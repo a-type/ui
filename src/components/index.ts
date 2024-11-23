@@ -31,6 +31,7 @@ export * from './particles/index.js';
 export * from './peek/index.js';
 export * from './popover/index.js';
 export * from './provider/Provider.js';
+export * from './progress/Progress.js';
 export * from './relativeTime/index.js';
 export * from './richEditor/index.js';
 export * from './scrollArea/ScrollArea.js';
