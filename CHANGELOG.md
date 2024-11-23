@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.26
+
+### Patch Changes
+
+- d02c642b: barrelfile (sadface)
+
 ## 1.1.25
 
 ### Patch Changes
