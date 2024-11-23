@@ -1,5 +1,3 @@
-'use client';
-
 import classNames from 'clsx';
 import { useCallback, useId, useState } from 'react';
 import { Icon } from '../icon.js';
@@ -10,7 +8,6 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from '../camera.js';
-import { default as resizer } from 'browser-image-resizer';
 
 export interface ImageUploaderProps {
 	value: string | null;
@@ -59,6 +56,7 @@ export function ImageUploader({
 			if (!file) {
 				handleChange(null);
 			} else if (maxDimension) {
+				const resizer = await import('browser-image-resizer');
 				const resizedImage = await resizer.readAndCompressImage(file, {
 					maxWidth: maxDimension,
 					maxHeight: maxDimension,
