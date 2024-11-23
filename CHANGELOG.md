@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.27
+
+### Patch Changes
+
+- 6a7be0fb: dynamic import b-i-r
+
 ## 1.1.26
 
 ### Patch Changes
