@@ -28,7 +28,9 @@ export function Provider({
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
 	const supportedVirtualKeyboardBehavior =
-		'virtualKeyboard' in navigator ? virtualKeyboardBehavior : 'displace';
+		typeof navigator !== 'undefined' && 'virtualKeyboard' in navigator
+			? virtualKeyboardBehavior
+			: 'displace';
 	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
 
 	const otherStuff = (
