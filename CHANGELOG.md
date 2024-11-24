@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.1.28
+
+### Patch Changes
+
+- 8eeb7948: add missing progress export
+
 ## 1.1.27
 
 ### Patch Changes
