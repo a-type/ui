@@ -10,7 +10,15 @@ export function ParticleLayer({
 	children: ReactNode;
 	noPortal?: boolean;
 }) {
-	const [particles] = useState(() => new Particles({ initialPoolSize: 100 }));
+	const [particles] = useState(() =>
+		typeof window === 'undefined'
+			? null
+			: new Particles({ initialPoolSize: 100 }),
+	);
+
+	if (!particles) {
+		return null;
+	}
 
 	const canvas = (
 		<canvas

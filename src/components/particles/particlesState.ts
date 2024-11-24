@@ -16,15 +16,18 @@ export class Particles {
 	private lastDrawLatch = true;
 
 	// keep canvas render size the same as its actual size
-	private resizeObserver = new ResizeObserver((entries) => {
-		for (const entry of entries) {
-			const { width, height } = entry.contentRect;
-			if (this.canvas) {
-				this.canvas.width = width;
-				this.canvas.height = height;
-			}
-		}
-	});
+	private resizeObserver =
+		typeof window === 'undefined'
+			? null
+			: new ResizeObserver((entries) => {
+					for (const entry of entries) {
+						const { width, height } = entry.contentRect;
+						if (this.canvas) {
+							this.canvas.width = width;
+							this.canvas.height = height;
+						}
+					}
+			  });
 
 	constructor({ initialPoolSize }: { initialPoolSize: number }) {
 		// if prefers-reduced-motion is set, disable particles
@@ -47,7 +50,7 @@ export class Particles {
 		}
 
 		if (this.canvas) {
-			this.resizeObserver.unobserve(this.canvas);
+			this.resizeObserver?.unobserve(this.canvas);
 		}
 		this.canvas = canvas;
 		this.ctx = canvas ? canvas.getContext('2d') : null;
@@ -55,7 +58,7 @@ export class Particles {
 			this.pause();
 		} else {
 			this.resume();
-			this.resizeObserver.observe(canvas);
+			this.resizeObserver?.observe(canvas);
 		}
 	};
 
