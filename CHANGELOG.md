@@ -1,5 +1,17 @@
 # @a-type/ui
 
+## 1.1.29
+
+### Patch Changes
+
+- 78f453aa: more ssr fixes
+
+## 1.1.28
+
+### Patch Changes
+
+- 8eeb7948: add missing progress export
+
 ## 1.1.27
 
 ### Patch Changes
