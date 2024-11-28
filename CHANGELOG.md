@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- faf8f002: Remove dynamic components/ imports
+
 ## 1.1.29
 
 ### Patch Changes
