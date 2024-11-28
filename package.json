@@ -7,19 +7,11 @@
 		"/src"
 	],
 	"exports": {
-		"./components/*": {
-			"types": "./dist/esm/components/*.d.ts",
-			"import": "./dist/esm/components/*.js",
-			"node": "./dist/esm/components/*.js",
-			"require": "./dist/cjs/components/*.js",
-			"default": "./dist/cjs/components/*.js"
-		},
-		"./hooks": {
-			"types": "./dist/esm/hooks.d.ts",
-			"import": "./dist/esm/hooks.js",
-			"node": "./dist/esm/hooks.js",
-			"require": "./dist/cjs/hooks.js",
-			"default": "./dist/cjs/hooks.js"
+		".": {
+			"import": "./dist/esm/index.js",
+			"node": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js",
+			"default": "./dist/cjs/index.js"
 		},
 		"./uno-preset": {
 			"types": "./dist/esm/uno.preset.d.ts",
@@ -33,12 +25,6 @@
 			"node": "./dist/css/main.css",
 			"require": "./dist/css/main.css",
 			"default": "./dist/css/main.css"
-		},
-		".": {
-			"import": "./dist/esm/index.js",
-			"node": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js",
-			"default": "./dist/cjs/index.js"
 		}
 	},
 	"scripts": {
