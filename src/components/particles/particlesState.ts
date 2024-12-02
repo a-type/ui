@@ -128,8 +128,12 @@ export class Particles {
 				this.extendPool(spawn.count - this.freeParticles.length);
 			}
 			for (let i = 0; i < spawn.count; i++) {
-				const particle = this.freeParticles.pop();
 				const initials = spawn.initializer(i);
+				if (!initials) {
+					// the particle initializer returned null, so we skip this particle
+					continue;
+				}
+				const particle = this.freeParticles.pop();
 				if (!particle) {
 					throw new Error('Particle allocation failed');
 				}
@@ -233,7 +237,7 @@ type ParticleInitializer = (index: number) => {
 	velocityX: number;
 	velocityY: number;
 	drag: number;
-};
+} | null;
 
 export function createCircleParticles({
 	count,
@@ -284,7 +288,7 @@ export const createElementBorderInitializer = ({
 	angleFuzz = 0.02,
 	margin = 0,
 }: {
-	element: HTMLElement;
+	element: HTMLElement | SVGElement;
 	borders?: BorderName[];
 	force?: number;
 	drag?: number;
@@ -297,7 +301,28 @@ export const createElementBorderInitializer = ({
 	// a single theoretical line, picking a random point on the line, and then converting that point
 	// back to a point on the border.
 	return (index: number) => {
+		// check that element is not hidden
+		if (
+			element instanceof HTMLElement &&
+			element.offsetWidth === 0 &&
+			element.offsetHeight === 0
+		) {
+			return null;
+		}
+		if (element.getClientRects().length === 0) {
+			return null;
+		}
+
 		const bounds = element.getBoundingClientRect();
+		if (bounds.width === 0 && bounds.height === 0) {
+			return null;
+		}
+
+		// by this point we've computed style already so this is cheap
+		if (window.getComputedStyle(element).visibility === 'hidden') {
+			return null;
+		}
+
 		const rect = {
 			left: bounds.left,
 			top: bounds.top,
@@ -408,7 +433,7 @@ export const elementExplosion = ({
 	margin,
 	...rest
 }: {
-	element: HTMLElement;
+	element: HTMLElement | SVGElement;
 	color?: Color | [Color, Color];
 	count: number;
 	startRadius?: number;
