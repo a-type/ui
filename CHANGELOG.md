@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.2.1
+
+### Patch Changes
+
+- c285f793: prevent particles triggering on hidden elements
+
 ## 1.2.0
 
 ### Minor Changes
