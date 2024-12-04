@@ -1,3 +1,4 @@
+import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
 import {
 	MouseEvent,
@@ -9,11 +10,10 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { Button, ButtonProps } from '../button.js';
-import { Icon } from '../icon.js';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../select.js';
-import { Slot } from '@radix-ui/react-slot';
 import { withClassName } from '../../hooks.js';
+import { Button, ButtonProps } from '../button/index.js';
+import { Icon } from '../icon/index.js';
+import { Select, SelectContent, SelectItem } from '../select/index.js';
 
 const CameraContext = createContext<{
 	triggerCapture: () => void;
@@ -258,7 +258,7 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 			value={selectedDeviceId || 'default'}
 			onValueChange={selectDeviceId}
 		>
-			<SelectTrigger asChild>
+			<Select.Trigger asChild>
 				<Button
 					size="icon"
 					color="ghost"
@@ -266,7 +266,7 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 				>
 					<Icon name="refresh" />
 				</Button>
-			</SelectTrigger>
+			</Select.Trigger>
 			<SelectContent>
 				{devices.map((device) => (
 					<SelectItem key={device.deviceId} value={device.deviceId}>

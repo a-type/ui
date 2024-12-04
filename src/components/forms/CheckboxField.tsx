@@ -1,7 +1,7 @@
 import { useField } from 'formik';
 import { withClassName } from '../../hooks.js';
-import { Checkbox } from '../checkbox.js';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
+import { Checkbox } from '../checkbox/index.js';
 
 export interface CheckboxFieldProps {
 	name: string;

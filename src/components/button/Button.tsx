@@ -1,9 +1,9 @@
-import classNames from 'clsx';
-import { forwardRef, ButtonHTMLAttributes, memo } from 'react';
-import { Spinner } from '../spinner.js';
-import { getButtonClassName } from './classes.js';
 import { Slot } from '@radix-ui/react-slot';
-import { Icon } from '../icon.js';
+import classNames from 'clsx';
+import { ButtonHTMLAttributes, forwardRef, memo } from 'react';
+import { Icon } from '../icon/index.js';
+import { Spinner } from '../spinner/index.js';
+import { getButtonClassName } from './classes.js';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?:

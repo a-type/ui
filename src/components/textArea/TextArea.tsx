@@ -1,7 +1,6 @@
 'use client';
 
 import classNames from 'clsx';
-import useMergedRef from '../../hooks/useMergedRef.js';
 import {
 	ChangeEvent,
 	forwardRef,
@@ -11,8 +10,9 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { inputClassName } from '../input.js';
+import useMergedRef from '../../hooks/useMergedRef.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
+import { inputClassName } from '../input/index.js';
 
 export interface TextAreaProps
 	extends Omit<HTMLProps<HTMLTextAreaElement>, 'ref'> {

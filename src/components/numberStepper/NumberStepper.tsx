@@ -2,7 +2,7 @@ import { fractionToText } from '@a-type/utils';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
 import { ReactNode } from 'react';
-import { Button } from '../button.js';
+import { Button } from '../button/index.js';
 
 export interface NumberStepperProps {
 	value: number;

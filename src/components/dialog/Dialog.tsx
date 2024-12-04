@@ -1,7 +1,10 @@
 'use client';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { useDrag } from '@use-gesture/react';
+import classNames from 'clsx';
 import {
 	ComponentPropsWithoutRef,
 	createContext,
@@ -11,15 +14,12 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { withClassName } from '../../hooks/withClassName.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { useParticles } from '../particles.js';
-import classNames from 'clsx';
-import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
-import { selectTriggerClassName } from '../select.js';
-import { useDrag } from '@use-gesture/react';
-import { Button } from '../button.js';
-import { useConfig } from '../provider.js';
+import { withClassName } from '../../hooks/withClassName.js';
+import { Button } from '../button/index.js';
+import { useParticles } from '../particles/index.js';
+import { useConfig } from '../provider/Provider.js';
+import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,

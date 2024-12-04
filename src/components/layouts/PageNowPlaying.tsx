@@ -2,7 +2,7 @@
 
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
-import { useConfig } from '../provider.js';
+import { useConfig } from '../provider/Provider.js';
 
 export function PageNowPlaying({
 	className,

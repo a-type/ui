@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { CSSProperties } from 'react';
-import { Icon } from '../icon.js';
+import { Icon } from '../icon/index.js';
 
 export interface AvatarProps {
 	className?: string;

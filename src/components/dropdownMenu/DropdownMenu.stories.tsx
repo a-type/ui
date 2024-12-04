@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
-import { Icon } from '../icon.js';
 
 const meta = {
 	title: 'DropdownMenu',

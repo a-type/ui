@@ -1,13 +1,13 @@
 import {
-	Calendar,
 	CalendarDay as BaseCalendarDay,
+	Calendar,
 	CalendarDays,
 } from 'calendar-blocks';
-import { Button } from '../button.js';
-import { Icon } from '../icon.js';
+import classNames from 'clsx';
 import { useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
-import classNames from 'clsx';
+import { Button } from '../button/index.js';
+import { Icon } from '../icon/index.js';
 
 export interface DatePickerProps {
 	value: Date | null;

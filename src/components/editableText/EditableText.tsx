@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import {
 	ChangeEvent,
 	FocusEvent,
@@ -7,9 +8,8 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { Input, inputClassName } from '../input.js';
-import clsx from 'clsx';
-import { Icon } from '../icon.js';
+import { Icon } from '../icon/index.js';
+import { Input, inputClassName } from '../input/index.js';
 
 export interface EditableTextProps {
 	value: string;

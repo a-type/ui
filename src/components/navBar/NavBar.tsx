@@ -1,8 +1,8 @@
-import classNames, { clsx } from 'clsx';
-import { withClassName } from '../../hooks.js';
-import { ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { Icon, IconProps } from '../icon.js';
+import classNames, { clsx } from 'clsx';
+import { ReactNode, forwardRef } from 'react';
+import { withClassName } from '../../hooks.js';
+import { Icon, IconProps } from '../icon/index.js';
 
 export const navBarItemClass = classNames(
 	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-7 select-none)',

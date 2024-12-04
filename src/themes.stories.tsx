@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
-import { Button } from './components/button.js';
-import { Input } from './components/input.js';
-import { TextArea } from './components/textArea.js';
-import { Card } from './components/card.js';
-import { Tabs } from './components/tabs.js';
+import { Button } from './components/button/index.js';
+import { Card } from './components/card/index.js';
+import { Input } from './components/input/index.js';
+import { Tabs } from './components/tabs/tabs.js';
+import { TextArea } from './components/textArea/index.js';
 
 const meta = {
 	title: 'themes',

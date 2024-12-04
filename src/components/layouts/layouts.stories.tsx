@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { PageRoot } from './PageRoot.js';
-import { PageContent } from './PageContent.js';
-import { PageNav } from './PageNav.js';
+import { useEffect, useState } from 'react';
+import { Button } from '../button/index.js';
+import { Icon } from '../icon/index.js';
+import { Input } from '../input/index.js';
 import {
 	NavBarItem,
 	NavBarItemIcon,
@@ -9,12 +10,11 @@ import {
 	NavBarItemPip,
 	NavBarItemText,
 	NavBarRoot,
-} from '../navBar.js';
-import { Icon } from '../icon.js';
+} from '../navBar/index.js';
+import { PageContent } from './PageContent.js';
+import { PageNav } from './PageNav.js';
 import { PageNowPlaying } from './PageNowPlaying.js';
-import { useEffect, useState } from 'react';
-import { Button } from '../button.js';
-import { Input } from '../input.js';
+import { PageRoot } from './PageRoot.js';
 
 const meta = {
 	title: 'layouts',

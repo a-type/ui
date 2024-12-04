@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useEffect, useState } from 'react';
+import { Button } from '../button/index.js';
+import { Input } from '../input/index.js';
+import { ParticleLayer } from '../particles/index.js';
+import { Provider } from '../provider/Provider.js';
+import { H1, P } from '../typography/index.js';
 import {
 	Dialog,
-	DialogContent,
-	DialogTrigger,
 	DialogActions,
 	DialogClose,
+	DialogContent,
 	DialogTitle,
+	DialogTrigger,
 } from './Dialog.js';
-import { ParticleLayer } from '../particles.js';
-import { H1, P } from '../typography.js';
-import { Button } from '../button.js';
-import { useEffect, useState } from 'react';
-import { Provider } from '../provider.js';
-import { Input } from '../input.js';
 
 const meta = {
 	title: 'Dialog',

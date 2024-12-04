@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { HorizontalList } from './HorizontalList.js';
-import { Button } from '../button.js';
-import { Icon } from '../icon.js';
 import { useState } from 'react';
+import { Button } from '../button/index.js';
+import { Icon } from '../icon/index.js';
+import { HorizontalList } from './HorizontalList.js';
 
 const meta = {
 	title: 'HorizontalList',

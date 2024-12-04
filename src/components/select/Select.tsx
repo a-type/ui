@@ -6,6 +6,7 @@ import {
 	ChevronUpIcon,
 } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
+import classNames from 'clsx';
 import {
 	ComponentPropsWithRef,
 	ComponentType,
@@ -16,10 +17,9 @@ import {
 	forwardRef,
 	useContext,
 } from 'react';
-import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
-import { Button, ButtonProps, getButtonClassName } from '../button.js';
-import { Icon } from '../icon.js';
+import { Button, ButtonProps, getButtonClassName } from '../button/index.js';
+import { Icon } from '../icon/index.js';
 
 export const SelectItem = forwardRef<
 	HTMLDivElement,

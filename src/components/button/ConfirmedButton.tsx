@@ -8,8 +8,8 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
-} from '../dialog.js';
-import { P } from '../typography.js';
+} from '../dialog/index.js';
+import { P } from '../typography/index.js';
 import { Button, ButtonProps } from './Button.js';
 
 export interface ConfirmedButtonProps extends Omit<ButtonProps, 'onClick'> {

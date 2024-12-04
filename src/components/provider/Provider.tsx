@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { ParticleLayer } from '../particles.js';
-import { IconSpritesheet } from '../icon.js';
 import { Toaster, ToastPosition } from 'react-hot-toast';
-import { TooltipProvider } from '../tooltip.js';
 import { useVisualViewportOffset } from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
+import { IconSpritesheet } from '../icon/index.js';
+import { ParticleLayer } from '../particles/index.js';
+import { TooltipProvider } from '../tooltip/index.js';
 
 export interface ProviderProps {
 	children?: ReactNode;

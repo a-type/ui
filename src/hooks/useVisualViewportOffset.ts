@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useConfig } from '../components/provider/Provider.js';
 import { useStableCallback } from './useStableCallback.js';
-import { useConfig } from '../components/provider.js';
 
 /**
  * Applies bottom offset px as a CSS custom property to the document root.

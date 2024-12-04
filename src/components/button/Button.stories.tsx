@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button.js';
 import { useState } from 'react';
-import { Icon } from '../icon.js';
+import { Icon } from '../icon/index.js';
+import { Button } from './Button.js';
 
 const meta = {
 	title: 'Button',

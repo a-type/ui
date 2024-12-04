@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { Button } from '../button/index.js';
+import { Icon } from '../icon/index.js';
 import {
 	Card,
 	CardActions,
@@ -11,9 +14,6 @@ import {
 	CardRoot,
 	CardTitle,
 } from './Card.js';
-import { Button } from '../button.js';
-import { Icon } from '../icon.js';
-import { useState } from 'react';
 
 const meta = {
 	title: 'Card',

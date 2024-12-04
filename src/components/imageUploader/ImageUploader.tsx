@@ -1,13 +1,13 @@
 import classNames from 'clsx';
 import { useCallback, useId, useState } from 'react';
-import { Icon } from '../icon.js';
-import { Button } from '../button.js';
+import { Button } from '../button/index.js';
 import {
 	CameraDeviceSelector,
 	CameraFullscreenButton,
 	CameraRoot,
 	CameraShutterButton,
-} from '../camera.js';
+} from '../camera/index.js';
+import { Icon } from '../icon/index.js';
 
 export interface ImageUploaderProps {
 	value: string | null;

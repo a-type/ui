@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { Button } from '../button/index.js';
+import { Icon } from '../icon/index.js';
 import {
 	ScrollAreaProps,
 	ScrollAreaRoot,
 	ScrollAreaScrollbar,
 	ScrollAreaViewport,
 } from '../scrollArea/ScrollArea.js';
-import { Button } from '../button.js';
-import { Icon } from '../icon.js';
 
 export interface HorizontalListProps {
 	open?: boolean;

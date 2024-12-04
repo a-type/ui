@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { MouseEvent, useRef, useState } from 'react';
-import { Button } from '../button.js';
-import { Checkbox } from '../checkbox.js';
-import { Icon } from '../icon.js';
+import { Button } from '../button/index.js';
+import { Checkbox } from '../checkbox/index.js';
+import { Icon } from '../icon/index.js';
 import { useParticles } from './ParticleContext.js';
 import { ParticleLayer } from './ParticleLayer.js';
 

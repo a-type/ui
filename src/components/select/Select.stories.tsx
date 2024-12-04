@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../button/index.js';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './Select.js';
-import { Button } from '../button.js';
 
 const meta = {
 	title: 'Select',
