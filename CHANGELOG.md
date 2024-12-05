@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.2.2
+
+### Patch Changes
+
+- bba183e9: experimental Box component
+
 ## 1.2.1
 
 ### Patch Changes
