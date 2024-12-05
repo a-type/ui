@@ -1,5 +1,8 @@
 'use client';
 
+import classNames from 'clsx';
+import { ReactNode } from 'react';
+import { withClassName } from '../../hooks/withClassName.js';
 import {
 	Select,
 	SelectContent,
@@ -7,18 +10,22 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '../select/Select.js';
-import classNames from 'clsx';
-import { ReactNode } from 'react';
-import { withClassName } from '../../hooks/withClassName.js';
 
-export type ThemeName = 'lemon' | 'tomato' | 'leek' | 'blueberry' | 'eggplant';
+export type ThemeName =
+	| 'lemon'
+	| 'tomato'
+	| 'leek'
+	| 'blueberry'
+	| 'eggplant'
+	| 'salt';
 
 export interface ColorPickerProps {
 	value: ThemeName | null;
 	onChange: (value: ThemeName) => void;
+	showSalt?: boolean;
 }
 
-export function ColorPicker({ value, onChange }: ColorPickerProps) {
+export function ColorPicker({ value, onChange, showSalt }: ColorPickerProps) {
 	const resolvedValue = [
 		'lemon',
 		'tomato',
@@ -55,6 +62,12 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
 					<ColorSwatch value="eggplant" />
 					<ItemLabel>Eggplant</ItemLabel>
 				</SelectItem>
+				{showSalt && (
+					<SelectItem value="salt">
+						<ColorSwatch value="salt" />
+						<ItemLabel>Salt</ItemLabel>
+					</SelectItem>
+				)}
 			</SelectContent>
 		</Select>
 	);

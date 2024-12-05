@@ -1,6 +1,6 @@
 // uno.config.ts
-import { defineConfig } from 'unocss';
 import variantGroup from '@unocss/transformer-variant-group';
+import { defineConfig } from 'unocss';
 import presetAglio from './src/uno.preset.js';
 
 export default defineConfig({

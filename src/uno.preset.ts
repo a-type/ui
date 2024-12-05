@@ -1,5 +1,5 @@
-import { PreflightContext, Preset, presetUno } from 'unocss';
 import { entriesToCss, toArray } from '@unocss/core';
+import { PreflightContext, Preset, presetUno } from 'unocss';
 
 export default function presetAglio({
 	spacingIncrement = 0.25,
@@ -380,7 +380,7 @@ export default function presetAglio({
 		],
 
 		shortcuts: {
-			'border-default': 'border border-solid border-black',
+			'border-default': 'border border-1 border-solid border-black',
 			'border-light': 'border border-solid border-gray5',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
@@ -708,6 +708,21 @@ export default function presetAglio({
 					--color-primary-wash: var(--color-red-wash);
 				}
 
+				.theme-salt {
+					--color-attention-light: var(--color-red-light);
+					--color-attention: var(--color-red);
+					--color-attention-dark: var(--color-red-dark);
+					--color-attention-wash: var(--color-red-wash);
+					--color-accent: var(--color-gray-4);
+					--color-accent-wash: var(--color-gray-2);
+					--color-accent-light: var(--color-gray-3);
+					--color-accent-dark: var(--color-gray-5);
+					--color-primary: var(--color-gray-5);
+					--color-primary-light: var(--color-gray-4);
+					--color-primary-dark: var(--color-gray-6);
+					--color-primary-wash: var(--color-white);
+				}
+
         html, body {
           margin: 0;
           padding: 0;
@@ -793,14 +808,22 @@ function generateColors(from: number, to: number) {
 }
 
 function makeSpacing(increment: number) {
-	return new Array(20)
-		.fill(0)
-		.map((_, i) => `${(i * increment).toFixed(2)}rem`)
-		.reduce(
-			(acc, cur, i) => {
-				acc[i] = cur;
-				return acc;
-			},
-			{} as Record<string, string>,
-		);
+	return {
+		...new Array(20)
+			.fill(0)
+			.map((_, i) => `${(i * increment).toFixed(2)}rem`)
+			.reduce(
+				(acc, cur, i) => {
+					acc[i] = cur;
+					return acc;
+				},
+				{} as Record<string, string>,
+			),
+
+		xs: 'calc(0.25rem * var(--spacing-scale,1))',
+		sm: 'calc(0.5rem * var(--spacing-scale,1))',
+		md: 'calc(1rem * var(--spacing-scale,1))',
+		lg: 'calc(2rem * var(--spacing-scale,1))',
+		xl: 'calc(3rem * var(--spacing-scale,1))',
+	};
 }

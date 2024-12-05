@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
 import type { Preview } from '@storybook/react';
+import React, { useEffect } from 'react';
 import 'virtual:uno.css';
-import './preview.css';
 import { Provider } from '../src/components/provider/Provider.js';
+import './preview.css';
 
 const preview: Preview = {
 	parameters: {
