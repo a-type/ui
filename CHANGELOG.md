@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.2.3
+
+### Patch Changes
+
+- b3c03087: adjust textarea sizing, add onValueChange props
+
 ## 1.2.2
 
 ### Patch Changes
