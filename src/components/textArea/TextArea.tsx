@@ -23,6 +23,7 @@ export interface TextAreaProps
 	padBottomPixels?: number;
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
+	onValueChange?: (value: string) => void;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -38,6 +39,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 			placeholder,
 			placeholders,
 			placeholdersIntervalMs = 5000,
+			onValueChange,
 			...rest
 		},
 		ref,
@@ -67,8 +69,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				if (onChange) {
 					onChange(e);
 				}
+				if (onValueChange) {
+					onValueChange(e.target.value);
+				}
 			},
-			[onChange],
+			[onChange, onValueChange],
 		);
 
 		const handleFocus = useCallback(
@@ -94,7 +99,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 				className={classNames(
 					inputClassName,
 					'layer-components:([font-family:inherit] text-inherit overflow-hidden resize-none)',
-					'layer-variants:(rounded-20px)',
+					'layer-variants:(rounded-20px px-4 py-4)',
 					{
 						'layer-components:[resize:vertical]': !autoSize,
 						'layer-components:[resize:none]': autoSize,
