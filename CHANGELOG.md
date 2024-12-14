@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.2
+
+### Patch Changes
+
+- bc26e82: Remove all forwardRef usage
+
 ## 1.3.1
 
 ### Patch Changes
