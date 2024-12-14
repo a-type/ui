@@ -1,8 +1,6 @@
 'use client';
-
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import classNames, { clsx } from 'clsx';
-import { forwardRef } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 
 const StyledContent = withClassName(
@@ -26,21 +24,26 @@ export interface DropdownMenuItemProps
 	extends DropdownMenuPrimitive.DropdownMenuItemProps {
 	color?: 'default' | 'destructive';
 }
-const StyledItem = forwardRef<HTMLDivElement, DropdownMenuItemProps>(
-	({ className, color, ...props }, forwardedRef) => {
-		return (
-			<StyledItemBase
-				{...props}
-				className={clsx(
-					color === 'destructive' &&
-						'layer-variants:(text-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
-					className,
-				)}
-				ref={forwardedRef}
-			/>
-		);
-	},
-);
+const StyledItem = ({
+	ref: forwardedRef,
+	className,
+	color,
+	...props
+}: DropdownMenuItemProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) => {
+	return (
+		<StyledItemBase
+			{...props}
+			className={clsx(
+				color === 'destructive' &&
+					'layer-variants:(text-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
+				className,
+			)}
+			ref={forwardedRef}
+		/>
+	);
+};
 const StyledCheckboxItem = withClassName(
 	DropdownMenuPrimitive.CheckboxItem,
 	itemClassName,

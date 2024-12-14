@@ -1,6 +1,5 @@
 'use client';
 
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
 
@@ -39,10 +38,16 @@ export interface TooltipProps
 }
 
 export const Tooltip = Object.assign(
-	forwardRef<HTMLButtonElement, TooltipProps>(function Tooltip(
-		{ content, children, open, disabled, ...rest },
+	function Tooltip({
 		ref,
-	) {
+		content,
+		children,
+		open,
+		disabled,
+		...rest
+	}: TooltipProps & {
+		ref?: React.Ref<HTMLButtonElement>;
+	}) {
 		return (
 			<TooltipPrimitive.Root open={open}>
 				{disabled ? (
@@ -55,7 +60,7 @@ export const Tooltip = Object.assign(
 				<Content sideOffset={12}>{content}</Content>
 			</TooltipPrimitive.Root>
 		);
-	}),
+	},
 	{
 		Trigger: TooltipPrimitive.TooltipTrigger,
 		Content,

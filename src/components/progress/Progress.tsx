@@ -1,6 +1,5 @@
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import { withClassName } from '../../hooks.js';
-import { forwardRef } from 'react';
 
 export const ProgressRoot = withClassName(
 	ProgressPrimitive.Root,
@@ -13,10 +12,17 @@ export const ProgressIndicator = withClassName(
 	'layer-variants:[&[data-color=accent]]:(bg-accent)',
 );
 
-const ProgressBase = forwardRef<
-	HTMLDivElement,
-	ProgressPrimitive.ProgressProps & { color?: 'accent' | 'primary' }
->(function ProgressBase({ children, color, max = 100, value, ...props }, ref) {
+const ProgressBase = function ProgressBase({
+	ref,
+	children,
+	color,
+	max = 100,
+	value,
+	...props
+}: ProgressPrimitive.ProgressProps & {
+	ref?: React.Ref<HTMLDivElement>;
+	color?: 'accent';
+}) {
 	return (
 		<ProgressRoot {...props} value={value} max={max} ref={ref}>
 			<ProgressIndicator
@@ -26,7 +32,7 @@ const ProgressBase = forwardRef<
 			/>
 		</ProgressRoot>
 	);
-});
+};
 
 export const Progress = Object.assign(ProgressBase, {
 	Root: ProgressRoot,

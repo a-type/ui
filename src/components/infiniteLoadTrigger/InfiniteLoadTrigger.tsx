@@ -1,7 +1,7 @@
-import { ReactNode, forwardRef, useEffect, useRef } from 'react';
 import classNames from 'clsx';
-import useMergedRef from '../../hooks/useMergedRef.js';
+import { ReactNode, useEffect, useRef } from 'react';
 import { useStableCallback } from '../../hooks.js';
+import useMergedRef from '../../hooks/useMergedRef.js';
 
 export interface InfiniteLoadTriggerProps {
 	className?: string;
@@ -9,10 +9,14 @@ export interface InfiniteLoadTriggerProps {
 	onVisible?: () => void;
 }
 
-export const InfiniteLoadTrigger = forwardRef<
-	HTMLDivElement,
-	InfiniteLoadTriggerProps
->(function InfiniteLoadTrigger({ className, onVisible, ...rest }, ref) {
+export const InfiniteLoadTrigger = function InfiniteLoadTrigger({
+	ref,
+	className,
+	onVisible,
+	...rest
+}: InfiniteLoadTriggerProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) {
 	const innerRef = useRef<HTMLDivElement>(null);
 
 	const stableOnVisible = useStableCallback(onVisible);
@@ -35,4 +39,4 @@ export const InfiniteLoadTrigger = forwardRef<
 			{...rest}
 		/>
 	);
-});
+};

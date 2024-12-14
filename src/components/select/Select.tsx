@@ -14,17 +14,20 @@ import {
 	FunctionComponent,
 	ReactNode,
 	createContext,
-	forwardRef,
 	useContext,
 } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { Button, ButtonProps, getButtonClassName } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 
-export const SelectItem = forwardRef<
-	HTMLDivElement,
-	SelectPrimitive.SelectItemProps
->(({ children, className, ...props }, forwardedRef) => {
+export const SelectItem = ({
+	ref: forwardedRef,
+	children,
+	className,
+	...props
+}: SelectPrimitive.SelectItemProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) => {
 	const isNative = useContext(IsNativeContext);
 
 	if (isNative) {
@@ -37,7 +40,7 @@ export const SelectItem = forwardRef<
 			<SelectItemIndicator />
 		</SelectItemRoot>
 	);
-});
+};
 
 export const SelectItemRoot = withClassName(
 	SelectPrimitive.Item,
@@ -83,22 +86,26 @@ export const UnstyledSelectTrigger = withNoNativeRender(
 );
 
 export interface SelectTriggerProps extends ButtonProps {}
-export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
-	function SelectTrigger({ children, ...props }, ref) {
-		return (
-			<UnstyledSelectTrigger asChild {...props} ref={ref}>
-				<Button className="gap-2 font-normal">
-					{children || (
-						<>
-							<SelectValue />
-							<SelectIcon />
-						</>
-					)}
-				</Button>
-			</UnstyledSelectTrigger>
-		);
-	},
-);
+export const SelectTrigger = function SelectTrigger({
+	ref,
+	children,
+	...props
+}: SelectTriggerProps & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
+	return (
+		<UnstyledSelectTrigger asChild {...props} ref={ref}>
+			<Button className="gap-2 font-normal">
+				{children || (
+					<>
+						<SelectValue />
+						<SelectIcon />
+					</>
+				)}
+			</Button>
+		</UnstyledSelectTrigger>
+	);
+};
 
 export const SelectValue = withNoNativeRender(
 	withClassName(SelectPrimitive.Value, 'flex flex-row'),
@@ -113,27 +120,28 @@ export const SelectSeparator = withNoNativeRender(
 	withClassName(SelectPrimitive.Separator, 'h-1px bg-gray50 m-1'),
 );
 export const SelectIcon = withNoNativeRender(
-	forwardRef<HTMLDivElement, SelectPrimitive.SelectIconProps>(
-		({ className, ...props }, forwardedRef) => {
-			return (
-				<SelectPrimitive.Icon
-					className={classNames('color-inherit', className)}
-					{...props}
-					ref={forwardedRef}
-				>
-					<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
-				</SelectPrimitive.Icon>
-			);
-		},
-	),
+	({
+		ref: forwardedRef,
+		className,
+		...props
+	}: SelectPrimitive.SelectIconProps & {
+		ref?: React.Ref<HTMLDivElement>;
+	}) => {
+		return (
+			<SelectPrimitive.Icon
+				className={classNames('color-inherit', className)}
+				{...props}
+				ref={forwardedRef}
+			>
+				<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
+			</SelectPrimitive.Icon>
+		);
+	},
 );
 
 const zIndex = { zIndex: 1001 };
 export const SelectContent = withPassthroughNativeRender(
-	forwardRef<
-		HTMLDivElement,
-		SelectPrimitive.SelectContentProps & { inDialog?: boolean }
-	>(({ children, inDialog, className, ...props }, forwardedRef) => {
+	({ ref: forwardedRef, children, inDialog, className, ...props }) => {
 		return (
 			<SelectPrimitive.Portal>
 				<SelectPrimitive.Content
@@ -162,13 +170,16 @@ export const SelectContent = withPassthroughNativeRender(
 				</SelectPrimitive.Content>
 			</SelectPrimitive.Portal>
 		);
-	}),
+	},
 );
 
-export const NativeSelect = forwardRef<
-	HTMLSelectElement,
-	React.SelectHTMLAttributes<HTMLSelectElement>
->(({ className, ...props }, forwardedRef) => {
+export const NativeSelect = ({
+	ref: forwardedRef,
+	className,
+	...props
+}: React.SelectHTMLAttributes<HTMLSelectElement> & {
+	ref?: React.Ref<HTMLSelectElement>;
+}) => {
 	return (
 		<div className={classNames('relative', className)}>
 			<select
@@ -183,7 +194,7 @@ export const NativeSelect = forwardRef<
 			</div>
 		</div>
 	);
-});
+};
 
 export type SelectProps<T extends string = string> = {
 	children?: ReactNode;

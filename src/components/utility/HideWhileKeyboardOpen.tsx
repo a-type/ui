@@ -1,17 +1,21 @@
 import { Slot } from '@radix-ui/react-slot';
-import { useIsKeyboardOpen } from '../../hooks.js';
 import clsx from 'clsx';
-import { forwardRef, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
+import { useIsKeyboardOpen } from '../../hooks.js';
 
 export interface HideWhileKeyboardOpenProps
 	extends HTMLAttributes<HTMLDivElement> {
 	asChild?: boolean;
 }
 
-export const HideWhileKeyboardOpen = forwardRef<
-	HTMLDivElement,
-	HideWhileKeyboardOpenProps
->(function HideWhileKeyboardOpen({ asChild, className, ...rest }, ref) {
+export const HideWhileKeyboardOpen = function HideWhileKeyboardOpen({
+	ref,
+	asChild,
+	className,
+	...rest
+}: HideWhileKeyboardOpenProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) {
 	const isKeyboardOpen = useIsKeyboardOpen();
 
 	const Comp = asChild ? Slot : 'div';
@@ -23,4 +27,4 @@ export const HideWhileKeyboardOpen = forwardRef<
 			{...rest}
 		/>
 	);
-});
+};

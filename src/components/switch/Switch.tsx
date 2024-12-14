@@ -1,6 +1,5 @@
-import { withClassName } from '../../hooks/withClassName.js';
 import { Root, SwitchProps, Thumb } from '@radix-ui/react-switch';
-import { forwardRef } from 'react';
+import { withClassName } from '../../hooks/withClassName.js';
 
 const SwitchRoot = withClassName(
 	Root,
@@ -13,13 +12,18 @@ const SwitchThumb = withClassName(
 );
 
 export const Switch = Object.assign(
-	forwardRef<HTMLButtonElement, SwitchProps>(function Switch(props, ref) {
+	function Switch({
+		ref,
+		...props
+	}: SwitchProps & {
+		ref?: React.Ref<HTMLButtonElement>;
+	}) {
 		return (
 			<SwitchRoot {...props} ref={ref}>
 				<SwitchThumb />
 			</SwitchRoot>
 		);
-	}),
+	},
 	{
 		Root: SwitchRoot,
 		Thumb: SwitchThumb,

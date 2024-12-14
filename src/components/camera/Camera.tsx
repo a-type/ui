@@ -3,8 +3,8 @@ import classNames from 'clsx';
 import {
 	MouseEvent,
 	ReactNode,
+	Ref,
 	createContext,
-	forwardRef,
 	useContext,
 	useEffect,
 	useRef,
@@ -37,164 +37,164 @@ export interface CameraRootProps {
 	children?: ReactNode;
 	format?: 'image/png' | 'image/jpeg';
 	facingMode?: 'user' | 'environment';
+	ref?: Ref<HTMLDivElement>;
 }
 
-export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
-	function Camera(
-		{
-			className,
-			onCapture,
-			children,
-			facingMode,
-			format = 'image/png',
-			...rest
-		},
-		ref,
-	) {
-		const videoRef = useRef<HTMLVideoElement>(null);
+export function CameraRoot({
+	className,
+	onCapture,
+	children,
+	facingMode,
+	format = 'image/png',
+	ref,
+	...rest
+}: CameraRootProps) {
+	const videoRef = useRef<HTMLVideoElement>(null);
 
-		const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-		const [stream, setStream] = useState<MediaStream | undefined>();
+	const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+	const [stream, setStream] = useState<MediaStream | undefined>();
 
-		useEffect(() => {
-			navigator.mediaDevices?.enumerateDevices().then((devices): void => {
-				setDevices(devices.filter((device) => device.kind === 'videoinput'));
-			});
-		}, [!!stream]);
+	useEffect(() => {
+		navigator.mediaDevices?.enumerateDevices().then((devices): void => {
+			setDevices(devices.filter((device) => device.kind === 'videoinput'));
+		});
+	}, [!!stream]);
 
-		const [selectedDeviceId, setSelectedDeviceId] = useState<
-			string | undefined
-		>();
+	const [selectedDeviceId, setSelectedDeviceId] = useState<
+		string | undefined
+	>();
 
-		const cleanupRef = useRef<() => void>(undefined);
-		useEffect(() => {
-			const init = () => {
-				cleanupRef.current?.();
-				navigator.mediaDevices
-					?.getUserMedia({
-						video: {
-							deviceId: selectedDeviceId,
-							facingMode,
-						},
-					})
-					.then((s) => {
-						setStream(s);
-						cleanupRef.current = () =>
-							s.getTracks().forEach((track) => track.stop());
-					});
-			};
-			init();
-
-			// reconnect if browser was backgrounded
-			const reconnect = () => {
-				if (stream?.active || document.visibilityState !== 'visible') {
-					return;
-				}
-				init();
-			};
-			document.addEventListener('visibilitychange', reconnect);
-
-			return () => {
-				document.removeEventListener('visibilitychange', reconnect);
-				cleanupRef.current?.();
-			};
-		}, [selectedDeviceId, facingMode]);
-
-		useEffect(() => {
-			const video = videoRef.current;
-			if (video && stream) {
-				video.srcObject = stream;
-				return () => {
-					video.srcObject = null;
-				};
-			}
-		}, [stream]);
-
-		const [capture, setCapture] = useState<ImageCapture>();
-
-		useEffect(() => {
-			if (typeof window !== 'undefined' && 'ImageCapture' in window) {
-				const videoTrack = stream?.getVideoTracks()[0];
-				if (videoTrack) {
-					const capturer = new ImageCapture(videoTrack);
-					setCapture(capturer);
-					capturer.getPhotoCapabilities().then((capabilities) => {
-						console.log('ImageCapture capabilities:', capabilities);
-					});
-				}
-			}
-		}, [stream]);
-
-		const triggerCapture = () => {
-			if (capture) {
-				capture.takePhoto().then((blob) => {
-					const file = new File([blob], `image.${format.split('/')[1]}`, {
-						type: format,
-					});
-					onCapture?.(file);
+	const cleanupRef = useRef<() => void>(undefined);
+	useEffect(() => {
+		const init = () => {
+			cleanupRef.current?.();
+			navigator.mediaDevices
+				?.getUserMedia({
+					video: {
+						deviceId: selectedDeviceId,
+						facingMode,
+					},
+				})
+				.then((s) => {
+					setStream(s);
+					cleanupRef.current = () =>
+						s.getTracks().forEach((track) => track.stop());
 				});
-			} else {
-				// ImageCapture not supported, fallback to
-				// canvas capture
-				const video = videoRef.current;
-				if (video) {
-					const canvas = document.createElement('canvas');
-					canvas.width = video.videoWidth;
-					canvas.height = video.videoHeight;
-					canvas.getContext('2d')?.drawImage(video, 0, 0);
-					const data = canvas.toDataURL(format);
-					const file = dataURItoFile(data);
-					onCapture?.(file);
-				}
-			}
 		};
+		init();
 
-		const [fullscreen, setFullscreen] = useState(false);
+		// reconnect if browser was backgrounded
+		const reconnect = () => {
+			if (stream?.active || document.visibilityState !== 'visible') {
+				return;
+			}
+			init();
+		};
+		document.addEventListener('visibilitychange', reconnect);
 
-		return (
-			<CameraContext.Provider
-				value={{
-					devices,
-					triggerCapture,
-					selectedDeviceId,
-					selectDeviceId: setSelectedDeviceId,
-					setFullscreen,
-					fullscreen,
-				}}
+		return () => {
+			document.removeEventListener('visibilitychange', reconnect);
+			cleanupRef.current?.();
+		};
+	}, [selectedDeviceId, facingMode]);
+
+	useEffect(() => {
+		const video = videoRef.current;
+		if (video && stream) {
+			video.srcObject = stream;
+			return () => {
+				video.srcObject = null;
+			};
+		}
+	}, [stream]);
+
+	const [capture, setCapture] = useState<ImageCapture>();
+
+	useEffect(() => {
+		if (typeof window !== 'undefined' && 'ImageCapture' in window) {
+			const videoTrack = stream?.getVideoTracks()[0];
+			if (videoTrack) {
+				const capturer = new ImageCapture(videoTrack);
+				setCapture(capturer);
+				capturer.getPhotoCapabilities().then((capabilities) => {
+					console.log('ImageCapture capabilities:', capabilities);
+				});
+			}
+		}
+	}, [stream]);
+
+	const triggerCapture = () => {
+		if (capture) {
+			capture.takePhoto().then((blob) => {
+				const file = new File([blob], `image.${format.split('/')[1]}`, {
+					type: format,
+				});
+				onCapture?.(file);
+			});
+		} else {
+			// ImageCapture not supported, fallback to
+			// canvas capture
+			const video = videoRef.current;
+			if (video) {
+				const canvas = document.createElement('canvas');
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+				canvas.getContext('2d')?.drawImage(video, 0, 0);
+				const data = canvas.toDataURL(format);
+				const file = dataURItoFile(data);
+				onCapture?.(file);
+			}
+		}
+	};
+
+	const [fullscreen, setFullscreen] = useState(false);
+
+	return (
+		<CameraContext.Provider
+			value={{
+				devices,
+				triggerCapture,
+				selectedDeviceId,
+				selectDeviceId: setSelectedDeviceId,
+				setFullscreen,
+				fullscreen,
+			}}
+		>
+			<div
+				ref={ref}
+				className={classNames(
+					'layer-components:([font-family:inherit] text-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
+					fullscreen && 'fixed inset-0 w-full h-full z-1000 rounded-none',
+					className,
+				)}
+				{...rest}
 			>
-				<div
-					ref={ref}
-					className={classNames(
-						'layer-components:([font-family:inherit] text-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
-						fullscreen && 'fixed inset-0 w-full h-full z-1000 rounded-none',
-						className,
-					)}
-					{...rest}
-				>
-					<video
-						ref={videoRef}
-						className="w-full h-full object-cover"
-						autoPlay
-						muted
-						playsInline
-					></video>
-					{children}
-				</div>
-			</CameraContext.Provider>
-		);
-	},
-);
+				<video
+					ref={videoRef}
+					className="w-full h-full object-cover"
+					autoPlay
+					muted
+					playsInline
+				></video>
+				{children}
+			</div>
+		</CameraContext.Provider>
+	);
+}
 
 export interface CameraShutterButtonProps {
 	className?: string;
 	asChild?: boolean;
 	onClick?: (ev: MouseEvent<HTMLButtonElement>) => void;
+	ref?: Ref<HTMLButtonElement>;
 }
 
-export const CameraShutterButton = forwardRef<
-	HTMLButtonElement,
-	CameraShutterButtonProps
->(function CameraShutterButton({ asChild, onClick, ...rest }, ref) {
+export function CameraShutterButton({
+	asChild,
+	onClick,
+	ref,
+	...rest
+}: CameraShutterButtonProps) {
 	const Comp = asChild ? Slot : StyledShutterButton;
 	const { triggerCapture } = useContext(CameraContext);
 
@@ -209,7 +209,7 @@ export const CameraShutterButton = forwardRef<
 			{...rest}
 		/>
 	);
-});
+}
 
 const StyledShutterButton = withClassName(
 	'button',

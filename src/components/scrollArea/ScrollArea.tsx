@@ -1,6 +1,6 @@
 import * as Primitive from '@radix-ui/react-scroll-area';
+import { Ref, useMemo } from 'react';
 import { withClassName } from '../../hooks.js';
-import { forwardRef, useMemo } from 'react';
 
 const ScrollAreaRootImpl = withClassName(
 	Primitive.Root,
@@ -10,20 +10,23 @@ const ScrollAreaRootImpl = withClassName(
 
 export interface ScrollAreaRootProps extends Primitive.ScrollAreaProps {
 	background?: 'white' | 'wash' | 'primary-wash' | 'primary' | 'black';
+	ref?: Ref<HTMLDivElement>;
 }
 
-export const ScrollAreaRoot = forwardRef<any, ScrollAreaRootProps>(
-	function ScrollAreaRoot({ background = 'wash', ...props }, ref) {
-		const bgStyle: any = useMemo(
-			() => ({
-				'--scroll-bg': `var(--color-${background})`,
-				'--scroll-shadow': `var(--color-${shadowMap[background]})`,
-			}),
-			[background],
-		);
-		return <ScrollAreaRootImpl ref={ref} style={bgStyle} {...props} />;
-	},
-);
+export const ScrollAreaRoot = function ScrollAreaRoot({
+	ref,
+	background = 'wash',
+	...props
+}: ScrollAreaRootProps) {
+	const bgStyle: any = useMemo(
+		() => ({
+			'--scroll-bg': `var(--color-${background})`,
+			'--scroll-shadow': `var(--color-${shadowMap[background]})`,
+		}),
+		[background],
+	);
+	return <ScrollAreaRootImpl ref={ref} style={bgStyle} {...props} />;
+};
 
 export const ScrollAreaViewport = withClassName(
 	Primitive.Viewport,
@@ -47,27 +50,32 @@ export const ScrollAreaThumb = withClassName(
 	'before:(content-[""] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full min-w-44px min-h-44px)',
 );
 
-export const ScrollAreaScrollbar = forwardRef<
-	any,
-	Primitive.ScrollAreaScrollbarProps
->(function ScrollAreaScrollbar(props, ref) {
+export const ScrollAreaScrollbar = function ScrollAreaScrollbar({
+	ref,
+	...props
+}: Primitive.ScrollAreaScrollbarProps & {
+	ref?: Ref<HTMLDivElement>;
+}) {
 	return (
 		<ScrollAreaScrollbarRoot {...props} ref={ref}>
 			<ScrollAreaThumb />
 		</ScrollAreaScrollbarRoot>
 	);
-});
+};
 
 export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
 	background?: ScrollAreaRootProps['background'];
 	orientation?: 'vertical' | 'both';
+	ref?: Ref<HTMLDivElement>;
 }
 
 export const ScrollArea = Object.assign(
-	forwardRef<any, ScrollAreaProps>(function ScrollArea(
-		{ children, orientation, ...props },
+	function ScrollArea({
 		ref,
-	) {
+		children,
+		orientation,
+		...props
+	}: ScrollAreaProps) {
 		return (
 			<ScrollAreaRoot ref={ref} {...props}>
 				<ScrollAreaViewport>{children}</ScrollAreaViewport>
@@ -77,7 +85,7 @@ export const ScrollArea = Object.assign(
 				)}
 			</ScrollAreaRoot>
 		);
-	}),
+	},
 	{
 		Root: ScrollAreaRoot,
 		Viewport: ScrollAreaViewport,

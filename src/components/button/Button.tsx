@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
-import { ButtonHTMLAttributes, forwardRef, memo } from 'react';
+import { ButtonHTMLAttributes, memo, Ref } from 'react';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
 import { getButtonClassName } from './classes.js';
@@ -24,67 +24,64 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	loading?: boolean;
 	asChild?: boolean;
 	visuallyFocused?: boolean;
+	ref?: Ref<HTMLButtonElement>;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	function Button(
-		{
+export function Button({
+	className,
+	color,
+	size,
+	toggled,
+	toggleMode = 'color',
+	align,
+	visuallyDisabled,
+	visuallyFocused,
+	loading,
+	children,
+	disabled,
+	asChild,
+	ref,
+	...props
+}: ButtonProps) {
+	const Comp = asChild ? Slot : 'button';
+	const buttonProps = {
+		ref: ref,
+		...props,
+		disabled: disabled || loading,
+		'data-disabled': visuallyDisabled,
+		'data-focus': visuallyFocused,
+		'data-size': size,
+		tabIndex: visuallyDisabled ? -1 : undefined,
+		className: classNames(
+			getButtonClassName({
+				color,
+				size,
+				toggleable: toggled !== undefined && toggleMode === 'color',
+				align,
+			}),
 			className,
-			color,
-			size,
-			toggled,
-			toggleMode = 'color',
-			align,
-			visuallyDisabled,
-			visuallyFocused,
-			loading,
-			children,
-			disabled,
-			asChild,
-			...props
-		},
-		ref,
-	) {
-		const Comp = asChild ? Slot : 'button';
-		const buttonProps = {
-			ref: ref,
-			...props,
-			disabled: disabled || loading,
-			'data-disabled': visuallyDisabled,
-			'data-focus': visuallyFocused,
-			'data-size': size,
-			tabIndex: visuallyDisabled ? -1 : undefined,
-			className: classNames(
-				getButtonClassName({
-					color,
-					size,
-					toggleable: toggled !== undefined && toggleMode === 'color',
-					align,
-				}),
-				className,
-			),
-		};
-		// set state when toggleable
-		if (toggled !== undefined) {
-			buttonProps['aria-pressed'] = !!toggled;
-		}
+		),
+	};
+	// set state when toggleable
+	if (toggled !== undefined) {
+		buttonProps['aria-pressed'] = !!toggled;
+	}
 
-		if (asChild) {
-			// avoid rendering loading spinner with asChild
-			return <Comp {...buttonProps}>{children}</Comp>;
-		}
+	if (asChild) {
+		// avoid rendering loading spinner with asChild
+		return <Comp {...buttonProps}>{children}</Comp>;
+	}
 
-		return (
-			<Comp {...buttonProps}>
-				{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
-				{toggled !== undefined && toggleMode !== 'state-only' && (
-					<ToggleIndicator value={toggled} />
-				)}
-				{children}
-			</Comp>
-		);
-	},
-);
+	return (
+		<Comp {...buttonProps}>
+			{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
+			{toggled !== undefined && toggleMode !== 'state-only' && (
+				<ToggleIndicator value={toggled} />
+			)}
+			{children}
+		</Comp>
+	);
+}
 
 const ToggleIndicator = memo(function ToggleIndicator({
 	value,

@@ -4,18 +4,17 @@ import { useField, useFormikContext } from 'formik';
 import {
 	ComponentProps,
 	InputHTMLAttributes,
+	KeyboardEvent,
+	Ref,
+	useCallback,
 	useEffect,
 	useRef,
-	Ref,
-	forwardRef,
-	KeyboardEvent,
-	useCallback,
 } from 'react';
+import { withClassName } from '../../hooks.js';
+import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { Input } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
-import { withClassName } from '../../hooks.js';
-import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 
 export type TextFieldProps = {
 	name: string;
@@ -32,54 +31,52 @@ export type TextFieldProps = {
 
 const emptyRef = (() => {}) as any;
 
-export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
-	function TextField(
-		{
-			name,
-			label,
-			className,
-			autoFocusDelay,
-			autoFocus,
-			inputRef,
-			onChange,
-			onFocus,
-			onBlur,
-			id: providedId,
-			...rest
-		},
-		ref,
-	) {
-		const [props] = useField({
-			name,
-			onChange,
-			onFocus,
-			onBlur,
-		});
-		const innerInputRef = useRef<HTMLInputElement>(null);
-		const id = useIdOrGenerated(providedId);
+export const TextField = function TextField({
+	ref,
+	name,
+	label,
+	className,
+	autoFocusDelay,
+	autoFocus,
+	inputRef,
+	onChange,
+	onFocus,
+	onBlur,
+	id: providedId,
+	...rest
+}: TextFieldProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) {
+	const [props] = useField({
+		name,
+		onChange,
+		onFocus,
+		onBlur,
+	});
+	const innerInputRef = useRef<HTMLInputElement>(null);
+	const id = useIdOrGenerated(providedId);
 
-		useEffect(() => {
-			if (autoFocusDelay) {
-				setTimeout(() => {
-					if (innerInputRef.current) innerInputRef.current.focus();
-				}, autoFocusDelay);
-			}
-		}, [autoFocusDelay]);
+	useEffect(() => {
+		if (autoFocusDelay) {
+			setTimeout(() => {
+				if (innerInputRef.current) innerInputRef.current.focus();
+			}, autoFocusDelay);
+		}
+	}, [autoFocusDelay]);
 
-		return (
-			<FieldRoot className={className} ref={ref}>
-				{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
-				<Input
-					{...props}
-					{...rest}
-					id={id}
-					autoFocus={autoFocus}
-					ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
-				/>
-			</FieldRoot>
-		);
-	},
-);
+	return (
+		<FieldRoot className={className} ref={ref}>
+			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
+			<Input
+				{...props}
+				{...rest}
+				id={id}
+				autoFocus={autoFocus}
+				ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
+			/>
+		</FieldRoot>
+	);
+};
 
 export type TextAreaFieldProps = {
 	name: string;

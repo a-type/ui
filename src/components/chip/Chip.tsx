@@ -1,16 +1,20 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
-import { HTMLAttributes, forwardRef } from 'react';
+import { HTMLAttributes, Ref } from 'react';
 
 export interface ChipProps extends HTMLAttributes<HTMLElement> {
 	color?: 'neutral' | 'primary' | 'accent';
 	asChild?: boolean;
+	ref?: Ref<any>;
 }
 
-export const Chip = forwardRef<any, ChipProps>(function Chip(
-	{ className, color = 'neutral', asChild, ...rest },
+export function Chip({
+	className,
+	color = 'neutral',
+	asChild,
 	ref,
-) {
+	...rest
+}: ChipProps) {
 	const Component = asChild ? Slot : 'div';
 	return (
 		<Component
@@ -26,4 +30,4 @@ export const Chip = forwardRef<any, ChipProps>(function Chip(
 			{...rest}
 		/>
 	);
-});
+}

@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
-import { HTMLAttributes, MouseEvent, ReactNode, forwardRef } from 'react';
+import { HTMLAttributes, MouseEvent, ReactNode, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
@@ -11,23 +11,25 @@ export const CardRoot = withClassName(
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
-export const CardMain = forwardRef<
-	any,
-	{
-		asChild?: boolean;
-		className?: string;
-		onClick?: (ev: MouseEvent) => void;
-		children?: ReactNode;
-		compact?: boolean;
-		/** forces non-interactive version */
-		nonInteractive?: boolean;
-		visuallyFocused?: boolean;
-		visuallyDisabled?: boolean;
-	}
->(function CardMain(
-	{ asChild, className, compact, nonInteractive, ...rest },
+export function CardMain({
+	asChild,
+	className,
+	compact,
+	nonInteractive,
 	ref,
-) {
+	...rest
+}: {
+	asChild?: boolean;
+	className?: string;
+	onClick?: (ev: MouseEvent) => void;
+	children?: ReactNode;
+	compact?: boolean;
+	/** forces non-interactive version */
+	nonInteractive?: boolean;
+	visuallyFocused?: boolean;
+	visuallyDisabled?: boolean;
+	ref?: Ref<any>;
+}) {
 	const isInteractive = !nonInteractive && (!!asChild || !!rest.onClick);
 	const Comp = asChild ? Slot : isInteractive ? 'button' : 'div';
 	return (
@@ -51,7 +53,7 @@ export const CardMain = forwardRef<
 			{...rest}
 		/>
 	);
-});
+}
 
 export const CardTitle = withClassName(
 	'div',
@@ -67,12 +69,11 @@ const CardContentRoot = withClassName(
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
+	ref?: Ref<HTMLDivElement>;
 }
-export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
-	function CardContent({ unstyled, ...rest }, ref) {
-		return <CardContentRoot ref={ref} data-unstyled={unstyled} {...rest} />;
-	},
-);
+export function CardContent({ unstyled, ref, ...rest }: CardContentProps) {
+	return <CardContentRoot ref={ref} data-unstyled={unstyled} {...rest} />;
+}
 
 export const CardImage = withClassName(
 	SlotDiv,

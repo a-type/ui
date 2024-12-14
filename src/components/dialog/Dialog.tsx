@@ -8,7 +8,6 @@ import classNames from 'clsx';
 import {
 	ComponentPropsWithoutRef,
 	createContext,
-	forwardRef,
 	useCallback,
 	useContext,
 	useRef,
@@ -47,17 +46,20 @@ const sheetClassNameWithDisplaceKeyboard = classNames(
 	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',
 );
 
-export const Content = forwardRef<
-	HTMLDivElement,
-	ComponentPropsWithoutRef<typeof StyledContent> & {
-		outerClassName?: string;
-		width?: 'lg' | 'md' | 'sm';
-		disableSheet?: boolean;
-	}
->(function Content(
-	{ children, width, outerClassName, className, disableSheet, ...props },
+export const Content = function Content({
 	ref,
-) {
+	children,
+	width,
+	outerClassName,
+	className,
+	disableSheet,
+	...props
+}: ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+	width?: 'sm' | 'md' | 'lg';
+	disableSheet?: boolean;
+	outerClassName?: string;
+	ref?: React.Ref<HTMLDivElement>;
+}) {
 	const particles = useParticles();
 	const wasOpenRef = useRef(false);
 	const openRef = useCallback(
@@ -144,12 +146,15 @@ export const Content = forwardRef<
 			</StyledContent>
 		</DialogPrimitive.Portal>
 	);
-});
+};
 
-export const DialogSwipeHandle = forwardRef<
-	HTMLDivElement,
-	ComponentPropsWithoutRef<'div'>
->(function DialogSwipeHandle({ className, ...props }, ref) {
+export const DialogSwipeHandle = function DialogSwipeHandle({
+	ref,
+	className,
+	...props
+}: ComponentPropsWithoutRef<'div'> & {
+	ref?: React.Ref<HTMLDivElement>;
+}) {
 	const close = useContext(DialogCloseContext);
 	const innerRef = useRef<HTMLDivElement>(null);
 	useDrag(
@@ -186,7 +191,7 @@ export const DialogSwipeHandle = forwardRef<
 			<div className="w-full h-[4px] bg-gray-4 rounded-full" />
 		</div>
 	);
-});
+};
 
 function findParentDialogContent(
 	element: HTMLElement | null,
@@ -239,16 +244,20 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
-export const DialogClose = forwardRef<
-	HTMLButtonElement,
-	DialogPrimitive.DialogCloseProps
->(function DialogClose({ asChild, children, ...props }, ref) {
+export const DialogClose = function DialogClose({
+	ref,
+	asChild,
+	children,
+	...props
+}: DialogPrimitive.DialogCloseProps & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
 	return (
 		<DialogPrimitive.DialogClose asChild ref={ref} {...props}>
 			{asChild === true ? children : <Button>{children ?? 'Close'}</Button>}
 		</DialogPrimitive.DialogClose>
 	);
-});
+};
 
 export type { DialogProps } from '@radix-ui/react-dialog';
 
@@ -259,10 +268,14 @@ export const DialogActions = withClassName(
 	'sm:(bottom-0)',
 );
 
-export const DialogSelectTrigger = forwardRef<
-	HTMLButtonElement,
-	DialogPrimitive.DialogTriggerProps
->(function DialogSelectTrigger({ children, className, ...props }, ref) {
+export const DialogSelectTrigger = function DialogSelectTrigger({
+	ref,
+	children,
+	className,
+	...props
+}: DialogPrimitive.DialogTriggerProps & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
 	return (
 		<DialogPrimitive.Trigger
 			className={classNames(selectTriggerClassName, className)}
@@ -272,7 +285,7 @@ export const DialogSelectTrigger = forwardRef<
 			<ChevronDownIcon />
 		</DialogPrimitive.Trigger>
 	);
-});
+};
 
 export const DialogSelectList = withClassName(
 	RadioGroupPrimitive.Root,
@@ -285,10 +298,13 @@ export const DialogSelectItemRoot = withClassName(
 	'[&[data-state=checked]]:(bg-primary-wash text-primary-dark)',
 );
 
-export const DialogSelectItem = forwardRef<
-	HTMLButtonElement,
-	ComponentPropsWithoutRef<typeof DialogSelectItemRoot>
->(function DialogSelectItem({ children, ...props }, ref) {
+export const DialogSelectItem = function DialogSelectItem({
+	ref,
+	children,
+	...props
+}: ComponentPropsWithoutRef<typeof DialogSelectItemRoot> & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
 	return (
 		<DialogSelectItemRoot {...props}>
 			<span className="flex-1">{children}</span>
@@ -297,7 +313,7 @@ export const DialogSelectItem = forwardRef<
 			</RadioGroupPrimitive.Indicator>
 		</DialogSelectItemRoot>
 	);
-});
+};
 
 export const Dialog = Object.assign(DialogRoot, {
 	Trigger: DialogTrigger,

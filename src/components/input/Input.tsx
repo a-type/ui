@@ -1,12 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
-import {
-	ChangeEvent,
-	ComponentProps,
-	FocusEvent,
-	forwardRef,
-	useCallback,
-} from 'react';
+import { ChangeEvent, ComponentProps, FocusEvent, useCallback } from 'react';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export const inputClassName = classNames(
@@ -27,22 +21,22 @@ export interface InputProps extends ComponentProps<'input'> {
 	onValueChange?: (value: string) => void;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-	{
-		className,
-		autoSelect,
-		onFocus,
-		onChange,
-		onValueChange,
-		variant: _,
-		asChild,
-		placeholders,
-		placeholder,
-		placeholdersIntervalMs = 5000,
-		...props
-	},
+export const Input = function Input({
 	ref,
-) {
+	className,
+	autoSelect,
+	onFocus,
+	onChange,
+	onValueChange,
+	variant: _,
+	asChild,
+	placeholders,
+	placeholder,
+	placeholdersIntervalMs = 5000,
+	...props
+}: InputProps & {
+	ref?: React.Ref<HTMLInputElement>;
+}) {
 	const handleFocus = useCallback(
 		(ev: FocusEvent<HTMLInputElement>) => {
 			if (autoSelect) {
@@ -78,4 +72,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 			placeholder={placeholder ?? randomPlaceholder}
 		/>
 	);
-});
+};

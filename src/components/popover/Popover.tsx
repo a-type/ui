@@ -1,10 +1,10 @@
 'use client';
 
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
-import { withClassName } from '../../hooks/withClassName.js';
 import classNames from 'clsx';
+import { Ref } from 'react';
+import { withClassName } from '../../hooks/withClassName.js';
 
 const StyledContent = withClassName(
 	PopoverPrimitive.Content,
@@ -36,25 +36,22 @@ export const PopoverArrow = StyledArrow;
 export const PopoverClose = StyledClose;
 export const PopoverAnchor = PopoverPrimitive.Anchor;
 
-export const PopoverContent = forwardRef<
-	HTMLDivElement,
-	ComponentPropsWithoutRef<typeof StyledContent> & {
-		disableBlur?: boolean;
-		padding?: 'none' | 'default';
-		radius?: 'none' | 'default' | 'md';
-	}
->(function PopoverContent(
-	{
-		children,
-		forceMount,
-		disableBlur,
-		className,
-		radius = 'default',
-		padding = 'default',
-		...props
-	},
+export const PopoverContent = function PopoverContent({
 	ref,
-) {
+	children,
+	forceMount,
+	disableBlur,
+	className,
+	radius = 'default',
+	padding = 'default',
+	...props
+}: PopoverPrimitive.PopoverContentProps & {
+	radius?: 'none' | 'default' | 'md';
+	padding?: 'none' | 'default';
+	forceMount?: boolean;
+	disableBlur?: boolean;
+	ref?: Ref<HTMLDivElement>;
+}) {
 	return (
 		<PopoverPrimitive.Portal forceMount={forceMount}>
 			<StyledContent
@@ -76,7 +73,7 @@ export const PopoverContent = forwardRef<
 			</StyledContent>
 		</PopoverPrimitive.Portal>
 	);
-});
+};
 
 export const Popover = Object.assign(PopoverRoot, {
 	Content: PopoverContent,

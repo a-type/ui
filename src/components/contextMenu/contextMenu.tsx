@@ -1,14 +1,18 @@
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { withClassName } from '../../hooks/withClassName.js';
 import classNames from 'clsx';
+import { ComponentPropsWithoutRef } from 'react';
+import { withClassName } from '../../hooks/withClassName.js';
 
 export const ContextMenuRoot = ContextMenuPrimitive.Root;
 
-export const ContextMenuContent = forwardRef<
-	HTMLDivElement,
-	ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
->(function Content({ className, onClick, ...props }, ref) {
+export const ContextMenuContent = function Content({
+	ref,
+	className,
+	onClick,
+	...props
+}: ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & {
+	ref?: React.Ref<HTMLDivElement>;
+}) {
 	return (
 		<ContextMenuPrimitive.Portal>
 			<ContextMenuPrimitive.Content
@@ -30,7 +34,7 @@ export const ContextMenuContent = forwardRef<
 			/>
 		</ContextMenuPrimitive.Portal>
 	);
-});
+};
 
 export const ContextMenuArrow = withClassName(
 	ContextMenuPrimitive.Arrow,

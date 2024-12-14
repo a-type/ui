@@ -3,7 +3,6 @@
 import classNames from 'clsx';
 import {
 	ChangeEvent,
-	forwardRef,
 	HTMLProps,
 	useCallback,
 	useLayoutEffect,
@@ -26,92 +25,90 @@ export interface TextAreaProps
 	onValueChange?: (value: string) => void;
 }
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-	function TextArea(
-		{
-			autoSize,
-			autoSelect,
-			onFocus,
-			className,
-			rows,
-			padBottomPixels = 0,
-			onChange,
-			placeholder,
-			placeholders,
-			placeholdersIntervalMs = 5000,
-			onValueChange,
-			...rest
-		},
-		ref,
-	) {
-		const innerRef = useRef<HTMLTextAreaElement>(null);
-		const finalRef = useMergedRef(innerRef, ref);
+export const TextArea = function TextArea({
+	ref,
+	autoSize,
+	autoSelect,
+	onFocus,
+	className,
+	rows,
+	padBottomPixels = 0,
+	onChange,
+	placeholder,
+	placeholders,
+	placeholdersIntervalMs = 5000,
+	onValueChange,
+	...rest
+}: TextAreaProps & {
+	ref?: React.Ref<HTMLTextAreaElement>;
+}) {
+	const innerRef = useRef<HTMLTextAreaElement>(null);
+	const finalRef = useMergedRef(innerRef, ref);
 
-		const [innerValue, setInnerValue] = useState('');
-		const finalValue = rest.value ?? innerValue;
+	const [innerValue, setInnerValue] = useState('');
+	const finalValue = rest.value ?? innerValue;
 
-		// TODO: can layout effect be avoided? useEffect shows a flash of the wrong size
-		useLayoutEffect(() => {
-			if (!autoSize) return;
-			const element = innerRef.current;
-			if (element) {
-				if (element.value !== '' || padBottomPixels) {
-					element!.style.height = 'auto';
-					const baseHeight = element.scrollHeight;
-					element.style.height = baseHeight + padBottomPixels + 'px';
-				}
+	// TODO: can layout effect be avoided? useEffect shows a flash of the wrong size
+	useLayoutEffect(() => {
+		if (!autoSize) return;
+		const element = innerRef.current;
+		if (element) {
+			if (element.value !== '' || padBottomPixels) {
+				element!.style.height = 'auto';
+				const baseHeight = element.scrollHeight;
+				element.style.height = baseHeight + padBottomPixels + 'px';
 			}
-		}, [autoSize, padBottomPixels, finalValue]);
+		}
+	}, [autoSize, padBottomPixels, finalValue]);
 
-		const handleChange = useCallback(
-			(e: ChangeEvent<HTMLTextAreaElement>) => {
-				setInnerValue((e.target as HTMLTextAreaElement).value);
-				if (onChange) {
-					onChange(e);
-				}
-				if (onValueChange) {
-					onValueChange(e.target.value);
-				}
-			},
-			[onChange, onValueChange],
-		);
+	const handleChange = useCallback(
+		(e: ChangeEvent<HTMLTextAreaElement>) => {
+			setInnerValue((e.target as HTMLTextAreaElement).value);
+			if (onChange) {
+				onChange(e);
+			}
+			if (onValueChange) {
+				onValueChange(e.target.value);
+			}
+		},
+		[onChange, onValueChange],
+	);
 
-		const handleFocus = useCallback(
-			(e: React.FocusEvent<HTMLTextAreaElement>) => {
-				if (autoSelect) {
-					e.target.select();
-				}
-				if (onFocus) {
-					onFocus(e);
-				}
-			},
-			[autoSelect, onFocus],
-		);
+	const handleFocus = useCallback(
+		(e: React.FocusEvent<HTMLTextAreaElement>) => {
+			if (autoSelect) {
+				e.target.select();
+			}
+			if (onFocus) {
+				onFocus(e);
+			}
+		},
+		[autoSelect, onFocus],
+	);
 
-		const randomPlaceholder = useRotatingShuffledValue(
-			placeholders ?? [],
-			placeholdersIntervalMs,
-		);
+	const randomPlaceholder = useRotatingShuffledValue(
+		placeholders ?? [],
+		placeholdersIntervalMs,
+	);
 
-		return (
-			<textarea
-				ref={finalRef}
-				className={classNames(
-					inputClassName,
-					'layer-components:([font-family:inherit] text-inherit overflow-hidden resize-none)',
-					'layer-variants:(rounded-20px px-4 py-4)',
-					{
-						'layer-components:[resize:vertical]': !autoSize,
-						'layer-components:[resize:none]': autoSize,
-					},
-					className,
-				)}
-				rows={autoSize ? 1 : rows}
-				onChange={handleChange}
-				onFocus={handleFocus}
-				placeholder={placeholder ?? randomPlaceholder}
-				{...rest}
-			/>
-		);
-	},
-);
+	return (
+		<textarea
+			ref={finalRef}
+			className={classNames(
+				inputClassName,
+				'layer-components:([font-family:inherit] text-inherit overflow-hidden resize-none)',
+				'layer-variants:(rounded-20px px-4 py-4)',
+				{
+					'layer-components:[resize:vertical]': !autoSize,
+					'layer-components:[resize:none]': autoSize,
+				},
+				className,
+			)}
+			rows={autoSize ? 1 : rows}
+			onChange={handleChange}
+			onFocus={handleFocus}
+			placeholder={placeholder ?? randomPlaceholder}
+			{...rest}
+		/>
+	);
+};

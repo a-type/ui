@@ -1,9 +1,9 @@
 'use client';
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { ComponentProps, forwardRef } from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
+import { ComponentProps } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 
 export const CheckboxRoot = withClassName(
@@ -36,15 +36,14 @@ export function CheckboxIndicator({
 }
 
 export const Checkbox = Object.assign(
-	forwardRef<HTMLButtonElement, ComponentProps<typeof CheckboxRoot>>(
-		function Checkbox(props, ref) {
-			return (
-				<CheckboxRoot ref={ref} {...props}>
-					<CheckboxIndicator />
-				</CheckboxRoot>
-			);
-		},
-	),
+	function Checkbox({ ref, ...props }: ComponentProps<typeof CheckboxRoot>) {
+		return (
+			<CheckboxRoot ref={ref} {...props}>
+				<CheckboxIndicator />
+			</CheckboxRoot>
+		);
+	},
+
 	{
 		Root: CheckboxRoot,
 		Indicator: CheckboxIndicator,

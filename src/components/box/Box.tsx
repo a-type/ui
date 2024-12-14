@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createContext, forwardRef, useContext, useMemo } from 'react';
+import { createContext, Ref, useContext, useMemo } from 'react';
 import { ThemeName } from '../colorPicker/ColorPicker.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
@@ -26,27 +26,26 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	surface?: boolean | 'primary' | 'secondary';
 	theme?: ThemeName;
 	border?: boolean;
+	ref?: Ref<HTMLDivElement>;
 }
 
-export const Box = forwardRef<HTMLDivElement, BoxProps>(function Box(
-	{
-		className,
-		direction,
-		items: itemsSolo,
-		justify: justifySolo,
-		align,
-		gap = 'md',
-		wrap,
-		p = 'sm',
-		container,
-		style: userStyle,
-		surface,
-		theme,
-		border,
-		...rest
-	},
+export function Box({
+	className,
+	direction,
+	items: itemsSolo,
+	justify: justifySolo,
+	align,
+	gap = 'md',
+	wrap,
+	p = 'sm',
+	container,
+	style: userStyle,
+	surface,
+	theme,
+	border,
 	ref,
-) {
+	...rest
+}: BoxProps) {
 	const { spacingScale } = useContext(BoxContext);
 
 	const style = useMemo(
@@ -118,7 +117,7 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(function Box(
 	}
 
 	return main;
-});
+}
 
 const SPACING_SCALE_NESTING_FACTOR = 0.5;
 const BoxContext = createContext<{

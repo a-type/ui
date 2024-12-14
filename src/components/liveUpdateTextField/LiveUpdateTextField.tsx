@@ -1,18 +1,18 @@
 'use client';
 
+import { debounce } from '@a-type/utils';
 import {
 	ChangeEvent,
 	FocusEvent,
-	forwardRef,
 	KeyboardEventHandler,
 	MouseEventHandler,
+	Ref,
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
 } from 'react';
-import { debounce } from '@a-type/utils';
 import { Input, InputProps } from '../input/Input.js';
 import { TextArea } from '../textArea/TextArea.js';
 
@@ -34,6 +34,7 @@ export type LiveUpdateTextFieldProps = {
 	onKeyDown?: KeyboardEventHandler;
 	onKeyUp?: KeyboardEventHandler;
 	onClick?: MouseEventHandler;
+	ref?: Ref<HTMLInputElement | HTMLTextAreaElement>;
 };
 
 /**
@@ -43,22 +44,17 @@ export type LiveUpdateTextFieldProps = {
  *
  * This component is optimistic and will not respond to external changes while focused.
  */
-export const LiveUpdateTextField = forwardRef<
-	HTMLInputElement | HTMLTextAreaElement,
-	LiveUpdateTextFieldProps
->(function LiveUpdateTextField(
-	{
-		value,
-		onChange,
-		debounceMs = 500,
-		onFocus,
-		onBlur,
-		textArea,
-		type,
-		...rest
-	},
+export const LiveUpdateTextField = function LiveUpdateTextField({
 	ref,
-) {
+	value,
+	onChange,
+	debounceMs = 500,
+	onFocus,
+	onBlur,
+	textArea,
+	type,
+	...rest
+}: LiveUpdateTextFieldProps) {
 	const [displayValue, setDisplayValue] = useState(value || '');
 	const ignoreUpdates = useRef(false);
 	const didChange = useRef(false);
@@ -135,4 +131,4 @@ export const LiveUpdateTextField = forwardRef<
 			/>
 		);
 	}
-});
+};

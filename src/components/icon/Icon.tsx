@@ -1,5 +1,5 @@
-import { forwardRef, HTMLAttributes } from 'react';
 import classNames from 'clsx';
+import { HTMLAttributes } from 'react';
 import { IconName } from './generated/iconNames.js';
 
 export interface IconProps extends HTMLAttributes<SVGSVGElement> {
@@ -7,10 +7,15 @@ export interface IconProps extends HTMLAttributes<SVGSVGElement> {
 	size?: number;
 }
 
-export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-	{ name, size = 15, className, ...rest },
+export const Icon = function Icon({
 	ref,
-) {
+	name,
+	size = 15,
+	className,
+	...rest
+}: IconProps & {
+	ref?: React.Ref<SVGSVGElement>;
+}) {
 	return (
 		<svg
 			ref={ref}
@@ -25,4 +30,4 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
 			<use xlinkHref={`#icon-${name}`} />
 		</svg>
 	);
-});
+};
