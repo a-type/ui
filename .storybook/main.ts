@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import UnoCSS from 'unocss/vite';
 
 const config: StorybookConfig = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -15,8 +14,9 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag',
 	},
-	viteFinal: (config) => {
+	viteFinal: async (config) => {
 		config.plugins = config.plugins || [];
+		const { default: UnoCSS } = await import('unocss/vite');
 		config.plugins.push(UnoCSS());
 		return config;
 	},

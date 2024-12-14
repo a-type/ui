@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'clsx';
-import { forwardRef, lazy } from 'react';
+import { lazy } from 'react';
 
 const EditorContent = lazy(() => import('./EditorContent.js'));
 
@@ -11,16 +11,9 @@ export interface RichEditorProps {
 	readOnly?: boolean;
 }
 
-export const RichEditor = forwardRef<any, RichEditorProps>(function RichEditor(
-	{ className, ...rest },
-	ref,
-) {
-	if (typeof ref === 'string') {
-		throw new Error('String ref not supported!');
-	}
+export function RichEditor({ className, ...rest }: RichEditorProps) {
 	return (
 		<EditorContent
-			ref={ref as any}
 			className={classNames(
 				'layer-components:(w-full rounded-lg)',
 				!rest.readOnly &&
@@ -35,4 +28,4 @@ export const RichEditor = forwardRef<any, RichEditorProps>(function RichEditor(
 			{...rest}
 		/>
 	);
-});
+}

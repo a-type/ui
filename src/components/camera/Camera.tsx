@@ -66,7 +66,7 @@ export const CameraRoot = forwardRef<HTMLDivElement, CameraRootProps>(
 			string | undefined
 		>();
 
-		const cleanupRef = useRef<() => void>();
+		const cleanupRef = useRef<() => void>(undefined);
 		useEffect(() => {
 			const init = () => {
 				cleanupRef.current?.();

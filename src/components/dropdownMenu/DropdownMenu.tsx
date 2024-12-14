@@ -1,9 +1,9 @@
 'use client';
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { withClassName } from '../../hooks/withClassName.js';
 import classNames, { clsx } from 'clsx';
 import { forwardRef } from 'react';
+import { withClassName } from '../../hooks/withClassName.js';
 
 const StyledContent = withClassName(
 	DropdownMenuPrimitive.Content,
@@ -52,7 +52,7 @@ const StyledRadioItem = withClassName(
 
 const StyledLabel = withClassName(
 	DropdownMenuPrimitive.Label,
-	'pl-25px text-12px leading-6 color-gray7',
+	'pl-25px text-md leading-6 color-gray-9',
 );
 
 const StyledSeparator = withClassName(

@@ -14,4 +14,8 @@ export default meta;
 
 type Story = StoryObj<typeof RichEditor>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render(args) {
+		return <RichEditor {...args} className="h-80vh" />;
+	},
+};

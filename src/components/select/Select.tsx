@@ -257,27 +257,27 @@ const IsNativeContext = createContext(false);
 function withNoNativeRender<T extends ComponentType<any> | ElementType<any>>(
 	Component: T,
 ): FunctionComponent<ComponentPropsWithRef<T>> {
-	const WithNoNativeRender = forwardRef<any, any>((props, ref) => {
+	const WithNoNativeRender = (props: any) => {
 		const isNative = useContext(IsNativeContext);
 
 		if (isNative) return null;
 
-		return <Component ref={ref} {...props} />;
-	});
+		return <Component {...props} />;
+	};
 	return WithNoNativeRender as any;
 }
 
 function withPassthroughNativeRender<
 	T extends ComponentType<any> | ElementType<any>,
 >(Component: T): FunctionComponent<ComponentPropsWithRef<T>> {
-	const WithPassthroughNativeRender = forwardRef<any, any>((props, ref) => {
+	const WithPassthroughNativeRender = (props: any) => {
 		const isNative = useContext(IsNativeContext);
 
 		if (isNative) {
 			return <>{props.children}</>;
 		}
 
-		return <Component ref={ref} {...props} />;
-	});
+		return <Component {...props} />;
+	};
 	return WithPassthroughNativeRender as any;
 }
