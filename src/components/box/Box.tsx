@@ -23,7 +23,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	wrap?: boolean;
 	p?: BoxSpacingSize;
 	container?: boolean;
-	surface?: boolean;
+	surface?: boolean | 'primary' | 'secondary';
 	theme?: ThemeName;
 	border?: boolean;
 }
@@ -93,9 +93,13 @@ export const Box = forwardRef<HTMLDivElement, BoxProps>(function Box(
 					'layer-components:p-md': p === 'md',
 					'layer-components:p-lg': p === 'lg',
 					'layer-components:p-xl': p === 'xl',
-					'layer-components:(rounded-lg bg-primary-wash)': surface,
-					'layer-components:(border border-solid border-primary-dark rounded-lg)':
-						border,
+					'layer-components:rounded-lg': !!surface,
+					'layer-components:(bg-white border-black)': surface === true,
+					'layer-components:(bg-primary-wash border-primary-dark)':
+						surface === 'primary',
+					'layer-components:(bg-secondary-wash border-secondary-dark)':
+						surface === 'secondary',
+					'layer-components:(border border-solid rounded-lg)': border,
 				},
 				theme && `theme-${theme}`,
 				className,
