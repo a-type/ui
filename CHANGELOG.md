@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.1
+
+### Patch Changes
+
+- 0fc42dc: Change box surface styles
+
 ## 1.3.0
 
 ### Minor Changes
