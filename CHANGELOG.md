@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.0
+
+### Minor Changes
+
+- a61b0db: upgrade all dependenices. React 19 is now required.
+
 ## 1.2.3
 
 ### Patch Changes
