@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.3
+
+### Patch Changes
+
+- 3ef3434: minor typing simplification
+
 ## 1.3.2
 
 ### Patch Changes
