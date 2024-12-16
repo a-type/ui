@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.4
+
+### Patch Changes
+
+- 691b197: add missing peer dep csstypes
+
 ## 1.3.3
 
 ### Patch Changes
