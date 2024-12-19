@@ -45,7 +45,14 @@ export function ConfirmedButton({
 	}, [onConfirm]);
 
 	if (skip) {
-		return <Button {...rest} />;
+		return (
+			<Button
+				{...rest}
+				onClick={(ev) => {
+					onConfirm();
+				}}
+			/>
+		);
 	}
 
 	return (

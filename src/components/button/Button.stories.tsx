@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Icon } from '../icon/index.js';
 import { Button } from './Button.js';
+import { ConfirmedButton } from './ConfirmedButton.js';
 
 const meta = {
 	title: 'Button',
@@ -46,6 +47,20 @@ export const Alignment: Story = {
 					</Button>
 				</div>
 			</div>
+		);
+	},
+};
+
+export const ConfirmedButtonDemo: Story = {
+	render() {
+		return (
+			<ConfirmedButton
+				confirmText="Are you sure?"
+				confirmTitle="Confirm"
+				onConfirm={() => console.log('confirmed')}
+			>
+				Confirm
+			</ConfirmedButton>
 		);
 	},
 };
