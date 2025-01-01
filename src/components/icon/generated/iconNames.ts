@@ -77,6 +77,12 @@ export const iconNames = [
 	'home',
 	'thermometer',
 	'lightbulb',
+	'next',
+	'playPause',
+	'pause',
+	'previous',
+	'skipStart',
+	'skipEnd',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

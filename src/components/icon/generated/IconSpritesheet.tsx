@@ -865,6 +865,78 @@ export const IconSpritesheet = (props: any) => (
 					stroke="currentColor"
 				/>
 			</symbol>
+			<symbol id="icon-next" viewBox="0 0 15 15">
+				<path
+					d="M11 7.5L4 1V14L11 7.5Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-playPause" viewBox="0 0 15 15">
+				<path
+					d="M14.5 8L5 1V14L14.5 8Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M2 1V14"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-pause" viewBox="0 0 15 15">
+				<path
+					d="M2 14H6V1H2V14Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M9 14H13V1H9V14Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-previous" viewBox="0 0 15 15">
+				<path
+					d="M4 7.5L11 14L11 1L4 7.5Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-skipStart" viewBox="0 0 15 15">
+				<path
+					d="M4 7.5L11 14L11 1L4 7.5Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M3 1V14"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-skipEnd" viewBox="0 0 15 15">
+				<path
+					d="M11 7.5L4 1L4 14L11 7.5Z"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M12 14L12 1"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
 		</defs>
 	</svg>
 );
