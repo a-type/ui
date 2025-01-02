@@ -1,12 +1,12 @@
-import { ReactNode, createContext, useContext } from 'react';
 import classNames from 'clsx';
+import { ReactNode, createContext, useContext } from 'react';
 import { Avatar, AvatarProps } from './Avatar.js';
 
 const AvatarListContext = createContext<{ size: number }>({
 	size: 24,
 });
 
-export function AvatarList({
+export function AvatarListRoot({
 	children,
 	count,
 	size = 24,
@@ -69,3 +69,8 @@ export function AvatarListItem({
 		</AvatarListItemRoot>
 	);
 }
+
+export const AvatarList = Object.assign(AvatarListRoot, {
+	Item: AvatarListItem,
+	ItemRoot: AvatarListItemRoot,
+});

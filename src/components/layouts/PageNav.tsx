@@ -24,7 +24,8 @@ export function PageNav({
 			{...props}
 			className={classNames(
 				'layer-components:([grid-area:nav] relative z-nav pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))])',
-				'layer-components:sm:([grid-area:nav] sticky top-0 h-auto bottom-auto left-auto right-auto)',
+				'layer-components:before:(content-[""] absolute inset-x-4 top-0 h-px bg-[#00000070])',
+				'layer-components:sm:([grid-area:nav] sticky top-0 h-auto bottom-auto left-auto right-auto) layer-components:sm:before:(hidden)',
 				className,
 			)}
 			ref={ref}

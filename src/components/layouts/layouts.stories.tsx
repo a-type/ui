@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 import { Button } from '../button/index.js';
+import { Card } from '../card/Card.js';
 import { Icon } from '../icon/index.js';
 import { Input } from '../input/index.js';
 import {
@@ -36,6 +37,13 @@ export const Default: Story = {
 				<div className="text-center">
 					<h1 className="text-3xl font-bold">Hello, World!</h1>
 					<p className="text-lg">This is a simple page layout.</p>
+					<Card.Grid>
+						{new Array(100).fill(null).map((_, i) => (
+							<Card key={i}>
+								<Card.Main />
+							</Card>
+						))}
+					</Card.Grid>
 				</div>
 				<PageNowPlaying>Now playing</PageNowPlaying>
 			</PageContent>
