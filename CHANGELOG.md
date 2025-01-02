@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.6
+
+### Patch Changes
+
+- 3d573aa: fix bg color
+
 ## 1.3.5
 
 ### Patch Changes
