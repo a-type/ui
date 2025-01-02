@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.3.5
+
+### Patch Changes
+
+- 70e9756: change mobile nav border styling
+- 22ca049: update icons
+
 ## 1.3.4
 
 ### Patch Changes
