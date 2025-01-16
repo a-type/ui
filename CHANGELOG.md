@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.3.7
+
+### Patch Changes
+
+- 3d8422d: Fix select asChild behavior
+
 ## 1.3.6
 
 ### Patch Changes
