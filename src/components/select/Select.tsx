@@ -89,13 +89,14 @@ export interface SelectTriggerProps extends ButtonProps {}
 export const SelectTrigger = function SelectTrigger({
 	ref,
 	children,
+	asChild,
 	...props
 }: SelectTriggerProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	return (
 		<UnstyledSelectTrigger asChild {...props} ref={ref}>
-			<Button className="gap-2 font-normal">
+			<Button className="gap-2 font-normal" asChild={asChild}>
 				{children || (
 					<>
 						<SelectValue />
