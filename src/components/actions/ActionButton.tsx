@@ -1,20 +1,19 @@
 'use client';
 
 import classNames from 'clsx';
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../button/Button.js';
 import { CollapsibleContent, CollapsibleRoot } from '../collapsible/index.js';
 
 export interface ActionButtonProps extends ButtonProps {
-	icon?: ReactNode;
 	visible?: boolean;
 }
 
 export function ActionButton({
-	icon,
 	children,
 	className,
 	visible = true,
+	asChild,
 	...rest
 }: ActionButtonProps) {
 	// this rather convoluted logic is meant to do:
@@ -48,9 +47,9 @@ export function ActionButton({
 						'hover:bg-gray2',
 						className,
 					)}
+					asChild={asChild}
 					{...rest}
 				>
-					{icon}
 					{children}
 				</Button>
 			</CollapsibleContent>
