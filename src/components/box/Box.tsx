@@ -37,7 +37,7 @@ export function Box({
 	align,
 	gap = 'md',
 	wrap,
-	p = 'sm',
+	p = 'none',
 	container,
 	style: userStyle,
 	surface,
