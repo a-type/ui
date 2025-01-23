@@ -55,7 +55,7 @@ const StyledRadioItem = withClassName(
 
 const StyledLabel = withClassName(
 	DropdownMenuPrimitive.Label,
-	'pl-25px text-md leading-6 color-gray-9',
+	'pl-3 py-1 font-bold text-sm leading-6 color-gray-9',
 );
 
 const StyledSeparator = withClassName(
