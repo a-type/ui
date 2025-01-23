@@ -16,6 +16,7 @@ export type BoxSpacingSize = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
 	direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
+	d?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
 	items?: BoxAlignment;
 	justify?: BoxJustification;
 	align?: `${BoxAlignment} ${BoxJustification}`;
@@ -31,13 +32,14 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 
 export function Box({
 	className,
-	direction,
 	items: itemsSolo,
 	justify: justifySolo,
 	align,
 	gap = 'md',
 	wrap,
 	p = 'none',
+	d = 'row',
+	direction = d,
 	container,
 	style: userStyle,
 	surface,
