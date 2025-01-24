@@ -1,5 +1,16 @@
 # @a-type/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- f9611f5: Remove icon option from ActionButton
+
+### Patch Changes
+
+- 1faee9e: Shorthand for Box direction. Box default padding removed. Fix dropdown menu label styles
+- 3d8422d: Fix select asChild behavior
+
 ## 1.3.6
 
 ### Patch Changes
