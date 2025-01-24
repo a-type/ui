@@ -4,7 +4,9 @@ import { Input } from './Input.js';
 const meta = {
 	title: 'Input',
 	component: Input,
-	argTypes: {},
+	argTypes: {
+		disabled: { control: 'boolean' },
+	},
 	parameters: {
 		controls: { expanded: true },
 	},
