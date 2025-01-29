@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- 78c3da7: Experimental theme configs
+
 ## 1.4.1
 
 ### Patch Changes
