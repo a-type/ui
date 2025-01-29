@@ -1,21 +1,38 @@
 import { entriesToCss, toArray } from '@unocss/core';
 import { PreflightContext, Preset, presetUno } from 'unocss';
 
+const spacing = {
+	sm: 0.125,
+	md: 0.25,
+	lg: 0.33333,
+};
+const roundedScaling = {
+	sm: 1,
+	md: 1,
+	lg: 1.25,
+};
+
 export default function presetAglio({
-	spacingIncrement = 0.25,
+	scale = 'md',
 	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
 	colorRanges = {
 		light: [90, 40],
 		dark: [0, 60],
 	},
+	borderScale = 1,
+	roundedness = 1,
 }: {
-	spacingIncrement?: number;
+	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
 	colorRanges?: {
 		light: [number, number];
 		dark: [number, number];
 	};
+	borderScale?: number;
+	roundedness?: number;
 } = {}): Preset {
+	const spacingIncrement = spacing[scale];
+	roundedness *= roundedScaling[scale];
 	const lightColors = generateColors(...colorRanges.light);
 	const darkColors = generateColors(...colorRanges.dark);
 
@@ -93,10 +110,17 @@ export default function presetAglio({
 			},
 			spacing: makeSpacing(spacingIncrement),
 			borderRadius: {
-				sm: '0.25rem',
-				md: '0.5rem',
-				lg: '0.75rem',
-				xl: '1rem',
+				xs: `${0.25 * roundedness}rem`,
+				sm: `${0.5 * roundedness}rem`,
+				md: `${roundedness}rem`,
+				lg: `${roundedness * 1.25}rem`,
+				xl: `${roundedness * 1.5}rem`,
+				full: roundedness === 0 ? '0px' : '9999px',
+			},
+			lineWidth: {
+				DEFAULT: `${borderScale}px`,
+				none: '0',
+				thick: `${2 * borderScale}px`,
 			},
 			width: {
 				content: '700px',
@@ -380,7 +404,7 @@ export default function presetAglio({
 		],
 
 		shortcuts: {
-			'border-default': 'border border-1 border-solid border-black',
+			'border-default': 'border border-solid border-black',
 			'border-light': 'border border-solid border-gray5',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',

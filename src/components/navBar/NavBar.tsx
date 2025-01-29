@@ -43,7 +43,7 @@ export const NavBarItem = function NavBarItem({
 
 export const NavBarItemIconWrapper = withClassName(
 	'div',
-	'layer-components:(relative flex) layer-components:sm:(p-6px rounded-full bg-gray-blend)',
+	'layer-components:(relative flex) layer-components:sm:(p-6px rounded-lg bg-gray-blend)',
 	'layer-variants:sm:[*[data-active=true]_&]:bg-primary-light',
 );
 
@@ -86,14 +86,14 @@ export const NavBarItemIcon = function NavBarItemIcon({
 
 export const NavBarItemPip = withClassName(
 	'div',
-	'layer-components:(absolute top-6px right-6px w-6px h-6px rounded-full bg-attention shadow-sm)',
+	'layer-components:(absolute top-6px right-6px w-6px h-6px rounded-lg bg-attention shadow-sm)',
 );
 
 export const NavBarRoot = withClassName(
 	'div',
-	'layer-components:(grid [grid-auto-columns:1fr] [grid-auto-flow:column] justify-items-center w-full rounded-0 overflow-hidden z-50 p-1 h-auto)',
+	'layer-components:(grid [grid-auto-columns:1fr] [grid-auto-flow:column] justify-items-center w-full rounded-none overflow-hidden z-50 p-1 h-auto)',
 	'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
-	'layer-components:sm:(bg-transparent flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
+	'layer-components:sm:(bg-transparent flex flex-col rounded-none border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
 );
 
 export const NavBar = Object.assign(NavBarRoot, {

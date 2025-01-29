@@ -7,16 +7,16 @@ export const SliderRoot = withClassName(
 );
 export const SliderTrack = withClassName(
 	SliderPrimitive.Track,
-	'layer-components:(bg-transparent relative grow rounded-full h-9px border border-1px border-solid border-black)',
+	'layer-components:(bg-transparent relative grow rounded-lg h-9px border borderpx border-solid border-black)',
 );
 export const SliderRange = withClassName(
 	SliderPrimitive.Range,
-	'layer-components:(absolute bg-accent rounded-full h-full)',
+	'layer-components:(absolute bg-accent rounded-lg h-full)',
 	'layer-variants:[&[data-color=primary]]:bg-primary',
 );
 export const SliderThumb = withClassName(
 	SliderPrimitive.Thumb,
-	'layer-components:(block w-5 h-5 bg-white shadow-sm rounded-full ring-2 ring-black touch-none transition-all)',
+	'layer-components:(block w-5 h-5 bg-white shadow-sm rounded-lg ring-2 ring-black touch-none transition-all)',
 	'layer-components:hover:(shadow-md)',
 	'layer-components:active:(shadow-lg ring-4 ring-accent-dark ring-opacity-50 bg-accent-light)',
 	'layer-components:focus-visible:(shadow-lg ring-4 ring-accent-dark ring-opacity-50 outline-none bg-accent-light)',

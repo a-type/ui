@@ -43,8 +43,7 @@ export function ActionButton({
 				<Button
 					size="small"
 					className={classNames(
-						'important:(border-gray7 font-normal whitespace-nowrap m-2 flex flex-row gap-2 items-center h-30px rounded-15px mx-1)',
-						'hover:bg-gray2',
+						'layer-variants:(border-gray7 font-normal whitespace-nowrap m-2 flex flex-row gap-2 items-center py-0.25 rounded-md mx-1)',
 						className,
 					)}
 					asChild={asChild}

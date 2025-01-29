@@ -97,7 +97,7 @@ export const TextArea = function TextArea({
 			className={classNames(
 				inputClassName,
 				'layer-components:([font-family:inherit] text-inherit overflow-hidden resize-none)',
-				'layer-variants:(rounded-20px px-4 py-4)',
+				'layer-variants:(rounded-lg px-4 py-4)',
 				{
 					'layer-components:[resize:vertical]': !autoSize,
 					'layer-components:[resize:none]': autoSize,

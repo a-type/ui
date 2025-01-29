@@ -147,7 +147,7 @@ export const SelectContent = withPassthroughNativeRender(
 			<SelectPrimitive.Portal>
 				<SelectPrimitive.Content
 					className={classNames(
-						'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border-1 border-black z-menu shadow-lg)',
+						'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border border-black z-menu shadow-lg)',
 						'layer-components:transform-origin-[var(--radix-select-content-transform-origin)]',
 						'layer-components:[&[data-state=open]]:animate-popover-in',
 						'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -185,7 +185,7 @@ export const NativeSelect = ({
 		<div className={classNames('relative', className)}>
 			<select
 				className={classNames(
-					'appearance-none font-inherit bg-white inline-flex items-center justify-center rounded-full px-3 py-1 pr-8 text-sm gap-2 color-black border-solid border border-gray5 hover:border-gray7 focus:outline-none focus-visible:shadow-focus [&[data-placeholder]]:color-gray8',
+					'appearance-none font-inherit bg-white inline-flex items-center justify-center rounded-lg px-3 py-1 pr-8 text-sm gap-2 color-black border-solid border border-gray5 hover:border-gray7 focus:outline-none focus-visible:shadow-focus [&[data-placeholder]]:color-gray8',
 				)}
 				{...props}
 				ref={forwardedRef}

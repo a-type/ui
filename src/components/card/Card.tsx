@@ -7,7 +7,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col border-light rounded-xl text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
+	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -36,7 +36,7 @@ export function CardMain({
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-sans outline-none rounded-t-xl)',
+				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-sans outline-none rounded-t-lg)',
 				!!compact && 'layer-variants:(pb-0)',
 				isInteractive &&
 					classNames(
@@ -87,12 +87,12 @@ export const CardFooter = withClassName(
 
 export const CardActions = withClassName(
 	'div',
-	'layer-components:(ml-0 mr-auto flex flex-row gap-2 items-center bg-white rounded-full p-0 border border-solid border-grayDarkBlend)',
+	'layer-components:(ml-0 mr-auto flex flex-row gap-2 items-center bg-white rounded-lg p-0 border border-solid border-grayDarkBlend)',
 );
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay py-0.5 rounded-full p-0)',
+	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay py-0.5 rounded-lg p-0)',
 );
 
 export const cardGridColumns = {

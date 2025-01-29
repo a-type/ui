@@ -22,7 +22,7 @@ export function Avatar({
 		<div
 			data-pop={popIn}
 			className={classNames(
-				'layer-components:(flex items-center justify-center rounded-full border-default overflow-hidden w-24px h-24px select-none relative bg-white flex-shrink-0)',
+				'layer-components:(flex items-center justify-center rounded-lg border-default overflow-hidden w-24px h-24px select-none relative bg-white flex-shrink-0)',
 				popIn &&
 					'layer-variants:(animate-pop-in-from-half animate-ease-springy animate-duration-200)',
 				empty && 'layer-components(border-dashed bg-gray2)',
@@ -46,7 +46,7 @@ function AvatarContent({
 	if (imageSrc) {
 		return (
 			<img
-				className="w-full h-full object-cover rounded-full"
+				className="w-full h-full object-cover rounded-lg"
 				referrerPolicy="no-referrer"
 				crossOrigin="anonymous"
 				src={imageSrc}
@@ -55,7 +55,7 @@ function AvatarContent({
 		);
 	}
 	return (
-		<div className="color-black items-center justify-center flex text-sm font-bold rounded-full">
+		<div className="color-black items-center justify-center flex text-sm font-bold rounded-lg">
 			{name?.charAt(0) || '?'}
 		</div>
 	);

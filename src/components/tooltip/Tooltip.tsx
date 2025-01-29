@@ -12,7 +12,7 @@ function Content({
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Content
 				className={classNames(
-					'layer-components:(relative rounded-md py-2 px-3 bg-black text-white text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
+					'layer-components:(relative rounded-sm py-2 px-3 bg-black text-white text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
 					'[&[data-state=delayed-open]]:display-initial',
 					'[&[data-state=instant-open]]:display-initial',
 					'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',

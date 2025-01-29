@@ -4,7 +4,7 @@ import { ChangeEvent, ComponentProps, FocusEvent, useCallback } from 'react';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export const inputClassName = classNames(
-	'layer-components:(px-5 py-[5px] text-md font-sans rounded-20px bg-white select-auto min-w-60px color-black border-solid border-1 border-gray-5 shadow-sm-inset)',
+	'layer-components:(px-5 py-1.25 text-md font-sans rounded-xl bg-white select-auto min-w-60px color-black border-solid border border-gray-5 shadow-sm-inset)',
 	'layer-components:focus:(outline-none bg-gray-1 ring-4	ring-white)',
 	'layer-components:focus-visible:(outline-none ring-gray-dark-blend)',
 	'layer-components:disabled:(bg-transparent border-gray-5 placeholder-gray-7 shadow-none)',

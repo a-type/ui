@@ -13,7 +13,7 @@ export function getButtonClassName({
 	align?: ButtonProps['align'];
 }) {
 	return classNames(
-		'layer-components:(px-4 py-2 bg-[var(--bg)] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-sans border border-solid border-transparent rounded-full cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap)',
+		'layer-components:(px-4 py-2 bg-[var(--bg)] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-sans border border-solid border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap)',
 		'layer-components:hover:(bg-[var(--hover)] ring-4 ring-[var(--hover)])',
 		'layer-components:focus:outline-off',
 		'layer-components:focus-visible:(outline-off ring-6 ring-[var(--focus,var(--hover))])',
@@ -43,15 +43,15 @@ const colors = {
 	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg:transparent] [--hover:rgb(from_var(--color-attention-light)_r_g_b/0.25)] [--focus:var(--color-attention-light)] [--active:var(--color-attention-light)] color-attention-dark)`,
 	ghostAccent: `layer-variants:[&.btn-color-ghostAccent]:([--bg:transparent] [--hover:rgb(from_var(--color-accent-light)_r_g_b/0.25)] [--focus:var(--color-accent-light)] [--active:var(--color-accent-light)] color-accent-dark)`,
 	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] [--hover:var(--color-gray-7)] [--focus:var(--color-gray-7)] [--active:var(--color-gray-6)] color-white border-black)`,
-	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-none shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-0 text-size-inherit transition-none)`,
+	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-none shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-none text-size-inherit transition-none)`,
 };
 
 const sizes = {
 	default: '',
-	small: 'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-full)',
-	icon: 'layer-variants:[&.size-icon]:(p-2.35 text-sm rounded-full)',
+	small: 'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-md)',
+	icon: 'layer-variants:[&.size-icon]:(p-2.35 text-sm rounded-lg)',
 	'icon-small':
-		'layer-variants:[&.size-icon-small]:(p-2 text-xs rounded-full -m-y-0.5)',
+		'layer-variants:[&.size-icon-small]:(p-2 text-xs rounded-lg -m-y-0.5)',
 };
 
 const toggledClass =

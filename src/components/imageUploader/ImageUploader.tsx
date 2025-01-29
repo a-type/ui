@@ -182,7 +182,7 @@ export function ImageUploader({
 				<Button
 					color="ghost"
 					size="icon"
-					className="absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-full transition-colors shadow-sm"
+					className="absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm"
 					onClick={() => onChange(null)}
 				>
 					<Icon name="x" />

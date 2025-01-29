@@ -184,11 +184,11 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 			ref={finalRef}
 			{...props}
 			className={classNames(
-				'absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-full cursor-grab sm:hidden touch-none',
+				'absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-lg cursor-grab sm:hidden touch-none',
 				className,
 			)}
 		>
-			<div className="w-full h-[4px] bg-gray-4 rounded-full" />
+			<div className="w-full h-[4px] bg-gray-4 rounded-lg" />
 		</div>
 	);
 };

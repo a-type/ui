@@ -67,7 +67,7 @@ export function NumberStepper({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(flex items-center border-solid border-1 border-gray-5 rounded-full overflow-hidden w-min-content flex-shrink-0 bg-white shadow-sm)',
+				'layer-components:(flex items-center border-solid border border-gray-5 rounded-lg overflow-hidden w-min-content flex-shrink-0 bg-white shadow-sm)',
 				disabled &&
 					'layer-variants:(border-gray-dark-blend bg-transparent shadow-none)',
 				{
