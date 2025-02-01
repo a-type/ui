@@ -20,9 +20,9 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	items?: BoxAlignment;
 	justify?: BoxJustification;
 	align?: `${BoxAlignment} ${BoxJustification}`;
-	gap?: BoxSpacingSize;
+	gap?: BoxSpacingSize | boolean;
 	wrap?: boolean;
-	p?: BoxSpacingSize;
+	p?: BoxSpacingSize | boolean;
 	container?: boolean;
 	surface?: boolean | 'primary' | 'secondary';
 	theme?: ThemeName;
@@ -35,7 +35,7 @@ export function Box({
 	items: itemsSolo,
 	justify: justifySolo,
 	align,
-	gap = 'md',
+	gap = 'none',
 	wrap,
 	p = 'none',
 	d = 'row',
@@ -76,7 +76,7 @@ export function Box({
 					'layer-components:flex-wrap': wrap,
 					'layer-components:gap-xs': gap === 'xs',
 					'layer-components:gap-sm': gap === 'sm',
-					'layer-components:gap-md': gap === 'md',
+					'layer-components:gap-md': gap === 'md' || gap === true,
 					'layer-components:gap-lg': gap === 'lg',
 					'layer-components:gap-xl': gap === 'xl',
 					'layer-components:items-center': items === 'center',
@@ -91,7 +91,7 @@ export function Box({
 					'layer-components:justify-around': justify === 'around',
 					'layer-components:p-xs': p === 'xs',
 					'layer-components:p-sm': p === 'sm',
-					'layer-components:p-md': p === 'md',
+					'layer-components:p-md': p === 'md' || p === true,
 					'layer-components:p-lg': p === 'lg',
 					'layer-components:p-xl': p === 'xl',
 					'layer-components:rounded-lg': !!surface,
