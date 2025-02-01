@@ -23,6 +23,9 @@ const meta = {
 				<Button>Default</Button>
 			</>
 		),
+		p: 'md',
+		gap: 'md',
+		border: true,
 	},
 	parameters: {
 		controls: { expanded: true },

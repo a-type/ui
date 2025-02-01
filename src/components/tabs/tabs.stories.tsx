@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TabsRoot, TabsList, TabsContent, TabsTrigger } from './tabs.js';
 import { useState } from 'react';
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs.js';
 
 const meta = {
 	title: 'Tabs',
-	argTypes: {},
+	argTypes: {
+		color: {
+			control: 'select',
+			options: ['default', 'primary'],
+		},
+	},
 	parameters: {
 		controls: { expanded: true },
 	},
@@ -12,17 +17,23 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<Meta>;
 
 export const Default: Story = {
-	render: () => {
+	render: (args) => {
 		const [value, setValue] = useState('tab1');
 		return (
 			<TabsRoot value={value} onValueChange={setValue}>
 				<TabsList>
-					<TabsTrigger value="tab1">Tab 1</TabsTrigger>
-					<TabsTrigger value="tab2">Tab 2 (long)</TabsTrigger>
-					<TabsTrigger value="tab3">Tab 3</TabsTrigger>
+					<TabsTrigger value="tab1" color={args.color}>
+						Tab 1
+					</TabsTrigger>
+					<TabsTrigger value="tab2" color={args.color}>
+						Tab 2 (long)
+					</TabsTrigger>
+					<TabsTrigger value="tab3" color={args.color}>
+						Tab 3
+					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="tab1">
 					<div>Tab 1 content</div>

@@ -6,7 +6,7 @@ import { withClassName } from '../../hooks/withClassName.js';
 
 const StyledContent = withClassName(
 	DropdownMenuPrimitive.Content,
-	'min-w-220px bg-white z-menu shadow-lg rounded-xl border-default',
+	'min-w-220px bg-white z-menu shadow-lg rounded-lg border-default',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -15,7 +15,7 @@ const StyledContent = withClassName(
 	'will-change-transform',
 );
 const itemClassName = classNames(
-	'layer-components:(text-md leading-4 color-black rounded-sm flex items-center pr-4 pl-8 py-3 relative text-left select-none cursor-pointer)',
+	'layer-components:(text-md leading-4 color-black flex items-center pr-4 pl-8 py-2 relative text-left select-none cursor-pointer)',
 	'layer-components:[&[data-disabled]]:(color-gray9 pointer-events-none)',
 	'layer-components:focus-visible:(bg-gray2 color-gray9)',
 	'layer-components:focus:outline-none',

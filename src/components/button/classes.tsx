@@ -45,6 +45,7 @@ const colors = {
 	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] [--hover:var(--color-gray-7)] [--focus:var(--color-gray-7)] [--active:var(--color-gray-6)] color-white border-black)`,
 	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-none shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-none text-size-inherit transition-none)`,
 };
+export const buttonColorClasses = colors;
 
 const sizes = {
 	default: '',
