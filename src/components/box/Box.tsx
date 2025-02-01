@@ -12,21 +12,35 @@ export type BoxJustification =
 	| 'around'
 	| 'end';
 export type BoxSpacingSize = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type BoxResponsive<T> =
+	| T
+	| {
+			sm?: T;
+			md?: T;
+			lg?: T;
+	  };
+
+function isResponsive<T>(
+	value: BoxResponsive<T>,
+): value is { sm?: T; md?: T; lg?: T } {
+	return typeof value === 'object';
+}
 
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
-	direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
-	d?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
+	direction?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
+	d?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
 	items?: BoxAlignment;
 	justify?: BoxJustification;
-	align?: `${BoxAlignment} ${BoxJustification}`;
+	layout?: `${BoxAlignment} ${BoxJustification}`;
 	gap?: BoxSpacingSize | boolean;
-	wrap?: boolean;
-	p?: BoxSpacingSize | boolean;
+	wrap?: BoxResponsive<boolean>;
+	p?: BoxResponsive<BoxSpacingSize | boolean>;
 	container?: boolean;
 	surface?: boolean | 'primary' | 'secondary';
 	theme?: ThemeName;
 	border?: boolean;
+	full?: boolean | 'width' | 'height';
 	ref?: Ref<HTMLDivElement>;
 }
 
@@ -34,7 +48,7 @@ export function Box({
 	className,
 	items: itemsSolo,
 	justify: justifySolo,
-	align,
+	layout: align,
 	gap = 'none',
 	wrap,
 	p = 'none',
@@ -45,6 +59,7 @@ export function Box({
 	surface,
 	theme,
 	border,
+	full,
 	ref,
 	...rest
 }: BoxProps) {
@@ -67,13 +82,40 @@ export function Box({
 			{...rest}
 			style={style}
 			className={clsx(
-				'flex',
+				'layer-components:flex layer-components:relative',
 				{
 					'layer-components:flex-row': direction === 'row',
 					'layer-components:flex-col': direction === 'col',
 					'layer-components:flex-row-reverse': direction === 'row-reverse',
 					'layer-components:flex-col-reverse': direction === 'col-reverse',
+					'layer-components:sm:flex-row':
+						isResponsive(direction) && direction.sm === 'row',
+					'layer-components:sm:flex-col':
+						isResponsive(direction) && direction.sm === 'col',
+					'layer-components:sm:flex-row-reverse':
+						isResponsive(direction) && direction.sm === 'row-reverse',
+					'layer-components:sm:flex-col-reverse':
+						isResponsive(direction) && direction.sm === 'col-reverse',
+					'layer-components:md:flex-row':
+						isResponsive(direction) && direction.md === 'row',
+					'layer-components:md:flex-col':
+						isResponsive(direction) && direction.md === 'col',
+					'layer-components:md:flex-row-reverse':
+						isResponsive(direction) && direction.md === 'row-reverse',
+					'layer-components:md:flex-col-reverse':
+						isResponsive(direction) && direction.md === 'col-reverse',
+					'layer-components:lg:flex-row':
+						isResponsive(direction) && direction.lg === 'row',
+					'layer-components:lg:flex-col':
+						isResponsive(direction) && direction.lg === 'col',
+					'layer-components:lg:flex-row-reverse':
+						isResponsive(direction) && direction.lg === 'row-reverse',
+					'layer-components:lg:flex-col-reverse':
+						isResponsive(direction) && direction.lg === 'col-reverse',
 					'layer-components:flex-wrap': wrap,
+					'layer-components:sm:flex-wrap': isResponsive(wrap) && wrap.sm,
+					'layer-components:md:flex-wrap': isResponsive(wrap) && wrap.md,
+					'layer-components:lg:flex-wrap': isResponsive(wrap) && wrap.lg,
 					'layer-components:gap-xs': gap === 'xs',
 					'layer-components:gap-sm': gap === 'sm',
 					'layer-components:gap-md': gap === 'md' || gap === true,
@@ -94,6 +136,21 @@ export function Box({
 					'layer-components:p-md': p === 'md' || p === true,
 					'layer-components:p-lg': p === 'lg',
 					'layer-components:p-xl': p === 'xl',
+					'layer-components:sm:p-xs': isResponsive(p) && p.sm === 'xs',
+					'layer-components:sm:p-sm': isResponsive(p) && p.sm === 'sm',
+					'layer-components:sm:p-md': isResponsive(p) && p.sm === 'md',
+					'layer-components:sm:p-lg': isResponsive(p) && p.sm === 'lg',
+					'layer-components:sm:p-xl': isResponsive(p) && p.sm === 'xl',
+					'layer-components:md:p-xs': isResponsive(p) && p.md === 'xs',
+					'layer-components:md:p-sm': isResponsive(p) && p.md === 'sm',
+					'layer-components:md:p-md': isResponsive(p) && p.md === 'md',
+					'layer-components:md:p-lg': isResponsive(p) && p.md === 'lg',
+					'layer-components:md:p-xl': isResponsive(p) && p.md === 'xl',
+					'layer-components:lg:p-xs': isResponsive(p) && p.lg === 'xs',
+					'layer-components:lg:p-sm': isResponsive(p) && p.lg === 'sm',
+					'layer-components:lg:p-md': isResponsive(p) && p.lg === 'md',
+					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
+					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
 					'layer-components:rounded-lg': !!surface,
 					'layer-components:(bg-white border-black)': surface === true,
 					'layer-components:(bg-primary-wash border-primary-dark)':
@@ -101,6 +158,8 @@ export function Box({
 					'layer-components:(bg-secondary-wash border-secondary-dark)':
 						surface === 'secondary',
 					'layer-components:(border border-solid rounded-lg)': border,
+					'layer-components:w-full': full === true || full === 'width',
+					'layer-components:h-full': full === true || full === 'height',
 				},
 				theme && `theme-${theme}`,
 				className,
