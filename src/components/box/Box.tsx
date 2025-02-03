@@ -15,6 +15,7 @@ export type BoxSpacingSize = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type BoxResponsive<T> =
 	| T
 	| {
+			default?: T;
 			sm?: T;
 			md?: T;
 			lg?: T;
@@ -24,6 +25,10 @@ function isResponsive<T>(
 	value: BoxResponsive<T>,
 ): value is { sm?: T; md?: T; lg?: T } {
 	return typeof value === 'object';
+}
+
+function hasDefault<T>(value: BoxResponsive<T>, val: T) {
+	return value === val || (isResponsive(value) && value.default === val);
 }
 
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
@@ -84,10 +89,16 @@ export function Box({
 			className={clsx(
 				'layer-components:flex layer-components:relative',
 				{
-					'layer-components:flex-row': direction === 'row',
-					'layer-components:flex-col': direction === 'col',
-					'layer-components:flex-row-reverse': direction === 'row-reverse',
-					'layer-components:flex-col-reverse': direction === 'col-reverse',
+					'layer-components:flex-row': hasDefault(direction, 'row'),
+					'layer-components:flex-col': hasDefault(direction, 'col'),
+					'layer-components:flex-row-reverse': hasDefault(
+						direction,
+						'row-reverse',
+					),
+					'layer-components:flex-col-reverse': hasDefault(
+						direction,
+						'col-reverse',
+					),
 					'layer-components:sm:flex-row':
 						isResponsive(direction) && direction.sm === 'row',
 					'layer-components:sm:flex-col':
@@ -112,7 +123,7 @@ export function Box({
 						isResponsive(direction) && direction.lg === 'row-reverse',
 					'layer-components:lg:flex-col-reverse':
 						isResponsive(direction) && direction.lg === 'col-reverse',
-					'layer-components:flex-wrap': wrap,
+					'layer-components:flex-wrap': hasDefault(wrap, true),
 					'layer-components:sm:flex-wrap': isResponsive(wrap) && wrap.sm,
 					'layer-components:md:flex-wrap': isResponsive(wrap) && wrap.md,
 					'layer-components:lg:flex-wrap': isResponsive(wrap) && wrap.lg,
@@ -131,11 +142,11 @@ export function Box({
 					'layer-components:justify-end': justify === 'end',
 					'layer-components:justify-between': justify === 'between',
 					'layer-components:justify-around': justify === 'around',
-					'layer-components:p-xs': p === 'xs',
-					'layer-components:p-sm': p === 'sm',
-					'layer-components:p-md': p === 'md' || p === true,
-					'layer-components:p-lg': p === 'lg',
-					'layer-components:p-xl': p === 'xl',
+					'layer-components:p-xs': hasDefault(p, 'xs'),
+					'layer-components:p-sm': hasDefault(p, 'sm'),
+					'layer-components:p-md': hasDefault(p, 'md') || hasDefault(p, true),
+					'layer-components:p-lg': hasDefault(p, 'lg'),
+					'layer-components:p-xl': hasDefault(p, 'xl'),
 					'layer-components:sm:p-xs': isResponsive(p) && p.sm === 'xs',
 					'layer-components:sm:p-sm': isResponsive(p) && p.sm === 'sm',
 					'layer-components:sm:p-md': isResponsive(p) && p.sm === 'md',
