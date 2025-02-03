@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.5.1
+
+### Patch Changes
+
+- 33e2b1d: more box tools: responsiveness, etc
+- 246d46b: More Box shorthands
+
 ## 1.5.0
 
 ### Minor Changes
