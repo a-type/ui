@@ -83,6 +83,8 @@ export const iconNames = [
 	'previous',
 	'skipStart',
 	'skipEnd',
+	'enterKey',
+	'gamePiece',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

@@ -937,6 +937,26 @@ export const IconSpritesheet = (props: any) => (
 					strokeLinejoin="round"
 				/>
 			</symbol>
+			<symbol id="icon-enterKey" viewBox="0 0 15 15">
+				<path
+					d="M10.5 8V10.5H3.5M3.5 10.5L5 9M3.5 10.5L5 12"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M14.5 2H6.5V6.5H0.5V14H14.5V2Z"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-gamePiece" viewBox="0 0 15 15">
+				<path
+					d="M10 2.5C10 4 8.5 5 8.5 5L10 11C11.1722 11.4548 12.0956 11.9049 12.5 13C9.5 14.5 5.5 14.5 2.5 13C2.85427 12.0596 3.71706 11.5944 5 11L6.5 5C6.5 5 5 4 5 2.5C5 1 6.52369 0.5 7.5 0.5C8.47631 0.5 10 1 10 2.5Z"
+					stroke="currentColor"
+					strokeLinejoin="round"
+				/>
+			</symbol>
 		</defs>
 	</svg>
 );
