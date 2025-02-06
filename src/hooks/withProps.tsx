@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const withProps = <T extends {}, Extras extends {}>(
-	Component: React.ComponentType<T & Extras>,
-	extras: Extras,
+export const withProps = <T extends {}>(
+	Component: React.ComponentType<T>,
+	extras: Partial<T>,
 ) => {
-	return (props: T & Extras) => {
+	return (props: T) => {
 		return <Component {...props} {...extras} />;
 	};
 };
