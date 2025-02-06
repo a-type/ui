@@ -50,6 +50,7 @@ export function CardMain({
 			data-compact={compact}
 			data-visually-focused={rest.visuallyFocused}
 			data-visually-disabled={rest.visuallyDisabled}
+			data-interactive={isInteractive}
 			{...rest}
 		/>
 	);
@@ -59,7 +60,7 @@ export const CardTitle = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
-	'layer-components:[:hover>&]:(bg-gray-2)',
+	'layer-components:[[data-interactive=true]:hover>&]:(bg-gray-2)',
 );
 
 const CardContentRoot = withClassName(
