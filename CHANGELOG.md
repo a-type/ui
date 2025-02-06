@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.5.4
+
+### Patch Changes
+
+- 75fb57b: card fixes
+- 8ecddc8: fix withProps typings
+
 ## 1.5.3
 
 ### Patch Changes
