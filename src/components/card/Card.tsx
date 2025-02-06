@@ -57,15 +57,15 @@ export function CardMain({
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold)',
+	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend text-black rounded-md mx-2 my-0.5 border border-solid border-grayDarkBlend text-xs)',
+	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend text-black rounded-md mx-2 my-0.5 border border-solid border-grayDarkBlend text-xs relative z-1)',
 	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
-	'layer-variants:[&[data-unstyled]]:(p-0 [background:unset] border-none)',
+	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
@@ -77,7 +77,7 @@ export function CardContent({ unstyled, ref, ...rest }: CardContentProps) {
 
 export const CardImage = withClassName(
 	SlotDiv,
-	'layer-components:(absolute z-0 right-0 top-0 bottom-0 w-full h-full object-cover bg-center)',
+	'layer-components:(absolute z-0 right-0 top-0 bottom-0 w-full h-full object-cover bg-cover bg-center)',
 );
 
 export const CardFooter = withClassName(
