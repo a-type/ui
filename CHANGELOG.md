@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.3
+
+### Patch Changes
+
+- d0c844a: add enterKey and gamePiece icons
+
 ## 1.5.2
 
 ### Patch Changes
