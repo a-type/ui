@@ -75,6 +75,9 @@ function DemoUI({ className }: { className?: string }) {
 						<Icon name="placeholder" />
 						World
 					</ActionButton>
+					<ActionButton>
+						<Icon name="placeholder" />
+					</ActionButton>
 				</ActionBar>
 			</div>
 			<div>
