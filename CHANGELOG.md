@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.5
+
+### Patch Changes
+
+- 40e3596: fix action button height
+
 ## 1.5.4
 
 ### Patch Changes
