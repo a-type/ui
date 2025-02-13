@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.6
+
+### Patch Changes
+
+- a67e582: SSR fix for color modes
+
 ## 1.5.5
 
 ### Patch Changes
