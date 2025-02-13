@@ -1,4 +1,5 @@
 export function setColorMode(mode: 'system' | 'light' | 'dark') {
+	if (typeof window === 'undefined') return;
 	if (mode === 'system') {
 		window.localStorage.removeItem('colorMode');
 	} else {
@@ -8,6 +9,8 @@ export function setColorMode(mode: 'system' | 'light' | 'dark') {
 }
 
 const updateMode = () => {
+	if (typeof window === 'undefined') return;
+
 	const mode = window.localStorage.getItem('colorMode');
 	document.documentElement.classList.remove('override-light', 'override-dark');
 	if (mode) {
@@ -45,15 +48,19 @@ const updateMode = () => {
 updateMode();
 
 // listen for changes and apply an override-mode to the html
-window.addEventListener('colorModeChanged', updateMode);
+if (typeof window !== 'undefined') {
+	window.addEventListener('colorModeChanged', updateMode);
+}
 
 export function getColorMode(): 'system' | 'light' | 'dark' {
+	if (typeof window === 'undefined') return 'system';
 	return (window.localStorage.getItem('colorMode') as any) || 'system';
 }
 
 export function subscribeToColorModeChange(
 	callback: (mode: 'system' | 'light' | 'dark') => void,
 ) {
+	if (typeof window === 'undefined') return () => {};
 	const update = () => callback(getColorMode());
 	window.addEventListener('colorModeChanged', update);
 	return () => {
@@ -61,4 +68,6 @@ export function subscribeToColorModeChange(
 	};
 }
 
-(window as any).setColorMode = setColorMode;
+if (typeof window !== 'undefined') {
+	(window as any).setColorMode = setColorMode;
+}
