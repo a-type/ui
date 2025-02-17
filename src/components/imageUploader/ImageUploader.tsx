@@ -56,7 +56,19 @@ export function ImageUploader({
 			if (!file) {
 				handleChange(null);
 			} else if (maxDimension) {
-				const resizer = await import('browser-image-resizer');
+				let resizer = await import('browser-image-resizer');
+				// @ts-ignore
+				resizer = resizer.readAndCompressImage ? resizer : resizer.default;
+				if (!resizer || !resizer.readAndCompressImage) {
+					// fallback. this happens in dev environments using untransformed TS.
+					// TODO: fix this.
+					console.warn(
+						'browser-image-resizer not available, uploading original image',
+					);
+					handleChange(file);
+					return;
+				}
+
 				const resizedImage = await resizer.readAndCompressImage(file, {
 					maxWidth: maxDimension,
 					maxHeight: maxDimension,

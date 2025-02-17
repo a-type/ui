@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ImageUploader } from './ImageUploader.js';
 import { useState } from 'react';
+import { ImageUploader } from './ImageUploader.js';
 
 const meta = {
 	title: 'ImageUploader',
 	component: ImageUploader,
 	argTypes: {
 		onChange: { action: 'change' },
+		maxDimension: { control: { type: 'number' } },
 	},
 	parameters: {
 		controls: { expanded: true },
