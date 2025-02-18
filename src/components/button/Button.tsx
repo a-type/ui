@@ -18,7 +18,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 		| 'unstyled';
 	size?: 'default' | 'small' | 'icon' | 'icon-small';
 	toggled?: boolean;
-	toggleMode?: 'color' | 'indicator' | 'state-only';
+	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
@@ -32,7 +32,7 @@ export function Button({
 	color,
 	size,
 	toggled,
-	toggleMode = 'color',
+	toggleMode = 'color-and-indicator',
 	align,
 	visuallyDisabled,
 	visuallyFocused,
@@ -56,7 +56,9 @@ export function Button({
 			getButtonClassName({
 				color,
 				size,
-				toggleable: toggled !== undefined && toggleMode === 'color',
+				toggleable:
+					toggled !== undefined &&
+					(toggleMode === 'color' || toggleMode === 'color-and-indicator'),
 				align,
 			}),
 			className,
@@ -75,9 +77,11 @@ export function Button({
 	return (
 		<Comp {...buttonProps}>
 			{loading && <Spinner size={16} className="inline-block w-1em h-1em" />}
-			{toggled !== undefined && toggleMode !== 'state-only' && (
-				<ToggleIndicator value={toggled} />
-			)}
+			{toggled !== undefined &&
+				(toggleMode === 'indicator' ||
+					toggleMode === 'color-and-indicator') && (
+					<ToggleIndicator value={toggled} />
+				)}
 			{children}
 		</Comp>
 	);
