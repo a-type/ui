@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.7
+
+### Patch Changes
+
+- 1f2c2c5: Bypass image resizing if not available (ImageUploader)
+
 ## 1.5.6
 
 ### Patch Changes
