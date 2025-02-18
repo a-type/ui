@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.5.8
+
+### Patch Changes
+
+- fdd97ee: Fix button toggle mode
+
 ## 1.5.7
 
 ### Patch Changes
