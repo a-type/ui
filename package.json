@@ -78,7 +78,6 @@
 		"date-fns": "^4.1.0",
 		"formik": "^2.4.6",
 		"pluralize": "^8.0.0",
-		"prosemirror-model": "1.24.1",
 		"react-hot-toast": "^2.4.1"
 	},
 	"devDependencies": {
