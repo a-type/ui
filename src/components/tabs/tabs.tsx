@@ -21,7 +21,7 @@ const colorClasses = {
 	default:
 		'layer-variants:([--bg:var(--color-white)] [--hover:var(--color-gray-3)] [--focus:var(--color-gray-4)] [--active:var(--color-gray-4)])',
 	primary:
-		'layer-variants:([--bg:var(--color-primary-light)] [--hover:var(--color-primary)] [--focus:var(--color-primary)] [--active:var(--color-primary)])',
+		'layer-variants:([--bg:var(--color-primary)] [--hover:var(--color-primary-light)] [--focus:var(--color-primary-light)] [--active:var(--color-primary-light)])',
 };
 
 export interface TabsTriggerProps

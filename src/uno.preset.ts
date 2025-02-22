@@ -459,8 +459,8 @@ export default function presetAglio({
 					--palette-red-00: #321f19;
 					--palette-green-90: #e9fff1;
 					--palette-green-80: #c2ffe1;
-					--palette-green-70: #8ff8d3;
-					--palette-green-60: #79fdcd;
+					--palette-green-70: #92f2d1;
+					--palette-green-60: #86efc8;
 					--palette-green-50: #63cea5;
 					--palette-green-40: #499d92;
 					--palette-green-30: #1f837c;
@@ -479,10 +479,10 @@ export default function presetAglio({
 					--palette-yellow-00: #3b1c00;
 					--palette-blue-90: #e3f3ff;
 					--palette-blue-80: #c4e7ff;
-					--palette-blue-70: #7bd0ff;
-					--palette-blue-60: #4cc5f9;
-					--palette-blue-50: #18b5ed;
-					--palette-blue-40: #0a9acf;
+					--palette-blue-70: #87d3fc;
+					--palette-blue-60: #6ad2ff;
+					--palette-blue-50: #1ebcf5;
+					--palette-blue-40: #0ca6df;
 					--palette-blue-30: #077da7;
 					--palette-blue-20: #005979;
 					--palette-blue-10: #004c69;
