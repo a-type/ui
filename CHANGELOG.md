@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.1
+
+### Patch Changes
+
+- 0fb36c4: remove unused dep
+
 ## 1.6.0
 
 ### Minor Changes
