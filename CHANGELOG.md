@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- 48f3946: Remove TipTap dependency. Just exports class names for use now.
+
 ## 1.5.8
 
 ### Patch Changes
