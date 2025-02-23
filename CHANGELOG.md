@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.2
+
+### Patch Changes
+
+- d0a6d78: Update rich text styles
+
 ## 1.6.1
 
 ### Patch Changes
