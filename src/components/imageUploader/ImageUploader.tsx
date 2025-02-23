@@ -1,6 +1,13 @@
-import classNames from 'clsx';
-import { useCallback, useId, useState } from 'react';
-import { Button } from '../button/index.js';
+import classNames, { clsx } from 'clsx';
+import {
+	createContext,
+	ReactNode,
+	useCallback,
+	useContext,
+	useId,
+	useState,
+} from 'react';
+import { Button, ButtonProps } from '../button/index.js';
 import {
 	CameraDeviceSelector,
 	CameraFullscreenButton,
@@ -14,7 +21,7 @@ export interface ImageUploaderProps {
 	onChange: (value: File | null) => void;
 	className?: string;
 	maxDimension?: number;
-	facingMode?: 'user' | 'environment';
+	children?: ReactNode;
 }
 
 /**
@@ -22,11 +29,11 @@ export interface ImageUploaderProps {
  * on the image to select a new one, or dragging a new image onto the
  * component to replace the existing one.
  */
-export function ImageUploader({
+export function ImageUploaderRoot({
 	value,
 	onChange: handleChange,
 	maxDimension,
-	facingMode,
+	children,
 	...rest
 }: ImageUploaderProps) {
 	const inputId = useId();
@@ -119,34 +126,23 @@ export function ImageUploader({
 		e.stopPropagation();
 	}, []);
 
-	const [cameraOpen, setCameraOpen] = useState(false);
-	const openCamera = () => setCameraOpen(true);
-
 	return (
-		<div
-			className={classNames(
-				'relative overflow-hidden rounded-lg',
-				rest.className,
-			)}
-			onDragEnter={onDragEnter}
-			onDragLeave={onDragLeave}
-			onDragOver={onDragOver}
-			onDrop={onDrop}
-			onDragStart={onDragStart}
-			onDragEnd={onDragEnd}
+		<ImageUploaderContext.Provider
+			value={{ inputId, dragging, draggingOver, value, onChange }}
 		>
-			{value ? (
-				<img src={value} className="w-full h-full object-cover object-center" />
-			) : null}
-			{!value && (
-				<div
-					className={classNames(
-						'absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[rgba(0,0,0,0.05)]',
-						{
-							'!bg-[rgba(0,0,0,0.1)]': draggingOver,
-						},
-					)}
-				>
+			<div
+				className={classNames(
+					'relative overflow-hidden rounded-lg',
+					rest.className,
+				)}
+				onDragEnter={onDragEnter}
+				onDragLeave={onDragLeave}
+				onDragOver={onDragOver}
+				onDrop={onDrop}
+				onDragStart={onDragStart}
+				onDragEnd={onDragEnd}
+			>
+				{!value && (
 					<input
 						type="file"
 						accept="image/*"
@@ -155,27 +151,56 @@ export function ImageUploader({
 						className="absolute inset--99999 op-0"
 						id={inputId}
 					/>
-					<Button color="ghost" asChild>
-						<label htmlFor={inputId}>
-							<Icon name="upload" />
-							<span>{dragging ? 'Drop' : 'Upload'}</span>
-						</label>
-					</Button>
-					<Button color="ghost" onClick={openCamera}>
-						<Icon name="camera" />
-						<span>Camera</span>
-					</Button>
-				</div>
-			)}
-			{!value && cameraOpen && (
+				)}
+				{children}
+			</div>
+		</ImageUploaderContext.Provider>
+	);
+}
+
+const ImageUploaderContext = createContext<{
+	inputId: string;
+	dragging: boolean;
+	draggingOver: boolean;
+	value: string | null;
+	onChange: (file: File | null) => void;
+} | null>(null);
+function useUploaderContext() {
+	const context = useContext(ImageUploaderContext);
+	if (!context) {
+		throw new Error('ImageUploaderContext not found');
+	}
+	return context;
+}
+
+function ImageUploaderPrebuilt(
+	props: Omit<ImageUploaderProps, 'children'> & {
+		facingMode?: 'user' | 'environment';
+	},
+) {
+	const [cameraOpen, setCameraOpen] = useState(false);
+	const openCamera = () => setCameraOpen(true);
+
+	return (
+		<ImageUploaderRoot {...props}>
+			<ImageUploaderDisplay />
+
+			<ImageUploaderEmptyControls>
+				<ImageUploaderFileButton />
+				<Button color="ghost" onClick={openCamera}>
+					<Icon name="camera" />
+					<span>Camera</span>
+				</Button>
+			</ImageUploaderEmptyControls>
+			{!props.value && cameraOpen && (
 				<CameraRoot
 					className="absolute w-full h-full z-1"
 					format="image/png"
 					onCapture={(file) => {
-						onChange(file);
+						props.onChange(file);
 						setCameraOpen(false);
 					}}
-					facingMode={facingMode}
+					facingMode={props.facingMode}
 				>
 					<CameraShutterButton />
 					<CameraDeviceSelector />
@@ -190,16 +215,97 @@ export function ImageUploader({
 					</Button>
 				</CameraRoot>
 			)}
-			{value && (
-				<Button
-					color="ghost"
-					size="icon"
-					className="absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm"
-					onClick={() => onChange(null)}
-				>
-					<Icon name="x" />
-				</Button>
+			<ImageUploaderRemoveButton />
+		</ImageUploaderRoot>
+	);
+}
+
+export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
+	const { inputId, dragging } = useUploaderContext();
+
+	return (
+		<Button color="ghost" asChild {...props}>
+			<label htmlFor={inputId}>
+				{children ?? (
+					<>
+						<Icon name="upload" />
+						<span>{dragging ? 'Drop' : 'Upload'}</span>
+					</>
+				)}
+			</label>
+		</Button>
+	);
+}
+
+export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
+	const { value, onChange } = useUploaderContext();
+	if (!value) return null;
+	return (
+		<Button
+			color="ghost"
+			size="icon"
+			className={clsx(
+				'layer-variants:(absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm z-10)',
+				className,
 			)}
+			onClick={() => onChange(null)}
+			{...rest}
+		>
+			<Icon name="x" />
+		</Button>
+	);
+}
+
+export function ImageUploaderDisplay({
+	className,
+	...rest
+}: {
+	className?: string;
+}) {
+	const { value } = useUploaderContext();
+	return value ? (
+		<img
+			src={value}
+			className={clsx(
+				'layer-components:(w-full h-full object-cover object-center)',
+				className,
+			)}
+			{...rest}
+		/>
+	) : null;
+}
+
+export function ImageUploaderEmptyControls({
+	children,
+	className,
+}: {
+	children: ReactNode;
+	className?: string;
+}) {
+	const { value, draggingOver } = useUploaderContext();
+
+	if (value) return null;
+
+	return (
+		<div
+			className={classNames(
+				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3)',
+				{
+					'layer-components:bg-[rgba(0,0,0,0.05)]': !draggingOver,
+					'layer-components:bg-[rgba(0,0,0,0.1)]': draggingOver,
+				},
+				className,
+			)}
+		>
+			{children}
 		</div>
 	);
 }
+
+export const ImageUploader = Object.assign(ImageUploaderPrebuilt, {
+	Root: ImageUploaderRoot,
+	FileButton: ImageUploaderFileButton,
+	RemoveButton: ImageUploaderRemoveButton,
+	Display: ImageUploaderDisplay,
+	EmptyControls: ImageUploaderEmptyControls,
+});
