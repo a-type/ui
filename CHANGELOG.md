@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.4
+
+### Patch Changes
+
+- 7f58cda: Fix for viewport constrained rounding error triggering keyboard expanded behavior
+
 ## 1.6.3
 
 ### Patch Changes
