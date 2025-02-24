@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.5
+
+### Patch Changes
+
+- 934589e: neutral nav items
+
 ## 1.6.4
 
 ### Patch Changes
