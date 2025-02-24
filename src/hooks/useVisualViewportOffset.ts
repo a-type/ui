@@ -39,7 +39,10 @@ export function useIsKeyboardOpen() {
 
 	const [isViewportConstrained, setIsViewportConstrained] = useState(false);
 	useReactToViewportChanges((viewport) => {
-		setIsViewportConstrained(viewport.height < window.innerHeight);
+		// heuristic - 100px difference between visual viewport and window height
+		setIsViewportConstrained(
+			Math.abs(viewport.height - window.innerHeight) > 100,
+		);
 	}, virtualKeyboardBehavior !== 'displace');
 
 	const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
