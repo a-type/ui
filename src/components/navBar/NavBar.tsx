@@ -7,10 +7,11 @@ import { Icon, IconProps } from '../icon/index.js';
 export const navBarItemClass = classNames(
 	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-7 select-none)',
 	'layer-components:sm:(flex-row-reverse h-auto justify-start gap-2 overflow-visible)',
+	'layer-components:active:bg-primary-wash layer-components:sm:active:bg-gray-dark-blend',
 	'layer-components:hover:bg-primary-wash',
 	'layer-components:focus-visible:(outline-none bg-primary-wash)',
-	'layer-components:active:bg-primary-wash layer-components:sm:active:bg-gray-dark-blend',
 	'layer-components:[&[data-active=true]]:(bg-primary-wash text-black)',
+	'layer-components:([--bg:var(--color-primary-wash)] [--fill:var(--color-primary)])',
 );
 
 export interface NavBarItemProps {
@@ -18,6 +19,7 @@ export interface NavBarItemProps {
 	className?: string;
 	children?: ReactNode;
 	active?: boolean;
+	color?: 'primary' | 'neutral';
 }
 
 export const NavBarItem = function NavBarItem({
@@ -25,6 +27,7 @@ export const NavBarItem = function NavBarItem({
 	asChild,
 	className,
 	active,
+	color,
 	...rest
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLDivElement>;
@@ -34,7 +37,17 @@ export const NavBarItem = function NavBarItem({
 	return (
 		<Comp
 			ref={ref}
-			className={classNames(navBarItemClass, className)}
+			className={classNames(
+				navBarItemClass,
+				color === 'neutral' && [
+					'layer-variants:active:bg-gray-dark-blend layer-variants:sm:active:bg-gray-dark-blend',
+					'layer-variants:hover:bg-gray-dark-blend',
+					'layer-variants:focus-visible:(bg-gray-dark-blend)',
+					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend text-black)',
+					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray-5)])',
+				],
+				className,
+			)}
 			data-active={active}
 			{...rest}
 		/>
@@ -44,7 +57,7 @@ export const NavBarItem = function NavBarItem({
 export const NavBarItemIconWrapper = withClassName(
 	'div',
 	'layer-components:(relative flex) layer-components:sm:(p-6px rounded-lg bg-gray-blend)',
-	'layer-variants:sm:[*[data-active=true]_&]:bg-primary-light',
+	'layer-variants:sm:[*[data-active=true]_&]:bg-[var(--bg)]',
 );
 
 export const NavBarItemText = withClassName(
@@ -73,7 +86,7 @@ export const NavBarItemIcon = function NavBarItemIcon({
 			name={name}
 			className={clsx(
 				'layer-components:(relative z-1 flex fill-none text-inherit)',
-				'layer-variants:[*[data-active=true]_&]:fill-primary-light',
+				'layer-variants:[*[data-active=true]_&]:fill-[var(--fill)]',
 				className,
 			)}
 			{...rest}

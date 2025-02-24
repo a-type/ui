@@ -64,6 +64,15 @@ export const Default: Story = {
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />
 					</NavBarItem>
+					<NavBarItem color="neutral" active={true}>
+						<NavBarItemIconWrapper>
+							<NavBarItemIcon asChild>
+								<Icon name="book" />
+							</NavBarItemIcon>
+						</NavBarItemIconWrapper>
+						<NavBarItemText>Neutral</NavBarItemText>
+						<NavBarItemPip />
+					</NavBarItem>
 				</NavBarRoot>
 			</PageNav>
 		</PageRoot>
