@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.6.3
+
+### Patch Changes
+
+- 5e1142a: Break down ImageUploader to subcomponents
+
 ## 1.6.2
 
 ### Patch Changes
