@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.1
+
+### Patch Changes
+
+- 6f337de: Add hue tweak to default theme
+
 ## 1.7.0
 
 ### Minor Changes
