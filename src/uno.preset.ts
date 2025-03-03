@@ -677,6 +677,7 @@ export default function presetAglio({
 					--color-primary-light: var(--color-yellow-light);
 					--color-primary-dark: var(--color-yellow-dark);
 					--color-primary-wash: var(--color-yellow-wash);
+					--wash-hue-tweak: -30;
 				}
 
 				/* INTRINSIC DARK THEME */
