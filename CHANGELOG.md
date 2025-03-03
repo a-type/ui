@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.0
+
+### Minor Changes
+
+- 1fd72dc: Fancy new color system
+
 ## 1.6.5
 
 ### Patch Changes
