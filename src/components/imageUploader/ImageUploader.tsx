@@ -4,6 +4,7 @@ import {
 	ReactNode,
 	useCallback,
 	useContext,
+	useEffect,
 	useId,
 	useState,
 } from 'react';
@@ -223,8 +224,29 @@ function ImageUploaderPrebuilt(
 export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
 	const { inputId, dragging } = useUploaderContext();
 
+	const [focused, setFocused] = useState(false);
+	useEffect(() => {
+		function updateFocus(ev: FocusEvent) {
+			setFocused(ev.target === document.activeElement);
+		}
+		setTimeout(() => {
+			const input = document.getElementById(inputId);
+			if (input) {
+				input.addEventListener('focus', updateFocus);
+				input.addEventListener('blur', updateFocus);
+			}
+		}, 0);
+		return () => {
+			const input = document.getElementById(inputId);
+			if (input) {
+				input.removeEventListener('focus', updateFocus);
+				input.removeEventListener('blur', updateFocus);
+			}
+		};
+	}, [inputId]);
+
 	return (
-		<Button color="ghost" asChild {...props}>
+		<Button color="ghost" asChild visuallyFocused={focused} {...props}>
 			<label htmlFor={inputId}>
 				{children ?? (
 					<>

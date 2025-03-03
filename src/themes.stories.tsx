@@ -7,6 +7,7 @@ import { Icon } from './components/icon/index.js';
 import {
 	AvatarList,
 	Box,
+	Checkbox,
 	DateRangePicker,
 	Dialog,
 	DropdownMenu,
@@ -62,18 +63,21 @@ function DemoUI({ className }: { className?: string }) {
 							Ghost Destructive Small
 						</Button>
 					</Box>
-					<Box gap wrap p>
+					<Box gap wrap p items="start">
 						<Input placeholder="Placeholder" />
 						<TextArea placeholder="Placeholder" />
 					</Box>
 					<Card>
-						<Card.Main>
+						<Card.Main onClick={() => {}}>
 							<Card.Title>Card Title</Card.Title>
 							<Card.Content>Card Content</Card.Content>
 						</Card.Main>
 						<Card.Footer>
 							<Card.Actions>
 								<Button size="small">Action 1</Button>
+								<Button size="icon-small" color="ghost">
+									<Icon name="placeholder" />
+								</Button>
 							</Card.Actions>
 						</Card.Footer>
 					</Card>
@@ -127,8 +131,9 @@ function DemoUI({ className }: { className?: string }) {
 						onChange={() => {}}
 					/>
 					<Progress value={50} className="m-auto" />
-					<Box surface="primary" p>
-						Primary surface
+					<Box surface="primary" p gap>
+						<div>Primary surface</div>
+						<Button color="ghost">Ghost</Button>
 					</Box>
 					<Box surface="accent" p>
 						Accent surface
@@ -150,6 +155,7 @@ function DemoUI({ className }: { className?: string }) {
 							<DropdownMenu.Item>Item 3</DropdownMenu.Item>
 						</DropdownMenu.Content>
 					</DropdownMenu>
+					<Checkbox />
 				</div>
 			</PageContent>
 			<PageNav>
