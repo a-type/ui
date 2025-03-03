@@ -42,7 +42,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	wrap?: BoxResponsive<boolean>;
 	p?: BoxResponsive<BoxSpacingSize | boolean>;
 	container?: boolean;
-	surface?: boolean | 'primary' | 'accent';
+	surface?: boolean | 'primary' | 'accent' | 'default';
 	theme?: ThemeName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
@@ -163,7 +163,8 @@ export function Box({
 					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
 					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
 					'layer-components:rounded-lg': !!surface,
-					'layer-components:(bg-white border-black)': surface === true,
+					'layer-components:(bg-white border-black)':
+						surface === true || surface === 'default',
 					'layer-components:(bg-primary-wash border-primary-dark)':
 						surface === 'primary',
 					'layer-components:(bg-accent-wash border-accent-dark)':

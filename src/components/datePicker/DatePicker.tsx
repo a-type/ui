@@ -216,18 +216,18 @@ const CalendarDay = withClassName(
 	'hover:(z-1 outline-accent)',
 	'active:(bg-accent-wash rounded)',
 	'[&[data-selected]]:(bg-accent-light z-2 rounded)',
-	'[&[data-in-range]]:(bg-accent-wash rounded-none z-1)',
+	'[&[data-in-range]]:(bg-accent-wash bg-darken-0.5 rounded-none z-1)',
 	'[&[data-range-start]]:(bg-accent-light rounded-l rounded-r-none z-1)',
 	'[&[data-range-end]]:(bg-accent-light rounded-r rounded-l-none z-1)',
 	'disabled:(opacity-50 cursor-default)',
 	// today dot
 	"[&[data-today]]:before:(content-[''] absolute left-[2px] top-[2px] w-[6px] h-[6px] rounded-lg bg-primary)",
-	'[&[data-top-edge]]:(border-t-gray-5)',
-	'[&[data-bottom-edge]]:(border-b-gray-5)',
-	'[&[data-first-column]]:(border-l-gray-5)',
-	'[&[data-last-column]]:(border-r-gray-5)',
-	'[&[data-day-first]]:(border-l-gray-5 rounded-tl)',
-	'[&[data-day-last]]:(border-r-gray-5 rounded-br)',
+	'[&[data-top-edge]]:(border-t-gray)',
+	'[&[data-bottom-edge]]:(border-b-gray)',
+	'[&[data-first-column]]:(border-l-gray)',
+	'[&[data-last-column]]:(border-r-gray)',
+	'[&[data-day-first]]:(border-l-gray rounded-tl)',
+	'[&[data-day-last]]:(border-r-gray rounded-br)',
 	'[&[data-first-column][data-bottom-edge]]:rounded-bl',
 	'[&[data-last-column][data-bottom-edge]]:rounded-br',
 	'[&[data-first-column][data-top-edge]]:rounded-tl',
@@ -237,7 +237,7 @@ const CalendarDay = withClassName(
 
 const DayLabel = withClassName(
 	'div',
-	'flex items-center justify-center text-sm text-gray-6',
+	'flex items-center justify-center text-sm text-gray-dark',
 );
 
 const DayLabels = () => (

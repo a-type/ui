@@ -13,7 +13,7 @@ export const CheckboxRoot = withClassName(
 		'layer-components:focus-visible:(outline-off shadow-focus)',
 		'layer-components:[&[data-state=checked]]:(bg-primary-light border-primary-dark)',
 		'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
-		'layer-components:[&:disabled]:(bg-transparent border-gray-3 shadow-none)',
+		'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
 	),
 );
 

@@ -1,10 +1,10 @@
 import { useField } from 'formik';
 import { withClassName } from '../../hooks.js';
+import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import {
 	NumberStepper,
 	NumberStepperProps,
 } from '../numberStepper/NumberStepper.js';
-import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 
 export interface NumberStepperFieldProps
 	extends Omit<NumberStepperProps, 'value' | 'onChange'> {
@@ -50,5 +50,5 @@ const FieldRoot = withClassName(
 
 const FieldLabel = withClassName(
 	'label',
-	'layer-components:(block flex-col gap-1 text-md font-normal text-dark-blend mt-2px)',
+	'layer-components:(block flex-col gap-1 text-md font-normal text-darkBlend mt-2px)',
 );

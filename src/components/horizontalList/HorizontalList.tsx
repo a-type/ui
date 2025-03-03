@@ -170,7 +170,7 @@ export function HorizontalList({
 							className={clsx(
 								'flex-shrink-0 bg-[var(--scroll-bg)] sticky left-0 top-2 z-1',
 								!open &&
-									'rounded-none h-full border-r border-r-solid border-r-gray-5',
+									'rounded-none h-full border-r border-r-solid border-r-gray',
 							)}
 						>
 							<Icon

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Masonry } from './masonry.js';
 import { useState } from 'react';
+import { Masonry } from './masonry.js';
 
 const meta = {
 	title: 'Masonry',
@@ -33,7 +33,7 @@ const content = (spans?: boolean) =>
 		return (
 			<div
 				key={i}
-				className="bg-gray-5 rounded-lg"
+				className="bg-gray-light rounded-lg"
 				style={{ height: size }}
 				data-span={spans ? span : undefined}
 				onClick={() => setSpan((v) => (v === 1 ? 2 : 1))}

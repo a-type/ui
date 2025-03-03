@@ -10,7 +10,7 @@ export const tipTapClassName = clsx(
 	'layer-components:[&_.ProseMirror_h4]:(text-sm font-bold mb-sm)',
 	'layer-components:[&_.ProseMirror_p]:(mb-sm)',
 	'layer-components:[&_.ProseMirror_a]:underline',
-	'layer-components:[&_.ProseMirror]:(bg-white rounded-[20px] px-4 py-2 shadow-sm-inset border-gray-5 border-solid border-1)',
+	'layer-components:[&_.ProseMirror]:(bg-white rounded-[20px] px-4 py-2 shadow-sm-inset border-gray border-solid border-1)',
 );
 
 export const tipTapReadonlyClassName = clsx(

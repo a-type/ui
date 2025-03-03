@@ -16,8 +16,8 @@ const StyledContent = withClassName(
 );
 const itemClassName = classNames(
 	'layer-components:(text-md leading-4 color-black flex items-center pr-4 pl-8 py-2 relative text-left select-none cursor-pointer)',
-	'layer-components:[&[data-disabled]]:(color-gray9 pointer-events-none)',
-	'layer-components:focus-visible:(bg-gray2 color-gray9)',
+	'layer-components:[&[data-disabled]]:(color-black pointer-events-none)',
+	'layer-components:focus-visible:(bg-gray-light bg-darken-0.5 color-black)',
 	'layer-components:focus:outline-none',
 );
 const StyledItemBase = withClassName(DropdownMenuPrimitive.Item, itemClassName);
@@ -55,7 +55,7 @@ const StyledRadioItem = withClassName(
 
 const StyledLabel = withClassName(
 	DropdownMenuPrimitive.Label,
-	'pl-3 py-1 font-bold text-sm leading-6 color-gray-9',
+	'pl-3 py-1 font-bold text-sm leading-6 color-gray-dark',
 );
 
 const StyledSeparator = withClassName(
@@ -102,7 +102,7 @@ export const DropdownMenuContent = ({
 	return (
 		<StyledPortal forceMount={forceMount}>
 			<StyledContent {...props}>
-				<div className="overflow-hidden rounded-xl">{children}</div>
+				<div className="overflow-hidden rounded-lg">{children}</div>
 				<StyledArrow />
 			</StyledContent>
 		</StyledPortal>

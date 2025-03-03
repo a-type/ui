@@ -44,8 +44,10 @@ export const SelectItem = ({
 
 export const SelectItemRoot = withClassName(
 	SelectPrimitive.Item,
-	'text-md leading-4 color-black rounded-sm flex items-center flex-row h-36px pr-4 pl-35px relative select-none',
-	'[&[data-disabled]]:(color-gray5 pointer-events-none) [&[data-highlighted]]:(outline-none bg-primary-wash color-black)',
+	'layer-components:(text-md leading-4 color-black rounded-sm flex items-center flex-row h-36px pr-4 pl-35px relative select-none)',
+	'layer-components:[&[data-disabled]]:(color-gray5 pointer-events-none) [&[data-highlighted]]:(outline-none bg-primary-wash color-black)',
+	'layer-components:[&:first-child]:(rounded-t-lg)',
+	'layer-components:[&:last-child]:(rounded-b-lg)',
 );
 export const SelectItemIndicatorRoot = withClassName(
 	SelectPrimitive.ItemIndicator,

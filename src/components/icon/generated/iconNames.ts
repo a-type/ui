@@ -38,6 +38,7 @@ export const iconNames = [
 	'maximize',
 	'email',
 	'link',
+	'linkRemove',
 	'camera',
 	'calendar',
 	'page',
@@ -85,6 +86,7 @@ export const iconNames = [
 	'skipEnd',
 	'enterKey',
 	'gamePiece',
+	'share',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

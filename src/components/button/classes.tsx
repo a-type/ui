@@ -13,12 +13,13 @@ export function getButtonClassName({
 	align?: ButtonProps['align'];
 }) {
 	return classNames(
-		'layer-components:(px-4 py-2 bg-[var(--bg)] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-sans border border-solid border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap)',
-		'layer-components:hover:(bg-[var(--hover)] ring-4 ring-[var(--hover)])',
+		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-sans border border-solid border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
+		'layer-components:()',
+		'layer-components:hover:(bg-[var(--bg)] bg-darken-2 ring-4)',
 		'layer-components:focus:outline-off',
-		'layer-components:focus-visible:(outline-off ring-6 ring-[var(--focus,var(--hover))])',
-		'layer-components:[&[data-focus=true]]:(ring-6 ring-[var(--focus,var(--hover))])',
-		'layer-components:active:(bg-[var(--active)] ring-8 ring-[var(--active)])',
+		'layer-components:focus-visible:(bg-[var(--bg)] outline-off bg-darken-7 ring-6)',
+		'layer-components:[&[data-focus=true]]:(ring-6 bg-darken-7)',
+		'layer-components:active:(bg-[var(--bg)] bg-darken-7 ring-8)',
 		'important:disabled:(opacity-50 cursor-default bg-[var(--bg)] shadow-none ring-none)',
 		'important:[&[data-disabled=true]]:(opacity-50 cursor-default bg-[var(--bg)] shadow-none)',
 		colors[color ?? 'default'],
@@ -30,19 +31,19 @@ export function getButtonClassName({
 		// compound variants
 		color === 'ghost' &&
 			toggleable &&
-			'layer-variants:[aria-pressed="true"]:bg-primary-wash',
+			'layer-variants:[aria-pressed="true"]:[--bg:var(--color-primary-wash)]',
 	);
 }
 
 const colors = {
-	primary: `layer-variants:[&.btn-color-primary]:([--bg:var(--color-primary-light)] [--hover:var(--color-primary)] [--focus:var(--color-primary)] [--active:var(--color-primary)] shadow-sm color-black border-primary-dark focus-visible:([--bg:var(--color-primary)]))`,
-	accent: `layer-variants:[&.btn-color-accent]:([--bg:var(--color-accent-wash)] [--hover:var(--color-accent-light)] [--focus:var(--color-accent-light)] [--active:var(--color-accent-light)] shadow-sm color-black border-accent-dark focus-visible:([--bg:var(--color-accent-light)]))`,
-	default: `layer-variants:[&.btn-color-default]:([--bg:var(--color-white)] [--hover:var(--color-gray-3)] [--focus:var(--color-gray-5)] [--active:var(--color-gray-4)] shadow-sm color-black border-gray-7)`,
-	ghost: `layer-variants:[&.btn-color-ghost]:([--bg:transparent] [--hover:var(--color-gray-blend)] [--focus:var(--color-gray-5)] [--active:var(--color-gray-dark-blend)] color-dark-blend)`,
-	destructive: `layer-variants:[&.btn-color-destructive]:([--bg:var(--color-attention-light)] [--hover:var(--color-attention-light)] [--focus:var(--color-attention-light)] [--active:var(--color-attention-light)] shadow-sm border-attention-dark color-black hover:([--bg:var(--colors-attention)]))`,
-	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg:transparent] [--hover:rgb(from_var(--color-attention-light)_r_g_b/0.25)] [--focus:var(--color-attention-light)] [--active:var(--color-attention-light)] color-attention-dark)`,
-	ghostAccent: `layer-variants:[&.btn-color-ghostAccent]:([--bg:transparent] [--hover:rgb(from_var(--color-accent-light)_r_g_b/0.25)] [--focus:var(--color-accent-light)] [--active:var(--color-accent-light)] color-accent-dark)`,
-	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] [--hover:var(--color-gray-7)] [--focus:var(--color-gray-7)] [--active:var(--color-gray-6)] color-white border-black)`,
+	primary: `layer-variants:[&.btn-color-primary]:([--bg:var(--color-primary-light)] shadow-sm color-black border-primary-dark focus-visible:([--bg:var(--color-primary)]))`,
+	accent: `layer-variants:[&.btn-color-accent]:([--bg:var(--color-accent-wash)] shadow-sm color-black border-accent-dark focus-visible:([--bg:var(--color-accent-light)]))`,
+	default: `layer-variants:[&.btn-color-default]:([--bg:var(--color-white)] shadow-sm color-black border-gray-dark)`,
+	ghost: `layer-variants:[&.btn-color-ghost]:([--bg-neutral:transparent] [--bg:var(--color-white)] color-darkBlend)`,
+	destructive: `layer-variants:[&.btn-color-destructive]:([--bg:var(--color-attention-light)] shadow-sm border-attention-dark color-black hover:([--bg:var(--colors-attention)]))`,
+	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg-neutral:transparent] [--bg:var(--color-attention-light)] color-attention-dark hover:(bg-darken-1 color-black) focus-visible:(bg-darken-2 color-black) active:bg-darken-2)`,
+	ghostAccent: `layer-variants:[&.btn-color-ghostAccent]:([--bg-neutral:transparent] [--bg:var(--color-accent-wash)] color-accent-dark hover:bg-darken-2 focus-visible:bg-darken-6 active:bg-darken-6)`,
+	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] color-white border-black hover:bg-lighten-1 focus-visible:bg-lighten-5 active:bg-lighten-4)`,
 	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-none shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-none text-size-inherit transition-none)`,
 };
 export const buttonColorClasses = colors;

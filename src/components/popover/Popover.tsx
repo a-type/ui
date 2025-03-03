@@ -26,7 +26,7 @@ const StyledArrow = withClassName(
 
 const StyledClose = withClassName(
 	PopoverPrimitive.Close,
-	'layer-components:([all:unset] [font-family:inherit] rounded-lg h-25px w-25px inline-flex items-center justify-center color-dark-blend absolute top-5px right-5px hover:bg-light-blend focus:shadow-focus)',
+	'layer-components:([all:unset] [font-family:inherit] rounded-lg h-25px w-25px inline-flex items-center justify-center color-darkBlend absolute top-5px right-5px hover:bg-lightBlend focus:shadow-focus)',
 );
 
 // Exports

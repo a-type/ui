@@ -133,5 +133,5 @@ export const FieldRoot = withClassName(
 );
 export const FieldLabel = withClassName(
 	'label',
-	'inline-flex flex-col gap-1 text-sm font-bold text-dark-blend mb-1',
+	'inline-flex flex-col gap-1 text-sm font-bold text-darkBlend mb-1',
 );

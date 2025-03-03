@@ -5,12 +5,12 @@ import { withClassName } from '../../hooks.js';
 import { Icon, IconProps } from '../icon/index.js';
 
 export const navBarItemClass = classNames(
-	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-7 select-none)',
+	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-dark select-none)',
 	'layer-components:sm:(flex-row-reverse h-auto justify-start gap-2 overflow-visible)',
-	'layer-components:active:bg-primary-wash layer-components:sm:active:bg-gray-dark-blend',
-	'layer-components:hover:bg-primary-wash',
-	'layer-components:focus-visible:(outline-none bg-primary-wash)',
-	'layer-components:[&[data-active=true]]:(bg-primary-wash text-black)',
+	'layer-components:active:bg-darken-2 layer-components:sm:active:bg-darken-2',
+	'layer-components:hover:bg-darken-1',
+	'layer-components:focus-visible:(outline-none bg-darken-3)',
+	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-2 text-black)',
 	'layer-components:([--bg:var(--color-primary-wash)] [--fill:var(--color-primary)])',
 );
 
@@ -40,11 +40,11 @@ export const NavBarItem = function NavBarItem({
 			className={classNames(
 				navBarItemClass,
 				color === 'neutral' && [
-					'layer-variants:active:bg-gray-dark-blend layer-variants:sm:active:bg-gray-dark-blend',
-					'layer-variants:hover:bg-gray-dark-blend',
-					'layer-variants:focus-visible:(bg-gray-dark-blend)',
-					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend text-black)',
-					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray-5)])',
+					'layer-variants:active:bg-gray-darkBlend layer-variants:sm:active:bg-gray-darkBlend',
+					'layer-variants:hover:bg-gray-darkBlend',
+					'layer-variants:focus-visible:(bg-gray-darkBlend)',
+					'layer-variants:[&[data-active=true]]:(bg-gray-darkBlend text-black)',
+					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray)])',
 				],
 				className,
 			)}

@@ -7,7 +7,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-gray-1 text-black shadow-sm)',
+	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-0.5 text-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -41,8 +41,8 @@ export function CardMain({
 				isInteractive &&
 					classNames(
 						'layer-components:cursor-pointer layer-components:hover:(bg-gray-darkBlend color-black shadow-sm-inset) layer-components:focus:outline-none',
-						'layer-components:focus-visible:(outline-none ring-inset ring-4 ring-gray-5)',
-						'layer-components:[&[data-visually-focused=true]]:(ring-inset ring-4 ring-gray-5)',
+						'layer-components:focus-visible:(outline-none ring-inset ring-4 ring-gray)',
+						'layer-components:[&[data-visually-focused=true]]:(ring-inset ring-4 ring-gray)',
 						'layer-components:[&[data-visually-disabled=true]]:(cursor-default) layer-components:disabled:(cursor-default)',
 					),
 				className,
@@ -60,12 +60,12 @@ export const CardTitle = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
-	'layer-components:[[data-interactive=true]:hover>&]:(bg-gray-2)',
+	'layer-components:[[data-interactive=true]:hover>&]:(bg-gray-light)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend text-black rounded-md mx-2 my-0.5 border border-solid border-grayDarkBlend text-xs relative z-1)',
+	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-lightBlend text-black rounded-md mx-2 my-0.5 border border-solid border-gray-darkBlend text-xs relative z-1)',
 	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
 	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
 );

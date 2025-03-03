@@ -22,14 +22,14 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-overlay [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray-5)',
+	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-overlay [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
 );
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto flex flex-col border-top-1 border-top-solid border-top-gray-5)',
+	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto flex flex-col border-top-1 border-top-solid border-top-gray)',
 	'layer-components:sm:(shadow-xl)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
@@ -188,7 +188,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 				className,
 			)}
 		>
-			<div className="w-full h-[4px] bg-gray-4 rounded-lg" />
+			<div className="w-full h-[4px] bg-gray rounded-lg" />
 		</div>
 	);
 };

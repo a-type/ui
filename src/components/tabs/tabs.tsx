@@ -11,17 +11,15 @@ export const TabsList = withClassName(
 
 export const TabsTriggerBase = withClassName(
 	TabsPrimitive.Trigger,
-	'layer-components:(flex flex-row items-center justify-center gap-2 color-black py-1 px-5 bg-wash text-md min-w-100px rounded-lg border-default font-semibold text-gray-8 border-gray-8 transition-colors cursor-pointer select-none font-sans flex-shrink-0 shadow-sm)',
-	'layer-components:hover:bg-[var(--hover)]',
-	'layer-components:focus-visible:(focus-ring focus-ring-[var(--focus)] outline-off)',
-	'[&[data-state=active]]:(font-semibold bg-[var(--focus,var(--hover))] text-black cursor-default hover:bg-[var(--hover)] relative z-1)',
+	'layer-components:(flex flex-row items-center cursor-pointer justify-center gap-2 color-black py-1 px-5 bg-wash text-md min-w-100px rounded-lg border-default font-semibold text-gray-darkBlend border-gray-dark transition-all cursor-pointer select-none font-sans flex-shrink-0 shadow-sm)',
+	'layer-components:hover:(bg-darken-1 ring-4 ring-bg)',
+	'layer-components:focus-visible:(bg-darken-3 ring-6 ring-bg outline-off)',
+	'[&[data-state=active]]:(bg-[var(--bg)] font-semibold text-black cursor-default hover:bg-darken-1 relative z-1)',
 );
 
 const colorClasses = {
-	default:
-		'layer-variants:([--bg:var(--color-white)] [--hover:var(--color-gray-3)] [--focus:var(--color-gray-4)] [--active:var(--color-gray-4)])',
-	primary:
-		'layer-variants:([--bg:var(--color-primary)] [--hover:var(--color-primary-light)] [--focus:var(--color-primary-light)] [--active:var(--color-primary-light)])',
+	default: 'layer-variants:([--bg:var(--color-white)])',
+	primary: 'layer-variants:([--bg:var(--color-primary-light)])',
 };
 
 export interface TabsTriggerProps
