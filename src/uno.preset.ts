@@ -21,7 +21,7 @@ export default function presetAglio({
 	},
 	borderScale = 1,
 	roundedness = 1,
-	saturation = 10,
+	saturation = 15,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
