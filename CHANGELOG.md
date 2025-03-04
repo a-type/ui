@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.7.5
+
+### Patch Changes
+
+- 78a4846: Update default saturation. Add "attention" surface Box.
+- dbf66ba: lemon hue tweaks
+
 ## 1.7.4
 
 ### Patch Changes
