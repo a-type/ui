@@ -60,7 +60,7 @@ export const CardTitle = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-grayDarkBlend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1 transition-colors)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
-	'layer-components:[[data-interactive=true]:hover>&]:(bg-gray-light)',
+	'layer-components:[[data-interactive=true]:hover>&]:(bg-darken-4)',
 );
 
 const CardContentRoot = withClassName(
