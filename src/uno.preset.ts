@@ -603,11 +603,16 @@ export default function presetAglio({
 
 					--final-saturation: calc(${saturationPercent} * var(--global-saturation, 1));
 
-					--color-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--final-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
-					--color-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--final-saturation, 1)) calc(l * 1.125));
-					--color-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * 0.75 * var(--final-saturation, 1)) calc(l * pow(1.125, var(--mode-mult,1))));
-					--color-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * 0.5 * var(--final-saturation, 1)) calc(l * pow(1.25, var(--mode-mult,1))));
+					--palette-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--final-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
+					--palette-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--final-saturation, 1)) calc(l * 1.125));
+					--palette-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * 0.75 * var(--final-saturation, 1)) calc(l * pow(1.125, var(--mode-mult,1))));
+					--palette-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * 0.5 * var(--final-saturation, 1)) calc(l * pow(1.25, var(--mode-mult,1))));
 					--color-wash: var(--color-gray-wash);
+
+					--color-gray-wash: var(--palette-gray-wash);
+					--color-gray: var(--palette-gray);
+					--color-gray-dark: var(--palette-gray-dark);
+					--color-gray-light: var(--palette-gray-light);
 
 					--palette-gray-1: var(--color-gray-wash);
 					--palette-gray-2: var(--color-gray-light);
@@ -860,14 +865,16 @@ export default function presetAglio({
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
 					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-gray-4);
-					--color-accent-wash: var(--color-gray-2);
-					--color-accent-light: var(--color-gray-3);
-					--color-accent-dark: var(--color-gray-5);
-					--color-primary: var(--color-gray-5);
-					--color-primary-light: var(--color-gray-4);
-					--color-primary-dark: var(--color-gray-6);
-					--color-primary-wash: var(--color-white);
+					--color-primary: #a0a0a0;
+					--color-primary-wash: #f9f9f9;
+					--color-primary-light: #c0c0c0;
+					--color-primary-dark: #808080;
+					--color-accent: #d0d0d0;
+					--color-accent-light: #eaeaea;
+					--color-accent-dark: #a0a0a0;
+					--color-accent-wash: #f8f8f8;
+
+					--global-saturation: 0;
 				}
 
         html, body {
