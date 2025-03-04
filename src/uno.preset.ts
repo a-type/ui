@@ -600,6 +600,16 @@ export default function presetAglio({
 					--palette-shadow-4: rgba(0, 0, 0, 0.5);
 					--palette-white-overlay: rgba(255, 255, 255, 0.4);
 					--palette-black-overlay: rgba(0, 0, 0, 0.4);
+					--palette-true-gray-90: #fcfcfc;
+					--palette-true-gray-80: #f4f4f4;
+					--palette-true-gray-70: #e7e7e7;
+					--palette-true-gray-60: #d6d6d6;
+					--palette-true-gray-50: #a6a6a6;
+					--palette-true-gray-40: #7d7d7d;
+					--palette-true-gray-30: #6a6a6a;
+					--palette-true-gray-20: #4f4f4f;
+					--palette-true-gray-10: #383838;
+					--palette-true-gray-00: #1f1f1f;
 
 					--final-saturation: calc(${saturationPercent} * var(--global-saturation, 1));
 
@@ -865,14 +875,14 @@ export default function presetAglio({
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
 					--color-attention-wash: var(--color-red-wash);
-					--color-primary: #a0a0a0;
-					--color-primary-wash: #f9f9f9;
-					--color-primary-light: #c0c0c0;
-					--color-primary-dark: #808080;
-					--color-accent: #d0d0d0;
-					--color-accent-light: #eaeaea;
-					--color-accent-dark: #a0a0a0;
-					--color-accent-wash: #f8f8f8;
+					--color-primary: var(--color-true-gray);
+					--color-primary-wash: var(--color-true-gray-wash);
+					--color-primary-light: var(--color-true-gray-light);
+					--color-primary-dark: var(--color-true-gray-dark);
+					--color-accent: var(--color-true-gray-light);
+					--color-accent-light: var(--color-true-gray-wash);
+					--color-accent-dark: var(--color-true-gray);
+					--color-accent-wash: var(--color-white);
 
 					--global-saturation: 0;
 				}
@@ -943,7 +953,7 @@ export default function presetAglio({
 	};
 }
 
-const themeColors = ['red', 'green', 'yellow', 'blue', 'purple'];
+const themeColors = ['red', 'green', 'yellow', 'blue', 'purple', 'true-gray'];
 function roundTens(num: number) {
 	return Math.round(num / 10) * 10;
 }
