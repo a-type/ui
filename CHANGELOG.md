@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.4
+
+### Patch Changes
+
+- 9b4fac1: fix nav divider, card title hover
+
 ## 1.7.3
 
 ### Patch Changes
