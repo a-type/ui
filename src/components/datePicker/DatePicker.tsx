@@ -256,5 +256,5 @@ const RangeLayout = withClassName(
 	'div',
 	'grid [grid-template-areas:"prevMonth_leftMonth_nextMonth""leftGrid_leftGrid_leftGrid"] [grid-template-columns:auto_1fr_auto]',
 	'[grid-template-rows:auto_1fr] gap-2',
-	'sm:[grid-template-areas:"prevMonth_leftMonth_rightMonth_nextMonth""leftGrid_leftGrid_rightGrid_rightGrid"] sm:[grid-template-columns:auto_1fr_1fr_auto]',
+	'sm:grid-areas-[prevMonth_leftMonth_rightMonth_nextMonth]-[leftGrid_leftGrid_rightGrid_rightGrid] sm:[grid-template-columns:auto_1fr_1fr_auto]',
 );

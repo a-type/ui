@@ -66,6 +66,10 @@ function DemoUI({ className }: { className?: string }) {
 					<Box gap wrap p items="start">
 						<Input placeholder="Placeholder" />
 						<TextArea placeholder="Placeholder" />
+						<Box d="row" gap items="center">
+							<Checkbox defaultChecked />
+							<span>Checkbox</span>
+						</Box>
 					</Box>
 					<Card>
 						<Card.Main onClick={() => {}}>
@@ -155,7 +159,6 @@ function DemoUI({ className }: { className?: string }) {
 							<DropdownMenu.Item>Item 3</DropdownMenu.Item>
 						</DropdownMenu.Content>
 					</DropdownMenu>
-					<Checkbox />
 				</div>
 			</PageContent>
 			<PageNav>

@@ -9,7 +9,7 @@ export default defineConfig({
 			borderScale: 1,
 			roundedness: 1,
 			scale: 'md',
-			saturation: 20,
+			saturation: 100,
 		}),
 	],
 	transformers: [variantGroup()],

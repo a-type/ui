@@ -21,7 +21,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Theme',
 				icon: 'paintbrush',
-				items: ['lemon', 'eggplant', 'leek', 'tomato', 'blueberry'],
+				items: ['lemon', 'eggplant', 'leek', 'tomato', 'blueberry', 'salt'],
 				dynamicTitle: true,
 			},
 		},
@@ -32,6 +32,17 @@ const preview: Preview = {
 				title: 'Mode',
 				icon: 'mirror',
 				items: ['light', 'dark'],
+				dynamicTitle: true,
+			},
+		},
+		saturation: {
+			description: 'Color saturation',
+			defaultValue: 10,
+			type: 'number',
+			toolbar: {
+				title: 'Saturation',
+				icon: 'dropper',
+				items: ['0', '10', '20', '40', '60', '80', '100'],
 				dynamicTitle: true,
 			},
 		},
@@ -51,6 +62,15 @@ const preview: Preview = {
 					);
 				};
 			}, [ctx.globals.mode, ctx.globals.theme]);
+			useEffect(() => {
+				document.documentElement.style.setProperty(
+					'--global-saturation',
+					`${ctx.globals.saturation / 100}`,
+				);
+				return () => {
+					document.documentElement.style.removeProperty('--global-saturation');
+				};
+			}, [ctx.globals.saturation]);
 			return (
 				<Provider>
 					<Story />

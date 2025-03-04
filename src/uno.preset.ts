@@ -21,7 +21,7 @@ export default function presetAglio({
 	},
 	borderScale = 1,
 	roundedness = 1,
-	saturation = 20,
+	saturation = 10,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -546,7 +546,7 @@ export default function presetAglio({
 					--palette-red-20: #804020;
 					--palette-red-10: #702604;
 					--palette-red-00: #321f19;
-					--palette-green-90: #f0fff5;
+					--palette-green-90: #e8ffef;
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
 					--palette-green-60: #86efc8;
@@ -556,7 +556,7 @@ export default function presetAglio({
 					--palette-green-20: #246869;
 					--palette-green-10: #274e50;
 					--palette-green-00: #18352e;
-					--palette-yellow-90: #fff9ea;
+					--palette-yellow-90: #fffbee;
 					--palette-yellow-80: #fff1c7;
 					--palette-yellow-70: #ffdf7c;
 					--palette-yellow-60: #ffdb57;
@@ -566,7 +566,7 @@ export default function presetAglio({
 					--palette-yellow-20: #714d00;
 					--palette-yellow-10: #634500;
 					--palette-yellow-00: #3b1c00;
-					--palette-blue-90: #eef8fe;
+					--palette-blue-90:rgb(231, 246, 255);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
 					--palette-blue-60: #5fcefe;
@@ -576,7 +576,7 @@ export default function presetAglio({
 					--palette-blue-20: #005979;
 					--palette-blue-10: #004c69;
 					--palette-blue-00: #092c3a;
-					--palette-purple-90: #f1efff;
+					--palette-purple-90:rgb(239, 236, 255);
 					--palette-purple-80: #e0e0ff;
 					--palette-purple-70: #c8cdff;
 					--palette-purple-60: #aab1ff;
@@ -585,27 +585,11 @@ export default function presetAglio({
 					--palette-purple-30: #6068c0;
 					--palette-purple-20: #5a62a7;
 					--palette-purple-10: #464d8a;
-					--palette-purple-00: #272a39;
+					--palette-purple-00:rgb(28, 30, 41);
 					--palette-light-blend: rgba(255, 255, 255, 0.8);
 					--palette-light-blend-2: rgba(255, 255, 255, 0.6);
 					--palette-dark-blend: rgba(0, 0, 0, 0.65);
 					--palette-dark-blend-2: rgba(0, 0, 0, 0.4);
-					--palette-black: #303030;
-					--palette-white: #fff;
-					--palette-light: #f8f8fb;
-					--palette-dark: #0a0a0b;
-					--palette-gray-1: #fafafc;
-					--palette-gray-2: #f5f5f8;
-					--palette-gray-3: #eeeef2;
-					--palette-gray-4: #e0e0e9;
-					--palette-gray-5: #bdbdc7;
-					--palette-gray-6: #939eaa;
-					--palette-gray-7: #6f7a86;
-					--palette-gray-8: #4d5660;
-					--palette-gray-9: #3c3c3f;
-					--palette-gray-0: #2b2b2f;
-					--palette-gray-ex-1: #232326;
-					--palette-gray-ex-2: #1b1b1f;
 					--palette-gray-blend: rgba(0, 0, 20, 0.025);
 					--palette-gray-dark-blend: rgba(0, 0, 20, 0.05);
 					--palette-light-gray-blend: rgba(255, 255, 255, 0.05);
@@ -617,18 +601,31 @@ export default function presetAglio({
 					--palette-white-overlay: rgba(255, 255, 255, 0.4);
 					--palette-black-overlay: rgba(0, 0, 0, 0.4);
 
-					--color-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * ${Math.min(
-						1,
-						saturationPercent,
-					)} * var(--wash-saturation-tweak, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
-					--color-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * ${saturationPercent}) calc(l * 1.125));
-					--color-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * ${
-						saturationPercent * 0.75
-					}) calc(l * pow(1.125, var(--mode-mult,1))));
-					--color-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * ${
-						saturationPercent * 0.5
-					}) calc(l * pow(1.25, var(--mode-mult,1))));
+					--final-saturation: calc(${saturationPercent} * var(--global-saturation, 1));
+
+					--color-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--final-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
+					--color-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--final-saturation, 1)) calc(l * 1.125));
+					--color-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * 0.75 * var(--final-saturation, 1)) calc(l * pow(1.125, var(--mode-mult,1))));
+					--color-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * 0.5 * var(--final-saturation, 1)) calc(l * pow(1.25, var(--mode-mult,1))));
 					--color-wash: var(--color-gray-wash);
+
+					--palette-gray-1: var(--color-gray-wash);
+					--palette-gray-2: var(--color-gray-light);
+					--palette-gray-3: var(--color-gray-light);
+					--palette-gray-4: var(--color-gray);
+					--palette-gray-5: var(--color-gray);
+					--palette-gray-6: var(--color-gray);
+					--palette-gray-7: var(--color-gray-dark);
+					--palette-gray-8: var(--color-gray-dark);
+					--palette-gray-9: var(--color-black);
+					--palette-gray-0: var(--color-black);
+					--palette-gray-ex-1: var(--color-black);
+					--palette-gray-ex-2: var(--color-black);
+
+					--palette-true-white: #ffffff;
+					--palette-true-black: #303030;
+					--palette-white: hsl(from var(--color-wash) calc(h + 0) calc(s * 0.3 * var(--final-saturation, 1)) calc(min(100, l + 1 / var(--final-saturation, 1))));
+					--palette-black: hsl(from var(--color-gray-dark) calc(h + 0) calc(s * 0.1 * var(--final-saturation, 1)) calc(min(100, l / (var(--mode-mult,1) * -5 + pow(1 + var(--final-saturation, 1), 1.5)))));
 
 					--z-nowPlaying: 40;
 					--z-nav: 50;
@@ -649,7 +646,7 @@ export default function presetAglio({
 					--color-light-blend: var(--palette-light-blend);
 					--color-dark-blend-2: var(--palette-dark-blend-2);
 					--color-light-blend-2: var(--palette-light-blend-2);
-					--color-black: var(--palette-black);
+					--color-black: var(--palette-true-black);
 					--color-white: var(--palette-white);
 					--color-gray-1: var(--palette-gray-1);
 					--color-gray-2: var(--palette-gray-2);
@@ -694,7 +691,7 @@ export default function presetAglio({
 						--color-light-blend: var(--palette-dark-blend);
 						--color-dark-blend-2: var(--palette-light-blend-2);
 						--color-light-blend-2: var(--palette-dark-blend-2);
-						--color-black: var(--palette-white);
+						--color-black: var(--palette-true-white);
 						--color-white: var(--palette-black);
 						--color-gray-1: var(--palette-gray-ex-2);
 						--color-gray-2: var(--palette-gray-ex-1);
@@ -724,7 +721,7 @@ export default function presetAglio({
 						--color-light-blend: var(--palette-light-blend);
 						--color-dark-blend-2: var(--palette-dark-blend-2);
 						--color-light-blend-2: var(--palette-light-blend-2);
-						--color-black: var(--palette-black);
+						--color-black: var(--palette-true-black);
 						--color-white: var(--palette-white);
 						--color-gray-1: var(--palette-gray-1);
 						--color-gray-2: var(--palette-gray-2);
@@ -753,7 +750,7 @@ export default function presetAglio({
 						--color-light-blend: var(--palette-dark-blend);
 						--color-dark-blend-2: var(--palette-light-blend-2);
 						--color-light-blend-2: var(--palette-dark-blend-2);
-						--color-black: var(--palette-white);
+						--color-black: var(--palette-true-white);
 						--color-white: var(--palette-black);
 						--color-gray-1: var(--palette-gray-ex-2);
 						--color-gray-2: var(--palette-gray-ex-1);
@@ -787,7 +784,7 @@ export default function presetAglio({
 					--color-primary-dark: var(--color-yellow-dark);
 					--color-primary-wash: var(--color-yellow-wash);
 
-					--gray-hue-tweak: -30;
+					--gray-hue-tweak: -10;
 				}
 
 				.theme-blueberry {
@@ -803,6 +800,8 @@ export default function presetAglio({
 					--color-primary-light: var(--color-blue-light);
 					--color-primary-dark: var(--color-blue-dark);
 					--color-primary-wash: var(--color-blue-wash);
+
+					--gray-hue-tweak: 20;
 				}
 
 				.theme-eggplant {
@@ -818,6 +817,8 @@ export default function presetAglio({
 					--color-primary-light: var(--color-purple-light);
 					--color-primary-dark: var(--color-purple-dark);
 					--color-primary-wash: var(--color-purple-wash);
+
+					--gray-hue-tweak: -20;
 				}
 
 				.theme-leek {
@@ -834,7 +835,7 @@ export default function presetAglio({
 					--color-primary-dark: var(--color-green-dark);
 					--color-primary-wash: var(--color-green-wash);
 
-					--gray-hue-tweak: 50;
+					--gray-hue-tweak: 20;
 				}
 
 				.theme-tomato {
@@ -1011,10 +1012,6 @@ function resolveThemeColor(color: string, theme: any) {
 
 	if (typeof resolvedColor === 'object' && 'DEFAULT' in resolvedColor) {
 		return resolvedColor.DEFAULT;
-	}
-
-	if (color === 'accent-light') {
-		console.log(resolveFrom, resolvedColor);
 	}
 
 	return resolvedColor;
