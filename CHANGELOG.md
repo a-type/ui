@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.2
+
+### Patch Changes
+
+- 42f04e8: More color tweaks
+
 ## 1.7.1
 
 ### Patch Changes
