@@ -556,7 +556,7 @@ export default function presetAglio({
 					--palette-green-20: #246869;
 					--palette-green-10: #274e50;
 					--palette-green-00: #18352e;
-					--palette-yellow-90: #fffbee;
+					--palette-yellow-90: #fff9ee;
 					--palette-yellow-80: #fff1c7;
 					--palette-yellow-70: #ffdf7c;
 					--palette-yellow-60: #ffdb57;
@@ -565,7 +565,7 @@ export default function presetAglio({
 					--palette-yellow-30: #8e5c00;
 					--palette-yellow-20: #714d00;
 					--palette-yellow-10: #634500;
-					--palette-yellow-00: #3b1c00;
+					--palette-yellow-00:rgb(59, 45, 0);
 					--palette-blue-90:rgb(231, 246, 255);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
@@ -799,7 +799,22 @@ export default function presetAglio({
 					--color-primary-dark: var(--color-yellow-dark);
 					--color-primary-wash: var(--color-yellow-wash);
 
-					--gray-hue-tweak: -10;
+					--gray-hue-tweak: -20;
+				}
+
+				/* fix yellow hue in dark mode */
+				@media(prefers-color-scheme: dark) {
+					.theme-lemon {
+						--gray-hue-tweak: 0;
+					}
+
+					html.override-light.theme-lemon, html.override-light .theme-lemon {
+						--gray-hue-tweak: -20;
+					}
+				}
+
+				html.override-dark.theme-lemon, html.override-dark .theme-lemon {
+					--gray-hue-tweak: 0;
 				}
 
 				.theme-blueberry {
