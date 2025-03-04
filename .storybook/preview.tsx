@@ -37,7 +37,7 @@ const preview: Preview = {
 		},
 		saturation: {
 			description: 'Color saturation',
-			defaultValue: 10,
+			defaultValue: 15,
 			type: 'number',
 			toolbar: {
 				title: 'Saturation',

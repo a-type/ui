@@ -145,6 +145,9 @@ function DemoUI({ className }: { className?: string }) {
 					<Box surface="default" p>
 						Default surface
 					</Box>
+					<Box surface="attention" p>
+						Attention surface
+					</Box>
 					<Box>
 						<Note>Note note</Note>
 					</Box>
