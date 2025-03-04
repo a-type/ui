@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.3
+
+### Patch Changes
+
+- 048a4b8: Saturation behavior changes for black and white. Gray value back-compat 'polyfills.'
+
 ## 1.7.2
 
 ### Patch Changes
