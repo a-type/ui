@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.7.6
+
+### Patch Changes
+
+- 3b3301a: fix action bar overflow
+- 3c93df0: align rich text border to input color
+
 ## 1.7.5
 
 ### Patch Changes
