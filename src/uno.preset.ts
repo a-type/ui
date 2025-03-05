@@ -868,10 +868,10 @@ export default function presetAglio({
 					--color-attention: var(--color-red);
 					--color-attention-dark: var(--color-red-dark);
 					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-yellow);
-					--color-accent-wash: var(--color-yellow-wash);
-					--color-accent-light: var(--color-yellow-light);
-					--color-accent-dark: var(--color-yellow-dark);
+					--color-accent: var(--color-blue);
+					--color-accent-wash: var(--color-blue-wash);
+					--color-accent-light: var(--color-blue-light);
+					--color-accent-dark: var(--color-blue-dark);
 					--color-primary: var(--color-green);
 					--color-primary-light: var(--color-green-light);
 					--color-primary-dark: var(--color-green-dark);
