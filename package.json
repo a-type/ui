@@ -42,7 +42,8 @@
 	},
 	"peerDependencies": {
 		"react": "^19",
-		"react-dom": "^19"
+		"react-dom": "^19",
+		"unocss": "^66"
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.4",
@@ -67,6 +68,8 @@
 		"@radix-ui/react-toggle-group": "^1.1.1",
 		"@radix-ui/react-tooltip": "^1.1.5",
 		"@react-spring/web": "^9.7.5",
+		"@unocss/preset-mini": "66.1.0-beta.3",
+		"@unocss/preset-wind3": "66.1.0-beta.3",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
 		"calendar-blocks": "^0.3.1",
@@ -93,9 +96,9 @@
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",
 		"@types/w3c-image-capture": "^1.0.10",
-		"@unocss/cli": "0.65.1",
-		"@unocss/core": "^0.65.1",
-		"@unocss/transformer-variant-group": "^0.65.1",
+		"@unocss/cli": "66.0.0",
+		"@unocss/core": "66.0.0",
+		"@unocss/transformer-variant-group": "66.0.0",
 		"axios": "^1.5.0",
 		"change-case": "^4.1.2",
 		"dotenv": "^16.3.1",
@@ -105,6 +108,6 @@
 		"react-dom": "19.0.0",
 		"storybook": "8.4.7",
 		"typescript": "^5.7.2",
-		"unocss": "^0.65.1"
+		"unocss": "66.0.0"
 	}
 }

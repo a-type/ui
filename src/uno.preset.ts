@@ -1,5 +1,9 @@
-import { entriesToCss, toArray } from '@unocss/core';
-import { PreflightContext, Preset, presetUno } from 'unocss';
+import { DynamicRule, entriesToCss, toArray } from '@unocss/core';
+import { bgColors as bgColorsRules } from '@unocss/preset-mini/rules';
+import presetWind3 from '@unocss/preset-wind3';
+import { PreflightContext, Preset } from 'unocss';
+
+const baseBgRule = bgColorsRules[0] as unknown as DynamicRule;
 
 const spacing = {
 	sm: 0.125,
@@ -428,11 +432,19 @@ export default function presetAglio({
 			],
 			[
 				/^bg-(.*)$/,
-				(match, { theme }) => {
+				(match, ctx) => {
+					const { theme } = ctx;
+					const resolvedColor = resolveThemeColor(match[1], theme);
+					if (resolvedColor === null) {
+						return baseBgRule[1](match, ctx);
+					}
 					return {
 						'background-color': 'var(--v-bg-altered,var(--v-bg))',
 						['--v-bg']: resolveThemeColor(match[1], theme),
 					};
+				},
+				{
+					autocomplete: `bg-$colors`,
 				},
 			],
 			[
@@ -961,7 +973,7 @@ export default function presetAglio({
 		],
 
 		presets: [
-			presetUno({
+			presetWind3({
 				preflight: false,
 			}),
 		],
@@ -1044,6 +1056,10 @@ function resolveThemeColor(color: string, theme: any) {
 
 	if (typeof resolvedColor === 'object' && 'DEFAULT' in resolvedColor) {
 		return resolvedColor.DEFAULT;
+	}
+
+	if (!resolvedColor) {
+		return null;
 	}
 
 	return resolvedColor;

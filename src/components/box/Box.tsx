@@ -41,11 +41,12 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	gap?: BoxSpacingSize | boolean;
 	wrap?: BoxResponsive<boolean>;
 	p?: BoxResponsive<BoxSpacingSize | boolean>;
-	container?: boolean;
+	container?: boolean | 'reset';
 	surface?: boolean | 'primary' | 'accent' | 'default' | 'attention';
 	theme?: ThemeName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
+	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
 	ref?: Ref<HTMLDivElement>;
 }
 
@@ -65,6 +66,7 @@ export function Box({
 	theme,
 	border,
 	full,
+	overflow,
 	ref,
 	...rest
 }: BoxProps) {
@@ -174,6 +176,12 @@ export function Box({
 					'layer-components:(border border-solid rounded-lg)': border,
 					'layer-components:w-full': full === true || full === 'width',
 					'layer-components:h-full': full === true || full === 'height',
+					'layer-components:overflow-hidden': overflow === 'hidden',
+					'layer-components:overflow-auto': overflow === 'auto',
+					'layer-components:(overflow-x-auto overflow-y-hidden)':
+						overflow === 'auto-x',
+					'layer-components:(overflow-y-auto overflow-x-hidden)':
+						overflow === 'auto-y',
 				},
 				theme && `theme-${theme}`,
 				className,
@@ -184,7 +192,12 @@ export function Box({
 	if (container) {
 		return (
 			<BoxContext.Provider
-				value={{ spacingScale: spacingScale * SPACING_SCALE_NESTING_FACTOR }}
+				value={{
+					spacingScale:
+						container === 'reset'
+							? 1
+							: spacingScale * SPACING_SCALE_NESTING_FACTOR,
+				}}
 			>
 				{main}
 			</BoxContext.Provider>
