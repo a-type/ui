@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../button/index.js';
+import { CollapsibleSimple } from '../collapsible/Collapsible.js';
 import { Icon } from '../icon/index.js';
 import {
 	ScrollAreaProps,
@@ -162,7 +163,10 @@ export function HorizontalList({
 					)}
 					ref={contentRef}
 				>
-					{internalCanOpen && !disableInternalOpenToggle && (
+					<CollapsibleSimple
+						horizontal
+						open={internalCanOpen && !disableInternalOpenToggle}
+					>
 						<Button
 							onClick={toggleOpen}
 							size="icon"
@@ -181,7 +185,7 @@ export function HorizontalList({
 								)}
 							/>
 						</Button>
-					)}
+					</CollapsibleSimple>
 					{children}
 				</div>
 			</ScrollAreaViewport>
