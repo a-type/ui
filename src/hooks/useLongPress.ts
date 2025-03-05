@@ -1,8 +1,8 @@
+import { preventDefault } from '@a-type/utils';
 import { useDrag } from '@use-gesture/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAnimationFrame } from './useAnimationFrame.js';
 import { useStableCallback } from './useStableCallback.js';
-import { preventDefault } from '@a-type/utils';
 
 /**
  * The press gesture must remain within THRESHOLD_DISTANCE until delay time has passed
@@ -31,7 +31,7 @@ export function useLongPress({
 	const [state, setState] = useState<
 		'holding' | 'candidate' | 'idle' | 'failed' | 'pending'
 	>('idle');
-	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const timeoutRef = useRef<number | null>(null);
 	const ref = useRef<any>(null);
 
 	const gestureStateRef = useRef<{ distance: number; startedAt: number }>({
