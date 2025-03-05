@@ -98,13 +98,13 @@ function useReactToViewportChanges(
 
 		update();
 
-		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('scroll', debouncedUpdate, { passive: true });
 		viewport.addEventListener('resize', update);
 		viewport.addEventListener('scroll', debouncedUpdate, { passive: true });
 
 		return () => {
+			window.removeEventListener('scroll', debouncedUpdate);
 			viewport.removeEventListener('resize', update);
-			window.removeEventListener('scroll', update);
 			viewport.removeEventListener('scroll', debouncedUpdate);
 		};
 	}, [stableCb, disable]);
