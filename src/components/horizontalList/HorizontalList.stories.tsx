@@ -69,10 +69,10 @@ export const Default: Story = {
 					</Button>
 					<HorizontalList
 						className="border-t border-t-solid border-t-black max-h-200px"
-						open={open}
-						onOpenChange={setOpen}
 						openDirection="up"
 						{...args}
+						open={open}
+						onOpenChange={setOpen}
 					/>
 				</div>
 			</div>
