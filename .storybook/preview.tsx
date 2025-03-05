@@ -42,7 +42,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Saturation',
 				icon: 'dropper',
-				items: ['0', '10', '20', '40', '60', '80', '100'],
+				items: ['0', '10', '15', '20', '40', '60', '80', '100'],
 				dynamicTitle: true,
 			},
 		},
