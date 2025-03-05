@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.7
+
+### Patch Changes
+
+- 8fdf4f2: animate horizontal list opener
+
 ## 1.7.6
 
 ### Patch Changes
