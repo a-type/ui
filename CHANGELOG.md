@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.8
+
+### Patch Changes
+
+- 2041a2a: perf tweak for scroll
+
 ## 1.7.7
 
 ### Patch Changes
