@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.10
+
+### Patch Changes
+
+- 4761242: fix icon name
+
 ## 1.7.9
 
 ### Patch Changes
