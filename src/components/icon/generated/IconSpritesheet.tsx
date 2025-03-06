@@ -1108,7 +1108,7 @@ export const IconSpritesheet = (props: any) => (
 					fill="currentColor"
 				/>
 			</symbol>
-			<symbol id="icon-name106" viewBox="0 0 15 15">
+			<symbol id="icon-orderedList" viewBox="0 0 15 15">
 				<path
 					fillRule="evenodd"
 					clipRule="evenodd"

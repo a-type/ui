@@ -102,7 +102,7 @@ export const iconNames = [
 	'pushUp',
 	'pushDown',
 	'bulletList',
-	'name106',
+	'orderedList',
 	'quote',
 	'code',
 	'newPage',
