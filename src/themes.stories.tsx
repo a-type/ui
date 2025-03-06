@@ -8,9 +8,15 @@ import {
 	AvatarList,
 	Box,
 	Checkbox,
+	ContextMenu,
 	DateRangePicker,
 	Dialog,
 	DropdownMenu,
+	H1,
+	H2,
+	H3,
+	H4,
+	HorizontalList,
 	ImageUploader,
 	NavBarItem,
 	NavBarItemIcon,
@@ -19,10 +25,13 @@ import {
 	NavBarItemText,
 	NavBarRoot,
 	Note,
+	P,
 	PageContent,
 	PageNav,
 	PageRoot,
 	Progress,
+	TextSkeleton,
+	ToggleGroup,
 	Tooltip,
 } from './components/index.js';
 import { Input } from './components/input/index.js';
@@ -70,6 +79,22 @@ function DemoUI({ className }: { className?: string }) {
 							<Checkbox defaultChecked />
 							<span>Checkbox</span>
 						</Box>
+						<ToggleGroup type="single">
+							<ToggleGroup.Item value="1">Toggle 1</ToggleGroup.Item>
+							<ToggleGroup.Item value="2">Toggle 2</ToggleGroup.Item>
+						</ToggleGroup>
+					</Box>
+					<Box layout="start center" d="col" gap p>
+						<H1>Heading 1</H1>
+						<H2>Heading 2</H2>
+						<H3>Heading 3</H3>
+						<H4>Heading 4</H4>
+						<P>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</P>
+						<TextSkeleton maxLength={30} />
+						<TextSkeleton maxLength={10} />
 					</Box>
 					<Card>
 						<Card.Main onClick={() => {}}>
@@ -111,9 +136,19 @@ function DemoUI({ className }: { className?: string }) {
 						<AvatarList.Item index={1} name="Jane Doe" />
 						<AvatarList.Item index={2} name="John Smith" />
 					</AvatarList>
-					<Tooltip content="Hello World">
-						<Button>Hover me</Button>
-					</Tooltip>
+					<ContextMenu>
+						<ContextMenu.Trigger asChild>
+							<Tooltip content="Hello World">
+								<Button>Hover or right click</Button>
+							</Tooltip>
+						</ContextMenu.Trigger>
+						<ContextMenu.Content>
+							<ContextMenu.Arrow />
+							<ContextMenu.Item>Item 1</ContextMenu.Item>
+							<ContextMenu.Item>Item 2</ContextMenu.Item>
+							<ContextMenu.Item>Item 3</ContextMenu.Item>
+						</ContextMenu.Content>
+					</ContextMenu>
 					<Dialog>
 						<Dialog.Trigger asChild>
 							<Button>Click</Button>
@@ -151,9 +186,19 @@ function DemoUI({ className }: { className?: string }) {
 					<Box>
 						<Note>Note note</Note>
 					</Box>
-					<ImageUploader className="h-400px" value={null} onChange={() => {}} />
+					<Box justify="start" items="start">
+						<HorizontalList openDirection="down">
+							<Button size="small">One</Button>
+							<Button size="small">Two</Button>
+							<Button size="small">Three</Button>
+							<Button size="small">Four</Button>
+							<Button size="small">Five</Button>
+							<Button size="small">Six</Button>
+						</HorizontalList>
+					</Box>
+					<ImageUploader className="h-200px" value={null} onChange={() => {}} />
 					<DropdownMenu>
-						<DropdownMenu.Trigger asChild>
+						<DropdownMenu.Trigger asChild className="m-auto">
 							<Button>Dropdown</Button>
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>

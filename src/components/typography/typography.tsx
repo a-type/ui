@@ -9,7 +9,7 @@ export const H1 = withClassName(
 export const H2 = withClassName(
 	'h2',
 	baseHeadingClass,
-	'layer-components:(text-lg font-title font-bold color-gray9)',
+	'layer-components:(text-lg font-title font-bold color-gray-dark)',
 );
 export const H3 = withClassName(
 	'h3',

@@ -45,7 +45,7 @@ export const SelectItem = ({
 export const SelectItemRoot = withClassName(
 	SelectPrimitive.Item,
 	'layer-components:(text-md leading-4 color-black rounded-sm flex items-center flex-row h-36px pr-4 pl-35px relative select-none)',
-	'layer-components:[&[data-disabled]]:(color-gray5 pointer-events-none) [&[data-highlighted]]:(outline-none bg-primary-wash color-black)',
+	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-primary-wash color-black)',
 	'layer-components:[&:first-child]:(rounded-t-lg)',
 	'layer-components:[&:last-child]:(rounded-b-lg)',
 );
@@ -78,7 +78,7 @@ export const SelectGroup = (props: SelectPrimitive.SelectGroupProps) => {
 export const SelectRoot = SelectPrimitive.Root;
 export const selectTriggerClassName = classNames(
 	getButtonClassName({ color: 'default' }),
-	'layer-components:([all:unset] inline-flex [&[data-placeholder]]:color-gray8)',
+	'layer-components:([all:unset] inline-flex [&[data-placeholder]]:color-gray-dark)',
 );
 export const SelectTriggerBase = withNoNativeRender(
 	withClassName(SelectPrimitive.Trigger, selectTriggerClassName),
@@ -120,7 +120,7 @@ export const SelectLabel = withNoNativeRender(
 	),
 );
 export const SelectSeparator = withNoNativeRender(
-	withClassName(SelectPrimitive.Separator, 'h-1px bg-gray50 m-1'),
+	withClassName(SelectPrimitive.Separator, 'h-1px bg-gray-light m-1'),
 );
 export const SelectIcon = withNoNativeRender(
 	({
@@ -187,7 +187,7 @@ export const NativeSelect = ({
 		<div className={classNames('relative', className)}>
 			<select
 				className={classNames(
-					'appearance-none font-inherit bg-white inline-flex items-center justify-center rounded-lg px-3 py-1 pr-8 text-sm gap-2 color-black border-solid border border-gray5 hover:border-gray7 focus:outline-none focus-visible:shadow-focus [&[data-placeholder]]:color-gray8',
+					'appearance-none font-inherit bg-white inline-flex items-center justify-center rounded-lg px-3 py-1 pr-8 text-sm gap-2 color-black border-solid border border-gray hover:border-gray-dark focus:outline-none focus-visible:shadow-focus [&[data-placeholder]]:color-gray-dark',
 				)}
 				{...props}
 				ref={forwardedRef}

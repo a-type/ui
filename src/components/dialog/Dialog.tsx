@@ -210,7 +210,7 @@ const StyledTitle = withClassName(
 
 const StyledDescription = withClassName(
 	DialogPrimitive.Description,
-	'mt-3 mb-6 color-gray8 text-md leading-6',
+	'mt-3 mb-6 color-gray-dark text-md leading-6',
 );
 
 // Exports

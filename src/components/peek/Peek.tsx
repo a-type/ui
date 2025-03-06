@@ -60,7 +60,7 @@ export function Peek({ peekHeight = 120, children, className }: PeekProps) {
 					className={classNames(
 						'h-80px absolute bottom-0 z-1 bg-transparent border-none w-full cursor-pointer border-b border-solid border-white',
 						'focus-visible:(outline-none bg-gradient-to-b from-transparent to-primary-wash border-b border-solid border-primary',
-						'after:(content-["-_tap_to_expand_-"] p-3 color-gray9 text-xs flex flex-col justify-end items-center absolute inset-0 top-auto h-80px bg-gradient-to-b from-transparent to-white)',
+						'after:(content-["-_tap_to_expand_-"] p-3 color-gray-dark text-xs flex flex-col justify-end items-center absolute inset-0 top-auto h-80px bg-gradient-to-b from-transparent to-white)',
 						'after:[&[data-state=open]]:content-["-_tap_to_collapse_-"]',
 					)}
 					onClick={toggle}

@@ -25,7 +25,7 @@ export default function presetAglio({
 	},
 	borderScale = 1,
 	roundedness = 1,
-	saturation = 15,
+	saturation = 10,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -506,7 +506,7 @@ export default function presetAglio({
 
 		shortcuts: {
 			'border-default': 'border border-solid border-black',
-			'border-light': 'border border-solid border-gray5',
+			'border-light': 'border border-solid border-gray',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
@@ -557,7 +557,7 @@ export default function presetAglio({
 					--palette-red-30: #ae562d;
 					--palette-red-20: #804020;
 					--palette-red-10: #702604;
-					--palette-red-00: #321f19;
+					--palette-red-00:rgb(52, 39, 35);
 					--palette-green-90: #e8ffef;
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
@@ -567,7 +567,7 @@ export default function presetAglio({
 					--palette-green-30: #1f837c;
 					--palette-green-20: #246869;
 					--palette-green-10: #274e50;
-					--palette-green-00: #18352e;
+					--palette-green-00:rgb(32, 48, 44);
 					--palette-yellow-90: #fff9ee;
 					--palette-yellow-80: #fff1c7;
 					--palette-yellow-70: #ffdf7c;
@@ -577,7 +577,7 @@ export default function presetAglio({
 					--palette-yellow-30: #8e5c00;
 					--palette-yellow-20: #714d00;
 					--palette-yellow-10: #634500;
-					--palette-yellow-00:rgb(59, 45, 0);
+					--palette-yellow-00:rgb(56, 50, 30);
 					--palette-blue-90:rgb(231, 246, 255);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
@@ -587,7 +587,7 @@ export default function presetAglio({
 					--palette-blue-30: #077da7;
 					--palette-blue-20: #005979;
 					--palette-blue-10: #004c69;
-					--palette-blue-00: #092c3a;
+					--palette-blue-00:rgb(25, 39, 44);
 					--palette-purple-90:rgb(239, 236, 255);
 					--palette-purple-80: #e0e0ff;
 					--palette-purple-70: #c8cdff;

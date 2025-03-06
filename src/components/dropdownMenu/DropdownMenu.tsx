@@ -60,7 +60,7 @@ const StyledLabel = withClassName(
 
 const StyledSeparator = withClassName(
 	DropdownMenuPrimitive.Separator,
-	'h-1px bg-gray5 m-5px',
+	'h-1px bg-gray m-5px',
 );
 
 const StyledItemIndicator = withClassName(
