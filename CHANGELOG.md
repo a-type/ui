@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.9
+
+### Patch Changes
+
+- 21690c3: fix some grays and adjust dark mode saturation
+
 ## 1.7.8
 
 ### Patch Changes
