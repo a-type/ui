@@ -132,10 +132,7 @@ export function ImageUploaderRoot({
 			value={{ inputId, dragging, draggingOver, value, onChange }}
 		>
 			<div
-				className={classNames(
-					'relative overflow-hidden rounded-lg',
-					rest.className,
-				)}
+				className={classNames('relative rounded-lg', rest.className)}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
@@ -149,7 +146,7 @@ export function ImageUploaderRoot({
 						accept="image/*"
 						onChange={onFileChange}
 						onClick={onFileClick}
-						className="absolute inset--99999 op-0"
+						className="absolute inset-0 pointer-events-none op-0"
 						id={inputId}
 					/>
 				)}
@@ -289,7 +286,7 @@ export function ImageUploaderDisplay({
 		<img
 			src={value}
 			className={clsx(
-				'layer-components:(w-full h-full object-cover object-center)',
+				'layer-components:(w-full h-full object-cover object-center rounded-lg)',
 				className,
 			)}
 			{...rest}
@@ -311,7 +308,7 @@ export function ImageUploaderEmptyControls({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3)',
+				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg)',
 				{
 					'layer-components:bg-[rgba(0,0,0,0.05)]': !draggingOver,
 					'layer-components:bg-[rgba(0,0,0,0.1)]': draggingOver,
