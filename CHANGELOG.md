@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.7.11
+
+### Patch Changes
+
+- 773d426: tweak image uploader overflow
+
 ## 1.7.10
 
 ### Patch Changes
