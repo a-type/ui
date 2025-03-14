@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.8.3
+
+### Patch Changes
+
+- 11a78b2: fix layout
+- 1e35934: Revert h1 weight. Tweak nav item color.
+
 ## 1.8.2
 
 ### Patch Changes
