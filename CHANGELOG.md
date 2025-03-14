@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- 654f765: Change box container spacing scale. Padded boxes now auto-contain.
+
 ## 1.7.11
 
 ### Patch Changes
