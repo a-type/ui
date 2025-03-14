@@ -5,7 +5,7 @@ import { withClassName } from '../../hooks.js';
 import { Icon, IconProps } from '../icon/index.js';
 
 export const navBarItemClass = classNames(
-	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-gray-dark select-none)',
+	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative color-black select-none)',
 	'layer-components:active:bg-darken-2',
 	'layer-components:hover:bg-darken-1',
 	'layer-components:focus-visible:(outline-none bg-darken-3)',

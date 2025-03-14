@@ -4,7 +4,7 @@ const baseHeadingClass = 'layer-components:my-0';
 export const H1 = withClassName(
 	'h1',
 	baseHeadingClass,
-	'layer-components:(font-title text-2xl font-light)',
+	'layer-components:(font-title text-2xl font-semibold)',
 );
 export const H2 = withClassName(
 	'h2',
