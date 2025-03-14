@@ -42,7 +42,7 @@ export default function presetAglio({
 	cornerScale?: number;
 	saturation?: number;
 } = {}): Preset {
-	const saturationPercent = saturation / 100;
+	const saturationScale = saturation / 100;
 	const spacingIncrement = spacing[scale];
 	cornerScale *= roundedScaling[scale];
 	const lightColors = generateColors(...colorRanges.light);
@@ -616,7 +616,7 @@ export default function presetAglio({
 					--palette-red-20: #804020;
 					--palette-red-10: #702604;
 					--palette-red-00:rgb(37, 28, 25);
-					--palette-green-90:rgb(238, 252, 242);
+					--palette-green-90:rgb(244, 251, 246);
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
 					--palette-green-60: #86efc8;
@@ -626,7 +626,7 @@ export default function presetAglio({
 					--palette-green-20: #246869;
 					--palette-green-10: #274e50;
 					--palette-green-00:rgb(32, 48, 44);
-					--palette-yellow-90: #fff9ee;
+					--palette-yellow-90:rgb(254, 249, 238);
 					--palette-yellow-80: #fff1c7;
 					--palette-yellow-70: #ffdf7c;
 					--palette-yellow-60: #ffdb57;
@@ -636,7 +636,7 @@ export default function presetAglio({
 					--palette-yellow-20:rgb(111, 83, 23);
 					--palette-yellow-10:rgb(84, 62, 12);
 					--palette-yellow-00:rgb(37, 33, 22);
-					--palette-blue-90:rgb(236, 244, 249);
+					--palette-blue-90:rgb(239, 249, 256);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
 					--palette-blue-60: #5fcefe;
@@ -648,11 +648,11 @@ export default function presetAglio({
 					--palette-blue-00:rgb(25, 39, 44);
 					--palette-purple-90:rgb(239, 236, 255);
 					--palette-purple-80: #e0e0ff;
-					--palette-purple-70: #c8cdff;
-					--palette-purple-60: #aab1ff;
-					--palette-purple-50: #8490f4;
-					--palette-purple-40:rgb(95, 103, 184);
-					--palette-purple-30:rgb(90, 96, 157);
+					--palette-purple-70:rgb(192, 197, 245);
+					--palette-purple-60:rgb(151, 159, 250);
+					--palette-purple-50:rgb(125, 137, 242);
+					--palette-purple-40:rgb(99, 105, 173);
+					--palette-purple-30:rgb(87, 91, 139);
 					--palette-purple-20:rgb(76, 81, 122);
 					--palette-purple-10:rgb(64, 67, 101);
 					--palette-purple-00:rgb(27, 24, 44);
@@ -681,15 +681,15 @@ export default function presetAglio({
 					--palette-true-gray-10: #383838;
 					--palette-true-gray-00: #1f1f1f;
 
-					--final-saturation: calc(${saturationPercent} * var(--global-saturation, 1));
+					--global-saturation: ${saturationScale};
 					--global-corner-scale: ${cornerScale};
 					--global-border-scale: ${borderScale};
 					--global-spacing-scale: ${spacingScale};
 
-					--palette-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--final-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
-					--palette-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--final-saturation, 1)) calc(l * 1.125));
-					--palette-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * 0.75 * var(--final-saturation, 1)) calc(l * pow(1.125, var(--mode-mult,1))));
-					--palette-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * 0.5 * var(--final-saturation, 1)) calc(l * pow(1.25, var(--mode-mult,1))));
+					--palette-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--global-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
+					--palette-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--global-saturation, 1)) calc(l * 1.125));
+					--palette-gray-dark: hsl(from var(--color-primary-dark) calc(h + var(--gray-hue-tweak, 0)) calc(s * 0.75 * var(--global-saturation, 1)) calc(l * pow(1.125, var(--mode-mult,1))));
+					--palette-gray-light: hsl(from var(--color-primary-light) calc(h + var(--gray-hue-tweak, 0) * pow(2, var(--mode-mult, 1))) calc(s * 0.5 * var(--global-saturation, 1)) calc(l * pow(1.25, var(--mode-mult,1))));
 					--color-wash: var(--color-gray-wash);
 
 					--color-gray-wash: var(--palette-gray-wash);
@@ -712,8 +712,8 @@ export default function presetAglio({
 
 					--palette-true-white: #ffffff;
 					--palette-true-black: #303030;
-					--palette-white: hsl(from var(--color-wash) calc(h + 0) calc(s * 0.3 * var(--final-saturation, 1)) calc(min(100, l + 1 / var(--final-saturation, 1))));
-					--palette-black: hsl(from var(--color-gray-dark) calc(h + 0) calc(s * 0.1 * var(--final-saturation, 1)) calc(min(100, l / (var(--mode-mult,1) * -5 + pow(1 + var(--final-saturation, 1), 1.5)))));
+					--palette-white: hsl(from var(--color-wash) calc(h + 0) calc(s * 0.3 * var(--global-saturation, 1)) calc(min(100, l + 1 / var(--global-saturation, 1))));
+					--palette-black: hsl(from var(--color-gray-dark) calc(h + 0) calc(s * 0.1 * var(--global-saturation, 1)) calc(min(100, l / (var(--mode-mult,1) * -5 + pow(1 + var(--global-saturation, 1), 1.5)))));
 
 					--z-nowPlaying: 40;
 					--z-nav: 50;
