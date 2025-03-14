@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.2
+
+### Patch Changes
+
+- b665ce1: layout responsive tweaks
+
 ## 1.8.1
 
 ### Patch Changes
