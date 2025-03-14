@@ -43,6 +43,7 @@ const meta = {
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },
+		layout: 'fullscreen',
 	},
 } satisfies Meta;
 
