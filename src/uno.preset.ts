@@ -510,8 +510,9 @@ export default function presetAglio({
 		],
 
 		shortcuts: {
-			'border-default': 'border border-solid border-black',
-			'border-light': 'border border-solid border-gray-dark',
+			'border-default': 'border border-solid border-color-black',
+			'border-light':
+				'border border-solid border-color-gray border-color-darken-5',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
@@ -626,7 +627,7 @@ export default function presetAglio({
 					--palette-green-20: #246869;
 					--palette-green-10: #274e50;
 					--palette-green-00:rgb(32, 48, 44);
-					--palette-yellow-90:rgb(254, 249, 238);
+					--palette-yellow-90:rgb(255, 249, 238);
 					--palette-yellow-80: #fff1c7;
 					--palette-yellow-70: #ffdf7c;
 					--palette-yellow-60: #ffdb57;
