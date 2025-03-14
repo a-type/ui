@@ -511,7 +511,7 @@ export default function presetAglio({
 
 		shortcuts: {
 			'border-default': 'border border-solid border-black',
-			'border-light': 'border border-solid border-gray',
+			'border-light': 'border border-solid border-gray-dark',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
@@ -606,7 +606,7 @@ export default function presetAglio({
 				@layer preflightBase, preflightVariant, components, responsive, variants, utilities;
 
 				:root {
-					--palette-red-90: #fff4f0;
+					--palette-red-90:rgb(255, 244, 240);
 					--palette-red-80: #ffdbcf;
 					--palette-red-70: #ffbea6;
 					--palette-red-60: #fdad8e;
@@ -616,7 +616,7 @@ export default function presetAglio({
 					--palette-red-20: #804020;
 					--palette-red-10: #702604;
 					--palette-red-00:rgb(37, 28, 25);
-					--palette-green-90:rgb(244, 251, 246);
+					--palette-green-90:rgb(242, 251, 247);
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
 					--palette-green-60: #86efc8;
@@ -636,7 +636,7 @@ export default function presetAglio({
 					--palette-yellow-20:rgb(111, 83, 23);
 					--palette-yellow-10:rgb(84, 62, 12);
 					--palette-yellow-00:rgb(37, 33, 22);
-					--palette-blue-90:rgb(239, 249, 256);
+					--palette-blue-90: rgb(239, 249, 256);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
 					--palette-blue-60: #5fcefe;
@@ -646,7 +646,7 @@ export default function presetAglio({
 					--palette-blue-20: #005979;
 					--palette-blue-10: #004c69;
 					--palette-blue-00:rgb(25, 39, 44);
-					--palette-purple-90:rgb(239, 236, 255);
+					--palette-purple-90:rgb(240, 238, 254);
 					--palette-purple-80: #e0e0ff;
 					--palette-purple-70:rgb(192, 197, 245);
 					--palette-purple-60:rgb(151, 159, 250);
