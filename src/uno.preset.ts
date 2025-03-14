@@ -25,7 +25,9 @@ export default function presetAglio({
 	},
 	borderScale = 1,
 	roundedness = 1,
-	saturation = 10,
+	cornerScale = roundedness,
+	spacingScale = 1,
+	saturation = 20,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -34,12 +36,15 @@ export default function presetAglio({
 		dark: [number, number];
 	};
 	borderScale?: number;
+	/** @deprecated use cornerScale */
 	roundedness?: number;
+	spacingScale?: number;
+	cornerScale?: number;
 	saturation?: number;
 } = {}): Preset {
 	const saturationPercent = saturation / 100;
 	const spacingIncrement = spacing[scale];
-	roundedness *= roundedScaling[scale];
+	cornerScale *= roundedScaling[scale];
 	const lightColors = generateColors(...colorRanges.light);
 	const darkColors = generateColors(...colorRanges.dark);
 
@@ -130,17 +135,17 @@ export default function presetAglio({
 			},
 			spacing: makeSpacing(spacingIncrement),
 			borderRadius: {
-				xs: `calc(${0.25 * roundedness}rem * var(--spacing-scale,1))`,
-				sm: `calc(${0.5 * roundedness}rem * var(--spacing-scale,1))`,
-				md: `calc(${roundedness}rem * var(--spacing-scale,1))`,
-				lg: `calc(${roundedness * 1.25}rem * var(--spacing-scale,1))`,
-				xl: `calc(${roundedness * 1.5}rem * var(--spacing-scale,1))`,
-				full: roundedness === 0 ? '0px' : '9999px',
+				xs: `calc(0.25rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				sm: `calc(0.5rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				md: `calc(1rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				lg: `calc(1.25rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				xl: `calc(1.5rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				full: cornerScale === 0 ? '0px' : '9999px',
 			},
 			lineWidth: {
-				DEFAULT: `${borderScale}px`,
+				DEFAULT: `calc(1px * var(--global-border-scale,1))`,
 				none: '0',
-				thick: `${2 * borderScale}px`,
+				thick: `calc(2px * var(--global-border-scale,1))`,
 			},
 			width: {
 				content: '700px',
@@ -544,8 +549,61 @@ export default function presetAglio({
 				},
 			} as any,
 			{
-				getCSS: (ctx) => `
-				@layer preflightBase, components, responsive, variants, utilities;
+				getCSS: (ctx) => {
+					const lightMode = `
+					--wash-saturation-tweak: ${lightModeSaturationTweak};
+					--mode-mult: 1;
+					${lightColors}
+					--color-dark-blend: var(--palette-dark-blend);
+					--color-light-blend: var(--palette-light-blend);
+					--color-dark-blend-2: var(--palette-dark-blend-2);
+					--color-light-blend-2: var(--palette-light-blend-2);
+					--color-black: var(--palette-true-black);
+					--color-white: var(--palette-white);
+					--color-gray-1: var(--palette-gray-1);
+					--color-gray-2: var(--palette-gray-2);
+					--color-gray-3: var(--palette-gray-3);
+					--color-gray-4: var(--palette-gray-4);
+					--color-gray-5: var(--palette-gray-5);
+					--color-gray-6: var(--palette-gray-6);
+					--color-gray-7: var(--palette-gray-7);
+					--color-gray-8: var(--palette-gray-8);
+					--color-gray-9: var(--palette-gray-9);
+					--color-gray-0: var(--palette-gray-0);
+					--color-gray-blend: var(--palette-gray-blend);
+					--color-gray-dark-blend: var(--palette-gray-dark-blend);
+					--color-shadow-1: var(--palette-shadow-2);
+					--color-shadow-2: var(--palette-shadow-1);
+					--color-overlay: var(--palette-white-overlay);
+				`;
+					const darkMode = `
+						--wash-saturation-tweak: ${darkModeSaturationTweak};
+						--mode-mult: -1;
+						${darkColors}
+						--color-dark-blend: var(--palette-light-blend);
+						--color-light-blend: var(--palette-dark-blend);
+						--color-dark-blend-2: var(--palette-light-blend-2);
+						--color-light-blend-2: var(--palette-dark-blend-2);
+						--color-black: var(--palette-true-white);
+						--color-white: var(--palette-black);
+						--color-gray-1: var(--palette-gray-ex-2);
+						--color-gray-2: var(--palette-gray-ex-1);
+						--color-gray-3: var(--palette-gray-0);
+						--color-gray-4: var(--palette-gray-9);
+						--color-gray-5: var(--palette-gray-8);
+						--color-gray-6: var(--palette-gray-7);
+						--color-gray-7: var(--palette-gray-6);
+						--color-gray-8: var(--palette-gray-5);
+						--color-gray-9: var(--palette-gray-4);
+						--color-gray-0: var(--palette-gray-3);
+						--color-gray-blend: var(--palette-light-gray-blend);
+						--color-gray-dark-blend: var(--palette-light-gray-dark-blend);
+						--color-shadow-1: var(--palette-shadow-4);
+						--color-shadow-2: var(--palette-shadow-3);
+						--color-overlay: var(--palette-black-overlay);
+					`;
+					return `
+				@layer preflightBase, preflightVariant, components, responsive, variants, utilities;
 
 				:root {
 					--palette-red-90: #fff4f0;
@@ -557,8 +615,8 @@ export default function presetAglio({
 					--palette-red-30: #ae562d;
 					--palette-red-20: #804020;
 					--palette-red-10: #702604;
-					--palette-red-00:rgb(52, 39, 35);
-					--palette-green-90: #e8ffef;
+					--palette-red-00:rgb(37, 28, 25);
+					--palette-green-90:rgb(238, 252, 242);
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
 					--palette-green-60: #86efc8;
@@ -573,12 +631,12 @@ export default function presetAglio({
 					--palette-yellow-70: #ffdf7c;
 					--palette-yellow-60: #ffdb57;
 					--palette-yellow-50: #e1b83c;
-					--palette-yellow-40: #ac7c04;
-					--palette-yellow-30: #8e5c00;
-					--palette-yellow-20: #714d00;
-					--palette-yellow-10: #634500;
-					--palette-yellow-00:rgb(56, 50, 30);
-					--palette-blue-90:rgb(231, 246, 255);
+					--palette-yellow-40:rgb(171, 134, 38);
+					--palette-yellow-30:rgb(139, 98, 20);
+					--palette-yellow-20:rgb(111, 83, 23);
+					--palette-yellow-10:rgb(84, 62, 12);
+					--palette-yellow-00:rgb(37, 33, 22);
+					--palette-blue-90:rgb(236, 244, 249);
 					--palette-blue-80: #c4e7ff;
 					--palette-blue-70: #87d3fc;
 					--palette-blue-60: #5fcefe;
@@ -593,11 +651,11 @@ export default function presetAglio({
 					--palette-purple-70: #c8cdff;
 					--palette-purple-60: #aab1ff;
 					--palette-purple-50: #8490f4;
-					--palette-purple-40: #6d78d7;
-					--palette-purple-30: #6068c0;
-					--palette-purple-20: #5a62a7;
-					--palette-purple-10: #464d8a;
-					--palette-purple-00:rgb(28, 30, 41);
+					--palette-purple-40:rgb(95, 103, 184);
+					--palette-purple-30:rgb(90, 96, 157);
+					--palette-purple-20:rgb(76, 81, 122);
+					--palette-purple-10:rgb(64, 67, 101);
+					--palette-purple-00:rgb(27, 24, 44);
 					--palette-light-blend: rgba(255, 255, 255, 0.8);
 					--palette-light-blend-2: rgba(255, 255, 255, 0.6);
 					--palette-dark-blend: rgba(0, 0, 0, 0.65);
@@ -624,6 +682,9 @@ export default function presetAglio({
 					--palette-true-gray-00: #1f1f1f;
 
 					--final-saturation: calc(${saturationPercent} * var(--global-saturation, 1));
+					--global-corner-scale: ${cornerScale};
+					--global-border-scale: ${borderScale};
+					--global-spacing-scale: ${spacingScale};
 
 					--palette-gray-wash: hsl(from var(--color-primary-wash) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--wash-saturation-tweak, 1) * var(--final-saturation, 1)) calc(l * pow(1.025, var(--mode-mult,1))));
 					--palette-gray: hsl(from var(--color-primary) calc(h + var(--gray-hue-tweak, 0)) calc(s * var(--final-saturation, 1)) calc(l * 1.125));
@@ -664,281 +725,188 @@ export default function presetAglio({
 					--z-overdraw: 100000;
 				}
 
-				/* LIGHT THEME */
-				html {
-					--wash-saturation-tweak: ${lightModeSaturationTweak};
-
-					${lightColors}
-					--color-dark-blend: var(--palette-dark-blend);
-					--color-light-blend: var(--palette-light-blend);
-					--color-dark-blend-2: var(--palette-dark-blend-2);
-					--color-light-blend-2: var(--palette-light-blend-2);
-					--color-black: var(--palette-true-black);
-					--color-white: var(--palette-white);
-					--color-gray-1: var(--palette-gray-1);
-					--color-gray-2: var(--palette-gray-2);
-					--color-gray-3: var(--palette-gray-3);
-					--color-gray-4: var(--palette-gray-4);
-					--color-gray-5: var(--palette-gray-5);
-					--color-gray-6: var(--palette-gray-6);
-					--color-gray-7: var(--palette-gray-7);
-					--color-gray-8: var(--palette-gray-8);
-					--color-gray-9: var(--palette-gray-9);
-					--color-gray-0: var(--palette-gray-0);
-					--color-gray-blend: var(--palette-gray-blend);
-					--color-gray-dark-blend: var(--palette-gray-dark-blend);
-					--color-shadow-1: var(--palette-shadow-2);
-					--color-shadow-2: var(--palette-shadow-1);
-					--color-overlay: var(--palette-white-overlay);
-
-
-					/* DEFAULT THEME (LEMON) */
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-green);
-					--color-accent-wash: var(--color-green-wash);
-					--color-accent-light: var(--color-green-light);
-					--color-accent-dark: var(--color-green-dark);
-					--color-primary: var(--color-yellow);
-					--color-primary-light: var(--color-yellow-light);
-					--color-primary-dark: var(--color-yellow-dark);
-					--color-primary-wash: var(--color-yellow-wash);
-					--gray-hue-tweak: -30;
-				}
-
-				/* INTRINSIC DARK THEME */
-				@media(prefers-color-scheme: dark) {
+				@layer preflightBase {
+					/* LIGHT THEME */
 					html {
-						--wash-saturation-tweak: ${darkModeSaturationTweak};
-						--mode-mult: -1;
-						${darkColors}
-						--color-dark-blend: var(--palette-light-blend);
-						--color-light-blend: var(--palette-dark-blend);
-						--color-dark-blend-2: var(--palette-light-blend-2);
-						--color-light-blend-2: var(--palette-dark-blend-2);
-						--color-black: var(--palette-true-white);
-						--color-white: var(--palette-black);
-						--color-gray-1: var(--palette-gray-ex-2);
-						--color-gray-2: var(--palette-gray-ex-1);
-						--color-gray-3: var(--palette-gray-0);
-						--color-gray-4: var(--palette-gray-9);
-						--color-gray-5: var(--palette-gray-8);
-						--color-gray-6: var(--palette-gray-7);
-						--color-gray-7: var(--palette-gray-6);
-						--color-gray-8: var(--palette-gray-5);
-						--color-gray-9: var(--palette-gray-4);
-						--color-gray-0: var(--palette-gray-3);
-						--color-gray-blend: var(--palette-light-gray-blend);
-						--color-gray-dark-blend: var(--palette-light-gray-dark-blend);
-						--color-shadow-1: var(--palette-shadow-4);
-						--color-shadow-2: var(--palette-shadow-3);
-						--color-overlay: var(--palette-black-overlay);
+						${lightMode}
+
+						/* DEFAULT THEME (LEMON) */
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-green);
+						--color-accent-wash: var(--color-green-wash);
+						--color-accent-light: var(--color-green-light);
+						--color-accent-dark: var(--color-green-dark);
+						--color-primary: var(--color-yellow);
+						--color-primary-light: var(--color-yellow-light);
+						--color-primary-dark: var(--color-yellow-dark);
+						--color-primary-wash: var(--color-yellow-wash);
+						--gray-hue-tweak: -30;
 					}
-				}
 
-				/** SYSTEM OVERRIDES **/
-				@media(prefers-color-scheme: dark) {
-					html.override-light {
-						--wash-saturation-tweak: ${lightModeSaturationTweak};
-						--mode-mult: 1;
-						${lightColors}
-						--color-dark-blend: var(--palette-dark-blend);
-						--color-light-blend: var(--palette-light-blend);
-						--color-dark-blend-2: var(--palette-dark-blend-2);
-						--color-light-blend-2: var(--palette-light-blend-2);
-						--color-black: var(--palette-true-black);
-						--color-white: var(--palette-white);
-						--color-gray-1: var(--palette-gray-1);
-						--color-gray-2: var(--palette-gray-2);
-						--color-gray-3: var(--palette-gray-3);
-						--color-gray-4: var(--palette-gray-4);
-						--color-gray-5: var(--palette-gray-5);
-						--color-gray-6: var(--palette-gray-6);
-						--color-gray-7: var(--palette-gray-7);
-						--color-gray-8: var(--palette-gray-8);
-						--color-gray-9: var(--palette-gray-9);
-						--color-gray-0: var(--palette-gray-0);
-						--color-gray-blend: var(--palette-gray-blend);
-						--color-gray-dark-blend: var(--palette-gray-dark-blend);
-						--color-shadow-1: var(--palette-shadow-2);
-						--color-shadow-2: var(--palette-shadow-1);
-						--color-overlay: var(--palette-white-overlay);
+					/* INTRINSIC DARK THEME */
+					@media(prefers-color-scheme: dark) {
+						html {
+							${darkMode}
+						}
 					}
-				}
 
-				@media(prefers-color-scheme: light) {
-					html.override-dark {
-						--wash-saturation-tweak: ${darkModeSaturationTweak};
-						--mode-mult: -1;
-						${darkColors}
-						--color-dark-blend: var(--palette-light-blend);
-						--color-light-blend: var(--palette-dark-blend);
-						--color-dark-blend-2: var(--palette-light-blend-2);
-						--color-light-blend-2: var(--palette-dark-blend-2);
-						--color-black: var(--palette-true-white);
-						--color-white: var(--palette-black);
-						--color-gray-1: var(--palette-gray-ex-2);
-						--color-gray-2: var(--palette-gray-ex-1);
-						--color-gray-3: var(--palette-gray-0);
-						--color-gray-4: var(--palette-gray-9);
-						--color-gray-5: var(--palette-gray-8);
-						--color-gray-6: var(--palette-gray-7);
-						--color-gray-7: var(--palette-gray-6);
-						--color-gray-8: var(--palette-gray-5);
-						--color-gray-9: var(--palette-gray-4);
-						--color-gray-0: var(--palette-gray-3);
-						--color-gray-blend: var(--palette-light-gray-blend);
-						--color-gray-dark-blend: var(--palette-light-gray-dark-blend);
-						--color-shadow-1: var(--palette-shadow-4);
-						--color-shadow-2: var(--palette-shadow-3);
-						--color-overlay: var(--palette-black-overlay);
-					}
-				}
-
-				.theme-lemon {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-green);
-					--color-accent-wash: var(--color-green-wash);
-					--color-accent-light: var(--color-green-light);
-					--color-accent-dark: var(--color-green-dark);
-					--color-primary: var(--color-yellow);
-					--color-primary-light: var(--color-yellow-light);
-					--color-primary-dark: var(--color-yellow-dark);
-					--color-primary-wash: var(--color-yellow-wash);
-
-					--gray-hue-tweak: -20;
-				}
-
-				/* fix yellow hue in dark mode */
-				@media(prefers-color-scheme: dark) {
 					.theme-lemon {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-green);
+						--color-accent-wash: var(--color-green-wash);
+						--color-accent-light: var(--color-green-light);
+						--color-accent-dark: var(--color-green-dark);
+						--color-primary: var(--color-yellow);
+						--color-primary-light: var(--color-yellow-light);
+						--color-primary-dark: var(--color-yellow-dark);
+						--color-primary-wash: var(--color-yellow-wash);
+
+						--gray-hue-tweak: -20;
+					}
+
+					/* fix yellow hue in dark mode */
+					@media(prefers-color-scheme: dark) {
+						.theme-lemon {
+							--gray-hue-tweak: 0;
+						}
+
+						html.override-light.theme-lemon, html.override-light .theme-lemon {
+							--gray-hue-tweak: -20;
+						}
+					}
+
+					html.override-dark.theme-lemon, html.override-dark .theme-lemon {
 						--gray-hue-tweak: 0;
 					}
 
-					html.override-light.theme-lemon, html.override-light .theme-lemon {
+					.theme-blueberry {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-green);
+						--color-accent-wash: var(--color-green-wash);
+						--color-accent-light: var(--color-green-light);
+						--color-accent-dark: var(--color-green-dark);
+						--color-primary: var(--color-blue);
+						--color-primary-light: var(--color-blue-light);
+						--color-primary-dark: var(--color-blue-dark);
+						--color-primary-wash: var(--color-blue-wash);
+
+						--gray-hue-tweak: 20;
+					}
+
+					.theme-eggplant {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-green);
+						--color-accent-wash: var(--color-green-wash);
+						--color-accent-light: var(--color-green-light);
+						--color-accent-dark: var(--color-green-dark);
+						--color-primary: var(--color-purple);
+						--color-primary-light: var(--color-purple-light);
+						--color-primary-dark: var(--color-purple-dark);
+						--color-primary-wash: var(--color-purple-wash);
+
 						--gray-hue-tweak: -20;
+					}
+
+					.theme-leek {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-blue);
+						--color-accent-wash: var(--color-blue-wash);
+						--color-accent-light: var(--color-blue-light);
+						--color-accent-dark: var(--color-blue-dark);
+						--color-primary: var(--color-green);
+						--color-primary-light: var(--color-green-light);
+						--color-primary-dark: var(--color-green-dark);
+						--color-primary-wash: var(--color-green-wash);
+
+						--gray-hue-tweak: 20;
+					}
+
+					.theme-tomato {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-accent: var(--color-green);
+						--color-accent-wash: var(--color-green-wash);
+						--color-accent-light: var(--color-green-light);
+						--color-accent-dark: var(--color-green-dark);
+						--color-primary: hsl(from var(--color-red) calc(h - 20) s l);
+						--color-primary-light: hsl(from var(--color-red-light) calc(h - 20) s l);
+						--color-primary-dark: hsl(from var(--color-red-dark) calc(h - 20) s l);
+						--color-primary-wash: hsl(from var(--color-red-wash) calc(h - 20) s l);
+
+						--gray-hue-tweak: -20;
+					}
+
+					.theme-salt {
+						--color-attention-light: var(--color-red-light);
+						--color-attention: var(--color-red);
+						--color-attention-dark: var(--color-red-dark);
+						--color-attention-wash: var(--color-red-wash);
+						--color-primary: var(--color-true-gray);
+						--color-primary-wash: var(--color-true-gray-wash);
+						--color-primary-light: var(--color-true-gray-light);
+						--color-primary-dark: var(--color-true-gray-dark);
+						--color-accent: var(--color-true-gray-light);
+						--color-accent-light: var(--color-true-gray-wash);
+						--color-accent-dark: var(--color-true-gray);
+						--color-accent-wash: var(--color-white);
+
+						--global-saturation: 0;
+					}
+
+					html, body {
+						margin: 0;
+						padding: 0;
+						font-family: "Inter", sans-serif;
+						font-size: 16px;
+						height: 100%;
+						--webkit-font-smoothing: antialiased;
+					}
+
+					body {
+						height: 100%;
+						background-color: var(--color-wash);
+						color: var(--color-black);
+						overflow: overlay;
+					}
+
+					a {
+						color: inherit;
+						text-decoration: none;
+					}
+
+					* {
+						box-sizing: border-box;
+						-webkit-tap-highlight-color: transparent;
 					}
 				}
 
-				html.override-dark.theme-lemon, html.override-dark .theme-lemon {
-					--gray-hue-tweak: 0;
+				@layer preflightVariants {
+					/** SYSTEM OVERRIDES **/
+					.override-light {
+						${lightMode}
+					}
+
+					.override-dark {
+						${darkMode}
+					}
 				}
-
-				.theme-blueberry {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-green);
-					--color-accent-wash: var(--color-green-wash);
-					--color-accent-light: var(--color-green-light);
-					--color-accent-dark: var(--color-green-dark);
-					--color-primary: var(--color-blue);
-					--color-primary-light: var(--color-blue-light);
-					--color-primary-dark: var(--color-blue-dark);
-					--color-primary-wash: var(--color-blue-wash);
-
-					--gray-hue-tweak: 20;
-				}
-
-				.theme-eggplant {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-green);
-					--color-accent-wash: var(--color-green-wash);
-					--color-accent-light: var(--color-green-light);
-					--color-accent-dark: var(--color-green-dark);
-					--color-primary: var(--color-purple);
-					--color-primary-light: var(--color-purple-light);
-					--color-primary-dark: var(--color-purple-dark);
-					--color-primary-wash: var(--color-purple-wash);
-
-					--gray-hue-tweak: -20;
-				}
-
-				.theme-leek {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-blue);
-					--color-accent-wash: var(--color-blue-wash);
-					--color-accent-light: var(--color-blue-light);
-					--color-accent-dark: var(--color-blue-dark);
-					--color-primary: var(--color-green);
-					--color-primary-light: var(--color-green-light);
-					--color-primary-dark: var(--color-green-dark);
-					--color-primary-wash: var(--color-green-wash);
-
-					--gray-hue-tweak: 20;
-				}
-
-				.theme-tomato {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-accent: var(--color-green);
-					--color-accent-wash: var(--color-green-wash);
-					--color-accent-light: var(--color-green-light);
-					--color-accent-dark: var(--color-green-dark);
-					--color-primary: hsl(from var(--color-red) calc(h - 20) s l);
-					--color-primary-light: hsl(from var(--color-red-light) calc(h - 20) s l);
-					--color-primary-dark: hsl(from var(--color-red-dark) calc(h - 20) s l);
-					--color-primary-wash: hsl(from var(--color-red-wash) calc(h - 20) s l);
-
-					--gray-hue-tweak: -20;
-				}
-
-				.theme-salt {
-					--color-attention-light: var(--color-red-light);
-					--color-attention: var(--color-red);
-					--color-attention-dark: var(--color-red-dark);
-					--color-attention-wash: var(--color-red-wash);
-					--color-primary: var(--color-true-gray);
-					--color-primary-wash: var(--color-true-gray-wash);
-					--color-primary-light: var(--color-true-gray-light);
-					--color-primary-dark: var(--color-true-gray-dark);
-					--color-accent: var(--color-true-gray-light);
-					--color-accent-light: var(--color-true-gray-wash);
-					--color-accent-dark: var(--color-true-gray);
-					--color-accent-wash: var(--color-white);
-
-					--global-saturation: 0;
-				}
-
-        html, body {
-          margin: 0;
-          padding: 0;
-          font-family: "Inter", sans-serif;
-          font-size: 16px;
-          height: 100%;
-          --webkit-font-smoothing: antialiased;
-        }
-
-        body {
-          height: 100%;
-          background-color: var(--color-wash);
-          color: var(--color-black);
-          overflow: overlay;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        * {
-          box-sizing: border-box;
-          -webkit-tap-highlight-color: transparent;
-        }
 
         @font-face {
           font-family: "Inter";
@@ -968,7 +936,13 @@ export default function presetAglio({
 					syntax: "*";
 					inherits: false;
 				}
-			`,
+
+				@property --local-corner-scale {
+					syntax: "*";
+					inherits: false;
+				}
+			`;
+				},
 			},
 		],
 
@@ -1026,11 +1000,11 @@ function makeSpacing(increment: number) {
 				{} as Record<string, string>,
 			),
 
-		xs: 'calc(0.25rem * var(--spacing-scale,1))',
-		sm: 'calc(0.5rem * var(--spacing-scale,1))',
-		md: 'calc(1rem * var(--spacing-scale,1))',
-		lg: 'calc(2rem * var(--spacing-scale,1))',
-		xl: 'calc(3rem * var(--spacing-scale,1))',
+		xs: 'calc(0.25rem * var(--spacing-scale,1) * var(--global-spacing-scale,1))',
+		sm: 'calc(0.5rem * var(--spacing-scale,1) * var(--global-spacing-scale,1))',
+		md: 'calc(1rem * var(--spacing-scale,1) * var(--global-spacing-scale,1))',
+		lg: 'calc(2rem * var(--spacing-scale,1) * var(--global-spacing-scale,1))',
+		xl: 'calc(3rem * var(--spacing-scale,1) * var(--global-spacing-scale,1))',
 	};
 }
 

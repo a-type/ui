@@ -27,11 +27,11 @@ const preview: Preview = {
 		},
 		mode: {
 			description: 'Device mode',
-			defaultValue: 'light',
+			defaultValue: 'system',
 			toolbar: {
 				title: 'Mode',
 				icon: 'mirror',
-				items: ['light', 'dark'],
+				items: ['light', 'dark', 'system'],
 				dynamicTitle: true,
 			},
 		},
@@ -43,6 +43,28 @@ const preview: Preview = {
 				title: 'Saturation',
 				icon: 'dropper',
 				items: ['0', '10', '15', '20', '40', '60', '80', '100'],
+				dynamicTitle: true,
+			},
+		},
+		spacing: {
+			description: 'Spacing scale',
+			defaultValue: 1,
+			type: 'number',
+			toolbar: {
+				title: 'Spacing',
+				icon: 'grid',
+				items: ['0', '0.25', '0.5', '0.75', '1', '1.5', '2'],
+				dynamicTitle: true,
+			},
+		},
+		corners: {
+			description: 'Corner scale',
+			defaultValue: 1,
+			type: 'number',
+			toolbar: {
+				title: 'Corners',
+				icon: 'rounded',
+				items: ['0', '0.25', '0.5', '1', '1.5', '2', '3'],
 				dynamicTitle: true,
 			},
 		},
@@ -71,6 +93,28 @@ const preview: Preview = {
 					document.documentElement.style.removeProperty('--global-saturation');
 				};
 			}, [ctx.globals.saturation]);
+			useEffect(() => {
+				document.documentElement.style.setProperty(
+					'--global-spacing-scale',
+					`${ctx.globals.spacing}`,
+				);
+				return () => {
+					document.documentElement.style.removeProperty(
+						'--global-spacing-scale',
+					);
+				};
+			}, [ctx.globals.spacing]);
+			useEffect(() => {
+				document.documentElement.style.setProperty(
+					'--global-corner-scale',
+					`${ctx.globals.corners}`,
+				);
+				return () => {
+					document.documentElement.style.removeProperty(
+						'--global-corner-scale',
+					);
+				};
+			}, [ctx.globals.corners]);
 			return (
 				<Provider>
 					<Story />
