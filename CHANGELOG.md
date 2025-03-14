@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.8.1
+
+### Patch Changes
+
+- f9fb9a7: Fix control borders in containers. Lots more color teaking.
+- 03a1ef6: fix checkbox roudedness
+
 ## 1.8.0
 
 ### Minor Changes
