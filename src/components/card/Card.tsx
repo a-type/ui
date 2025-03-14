@@ -1,12 +1,13 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
 import { HTMLAttributes, MouseEvent, ReactNode, Ref } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName, withProps } from '../../hooks.js';
+import { Box } from '../box/Box.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
-	'div',
+	withProps(Box, { container: 'reset' }),
 	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-0.5 text-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );

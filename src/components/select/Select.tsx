@@ -17,6 +17,7 @@ import {
 	useContext,
 } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { BoxContext } from '../box/Box.js';
 import { Button, ButtonProps, getButtonClassName } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 
@@ -147,30 +148,32 @@ export const SelectContent = withPassthroughNativeRender(
 	({ ref: forwardedRef, children, inDialog, className, ...props }) => {
 		return (
 			<SelectPrimitive.Portal>
-				<SelectPrimitive.Content
-					className={classNames(
-						'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border border-black z-menu shadow-lg)',
-						'layer-components:transform-origin-[var(--radix-select-content-transform-origin)]',
-						'layer-components:[&[data-state=open]]:animate-popover-in',
-						'layer-components:[&[data-state=closed]]:animate-popover-out',
-						'layer-components:(min-w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)])',
-						inDialog && 'z-[calc(var(--z-dialog)+1)]',
-						className,
-					)}
-					style={zIndex}
-					{...props}
-					ref={forwardedRef}
-				>
-					<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
-						<ChevronUpIcon />
-					</SelectPrimitive.ScrollUpButton>
-					<SelectPrimitive.Viewport className="p-1">
-						{children}
-					</SelectPrimitive.Viewport>
-					<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
-						<ChevronDownIcon />
-					</SelectPrimitive.ScrollDownButton>
-				</SelectPrimitive.Content>
+				<BoxContext.Provider value={{ spacingScale: 1 }}>
+					<SelectPrimitive.Content
+						className={classNames(
+							'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border border-black z-menu shadow-lg)',
+							'layer-components:transform-origin-[var(--radix-select-content-transform-origin)]',
+							'layer-components:[&[data-state=open]]:animate-popover-in',
+							'layer-components:[&[data-state=closed]]:animate-popover-out',
+							'layer-components:(min-w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)])',
+							inDialog && 'z-[calc(var(--z-dialog)+1)]',
+							className,
+						)}
+						style={zIndex}
+						{...props}
+						ref={forwardedRef}
+					>
+						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
+							<ChevronUpIcon />
+						</SelectPrimitive.ScrollUpButton>
+						<SelectPrimitive.Viewport className="p-1">
+							{children}
+						</SelectPrimitive.Viewport>
+						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
+							<ChevronDownIcon />
+						</SelectPrimitive.ScrollDownButton>
+					</SelectPrimitive.Content>
+				</BoxContext.Provider>
 			</SelectPrimitive.Portal>
 		);
 	},

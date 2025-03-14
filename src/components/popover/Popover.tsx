@@ -5,6 +5,7 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { BoxContext } from '../box/Box.js';
 
 const StyledContent = withClassName(
 	PopoverPrimitive.Content,
@@ -54,23 +55,25 @@ export const PopoverContent = function PopoverContent({
 }) {
 	return (
 		<PopoverPrimitive.Portal forceMount={forceMount}>
-			<StyledContent
-				{...props}
-				forceMount={forceMount}
-				ref={ref}
-				className={classNames(
-					{
-						'layer-variants:important:p-0': padding === 'none',
-						'layer-variants:p-5': padding === 'default',
-						'layer-variants:rounded-none': radius === 'none',
-						'layer-variants:rounded-lg': radius === 'default',
-						'layer-variants:rounded-md': radius === 'md',
-					},
-					className,
-				)}
-			>
-				{children}
-			</StyledContent>
+			<BoxContext.Provider value={{ spacingScale: 1 }}>
+				<StyledContent
+					{...props}
+					forceMount={forceMount}
+					ref={ref}
+					className={classNames(
+						{
+							'layer-variants:important:p-0': padding === 'none',
+							'layer-variants:p-5': padding === 'default',
+							'layer-variants:rounded-none': radius === 'none',
+							'layer-variants:rounded-lg': radius === 'default',
+							'layer-variants:rounded-md': radius === 'md',
+						},
+						className,
+					)}
+				>
+					{children}
+				</StyledContent>
+			</BoxContext.Provider>
 		</PopoverPrimitive.Portal>
 	);
 };

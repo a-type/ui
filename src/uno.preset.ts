@@ -130,11 +130,11 @@ export default function presetAglio({
 			},
 			spacing: makeSpacing(spacingIncrement),
 			borderRadius: {
-				xs: `${0.25 * roundedness}rem`,
-				sm: `${0.5 * roundedness}rem`,
-				md: `${roundedness}rem`,
-				lg: `${roundedness * 1.25}rem`,
-				xl: `${roundedness * 1.5}rem`,
+				xs: `calc(${0.25 * roundedness}rem * var(--spacing-scale,1))`,
+				sm: `calc(${0.5 * roundedness}rem * var(--spacing-scale,1))`,
+				md: `calc(${roundedness}rem * var(--spacing-scale,1))`,
+				lg: `calc(${roundedness * 1.25}rem * var(--spacing-scale,1))`,
+				xl: `calc(${roundedness * 1.5}rem * var(--spacing-scale,1))`,
 				full: roundedness === 0 ? '0px' : '9999px',
 			},
 			lineWidth: {

@@ -42,7 +42,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	wrap?: BoxResponsive<boolean>;
 	p?: BoxResponsive<BoxSpacingSize | boolean>;
 	container?: boolean | 'reset';
-	surface?: boolean | 'primary' | 'accent' | 'default' | 'attention';
+	surface?: boolean | 'primary' | 'accent' | 'default' | 'attention' | 'wash';
 	theme?: ThemeName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
@@ -167,6 +167,7 @@ export function Box({
 					'layer-components:rounded-lg': !!surface,
 					'layer-components:(bg-white border-black)':
 						surface === true || surface === 'default',
+					'layer-components:(bg-wash border-black)': surface === 'wash',
 					'layer-components:(bg-primary-wash border-primary-dark color-primary-dark)':
 						surface === 'primary',
 					'layer-components:(bg-accent-wash border-accent-dark color-accent-dark)':
@@ -189,7 +190,7 @@ export function Box({
 		/>
 	);
 
-	if (container) {
+	if (container || p) {
 		return (
 			<BoxContext.Provider
 				value={{
@@ -207,8 +208,8 @@ export function Box({
 	return main;
 }
 
-const SPACING_SCALE_NESTING_FACTOR = 0.5;
-const BoxContext = createContext<{
+const SPACING_SCALE_NESTING_FACTOR = 0.75;
+export const BoxContext = createContext<{
 	spacingScale: number;
 }>({
 	spacingScale: 1,

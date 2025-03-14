@@ -15,6 +15,7 @@ import {
 } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
+import { BoxContext } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { useParticles } from '../particles/index.js';
 import { useConfig } from '../provider/Provider.js';
@@ -121,29 +122,31 @@ export const Content = function Content({
 	return (
 		<DialogPrimitive.Portal>
 			<StyledOverlay />
-			<StyledContent
-				data-dialog-content
-				ref={finalRef}
-				{...props}
-				className={classNames(
-					{
-						'md:max-w-800px': width === 'lg',
-						'max-w-600px': width === 'md',
-						'max-w-300px': width === 'sm',
-					},
-					!disableSheet && sheetClassNames,
-					!disableSheet &&
-						virtualKeyboardBehavior === 'overlay' &&
-						sheetClassNameWithOverlayKeyboard,
-					!disableSheet &&
-						virtualKeyboardBehavior === 'displace' &&
-						sheetClassNameWithDisplaceKeyboard,
-					outerClassName || className,
-				)}
-			>
-				{!disableSheet && <DialogSwipeHandle />}
-				{children}
-			</StyledContent>
+			<BoxContext.Provider value={{ spacingScale: 1 }}>
+				<StyledContent
+					data-dialog-content
+					ref={finalRef}
+					{...props}
+					className={classNames(
+						{
+							'md:max-w-800px': width === 'lg',
+							'max-w-600px': width === 'md',
+							'max-w-300px': width === 'sm',
+						},
+						!disableSheet && sheetClassNames,
+						!disableSheet &&
+							virtualKeyboardBehavior === 'overlay' &&
+							sheetClassNameWithOverlayKeyboard,
+						!disableSheet &&
+							virtualKeyboardBehavior === 'displace' &&
+							sheetClassNameWithDisplaceKeyboard,
+						outerClassName || className,
+					)}
+				>
+					{!disableSheet && <DialogSwipeHandle />}
+					{children}
+				</StyledContent>
+			</BoxContext.Provider>
 		</DialogPrimitive.Portal>
 	);
 };

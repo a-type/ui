@@ -41,18 +41,18 @@ export const Default: Story = {};
 export const NestedContainers: Story = {
 	render(args) {
 		return (
-			<Box {...args} container direction="col">
-				<Box {...args} container>
-					<Box {...args}>
+			<Box {...args} container surface="accent" direction="col">
+				<Box {...args} container surface="primary">
+					<Box {...args} surface="default">
 						<Button>Button</Button>
 						<Button>Button</Button>
 					</Box>
-					<Box {...args}>
+					<Box {...args} surface="attention">
 						<Button>Button</Button>
 						<Button>Button</Button>
 					</Box>
 				</Box>
-				<Box {...args}>
+				<Box {...args} surface="wash">
 					<Button>Button</Button>
 					<Button>Button</Button>
 				</Box>

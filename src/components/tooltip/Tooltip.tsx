@@ -2,6 +2,7 @@
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
+import { BoxContext } from '../box/Box.js';
 
 function Content({
 	children,
@@ -10,20 +11,22 @@ function Content({
 }: TooltipPrimitive.TooltipContentProps) {
 	return (
 		<TooltipPrimitive.Portal>
-			<TooltipPrimitive.Content
-				className={classNames(
-					'layer-components:(relative rounded-sm py-2 px-3 bg-black text-white text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
-					'[&[data-state=delayed-open]]:display-initial',
-					'[&[data-state=instant-open]]:display-initial',
-					'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
-					'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
-					className,
-				)}
-				{...props}
-			>
-				{children}
-				<TooltipPrimitive.Arrow className="fill-black" />
-			</TooltipPrimitive.Content>
+			<BoxContext.Provider value={{ spacingScale: 1 }}>
+				<TooltipPrimitive.Content
+					className={classNames(
+						'layer-components:(relative rounded-sm py-2 px-3 bg-black text-white text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
+						'[&[data-state=delayed-open]]:display-initial',
+						'[&[data-state=instant-open]]:display-initial',
+						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
+						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
+						className,
+					)}
+					{...props}
+				>
+					{children}
+					<TooltipPrimitive.Arrow className="fill-black" />
+				</TooltipPrimitive.Content>
+			</BoxContext.Provider>
 		</TooltipPrimitive.Portal>
 	);
 }

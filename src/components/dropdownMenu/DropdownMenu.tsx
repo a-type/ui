@@ -3,9 +3,18 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { BoxContext } from '../box/Box.js';
 
 const StyledContent = withClassName(
-	DropdownMenuPrimitive.Content,
+	function DropdownMenuContent(
+		props: DropdownMenuPrimitive.DropdownMenuContentProps,
+	) {
+		return (
+			<BoxContext.Provider value={{ spacingScale: 1 }}>
+				<DropdownMenuPrimitive.Content {...props} />
+			</BoxContext.Provider>
+		);
+	},
 	'min-w-220px bg-white z-menu shadow-lg rounded-lg border-default',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
