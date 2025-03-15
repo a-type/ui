@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.9
+
+### Patch Changes
+
+- 88756c3: fix editable text alignment
+
 ## 1.8.8
 
 ### Patch Changes
