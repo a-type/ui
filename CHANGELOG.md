@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.10
+
+### Patch Changes
+
+- 120b61d: fix nesting and overriding themes
+
 ## 1.8.9
 
 ### Patch Changes
