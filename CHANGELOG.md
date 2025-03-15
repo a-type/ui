@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.7
+
+### Patch Changes
+
+- 6af9ed5: rich text typography
+
 ## 1.8.6
 
 ### Patch Changes
