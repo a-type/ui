@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.8
+
+### Patch Changes
+
+- ae0d028: add hr to richText, fix cards in boxes
+
 ## 1.8.7
 
 ### Patch Changes
