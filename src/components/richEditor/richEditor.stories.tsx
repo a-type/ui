@@ -32,7 +32,7 @@ export const Default: Story = {
 					<h2>Heading 2</h2>
 					<p>{paragraphText}</p>
 					<p>{paragraphText}</p>
-
+					<hr />
 					<p>{paragraphText}</p>
 
 					<blockquote>{paragraphText}</blockquote>

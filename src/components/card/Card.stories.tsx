@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 import {
@@ -255,4 +256,41 @@ export const VisuallyFocused: Story = {
 			</CardFooter>
 		</CardRoot>
 	),
+};
+
+export const CardsInBox: Story = {
+	render() {
+		return (
+			<Box container p gap>
+				<CardRoot>
+					<CardMain onClick={() => {}}>
+						<CardTitle>Card Title</CardTitle>
+						<CardContent>Other stuff</CardContent>
+					</CardMain>
+					<CardFooter>
+						<CardActions>
+							<Button size="small">Button</Button>
+							<Button size="icon" color="ghost">
+								<Icon name="placeholder" />
+							</Button>
+						</CardActions>
+					</CardFooter>
+				</CardRoot>
+				<CardRoot>
+					<CardMain onClick={() => {}}>
+						<CardTitle>Card Title</CardTitle>
+						<CardContent>Other stuff</CardContent>
+					</CardMain>
+					<CardFooter>
+						<CardActions>
+							<Button size="small">Button</Button>
+							<Button size="icon" color="ghost">
+								<Icon name="placeholder" />
+							</Button>
+						</CardActions>
+					</CardFooter>
+				</CardRoot>
+			</Box>
+		);
+	},
 };

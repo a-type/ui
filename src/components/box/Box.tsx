@@ -75,10 +75,13 @@ export function Box({
 	const style = useMemo(
 		() => ({
 			...userStyle,
-			'--spacing-scale': spacingScale,
-			'--local-corner-scale': `calc(var(--global-corner-scale,1)*${spacingScale})`,
+			'--spacing-scale': container === 'reset' ? 1 : spacingScale,
+			'--local-corner-scale':
+				container === 'reset'
+					? 1
+					: `calc(var(--global-corner-scale,1)*${spacingScale})`,
 		}),
-		[userStyle, spacingScale],
+		[userStyle, spacingScale, container],
 	);
 
 	const items = itemsSolo ?? align?.split(' ')[0];

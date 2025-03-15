@@ -17,6 +17,7 @@ export const tipTapClassName = clsx(
 	'layer-components:[&_mark]:(bg-accent-wash bg-darken-3)',
 	'layer-components:[&_strong]:(font-semibold)',
 	'layer-components:[&_em]:(italic)',
+	'layer-components:[&_hr]:(my-lg border-gray)',
 	'layer-components:[&_a]:(underline)',
 	'layer-components:[&_a:hover]:(underline)',
 	'layer-components:[&_a:focus]:(outline-none shadow-focus)',
