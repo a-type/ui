@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
+import { useState } from 'react';
 import { ActionBar, ActionButton } from './components/actions/index.js';
 import { Button } from './components/button/index.js';
 import { Card } from './components/card/index.js';
@@ -8,6 +9,7 @@ import {
 	AvatarList,
 	Box,
 	Checkbox,
+	ColorPicker,
 	ContextMenu,
 	DateRangePicker,
 	Dialog,
@@ -30,13 +32,16 @@ import {
 	PageNav,
 	PageRoot,
 	Progress,
+	Provider,
 	TextSkeleton,
+	ThemeName,
 	ToggleGroup,
 	Tooltip,
 } from './components/index.js';
 import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
+import { useOverrideTheme } from './hooks/useOverrideTheme.js';
 
 const meta = {
 	title: 'themes',
@@ -55,9 +60,9 @@ function DemoUI({ className }: { className?: string }) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot>
+		<PageRoot className={clsx('flex-1', className)}>
 			<PageContent>
-				<div className={clsx('grid gap-2 grid-cols-2', className)}>
+				<div className={clsx('grid gap-2 grid-cols-2')}>
 					<Box gap wrap p>
 						<Button color="primary">Primary</Button>
 						<Button color="accent">Accent</Button>
@@ -159,6 +164,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Dialog.Description>Im a dialog</Dialog.Description>
 							<Dialog.Actions>
 								<Dialog.Close>Close</Dialog.Close>
+								<Button color="primary">Action</Button>
 							</Dialog.Actions>
 						</Dialog.Content>
 					</Dialog>
@@ -245,5 +251,33 @@ function DemoUI({ className }: { className?: string }) {
 export const Default: Story = {
 	render() {
 		return <DemoUI />;
+	},
+};
+
+export const Nesting: Story = {
+	render() {
+		return (
+			<Box d="col" p gap>
+				<Box d="row" gap surface="primary">
+					<Button color="primary">Root theme</Button>
+				</Box>
+				<DemoUI className="theme-eggplant override-dark flex-1" />
+			</Box>
+		);
+	},
+};
+
+export const Override: Story = {
+	render() {
+		const [theme, setTheme] = useState<ThemeName | null>(null);
+		useOverrideTheme(theme);
+		return (
+			<Provider>
+				<Box d="col" p gap>
+					<ColorPicker value={theme} onChange={setTheme} />
+					<DemoUI />
+				</Box>
+			</Provider>
+		);
 	},
 };
