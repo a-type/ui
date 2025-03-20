@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.8.11
+
+### Patch Changes
+
+- 355d529: more color tweaks
+- ec42ec6: Color inheritance improvements
+
 ## 1.8.10
 
 ### Patch Changes
