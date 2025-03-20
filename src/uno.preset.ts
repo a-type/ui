@@ -139,11 +139,11 @@ export default function presetAglio({
 			},
 			spacing: makeSpacing(spacingIncrement),
 			borderRadius: {
-				xs: `calc(0.25rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
-				sm: `calc(0.5rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
-				md: `calc(1rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
-				lg: `calc(1.25rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
-				xl: `calc(1.5rem * var(--local-corner-scale, var(--global-corner-scale,1)))`,
+				xs: `calc(0.25rem * var(--local-corner-scale,1) * var(--global-corner-scale,1))`,
+				sm: `calc(0.5rem * var(--local-corner-scale,1) * var(--global-corner-scale,1))`,
+				md: `calc(1rem * var(--local-corner-scale,1) * var(--global-corner-scale,1))`,
+				lg: `calc(1.25rem * var(--local-corner-scale,1) * var(--global-corner-scale,1))`,
+				xl: `calc(1.5rem * var(--local-corner-scale,1) * var(--global-corner-scale,1))`,
 				full: cornerScale === 0 ? '0px' : '9999px',
 			},
 			lineWidth: {
