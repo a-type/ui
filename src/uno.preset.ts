@@ -607,12 +607,13 @@ export default function presetAglio({
 					const lemon = themeVars({
 						primary: 'yellow',
 						accent: 'green',
-						grayTweak: -20,
+						grayTweak: -10,
 					});
 					const leek = themeVars({
 						primary: 'green',
 						accent: 'blue',
 						grayTweak: 20,
+						primaryWashSaturation: 0.95,
 					});
 					const tomato = themeVars({
 						primary: 'magenta',
@@ -691,7 +692,7 @@ export default function presetAglio({
 					--palette-magenta-20: hsl(from #804020 calc(h - 20) s l);
 					--palette-magenta-10: hsl(from #702604 calc(h - 20) s l);
 					--palette-magenta-00: hsl(from rgb(37, 28, 25) calc(h - 20) s l);
-					--palette-green-90:rgb(242, 251, 247);
+					--palette-green-90:rgb(240, 255, 248);
 					--palette-green-80: #c2ffe9;
 					--palette-green-70: #92f2d1;
 					--palette-green-60: #86efc8;
@@ -1060,16 +1061,22 @@ function themeVars({
 	accent,
 	grayTweak,
 	globalSaturation,
+	primaryWashSaturation,
 }: {
 	primary: string | ExplicitColorRange;
 	accent: string | ExplicitColorRange;
 	grayTweak?: number;
 	globalSaturation?: number;
+	primaryWashSaturation?: number;
 }) {
 	return `
 	${themeVarRange({ name: 'attention', range: 'red' })}
 	${themeVarRange({ name: 'accent', range: accent })}
-	${themeVarRange({ name: 'primary', range: primary })}
+	${themeVarRange({
+		name: 'primary',
+		range: primary,
+		washSaturation: primaryWashSaturation,
+	})}
 
 	--gray-hue-tweak: ${grayTweak ?? 0};
 	${
@@ -1089,19 +1096,28 @@ type ExplicitColorRange = {
 function themeVarRange({
 	name,
 	range,
+	washSaturation = 1,
 }: {
 	name: string;
 	range: string | ExplicitColorRange;
+	washSaturation?: number;
 }) {
-	if (typeof range === 'string') {
-		return `--color-${name}: var(--color-${range});
---color-${name}-wash: var(--color-${range}-wash);
---color-${name}-light: var(--color-${range}-light);
---color-${name}-dark: var(--color-${range}-dark);`;
-	}
+	const realRange =
+		typeof range === 'string'
+			? {
+					default: range,
+					wash: `${range}-wash`,
+					light: `${range}-light`,
+					dark: `${range}-dark`,
+			  }
+			: range;
 
-	return `--color-${name}: var(--color-${range.default});
---color-${name}-wash: var(--color-${range.wash});
---color-${name}-light: var(--color-${range.light});
---color-${name}-dark: var(--color-${range.dark});`;
+	return `--color-${name}: var(--color-${realRange.default});
+--color-${name}-wash: ${
+		washSaturation !== 1
+			? `hsl(from var(--color-${realRange.wash}) h calc(s * ${washSaturation}) l)`
+			: `var(--color-${realRange.wash})`
+	};
+--color-${name}-light: var(--color-${realRange.light});
+--color-${name}-dark: var(--color-${realRange.dark});`;
 }
