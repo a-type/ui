@@ -4,22 +4,22 @@ const baseHeadingClass = 'layer-components:my-0';
 export const H1 = withClassName(
 	'h1',
 	baseHeadingClass,
-	'layer-components:(font-title text-2xl font-semibold)',
+	'layer-components:(font-title text-2xl font-semibold color-inherit color-darken-1)',
 );
 export const H2 = withClassName(
 	'h2',
 	baseHeadingClass,
-	'layer-components:(text-lg font-title font-bold color-gray-dark color-darken-7)',
+	'layer-components:(text-lg font-title font-bold color-inherit color-lighten-2)',
 );
 export const H3 = withClassName(
 	'h3',
 	baseHeadingClass,
-	'layer-components:(font-title text-md font-500 color-gray-dark color-darken-5)',
+	'layer-components:(font-title text-md font-500 color-inherit color-lighten-4)',
 );
 export const H4 = withClassName(
 	'h4',
 	baseHeadingClass,
-	'layer-components:(text-xs uppercase color-gray-dark color-darken-3)',
+	'layer-components:(text-xs uppercase color-inherit color-lighten-6)',
 );
 export const H5 = withClassName('h5', baseHeadingClass);
 

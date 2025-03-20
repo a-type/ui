@@ -20,8 +20,8 @@ export default function presetAglio({
 	scale = 'md',
 	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
 	colorRanges = {
-		light: [90, 40],
-		dark: [0, 60],
+		light: [90, 20],
+		dark: [0, 80],
 	},
 	borderScale = 1,
 	roundedness = 1,
@@ -70,12 +70,14 @@ export default function presetAglio({
 					light: 'var(--color-attention-light)',
 					dark: 'var(--color-attention-dark)',
 					wash: 'var(--color-attention-wash)',
+					ink: 'var(--color-attention-ink)',
 				},
 				accent: {
 					DEFAULT: 'var(--color-accent)',
 					light: 'var(--color-accent-light)',
 					dark: 'var(--color-accent-dark)',
 					wash: 'var(--color-accent-wash)',
+					ink: 'var(--color-accent-ink)',
 				},
 				accentWash: 'var(--color-accent-wash)',
 				'accent-wash': 'var(--color-accent-wash)',
@@ -88,6 +90,7 @@ export default function presetAglio({
 					light: 'var(--color-primary-light)',
 					dark: 'var(--color-primary-dark)',
 					wash: 'var(--color-primary-wash)',
+					ink: 'var(--color-primary-ink)',
 				},
 				primaryLight: 'var(--color-primary-light)',
 				'primary-light': 'var(--color-primary-light)',
@@ -100,6 +103,7 @@ export default function presetAglio({
 					wash: 'var(--color-gray-wash)',
 					light: 'var(--color-gray-light)',
 					dark: 'var(--color-gray-dark)',
+					ink: 'var(--color-gray-ink)',
 					blend: 'var(--color-gray-blend)',
 				},
 				grayBlend: 'var(--color-gray-blend)',
@@ -418,10 +422,15 @@ export default function presetAglio({
 
 			[
 				/^color-(.*)$/,
-				(match, { theme }) => ({
-					color: 'var(--v-color-altered,var(--v-color))',
-					'--v-color': resolveThemeColor(match[1], theme),
-				}),
+				(match, { theme }) => {
+					if (match[1] === 'inherit') {
+						return { color: 'var(--v-color-altered,var(--v-color))' };
+					}
+					return {
+						color: 'var(--v-color-altered,var(--v-color))',
+						'--v-color': resolveThemeColor(match[1], theme),
+					};
+				},
 			],
 			[
 				/^color-lighten-(\d+\.?\d*)$/,
@@ -439,6 +448,9 @@ export default function presetAglio({
 				/^bg-(.*)$/,
 				(match, ctx) => {
 					const { theme } = ctx;
+					if (match[1] === 'inherit') {
+						return { 'background-color': 'var(--v-bg-altered,var(--v-bg))' };
+					}
 					const resolvedColor = resolveThemeColor(match[1], theme);
 					if (resolvedColor === null) {
 						return baseBgRule[1](match, ctx);
@@ -637,6 +649,7 @@ export default function presetAglio({
 							wash: 'white',
 							light: 'true-gray-wash',
 							dark: 'true-gray',
+							ink: 'true-gray-dark',
 						},
 						globalSaturation: 0,
 					});
@@ -651,6 +664,7 @@ export default function presetAglio({
 				--color-gray: var(--palette-gray);
 				--color-gray-dark: var(--palette-gray-dark);
 				--color-gray-light: var(--palette-gray-light);
+				--color-gray-ink: var(--color-black);
 				--palette-gray-1: var(--color-gray-wash);
 				--palette-gray-2: var(--color-gray-light);
 				--palette-gray-3: var(--color-gray-light);
@@ -964,7 +978,7 @@ function asPaletteValue(num: number) {
 	return roundTens(num).toString().padStart(2, '0');
 }
 function generateColors(from: number, to: number) {
-	const increment = (to - from) / 3;
+	const increment = (to - from) / 4;
 	const map = themeColors.reduce(
 		(acc, color) => {
 			acc[`--color-${color}-wash`] = `var(--palette-${color}-${asPaletteValue(
@@ -978,6 +992,9 @@ function generateColors(from: number, to: number) {
 			)})`;
 			acc[`--color-${color}-dark`] = `var(--palette-${color}-${asPaletteValue(
 				from + roundTens(increment * 3),
+			)})`;
+			acc[`--color-${color}-ink`] = `var(--palette-${color}-${asPaletteValue(
+				from + roundTens(increment * 4),
 			)})`;
 			return acc;
 		},
@@ -1092,6 +1109,7 @@ type ExplicitColorRange = {
 	wash: string;
 	light: string;
 	dark: string;
+	ink: string;
 };
 function themeVarRange({
 	name,
@@ -1109,6 +1127,7 @@ function themeVarRange({
 					wash: `${range}-wash`,
 					light: `${range}-light`,
 					dark: `${range}-dark`,
+					ink: `${range}-ink`,
 			  }
 			: range;
 
@@ -1119,5 +1138,6 @@ function themeVarRange({
 			: `var(--color-${realRange.wash})`
 	};
 --color-${name}-light: var(--color-${realRange.light});
---color-${name}-dark: var(--color-${realRange.dark});`;
+--color-${name}-dark: var(--color-${realRange.dark});
+--color-${name}-ink: var(--color-${realRange.ink});`;
 }

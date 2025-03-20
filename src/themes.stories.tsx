@@ -33,6 +33,7 @@ import {
 	PageRoot,
 	Progress,
 	Provider,
+	ScrollArea,
 	TextSkeleton,
 	ThemeName,
 	ToggleGroup,
@@ -90,32 +91,50 @@ function DemoUI({ className }: { className?: string }) {
 							<ToggleGroup.Item value="2">Toggle 2</ToggleGroup.Item>
 						</ToggleGroup>
 					</Box>
-					<Box layout="start center" d="col" gap p>
-						<H1>Heading 1</H1>
-						<H2>Heading 2</H2>
-						<H3>Heading 3</H3>
-						<H4>Heading 4</H4>
-						<P>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</P>
-						<TextSkeleton maxLength={30} />
-						<TextSkeleton maxLength={10} />
+					<Box layout="start center" d="col" gap p className="max-h-200px">
+						<ScrollArea>
+							<H1>Heading 1</H1>
+							<H2>Heading 2</H2>
+							<H3>Heading 3</H3>
+							<H4>Heading 4</H4>
+							<P>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</P>
+							<TextSkeleton maxLength={30} />
+							<TextSkeleton maxLength={10} />
+						</ScrollArea>
 					</Box>
-					<Card>
-						<Card.Main onClick={() => {}}>
-							<Card.Title>Card Title</Card.Title>
-							<Card.Content>Card Content</Card.Content>
-						</Card.Main>
-						<Card.Footer>
-							<Card.Actions>
-								<Button size="small">Action 1</Button>
-								<Button size="icon-small" color="ghost">
-									<Icon name="placeholder" />
-								</Button>
-							</Card.Actions>
-						</Card.Footer>
-					</Card>
+					<Box d="col" gap>
+						<Card>
+							<Card.Main onClick={() => {}}>
+								<Card.Title>Card Title</Card.Title>
+								<Card.Content>Card Content</Card.Content>
+							</Card.Main>
+							<Card.Footer>
+								<Card.Actions>
+									<Button size="small">Action 1</Button>
+									<Button size="icon-small" color="ghost">
+										<Icon name="placeholder" />
+									</Button>
+								</Card.Actions>
+							</Card.Footer>
+						</Card>
+						<Card>
+							<Card.Main compact onClick={() => {}}>
+								<Card.Title>Card Title</Card.Title>
+								<Card.Content>Card Content</Card.Content>
+							</Card.Main>
+							<Card.Footer>
+								<Card.Actions>
+									<Button size="small">Action 1</Button>
+									<Button size="icon-small" color="ghost">
+										<Icon name="placeholder" />
+									</Button>
+								</Card.Actions>
+							</Card.Footer>
+						</Card>
+					</Box>
 					<Tabs defaultValue="tab1">
 						<Tabs.List>
 							<Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
@@ -177,17 +196,40 @@ function DemoUI({ className }: { className?: string }) {
 						onChange={() => {}}
 					/>
 					<Progress value={50} className="m-auto" />
-					<Box surface="primary" p gap>
+					<Box surface="primary" p gap d="col">
+						<H1>Primary surface</H1>
+						<H2>Primary surface</H2>
+						<H3>Primary surface</H3>
 						<div>Primary surface</div>
 						<Button color="ghost">Ghost</Button>
 					</Box>
-					<Box surface="accent" p>
-						Accent surface
+					<Box surface="accent" p d="col" className="max-h-200px">
+						<ScrollArea>
+							<H2>Accent surface</H2>
+							<H3>Accent surface</H3>
+							<P>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</P>
+							<P>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</P>
+							<P>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</P>
+							<TextSkeleton maxLength={30} />
+							<TextSkeleton maxLength={10} />
+							Accent surface
+						</ScrollArea>
 					</Box>
-					<Box surface="default" p>
+					<Box surface="default" p d="col">
 						Default surface
 					</Box>
-					<Box surface="attention" p>
+					<Box surface="attention" p d="col">
+						<H2>Attention surface</H2>
+						<H3>Attention surface</H3>
 						Attention surface
 					</Box>
 					<Box>

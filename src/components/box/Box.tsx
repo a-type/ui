@@ -172,11 +172,11 @@ export function Box({
 					'layer-components:(bg-white border-black)':
 						surface === true || surface === 'default',
 					'layer-components:(bg-wash border-black)': surface === 'wash',
-					'layer-components:(bg-primary-wash border-primary-dark color-primary-dark)':
+					'layer-components:(bg-primary-wash border-primary-dark color-primary-ink)':
 						surface === 'primary',
-					'layer-components:(bg-accent-wash border-accent-dark color-accent-dark)':
+					'layer-components:(bg-accent-wash border-accent-dark color-accent-ink)':
 						surface === 'accent',
-					'layer-components:(bg-attention-wash border-attention-dark color-attention-dark)':
+					'layer-components:(bg-attention-wash border-attention-dark color-attention-ink)':
 						surface === 'attention',
 					'layer-components:(border border-solid rounded-lg)': border,
 					'layer-components:w-full': full === true || full === 'width',
