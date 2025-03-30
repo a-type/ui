@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.8.12
+
+### Patch Changes
+
+- 352ede2: fix now playing position at md responsive
+- 05f8785: sort of fix peek, still slides close on mount
+
 ## 1.8.11
 
 ### Patch Changes
