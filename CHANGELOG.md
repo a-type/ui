@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.14
+
+### Patch Changes
+
+- 3306cfb: actually use default font
+
 ## 1.8.13
 
 ### Patch Changes
