@@ -117,9 +117,10 @@ export default function presetAglio({
 				overlay: 'var(--color-overlay)',
 			},
 			fontFamily: {
-				sans: '"Inter", sans-serif',
-				serif: '"Domine", serif',
-				title: '"Inter", sans-serif',
+				default: 'var(--font-default, sans-serif)',
+				sans: 'var(--font-sans, sans-serif)',
+				serif: 'var(--font-serif, serif)',
+				title: 'var(--font-title, var(--font-default))',
 			},
 			fontSize: {
 				xxs: ['0.625rem', '0.75rem'],
@@ -777,6 +778,11 @@ export default function presetAglio({
 					--global-corner-scale: ${cornerScale};
 					--global-border-scale: ${borderScale};
 					--global-spacing-scale: ${spacingScale};
+
+					--font-sans: "Inter", sans-serif;
+					--font-serif: "Domine", serif;
+					--font-title: "Inter", sans-serif;
+					--font-default: var(--font-sans, sans-serif);
 
 					${computedVars}
 
