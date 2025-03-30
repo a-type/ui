@@ -19,6 +19,7 @@ const roundedScaling = {
 export default function presetAglio({
 	scale = 'md',
 	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
+	domineFontLocation = 'https://resources.biscuits.club/fonts/Domine-VariableFont_wght.ttf',
 	colorRanges = {
 		light: [90, 20],
 		dark: [0, 80],
@@ -31,6 +32,7 @@ export default function presetAglio({
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
+	domineFontLocation?: string;
 	colorRanges?: {
 		light: [number, number];
 		dark: [number, number];
@@ -929,6 +931,14 @@ export default function presetAglio({
           font-style: oblique 0deg 5deg;
           font-display: block;
         }
+
+				@font-face {
+					font-family: "Domine";
+					src: url("${domineFontLocation}") format("truetype-variations");
+					font-weight: 1 999;
+					font-style: oblique 0deg 5deg;
+					font-display: block;
+				}
 
 				@media (display-mode: standalone) {
 					html, body {
