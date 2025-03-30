@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.13
+
+### Patch Changes
+
+- 3356e0f: Customize fonts with vars
+
 ## 1.8.12
 
 ### Patch Changes
