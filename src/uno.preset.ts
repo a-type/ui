@@ -860,7 +860,7 @@ export default function presetAglio({
 					html, body {
 						margin: 0;
 						padding: 0;
-						font-family: "Inter", sans-serif;
+						font-family: var(--font-default);
 						font-size: 16px;
 						height: 100%;
 						--webkit-font-smoothing: antialiased;
