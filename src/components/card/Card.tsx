@@ -37,7 +37,7 @@ export function CardMain({
 		<Comp
 			ref={ref}
 			className={classNames(
-				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-sans outline-none rounded-t-lg)',
+				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-lg)',
 				!!compact && 'layer-variants:(pb-0)',
 				isInteractive &&
 					classNames(
