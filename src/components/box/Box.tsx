@@ -76,10 +76,7 @@ export function Box({
 		() => ({
 			...userStyle,
 			'--spacing-scale': container === 'reset' ? 1 : spacingScale,
-			'--local-corner-scale':
-				container === 'reset'
-					? 1
-					: `calc(var(--global-corner-scale,1)*${spacingScale})`,
+			'--local-corner-scale': container === 'reset' ? 1 : `${spacingScale}`,
 		}),
 		[userStyle, spacingScale, container],
 	);
