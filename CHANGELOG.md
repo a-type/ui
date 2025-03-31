@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.17
+
+### Patch Changes
+
+- bda16fa: avoid top margin on first heading in rich text
+
 ## 1.8.16
 
 ### Patch Changes
