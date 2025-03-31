@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.18
+
+### Patch Changes
+
+- 02e2865: fix expontential corner scaling in box
+
 ## 1.8.17
 
 ### Patch Changes
