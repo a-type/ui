@@ -14,7 +14,7 @@ export const tipTapClassName = clsx(
 	'layer-components:[&_ul]:(list-disc pl-6 mb-md mt-md)',
 	'layer-components:[&_ol]:(list-decimal pl-6 mb-md mt-md)',
 	'layer-components:[&_li]:(mb-sm)',
-	'layer-components:[&_mark]:(bg-accent-wash bg-darken-3)',
+	'layer-components:[&_mark]:(bg-primary-wash bg-darken-3)',
 	'layer-components:[&_strong]:(font-semibold)',
 	'layer-components:[&_em]:(italic)',
 	'layer-components:[&_hr]:(my-lg border-gray)',
