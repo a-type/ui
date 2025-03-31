@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 1.8.15
+
+### Patch Changes
+
+- 6769e65: Add domine font face
+
 ## 1.8.14
 
 ### Patch Changes
