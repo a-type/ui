@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 1.8.16
+
+### Patch Changes
+
+- f66341a: Use primary for mark color
+- 7c1bcf8: more font-inherit
+
 ## 1.8.15
 
 ### Patch Changes
