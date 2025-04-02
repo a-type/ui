@@ -8,7 +8,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	withProps(Box, { container: 'reset' }),
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-0.5 text-black shadow-sm)',
+	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-1 text-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -61,12 +61,12 @@ export const CardTitle = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-gray-dark-blend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1 transition-colors)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
-	'layer-components:[[data-interactive=true]:hover>&]:(bg-darken-4)',
+	'layer-components:[[data-interactive=true]:hover>&]:(bg-darken-2)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-lightBlend text-black rounded-md mx-2 my-0.5 border border-solid border-gray-dark-blend text-xs relative z-1)',
+	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend text-black rounded-md mx-2 my-0.5 border border-solid border-gray-dark-blend text-xs relative z-1)',
 	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
 	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
 );

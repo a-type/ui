@@ -506,7 +506,7 @@ export default function presetAglio({
 		shortcuts: {
 			'border-default': 'border border-solid border-color-black',
 			'border-light':
-				'border border-solid border-color-gray border-color-darken-5',
+				'border border-solid border-color-gray border-color-darken-3',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
@@ -555,7 +555,6 @@ export default function presetAglio({
 					--color-dark-blend-2: var(--palette-dark-blend-2);
 					--color-light-blend-2: var(--palette-light-blend-2);
 					--color-black: var(--palette-true-black);
-					--color-white: var(--palette-white);
 					--color-gray-1: var(--palette-gray-1);
 					--color-gray-2: var(--palette-gray-2);
 					--color-gray-3: var(--palette-gray-3);
@@ -575,7 +574,8 @@ export default function presetAglio({
 					const darkMode = `
 						--wash-saturation-tweak: ${darkModeSaturationTweak};
 						--mode-mult: -1;
-						--dyn-mode-mult: -4;
+						--dyn-mode-mult: -1.6;
+						--dyn-mode-lighten-mult: -0.5;
 						--dyn-mode-sign: -1;
 						--dyn-source-mode-adjust: 1;
 						--color-dark-blend: var(--palette-light-blend);
@@ -583,7 +583,6 @@ export default function presetAglio({
 						--color-dark-blend-2: var(--palette-light-blend-2);
 						--color-light-blend-2: var(--palette-dark-blend-2);
 						--color-black: var(--palette-true-white);
-						--color-white: var(--palette-black);
 						--color-gray-1: var(--palette-gray-ex-2);
 						--color-gray-2: var(--palette-gray-ex-1);
 						--color-gray-3: var(--palette-gray-0);
@@ -603,7 +602,7 @@ export default function presetAglio({
 
 					const dynThemes = {
 						lemon: { hue: 91.8, hueRotate: 10 },
-						leek: { hue: 169.88, hueRotate: 2 },
+						leek: { hue: 160.88, hueRotate: -1 },
 						tomato: { hue: 10.51, hueRotate: -2 },
 						blueberry: { hue: 248.14, hueRotate: 0 },
 						eggplant: { hue: 280.21, hueRotate: -5 },
@@ -924,16 +923,16 @@ function resolveThemeColor(color: string, theme: any) {
 }
 
 function lighten(base: string, level: string, saturate?: string) {
-	const levelNum = parseFloat(level) * 0.175;
+	const levelNum = parseFloat(level) * 0.1;
 	const saturateNum = saturate ? parseFloat(saturate) : levelNum / 100;
-	return `oklch(from ${base} calc(l * pow(${
-		1 + levelNum
-	}, var(--mode-mult, 1))) calc(c * pow(${
-		1 + saturateNum
-	}, var(--mode-mult, 1))) h)`;
+	return `oklch(from ${base} calc(l + (${
+		1 * levelNum
+	} * var(--dyn-mode-lighten-mult, 1))) calc(c + (${
+		1 * saturateNum
+	} * var(--dyn-mode-lighten-mult, 1))) h)`;
 }
 
 function darken(base: string, level: string) {
 	const levelNum = parseFloat(level);
-	return lighten(base, (levelNum / -15).toString());
+	return lighten(base, (-levelNum / 8).toString());
 }

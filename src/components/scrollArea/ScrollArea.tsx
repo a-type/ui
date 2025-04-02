@@ -35,7 +35,7 @@ export const ScrollAreaScrollbarRoot = withClassName(
 
 export const ScrollAreaThumb = withClassName(
 	Primitive.Thumb,
-	'layer-components:(flex-1 rounded-lg relative bg-inherit bg-darken-8)',
+	'layer-components:(flex-1 rounded-lg relative bg-inherit bg-darken-4)',
 	'before:(content-[""] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full min-w-44px min-h-44px)',
 );
 
