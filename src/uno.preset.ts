@@ -2,7 +2,7 @@ import { DynamicRule, entriesToCss, toArray } from '@unocss/core';
 import { bgColors as bgColorsRules } from '@unocss/preset-mini/rules';
 import presetWind3 from '@unocss/preset-wind3';
 import { PreflightContext, Preset } from 'unocss';
-import { dynamicTheme } from './uno/colors.js';
+import { dynamicTheme, dynamicThemeComputedColors } from './uno/colors.js';
 
 const baseBgRule = bgColorsRules[0] as unknown as DynamicRule;
 
@@ -61,11 +61,6 @@ export default function presetAglio({
 				black: 'var(--color-black)',
 				white: 'var(--color-white)',
 				wash: 'var(--color-wash)',
-				attentionLight: 'var(--color-attention-light)',
-				'attention-light': 'var(--color-attention-light)',
-				attentionDark: 'var(--color-attention-dark)',
-				'attention-dark': 'var(--color-attention-dark)',
-				'attention-wash': 'var(--color-attention-wash)',
 				attention: {
 					DEFAULT: 'var(--color-attention)',
 					light: 'var(--color-attention-light)',
@@ -74,46 +69,31 @@ export default function presetAglio({
 					ink: 'var(--color-attention-ink)',
 				},
 				accent: {
-					DEFAULT: 'var(--dyn-color-accent)',
-					light: 'var(--dyn-color-accent-light)',
-					dark: 'var(--dyn-color-accent-dark)',
-					wash: 'var(--dyn-color-accent-wash)',
-					ink: 'var(--dyn-color-accent-ink)',
+					DEFAULT: 'var(--color-accent)',
+					light: 'var(--color-accent-light)',
+					dark: 'var(--color-accent-dark)',
+					wash: 'var(--color-accent-wash)',
+					ink: 'var(--color-accent-ink)',
 				},
-				accentWash: 'var(--color-accent-wash)',
-				'accent-wash': 'var(--color-accent-wash)',
-				accentLight: 'var(--color-accent-light)',
-				'accent-light': 'var(--color-accent-light)',
-				accentDark: 'var(--color-accent-dark)',
-				'accent-dark': 'var(--color-accent-dark)',
 				primary: {
-					DEFAULT: 'var(--dyn-color-primary)',
-					light: 'var(--dyn-color-primary-light)',
-					dark: 'var(--dyn-color-primary-dark)',
-					wash: 'var(--dyn-color-primary-wash)',
-					ink: 'var(--dyn-color-primary-ink)',
+					DEFAULT: 'var(--color-primary)',
+					light: 'var(--color-primary-light)',
+					dark: 'var(--color-primary-dark)',
+					wash: 'var(--color-primary-wash)',
+					ink: 'var(--color-primary-ink)',
 				},
-				primaryLight: 'var(--color-primary-light)',
-				'primary-light': 'var(--color-primary-light)',
-				primaryDark: 'var(--color-primary-dark)',
-				'primary-dark': 'var(--color-primary-dark)',
-				primaryWash: 'var(--color-primary-wash)',
-				'primary-wash': 'var(--color-primary-wash)',
 				gray: {
 					DEFAULT: 'var(--color-gray)',
 					wash: 'var(--color-gray-wash)',
 					light: 'var(--color-gray-light)',
-					dark: 'var(--color-gray-dark)',
 					ink: 'var(--color-gray-ink)',
 					blend: 'var(--color-gray-blend)',
+					dark: {
+						DEFAULT: 'var(--color-gray-dark)',
+						blend: 'var(--color-gray-dark-blend)',
+					},
 				},
-				grayBlend: 'var(--color-gray-blend)',
-				'gray-blend': 'var(--color-gray-blend)',
-				grayDarkBlend: 'var(--color-gray-dark-blend)',
-				'gray-dark-blend': 'var(--color-gray-dark-blend)',
-				darkBlend: 'var(--color-dark-blend)',
 				'dark-blend': 'var(--color-dark-blend)',
-				lightBlend: 'var(--color-light-blend)',
 				'light-blend': 'var(--color-light-blend)',
 				overlay: 'var(--color-overlay)',
 			},
@@ -622,13 +602,23 @@ export default function presetAglio({
 					`;
 
 					const dynThemes = {
-						lemon: { hue: 91.8, source: '#ffdb57', hueRotate: 10 },
-						leek: { hue: 169.88, source: '#92f2d1', hueRotate: 2 },
-						tomato: { hue: 15.51, source: '#ff8a8a', hueRotate: -2 },
-						blueberry: { hue: 233.14, source: '#59d0f5', hueRotate: -10 },
-						eggplant: { hue: 280.21, source: '#9797ff', hueRotate: -5 },
-						salt: { hue: 0, source: '#d8d8d8', hueRotate: -50 },
-						saltLight: { hue: 0, source: '#efefef', hueRotate: -50 },
+						lemon: { hue: 91.8, hueRotate: 10 },
+						leek: { hue: 169.88, hueRotate: 2 },
+						tomato: { hue: 10.51, hueRotate: -2 },
+						blueberry: { hue: 248.14, hueRotate: 0 },
+						eggplant: { hue: 280.21, hueRotate: -5 },
+						salt: {
+							hue: 0,
+							hueRotate: -50,
+							hueRotateMult: 0,
+							saturationMult: 0,
+						},
+						saltLight: {
+							hue: 0,
+							hueRotate: -50,
+							hueRotateMult: 0,
+							saturationMult: 0,
+						},
 					};
 
 					const dynLemon = dynamicTheme({
@@ -714,6 +704,12 @@ export default function presetAglio({
 
 						/* DEFAULT THEME (LEMON) */
 						${dynLemon}
+
+						--dyn-attention-source: 30;
+						--dyn-attention-hue-rotate: 0;
+						--dyn-attention-sat-mult: 1;
+						--dyn-attention-hue-rotate-mult: 1;
+						${dynamicThemeComputedColors('attention')}
 					}
 
 					/* INTRINSIC DARK THEME */

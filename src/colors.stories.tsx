@@ -18,18 +18,11 @@ export const Default: Story = {
 		return (
 			<Box d="col">
 				<Box>
-					<Swatch className="bg-primary-old-wash" />
-					<Swatch className="bg-primary-old-light" />
-					<Swatch className="bg-primary-old" />
-					<Swatch className="bg-primary-old-dark" />
-					<Swatch className="bg-primary-old-ink" />
-				</Box>
-				<Box>
-					<Swatch className="bg-dyn-primary-wash" />
-					<Swatch className="bg-dyn-primary-light" />
-					<Swatch className="bg-dyn-primary" />
-					<Swatch className="bg-dyn-primary-dark" />
-					<Swatch className="bg-dyn-primary-ink" />
+					<Swatch className="bg-primary-wash" />
+					<Swatch className="bg-primary-light" />
+					<Swatch className="bg-primary" />
+					<Swatch className="bg-primary-dark" />
+					<Swatch className="bg-primary-ink" />
 				</Box>
 			</Box>
 		);

@@ -7,7 +7,7 @@ export const ToggleGroupRoot = withClassName(
 );
 export const ToggleGroupItem = withClassName(
 	ToggleGroupPrimitive.Item,
-	'rounded-xl color-black bg-gray-light py-sm px-md flex items-center border-none justify-center cursor-pointer hover:bg-darken-2 active:bg-darken-4 focus-visible:(shadow-focus outline-off) [&[data-state=on]]:(bg-primary-light border-black)',
+	'rounded-xl color-black bg-gray-light py-sm px-md flex items-center border-none justify-center cursor-pointer hover:bg-darken-2 active:bg-darken-4 focus-visible:(shadow-focus outline-off) [&[data-state=on]]:(bg-primary border-black)',
 );
 
 export const ToggleGroup = Object.assign(ToggleGroupRoot, {
