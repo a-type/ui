@@ -20,7 +20,7 @@ export const ScrollAreaRoot = function ScrollAreaRoot({
 export const ScrollAreaViewport = withClassName(
 	Primitive.Viewport,
 	'h-full w-full',
-	'[background:linear-gradient(var(--v-bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--v-bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,hsl(from_var(--v-bg)_h_s_calc(l*0.9)),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,hsl(from_var(--v-bg)_h_s_calc(l*0.9)),rgba(0,0,0,0))_center_bottom]',
+	'[background:linear-gradient(var(--v-bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--v-bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,oklch(from_var(--v-bg)_calc(l*0.9)_c_h),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,oklch(from_var(--v-bg)_calc(l*0.9)_c_h),rgba(0,0,0,0))_center_bottom]',
 	'![background-repeat:no-repeat] ![background-size:100%_40px,100%_40px,100%_14px,100%_14px]',
 	'![background-attachment:local,local,scroll,scroll]',
 );

@@ -22,8 +22,8 @@ export const SliderThumb = withClassName(
 	'layer-components:focus-visible:(shadow-lg ring-4 ring-accent-dark ring-opacity-50 outline-none bg-accent-light)',
 	'layer-components:focus:(outline-none)',
 	'layer-components:disabled:(opacity-50)',
-	'layer-variants:[&[data-color=primary]]:active:(bg-primary-light ring-primary-dark)',
-	'layer-variants:[&[data-color=primary]]:focus-visible:(bg-primary-light ring-primary-dark)',
+	'layer-variants:[&[data-color=primary]]:active:(bg-primary ring-primary-dark)',
+	'layer-variants:[&[data-color=primary]]:focus-visible:(bg-primary ring-primary-dark)',
 );
 
 export interface SliderProps extends SliderPrimitive.SliderProps {

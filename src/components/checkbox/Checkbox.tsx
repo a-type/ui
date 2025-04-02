@@ -11,7 +11,7 @@ export const CheckboxRoot = withClassName(
 	classNames(
 		'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border-default transition rounded-lg shadow-sm)',
 		'layer-components:focus-visible:(outline-off shadow-focus)',
-		'layer-components:[&[data-state=checked]]:(bg-primary-light border-primary-dark)',
+		'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',
 		'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
 		'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
 	),
