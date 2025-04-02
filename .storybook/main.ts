@@ -19,7 +19,7 @@ const config: StorybookConfig = {
 		const { default: UnoCSS } = await import('unocss/vite');
 		config.plugins.push(
 			UnoCSS({
-				configDeps: ['./src/uno.preset.ts'],
+				configDeps: ['./src/uno.preset.ts', './src/uno/colors.ts'],
 			}),
 		);
 		return config;
