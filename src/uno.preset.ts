@@ -445,7 +445,7 @@ export default function presetAglio({
 					}
 					return {
 						'background-color': 'var(--v-bg-altered,var(--v-bg))',
-						['--v-bg']: resolveThemeColor(match[1], theme),
+						['--v-bg']: resolvedColor,
 					};
 				},
 				{
@@ -620,7 +620,7 @@ export default function presetAglio({
 						lemon: { hue: 91.8, hueRotate: 5 },
 						leek: { hue: 160.88, hueRotate: -1 },
 						tomato: { hue: 10.51, hueRotate: -2 },
-						blueberry: { hue: 248.14, hueRotate: 0 },
+						blueberry: { hue: 248.14, hueRotate: 4 },
 						eggplant: { hue: 280.21, hueRotate: -5 },
 						salt: {
 							hue: 0,
