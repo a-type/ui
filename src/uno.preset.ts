@@ -551,6 +551,12 @@ export default function presetAglio({
 			} as any,
 			{
 				getCSS: (ctx) => {
+					const attentionColors = `
+					--dyn-attention-source: 30;
+						--dyn-attention-hue-rotate: 0;
+						--dyn-attention-sat-mult: 1;
+						--dyn-attention-hue-rotate-mult: 1;
+						${dynamicThemeComputedColors('attention')}`;
 					const lightMode = `
 					--wash-saturation-tweak: ${lightModeSaturationTweak};
 					--mode-mult: 1;
@@ -561,6 +567,7 @@ export default function presetAglio({
 					--color-dark-blend-2: var(--palette-dark-blend-2);
 					--color-light-blend-2: var(--palette-light-blend-2);
 					--color-black: var(--palette-true-black);
+					--color-white: var(--palette-white);
 					--color-gray-1: var(--palette-gray-1);
 					--color-gray-2: var(--palette-gray-2);
 					--color-gray-3: var(--palette-gray-3);
@@ -576,6 +583,7 @@ export default function presetAglio({
 					--color-shadow-1: var(--palette-shadow-2);
 					--color-shadow-2: var(--palette-shadow-1);
 					--color-overlay: var(--palette-white-overlay);
+					${attentionColors}
 				`;
 					const darkMode = `
 						--wash-saturation-tweak: ${darkModeSaturationTweak};
@@ -589,6 +597,7 @@ export default function presetAglio({
 						--color-dark-blend-2: var(--palette-light-blend-2);
 						--color-light-blend-2: var(--palette-dark-blend-2);
 						--color-black: var(--palette-true-white);
+						--color-white: var(--palette-white);
 						--color-gray-1: var(--palette-gray-ex-2);
 						--color-gray-2: var(--palette-gray-ex-1);
 						--color-gray-3: var(--palette-gray-0);
@@ -604,6 +613,7 @@ export default function presetAglio({
 						--color-shadow-1: var(--palette-shadow-4);
 						--color-shadow-2: var(--palette-shadow-3);
 						--color-overlay: var(--palette-black-overlay);
+						${attentionColors}
 					`;
 
 					const dynThemes: Record<string, DynamicThemeColor> = {
@@ -711,12 +721,6 @@ export default function presetAglio({
 
 						/* DEFAULT THEME (LEMON) */
 						${dynLemon}
-
-						--dyn-attention-source: 30;
-						--dyn-attention-hue-rotate: 0;
-						--dyn-attention-sat-mult: 1;
-						--dyn-attention-hue-rotate-mult: 1;
-						${dynamicThemeComputedColors('attention')}
 					}
 
 					/* INTRINSIC DARK THEME */

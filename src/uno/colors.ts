@@ -31,7 +31,7 @@ ${dynamicThemeComputedColors('accent')}
 
 --color-wash: var(--color-gray-wash);
 --palette-black: var(--color-gray-ink);
---color-white: oklch(from var(--color-wash) calc(l + 1 / var(--dyn-mode-mult,1)) calc(c * var(--global-saturation, 1)/var(--dyn-mode-mult,1)) h);
+--palette-white: oklch(from var(--color-wash) calc(l + 1 / var(--dyn-mode-mult,1)) calc(c * var(--global-saturation, 1)/var(--dyn-mode-mult,1)) h);
 /* A dark-mode only contrast color */
 --color-dark-mode-contrast: oklch(from var(--color-gray-ink) l c h / calc(100% * var(--dyn-source-mode-adjust, 0)));
 `;
