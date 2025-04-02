@@ -5,6 +5,7 @@ import { PreflightContext, Preset } from 'unocss';
 import {
 	dynamicComputedVars,
 	dynamicTheme,
+	DynamicThemeColor,
 	dynamicThemeComputedColors,
 } from './uno/colors.js';
 
@@ -100,6 +101,7 @@ export default function presetAglio({
 				'dark-blend': 'var(--color-dark-blend)',
 				'light-blend': 'var(--color-light-blend)',
 				overlay: 'var(--color-overlay)',
+				'dark-mode-contrast': 'var(--color-dark-mode-contrast)',
 			},
 			fontFamily: {
 				default: 'var(--font-default, sans-serif)',
@@ -604,8 +606,8 @@ export default function presetAglio({
 						--color-overlay: var(--palette-black-overlay);
 					`;
 
-					const dynThemes = {
-						lemon: { hue: 91.8, hueRotate: 10 },
+					const dynThemes: Record<string, DynamicThemeColor> = {
+						lemon: { hue: 91.8, hueRotate: 5 },
 						leek: { hue: 160.88, hueRotate: -1 },
 						tomato: { hue: 10.51, hueRotate: -2 },
 						blueberry: { hue: 248.14, hueRotate: 0 },
@@ -615,12 +617,14 @@ export default function presetAglio({
 							hueRotate: -50,
 							hueRotateMult: 0,
 							saturationMult: 0,
+							dim: '4%',
 						},
 						saltLight: {
 							hue: 0,
 							hueRotate: -50,
 							hueRotateMult: 0,
 							saturationMult: 0,
+							dim: '15%',
 						},
 					};
 
@@ -630,7 +634,7 @@ export default function presetAglio({
 					});
 					const dynLeek = dynamicTheme({
 						primary: dynThemes.leek,
-						accent: dynThemes.blueberry,
+						accent: dynThemes.lemon,
 					});
 					const dynTomato = dynamicTheme({
 						primary: dynThemes.tomato,

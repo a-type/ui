@@ -222,6 +222,7 @@ const CalendarDay = withClassName(
 	'disabled:(opacity-50 cursor-default)',
 	// today dot
 	"[&[data-today]]:before:(content-[''] absolute left-[2px] top-[2px] w-[6px] h-[6px] rounded-lg bg-primary)",
+	// calendar edges
 	'[&[data-top-edge]]:(border-t-gray)',
 	'[&[data-bottom-edge]]:(border-b-gray)',
 	'[&[data-first-column]]:(border-l-gray)',
