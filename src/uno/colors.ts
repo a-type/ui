@@ -19,6 +19,21 @@ export const dynamicThemeComputedColors = (name: string) => `
 	--color-${name}-gray-ink: oklch(from var(--color-${name}-ink) l calc(c * 0.25) h);
 `;
 
+export const dynamicComputedVars = `
+${dynamicThemeComputedColors('primary')}
+${dynamicThemeComputedColors('accent')}
+
+--color-gray: var(--color-primary-gray);
+--color-gray-wash: var(--color-primary-gray-wash);
+--color-gray-light: var(--color-primary-gray-light);
+--color-gray-dark: var(--color-primary-gray-dark);
+--color-gray-ink: var(--color-primary-gray-ink);
+
+--color-wash: var(--color-gray-wash);
+--palette-black: var(--color-gray-ink);
+--color-white: var(--color-gray-wash);
+--color-whiter: oklch(from var(--color-white) calc(l + 1 * var(--dyn-mode-mult, 1)) c h);`;
+
 export type DynamicThemeColor = {
 	hue: number;
 	hueRotate: number;
@@ -43,19 +58,6 @@ export function dynamicTheme({
 --dyn-primary-sat-mult: ${primary.saturationMult ?? 1};
 --dyn-accent-hue-rotate-mult: ${accent.hueRotateMult ?? 1};
 --dyn-accent-sat-mult: ${accent.saturationMult ?? 1};
-
-${dynamicThemeComputedColors('primary')}
-${dynamicThemeComputedColors('accent')}
-
---color-gray: var(--color-primary-gray);
---color-gray-wash: var(--color-primary-gray-wash);
---color-gray-light: var(--color-primary-gray-light);
---color-gray-dark: var(--color-primary-gray-dark);
---color-gray-ink: var(--color-primary-gray-ink);
-
---color-wash: var(--color-gray-wash);
---palette-black: var(--color-gray-ink);
---color-white: var(--color-gray-wash);
---color-whiter: oklch(from var(--color-white) calc(l + 1 * var(--dyn-mode-mult, 1)) c h);
+${dynamicComputedVars}
 	`;
 }

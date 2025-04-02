@@ -57,11 +57,29 @@ export default meta;
 
 type Story = StoryObj;
 
-function DemoUI({ className }: { className?: string }) {
+function DemoUI({
+	className,
+	primarySource,
+	accentSource,
+}: {
+	className?: string;
+	primarySource?: number;
+	accentSource?: number;
+}) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot className={clsx('flex-1', className)}>
+		<PageRoot
+			className={clsx('flex-1', className)}
+			style={
+				primarySource || accentSource
+					? ({
+							'--dyn-primary-source': primarySource?.toString(),
+							'--dyn-accent-source': accentSource?.toString(),
+					  } as any)
+					: {}
+			}
+		>
 			<PageContent>
 				<div className={clsx('grid gap-2 grid-cols-2')}>
 					<Box gap wrap p>
@@ -321,5 +339,11 @@ export const Override: Story = {
 				</Box>
 			</Provider>
 		);
+	},
+};
+
+export const Custom: Story = {
+	render() {
+		return <DemoUI className="theme" primarySource={70} accentSource={290} />;
 	},
 };

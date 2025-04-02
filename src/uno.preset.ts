@@ -2,7 +2,11 @@ import { DynamicRule, entriesToCss, toArray } from '@unocss/core';
 import { bgColors as bgColorsRules } from '@unocss/preset-mini/rules';
 import presetWind3 from '@unocss/preset-wind3';
 import { PreflightContext, Preset } from 'unocss';
-import { dynamicTheme, dynamicThemeComputedColors } from './uno/colors.js';
+import {
+	dynamicComputedVars,
+	dynamicTheme,
+	dynamicThemeComputedColors,
+} from './uno/colors.js';
 
 const baseBgRule = bgColorsRules[0] as unknown as DynamicRule;
 
@@ -722,21 +726,6 @@ export default function presetAglio({
 						${dynLemon}
 					}
 
-					/* fix yellow hue in dark mode */
-					@media(prefers-color-scheme: dark) {
-						.theme-lemon {
-							--gray-hue-tweak: 0;
-						}
-
-						html.override-light.theme-lemon, html.override-light .theme-lemon {
-							--gray-hue-tweak: -20;
-						}
-					}
-
-					html.override-dark.theme-lemon, html.override-dark .theme-lemon {
-						--gray-hue-tweak: 0;
-					}
-
 					.theme-blueberry {
 						${dynBlueberry}
 					}
@@ -755,6 +744,10 @@ export default function presetAglio({
 
 					.theme-salt {
 						${dynSalt}
+					}
+
+					.theme {
+						${dynamicComputedVars}
 					}
 
 					html, body {
