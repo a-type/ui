@@ -7,16 +7,16 @@ export const colorConstants = `
 
 export const dynamicThemeComputedColors = (name: string) => `
 	--color-${name}: oklch(calc(90% - 35% * var(--dyn-source-mode-adjust, 0) - (var(--dyn-mode-sign, 1) * var(--dyn-${name}-base-dim, 0%))) calc(var(--dyn-${name}-sat-mult,1) * (35% - 2% * var(--dyn-source-mode-adjust, 0))) var(--dyn-${name}-source, 0));
-	--color-${name}-wash: oklch(from var(--color-${name}) calc(min(0.999,max(0.15, l + 0.2 * var(--dyn-mode-mult, 1)))) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-wash, 1) - 0.03)) calc(h - 5 * var(--dyn-${name}-hue-rotate, 0) * var(--dyn-${name}-hue-rotate-mult, 1)));
+	--color-${name}-wash: oklch(from var(--color-${name}) calc(min(0.999,max(0.15, l + 0.15 * var(--dyn-mode-mult, 1)))) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-wash, 1) - 0.03)) calc(h - 5 * var(--dyn-${name}-hue-rotate, 0) * var(--dyn-${name}-hue-rotate-mult, 1)));
 	--color-${name}-light: oklch(from var(--color-${name}) calc(l + 0.08 * var(--dyn-mode-mult, 1)) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-light, 1) - 0.03)) calc(h - 0.5 * var(--dyn-${name}-hue-rotate, 0) * var(--dyn-${name}-hue-rotate-mult, 1)));
 	--color-${name}-dark: oklch(from var(--color-${name}) calc(l - 0.26 * var(--dyn-mode-mult, 1)) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-dark, 1) + 0.01)) calc(h + 0.2 * var(--dyn-${name}-hue-rotate, 0) * var(--dyn-${name}-hue-rotate-mult, 1)));
 	--color-${name}-ink: oklch(from var(--color-${name}) calc(l - 0.45 * var(--dyn-mode-mult, 1)) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-ink, 1) + 0.01)) calc(h + 1 * var(--dyn-${name}-hue-rotate, 0) * var(--dyn-${name}-hue-rotate-mult, 1)));
 
-	--color-${name}-gray: oklch(from var(--color-${name}) l calc(c * 0.25 * var(--global-saturation, 1)) h);
-	--color-${name}-gray-wash: oklch(from var(--color-${name}-wash) l calc(c * 0.25 * var(--global-saturation, 1)) h);
-	--color-${name}-gray-light: oklch(from var(--color-${name}-light) l calc(c * 0.25 * var(--global-saturation, 1)) h);
-	--color-${name}-gray-dark: oklch(from var(--color-${name}-dark) l calc(c * 0.25 * var(--global-saturation, 1)) h);
-	--color-${name}-gray-ink: oklch(from var(--color-${name}-ink) l calc(c * 0.25 * var(--global-saturation, 1)) h);
+	--color-${name}-gray: oklch(from var(--color-${name}) calc(l - 0.1 * var(--dyn-source-mode-adjust,0)) calc(c * 0.25 * var(--global-saturation, 1)) h);
+	--color-${name}-gray-wash: oklch(from var(--color-${name}-wash)  calc(l - 0.1 * var(--dyn-source-mode-adjust,0)) calc(c * 0.25 * var(--global-saturation, 1)) h);
+	--color-${name}-gray-light: oklch(from var(--color-${name}-light)  calc(l - 0.1 * var(--dyn-source-mode-adjust,0)) calc(c * 0.25 * var(--global-saturation, 1)) h);
+	--color-${name}-gray-dark: oklch(from var(--color-${name}-dark)  calc(l - 0.1 * var(--dyn-source-mode-adjust,0)) calc(c * 0.25 * var(--global-saturation, 1)) h);
+	--color-${name}-gray-ink: oklch(from var(--color-${name}-ink)  calc(l - 0.1 * var(--dyn-source-mode-adjust,0)) calc(c * 0.25 * var(--global-saturation, 1)) h);
 `;
 
 export const dynamicComputedVars = `

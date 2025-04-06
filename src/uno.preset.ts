@@ -611,7 +611,7 @@ export default function presetAtype({
 					`;
 
 					const dynThemes: Record<string, DynamicThemeColor> = {
-						lemon: { hue: 91.8, hueRotate: 5 },
+						lemon: { hue: 91.8, hueRotate: 3 },
 						leek: { hue: 160.88, hueRotate: -1 },
 						tomato: { hue: 10.51, hueRotate: -2 },
 						blueberry: { hue: 248.14, hueRotate: 4 },
