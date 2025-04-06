@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.0
+
+### Major Changes
+
+- 1f9f0cd: Complete overhaul of color system. Colors are now fully dynamic and generated from a set of source hues.
+
 ## 1.8.18
 
 ### Patch Changes
