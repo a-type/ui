@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.2
+
+### Patch Changes
+
+- 69f54a5: new default saturation
+
 ## 2.0.1
 
 ### Patch Changes
