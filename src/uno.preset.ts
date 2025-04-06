@@ -22,14 +22,11 @@ const roundedScaling = {
 	lg: 1.25,
 };
 
-export default function presetAglio({
+export default function presetAtype({
 	scale = 'md',
 	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
 	domineFontLocation = 'https://resources.biscuits.club/fonts/Domine-VariableFont_wght.ttf',
-	colorRanges = {
-		light: [90, 20],
-		dark: [0, 80],
-	},
+	customTheme,
 	borderScale = 1,
 	roundedness = 1,
 	cornerScale = roundedness,
@@ -39,10 +36,7 @@ export default function presetAglio({
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
 	domineFontLocation?: string;
-	colorRanges?: {
-		light: [number, number];
-		dark: [number, number];
-	};
+	customTheme?: { primary: DynamicThemeColor; accent: DynamicThemeColor };
 	borderScale?: number;
 	/** @deprecated use cornerScale */
 	roundedness?: number;
@@ -719,8 +713,8 @@ export default function presetAglio({
 					html {
 						${lightMode}
 
-						/* DEFAULT THEME (LEMON) */
-						${dynLemon}
+						/* DEFAULT THEME */
+						${customTheme ? dynamicTheme(customTheme) : dynLemon}
 					}
 
 					/* INTRINSIC DARK THEME */
