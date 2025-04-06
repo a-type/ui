@@ -68,9 +68,9 @@ export function HorizontalList({
 		}
 		const contentWidth = content.offsetWidth;
 		const containerHeight = container.offsetHeight;
-		if (open) {
+		const containerWidth = container.offsetWidth;
+		if (open && contentWidth > containerWidth) {
 			// measure content width and animate to container width
-			const containerWidth = container.offsetWidth;
 			rememberedWidth.current = contentWidth;
 			content.style.setProperty('width', `${containerWidth}px`);
 			content.style.setProperty('flex-wrap', 'wrap');
