@@ -9,17 +9,17 @@ export const H1 = withClassName(
 export const H2 = withClassName(
 	'h2',
 	baseHeadingClass,
-	'layer-components:(text-lg font-title font-bold color-inherit color-lighten-2)',
+	'layer-components:(text-lg font-title font-bold color-inherit color-lighten-1)',
 );
 export const H3 = withClassName(
 	'h3',
 	baseHeadingClass,
-	'layer-components:(font-title text-md font-500 color-inherit color-lighten-4)',
+	'layer-components:(font-title text-md font-500 color-inherit color-lighten-2)',
 );
 export const H4 = withClassName(
 	'h4',
 	baseHeadingClass,
-	'layer-components:(text-xs uppercase color-inherit color-lighten-6)',
+	'layer-components:(text-xs uppercase color-inherit color-lighten-2)',
 );
 export const H5 = withClassName('h5', baseHeadingClass);
 

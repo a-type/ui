@@ -19,7 +19,7 @@ export const TabsTriggerBase = withClassName(
 
 const colorClasses = {
 	default: 'layer-variants:([--bg:var(--color-white)])',
-	primary: 'layer-variants:([--bg:var(--color-primary-light)])',
+	primary: 'layer-variants:([--bg:var(--color-primary)])',
 };
 
 export interface TabsTriggerProps

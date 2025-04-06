@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ActionBar, ActionButton } from './components/actions/index.js';
 import { Button } from './components/button/index.js';
 import { Card } from './components/card/index.js';
@@ -42,6 +42,7 @@ import {
 import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
+import { useAnimationFrame } from './hooks.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
 
 const meta = {
@@ -320,6 +321,93 @@ export const Override: Story = {
 					<DemoUI />
 				</Box>
 			</Provider>
+		);
+	},
+};
+
+export const Custom: Story = {
+	render() {
+		const [theme, setTheme] = useState({
+			'--dyn-primary-source': 70,
+			'--dyn-accent-source': 290,
+			'--global-saturation': 0.5,
+			'--global-border-scale': 1.5,
+			'--global-spacing-scale': 1,
+			'--global-corner-scale': 1,
+		});
+		const reroll = () => {
+			setTheme({
+				'--dyn-primary-source': Math.floor(Math.random() * 360),
+				'--dyn-accent-source': Math.floor(Math.random() * 360),
+				'--global-saturation': Math.random(),
+				'--global-border-scale': Math.random() * 2,
+				'--global-spacing-scale': Math.random() * 2,
+				'--global-corner-scale': Math.random() * 1.25,
+			});
+		};
+		return (
+			<Box d="col" gap items="start" style={theme as any}>
+				<Button onClick={reroll}>Reroll</Button>
+				<DemoUI className="theme" />
+			</Box>
+		);
+	},
+};
+
+export const Trippy: Story = {
+	render() {
+		const ref = useRef<HTMLDivElement>(null);
+		const values = useRef({
+			primarySource: 0,
+			accentSource: 180,
+			saturation: 0.5,
+			borderScale: 2,
+			spacingScale: 0.5,
+			cornerScale: 0.5,
+		});
+		useAnimationFrame((dt) => {
+			const current = ref.current;
+			if (!current) return;
+			values.current.primarySource =
+				(values.current.primarySource + dt / 100) % 360;
+			values.current.accentSource =
+				(values.current.accentSource + dt / 50) % 360;
+			values.current.saturation =
+				0.5 + 0.5 * Math.sin((Date.now() / 100000) * Math.PI * 2);
+			values.current.borderScale =
+				1.5 + 1.5 * Math.sin((Date.now() / 20000) * Math.PI * 2);
+			values.current.spacingScale =
+				1 + Math.sin((Date.now() / 50000) * Math.PI * 2);
+			values.current.cornerScale = 1 + Math.sin(Date.now() / 3000);
+			current.style.setProperty(
+				'--dyn-primary-source',
+				values.current.primarySource.toString(),
+			);
+			current.style.setProperty(
+				'--dyn-accent-source',
+				values.current.accentSource.toString(),
+			);
+			current.style.setProperty(
+				'--global-saturation',
+				values.current.saturation.toString(),
+			);
+			current.style.setProperty(
+				'--global-border-scale',
+				values.current.borderScale.toString(),
+			);
+			current.style.setProperty(
+				'--global-spacing-scale',
+				values.current.spacingScale.toString(),
+			);
+			current.style.setProperty(
+				'--global-corner-scale',
+				values.current.cornerScale.toString(),
+			);
+		});
+		return (
+			<div ref={ref}>
+				<DemoUI className="theme" />
+			</div>
 		);
 	},
 };
