@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.1
+
+### Patch Changes
+
+- 8fe004f: Fix controlled horizontal list open state when not overflowing
+
 ## 2.0.0
 
 ### Major Changes
