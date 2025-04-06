@@ -31,7 +31,7 @@ export default function presetAtype({
 	roundedness = 1,
 	cornerScale = roundedness,
 	spacingScale = 1,
-	saturation = 30,
+	saturation = 40,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
