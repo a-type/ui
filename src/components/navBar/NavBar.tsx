@@ -40,10 +40,10 @@ export const NavBarItem = function NavBarItem({
 			className={classNames(
 				navBarItemClass,
 				color === 'neutral' && [
-					'layer-variants:active:bg-gray-darkBlend layer-variants:md:active:bg-gray-darkBlend',
-					'layer-variants:hover:bg-gray-darkBlend',
-					'layer-variants:focus-visible:(bg-gray-darkBlend)',
-					'layer-variants:[&[data-active=true]]:(bg-gray-darkBlend text-black)',
+					'layer-variants:active:bg-gray-dark-blend layer-variants:md:active:bg-gray-dark-blend',
+					'layer-variants:hover:bg-gray-dark-blend',
+					'layer-variants:focus-visible:(bg-gray-dark-blend)',
+					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend text-black)',
 					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray)])',
 				],
 				className,

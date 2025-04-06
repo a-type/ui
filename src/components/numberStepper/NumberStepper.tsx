@@ -69,7 +69,7 @@ export function NumberStepper({
 			className={classNames(
 				'layer-components:(flex items-center border-solid border border-gray-dark rounded-lg overflow-hidden w-min-content flex-shrink-0 bg-white shadow-sm)',
 				disabled &&
-					'layer-variants:(border-gray-darkBlend bg-transparent shadow-none)',
+					'layer-variants:(border-gray-dark-blend bg-transparent shadow-none)',
 				{
 					'layer-variants:(bg-accent-wash color-black)':
 						!!highlightChange && value !== 1,
