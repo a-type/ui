@@ -158,7 +158,7 @@ export function HorizontalList({
 				<div
 					className={clsx(
 						'layer-components:(px-3 pt-3 pb-4 gap-2)',
-						'flex flex-row gap-2 flex-shrink-0 w-max-content w-auto)',
+						'flex flex-row items-center gap-2 flex-shrink-0 w-max-content w-auto)',
 						contentClassName,
 					)}
 					ref={contentRef}

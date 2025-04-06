@@ -17,13 +17,12 @@ export const Default: Story = {
 	render() {
 		return (
 			<Box d="col">
-				<Box>
-					<Swatch className="bg-primary-wash" />
-					<Swatch className="bg-primary-light" />
-					<Swatch className="bg-primary" />
-					<Swatch className="bg-primary-dark" />
-					<Swatch className="bg-primary-ink" />
-				</Box>
+				<Range className="theme-lemon" />
+				<Range className="theme-leek" />
+				<Range className="theme-tomato" />
+				<Range className="theme-eggplant" />
+				<Range className="theme-blueberry" />
+				<Range className="theme-salt" />
 			</Box>
 		);
 	},
@@ -38,5 +37,17 @@ function Swatch({ className }: { className?: string }) {
 				height: '100px',
 			}}
 		/>
+	);
+}
+
+function Range({ className }: { className?: string }) {
+	return (
+		<Box className={className}>
+			<Swatch className="bg-primary-wash" />
+			<Swatch className="bg-primary-light" />
+			<Swatch className="bg-primary" />
+			<Swatch className="bg-primary-dark" />
+			<Swatch className="bg-primary-ink" />
+		</Box>
 	);
 }

@@ -334,6 +334,8 @@ export const Custom: Story = {
 			'--global-border-scale': 1.5,
 			'--global-spacing-scale': 1,
 			'--global-corner-scale': 1,
+			'--dyn-primary-hue-rotate': 0,
+			'--dyn-accent-hue-rotate': 0,
 		});
 		const reroll = () => {
 			setTheme({
@@ -343,6 +345,8 @@ export const Custom: Story = {
 				'--global-border-scale': Math.random() * 2,
 				'--global-spacing-scale': Math.random() * 2,
 				'--global-corner-scale': Math.random() * 1.25,
+				'--dyn-primary-hue-rotate': Math.random() * 4 - 2,
+				'--dyn-accent-hue-rotate': Math.random() * 4 - 2,
 			});
 		};
 		return (
@@ -403,6 +407,8 @@ export const Trippy: Story = {
 				'--global-corner-scale',
 				values.current.cornerScale.toString(),
 			);
+			current.style.setProperty('--dyn-primary-hue-rotate', '0');
+			current.style.setProperty('--dyn-accent-hue-rotate', '0');
 		});
 		return (
 			<div ref={ref}>
