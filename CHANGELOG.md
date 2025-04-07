@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.3
+
+### Patch Changes
+
+- 2c29bcd: fix light override
+
 ## 2.0.2
 
 ### Patch Changes
