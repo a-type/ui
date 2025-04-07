@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from 'react';
+
 export function setColorMode(mode: 'system' | 'light' | 'dark') {
 	if (typeof window === 'undefined') return;
 	if (mode === 'system') {
@@ -80,4 +82,8 @@ export function subscribeToColorModeChange(
 
 if (typeof window !== 'undefined') {
 	(window as any).setColorMode = setColorMode;
+}
+
+export function useColorMode() {
+	return useSyncExternalStore(subscribeToColorModeChange, getColorMode);
 }

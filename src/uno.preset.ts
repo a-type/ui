@@ -556,6 +556,8 @@ export default function presetAtype({
 					--mode-mult: 1;
 					--dyn-mode-mult: 1;
 					--dyn-mode-sign: 1;
+					--dyn-source-mode-adjust: 0;
+					--dyn-mode-lighten-mult: 1;
 					--color-dark-blend: var(--palette-dark-blend);
 					--color-light-blend: var(--palette-light-blend);
 					--color-dark-blend-2: var(--palette-dark-blend-2);

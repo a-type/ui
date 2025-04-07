@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
+import { setColorMode, useColorMode } from './colorMode.js';
 import { ActionBar, ActionButton } from './components/actions/index.js';
 import { Button } from './components/button/index.js';
 import { Card } from './components/card/index.js';
@@ -34,6 +35,7 @@ import {
 	Progress,
 	Provider,
 	ScrollArea,
+	Select,
 	TextSkeleton,
 	ThemeName,
 	ToggleGroup,
@@ -314,10 +316,24 @@ export const Override: Story = {
 	render() {
 		const [theme, setTheme] = useState<ThemeName | null>(null);
 		useOverrideTheme(theme);
+		const colorMode = useColorMode();
 		return (
 			<Provider>
-				<Box d="col" p gap>
-					<ColorPicker value={theme} onChange={setTheme} />
+				<Box d="col" gap>
+					<Box gap p>
+						<ColorPicker value={theme} onChange={setTheme} />
+						<Select
+							value={colorMode}
+							onValueChange={(v) => setColorMode(v as any)}
+						>
+							<Select.Trigger />
+							<Select.Content>
+								<Select.Item value="system">System</Select.Item>
+								<Select.Item value="light">Light</Select.Item>
+								<Select.Item value="dark">Dark</Select.Item>
+							</Select.Content>
+						</Select>
+					</Box>
 					<DemoUI />
 				</Box>
 			</Provider>
