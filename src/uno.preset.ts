@@ -32,6 +32,7 @@ export default function presetAtype({
 	cornerScale = roundedness,
 	spacingScale = 1,
 	saturation = 40,
+	noPreflight,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -43,6 +44,7 @@ export default function presetAtype({
 	spacingScale?: number;
 	cornerScale?: number;
 	saturation?: number;
+	noPreflight?: boolean;
 } = {}): Preset {
 	const saturationScale = saturation / 100;
 	const spacingIncrement = spacing[scale];
@@ -532,6 +534,8 @@ export default function presetAtype({
 			{
 				layer: 'preflights',
 				getCSS: (ctx: PreflightContext<any>) => {
+					if (noPreflight) return '/* Preflight disabled */';
+
 					if (ctx.theme.preflightBase) {
 						const css = entriesToCss(Object.entries(ctx.theme.preflightBase));
 						const roots = toArray(
@@ -545,6 +549,8 @@ export default function presetAtype({
 			} as any,
 			{
 				getCSS: (ctx) => {
+					if (noPreflight) return '';
+
 					const attentionColors = `
 					--dyn-attention-source: 30;
 						--dyn-attention-hue-rotate: 0;
