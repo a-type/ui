@@ -75,6 +75,7 @@ export const iconNames = [
 	'search',
 	'star',
 	'bell',
+	'bell-off',
 	'home',
 	'thermometer',
 	'lightbulb',
