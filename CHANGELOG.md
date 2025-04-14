@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.0.4
+
+### Patch Changes
+
+- ad3caca: update icons
+- d81e180: allow disabling preflight
+
 ## 2.0.3
 
 ### Patch Changes
