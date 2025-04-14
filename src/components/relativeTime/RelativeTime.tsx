@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
-import { formatDistanceToNowStrict } from 'date-fns';
 import { shortenTimeUnits } from '@a-type/utils';
+import { formatDistanceToNowStrict } from 'date-fns/formatDistanceToNowStrict';
+import { useEffect, useMemo, useState } from 'react';
 
 export interface RelativeTimeProps {
 	value: number;
