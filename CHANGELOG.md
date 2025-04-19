@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.0.5
+
+### Patch Changes
+
+- 370347b: more specific date-fns import
+- 2a17d2d: Add error to ErrorBoundary render props
+
 ## 2.0.4
 
 ### Patch Changes
