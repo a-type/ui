@@ -4,9 +4,15 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
 import { BoxContext } from '../box/Box.js';
 
+export interface TooltipContentProps
+	extends TooltipPrimitive.TooltipContentProps {
+	color?: 'contrast' | 'white' | 'attention';
+}
+
 function Content({
 	children,
 	className,
+	color,
 	...props
 }: TooltipPrimitive.TooltipContentProps) {
 	return (
@@ -14,17 +20,23 @@ function Content({
 			<BoxContext.Provider value={{ spacingScale: 1 }}>
 				<TooltipPrimitive.Content
 					className={classNames(
-						'layer-components:(relative rounded-sm py-2 px-3 bg-black text-white text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
+						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
 						'[&[data-state=delayed-open]]:display-initial',
 						'[&[data-state=instant-open]]:display-initial',
 						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
 						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
+						{
+							'layer-variants:(bg-black text-white)': color === 'contrast',
+							'layer-variants:(bg-white text-black)': color === 'white',
+							'layer-variants:(bg-attention-ink text-white)':
+								color === 'attention',
+						},
 						className,
 					)}
 					{...props}
 				>
 					{children}
-					<TooltipPrimitive.Arrow className="fill-black" />
+					<TooltipPrimitive.Arrow className="layer-components:fill-[var(--v-bg)]" />
 				</TooltipPrimitive.Content>
 			</BoxContext.Provider>
 		</TooltipPrimitive.Portal>
@@ -47,10 +59,14 @@ export const Tooltip = Object.assign(
 		children,
 		open,
 		disabled,
+		className,
+		sideOffset = 12,
+		side,
+		color,
 		...rest
 	}: TooltipProps & {
 		ref?: React.Ref<HTMLButtonElement>;
-	}) {
+	} & Pick<TooltipContentProps, 'color' | 'sideOffset' | 'side'>) {
 		return (
 			<TooltipPrimitive.Root open={open}>
 				{disabled ? (
@@ -60,7 +76,14 @@ export const Tooltip = Object.assign(
 						{children}
 					</TooltipPrimitive.TooltipTrigger>
 				)}
-				<Content sideOffset={12}>{content}</Content>
+				<Content
+					color={color}
+					side={side}
+					sideOffset={sideOffset}
+					className={className}
+				>
+					{content}
+				</Content>
 			</TooltipPrimitive.Root>
 		);
 	},

@@ -10,6 +10,7 @@ const meta = {
 	},
 	args: {
 		content: 'hello world',
+		color: 'contrast',
 	},
 } satisfies Meta<typeof Tooltip>;
 
@@ -20,6 +21,33 @@ type Story = StoryObj<typeof Tooltip>;
 export const Default: Story = {
 	render: (args) => (
 		<Tooltip {...args}>
+			<button>Hover me</button>
+		</Tooltip>
+	),
+};
+
+export const Disabled: Story = {
+	render: (args) => (
+		<Tooltip {...args} disabled>
+			<button>Hover me</button>
+		</Tooltip>
+	),
+};
+
+export const Color: Story = {
+	render: (args) => (
+		<Tooltip {...args}>
+			<button>Hover me</button>
+		</Tooltip>
+	),
+	args: {
+		color: 'white',
+	},
+};
+
+export const Customized: Story = {
+	render: (args) => (
+		<Tooltip className="bg-attention" {...args}>
 			<button>Hover me</button>
 		</Tooltip>
 	),
