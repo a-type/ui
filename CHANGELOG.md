@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.0.6
+
+### Patch Changes
+
+- 76dd8c2: fix tooltip styling
+- b8fc661: avatarlist classname
+
 ## 2.0.5
 
 ### Patch Changes
