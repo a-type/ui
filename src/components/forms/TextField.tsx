@@ -27,6 +27,7 @@ export type TextFieldProps = {
 	autoFocus?: InputHTMLAttributes<HTMLInputElement>['autoFocus'];
 	autoFocusDelay?: number;
 	inputRef?: Ref<HTMLInputElement>;
+	inputClassName?: string;
 } & ComponentProps<typeof Input>;
 
 const emptyRef = (() => {}) as any;
@@ -43,6 +44,7 @@ export const TextField = function TextField({
 	onFocus,
 	onBlur,
 	id: providedId,
+	inputClassName,
 	...rest
 }: TextFieldProps & {
 	ref?: React.Ref<HTMLDivElement>;
@@ -72,6 +74,7 @@ export const TextField = function TextField({
 				{...rest}
 				id={id}
 				autoFocus={autoFocus}
+				className={inputClassName}
 				ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
 			/>
 		</FieldRoot>
@@ -87,6 +90,7 @@ export type TextAreaFieldProps = {
 	className?: string;
 	inputRef?: Ref<HTMLTextAreaElement>;
 	submitOnEnter?: boolean;
+	textAreaClassName?: string;
 } & TextAreaProps;
 
 export function TextAreaField({
@@ -97,6 +101,7 @@ export function TextAreaField({
 	onKeyDown,
 	submitOnEnter,
 	id: providedId,
+	textAreaClassName,
 	...rest
 }: TextAreaFieldProps) {
 	const [props] = useField(name);
@@ -120,6 +125,7 @@ export function TextAreaField({
 				ref={inputRef}
 				{...props}
 				{...rest}
+				className={textAreaClassName}
 				id={id}
 				onKeyDown={onKeyDownInner}
 			/>
