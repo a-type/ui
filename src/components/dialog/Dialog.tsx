@@ -129,9 +129,9 @@ export const Content = function Content({
 					{...props}
 					className={classNames(
 						{
-							'md:max-w-800px': width === 'lg',
-							'max-w-600px': width === 'md',
-							'max-w-300px': width === 'sm',
+							'layer-variants:md:max-w-800px': width === 'lg',
+							'layer-variants:max-w-600px': width === 'md',
+							'layer-variants:max-w-300px': width === 'sm',
 						},
 						!disableSheet && sheetClassNames,
 						!disableSheet &&
@@ -187,11 +187,11 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 			ref={finalRef}
 			{...props}
 			className={classNames(
-				'absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-lg cursor-grab sm:hidden touch-none',
+				'layer-components:(absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-lg cursor-grab sm:hidden touch-none)',
 				className,
 			)}
 		>
-			<div className="w-full h-[4px] bg-gray rounded-lg" />
+			<div className="layer-components:(w-full h-[4px] bg-gray rounded-lg)" />
 		</div>
 	);
 };
@@ -208,12 +208,12 @@ const DialogCloseContext = createContext<() => void>(() => {});
 
 const StyledTitle = withClassName(
 	DialogPrimitive.Title,
-	'font-title color-black text-3xl mb-4 mt-0',
+	'layer-components:(font-title color-black text-3xl mb-4 mt-0)',
 );
 
 const StyledDescription = withClassName(
 	DialogPrimitive.Description,
-	'mt-3 mb-6 color-gray-dark text-md leading-6',
+	'layer-components:(mt-3 mb-6 color-gray-dark text-md leading-6)',
 );
 
 // Exports
@@ -292,13 +292,13 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 
 export const DialogSelectList = withClassName(
 	RadioGroupPrimitive.Root,
-	'flex flex-col gap-2 overflow-y-auto p-2',
+	'layer-components:(flex flex-col gap-2 overflow-y-auto p-2)',
 );
 
 export const DialogSelectItemRoot = withClassName(
 	RadioGroupPrimitive.Item,
-	'flex items-center gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-transparent [&:nth-child(2n+1)]:bg-gray-blend cursor-pointer transition-all',
-	'[&[data-state=checked]]:(bg-primary-wash text-primary-dark)',
+	'layer-components:(flex items-center gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-transparent [&:nth-child(2n+1)]:bg-gray-blend cursor-pointer transition-all)',
+	'layer-components:[&[data-state=checked]]:(bg-primary-wash text-primary-dark)',
 );
 
 export const DialogSelectItem = function DialogSelectItem({
