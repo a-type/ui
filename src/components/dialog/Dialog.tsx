@@ -266,9 +266,9 @@ export type { DialogProps } from '@radix-ui/react-dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'flex justify-end sticky w-full gap-3 items-center bg-white py-4 translate-y-6 flex-wrap',
-	'bottom--6',
-	'sm:(bottom-0)',
+	'layer-components:(flex justify-end sticky w-full gap-3 items-center bg-inherit py-4 translate-y-6 flex-wrap)',
+	'layer-components:bottom--6',
+	'layer-components:sm:(bottom-0)',
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
