@@ -1,5 +1,13 @@
 # @a-type/ui
 
+## 2.0.7
+
+### Patch Changes
+
+- dce6c49: expose FieldArray
+- 84b67e2: fix dialog action bg
+- 6a43909: allow changing input class name on form field
+
 ## 2.0.6
 
 ### Patch Changes
