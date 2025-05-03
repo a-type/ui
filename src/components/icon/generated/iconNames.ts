@@ -107,6 +107,7 @@ export const iconNames = [
 	'quote',
 	'code',
 	'newPage',
+	'bug',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
