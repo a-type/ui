@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.0.8
+
+### Patch Changes
+
+- a6f0f01: stick to bottom option for scroll area
+- e0f5e72: new icons
+
 ## 2.0.7
 
 ### Patch Changes
