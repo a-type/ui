@@ -1,6 +1,7 @@
 import * as Primitive from '@radix-ui/react-scroll-area';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
+import { useStayScrolledToBottom } from '../../hooks/useStayScrolledToBottom.js';
 
 const ScrollAreaRootImpl = withClassName(Primitive.Root, 'overflow-hidden');
 
@@ -56,6 +57,7 @@ export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
 	background?: ScrollAreaRootProps['background'];
 	orientation?: 'vertical' | 'both';
 	ref?: Ref<HTMLDivElement>;
+	stickToBottom?: boolean;
 }
 
 export const ScrollArea = Object.assign(
@@ -63,11 +65,20 @@ export const ScrollArea = Object.assign(
 		ref,
 		children,
 		orientation,
+		stickToBottom,
 		...props
 	}: ScrollAreaProps) {
+		const { ref: stickRef, onScroll } = useStayScrolledToBottom(stickToBottom);
+
 		return (
-			<ScrollAreaRoot ref={ref} {...props}>
-				<ScrollAreaViewport>{children}</ScrollAreaViewport>
+			<ScrollAreaRoot data-scroll-root ref={ref} {...props}>
+				<ScrollAreaViewport
+					data-scroll-viewport
+					ref={stickRef}
+					onScroll={onScroll}
+				>
+					{children}
+				</ScrollAreaViewport>
 				<ScrollAreaScrollbar />
 				{orientation === 'both' && (
 					<ScrollAreaScrollbar orientation="horizontal" />
