@@ -21,8 +21,8 @@ function Content({
 				<TooltipPrimitive.Content
 					className={classNames(
 						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
-						'[&[data-state=delayed-open]]:display-initial',
-						'[&[data-state=instant-open]]:display-initial',
+						'[&[data-state=delayed-open]]:display-flex',
+						'[&[data-state=instant-open]]:display-flex',
 						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
 						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
 						{
