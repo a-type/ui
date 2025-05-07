@@ -12,7 +12,7 @@ export interface TooltipContentProps
 function Content({
 	children,
 	className,
-	color,
+	color = 'contrast',
 	...props
 }: TooltipPrimitive.TooltipContentProps) {
 	return (
