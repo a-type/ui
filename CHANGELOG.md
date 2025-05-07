@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.9
+
+### Patch Changes
+
+- 70a6675: tooltip default color
+
 ## 2.0.8
 
 ### Patch Changes
