@@ -6,7 +6,7 @@ import { BoxContext } from '../box/Box.js';
 
 export interface TooltipContentProps
 	extends TooltipPrimitive.TooltipContentProps {
-	color?: 'contrast' | 'white' | 'attention';
+	color?: 'contrast' | 'white' | 'neutral' | 'attention';
 }
 
 function Content({
@@ -20,14 +20,15 @@ function Content({
 			<BoxContext.Provider value={{ spacingScale: 1 }}>
 				<TooltipPrimitive.Content
 					className={classNames(
-						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip sm:display-initial)',
-						'[&[data-state=delayed-open]]:display-flex',
-						'[&[data-state=instant-open]]:display-flex',
+						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip)',
+						'[&[data-state=delayed-open]]:flex',
+						'[&[data-state=instant-open]]:flex',
 						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
 						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
 						{
 							'layer-variants:(bg-black text-white)': color === 'contrast',
-							'layer-variants:(bg-white text-black)': color === 'white',
+							'layer-variants:(bg-white text-black)':
+								color === 'white' || color === 'neutral',
 							'layer-variants:(bg-attention-ink text-white)':
 								color === 'attention',
 						},

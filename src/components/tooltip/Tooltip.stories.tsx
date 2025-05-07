@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Box } from '../box/Box.js';
 import { Tooltip } from './Tooltip.js';
 
 const meta = {
@@ -47,7 +48,15 @@ export const Color: Story = {
 
 export const Customized: Story = {
 	render: (args) => (
-		<Tooltip className="bg-attention" {...args}>
+		<Tooltip
+			className="bg-attention"
+			{...args}
+			content={
+				<Box d="col" p>
+					Some content
+				</Box>
+			}
+		>
 			<button>Hover me</button>
 		</Tooltip>
 	),
