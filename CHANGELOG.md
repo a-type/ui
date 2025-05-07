@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.0.10
+
+### Patch Changes
+
+- bb533a9: actually fix tooltip
+
 ## 2.0.9
 
 ### Patch Changes
