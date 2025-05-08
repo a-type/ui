@@ -108,6 +108,7 @@ export const iconNames = [
 	'code',
 	'newPage',
 	'bug',
+	'smile',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

@@ -1165,6 +1165,22 @@ export const IconSpritesheet = (props: any) => (
 					strokeLinejoin="round"
 				/>
 			</symbol>
+			<symbol id="icon-smile" viewBox="0 0 15 15">
+				<g clipPath="url(#clip0_1109_18)">
+					<path
+						d="M7.49998 14.1667C11.1819 14.1667 14.1666 11.1819 14.1666 7.50004C14.1666 3.81814 11.1819 0.833374 7.49998 0.833374C3.81808 0.833374 0.833313 3.81814 0.833313 7.50004C0.833313 11.1819 3.81808 14.1667 7.49998 14.1667Z"
+						stroke="currentColor"
+					/>
+					<circle cx="5" cy="6" r="0.5" stroke="currentColor" />
+					<circle cx="10" cy="6" r="0.5" stroke="currentColor" />
+					<path d="M3.5 9.5C6.5 12 8.5 12 11.5 9.5" stroke="currentColor" />
+				</g>
+				<defs>
+					<clipPath id="clip0_1109_18">
+						<rect width="15" height="15" fill="white" />
+					</clipPath>
+				</defs>
+			</symbol>
 		</defs>
 	</svg>
 );
