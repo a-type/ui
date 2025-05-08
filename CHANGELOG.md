@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.0
+
+### Minor Changes
+
+- 5d8f569: emojipicker component
+
 ## 2.0.11
 
 ### Patch Changes
