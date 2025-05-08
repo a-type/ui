@@ -15,6 +15,7 @@ export * from './dialog/index.js';
 export * from './divider/index.js';
 export * from './dropdownMenu/index.js';
 export * from './editableText/EditableText.js';
+export * from './emojiPicker/EmojiPicker.js';
 export * from './errorBoundary/index.js';
 export * from './forms/index.js';
 export * from './horizontalList/HorizontalList.js';

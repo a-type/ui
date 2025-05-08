@@ -3,7 +3,26 @@ import { Box } from './components/index.js';
 
 const meta = {
 	title: 'colors',
-	argTypes: {},
+	argTypes: {
+		customHue: {
+			control: {
+				type: 'range',
+				min: 0,
+				max: 360,
+			},
+		},
+		customRotate: {
+			control: {
+				type: 'range',
+				min: -180,
+				max: 180,
+			},
+		},
+	},
+	args: {
+		customHue: 0,
+		customRotate: 0,
+	},
 	parameters: {
 		controls: { expanded: true },
 	},
@@ -14,7 +33,13 @@ export default meta;
 type Story = StoryObj;
 
 export const Default: Story = {
-	render() {
+	render(args: any) {
+		const style: any = args.customHue
+			? {
+					'--dyn-primary-source': args.customHue,
+					'--dyn-primary-hue-rotate': args.customRotate,
+			  }
+			: {};
 		return (
 			<Box d="col">
 				<Range className="theme-lemon" />
@@ -23,6 +48,7 @@ export const Default: Story = {
 				<Range className="theme-eggplant" />
 				<Range className="theme-blueberry" />
 				<Range className="theme-salt" />
+				<Range className="theme" style={style} />
 			</Box>
 		);
 	},
@@ -40,9 +66,9 @@ function Swatch({ className }: { className?: string }) {
 	);
 }
 
-function Range({ className }: { className?: string }) {
+function Range({ className, style }: { className?: string; style?: any }) {
 	return (
-		<Box className={className}>
+		<Box className={className} style={style}>
 			<Swatch className="bg-primary-wash" />
 			<Swatch className="bg-primary-light" />
 			<Swatch className="bg-primary" />
