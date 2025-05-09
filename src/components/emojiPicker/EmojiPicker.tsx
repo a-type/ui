@@ -17,7 +17,7 @@ import { Spinner } from '../spinner/Spinner.js';
 
 export const EmojiPickerRoot = withClassName(
 	Core.Root,
-	'layer-components:(isolate flex flex-col w-fit h-368px bg-white gap-sm)',
+	'layer-components:(isolate flex flex-col w-fit h-368px gap-sm)',
 );
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
@@ -28,7 +28,7 @@ export const EmojiPickerViewport = ({
 	className,
 	...props
 }: EmojiPickerViewportProps) => (
-	<Box border className="flex-1 min-h-0 overflow-hidden">
+	<Box className="flex-1 min-h-0 overflow-hidden rounded-md bg-white">
 		<Core.Viewport
 			className="layer-components:(relative outline-hidden)"
 			{...props}
@@ -115,7 +115,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 	const [skinTone, setSkinTone] = useEmojiSkinTone();
 
 	return (
-		<Box d="row" gap border {...props}>
+		<Box d="row" gap {...props}>
 			{options.map((option) => (
 				<Button
 					key={option.skinTone}
