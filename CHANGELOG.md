@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.1.1
+
+### Patch Changes
+
+- 867964c: new icon
+- aa8d346: chip layers
+
 ## 2.1.0
 
 ### Minor Changes
