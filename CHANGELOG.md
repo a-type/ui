@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.2
+
+### Patch Changes
+
+- 0fbade5: remove borders from emoji picker
+
 ## 2.1.1
 
 ### Patch Changes
