@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.6
+
+### Patch Changes
+
+- 14f5f37: note css tweaks
+
 ## 2.1.5
 
 ### Patch Changes
