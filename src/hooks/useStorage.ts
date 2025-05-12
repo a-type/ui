@@ -71,13 +71,26 @@ function makeUseStorage(
 	};
 }
 
+const mockStorage: Storage = {
+	getItem: (key: string) => {
+		return null;
+	},
+	setItem: (key: string, value: string) => {},
+	removeItem: (key: string) => {},
+	length: 0,
+	clear: () => {},
+	key: (index: number) => {
+		return null;
+	},
+};
+
 export const useLocalStorage = makeUseStorage(
-	localStorage,
+	typeof localStorage === 'undefined' ? mockStorage : localStorage,
 	proxy({}),
 	'LocalStorage',
 );
 export const useSessionStorage = makeUseStorage(
-	sessionStorage,
+	typeof sessionStorage === 'undefined' ? mockStorage : sessionStorage,
 	proxy({}),
 	'SessionStorage',
 );
