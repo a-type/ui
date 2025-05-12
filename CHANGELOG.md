@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.5
+
+### Patch Changes
+
+- 8a8e534: another ssr fi
+
 ## 2.1.4
 
 ### Patch Changes
