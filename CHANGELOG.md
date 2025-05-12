@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.4
+
+### Patch Changes
+
+- 250508e: new icons, color mode toggle
+
 ## 2.1.3
 
 ### Patch Changes
