@@ -85,5 +85,9 @@ if (typeof window !== 'undefined') {
 }
 
 export function useColorMode() {
-	return useSyncExternalStore(subscribeToColorModeChange, getColorMode);
+	return useSyncExternalStore(
+		subscribeToColorModeChange,
+		getColorMode,
+		() => 'system',
+	);
 }
