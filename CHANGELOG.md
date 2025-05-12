@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.3
+
+### Patch Changes
+
+- 82fad70: fixes for ssr
+
 ## 2.1.2
 
 ### Patch Changes
