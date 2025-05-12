@@ -8,6 +8,7 @@ export * from './card/index.js';
 export * from './checkbox/index.js';
 export * from './chip/index.js';
 export * from './collapsible/index.js';
+export * from './colorMode/ColorModeToggle.js';
 export * from './colorPicker/index.js';
 export * from './contextMenu/contextMenu.js';
 export * from './datePicker/index.js';
