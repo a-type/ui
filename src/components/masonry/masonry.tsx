@@ -1,6 +1,13 @@
 import { debounce } from '@a-type/utils';
 import clsx from 'clsx';
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
+import {
+	CSSProperties,
+	ReactNode,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from 'react';
 
 interface Layout {
 	attach(container: HTMLElement): () => void;
@@ -12,70 +19,19 @@ interface MasonryLayoutConfig {
 	gap: number;
 }
 
-class MasonryLayout implements Layout {
-	private containerResizeObserver: ResizeObserver | null = null;
-	private containerMutationObserver: MutationObserver | null = null;
-	private childSizeObserver: ResizeObserver;
-	private childMutationObserver: MutationObserver;
-
-	private container: HTMLElement | null = null;
-
-	private columns: number = 0;
+abstract class MasonryLayout implements Layout {
+	protected container: HTMLElement | null = null;
+	protected columns: number = 0;
 
 	constructor(private config: MasonryLayoutConfig) {
 		this.columns =
 			typeof config.columns === 'function' ? config.columns(0) : config.columns;
-		this.childSizeObserver = new ResizeObserver(this.handleChildResize);
-		this.childMutationObserver = new MutationObserver(this.relayout);
 		this.relayout();
 	}
 
-	attach = (container: HTMLElement) => {
-		this.containerResizeObserver?.disconnect();
-		this.containerMutationObserver?.disconnect();
+	abstract attach(container: HTMLElement): () => void;
 
-		this.container = container;
-
-		this.containerResizeObserver = new ResizeObserver(
-			this.handleContainerResize,
-		);
-		this.containerMutationObserver = new MutationObserver(
-			this.handleContainerMutation,
-		);
-		this.containerResizeObserver.observe(container);
-		this.containerMutationObserver.observe(container, { childList: true });
-
-		container.style.setProperty('position', 'relative');
-		container.style.setProperty('overflow', 'hidden');
-		container.style.setProperty('visibility', 'visible');
-		container.childNodes.forEach((node) => {
-			if (node instanceof HTMLElement) {
-				this.setupChild(node);
-			}
-		});
-
-		this.updateFromContainerSize(container.offsetWidth);
-
-		this.relayout();
-
-		return () => {
-			this.containerResizeObserver?.disconnect();
-			this.containerMutationObserver?.disconnect();
-			container.style.removeProperty('position');
-			container.style.removeProperty('overflow');
-			this.container = null;
-		};
-	};
-
-	private setupChild = (child: HTMLElement) => {
-		child.style.setProperty('position', 'absolute');
-		// hide until laid out
-		child.style.setProperty('visibility', 'hidden');
-		this.childSizeObserver.observe(child);
-		this.childMutationObserver.observe(child, {
-			attributeFilter: ['data-span'],
-		});
-	};
+	abstract setupChild(child: HTMLElement): void;
 
 	updateConfig = (config: MasonryLayoutConfig) => {
 		const gapChanged = config.gap !== this.config.gap;
@@ -89,12 +45,7 @@ class MasonryLayout implements Layout {
 		}
 	};
 
-	private handleContainerResize = (entries: ResizeObserverEntry[]) => {
-		const containerWidth = entries[0].contentRect.width;
-		this.updateFromContainerSize(containerWidth);
-	};
-
-	private updateFromContainerSize = (containerWidth: number) => {
+	protected updateFromContainerSize = (containerWidth: number) => {
 		if (typeof this.config.columns === 'function') {
 			const newValue = this.config.columns(containerWidth);
 			if (newValue !== this.columns) {
@@ -106,35 +57,7 @@ class MasonryLayout implements Layout {
 		return false;
 	};
 
-	private handleContainerMutation = (entries: MutationRecord[]) => {
-		for (const entry of entries) {
-			entry.addedNodes.forEach((node) => {
-				if (node instanceof HTMLElement) {
-					this.setupChild(node);
-				}
-			});
-			entry.removedNodes.forEach((node) => {
-				if (node instanceof HTMLElement) {
-					this.childSizeObserver?.unobserve(node);
-				}
-			});
-		}
-		this.relayout();
-	};
-
-	private handleChildResize = (entries: ResizeObserverEntry[]) => {
-		// only worry about height changes
-		for (const entry of entries) {
-			const lastSeenHeight = entry.target.getAttribute('data-last-height');
-			const currentHeight = entry.contentRect.height;
-			entry.target.setAttribute('data-last-height', currentHeight.toString());
-			if (lastSeenHeight && lastSeenHeight !== currentHeight.toString()) {
-				this.relayout();
-			}
-		}
-	};
-
-	private relayout = debounce(() => {
+	protected relayout = debounce(() => {
 		if (!this.container) {
 			return;
 		}
@@ -187,11 +110,115 @@ class MasonryLayout implements Layout {
 	}, 100);
 }
 
-class ServerLayout implements Layout {
-	attach(container: HTMLElement): () => void {
-		return () => {};
+class ClientLayout extends MasonryLayout {
+	private containerResizeObserver: ResizeObserver | null = null;
+	private containerMutationObserver: MutationObserver | null = null;
+	private childSizeObserver: ResizeObserver;
+	private childMutationObserver: MutationObserver;
+
+	constructor(config: MasonryLayoutConfig) {
+		super(config);
+		this.childSizeObserver = new ResizeObserver(this.handleChildResize);
+		this.childMutationObserver = new MutationObserver(this.relayout);
 	}
-	updateConfig(config: MasonryLayoutConfig): void {}
+
+	private handleContainerMutation = (entries: MutationRecord[]) => {
+		for (const entry of entries) {
+			entry.addedNodes.forEach((node) => {
+				if (node instanceof HTMLElement) {
+					this.setupChild(node);
+				}
+			});
+			entry.removedNodes.forEach((node) => {
+				if (node instanceof HTMLElement) {
+					this.childSizeObserver?.unobserve(node);
+				}
+			});
+		}
+		this.relayout();
+	};
+
+	private handleChildResize = (entries: ResizeObserverEntry[]) => {
+		// only worry about height changes
+		for (const entry of entries) {
+			const lastSeenHeight = entry.target.getAttribute('data-last-height');
+			const currentHeight = entry.contentRect.height;
+			entry.target.setAttribute('data-last-height', currentHeight.toString());
+			if (lastSeenHeight && lastSeenHeight !== currentHeight.toString()) {
+				this.relayout();
+			}
+		}
+	};
+
+	attach = (container: HTMLElement) => {
+		this.containerResizeObserver?.disconnect();
+		this.containerMutationObserver?.disconnect();
+
+		this.container = container;
+
+		this.containerResizeObserver = new ResizeObserver(
+			this.handleContainerResize,
+		);
+		this.containerMutationObserver = new MutationObserver(
+			this.handleContainerMutation,
+		);
+		this.containerResizeObserver.observe(container);
+		this.containerMutationObserver.observe(container, { childList: true });
+
+		container.style.setProperty('position', 'relative');
+		container.style.setProperty('overflow', 'hidden');
+		container.style.setProperty('visibility', 'visible');
+		container.childNodes.forEach((node) => {
+			if (node instanceof HTMLElement) {
+				this.setupChild(node);
+			}
+		});
+
+		this.updateFromContainerSize(container.offsetWidth);
+
+		return () => {
+			this.containerResizeObserver?.disconnect();
+			this.containerMutationObserver?.disconnect();
+			container.style.removeProperty('position');
+			container.style.removeProperty('overflow');
+			this.container = null;
+		};
+	};
+
+	setupChild = (child: HTMLElement) => {
+		child.style.setProperty('position', 'absolute');
+		// hide until laid out
+		child.style.setProperty('visibility', 'hidden');
+		this.childSizeObserver.observe(child);
+		this.childMutationObserver.observe(child, {
+			attributeFilter: ['data-span'],
+		});
+	};
+
+	private handleContainerResize = (entries: ResizeObserverEntry[]) => {
+		const containerWidth = entries[0].contentRect.width;
+		this.updateFromContainerSize(containerWidth);
+	};
+}
+
+class ServerLayout extends MasonryLayout {
+	attach = (container: HTMLElement): (() => void) => {
+		this.container = container;
+		this.container.style.setProperty('position', 'relative');
+		this.container.style.setProperty('overflow', 'hidden');
+		this.container.style.setProperty('visibility', 'visible');
+		container.childNodes.forEach((node) => {
+			if (node instanceof HTMLElement) {
+				this.setupChild(node);
+			}
+		});
+		this.updateFromContainerSize(container.offsetWidth);
+		return () => {};
+	};
+	setupChild(child: HTMLElement): void {
+		child.style.setProperty('position', 'absolute');
+		child.style.setProperty('visibility', 'visible');
+	}
 }
 
 function pickTrack(tracks: number[], trackSpan: number) {
@@ -226,15 +253,15 @@ export function Masonry({
 }: MasonryProps) {
 	const [layout] = useState<Layout>(() => {
 		if (typeof window === 'undefined') {
-			return new ServerLayout();
+			return new ServerLayout({ columns, gap });
 		}
-		return new MasonryLayout({ columns, gap });
+		return new ClientLayout({ columns, gap });
 	});
-	useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		layout.updateConfig({ columns, gap });
 	}, [layout, columns, gap]);
 	const ref = useRef<HTMLDivElement>(null);
-	useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (ref.current) {
 			return layout.attach(ref.current);
 		}
@@ -253,4 +280,13 @@ export function Masonry({
 
 export function masonrySpan(span: number) {
 	return { 'data-span': span };
+}
+
+function useIsomorphicLayoutEffect(
+	effect: () => void | (() => void),
+	deps: any[] = [],
+) {
+	const isBrowser = typeof window !== 'undefined';
+	const useIsoEffect = isBrowser ? useLayoutEffect : useEffect;
+	return useIsoEffect(effect, deps);
 }
