@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.1.7
+
+### Patch Changes
+
+- a7eb8f1: use useLayoutEffect for masonry
+- ff831f3: new icons
+
 ## 2.1.6
 
 ### Patch Changes
