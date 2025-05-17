@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.8
+
+### Patch Changes
+
+- a2d038a: simplify suit icons
+
 ## 2.1.7
 
 ### Patch Changes
