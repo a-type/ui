@@ -310,6 +310,10 @@ export default function presetAtype({
 						0% { opacity: 1; transform: translateY(0) translate(-50%, -50%); }
 						100% { opacity: 0; transform: translateY(20px) translate(-50%, -50%); }
 					}`,
+					'checkbox-fade': `{
+						from { background-color: var(--v-bg-altered,var(--v-bg)); opacity: 1; }
+						to { background-color: transparent; opacity: 0.5; border-color: transparent; }
+					}`,
 				},
 				timingFns: {
 					linear: 'linear',
@@ -343,6 +347,7 @@ export default function presetAtype({
 					'item-disappear': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'dialog-in': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'dialog-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+					'checkbox-fade': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 				},
 				durations: {
 					'fade-in-up': '200ms',
@@ -372,6 +377,7 @@ export default function presetAtype({
 					'popover-out': '100ms',
 					'dialog-in': '200ms',
 					'dialog-out': '200ms',
+					'checkbox-fade': '5000ms',
 				},
 			},
 		},

@@ -3,19 +3,37 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
-import { ComponentProps } from 'react';
-import { withClassName } from '../../hooks/withClassName.js';
 
-export const CheckboxRoot = withClassName(
-	CheckboxPrimitive.Root,
-	classNames(
-		'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border-default transition rounded-lg shadow-sm)',
-		'layer-components:focus-visible:(outline-off shadow-focus)',
-		'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',
-		'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
-		'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
-	),
-);
+export interface CheckboxProps extends CheckboxPrimitive.CheckboxProps {
+	/**
+	 * The checked visual state. Prominent mode means the checked version is visually
+	 * emphasized to the user. Faded means the checked version is visually de-emphasized.
+	 * Prominent is appropriate when the user's attention should be drawn to the 'on' state,
+	 * while faded is appropriate when a checked state means the item is 'done,' like in a task list.
+	 */
+	checkedMode?: 'prominent' | 'faded';
+}
+
+export function CheckboxRoot({
+	className,
+	checkedMode = 'prominent',
+	...props
+}: CheckboxProps) {
+	return (
+		<CheckboxPrimitive.Root
+			{...props}
+			className={classNames(
+				'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border-default transition rounded-lg shadow-sm)',
+				'layer-components:focus-visible:(outline-off shadow-focus)',
+				checkedMode === 'faded'
+					? 'layer-components:[&[data-state=checked]]:(bg-primary animate-checkbox-fade)'
+					: 'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',
+				'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
+				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
+			)}
+		/>
+	);
+}
 
 export function CheckboxIndicator({
 	children,
@@ -36,14 +54,13 @@ export function CheckboxIndicator({
 }
 
 export const Checkbox = Object.assign(
-	function Checkbox({ ref, ...props }: ComponentProps<typeof CheckboxRoot>) {
+	function Checkbox(props: CheckboxProps) {
 		return (
-			<CheckboxRoot ref={ref} {...props}>
+			<CheckboxRoot {...props}>
 				<CheckboxIndicator />
 			</CheckboxRoot>
 		);
 	},
-
 	{
 		Root: CheckboxRoot,
 		Indicator: CheckboxIndicator,
