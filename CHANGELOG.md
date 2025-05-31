@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.12
+
+### Patch Changes
+
+- 6704366: fix animation fill mode for checkbox fade
+
 ## 2.1.11
 
 ### Patch Changes
