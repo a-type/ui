@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.9
+
+### Patch Changes
+
+- 876f7b5: Add checkedMode to Checkbox for fading checked state
+
 ## 2.1.8
 
 ### Patch Changes
