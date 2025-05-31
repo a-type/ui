@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.11
+
+### Patch Changes
+
+- 2153be4: fix classname not applying on checkbox
+
 ## 2.1.10
 
 ### Patch Changes
