@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.10
+
+### Patch Changes
+
+- 0f9a024: add missing ref prop
+
 ## 2.1.9
 
 ### Patch Changes
