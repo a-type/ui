@@ -32,6 +32,7 @@ export function CheckboxRoot({
 					: 'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',
 				'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
 				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
+				className,
 			)}
 		/>
 	);
