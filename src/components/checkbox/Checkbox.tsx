@@ -3,6 +3,7 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
+import { Ref } from 'react';
 
 export interface CheckboxProps extends CheckboxPrimitive.CheckboxProps {
 	/**
@@ -12,6 +13,7 @@ export interface CheckboxProps extends CheckboxPrimitive.CheckboxProps {
 	 * while faded is appropriate when a checked state means the item is 'done,' like in a task list.
 	 */
 	checkedMode?: 'prominent' | 'faded';
+	ref?: Ref<HTMLButtonElement>;
 }
 
 export function CheckboxRoot({
