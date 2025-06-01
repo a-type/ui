@@ -47,6 +47,25 @@ const sheetClassNameWithDisplaceKeyboard = classNames(
 	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',
 );
 
+function sheetCloseGestureLogic(
+	swipeY: number,
+	dy: number,
+	vy: number,
+	last: boolean,
+	close: () => void,
+	content: HTMLElement,
+) {
+	const contentHeight = content.clientHeight;
+
+	const shouldClose = last && (swipeY === 1 || dy > contentHeight / 2);
+	if (shouldClose) {
+		close();
+	}
+	const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
+	content.style.setProperty('--gesture-y', `${gestureY}px`);
+	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
+}
+
 export const Content = function Content({
 	ref,
 	children,
@@ -119,14 +138,27 @@ export const Content = function Content({
 
 	const { virtualKeyboardBehavior } = useConfig();
 
+	const close = useContext(DialogCloseContext);
+	const bind = useDrag(
+		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
+			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
+				sheetCloseGestureLogic(swipeY, dy, vy, last, close, gestureRef.current);
+			}
+		},
+		{
+			axis: 'y',
+			enabled: !disableSheet,
+		},
+	);
+
 	return (
 		<DialogPrimitive.Portal>
 			<StyledOverlay />
 			<BoxContext.Provider value={{ spacingScale: 1 }}>
 				<StyledContent
 					data-dialog-content
+					{...bind(props)}
 					ref={finalRef}
-					{...props}
 					className={classNames(
 						{
 							'layer-variants:md:max-w-800px': width === 'lg',
@@ -164,17 +196,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
 			const content = findParentDialogContent(innerRef.current);
 			if (!content) return;
-
-			const contentHeight = content.clientHeight;
-
-			const shouldClose = last && (swipeY === 1 || dy > contentHeight / 2);
-			if (shouldClose) {
-				close();
-			}
-			const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
-			console.log(gestureY, dy, vy, swipeY);
-			content.style.setProperty('--gesture-y', `${gestureY}px`);
-			content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
+			sheetCloseGestureLogic(swipeY, dy, vy, last, close, content);
 		},
 		{
 			target: innerRef,

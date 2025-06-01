@@ -4,6 +4,8 @@ import { Button } from '../button/index.js';
 import { Input } from '../input/index.js';
 import { ParticleLayer } from '../particles/index.js';
 import { Provider } from '../provider/Provider.js';
+import { Select } from '../select/index.js';
+import { Tooltip } from '../tooltip/Tooltip.js';
 import { H1, P } from '../typography/index.js';
 import {
 	Dialog,
@@ -147,6 +149,45 @@ export const VirtualKeyboard: Story = {
 				</Dialog>
 				<div className="fixed bottom-0 h-[var(--mock-virtual-keyboard-height,0)] bg-black w-full transition-height left-0 right-0" />
 			</Provider>
+		);
+	},
+};
+
+export const MultiNested: Story = {
+	render() {
+		return (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button>Open</Button>
+				</DialogTrigger>
+				<DialogContent>
+					<DialogTitle>Hello world</DialogTitle>
+					<DummyContent />
+					<Select value="">
+						<Select.Trigger>
+							<Select.Value placeholder="Select an option" />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Item value="option1">Option 1</Select.Item>
+							<Select.Item value="option2">Option 2</Select.Item>
+							<Select.Item value="option3">Option 3</Select.Item>
+						</Select.Content>
+					</Select>
+					<Dialog>
+						<DialogTrigger asChild>
+							<Button>Open nested</Button>
+						</DialogTrigger>
+						<DialogContent>
+							<DialogTitle>Nested dialog</DialogTitle>
+							<Tooltip content="This is a tooltip">
+								<Button>Hover me</Button>
+							</Tooltip>
+							<DummyContent />
+							<DummyContent />
+						</DialogContent>
+					</Dialog>
+				</DialogContent>
+			</Dialog>
 		);
 	},
 };

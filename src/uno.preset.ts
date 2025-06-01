@@ -33,6 +33,7 @@ export default function presetAtype({
 	spacingScale = 1,
 	saturation = 40,
 	noPreflight,
+	noZIndexes = false,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -45,6 +46,7 @@ export default function presetAtype({
 	cornerScale?: number;
 	saturation?: number;
 	noPreflight?: boolean;
+	noZIndexes?: boolean;
 } = {}): Preset {
 	const saturationScale = saturation / 100;
 	const spacingIncrement = spacing[scale];
@@ -522,18 +524,22 @@ export default function presetAtype({
 			'hidden-input':
 				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:hidden',
 			center: 'left-50% top-50%',
-			'z-nav': 'z-[var(--z-nav)]',
-			'z-menu': 'z-[var(--z-menu)]',
-			'z-dialog': 'z-[var(--z-dialog)]',
-			'z-dialog-backdrop': 'z-[var(--z-dialogBackdrop)]',
-			'z-tooltip': 'z-[var(--z-tooltip)]',
-			'z-overdraw': 'z-[var(--z-overdraw)]',
-			'z-now-playing': 'z-[var(--z-nowPlaying)]',
 			'outline-off': '[outline:none]',
 			'bg-wash': 'bg-[var(--color-wash)]',
 			unset: '[all:unset]',
 			'bottom-keyboard':
 				'bottom-[var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))]',
+			...(noZIndexes
+				? {}
+				: {
+						'z-nav': 'z-[var(--z-nav)]',
+						'z-menu': 'z-[var(--z-menu)]',
+						'z-dialog': 'z-[var(--z-dialog)]',
+						'z-dialog-backdrop': 'z-[var(--z-dialogBackdrop)]',
+						'z-tooltip': 'z-[var(--z-tooltip)]',
+						'z-overdraw': 'z-[var(--z-overdraw)]',
+						'z-now-playing': 'z-[var(--z-nowPlaying)]',
+				  }),
 		},
 
 		preflights: [
@@ -712,8 +718,12 @@ export default function presetAtype({
 					--font-title: "Inter", sans-serif;
 					--font-default: var(--font-sans, sans-serif);
 
+					${
+						/* refactor note: do not remove these after deprecating hardcoded z indexes */ ''
+					}
 					--z-nowPlaying: 40;
 					--z-nav: 50;
+
 					--z-menu: 100;
 					--z-menuTrigger: 101;
 					--z-dialog: 1000;

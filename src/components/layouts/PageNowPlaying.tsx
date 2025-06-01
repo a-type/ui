@@ -21,7 +21,7 @@ export function PageNowPlaying({
 			<div
 				{...props}
 				className={classNames(
-					'layer-components:(fixed left-0 right-0 z-now-playing flex flex-col gap-2 items-end)',
+					'layer-components:(fixed left-0 right-0 z-[var(--z-nowPlaying)] flex flex-col gap-2 items-end)',
 					// on mobile, this must be positioned above any nav bar that's present,
 					// or at minimum in the safe area
 					'layer-components:bottom-[var(--nav-height,env(safe-area-inset-bottom,0px))]',

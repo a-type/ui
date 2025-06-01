@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
-import { Particles } from './particlesState.js';
 import { createPortal } from 'react-dom';
 import { ParticlesProvider } from './ParticleContext.js';
+import { Particles } from './particlesState.js';
 
 export function ParticleLayer({
 	children,
@@ -23,7 +23,7 @@ export function ParticleLayer({
 	const canvas = (
 		<canvas
 			ref={particles.setCanvas}
-			className="fixed inset-0 w-full h-full z-overdraw pointer-events-none"
+			className="fixed inset-0 w-full h-full z-[100000] pointer-events-none"
 		/>
 	);
 
