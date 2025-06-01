@@ -35,6 +35,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
 	direction?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
 	d?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
+	col?: boolean;
 	items?: BoxAlignment;
 	justify?: BoxJustification;
 	layout?: `${BoxAlignment} ${BoxJustification}`;
@@ -67,6 +68,7 @@ export function Box({
 	border,
 	full,
 	overflow,
+	col,
 	ref,
 	...rest
 }: BoxProps) {
@@ -93,7 +95,7 @@ export function Box({
 				'layer-components:flex layer-components:relative',
 				{
 					'layer-components:flex-row': hasDefault(direction, 'row'),
-					'layer-components:flex-col': hasDefault(direction, 'col'),
+					'layer-components:flex-col': hasDefault(direction, 'col') || col,
 					'layer-components:flex-row-reverse': hasDefault(
 						direction,
 						'row-reverse',

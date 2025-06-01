@@ -91,3 +91,11 @@ export function useColorMode() {
 		() => 'system',
 	);
 }
+
+export function useResolvedColorMode() {
+	return useSyncExternalStore(
+		subscribeToColorModeChange,
+		getResolvedColorMode,
+		() => 'light',
+	);
+}

@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react';
 import { useEffect } from 'react';
 import 'virtual:uno.css';
+import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
 import './preview.css';
 
@@ -72,6 +73,7 @@ const preview: Preview = {
 	decorators: [
 		(Story, ctx) => {
 			useEffect(() => {
+				setColorMode(ctx.globals.mode);
 				document.documentElement.classList.add(`theme-${ctx.globals.theme}`);
 				document.documentElement.classList.add(`override-${ctx.globals.mode}`);
 

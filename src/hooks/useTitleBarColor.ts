@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react';
+import { useResolvedColorMode } from '../colorMode.js';
 
 let defaultColor = '#ffffff';
 if (typeof document !== 'undefined') {
@@ -15,16 +16,35 @@ function changeThemeColor(color: string) {
 		color = getComputedStyle(root).getPropertyValue(cssVar);
 	}
 	var metaThemeColor = document.querySelector('meta[name=theme-color]');
+	if (!metaThemeColor) {
+		metaThemeColor = document.createElement('meta');
+		metaThemeColor.setAttribute('name', 'theme-color');
+		document.head.appendChild(metaThemeColor);
+	}
 	metaThemeColor?.setAttribute('content', color);
+	console.log('set title bar color', color);
 }
 
-export function useTitleBarColor(color: string) {
+export function useTitleBarColor(
+	color: string | { light: string; dark: string },
+) {
+	const colorMode = useResolvedColorMode();
 	useEffect(() => {
-		changeThemeColor(color);
+		const finalColor =
+			typeof color === 'string'
+				? color
+				: colorMode === 'dark'
+				? color.dark
+				: color.light;
+		const previousColor =
+			document
+				.querySelector('meta[name=theme-color]')
+				?.getAttribute('content') ?? defaultColor;
+		changeThemeColor(finalColor);
 		return () => {
-			changeThemeColor(defaultColor);
+			changeThemeColor(previousColor);
 		};
-	}, [color]);
+	}, [color, colorMode]);
 }
 
 export function useSetTitleBarColor() {

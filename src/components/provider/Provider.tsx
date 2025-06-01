@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { Toaster, ToastPosition } from 'react-hot-toast';
-import { useVisualViewportOffset } from '../../hooks.js';
+import { useTitleBarColor, useVisualViewportOffset } from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
@@ -32,6 +32,10 @@ export function Provider({
 			? virtualKeyboardBehavior
 			: 'displace';
 	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
+	useTitleBarColor({
+		light: '#fdfdfd',
+		dark: '#020202',
+	});
 
 	const otherStuff = (
 		<>
