@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.1.13
+
+### Patch Changes
+
+- f65b21a: fix default title bar colors for dark mode
+- fcaeef1: Scroll to dismiss dialog sheet
+
 ## 2.1.12
 
 ### Patch Changes
