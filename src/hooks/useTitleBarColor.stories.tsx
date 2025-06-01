@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
-import { Box, Icon, Provider } from '../components/index.js';
+import { Box, Button, Dialog, Icon, Provider } from '../components/index.js';
 import { useTitleBarColor } from './useTitleBarColor.js';
 
 const meta = {
@@ -27,6 +27,21 @@ export const Default: Story = {
 							on the meta tag in the document head.
 						</p>
 					</Box>
+					<Dialog>
+						<Dialog.Trigger asChild>
+							<Button>Override</Button>
+						</Dialog.Trigger>
+						<Dialog.Content>
+							<Dialog.Title>Overriding color</Dialog.Title>
+							<Dialog.Description>
+								The title bar color is overridden while this dialog is open.
+							</Dialog.Description>
+							<Overrider />
+							<Dialog.Actions>
+								<Dialog.Close />
+							</Dialog.Actions>
+						</Dialog.Content>
+					</Dialog>
 				</Box>
 			</Provider>
 		);
@@ -77,4 +92,9 @@ function MockTitleBar() {
 			</Box>
 		</Box>
 	);
+}
+
+function Overrider() {
+	useTitleBarColor('#ff0000');
+	return null;
 }
