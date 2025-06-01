@@ -7,12 +7,14 @@ import { useDrag } from '@use-gesture/react';
 import classNames from 'clsx';
 import {
 	ComponentPropsWithoutRef,
+	ComponentPropsWithRef,
 	createContext,
 	useCallback,
 	useContext,
 	useRef,
 	useState,
 } from 'react';
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
 import { BoxContext } from '../box/Box.js';
@@ -66,6 +68,13 @@ function sheetCloseGestureLogic(
 	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
 }
 
+export interface DialogContentProps
+	extends ComponentPropsWithRef<typeof DialogPrimitive.Content> {
+	width?: 'sm' | 'md' | 'lg';
+	disableSheet?: boolean;
+	outerClassName?: string;
+}
+
 export const Content = function Content({
 	ref,
 	children,
@@ -74,12 +83,7 @@ export const Content = function Content({
 	className,
 	disableSheet,
 	...props
-}: ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-	width?: 'sm' | 'md' | 'lg';
-	disableSheet?: boolean;
-	outerClassName?: string;
-	ref?: React.Ref<HTMLDivElement>;
-}) {
+}: DialogContentProps) {
 	const particles = useParticles();
 	const wasOpenRef = useRef(false);
 	const openRef = useCallback(
@@ -139,6 +143,7 @@ export const Content = function Content({
 	const { virtualKeyboardBehavior } = useConfig();
 
 	const close = useContext(DialogCloseContext);
+	const isSmall = useMediaQuery('(max-width: 640px)');
 	const bind = useDrag(
 		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
 			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
@@ -147,7 +152,7 @@ export const Content = function Content({
 		},
 		{
 			axis: 'y',
-			enabled: !disableSheet,
+			enabled: isSmall && !disableSheet,
 		},
 	);
 
