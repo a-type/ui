@@ -320,6 +320,7 @@ export default function presetAtype({
 				timingFns: {
 					linear: 'linear',
 					springy: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+					'pop-up': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'ease-out': 'ease-out',
 					'fade-in-up': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 					'fade-in-down': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
@@ -380,6 +381,7 @@ export default function presetAtype({
 					'dialog-in': '200ms',
 					'dialog-out': '200ms',
 					'checkbox-fade': '5000ms',
+					'pop-up': '200ms',
 				},
 			},
 		},
