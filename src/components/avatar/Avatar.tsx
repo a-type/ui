@@ -12,7 +12,7 @@ export interface AvatarProps {
 
 export function Avatar({
 	className,
-	popIn = true,
+	popIn = false,
 	imageSrc,
 	name,
 	...rest
