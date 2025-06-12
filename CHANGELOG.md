@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.1.14
+
+### Patch Changes
+
+- b96408e: missing animation config for pop-in
+- 63beb43: no default avatar popin
+
 ## 2.1.13
 
 ### Patch Changes
