@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.16
+
+### Patch Changes
+
+- c814bc4: add crossorigin to image uploader
+
 ## 2.1.15
 
 ### Patch Changes
