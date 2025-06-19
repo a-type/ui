@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.15
+
+### Patch Changes
+
+- 709f7f5: allow setting crossorigin on avatar
+
 ## 2.1.14
 
 ### Patch Changes
