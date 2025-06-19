@@ -1,5 +1,5 @@
 import classNames from 'clsx';
-import { CSSProperties } from 'react';
+import { CSSProperties, HTMLProps } from 'react';
 import { Icon } from '../icon/index.js';
 
 export interface AvatarProps {
@@ -8,6 +8,7 @@ export interface AvatarProps {
 	style?: CSSProperties;
 	imageSrc?: string | null;
 	name?: string;
+	crossOrigin?: HTMLProps<HTMLImageElement>['crossOrigin'];
 }
 
 export function Avatar({
@@ -15,6 +16,7 @@ export function Avatar({
 	popIn = false,
 	imageSrc,
 	name,
+	crossOrigin,
 	...rest
 }: AvatarProps) {
 	const empty = !name && !imageSrc;
@@ -30,7 +32,13 @@ export function Avatar({
 			)}
 			{...rest}
 		>
-			{!empty && <AvatarContent name={name} imageSrc={imageSrc} />}
+			{!empty && (
+				<AvatarContent
+					name={name}
+					imageSrc={imageSrc}
+					crossOrigin={crossOrigin}
+				/>
+			)}
 			{empty && <Icon name="profile" />}
 		</div>
 	);
@@ -39,18 +47,20 @@ export function Avatar({
 function AvatarContent({
 	name,
 	imageSrc,
+	crossOrigin = 'anonymous',
 }: {
 	name?: string;
 	imageSrc?: string | null;
+	crossOrigin?: HTMLProps<HTMLImageElement>['crossOrigin'];
 }) {
 	if (imageSrc) {
 		return (
 			<img
 				className="w-full h-full object-cover"
 				referrerPolicy="no-referrer"
-				crossOrigin="anonymous"
 				src={imageSrc}
 				alt={`${name ?? 'user'}'s profile picture`}
+				crossOrigin={crossOrigin}
 			/>
 		);
 	}
