@@ -1,6 +1,7 @@
 import classNames, { clsx } from 'clsx';
 import {
 	createContext,
+	ImgHTMLAttributes,
 	ReactNode,
 	useCallback,
 	useContext,
@@ -171,17 +172,19 @@ function useUploaderContext() {
 	return context;
 }
 
-function ImageUploaderPrebuilt(
-	props: Omit<ImageUploaderProps, 'children'> & {
-		facingMode?: 'user' | 'environment';
-	},
-) {
+function ImageUploaderPrebuilt({
+	crossOrigin = 'anonymous',
+	...props
+}: Omit<ImageUploaderProps, 'children'> & {
+	facingMode?: 'user' | 'environment';
+	crossOrigin?: ImgHTMLAttributes<HTMLImageElement>['crossOrigin'];
+}) {
 	const [cameraOpen, setCameraOpen] = useState(false);
 	const openCamera = () => setCameraOpen(true);
 
 	return (
 		<ImageUploaderRoot {...props}>
-			<ImageUploaderDisplay />
+			<ImageUploaderDisplay crossOrigin={crossOrigin} />
 
 			<ImageUploaderEmptyControls>
 				<ImageUploaderFileButton />
@@ -278,9 +281,7 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 export function ImageUploaderDisplay({
 	className,
 	...rest
-}: {
-	className?: string;
-}) {
+}: ImgHTMLAttributes<HTMLImageElement>) {
 	const { value } = useUploaderContext();
 	return value ? (
 		<img
