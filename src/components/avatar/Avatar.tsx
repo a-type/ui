@@ -1,5 +1,5 @@
 import classNames from 'clsx';
-import { CSSProperties, HTMLProps } from 'react';
+import { CSSProperties, HTMLProps, useState } from 'react';
 import { Icon } from '../icon/index.js';
 
 export interface AvatarProps {
@@ -53,7 +53,11 @@ function AvatarContent({
 	imageSrc?: string | null;
 	crossOrigin?: HTMLProps<HTMLImageElement>['crossOrigin'];
 }) {
-	if (imageSrc) {
+	const [fallback, setFallback] = useState(false);
+	const triggerFallback = () => {
+		setFallback(true);
+	};
+	if (imageSrc && !fallback) {
 		return (
 			<img
 				className="w-full h-full object-cover"
@@ -61,6 +65,7 @@ function AvatarContent({
 				src={imageSrc}
 				alt={`${name ?? 'user'}'s profile picture`}
 				crossOrigin={crossOrigin}
+				onError={triggerFallback}
 			/>
 		);
 	}
