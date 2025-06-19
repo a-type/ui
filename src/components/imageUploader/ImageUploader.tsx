@@ -141,16 +141,14 @@ export function ImageUploaderRoot({
 				onDragStart={onDragStart}
 				onDragEnd={onDragEnd}
 			>
-				{!value && (
-					<input
-						type="file"
-						accept="image/*"
-						onChange={onFileChange}
-						onClick={onFileClick}
-						className="absolute inset-0 pointer-events-none op-0"
-						id={inputId}
-					/>
-				)}
+				<input
+					type="file"
+					accept="image/*"
+					onChange={onFileChange}
+					onClick={onFileClick}
+					className="absolute inset-0 pointer-events-none op-0"
+					id={inputId}
+				/>
 				{children}
 			</div>
 		</ImageUploaderContext.Provider>
