@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.17
+
+### Patch Changes
+
+- 3dd094c: keep input available in file upload even with value
+
 ## 2.1.16
 
 ### Patch Changes
