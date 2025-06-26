@@ -921,6 +921,14 @@ function resolveThemeColor(color: string, theme: any) {
 		return color.slice(1, -1);
 	}
 
+	if (color === 'bg') {
+		return 'var(--v-bg)';
+	} else if (color === 'fg' || color === 'color') {
+		return 'var(--v-color)';
+	} else if (color === 'border') {
+		return 'var(--v-border)';
+	}
+
 	const parts = color.split('-');
 	let resolveFrom = theme.colors;
 	let resolvedColor: any = color;
