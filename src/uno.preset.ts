@@ -922,11 +922,11 @@ function resolveThemeColor(color: string, theme: any) {
 	}
 
 	if (color === 'bg') {
-		return 'var(--v-bg)';
+		return 'var(--v-bg-altered, var(--v-bg))';
 	} else if (color === 'fg' || color === 'color') {
-		return 'var(--v-color)';
+		return 'var(--v-color--altered, var(--v-color))';
 	} else if (color === 'border') {
-		return 'var(--v-border)';
+		return 'var(--v-border-altered, var(--v-border))';
 	}
 
 	const parts = color.split('-');
