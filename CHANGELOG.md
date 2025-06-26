@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.18
+
+### Patch Changes
+
+- f49fd0f: support cross-color inheritance in color utils
+
 ## 2.1.17
 
 ### Patch Changes
