@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.3.0
+
+### Minor Changes
+
+- dc3b26f: rework page layout
+
 ## 2.2.0
 
 ### Minor Changes
