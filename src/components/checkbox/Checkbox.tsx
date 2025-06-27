@@ -45,10 +45,7 @@ export function CheckboxIndicator({
 }: CheckboxPrimitive.CheckboxIndicatorProps) {
 	return (
 		<CheckboxPrimitive.Indicator
-			className={classNames(
-				'absolute center translate-[-50%] color-black',
-				className,
-			)}
+			className={classNames('absolute center color-black', className)}
 			{...props}
 		>
 			{children ?? <CheckIcon width={18} height={18} />}

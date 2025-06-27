@@ -12,6 +12,7 @@ import {
 	NavBarItemText,
 	NavBarRoot,
 } from '../navBar/index.js';
+import { Switch } from '../switch/Switch.js';
 import { PageContent } from './PageContent.js';
 import { PageNav } from './PageNav.js';
 import { PageNowPlaying } from './PageNowPlaying.js';
@@ -31,6 +32,112 @@ export default meta;
 type Story = StoryObj;
 
 export const Default: Story = {
+	render: () => {
+		const [content, setContent] = useState(true);
+		const toggleContent = () => setContent((prev) => !prev);
+		return (
+			<PageRoot className="bg-primary-wash">
+				<PageContent>
+					<div className="text-center">
+						<h1 className="text-3xl font-bold">Hello, World!</h1>
+						<p className="text-lg">This is a simple page layout.</p>
+					</div>
+					<Switch checked={content} onCheckedChange={toggleContent} />
+					{content && (
+						<Card.Grid>
+							{new Array(100).fill(null).map((_, i) => (
+								<Card key={i}>
+									<Card.Main />
+								</Card>
+							))}
+						</Card.Grid>
+					)}
+					<PageNowPlaying>Now playing</PageNowPlaying>
+				</PageContent>
+				<PageNav>
+					<NavBarRoot>
+						<NavBarItem>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon name="cart" />
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 1 long</NavBarItemText>
+						</NavBarItem>
+						<NavBarItem active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon asChild>
+									<Icon name="book" />
+								</NavBarItemIcon>
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 2</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+						<NavBarItem color="neutral" active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon asChild>
+									<Icon name="book" />
+								</NavBarItemIcon>
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Neutral</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+					</NavBarRoot>
+				</PageNav>
+			</PageRoot>
+		);
+	},
+};
+
+export const ManualWidth: Story = {
+	render: () => {
+		return (
+			<PageRoot className="bg-primary-wash">
+				<PageContent className="max-w-300px">
+					<div className="text-center">
+						<h1 className="text-3xl font-bold">Hello, World!</h1>
+						<p className="text-lg">This is a simple page layout.</p>
+					</div>
+					<Card.Grid>
+						{new Array(100).fill(null).map((_, i) => (
+							<Card key={i}>
+								<Card.Main />
+							</Card>
+						))}
+					</Card.Grid>
+				</PageContent>
+				<PageNav>
+					<NavBarRoot>
+						<NavBarItem>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon name="cart" />
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 1 long</NavBarItemText>
+						</NavBarItem>
+						<NavBarItem active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon asChild>
+									<Icon name="book" />
+								</NavBarItemIcon>
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 2</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+						<NavBarItem color="neutral" active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon asChild>
+									<Icon name="book" />
+								</NavBarItemIcon>
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Neutral</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+					</NavBarRoot>
+				</PageNav>
+			</PageRoot>
+		);
+	},
+};
+
+export const WithoutNav: Story = {
 	render: () => (
 		<PageRoot className="w-full h-full">
 			<PageContent>
@@ -44,48 +151,6 @@ export const Default: Story = {
 							</Card>
 						))}
 					</Card.Grid>
-				</div>
-				<PageNowPlaying>Now playing</PageNowPlaying>
-			</PageContent>
-			<PageNav>
-				<NavBarRoot>
-					<NavBarItem>
-						<NavBarItemIconWrapper>
-							<NavBarItemIcon name="cart" />
-						</NavBarItemIconWrapper>
-						<NavBarItemText>Item 1 long</NavBarItemText>
-					</NavBarItem>
-					<NavBarItem active={true}>
-						<NavBarItemIconWrapper>
-							<NavBarItemIcon asChild>
-								<Icon name="book" />
-							</NavBarItemIcon>
-						</NavBarItemIconWrapper>
-						<NavBarItemText>Item 2</NavBarItemText>
-						<NavBarItemPip />
-					</NavBarItem>
-					<NavBarItem color="neutral" active={true}>
-						<NavBarItemIconWrapper>
-							<NavBarItemIcon asChild>
-								<Icon name="book" />
-							</NavBarItemIcon>
-						</NavBarItemIconWrapper>
-						<NavBarItemText>Neutral</NavBarItemText>
-						<NavBarItemPip />
-					</NavBarItem>
-				</NavBarRoot>
-			</PageNav>
-		</PageRoot>
-	),
-};
-
-export const WithoutNav: Story = {
-	render: () => (
-		<PageRoot className="w-full h-full">
-			<PageContent>
-				<div className="text-center">
-					<h1 className="text-3xl font-bold">Hello, World!</h1>
-					<p className="text-lg">This is a simple page layout.</p>
 				</div>
 				<PageNowPlaying>Now playing</PageNowPlaying>
 			</PageContent>

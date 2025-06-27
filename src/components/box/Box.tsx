@@ -48,6 +48,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
+	grow?: boolean;
 	ref?: Ref<HTMLDivElement>;
 }
 
@@ -69,6 +70,7 @@ export function Box({
 	full,
 	overflow,
 	col,
+	grow,
 	ref,
 	...rest
 }: BoxProps) {
@@ -186,6 +188,8 @@ export function Box({
 						overflow === 'auto-x',
 					'layer-components:(overflow-y-auto overflow-x-hidden)':
 						overflow === 'auto-y',
+					'layer-components:flex-grow': grow,
+					'layer-components:@container': container === true,
 				},
 				theme && `theme-${theme}`,
 				className,

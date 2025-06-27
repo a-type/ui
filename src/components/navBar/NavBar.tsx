@@ -62,7 +62,7 @@ export const NavBarItemIconWrapper = withClassName(
 
 export const NavBarItemText = withClassName(
 	'span',
-	'layer-components:(overflow-hidden pl-1 inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:md:(text-md leading-normal)',
+	'layer-components:(overflow-hidden inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:md:(text-md leading-normal)',
 );
 
 interface NavBarItemIconProps {

@@ -508,7 +508,9 @@ export default function presetAtype({
 			col: 'layer-components:flex layer-components:flex-col layer-components:gap-sm layer-components:items-center',
 			'hidden-input':
 				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:hidden',
-			center: 'left-50% top-50%',
+			center: 'left-1/2 top-1/2 translate-x--1/2 translate-y--1/2',
+			'center-x': 'left-1/2 translate-x--1/2',
+			'center-y': 'top-1/2 translate-y--1/2',
 			'outline-off': '[outline:none]',
 			'bg-wash': 'bg-[var(--color-wash)]',
 			unset: '[all:unset]',
