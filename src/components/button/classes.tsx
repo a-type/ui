@@ -13,7 +13,7 @@ export function getButtonClassName({
 	align?: ButtonProps['align'];
 }) {
 	return classNames(
-		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border border-solid border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
+		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border border-solid border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-color-bg)',
 		'layer-components:()',
 		'layer-components:hover:(bg-[var(--bg)] bg-darken-1 ring-4)',
 		'layer-components:focus:outline-off',

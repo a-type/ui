@@ -497,9 +497,22 @@ export default function presetAtype({
 				}),
 			],
 			[
-				/^ring-bg$/,
-				() => ({
-					'--un-ring-color': 'var(--v-bg-altered,var(--v-bg))',
+				/^ring-color-(.*)$/,
+				(match, { theme }) => ({
+					'--un-ring-color': 'var(--v-ring-altered,var(--v-ring))',
+					'--v-ring': resolveThemeColor(match[1], theme),
+				}),
+			],
+			[
+				/^ring-color-lighten-(\d+\.?\d*)$/,
+				(match, { theme }) => ({
+					'--v-ring-altered': lighten('var(--v-ring,currentColor)', match[1]),
+				}),
+			],
+			[
+				/^ring-color-darken-(\d+\.?\d*)$/,
+				(match, { theme }) => ({
+					'--v-ring-altered': darken('var(--v-ring,currentColor)', match[1]),
 				}),
 			],
 		],
@@ -516,13 +529,15 @@ export default function presetAtype({
 		],
 
 		shortcuts: {
+			border:
+				'border-width-[calc(1px * var(--global-border-scale,1))] border-solid',
 			'border-default': 'border border-solid border-color-black',
 			'border-light':
 				'border border-solid border-color-gray border-color-darken-3',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
-			row: 'layer-components:flex layer-components:flex-row layer-components:gap-2 layer-components:items-center',
-			col: 'layer-components:flex layer-components:flex-col layer-components:gap-2 layer-components:items-center',
+			row: 'layer-components:flex layer-components:flex-row layer-components:gap-sm layer-components:items-center',
+			col: 'layer-components:flex layer-components:flex-col layer-components:gap-sm layer-components:items-center',
 			'hidden-input':
 				'op-0 absolute z--1 pointer-events-none [&::webkit-file-upload-button]:hidden',
 			center: 'left-50% top-50%',
