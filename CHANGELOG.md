@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.21
+
+### Patch Changes
+
+- 0e967e9: fix typo
+
 ## 2.1.20
 
 ### Patch Changes
