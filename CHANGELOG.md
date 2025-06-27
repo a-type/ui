@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.1.20
+
+### Patch Changes
+
+- 41ccf40: ring color utils, better 'border' shortcut
+
 ## 2.1.19
 
 ### Patch Changes
