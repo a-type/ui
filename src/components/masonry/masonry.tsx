@@ -153,6 +153,7 @@ class ClientLayout extends MasonryLayout {
 	attach = (container: HTMLElement) => {
 		this.containerResizeObserver?.disconnect();
 		this.containerMutationObserver?.disconnect();
+		this.columns = 0;
 
 		this.container = container;
 
