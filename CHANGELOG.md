@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.3.1
+
+### Patch Changes
+
+- 06800eb: try fixing masonry bug
+
 ## 2.3.0
 
 ### Minor Changes
