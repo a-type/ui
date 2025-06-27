@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.2.0
+
+### Minor Changes
+
+- 157bbef: remove all tw colors. fix some errors with borders.
+
 ## 2.1.21
 
 ### Patch Changes
