@@ -151,6 +151,17 @@ class ClientLayout extends MasonryLayout {
 	};
 
 	attach = (container: HTMLElement) => {
+		const disconnect = () => {
+			this.containerResizeObserver?.disconnect();
+			this.containerMutationObserver?.disconnect();
+			container.style.removeProperty('position');
+			container.style.removeProperty('overflow');
+			this.container = null;
+		};
+		if (container === this.container) {
+			return disconnect;
+		}
+
 		this.containerResizeObserver?.disconnect();
 		this.containerMutationObserver?.disconnect();
 		this.columns = 0;
@@ -175,15 +186,11 @@ class ClientLayout extends MasonryLayout {
 			}
 		});
 
-		this.updateFromContainerSize(container.offsetWidth);
+		if (!this.updateFromContainerSize(container.offsetWidth)) {
+			this.relayout();
+		}
 
-		return () => {
-			this.containerResizeObserver?.disconnect();
-			this.containerMutationObserver?.disconnect();
-			container.style.removeProperty('position');
-			container.style.removeProperty('overflow');
-			this.container = null;
-		};
+		return disconnect;
 	};
 
 	setupChild = (child: HTMLElement) => {
