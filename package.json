@@ -1,6 +1,6 @@
 {
 	"name": "@a-type/ui",
-	"version": "2.1.18",
+	"version": "2.1.19",
 	"type": "module",
 	"files": [
 		"/dist",
