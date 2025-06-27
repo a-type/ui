@@ -7,6 +7,7 @@ import {
 	dynamicTheme,
 	DynamicThemeColor,
 	dynamicThemeComputedColors,
+	themeColors,
 } from './uno/colors.js';
 
 const baseBgRule = bgColorsRules[0] as unknown as DynamicRule;
@@ -59,48 +60,7 @@ export default function presetAtype({
 		name: 'atype',
 		enforce: 'post',
 		theme: {
-			colors: {
-				none: '',
-				black: 'var(--color-black)',
-				white: 'var(--color-white)',
-				wash: 'var(--color-wash)',
-				attention: {
-					DEFAULT: 'var(--color-attention)',
-					light: 'var(--color-attention-light)',
-					dark: 'var(--color-attention-dark)',
-					wash: 'var(--color-attention-wash)',
-					ink: 'var(--color-attention-ink)',
-				},
-				accent: {
-					DEFAULT: 'var(--color-accent)',
-					light: 'var(--color-accent-light)',
-					dark: 'var(--color-accent-dark)',
-					wash: 'var(--color-accent-wash)',
-					ink: 'var(--color-accent-ink)',
-				},
-				primary: {
-					DEFAULT: 'var(--color-primary)',
-					light: 'var(--color-primary-light)',
-					dark: 'var(--color-primary-dark)',
-					wash: 'var(--color-primary-wash)',
-					ink: 'var(--color-primary-ink)',
-				},
-				gray: {
-					DEFAULT: 'var(--color-gray)',
-					wash: 'var(--color-gray-wash)',
-					light: 'var(--color-gray-light)',
-					ink: 'var(--color-gray-ink)',
-					blend: 'var(--color-gray-blend)',
-					dark: {
-						DEFAULT: 'var(--color-gray-dark)',
-						blend: 'var(--color-gray-dark-blend)',
-					},
-				},
-				'dark-blend': 'var(--color-dark-blend)',
-				'light-blend': 'var(--color-light-blend)',
-				overlay: 'var(--color-overlay)',
-				'dark-mode-contrast': 'var(--color-dark-mode-contrast)',
-			},
+			colors: themeColors,
 			fontFamily: {
 				default: 'var(--font-default, sans-serif)',
 				sans: 'var(--font-sans, sans-serif)',
@@ -134,6 +94,7 @@ export default function presetAtype({
 			},
 			lineWidth: {
 				DEFAULT: `calc(1px * var(--global-border-scale,1))`,
+				thin: `calc(1px * var(--global-border-scale,1))`,
 				none: '0',
 				thick: `calc(2px * var(--global-border-scale,1))`,
 			},
@@ -385,6 +346,14 @@ export default function presetAtype({
 				},
 			},
 		},
+		extendTheme: (theme: any) => {
+			// delete all colors that are not defined in the custom theme
+			const { colors: _, ...rest } = theme;
+			return {
+				colors: themeColors,
+				...rest,
+			};
+		},
 
 		rules: [
 			[
@@ -529,8 +498,7 @@ export default function presetAtype({
 		],
 
 		shortcuts: {
-			border:
-				'border-width-[calc(1px * var(--global-border-scale,1))] border-solid',
+			border: 'border-width-thin border-solid',
 			'border-default': 'border border-solid border-color-black',
 			'border-light':
 				'border border-solid border-color-gray border-color-darken-3',

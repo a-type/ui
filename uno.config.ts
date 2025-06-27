@@ -10,7 +10,7 @@ export default defineConfig({
 			roundedness: 1,
 			scale: 'md',
 			saturation: 100,
-			noZIndexes: true,
+			// noZIndexes: true,
 		}),
 	],
 	transformers: [variantGroup()],

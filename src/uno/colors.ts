@@ -66,3 +66,47 @@ export function dynamicTheme({
 ${dynamicComputedVars}
 	`;
 }
+
+export const themeColors = {
+	none: 'transparent',
+	black: 'var(--color-black)',
+	white: 'var(--color-white)',
+	wash: 'var(--color-wash)',
+	transparent: 'transparent',
+	attention: {
+		DEFAULT: 'var(--color-attention)',
+		light: 'var(--color-attention-light)',
+		dark: 'var(--color-attention-dark)',
+		wash: 'var(--color-attention-wash)',
+		ink: 'var(--color-attention-ink)',
+	},
+	accent: {
+		DEFAULT: 'var(--color-accent)',
+		light: 'var(--color-accent-light)',
+		dark: 'var(--color-accent-dark)',
+		wash: 'var(--color-accent-wash)',
+		ink: 'var(--color-accent-ink)',
+	},
+	primary: {
+		DEFAULT: 'var(--color-primary)',
+		light: 'var(--color-primary-light)',
+		dark: 'var(--color-primary-dark)',
+		wash: 'var(--color-primary-wash)',
+		ink: 'var(--color-primary-ink)',
+	},
+	gray: {
+		DEFAULT: 'var(--color-gray)',
+		wash: 'var(--color-gray-wash)',
+		light: 'var(--color-gray-light)',
+		ink: 'var(--color-gray-ink)',
+		blend: 'var(--color-gray-blend)',
+		dark: {
+			DEFAULT: 'var(--color-gray-dark)',
+			blend: 'var(--color-gray-dark-blend)',
+		},
+	},
+	'dark-blend': 'var(--color-dark-blend)',
+	'light-blend': 'var(--color-light-blend)',
+	overlay: 'var(--color-overlay)',
+	'dark-mode-contrast': 'var(--color-dark-mode-contrast)',
+} as const;
