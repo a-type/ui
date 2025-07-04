@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.3.3
+
+### Patch Changes
+
+- 99b812c: remove important from button disabled style
+- c2ba4e9: input small size variant, align input styles to button
+
 ## 2.3.2
 
 ### Patch Changes
