@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.3.5
+
+### Patch Changes
+
+- fe75086: add anchor utils. deprecate scrollarea. add default scroll styling.
+
 ## 2.3.4
 
 ### Patch Changes
