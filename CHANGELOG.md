@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.3.4
+
+### Patch Changes
+
+- 95f1fac: fix typing of callback hook
+- fe720c0: new icon
+
 ## 2.3.3
 
 ### Patch Changes
