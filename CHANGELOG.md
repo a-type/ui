@@ -1,5 +1,12 @@
 # @a-type/ui
 
+## 2.3.6
+
+### Patch Changes
+
+- 7576e62: tweak popover and shadows
+- 7576e62: remove border from popover
+
 ## 2.3.5
 
 ### Patch Changes
