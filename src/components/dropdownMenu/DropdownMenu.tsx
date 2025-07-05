@@ -15,7 +15,7 @@ const StyledContent = withClassName(
 			</BoxContext.Provider>
 		);
 	},
-	'min-w-220px bg-white z-menu shadow-lg rounded-lg border-default',
+	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-lg border border-gray)',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -64,22 +64,22 @@ const StyledRadioItem = withClassName(
 
 const StyledLabel = withClassName(
 	DropdownMenuPrimitive.Label,
-	'pl-3 py-1 font-bold text-sm leading-6 color-gray-dark',
+	'layer-components:(pl-3 py-1 font-bold text-sm leading-6)',
 );
 
 const StyledSeparator = withClassName(
 	DropdownMenuPrimitive.Separator,
-	'h-1px bg-gray m-5px',
+	'layer-components:(h-1px bg-gray m-5px)',
 );
 
 const StyledItemIndicator = withClassName(
 	DropdownMenuPrimitive.ItemIndicator,
-	'absolute left-0 w-25px inline-flex items-center justify-center',
+	'layer-components:(absolute left-0 w-25px inline-flex items-center justify-center)',
 );
 
 const StyledArrow = withClassName(
 	DropdownMenuPrimitive.Arrow,
-	'fill-white stroke-black stroke-1',
+	'layer-components:(fill-white stroke-gray)',
 );
 
 const StyledTrigger = withClassName(

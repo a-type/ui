@@ -108,5 +108,6 @@ export const themeColors = {
 	'dark-blend': 'var(--color-dark-blend)',
 	'light-blend': 'var(--color-light-blend)',
 	overlay: 'var(--color-overlay)',
+	'overlay-dark': 'var(--color-overlay-dark)',
 	'dark-mode-contrast': 'var(--color-dark-mode-contrast)',
 } as const;

@@ -115,9 +115,9 @@ export default function presetAtype({
 				md: '0 4px 6px -1px var(--color-shadow-1), 0 2px 4px -1px var(--color-shadow-2)',
 				'md-inset':
 					'inset 0 4px 6px -1px var(--color-shadow-1), inset 0 2px 4px -1px var(--color-shadow-2)',
-				lg: '0 10px 15px -3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
+				lg: '0 8px 14px -3px var(--color-shadow-1), 0 2px 10px 0px var(--color-shadow-2)',
 				'lg-inset':
-					'inset 0 10px 15px -3px var(--color-shadow-1), inset 0 4px 6px -2px var(--color-shadow-2)',
+					'inset 0 8px 15px -3px var(--color-shadow-1), inset 0 2px 6px -2px var(--color-shadow-2)',
 				xl: '0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
 				'xl-inset':
 					'inset 0 20px 25px -5px var(--color-shadow-1), inset 0 10px 10px -5px var(--color-shadow-2)',
@@ -129,6 +129,8 @@ export default function presetAtype({
 					'0 -10px 15px -3px var(--color-shadow-1), 0 -4px 6px -2px var(--color-shadow-2)',
 				'xl-up':
 					'0 -20px 25px -5px var(--color-shadow-1), 0 -10px 10px -5px var(--color-shadow-2)',
+				'lg-dim':
+					'0 0 0 3000px var(--color-overlay-dark), 0 10px 15px 3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
 
 				// focus outlines
 				focus: `0 0 0 3px var(--color-primary-light)`,
@@ -503,16 +505,8 @@ export default function presetAtype({
 				},
 			],
 			[
-				'overflow-auto',
+				'overflow-stable',
 				{
-					overflow: 'auto',
-					'scrollbar-gutter': 'stable',
-				},
-			],
-			[
-				'overflow-y-auto',
-				{
-					'overflow-y': 'auto',
 					'scrollbar-gutter': 'stable',
 				},
 			],
@@ -616,6 +610,7 @@ export default function presetAtype({
 					--color-shadow-1: var(--palette-shadow-2);
 					--color-shadow-2: var(--palette-shadow-1);
 					--color-overlay: var(--palette-white-overlay);
+					--color-overlay-dark: var(--palette-black-overlay);
 					${attentionColors}
 				`;
 					const darkMode = `
@@ -646,6 +641,7 @@ export default function presetAtype({
 						--color-shadow-1: var(--palette-shadow-4);
 						--color-shadow-2: var(--palette-shadow-3);
 						--color-overlay: var(--palette-black-overlay);
+						--color-overlay-dark: var(--palette-white-overlay);
 						${attentionColors}
 					`;
 
@@ -708,9 +704,9 @@ export default function presetAtype({
 					--palette-gray-dark-blend: rgba(0, 0, 20, 0.05);
 					--palette-light-gray-blend: rgba(255, 255, 255, 0.05);
 					--palette-light-gray-dark-blend: rgba(255, 255, 255, 0.1);
-					--palette-shadow-1: rgba(0, 0, 0, 0.07);
-					--palette-shadow-2: rgba(0, 0, 0, 0.15);
-					--palette-shadow-3: rgba(0, 0, 0, 0.3);
+					--palette-shadow-1: rgba(0, 0, 0, 0.1);
+					--palette-shadow-2: rgba(0, 0, 0, 0.2);
+					--palette-shadow-3: rgba(0, 0, 0, 0.4);
 					--palette-shadow-4: rgba(0, 0, 0, 0.5);
 					--palette-white-overlay: rgba(255, 255, 255, 0.4);
 					--palette-black-overlay: rgba(0, 0, 0, 0.4);
@@ -819,7 +815,7 @@ export default function presetAtype({
 					* {
 						box-sizing: border-box;
 						-webkit-tap-highlight-color: transparent;
-						scrollbar-color: var(--v-bg-altered,var(--v-bg,var(--color-gray))) var(--v-color-altered,var(--v-color,var(--color-wash)));
+						scrollbar-color: var(--v-bg-altered,var(--v-bg,var(--color-gray))) transparent;
 					}
 				}
 
