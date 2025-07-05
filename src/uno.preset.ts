@@ -484,6 +484,38 @@ export default function presetAtype({
 					'--v-ring-altered': darken('var(--v-ring,currentColor)', match[1]),
 				}),
 			],
+			[
+				/^anchor-(\w+)$/,
+				(match) => ({
+					'anchor-name': `--${match[1]}`,
+				}),
+				{
+					autocomplete: 'anchor-<name>',
+				},
+			],
+			[
+				/^anchor-to-(\w+)$/,
+				(match) => ({
+					'position-anchor': `--${match[1]}`,
+				}),
+				{
+					autocomplete: 'anchor-to-<name>',
+				},
+			],
+			[
+				'overflow-auto',
+				{
+					overflow: 'auto',
+					'scrollbar-gutter': 'stable',
+				},
+			],
+			[
+				'overflow-y-auto',
+				{
+					'overflow-y': 'auto',
+					'scrollbar-gutter': 'stable',
+				},
+			],
 		],
 
 		variants: [
@@ -787,6 +819,7 @@ export default function presetAtype({
 					* {
 						box-sizing: border-box;
 						-webkit-tap-highlight-color: transparent;
+						scrollbar-color: var(--v-bg-altered,var(--v-bg,var(--color-gray))) var(--v-color-altered,var(--v-color,var(--color-wash)));
 					}
 				}
 
