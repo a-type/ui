@@ -510,6 +510,27 @@ export default function presetAtype({
 					'scrollbar-gutter': 'stable',
 				},
 			],
+			[
+				'overflow-auto',
+				{
+					overflow: 'auto',
+					'scrollbar-gutter': 'stable',
+				},
+			],
+			[
+				'overflow-y-auto',
+				{
+					'overflow-y': 'auto',
+					'scrollbar-gutter': 'stable',
+				},
+			],
+			[
+				'overflow-x-auto',
+				{
+					'overflow-x': 'auto',
+					'scrollbar-gutter': 'stable',
+				},
+			],
 		],
 
 		variants: [

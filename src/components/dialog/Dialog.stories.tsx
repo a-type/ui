@@ -70,6 +70,28 @@ export const Default: Story = {
 	},
 };
 
+export const Small: Story = {
+	args: {
+		children: (
+			<ParticleLayer noPortal>
+				<DialogTrigger asChild>
+					<Button>Open</Button>
+				</DialogTrigger>
+				<DummyContent />
+				<DialogContent>
+					<DialogTitle>Hello world</DialogTitle>
+					<DummyContent />
+					<DialogActions>
+						<DialogClose asChild>
+							<Button>Close</Button>
+						</DialogClose>
+					</DialogActions>
+				</DialogContent>
+			</ParticleLayer>
+		),
+	},
+};
+
 export const NoSheet: Story = {
 	args: {
 		children: (
