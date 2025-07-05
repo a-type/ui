@@ -74,11 +74,11 @@ export function useBounds<E extends HTMLElement>(
 		top: number;
 		width: number;
 		height: number;
-		ref: RefObject<E>;
+		ref: RefObject<E | null>;
 	}) => void,
 	disconnectCallback: () => void = () => {},
 ) {
-	const ref = useRef<E>(null);
+	const ref = useRef<E | null>(null);
 	const cb = useStableCallback(callback);
 	const disconnectCb = useStableCallback(disconnectCallback);
 	useEffect(() => {
@@ -128,7 +128,7 @@ export function useBoundsCssVars<E extends HTMLElement>(
 			top: number;
 			width: number;
 			height: number;
-			ref: RefObject<E>;
+			ref: RefObject<E | null>;
 		}) => {
 			const usedRef = applyToRef || ref;
 			usedRef.current?.style.setProperty(
