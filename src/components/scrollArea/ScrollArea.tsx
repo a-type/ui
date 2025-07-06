@@ -61,7 +61,7 @@ export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
 }
 
 /**
- * @deprecated - just use overflow-auto
+ * @deprecated - just use Box with overflow prop
  */
 export const ScrollArea = Object.assign(
 	function ScrollArea({
