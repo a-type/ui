@@ -836,7 +836,7 @@ export default function presetAtype({
 					* {
 						box-sizing: border-box;
 						-webkit-tap-highlight-color: transparent;
-						scrollbar-color: var(--v-bg-altered,var(--v-bg,var(--color-gray))) transparent;
+						scrollbar-color: var(--v-color-altered,var(--v-color,var(--color-gray))) transparent;
 					}
 				}
 
