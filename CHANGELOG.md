@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.3.7
+
+### Patch Changes
+
+- 807cff5: fix scroll thumb color
+
 ## 2.3.6
 
 ### Patch Changes
