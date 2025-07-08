@@ -13,7 +13,7 @@ export const TabsTriggerBase = withClassName(
 	TabsPrimitive.Trigger,
 	'layer-components:(flex flex-row items-center cursor-pointer justify-center gap-2 color-black py-1 px-5 bg-wash text-md min-w-100px rounded-lg border-default font-semibold text-gray-dark-blend border-gray-dark transition-all cursor-pointer select-none font-inherit flex-shrink-0 shadow-sm)',
 	'layer-components:hover:(bg-darken-1 ring-4 ring-color-bg)',
-	'layer-components:focus-visible:(bg-darken-3 ring-6 ring-color-bg outline-off)',
+	'layer-components:focus-visible:(bg-darken-1 ring-4 ring-color-bg outline-off)',
 	'[&[data-state=active]]:(bg-[var(--bg)] font-semibold text-black cursor-default hover:bg-darken-1 relative z-1)',
 );
 
@@ -38,7 +38,10 @@ export const TabsTrigger = ({
 	/>
 );
 
-export const TabsContent = withClassName(TabsPrimitive.Content, '');
+export const TabsContent = withClassName(
+	TabsPrimitive.Content,
+	'layer-components:(focus:outline-none focus-visible:(outline-none ring-inset ring-2 ring-gray))',
+);
 
 export const Tabs = Object.assign(TabsRoot, {
 	List: TabsList,

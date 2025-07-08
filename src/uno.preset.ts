@@ -3,10 +3,12 @@ import { bgColors as bgColorsRules } from '@unocss/preset-mini/rules';
 import presetWind3 from '@unocss/preset-wind3';
 import { PreflightContext, Preset } from 'unocss';
 import {
+	darken,
 	dynamicComputedVars,
 	dynamicTheme,
 	DynamicThemeColor,
 	dynamicThemeComputedColors,
+	lighten,
 	themeColors,
 } from './uno/colors.js';
 
@@ -638,7 +640,7 @@ export default function presetAtype({
 						--wash-saturation-tweak: ${darkModeSaturationTweak};
 						--mode-mult: -1;
 						--dyn-mode-mult: -1.6;
-						--dyn-mode-lighten-mult: -0.5;
+						--dyn-mode-lighten-mult: -1;
 						--dyn-mode-sign: -1;
 						--dyn-source-mode-adjust: 1;
 						--color-dark-blend: var(--palette-light-blend);
@@ -984,19 +986,4 @@ function resolveThemeColor(color: string, theme: any) {
 	}
 
 	return resolvedColor;
-}
-
-function lighten(base: string, level: string, saturate?: string) {
-	const levelNum = parseFloat(level) * 0.1;
-	const saturateNum = saturate ? parseFloat(saturate) : levelNum / 100;
-	return `oklch(from ${base} calc(l + (${
-		1 * levelNum
-	} * var(--dyn-mode-lighten-mult, 1))) calc(c + (${
-		1 * saturateNum
-	} * var(--dyn-mode-lighten-mult, 1))) h)`;
-}
-
-function darken(base: string, level: string) {
-	const levelNum = parseFloat(level);
-	return lighten(base, (-levelNum / 8).toString());
 }

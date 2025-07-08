@@ -216,7 +216,7 @@ const CalendarDay = withClassName(
 	'hover:(z-1 outline-accent)',
 	'active:(bg-accent-wash rounded)',
 	'[&[data-selected]]:(bg-accent-light z-2 rounded)',
-	'[&[data-in-range]]:(bg-accent-wash bg-darken-0.5 rounded-none z-1)',
+	'[&[data-in-range]]:(bg-accent-wash bg-darken-1 rounded-none z-1)',
 	'[&[data-range-start]]:(bg-accent-light rounded-l rounded-r-none z-1)',
 	'[&[data-range-end]]:(bg-accent-light rounded-r rounded-l-none z-1)',
 	'disabled:(opacity-50 cursor-default)',

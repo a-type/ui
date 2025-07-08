@@ -54,15 +54,26 @@ export const Default: Story = {
 	},
 };
 
-function Swatch({ className }: { className?: string }) {
+function Swatch({
+	className,
+	children,
+}: {
+	className?: string;
+	children?: React.ReactNode;
+}) {
 	return (
 		<div
 			className={className}
 			style={{
 				width: '100px',
 				height: '100px',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
 			}}
-		/>
+		>
+			{children}
+		</div>
 	);
 }
 
@@ -74,6 +85,54 @@ function Range({ className, style }: { className?: string; style?: any }) {
 			<Swatch className="bg-primary" />
 			<Swatch className="bg-primary-dark" />
 			<Swatch className="bg-primary-ink" />
+		</Box>
+	);
+}
+
+export const Modifiers: Story = {
+	render(args: any) {
+		const style: any = args.customHue
+			? {
+					'--dyn-primary-source': args.customHue,
+					'--dyn-primary-hue-rotate': args.customRotate,
+			  }
+			: {};
+		return (
+			<Box col>
+				<ModifierRange className="theme-salt" />
+				<ModifierRange className="theme-lemon" />
+				<ModifierRange className="theme-leek" />
+				<ModifierRange className="theme-tomato" />
+				<ModifierRange className="theme-eggplant" />
+				<ModifierRange className="theme-blueberry" />
+				<ModifierRange style={style} className="theme" />
+			</Box>
+		);
+	},
+};
+
+function ModifierRange({
+	className,
+	style,
+}: {
+	className?: string;
+	style?: any;
+}) {
+	return (
+		<Box className={className} style={style}>
+			<Swatch className="bg-primary-wash">W</Swatch>
+			<Swatch className="bg-primary-light bg-lighten-3">L+3</Swatch>
+			<Swatch className="bg-primary-light">L</Swatch>
+			{/* <Swatch className="bg-primary bg-lighten-5">P+5</Swatch> */}
+			<Swatch className="bg-primary bg-lighten-3">P+3</Swatch>
+			<Swatch className="bg-primary bg-lighten-1">P+1</Swatch>
+			<Swatch className="bg-primary">P</Swatch>
+			<Swatch className="bg-primary bg-darken-1">P-1</Swatch>
+			<Swatch className="bg-primary bg-darken-3">P-3</Swatch>
+			{/* <Swatch className="bg-primary bg-darken-5">P-5</Swatch> */}
+			<Swatch className="bg-primary-dark">D</Swatch>
+			<Swatch className="bg-primary-dark bg-darken-3">D-3</Swatch>
+			<Swatch className="bg-primary-ink">I</Swatch>
 		</Box>
 	);
 }

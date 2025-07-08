@@ -28,15 +28,14 @@ export const ScrollAreaViewport = withClassName(
 
 export const ScrollAreaScrollbarRoot = withClassName(
 	Primitive.Scrollbar,
-	'layer-components:(flex select-none touch-none p-0.5 bg-inherit bg-lighten-4 transition-colors duration-160ms ease-out)',
-	// 'layer-components:hover:bg-lighten-4',
+	'layer-components:(flex select-none touch-none p-0.5 bg-inherit bg-lighten-2 transition-colors duration-160ms ease-out)',
 	'layer-components:[&[data-orientation=vertical]]:w-2.5',
 	'layer-components:[&[data-orientation=horizontal]]:(flex-col h-2.5)',
 );
 
 export const ScrollAreaThumb = withClassName(
 	Primitive.Thumb,
-	'layer-components:(flex-1 rounded-lg relative bg-inherit bg-darken-8)',
+	'layer-components:(flex-1 rounded-lg relative bg-inherit bg-darken-2)',
 	'before:(content-[""] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full min-w-44px min-h-44px)',
 );
 

@@ -26,7 +26,7 @@ export function CheckboxRoot({
 			{...props}
 			className={classNames(
 				'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border-default transition rounded-lg shadow-sm)',
-				'layer-components:focus-visible:(outline-off shadow-focus)',
+				'layer-components:focus-visible:(outline-off ring-4 ring-primary)',
 				checkedMode === 'faded'
 					? 'layer-components:[&[data-state=checked]]:(bg-primary animate-checkbox-fade animate-forwards)'
 					: 'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',

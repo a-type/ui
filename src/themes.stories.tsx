@@ -89,7 +89,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Checkbox defaultChecked />
 							<span>Checkbox</span>
 						</Box>
-						<ToggleGroup type="single">
+						<ToggleGroup type="single" defaultValue="1">
 							<ToggleGroup.Item value="1">Toggle 1</ToggleGroup.Item>
 							<ToggleGroup.Item value="2">Toggle 2</ToggleGroup.Item>
 						</ToggleGroup>

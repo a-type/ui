@@ -8,8 +8,8 @@ export const navBarItemClass = classNames(
 	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-sm border-none cursor-pointer text-sm transition-colors h-full gap-6px relative color-black select-none)',
 	'layer-components:active:bg-darken-2',
 	'layer-components:hover:bg-darken-1',
-	'layer-components:focus-visible:(outline-none bg-darken-3)',
-	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-2 text-black)',
+	'layer-components:focus-visible:(outline-none bg-darken-2)',
+	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-1 text-black)',
 	'layer-components:([--bg:var(--color-primary-wash)] [--fill:var(--color-primary)])',
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
