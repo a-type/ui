@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.4.0
+
+### Minor Changes
+
+- cf61cec: overhaul color system
+
 ## 2.3.7
 
 ### Patch Changes
