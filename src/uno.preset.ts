@@ -510,6 +510,8 @@ export default function presetAtype({
 				'overflow-stable',
 				{
 					'scrollbar-gutter': 'stable',
+					'scrollbar-color':
+						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
 				},
 			],
 			[
@@ -517,6 +519,8 @@ export default function presetAtype({
 				{
 					overflow: 'auto',
 					'scrollbar-gutter': 'stable',
+					'scrollbar-color':
+						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
 				},
 			],
 			[
@@ -524,6 +528,8 @@ export default function presetAtype({
 				{
 					'overflow-y': 'auto',
 					'scrollbar-gutter': 'stable',
+					'scrollbar-color':
+						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
 				},
 			],
 			[
@@ -531,6 +537,8 @@ export default function presetAtype({
 				{
 					'overflow-x': 'auto',
 					'scrollbar-gutter': 'stable',
+					'scrollbar-color':
+						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
 				},
 			],
 		],
@@ -838,7 +846,6 @@ export default function presetAtype({
 					* {
 						box-sizing: border-box;
 						-webkit-tap-highlight-color: transparent;
-						scrollbar-color: var(--v-color-altered,var(--v-color,var(--color-gray))) transparent;
 					}
 				}
 
