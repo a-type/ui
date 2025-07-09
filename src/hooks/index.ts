@@ -5,6 +5,7 @@ export * from './useOnUnmount.js';
 export * from './useOverrideTheme.js';
 export * from './useSize.js';
 export * from './useStableCallback.js';
+export * from './useStayScrolledToBottom.js';
 export * from './useTitleBarColor.js';
 export * from './useToggle.js';
 export * from './useVisualViewportOffset.js';
