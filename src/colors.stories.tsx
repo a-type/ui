@@ -14,8 +14,8 @@ const meta = {
 		customRotate: {
 			control: {
 				type: 'range',
-				min: -180,
-				max: 180,
+				min: -20,
+				max: 20,
 			},
 		},
 	},
@@ -41,18 +41,51 @@ export const Default: Story = {
 			  }
 			: {};
 		return (
-			<Box d="col">
-				<Range className="theme" style={style} />
-				<Range className="theme-lemon" />
-				<Range className="theme-leek" />
-				<Range className="theme-tomato" />
-				<Range className="theme-eggplant" />
-				<Range className="theme-blueberry" />
-				<Range className="theme-salt" />
-				<Box className="h-100px">
-					<Box grow className="bg-black" />
-					<Box grow className="bg-wash" />
-					<Box grow className="bg-white" />
+			<Box col>
+				<input type="color" className="sticky top-0 z-1" />
+				<Box full>
+					<Box d="col" grow p surface="default">
+						<Range className="theme" style={style} />
+						<Range className="theme-lemon" />
+						<Range className="theme-leek" />
+						<Range className="theme-tomato" />
+						<Range className="theme-eggplant" />
+						<Range className="theme-blueberry" />
+						<Range className="theme-salt" />
+						<Box className="h-100px">
+							<Box grow className="bg-gray-wash" />
+							<Box grow className="bg-gray-light" />
+							<Box grow className="bg-gray" />
+							<Box grow className="bg-gray-dark" />
+							<Box grow className="bg-gray-ink" />
+						</Box>
+						<Box className="h-100px">
+							<Box grow className="bg-black" />
+							<Box grow className="bg-wash" />
+							<Box grow className="bg-white" />
+						</Box>
+					</Box>
+					<Box d="col" className="override-dark theme" grow p surface="default">
+						<Range className="theme" style={style} />
+						<Range className="theme-lemon" />
+						<Range className="theme-leek" />
+						<Range className="theme-tomato" />
+						<Range className="theme-eggplant" />
+						<Range className="theme-blueberry" />
+						<Range className="theme-salt" />
+						<Box className="h-100px">
+							<Box grow className="bg-gray-wash" />
+							<Box grow className="bg-gray-light" />
+							<Box grow className="bg-gray" />
+							<Box grow className="bg-gray-dark" />
+							<Box grow className="bg-gray-ink" />
+						</Box>
+						<Box className="h-100px">
+							<Box grow className="bg-black" />
+							<Box grow className="bg-wash" />
+							<Box grow className="bg-white" />
+						</Box>
+					</Box>
 				</Box>
 			</Box>
 		);
@@ -70,11 +103,11 @@ function Swatch({
 		<div
 			className={className}
 			style={{
-				width: '100px',
 				height: '100px',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				flex: '1',
 			}}
 		>
 			{children}
