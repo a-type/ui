@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CollapsibleSimple, CollapsibleTrigger } from './Collapsible.js';
 import { useState } from 'react';
+import { CollapsibleSimple } from './Collapsible.js';
 
 const meta = {
-	title: 'CollapsibleSimple',
+	title: 'Components/CollapsibleSimple',
 	component: CollapsibleSimple,
 	argTypes: {},
 	parameters: {

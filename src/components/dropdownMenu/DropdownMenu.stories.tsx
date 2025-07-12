@@ -3,7 +3,7 @@ import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
 
 const meta = {
-	title: 'DropdownMenu',
+	title: 'Components/DropdownMenu',
 	component: DropdownMenu,
 	argTypes: {},
 	parameters: {

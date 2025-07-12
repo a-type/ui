@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { NumberStepper } from './NumberStepper.js';
 
 const meta = {
-	title: 'NumberStepper',
+	title: 'Components/NumberStepper',
 	component: NumberStepper,
 	argTypes: {},
 	parameters: {

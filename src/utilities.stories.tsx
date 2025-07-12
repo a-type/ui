@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Button, P } from './components/index.js';
 
 const meta = {
-	title: 'Utility Classes',
+	title: 'System/Utility Classes',
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },

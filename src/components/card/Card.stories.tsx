@@ -17,7 +17,7 @@ import {
 } from './Card.js';
 
 const meta = {
-	title: 'Card',
+	title: 'Components/Card',
 	component: CardRoot,
 	argTypes: {},
 	parameters: {

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { tipTapClassName, tipTapReadonlyClassName } from './index.js';
 
 const meta = {
-	title: 'richEditor',
+	title: 'Components/RichEditor',
 	argTypes: {
 		readonly: { control: 'boolean' },
 	},

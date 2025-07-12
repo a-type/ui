@@ -3,7 +3,7 @@ import { Box } from '../index.js';
 import { TextSkeleton } from './skeletons.js';
 
 const meta = {
-	title: 'TextSkeleton',
+	title: 'Components/TextSkeleton',
 	component: TextSkeleton,
 	argTypes: {
 		maxLength: {

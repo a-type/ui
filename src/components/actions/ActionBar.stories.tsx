@@ -5,7 +5,7 @@ import { ActionBar } from './ActionBar.js';
 import { ActionButton } from './ActionButton.js';
 
 const meta = {
-	title: 'ActionBar',
+	title: 'Components/ActionBar',
 	component: ActionBar,
 	argTypes: {},
 	args: {

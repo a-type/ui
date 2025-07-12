@@ -4,7 +4,7 @@ import { Box, Button, Dialog, Icon, Provider } from '../components/index.js';
 import { useTitleBarColor } from './useTitleBarColor.js';
 
 const meta = {
-	title: 'useTitleBarColor',
+	title: 'Hooks/useTitleBarColor',
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },

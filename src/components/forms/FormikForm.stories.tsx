@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FormikForm } from './FormikForm.js';
-import { TextField } from './TextField.js';
 import { CheckboxField } from './CheckboxField.js';
-import { SubmitButton } from './SubmitButton.js';
+import { FormikForm } from './FormikForm.js';
 import { NumberStepperField } from './NumberStepperField.js';
+import { SubmitButton } from './SubmitButton.js';
+import { TextField } from './TextField.js';
 
 const meta = {
-	title: 'Form',
+	title: 'Components/Form',
 	component: FormikForm,
 	argTypes: {},
 	parameters: {

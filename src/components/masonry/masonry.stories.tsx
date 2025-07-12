@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Masonry } from './masonry.js';
 
 const meta = {
-	title: 'Masonry',
+	title: 'Components/Masonry',
 	component: Masonry,
 	argTypes: {},
 	parameters: {

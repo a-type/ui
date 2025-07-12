@@ -3,7 +3,7 @@ import { Box } from '../box/Box.js';
 import { Tooltip } from './Tooltip.js';
 
 const meta = {
-	title: 'Tooltip',
+	title: 'Components/Tooltip',
 	component: Tooltip,
 	argTypes: {},
 	parameters: {

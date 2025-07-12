@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs.js';
 
 const meta = {
-	title: 'Tabs',
+	title: 'Components/Tabs',
 	argTypes: {
 		color: {
 			control: 'select',

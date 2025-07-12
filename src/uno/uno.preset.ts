@@ -35,7 +35,7 @@ export default function presetAtype({
 	saturation = 40,
 	noPreflight,
 	noZIndexes = false,
-	hardShadows = true,
+	hardShadows = false,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;

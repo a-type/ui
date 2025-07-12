@@ -5,7 +5,7 @@ import { Button } from './Button.js';
 import { ConfirmedButton } from './ConfirmedButton.js';
 
 const meta = {
-	title: 'Button',
+	title: 'Components/Button',
 	component: Button,
 	argTypes: {},
 	parameters: {

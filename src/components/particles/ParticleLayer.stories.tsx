@@ -7,7 +7,7 @@ import { useParticles } from './ParticleContext.js';
 import { ParticleLayer } from './ParticleLayer.js';
 
 const meta = {
-	title: 'ParticleLayer',
+	title: 'Components/ParticleLayer',
 	component: ParticleLayer,
 	argTypes: {},
 	parameters: {},

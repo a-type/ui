@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Camera } from './Camera.js';
 import { useMemo, useState } from 'react';
+import { Camera } from './Camera.js';
 
 const meta = {
-	title: 'Camera',
+	title: 'Components/Camera',
 	component: Camera,
 	argTypes: {},
 	parameters: {

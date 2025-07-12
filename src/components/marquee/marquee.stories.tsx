@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Marquee } from './marquee.js';
 
 const meta = {
-	title: 'Marquee',
+	title: 'Components/Marquee',
 	component: Marquee,
 	argTypes: {},
 	parameters: {

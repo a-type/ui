@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ColorModeToggle } from './ColorModeToggle.js';
 
 const meta = {
-	title: 'ColorModeToggle',
+	title: 'Components/ColorModeToggle',
 	component: ColorModeToggle,
 	argTypes: {},
 	parameters: {

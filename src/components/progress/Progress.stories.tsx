@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Progress } from './Progress.js';
 
 const meta = {
-	title: 'Progress',
+	title: 'Components/Progress',
 	component: Progress,
 	argTypes: {},
 	parameters: {

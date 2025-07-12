@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ImageUploader } from './ImageUploader.js';
 
 const meta = {
-	title: 'ImageUploader',
+	title: 'Components/ImageUploader',
 	component: ImageUploader,
 	argTypes: {
 		onChange: { action: 'change' },

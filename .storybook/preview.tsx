@@ -71,7 +71,7 @@ const preview: Preview = {
 		},
 		shadows: {
 			description: 'Hard shadows',
-			defaultValue: false,
+			defaultValue: true,
 			type: 'boolean',
 			toolbar: {
 				title: 'Shadows',

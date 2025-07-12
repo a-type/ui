@@ -4,7 +4,7 @@ import { Button } from '../button/Button.js';
 import { Input } from './Input.js';
 
 const meta = {
-	title: 'Input',
+	title: 'Components/Input',
 	component: Input,
 	argTypes: {
 		disabled: { control: 'boolean' },

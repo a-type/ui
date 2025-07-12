@@ -3,7 +3,7 @@ import { Button } from '../button/Button.js';
 import { Popover } from './Popover.js';
 
 const meta = {
-	title: 'Popover',
+	title: 'Components/Popover',
 	component: Popover,
 	argTypes: {},
 	parameters: {

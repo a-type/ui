@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { EditableText } from './EditableText.js';
 import { useState } from 'react';
+import { EditableText } from './EditableText.js';
 
 const meta = {
-	title: 'EditableText',
+	title: 'Components/EditableText',
 	component: EditableText,
 	argTypes: {},
 	args: {

@@ -3,7 +3,7 @@ import { Button } from '../button/Button.js';
 import { Box } from './Box.js';
 
 const meta = {
-	title: 'Box',
+	title: 'Components/Box',
 	component: Box,
 	argTypes: {
 		border: {

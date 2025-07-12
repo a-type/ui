@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { RelativeTime } from './RelativeTime.js';
 
 const meta = {
-	title: 'RelativeTime',
+	title: 'Components/RelativeTime',
 	component: RelativeTime,
 	argTypes: {},
 	args: {

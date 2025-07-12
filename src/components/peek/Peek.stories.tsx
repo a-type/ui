@@ -4,7 +4,7 @@ import { P } from '../typography/typography.js';
 import { Peek } from './Peek.js';
 
 const meta = {
-	title: 'Peek',
+	title: 'Components/Peek',
 	component: Peek,
 	argTypes: {},
 	parameters: {

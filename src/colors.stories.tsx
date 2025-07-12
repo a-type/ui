@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from './components/index.js';
 
 const meta = {
-	title: 'colors',
+	title: 'System/Colors',
 	argTypes: {
 		customHue: {
 			control: {

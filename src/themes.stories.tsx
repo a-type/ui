@@ -47,7 +47,7 @@ import { useAnimationFrame } from './hooks.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
 
 const meta = {
-	title: 'themes',
+	title: 'Theme Demo',
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ScrollArea } from './ScrollArea.js';
 
 const meta = {
-	title: 'ScrollArea',
+	title: 'Components/ScrollArea',
 	component: ScrollArea,
 	argTypes: {},
 	parameters: {

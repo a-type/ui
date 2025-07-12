@@ -19,7 +19,7 @@ import { PageNowPlaying } from './PageNowPlaying.js';
 import { PageRoot } from './PageRoot.js';
 
 const meta = {
-	title: 'layouts',
+	title: 'Components/Layouts',
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },

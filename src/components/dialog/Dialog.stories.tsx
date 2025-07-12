@@ -17,7 +17,7 @@ import {
 } from './Dialog.js';
 
 const meta = {
-	title: 'Dialog',
+	title: 'Components/Dialog',
 	component: Dialog,
 	argTypes: {},
 	parameters: {

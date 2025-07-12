@@ -3,7 +3,7 @@ import { Button } from '../button/index.js';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './Select.js';
 
 const meta = {
-	title: 'Select',
+	title: 'Components/Select',
 	component: Select,
 	argTypes: {},
 	parameters: {

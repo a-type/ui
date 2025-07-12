@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Note } from './Note.js';
 
 const meta = {
-	title: 'Note',
+	title: 'Components/Note',
 	component: Note,
 
 	args: {

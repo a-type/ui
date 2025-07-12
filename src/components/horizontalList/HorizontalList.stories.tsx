@@ -5,7 +5,7 @@ import { Icon } from '../icon/index.js';
 import { HorizontalList } from './HorizontalList.js';
 
 const meta = {
-	title: 'HorizontalList',
+	title: 'Components/HorizontalList',
 	component: HorizontalList,
 	argTypes: {},
 	args: {

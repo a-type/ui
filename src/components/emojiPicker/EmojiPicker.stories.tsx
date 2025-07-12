@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { EmojiPicker } from './EmojiPicker.js';
 
 const meta = {
-	title: 'EmojiPicker',
+	title: 'Components/EmojiPicker',
 	component: EmojiPicker,
 	argTypes: {},
 	parameters: {
