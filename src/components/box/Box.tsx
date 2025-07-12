@@ -6,6 +6,7 @@ import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 export type BoxAlignment = 'center' | 'stretch' | 'start' | 'end';
 export type BoxJustification =
 	| 'center'
+	| 'safe-center'
 	| 'start'
 	| 'stretch'
 	| 'between'
@@ -150,8 +151,9 @@ export function Box({
 					'layer-components:items-stretch': items === 'stretch',
 					'layer-components:items-start': items === 'start',
 					'layer-components:items-end': items === 'end',
-					'layer-components:[justify-content:center-safe]':
-						justify === 'center',
+					'layer-components:justify-center': justify === 'center',
+					'layer-components:[justify-content:safe_center]':
+						justify === 'safe-center',
 					'layer-components:justify-stretch': justify === 'stretch',
 					'layer-components:justify-start': justify === 'start',
 					'layer-components:justify-end': justify === 'end',

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Box } from '../box/Box.js';
 import { Masonry } from './masonry.js';
 
 const meta = {
@@ -31,15 +32,17 @@ const content = (spans?: boolean) =>
 		const [span, setSpan] = useState(randomSpan);
 
 		return (
-			<div
+			<Box
 				key={i}
-				className="bg-gray-light rounded-lg"
+				layout="center center"
+				surface="primary"
+				border
 				style={{ height: size }}
 				data-span={spans ? span : undefined}
 				onClick={() => setSpan((v) => (v === 1 ? 2 : 1))}
 			>
-				{size}
-			</div>
+				<div>{size}</div>
+			</Box>
 		);
 	});
 

@@ -94,7 +94,7 @@ function DemoUI({ className }: { className?: string }) {
 						</ToggleGroup>
 					</Box>
 					<Box
-						layout="start center"
+						layout="start safe-center"
 						d="col"
 						gap
 						p

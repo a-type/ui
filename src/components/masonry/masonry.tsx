@@ -53,6 +53,10 @@ abstract class MasonryLayout implements Layout {
 				this.relayout();
 				return true;
 			}
+		} else if (this.config.columns !== this.columns) {
+			this.columns = this.config.columns;
+			this.relayout();
+			return true;
 		}
 		return false;
 	};
