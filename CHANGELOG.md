@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.6.1
+
+### Patch Changes
+
+- a6c4998: adjust colors again
+
 ## 2.6.0
 
 ### Minor Changes
