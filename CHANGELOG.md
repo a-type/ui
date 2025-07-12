@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.4.1
+
+### Patch Changes
+
+- 8c45119: expose stay scrolled to bottom hook
+
 ## 2.4.0
 
 ### Minor Changes
