@@ -136,3 +136,25 @@ function ModifierRange({
 		</Box>
 	);
 }
+
+export const Inheritance: Story = {
+	render(args: any) {
+		const style: any = args.customHue
+			? {
+					'--dyn-primary-source': args.customHue,
+					'--dyn-primary-hue-rotate': args.customRotate,
+			  }
+			: {};
+		return (
+			<Box surface="primary" p="xl" className="theme" style={style}>
+				<Box
+					className="border-color-bg border-color-darken-5 color-bg color-darken-5"
+					border
+					p="xl"
+				>
+					Inherits and darkens
+				</Box>
+			</Box>
+		);
+	},
+};

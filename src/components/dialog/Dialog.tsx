@@ -32,8 +32,8 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl-up bg-white overflow-y-auto border border-gray flex flex-col border-top-1 border-top-solid border-top-gray)',
-	'layer-components:sm:(shadow-xl)',
+	'layer-components:(z-dialog fixed shadow-xl shadow-up bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark)',
+	'layer-components:sm:(shadow-down)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
 	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',

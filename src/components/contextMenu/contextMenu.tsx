@@ -19,7 +19,7 @@ export const ContextMenuContent = function Content({
 			<BoxContext.Provider value={{ spacingScale: 1 }}>
 				<ContextMenuPrimitive.Content
 					className={classNames(
-						'layer-components:(min-w-120px bg-white rounded-md border-default overflow-hidden p-1 shadow-md z-menu)',
+						'layer-components:(min-w-120px bg-white rounded-sm overflow-hidden p-1 border-gray-dark border shadow-md z-menu)',
 						'layer-components:transform-origin-[var(--radix-context-menu-transform-origin)]',
 						'layer-components:[&[data-state=open]]:animate-popover-in',
 						'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -32,6 +32,7 @@ export const ContextMenuContent = function Content({
 						onClick?.(ev);
 					}}
 					ref={ref}
+					alignOffset={-10}
 					{...props}
 				/>
 			</BoxContext.Provider>
@@ -41,7 +42,7 @@ export const ContextMenuContent = function Content({
 
 export const ContextMenuArrow = withClassName(
 	ContextMenuPrimitive.Arrow,
-	'layer-components:fill-white',
+	'layer-components:(arrow)',
 );
 
 export const ContextMenuItem = withClassName(

@@ -34,7 +34,6 @@ import {
 	PageRoot,
 	Progress,
 	Provider,
-	ScrollArea,
 	Select,
 	TextSkeleton,
 	ThemeName,
@@ -94,19 +93,24 @@ function DemoUI({ className }: { className?: string }) {
 							<ToggleGroup.Item value="2">Toggle 2</ToggleGroup.Item>
 						</ToggleGroup>
 					</Box>
-					<Box layout="start center" d="col" gap p className="max-h-200px">
-						<ScrollArea>
-							<H1>Heading 1</H1>
-							<H2>Heading 2</H2>
-							<H3>Heading 3</H3>
-							<H4>Heading 4</H4>
-							<P>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							</P>
-							<TextSkeleton maxLength={30} />
-							<TextSkeleton maxLength={10} />
-						</ScrollArea>
+					<Box
+						layout="start center"
+						d="col"
+						gap
+						p
+						className="max-h-200px"
+						overflow="auto-y"
+					>
+						<H1>Heading 1</H1>
+						<H2>Heading 2</H2>
+						<H3>Heading 3</H3>
+						<H4>Heading 4</H4>
+						<P>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</P>
+						<TextSkeleton maxLength={30} />
+						<TextSkeleton maxLength={10} />
 					</Box>
 					<Box d="col" gap>
 						<Card>
@@ -171,7 +175,6 @@ function DemoUI({ className }: { className?: string }) {
 							</Tooltip>
 						</ContextMenu.Trigger>
 						<ContextMenu.Content>
-							<ContextMenu.Arrow />
 							<ContextMenu.Item>Item 1</ContextMenu.Item>
 							<ContextMenu.Item>Item 2</ContextMenu.Item>
 							<ContextMenu.Item>Item 3</ContextMenu.Item>
@@ -206,26 +209,30 @@ function DemoUI({ className }: { className?: string }) {
 						<div>Primary surface</div>
 						<Button color="ghost">Ghost</Button>
 					</Box>
-					<Box surface="accent" p d="col" className="max-h-200px">
-						<ScrollArea>
-							<H2>Accent surface</H2>
-							<H3>Accent surface</H3>
-							<P>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							</P>
-							<P>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							</P>
-							<P>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.
-							</P>
-							<TextSkeleton maxLength={30} />
-							<TextSkeleton maxLength={10} />
-							Accent surface
-						</ScrollArea>
+					<Box
+						surface="accent"
+						p
+						d="col"
+						className="max-h-200px"
+						overflow="auto-y"
+					>
+						<H2>Accent surface</H2>
+						<H3>Accent surface</H3>
+						<P>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</P>
+						<P>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</P>
+						<P>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</P>
+						<TextSkeleton maxLength={30} />
+						<TextSkeleton maxLength={10} />
+						Accent surface
 					</Box>
 					<Box surface="default" p d="col">
 						Default surface

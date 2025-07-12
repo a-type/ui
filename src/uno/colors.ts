@@ -73,6 +73,13 @@ export const themeColors = {
 	white: 'var(--color-white)',
 	wash: 'var(--color-wash)',
 	transparent: 'transparent',
+
+	// magic tokens
+	bg: 'var(--v-bg-altered, var(--v-bg, transparent))',
+	fg: 'var(--v-color-altered, var(--v-color, var(--color-black)))',
+	color: 'var(--v-color-altered, var(--v-color, var(--color-black)))',
+	border: 'var(--v-border-altered, var(--v-border, transparent))',
+
 	attention: {
 		DEFAULT: 'var(--color-attention)',
 		light: 'var(--color-attention-light)',

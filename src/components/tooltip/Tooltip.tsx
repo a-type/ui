@@ -37,7 +37,7 @@ function Content({
 					{...props}
 				>
 					{children}
-					<TooltipPrimitive.Arrow className="layer-components:fill-[var(--v-bg)]" />
+					<TooltipPrimitive.Arrow className="layer-components:arrow" />
 				</TooltipPrimitive.Content>
 			</BoxContext.Provider>
 		</TooltipPrimitive.Portal>

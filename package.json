@@ -14,11 +14,11 @@
 			"default": "./dist/cjs/index.js"
 		},
 		"./uno-preset": {
-			"types": "./dist/esm/uno.preset.d.ts",
-			"import": "./dist/esm/uno.preset.js",
-			"node": "./dist/esm/uno.preset.js",
-			"require": "./dist/cjs/uno.preset.js",
-			"default": "./dist/cjs/uno.preset.js"
+			"types": "./dist/esm/uno/uno.preset.d.ts",
+			"import": "./dist/esm/uno/uno.preset.js",
+			"node": "./dist/esm/uno/uno.preset.js",
+			"require": "./dist/cjs/uno/uno.preset.js",
+			"default": "./dist/cjs/uno/uno.preset.js"
 		},
 		"./main.css": {
 			"import": "./dist/css/main.css",

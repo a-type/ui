@@ -38,34 +38,48 @@ const preview: Preview = {
 		},
 		saturation: {
 			description: 'Color saturation',
-			defaultValue: 40,
+			defaultValue: '40',
 			type: 'number',
 			toolbar: {
 				title: 'Saturation',
-				icon: 'dropper',
+				icon: 'contrast',
 				items: ['0', '10', '15', '20', '40', '60', '80', '100'],
 				dynamicTitle: true,
 			},
 		},
 		spacing: {
 			description: 'Spacing scale',
-			defaultValue: 1,
+			defaultValue: '1',
 			type: 'number',
 			toolbar: {
 				title: 'Spacing',
-				icon: 'grid',
+				icon: 'ruler',
 				items: ['0', '0.25', '0.5', '0.75', '1', '1.5', '2'],
 				dynamicTitle: true,
 			},
 		},
 		corners: {
 			description: 'Corner scale',
-			defaultValue: 1,
+			defaultValue: '1',
 			type: 'number',
 			toolbar: {
 				title: 'Corners',
-				icon: 'rounded',
+				icon: 'grow',
 				items: ['0', '0.25', '0.5', '1', '1.5', '2', '3'],
+				dynamicTitle: true,
+			},
+		},
+		shadows: {
+			description: 'Hard shadows',
+			defaultValue: false,
+			type: 'boolean',
+			toolbar: {
+				title: 'Shadows',
+				icon: 'bottombar',
+				items: [
+					{ value: false, title: 'Soft' },
+					{ value: true, title: 'Hard' },
+				],
 				dynamicTitle: true,
 			},
 		},
@@ -117,6 +131,17 @@ const preview: Preview = {
 					);
 				};
 			}, [ctx.globals.corners]);
+			useEffect(() => {
+				document.documentElement.style.setProperty(
+					'--global-shadow-spread',
+					`${ctx.globals.shadows ? 0 : 1}`,
+				);
+				return () => {
+					document.documentElement.style.removeProperty(
+						'--global-shadow-spread',
+					);
+				};
+			}, [ctx.globals.shadows]);
 			return (
 				<Provider>
 					<Story />

@@ -9,7 +9,7 @@ import { BoxContext } from '../box/Box.js';
 
 const StyledContent = withClassName(
 	PopoverPrimitive.Content,
-	'layer-components:(rounded-xl min-w-120px bg-white z-menu shadow-lg op-0 hidden max-w-90vw border border-gray)',
+	'layer-components:(rounded-xl min-w-120px bg-white z-menu shadow-lg op-0 hidden max-w-90vw border border-gray-dark)',
 	'will-change-transform',
 	'layer-components:transform-origin-[var(--radix-popover-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
@@ -22,7 +22,7 @@ const StyledContent = withClassName(
 
 const StyledArrow = withClassName(
 	PopoverPrimitive.Arrow,
-	'layer-components:(fill-white stroke-gray w-15px h-8px)',
+	'layer-components:(arrow)',
 );
 
 const StyledClose = withClassName(

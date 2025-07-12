@@ -1,5 +1,4 @@
-import { DynamicRule, entriesToCss, toArray } from '@unocss/core';
-import { bgColors as bgColorsRules } from '@unocss/preset-mini/rules';
+import { entriesToCss, toArray } from '@unocss/core';
 import presetWind3 from '@unocss/preset-wind3';
 import { PreflightContext, Preset } from 'unocss';
 import {
@@ -10,9 +9,8 @@ import {
 	dynamicThemeComputedColors,
 	lighten,
 	themeColors,
-} from './uno/colors.js';
-
-const baseBgRule = bgColorsRules[0] as unknown as DynamicRule;
+} from './colors.js';
+import { getShadows } from './shadows.js';
 
 const spacing = {
 	sm: 0.125,
@@ -37,6 +35,7 @@ export default function presetAtype({
 	saturation = 40,
 	noPreflight,
 	noZIndexes = false,
+	hardShadows = true,
 }: {
 	scale?: 'sm' | 'md' | 'lg';
 	interFontLocation?: string;
@@ -50,6 +49,7 @@ export default function presetAtype({
 	saturation?: number;
 	noPreflight?: boolean;
 	noZIndexes?: boolean;
+	hardShadows?: boolean;
 } = {}): Preset {
 	const saturationScale = saturation / 100;
 	const spacingIncrement = spacing[scale];
@@ -110,33 +110,7 @@ export default function presetAtype({
 				'min-content': 'min-content',
 				'max-content': 'max-content',
 			},
-			boxShadow: {
-				sm: '0 1px 2px 0 var(--color-shadow-2), 0 0 1px 0 var(--color-shadow-2)',
-				'sm-inset':
-					'inset 0 1px 2px 0 var(--color-shadow-2), inset 0 0 1px 0 var(--color-shadow-2)',
-				md: '0 4px 6px -1px var(--color-shadow-1), 0 2px 4px -1px var(--color-shadow-2)',
-				'md-inset':
-					'inset 0 4px 6px -1px var(--color-shadow-1), inset 0 2px 4px -1px var(--color-shadow-2)',
-				lg: '0 8px 14px -3px var(--color-shadow-1), 0 2px 10px 0px var(--color-shadow-2)',
-				'lg-inset':
-					'inset 0 8px 15px -3px var(--color-shadow-1), inset 0 2px 6px -2px var(--color-shadow-2)',
-				xl: '0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
-				'xl-inset':
-					'inset 0 20px 25px -5px var(--color-shadow-1), inset 0 10px 10px -5px var(--color-shadow-2)',
-				'sm-up':
-					'0 -1px 2px 0 var(--color-shadow-2), 0 0 1px 0 var(--color-shadow-2)',
-				'md-up':
-					'0 -4px 6px -1px var(--color-shadow-1), 0 -2px 4px -1px var(--color-shadow-2)',
-				'lg-up':
-					'0 -10px 15px -3px var(--color-shadow-1), 0 -4px 6px -2px var(--color-shadow-2)',
-				'xl-up':
-					'0 -20px 25px -5px var(--color-shadow-1), 0 -10px 10px -5px var(--color-shadow-2)',
-				'lg-dim':
-					'0 0 0 3000px var(--color-overlay-dark), 0 10px 15px 3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
-
-				// focus outlines
-				focus: `0 0 0 3px var(--color-primary-light)`,
-			},
+			boxShadow: getShadows(hardShadows),
 			easing: {
 				springy: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 				default: 'ease',
@@ -364,29 +338,6 @@ export default function presetAtype({
 				/^gutter-bottom$/,
 				(_, { theme }) => ({ 'margin-bottom': (theme as any).spacing[2] }),
 			],
-			['shadow-1', { 'box-shadow': '0 1px 2px 0 var(--color-shadow-2)' }],
-			[
-				'shadow-2',
-				{
-					'box-shadow':
-						'0 4px 6px -1px var(--color-shadow-1), 0 2px 4px -1px var(--color-shadow-2)',
-				},
-			],
-			[
-				'shadow-3',
-				{
-					'box-shadow':
-						'0 10px 15px -3px var(--color-shadow-1), 0 4px 6px -2px var(--color-shadow-2)',
-				},
-			],
-			[
-				'shadow-4',
-				{
-					'box-shadow':
-						'0 20px 25px -5px var(--color-shadow-1), 0 10px 10px -5px var(--color-shadow-2)',
-				},
-			],
-
 			[
 				/^color-(.*)$/,
 				(match, { theme }) => {
@@ -420,7 +371,7 @@ export default function presetAtype({
 					}
 					const resolvedColor = resolveThemeColor(match[1], theme);
 					if (resolvedColor === null) {
-						return baseBgRule[1](match, ctx);
+						return undefined;
 					}
 					return {
 						'background-color': 'var(--v-bg-altered,var(--v-bg))',
@@ -452,6 +403,22 @@ export default function presetAtype({
 				}),
 			],
 			[
+				/^border-(.*)$/,
+				(match, { theme }) => {
+					if (match[1] === 'none') {
+						return undefined;
+					}
+					const resolvedColor = resolveThemeColor(match[1], theme);
+					if (resolvedColor === null) {
+						return undefined;
+					}
+					return {
+						'border-color': 'var(--v-border-altered,var(--v-border))',
+						'--v-border': resolvedColor,
+					};
+				},
+			],
+			[
 				/^border-color-lighten-(\d+\.?\d*)$/,
 				(match, { theme }) => ({
 					'--v-border-altered': lighten(
@@ -462,6 +429,24 @@ export default function presetAtype({
 			],
 			[
 				/^border-color-darken-(\d+\.?\d*)$/,
+				(match, { theme }) => ({
+					'--v-border-altered': darken(
+						'var(--v-border,currentColor)',
+						match[1],
+					),
+				}),
+			],
+			[
+				/^border-lighten-(\d+\.?\d*)$/,
+				(match, { theme }) => ({
+					'--v-border-altered': lighten(
+						'var(--v-border,currentColor)',
+						match[1],
+					),
+				}),
+			],
+			[
+				/^border-darken-(\d+\.?\d*)$/,
 				(match, { theme }) => ({
 					'--v-border-altered': darken(
 						'var(--v-border,currentColor)',
@@ -489,6 +474,18 @@ export default function presetAtype({
 				}),
 			],
 			[
+				/^shadow-up$/,
+				() => ({
+					'--v-shadow-y-mult': '-1',
+				}),
+			],
+			[
+				/^shadow-down$/,
+				() => ({
+					'--v-shadow-y-mult': '1',
+				}),
+			],
+			[
 				/^anchor-(\w+)$/,
 				(match) => ({
 					'anchor-name': `--${match[1]}`,
@@ -511,7 +508,7 @@ export default function presetAtype({
 				{
 					'scrollbar-gutter': 'stable',
 					'scrollbar-color':
-						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
+						'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 				},
 			],
 			[
@@ -520,7 +517,7 @@ export default function presetAtype({
 					overflow: 'auto',
 					'scrollbar-gutter': 'stable',
 					'scrollbar-color':
-						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
+						'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 				},
 			],
 			[
@@ -529,7 +526,7 @@ export default function presetAtype({
 					'overflow-y': 'auto',
 					'scrollbar-gutter': 'stable',
 					'scrollbar-color':
-						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
+						'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 				},
 			],
 			[
@@ -538,7 +535,50 @@ export default function presetAtype({
 					'overflow-x': 'auto',
 					'scrollbar-gutter': 'stable',
 					'scrollbar-color':
-						'var(--v-color-altered,var(--v-color,var(--color-gray))) transparent',
+						'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
+				},
+			],
+			[
+				/^arrow$/,
+				function* (_, ctx) {
+					yield {
+						fill: 'var(--v-bg-altered,var(--v-bg))',
+						stroke: 'var(--v-border-altered,var(--v-border))',
+						width: 'var(--arrow-size)',
+						height: 'calc(var(--arrow-size) * 0.5)',
+						position: 'relative',
+						'z-index': 0,
+					};
+					yield {
+						[ctx.symbols.selector]: (selector) => `span:has(${selector}):after`,
+						content: '""',
+						position: 'absolute',
+						top: '0',
+						left: '1.5px',
+						right: '1.5px',
+						height: '1px',
+						background: 'var(--v-bg-altered,var(--v-bg))',
+					};
+					// yield {
+					// 	[ctx.symbols.selector]: (selector) =>
+					// 		`[data-side="top"]>span>${selector}`,
+					// 	bottom: '-1px',
+					// };
+					// yield {
+					// 	[ctx.symbols.selector]: (selector) =>
+					// 		`[data-side="bottom"]>span>${selector}`,
+					// 	top: '-1px',
+					// };
+					// yield {
+					// 	[ctx.symbols.selector]: (selector) =>
+					// 		`[data-side="left"]>span>${selector}`,
+					// 	right: '-1px',
+					// };
+					// yield {
+					// 	[ctx.symbols.selector]: (selector) =>
+					// 		`[data-side="right"]>span>${selector}`,
+					// 	left: '-1px',
+					// };
 				},
 			],
 		],
@@ -758,6 +798,7 @@ export default function presetAtype({
 					--global-corner-scale: ${cornerScale};
 					--global-border-scale: ${borderScale};
 					--global-spacing-scale: ${spacingScale};
+					--global-shadow-spread: ${hardShadows ? 0 : 1};
 
 					--font-sans: "Inter", sans-serif;
 					--font-serif: "Domine", serif;
@@ -776,6 +817,11 @@ export default function presetAtype({
 					--z-dialogBackdrop: 900;
 					--z-tooltip: 10000;
 					--z-overdraw: 100000;
+
+					--un-shadow-color: var(--palette-true-black);
+					--un-shadow-opacity: 10%;
+
+					--arrow-size: 1rem;
 				}
 
 				@layer preflightBase {
@@ -922,6 +968,11 @@ export default function presetAtype({
 					syntax: "*";
 					inherits: false;
 				}
+
+				@property --v-shadow-y-mult {
+					syntax: "*";
+					inherits: false;
+				}
 			`;
 				},
 			},
@@ -963,14 +1014,6 @@ function resolveThemeColor(color: string, theme: any) {
 		color.endsWith(']')
 	) {
 		return color.slice(1, -1);
-	}
-
-	if (color === 'bg') {
-		return 'var(--v-bg-altered, var(--v-bg))';
-	} else if (color === 'fg' || color === 'color') {
-		return 'var(--v-color-altered, var(--v-color))';
-	} else if (color === 'border') {
-		return 'var(--v-border-altered, var(--v-border))';
 	}
 
 	const parts = color.split('-');

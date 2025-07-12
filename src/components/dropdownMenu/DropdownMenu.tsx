@@ -15,7 +15,7 @@ const StyledContent = withClassName(
 			</BoxContext.Provider>
 		);
 	},
-	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-lg border border-gray)',
+	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-sm border border-gray-dark)',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -79,7 +79,7 @@ const StyledItemIndicator = withClassName(
 
 const StyledArrow = withClassName(
 	DropdownMenuPrimitive.Arrow,
-	'layer-components:(fill-white stroke-gray)',
+	'layer-components:(arrow)',
 );
 
 const StyledTrigger = withClassName(

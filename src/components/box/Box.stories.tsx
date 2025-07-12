@@ -14,6 +14,51 @@ const meta = {
 			type: 'boolean',
 			defaultValue: false,
 		},
+		elevated: {
+			type: 'string',
+			options: [
+				'sm',
+				'md',
+				'lg',
+				'xl',
+				'-sm',
+				'-md',
+				'-lg',
+				'-xl',
+				'sm-up',
+				'md-up',
+				'lg-up',
+				'xl-up',
+				'-sm-up',
+				'-md-up',
+				'-lg-up',
+				'-xl-up',
+			],
+			control: {
+				type: 'select',
+			},
+		},
+		layout: {
+			type: 'string',
+		},
+		wrap: {
+			type: 'boolean',
+		},
+		container: {
+			type: 'boolean',
+		},
+		theme: {
+			type: 'string',
+			options: ['lemon', 'leek', 'tomato', 'eggplant', 'blueberry', 'salt'],
+			control: {
+				type: 'select',
+			},
+		},
+		children: {
+			table: {
+				disable: true,
+			},
+		},
 	},
 	args: {
 		children: (

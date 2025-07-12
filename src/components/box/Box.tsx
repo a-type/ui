@@ -31,6 +31,11 @@ function hasDefault<T>(value: BoxResponsive<T>, val: T) {
 	return value === val || (isResponsive(value) && value.default === val);
 }
 
+type ShadowSize = 'sm' | 'md' | 'lg' | 'xl';
+type MaybeMinus = '' | '-';
+type MaybeUp = '' | '-up';
+type ShadowValue = `${MaybeMinus}${ShadowSize}${MaybeUp}`;
+
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
 	direction?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
@@ -49,6 +54,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
 	grow?: boolean;
+	elevated?: ShadowValue;
 	ref?: Ref<HTMLDivElement>;
 }
 
@@ -71,6 +77,7 @@ export function Box({
 	overflow,
 	col,
 	grow,
+	elevated,
 	ref,
 	...rest
 }: BoxProps) {
@@ -143,7 +150,8 @@ export function Box({
 					'layer-components:items-stretch': items === 'stretch',
 					'layer-components:items-start': items === 'start',
 					'layer-components:items-end': items === 'end',
-					'layer-components:justify-center': justify === 'center',
+					'layer-components:[justify-content:center-safe]':
+						justify === 'center',
 					'layer-components:justify-stretch': justify === 'stretch',
 					'layer-components:justify-start': justify === 'start',
 					'layer-components:justify-end': justify === 'end',
@@ -170,9 +178,9 @@ export function Box({
 					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
 					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
 					'layer-components:rounded-lg': !!surface,
-					'layer-components:(bg-white border-black)':
+					'layer-components:(bg-white border-gray-ink)':
 						surface === true || surface === 'default',
-					'layer-components:(bg-wash border-black)': surface === 'wash',
+					'layer-components:(bg-wash border-gray-ink)': surface === 'wash',
 					'layer-components:(bg-primary-wash border-primary-dark color-primary-ink)':
 						surface === 'primary',
 					'layer-components:(bg-accent-wash border-accent-dark color-accent-ink)':
@@ -190,6 +198,12 @@ export function Box({
 						overflow === 'auto-y',
 					'layer-components:flex-grow': grow,
 					'layer-components:@container': container === true,
+					'layer-components:shadow-sm': elevated?.includes('sm'),
+					'layer-components:shadow-md': elevated?.includes('md'),
+					'layer-components:shadow-lg': elevated?.includes('lg'),
+					'layer-components:shadow-xl': elevated?.includes('xl'),
+					'layer-components:shadow-inset': elevated?.startsWith('-'),
+					'layer-components:(shadow-up)': elevated?.endsWith('-up'),
 				},
 				theme && `theme-${theme}`,
 				className,
