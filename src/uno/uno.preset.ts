@@ -559,26 +559,6 @@ export default function presetAtype({
 						height: '1px',
 						background: 'var(--v-bg-altered,var(--v-bg))',
 					};
-					// yield {
-					// 	[ctx.symbols.selector]: (selector) =>
-					// 		`[data-side="top"]>span>${selector}`,
-					// 	bottom: '-1px',
-					// };
-					// yield {
-					// 	[ctx.symbols.selector]: (selector) =>
-					// 		`[data-side="bottom"]>span>${selector}`,
-					// 	top: '-1px',
-					// };
-					// yield {
-					// 	[ctx.symbols.selector]: (selector) =>
-					// 		`[data-side="left"]>span>${selector}`,
-					// 	right: '-1px',
-					// };
-					// yield {
-					// 	[ctx.symbols.selector]: (selector) =>
-					// 		`[data-side="right"]>span>${selector}`,
-					// 	left: '-1px',
-					// };
 				},
 			],
 		],
