@@ -148,11 +148,81 @@ export const Inheritance: Story = {
 		return (
 			<Box surface="primary" p="xl" className="theme" style={style}>
 				<Box
-					className="border-color-bg border-color-darken-5 color-bg color-darken-5"
+					className="border-bg border-darken-5 color-bg color-darken-5"
 					border
 					p="xl"
 				>
 					Inherits and darkens
+				</Box>
+			</Box>
+		);
+	},
+};
+
+export const TweakOpacity: Story = {
+	render() {
+		// none of these elements have root opacity; all opacity is done through colors
+		return (
+			<Box surface="accent" className="h-32" full="width" p gap>
+				<Box
+					className="bg-primary/100 h-full color-primary-dark/100 ring ring-primary-light/100 border border-black/100"
+					grow
+				>
+					100
+				</Box>
+				<Box
+					className="bg-primary/90 h-full color-primary-dark/90 ring ring-primary-light/90 border border-black/90"
+					grow
+				>
+					90
+				</Box>
+				<Box
+					className="bg-primary/80 h-full color-primary-dark/80 ring ring-primary-light/80 border border-black/80"
+					grow
+				>
+					80
+				</Box>
+				<Box
+					className="bg-primary/70 h-full color-primary-dark/70 ring ring-primary-light/70 border border-black/70"
+					grow
+				>
+					70
+				</Box>
+				<Box
+					className="bg-primary/60 h-full color-primary-dark/60 ring ring-primary-light/60 border border-black/60"
+					grow
+				>
+					60
+				</Box>
+				<Box
+					className="bg-primary/50 h-full color-primary-dark/50 ring ring-primary-light/50 border border-black/50"
+					grow
+				>
+					50
+				</Box>
+				<Box
+					className="bg-primary/40 h-full color-primary-dark/40 ring ring-primary-light/40 border border-black/40"
+					grow
+				>
+					40
+				</Box>
+				<Box
+					className="bg-primary/30 h-full color-primary-dark/30 ring ring-primary-light/30 border border-black/30"
+					grow
+				>
+					30
+				</Box>
+				<Box
+					className="bg-primary/20 h-full color-primary-dark/20 ring ring-primary-light/20 border border-black/20"
+					grow
+				>
+					20
+				</Box>
+				<Box
+					className="bg-primary/10 h-full color-primary-dark/10 ring ring-primary-light/10 border border-black/10"
+					grow
+				>
+					10
 				</Box>
 			</Box>
 		);

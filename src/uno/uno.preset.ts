@@ -1,4 +1,5 @@
 import { entriesToCss, toArray } from '@unocss/core';
+import { parseColor } from '@unocss/preset-mini/utils';
 import presetWind3 from '@unocss/preset-wind3';
 import { PreflightContext, Preset } from 'unocss';
 import {
@@ -344,9 +345,16 @@ export default function presetAtype({
 					if (match[1] === 'inherit') {
 						return { color: 'var(--v-color-altered,var(--v-color))' };
 					}
+					const parsed = parseColor(match[1], theme);
+					if (!parsed?.color) {
+						return undefined;
+					}
 					return {
-						color: 'var(--v-color-altered,var(--v-color))',
-						'--v-color': resolveThemeColor(match[1], theme),
+						color: parsed.opacity
+							? 'rgb(from var(--v-color-altered,var(--v-color)) r g b / var(--v-color-opacity,100%))'
+							: 'var(--v-color-altered,var(--v-color))',
+						'--v-color': parsed.color,
+						'--v-color-opacity': (parsed.opacity || 100) + '%',
 					};
 				},
 			],
@@ -367,15 +375,22 @@ export default function presetAtype({
 				(match, ctx) => {
 					const { theme } = ctx;
 					if (match[1] === 'inherit') {
-						return { 'background-color': 'var(--v-bg-altered,var(--v-bg))' };
+						return {
+							'background-color':
+								'rgb(from var(--v-bg-altered,var(--v-bg)) r g b / var(--v-bg-opacity,100%))',
+						};
 					}
-					const resolvedColor = resolveThemeColor(match[1], theme);
-					if (resolvedColor === null) {
+					const parsed = parseColor(match[1], theme);
+					if (!parsed?.color) {
 						return undefined;
 					}
+
 					return {
-						'background-color': 'var(--v-bg-altered,var(--v-bg))',
-						['--v-bg']: resolvedColor,
+						'background-color': parsed.opacity
+							? 'rgb(from var(--v-bg-altered,var(--v-bg)) r g b / var(--v-bg-opacity,100%))'
+							: 'var(--v-bg-altered,var(--v-bg))',
+						['--v-bg']: parsed.color,
+						['--v-bg-opacity']: (parsed.opacity || 100) + '%',
 					};
 				},
 				{
@@ -394,47 +409,24 @@ export default function presetAtype({
 					'--v-bg-altered': darken('var(--v-bg,var(--color-white))', match[1]),
 				}),
 			],
-
-			[
-				/^border-color-(.*)$/,
-				(match, { theme }) => ({
-					'border-color': 'var(--v-border-altered,var(--v-border))',
-					'--v-border': resolveThemeColor(match[1], theme),
-				}),
-			],
 			[
 				/^border-(.*)$/,
 				(match, { theme }) => {
 					if (match[1] === 'none') {
 						return undefined;
 					}
-					const resolvedColor = resolveThemeColor(match[1], theme);
-					if (resolvedColor === null) {
+					const parsed = parseColor(match[1], theme);
+					if (!parsed?.color) {
 						return undefined;
 					}
 					return {
-						'border-color': 'var(--v-border-altered,var(--v-border))',
-						'--v-border': resolvedColor,
+						'border-color': parsed.opacity
+							? 'rgb(from var(--v-border-altered,var(--v-border)) r g b / var(--v-border-opacity,100%))'
+							: 'var(--v-border-altered,var(--v-border))',
+						'--v-border': parsed.color,
+						'--v-border-opacity': (parsed.opacity || 100) + '%',
 					};
 				},
-			],
-			[
-				/^border-color-lighten-(\d+\.?\d*)$/,
-				(match, { theme }) => ({
-					'--v-border-altered': lighten(
-						'var(--v-border,currentColor)',
-						match[1],
-					),
-				}),
-			],
-			[
-				/^border-color-darken-(\d+\.?\d*)$/,
-				(match, { theme }) => ({
-					'--v-border-altered': darken(
-						'var(--v-border,currentColor)',
-						match[1],
-					),
-				}),
 			],
 			[
 				/^border-lighten-(\d+\.?\d*)$/,
@@ -444,6 +436,9 @@ export default function presetAtype({
 						match[1],
 					),
 				}),
+				{
+					autocomplete: 'border-lighten-<number>',
+				},
 			],
 			[
 				/^border-darken-(\d+\.?\d*)$/,
@@ -453,6 +448,9 @@ export default function presetAtype({
 						match[1],
 					),
 				}),
+				{
+					autocomplete: 'border-darken-<number>',
+				},
 			],
 			[
 				/^ring-color-(.*)$/,
@@ -460,6 +458,22 @@ export default function presetAtype({
 					'--un-ring-color': 'var(--v-ring-altered,var(--v-ring))',
 					'--v-ring': resolveThemeColor(match[1], theme),
 				}),
+			],
+			[
+				/^ring-(.*)$/,
+				(match, { theme }) => {
+					const parsed = parseColor(match[1], theme);
+					if (!parsed?.color) {
+						return undefined;
+					}
+					return {
+						'--un-ring-color': parsed.opacity
+							? 'rgb(from var(--v-ring-altered,var(--v-ring)) r g b / var(--v-ring-opacity,100%))'
+							: 'var(--v-ring-altered,var(--v-ring))',
+						'--v-ring': parsed.color,
+						'--v-ring-opacity': (parsed.opacity || 100) + '%',
+					};
+				},
 			],
 			[
 				/^ring-color-lighten-(\d+\.?\d*)$/,
@@ -951,6 +965,31 @@ export default function presetAtype({
 
 				@property --v-shadow-y-mult {
 					syntax: "*";
+					inherits: false;
+				}
+
+				@property --v-ring-altered {
+					syntax: "*";
+					inherits: false;
+				}
+
+				@property --v-bg-opacity {
+					syntax: "<percentage>";
+					inherits: false;
+				}
+
+				@property --v-color-opacity {
+					syntax: "<percentage>";
+					inherits: false;
+				}
+
+				@property --v-border-opacity {
+					syntax: "<percentage>";
+					inherits: false;
+				}
+
+				@property --v-ring-opacity {
+					syntax: "<percentage>";
 					inherits: false;
 				}
 			`;
