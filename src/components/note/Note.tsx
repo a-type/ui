@@ -17,7 +17,7 @@ export function Note({ className, children, ...rest }: NoteProps) {
 					aria-hidden
 				>
 					<div className="layer-components:(border-0 border-solid border-primary-dark flex-[0_0_20px] w-[20px] h-[20px] relative) layer-variants:(border-b-1px border-l-1px)">
-						<div className="layer-components:(absolute w-1px bg-primary-dark h-26px rotate--45 left-9px top--4px transform-origin-cc)" />
+						<div className="layer-components:(absolute w-0.5px bg-primary-dark h-27px rotate--45 left-9px top--3px transform-origin-cc)" />
 						<div
 							className={`layer-components:(border-solid box-content border-transparent border-r-primary-wash border-13px w-0 h-0 rotate--45 translate--7px transform-origin-br)`}
 						/>
