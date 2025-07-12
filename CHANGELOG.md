@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.6.0
+
+### Minor Changes
+
+- 2c8f9bc: support opacity color modifiers
+
 ## 2.5.0
 
 ### Minor Changes
