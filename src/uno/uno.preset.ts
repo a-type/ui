@@ -453,13 +453,6 @@ export default function presetAtype({
 				},
 			],
 			[
-				/^ring-color-(.*)$/,
-				(match, { theme }) => ({
-					'--un-ring-color': 'var(--v-ring-altered,var(--v-ring))',
-					'--v-ring': resolveThemeColor(match[1], theme),
-				}),
-			],
-			[
 				/^ring-(.*)$/,
 				(match, { theme }) => {
 					const parsed = parseColor(match[1], theme);
@@ -476,13 +469,13 @@ export default function presetAtype({
 				},
 			],
 			[
-				/^ring-color-lighten-(\d+\.?\d*)$/,
+				/^ring-lighten-(\d+\.?\d*)$/,
 				(match, { theme }) => ({
 					'--v-ring-altered': lighten('var(--v-ring,currentColor)', match[1]),
 				}),
 			],
 			[
-				/^ring-color-darken-(\d+\.?\d*)$/,
+				/^ring-darken-(\d+\.?\d*)$/,
 				(match, { theme }) => ({
 					'--v-ring-altered': darken('var(--v-ring,currentColor)', match[1]),
 				}),
@@ -590,9 +583,8 @@ export default function presetAtype({
 
 		shortcuts: {
 			border: 'border-width-thin border-solid',
-			'border-default': 'border border-solid border-color-black',
-			'border-light':
-				'border border-solid border-color-gray border-color-darken-3',
+			'border-default': 'border border-solid border-black',
+			'border-light': 'border border-solid border-gray border-darken-3',
 			'flex-1-0-0': 'flex-grow-1 flex-shrink-0 flex-basis-0',
 			'flex-0-0-auto': 'flex-grow-0 flex-shrink-0 flex-basis-auto',
 			row: 'layer-components:flex layer-components:flex-row layer-components:gap-sm layer-components:items-center',

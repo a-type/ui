@@ -26,6 +26,7 @@ const config: StorybookConfig = {
 					'./src/uno/colors.ts',
 					'./src/uno/shadows.ts',
 				],
+				inspector: true,
 			}),
 		);
 		return config;

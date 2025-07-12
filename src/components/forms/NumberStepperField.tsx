@@ -50,5 +50,5 @@ const FieldRoot = withClassName(
 
 const FieldLabel = withClassName(
 	'label',
-	'layer-components:(block flex-col gap-1 text-md font-normal text-dark-blend mt-2px)',
+	'layer-components:(block flex-col gap-1 text-md font-normal color-dark-blend mt-2px)',
 );

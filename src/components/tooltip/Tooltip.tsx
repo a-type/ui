@@ -26,10 +26,10 @@ function Content({
 						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
 						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
 						{
-							'layer-variants:(bg-black text-white)': color === 'contrast',
-							'layer-variants:(bg-white text-black)':
+							'layer-variants:(bg-black color-white)': color === 'contrast',
+							'layer-variants:(bg-white color-black)':
 								color === 'white' || color === 'neutral',
-							'layer-variants:(bg-attention-ink text-white)':
+							'layer-variants:(bg-attention-ink color-white)':
 								color === 'attention',
 						},
 						className,

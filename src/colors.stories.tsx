@@ -42,13 +42,18 @@ export const Default: Story = {
 			: {};
 		return (
 			<Box d="col">
+				<Range className="theme" style={style} />
 				<Range className="theme-lemon" />
 				<Range className="theme-leek" />
 				<Range className="theme-tomato" />
 				<Range className="theme-eggplant" />
 				<Range className="theme-blueberry" />
 				<Range className="theme-salt" />
-				<Range className="theme" style={style} />
+				<Box className="h-100px">
+					<Box grow className="bg-black" />
+					<Box grow className="bg-wash" />
+					<Box grow className="bg-white" />
+				</Box>
 			</Box>
 		);
 	},

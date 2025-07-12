@@ -9,7 +9,7 @@ export const navBarItemClass = classNames(
 	'layer-components:active:bg-darken-2',
 	'layer-components:hover:bg-darken-1',
 	'layer-components:focus-visible:(outline-none bg-darken-2)',
-	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-1 text-black)',
+	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-1 color-black)',
 	'layer-components:([--bg:var(--color-primary-wash)] [--fill:var(--color-primary)])',
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
@@ -43,7 +43,7 @@ export const NavBarItem = function NavBarItem({
 					'layer-variants:active:bg-gray-dark-blend layer-variants:md:active:bg-gray-dark-blend',
 					'layer-variants:hover:bg-gray-dark-blend',
 					'layer-variants:focus-visible:(bg-gray-dark-blend)',
-					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend text-black)',
+					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend color-black)',
 					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray)])',
 				],
 				className,
@@ -85,7 +85,7 @@ export const NavBarItemIcon = function NavBarItemIcon({
 		<Comp
 			name={name}
 			className={clsx(
-				'layer-components:(relative z-1 flex fill-none text-inherit)',
+				'layer-components:(relative z-1 flex fill-none color-inherit)',
 				'layer-variants:[*[data-active=true]_&]:fill-[var(--fill)]',
 				className,
 			)}

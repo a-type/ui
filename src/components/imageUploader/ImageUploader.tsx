@@ -208,7 +208,7 @@ function ImageUploaderPrebuilt({
 						onClick={() => setCameraOpen(false)}
 						color="ghost"
 						size="small"
-						className="text-white absolute top-2 left-2"
+						className="color-white absolute top-2 left-2"
 					>
 						Cancel
 					</Button>

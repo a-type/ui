@@ -23,7 +23,7 @@ export const Default: Story = {
 					{Array.from({ length: 100 }, (_, i) => (
 						<div
 							key={i}
-							className="h-10 w-full bg-primary-wash text-primary flex items-center justify-center"
+							className="h-10 w-full bg-primary-wash color-primary flex items-center justify-center"
 						>
 							Item {i + 1}
 						</div>
@@ -50,7 +50,7 @@ export const StickToBottom: Story = {
 						{Array.from({ length: itemCount }, (_, i) => (
 							<div
 								key={i}
-								className="h-10 w-full bg-primary-wash text-primary flex items-center justify-center"
+								className="h-10 w-full bg-primary-wash color-primary flex items-center justify-center"
 							>
 								Item {i + 1}
 							</div>

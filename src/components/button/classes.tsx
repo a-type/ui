@@ -13,7 +13,7 @@ export function getButtonClassName({
 	align?: ButtonProps['align'];
 }) {
 	return classNames(
-		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border-solid border-thin border-color-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-color-bg)',
+		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border-solid border-thin border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
 		'layer-components:hover:(bg-[var(--bg)] bg-darken-1 ring-4)',
 		'layer-components:focus:outline-off',
 		'layer-components:focus-visible:(bg-[var(--bg)] outline-off bg-darken-1 ring-6)',
@@ -35,15 +35,15 @@ export function getButtonClassName({
 }
 
 const colors = {
-	primary: `layer-variants:[&.btn-color-primary]:([--bg:var(--color-primary)] shadow-sm color-black border-color-primary-dark)`,
+	primary: `layer-variants:[&.btn-color-primary]:([--bg:var(--color-primary)] shadow-sm color-black border-primary-dark)`,
 	accent: `layer-variants:[&.btn-color-accent]:([--bg-neutral:var(--color-accent-wash)] [--bg:var(--color-accent-light)] shadow-sm color-black border-accent-dark)`,
 	default: `layer-variants:[&.btn-color-default]:([--bg-neutral:var(--color-white)] [--bg:var(--color-gray-light)] shadow-sm color-black border-gray-dark)`,
 	ghost: `layer-variants:[&.btn-color-ghost]:([--bg-neutral:transparent] [--bg:oklch(from_var(--color-gray)_l_c_h/50%)] color-dark-blend)`,
-	destructive: `layer-variants:[&.btn-color-destructive]:([--bg:var(--color-attention)] shadow-sm border-color-attention-dark color-black ))`,
+	destructive: `layer-variants:[&.btn-color-destructive]:([--bg:var(--color-attention)] shadow-sm border-attention-dark color-black)`,
 	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg-neutral:transparent] [--bg:var(--color-attention-light)] color-attention-dark hover:(color-black) focus-visible:(color-black))`,
 	ghostAccent: `layer-variants:[&.btn-color-ghostAccent]:([--bg-neutral:transparent] [--bg:var(--color-accent-light)] color-accent-dark hover:color-black focus-visible:color-black)`,
-	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] color-white border-color-black hover:bg-lighten-1 focus-visible:bg-lighten-1 active:bg-lighten-1)`,
-	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-color-transparent shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-none text-size-inherit transition-none)`,
+	contrast: `layer-variants:[&.btn-color-contrast]:([--bg:var(--color-black)] color-white border-black hover:bg-lighten-1 focus-visible:bg-lighten-1 active:bg-lighten-1)`,
+	unstyled: `layer-variants:(bg-transparent hover:(bg-transparent) focus:(bg-transparent) active:(bg-transparent) color-inherit border-transparent shadow-none hover:(shadow-none) focus:(shadow-none) active:(shadow-none) p-0 items-start font-inherit font-normal rounded-none text-size-inherit transition-none)`,
 };
 export const buttonColorClasses = colors;
 

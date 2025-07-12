@@ -102,7 +102,7 @@ export function EditableText({
 			onClick={() => setEditingFinal(true)}
 			className={clsx(
 				inputClassName,
-				'layer-variants:(border-transparent bg-transparent w-auto inline-flex items-center gap-2 font-size-inherit text-inherit shadow-none text-left)',
+				'layer-variants:(border-transparent bg-transparent w-auto inline-flex items-center gap-2 font-size-inherit color-inherit shadow-none text-left)',
 				'layer-variants:hover:(bg-gray-blend)',
 				'layer-variants:focus-visible:(outline-none bg-gray-dark-blend)',
 				'cursor-pointer',

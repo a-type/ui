@@ -210,7 +210,7 @@ const CalendarGrid = withClassName(
 
 const CalendarDay = withClassName(
 	BaseCalendarDay,
-	'border border-solid border-transparent bg-white mr--1px mb--1px relative text-black',
+	'border border-solid border-transparent bg-white mr--1px mb--1px relative color-black',
 	'flex items-center justify-center transition cursor-pointer',
 	'[&[data-highlighted]]:(z-1 outline-accent)',
 	'hover:(z-1 outline-accent)',
@@ -238,7 +238,7 @@ const CalendarDay = withClassName(
 
 const DayLabel = withClassName(
 	'div',
-	'flex items-center justify-center text-sm text-gray-dark',
+	'flex items-center justify-center text-sm color-gray-dark',
 );
 
 const DayLabels = () => (

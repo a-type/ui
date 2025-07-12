@@ -46,7 +46,7 @@ const StyledItem = ({
 			{...props}
 			className={clsx(
 				color === 'destructive' &&
-					'layer-variants:(text-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
+					'layer-variants:(color-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
 				className,
 			)}
 			ref={forwardedRef}

@@ -164,7 +164,7 @@ export function CameraRoot({
 				ref={ref}
 				className={classNames(
 					'override-light',
-					'layer-components:([font-family:inherit] text-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
+					'layer-components:([font-family:inherit] color-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
 					fullscreen && 'fixed inset-0 w-full h-full z-1000 rounded-none',
 					className,
 				)}
@@ -246,7 +246,7 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 			<Button
 				size="icon"
 				color="ghost"
-				className="absolute bottom-2 left-2 text-white"
+				className="absolute bottom-2 left-2 color-white"
 				onClick={swapCamera}
 			>
 				<Icon name="refresh" />
@@ -263,7 +263,7 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 				<Button
 					size="icon"
 					color="ghost"
-					className="absolute bottom-2 left-2 text-white"
+					className="absolute bottom-2 left-2 color-white"
 				>
 					<Icon name="refresh" />
 				</Button>
@@ -286,7 +286,7 @@ export const CameraFullscreenButton = (props: ButtonProps) => {
 			{...props}
 			size="icon"
 			color="ghost"
-			className="absolute top-2 right-2 text-white"
+			className="absolute top-2 right-2 color-white"
 			onClick={() => setFullscreen(!fullscreen)}
 		>
 			<Icon name={fullscreen ? 'x' : 'maximize'} />
