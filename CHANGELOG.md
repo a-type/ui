@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.6.2
+
+### Patch Changes
+
+- f84215e: improve menu colors and consistency
+
 ## 2.6.1
 
 ### Patch Changes
