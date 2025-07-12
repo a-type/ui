@@ -180,6 +180,42 @@ function DemoUI({ className }: { className?: string }) {
 							<ContextMenu.Item>Item 3</ContextMenu.Item>
 						</ContextMenu.Content>
 					</ContextMenu>
+					<DropdownMenu>
+						<DropdownMenu.Trigger asChild className="m-auto">
+							<Button>Dropdown</Button>
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Item>Item 1</DropdownMenu.Item>
+							<DropdownMenu.Item>Item 2</DropdownMenu.Item>
+							<DropdownMenu.Item>Item 3</DropdownMenu.Item>
+							<DropdownMenu.Item disabled>Disabled Item</DropdownMenu.Item>
+							<DropdownMenu.Separator />
+							<DropdownMenu.Item>Item 4</DropdownMenu.Item>
+							<DropdownMenu.Item>Item 5</DropdownMenu.Item>
+							<DropdownMenu.Item>Item 6</DropdownMenu.Item>
+							<DropdownMenu.Item>
+								With icon
+								<DropdownMenu.ItemRightSlot>
+									<Icon name="flag" />
+								</DropdownMenu.ItemRightSlot>
+							</DropdownMenu.Item>
+						</DropdownMenu.Content>
+					</DropdownMenu>
+					<Select value="1">
+						<Select.Trigger />
+						<Select.Content>
+							<Select.Item value="1">Item 1</Select.Item>
+							<Select.Item value="2">Item 2</Select.Item>
+							<Select.Item value="3">Item 3</Select.Item>
+							<Select.Item value="4">Item 4</Select.Item>
+							<Select.Item value="5">Item 5</Select.Item>
+							<Select.Item value="6">Item 6</Select.Item>
+							<Select.Item value="7">Item 7</Select.Item>
+							<Select.Item value="8">Item 8</Select.Item>
+							<Select.Item value="9">Item 9</Select.Item>
+							<Select.Item value="10">Item 10</Select.Item>
+						</Select.Content>
+					</Select>
 					<Dialog>
 						<Dialog.Trigger asChild>
 							<Button>Click</Button>
@@ -256,16 +292,6 @@ function DemoUI({ className }: { className?: string }) {
 						</HorizontalList>
 					</Box>
 					<ImageUploader className="h-200px" value={null} onChange={() => {}} />
-					<DropdownMenu>
-						<DropdownMenu.Trigger asChild className="m-auto">
-							<Button>Dropdown</Button>
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Content>
-							<DropdownMenu.Item>Item 1</DropdownMenu.Item>
-							<DropdownMenu.Item>Item 2</DropdownMenu.Item>
-							<DropdownMenu.Item>Item 3</DropdownMenu.Item>
-						</DropdownMenu.Content>
-					</DropdownMenu>
 				</div>
 			</PageContent>
 			<PageNav>

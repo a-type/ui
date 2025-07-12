@@ -15,7 +15,7 @@ const StyledContent = withClassName(
 			</BoxContext.Provider>
 		);
 	},
-	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-sm border border-gray-dark)',
+	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-gray-dark)',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -25,8 +25,9 @@ const StyledContent = withClassName(
 );
 const itemClassName = classNames(
 	'layer-components:(text-md leading-4 color-black flex items-center pr-4 pl-8 py-2 relative text-left select-none cursor-pointer)',
-	'layer-components:[&[data-disabled]]:(color-black pointer-events-none)',
-	'layer-components:focus-visible:(bg-gray-light bg-darken-0.5 color-black)',
+	'layer-components:[&[data-disabled]]:(color-gray-dark pointer-events-none)',
+	'layer-components:focus-visible:(bg-gray bg-lighten-3 color-black)',
+	'layer-components:hover:(bg-gray bg-lighten-3 color-black)',
 	'layer-components:focus:outline-none',
 );
 const StyledItemBase = withClassName(DropdownMenuPrimitive.Item, itemClassName);
@@ -46,7 +47,7 @@ const StyledItem = ({
 			{...props}
 			className={clsx(
 				color === 'destructive' &&
-					'layer-variants:(color-attention-dark hover:bg-attention-wash focus-visible:bg-attention-wash)',
+					'layer-variants:(color-attention-dark hover:bg-attention-light focus-visible:bg-attention-light)',
 				className,
 			)}
 			ref={forwardedRef}
@@ -111,14 +112,14 @@ export const DropdownMenuContent = ({
 	return (
 		<StyledPortal forceMount={forceMount}>
 			<StyledContent {...props}>
-				<div className="overflow-hidden rounded-lg">{children}</div>
+				<div className="overflow-hidden rounded-md">{children}</div>
 				<StyledArrow />
 			</StyledContent>
 		</StyledPortal>
 	);
 };
 
-export const DropdownMenuItemRightSlot = withClassName('div', 'ml-auto');
+export const DropdownMenuItemRightSlot = withClassName('div', 'ml-auto pl-md');
 
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
 	Content: DropdownMenuContent,

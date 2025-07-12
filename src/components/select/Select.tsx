@@ -45,10 +45,8 @@ export const SelectItem = ({
 
 export const SelectItemRoot = withClassName(
 	SelectPrimitive.Item,
-	'layer-components:(text-md leading-4 color-black rounded-sm flex items-center flex-row h-36px pr-4 pl-35px relative select-none)',
-	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-primary-wash color-black)',
-	'layer-components:[&:first-child]:(rounded-t-lg)',
-	'layer-components:[&:last-child]:(rounded-b-lg)',
+	'layer-components:(text-md leading-4 color-black flex items-center flex-row h-36px pr-4 pl-35px relative select-none)',
+	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-gray bg-lighten-3 color-black)',
 );
 export const SelectItemIndicatorRoot = withClassName(
 	SelectPrimitive.ItemIndicator,
@@ -133,7 +131,7 @@ export const SelectIcon = withNoNativeRender(
 	}) => {
 		return (
 			<SelectPrimitive.Icon
-				className={classNames('color-inherit', className)}
+				className={classNames('color-inherit ml-auto', className)}
 				{...props}
 				ref={forwardedRef}
 			>
@@ -143,7 +141,11 @@ export const SelectIcon = withNoNativeRender(
 	},
 );
 
-const zIndex = { zIndex: 1001 };
+const contentStyle = {
+	zIndex: 1001,
+	'--local-corner-scale': '1',
+} as React.CSSProperties;
+const viewportStyle = { '--local-corner-scale': '0.9' } as React.CSSProperties;
 export const SelectContent = withPassthroughNativeRender(
 	({ ref: forwardedRef, children, inDialog, className, ...props }) => {
 		return (
@@ -151,7 +153,7 @@ export const SelectContent = withPassthroughNativeRender(
 				<BoxContext.Provider value={{ spacingScale: 1 }}>
 					<SelectPrimitive.Content
 						className={classNames(
-							'layer-components:(overflow-hidden bg-white rounded-lg border border-solid border border-black z-menu shadow-lg)',
+							'layer-components:(overflow-hidden bg-white rounded-md border border-solid border border-black z-menu shadow-lg)',
 							'layer-components:transform-origin-[var(--radix-select-content-transform-origin)]',
 							'layer-components:[&[data-state=open]]:animate-popover-in',
 							'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -159,14 +161,14 @@ export const SelectContent = withPassthroughNativeRender(
 							inDialog && 'z-[calc(var(--z-dialog)+1)]',
 							className,
 						)}
-						style={zIndex}
+						style={contentStyle}
 						{...props}
 						ref={forwardedRef}
 					>
 						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
 							<ChevronUpIcon />
 						</SelectPrimitive.ScrollUpButton>
-						<SelectPrimitive.Viewport className="p-1">
+						<SelectPrimitive.Viewport style={viewportStyle}>
 							{children}
 						</SelectPrimitive.Viewport>
 						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
