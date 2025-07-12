@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.5.0
+
+### Minor Changes
+
+- b90f89c: Overhaul shadows, simplify some color system stuff, add hard shadow option, fix peek
+
 ## 2.4.1
 
 ### Patch Changes
