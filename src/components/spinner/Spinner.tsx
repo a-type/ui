@@ -25,7 +25,7 @@ export const Spinner = function Spinner({
 			role="progressbar"
 			{...props}
 			className={classNames(
-				'inline-block animate-spin animate-ease-linear animate-iteration-infinite color-inherit animate-duration-1400 transform-origin-[50%_50%]',
+				'flex-shrink-0 inline-block animate-spin animate-ease-linear animate-iteration-infinite color-inherit animate-duration-1400 transform-origin-[50%_50%]',
 				className,
 			)}
 			style={{ width: size, height: size, ...style }}

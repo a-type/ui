@@ -1,6 +1,8 @@
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
+import { Spinner } from '../spinner/Spinner.js';
 import { IconName } from './generated/iconNames.js';
+import { useIconLoading } from './IconLoadingContext.js';
 
 export interface IconProps extends HTMLAttributes<SVGSVGElement> {
 	name: IconName;
@@ -16,10 +18,17 @@ export const Icon = function Icon({
 }: IconProps & {
 	ref?: React.Ref<SVGSVGElement>;
 }) {
+	const loading = useIconLoading();
+
+	if (loading) {
+		return <Spinner size={size} className="inline-block" />;
+	}
+
 	return (
 		<svg
 			ref={ref}
 			className={classNames(
+				'icon',
 				'flex-shrink-0 layer-components:fill-none',
 				className,
 			)}

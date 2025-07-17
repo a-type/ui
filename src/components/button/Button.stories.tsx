@@ -31,18 +31,20 @@ export const Toggled: Story = {
 };
 
 export const Alignment: Story = {
-	render() {
+	render(args) {
 		return (
 			<div className="col">
 				<div className="row border-default">
-					<Button size="small">Button</Button>
-					<Button size="icon-small">
+					<Button size="small" {...args}>
+						Button
+					</Button>
+					<Button size="small" {...args}>
 						<Icon name="placeholder" />
 					</Button>
 				</div>
 				<div className="row border-default">
-					<Button>Button</Button>
-					<Button size="icon">
+					<Button {...args}>Button</Button>
+					<Button {...args}>
 						<Icon name="placeholder" />
 					</Button>
 				</div>
@@ -52,12 +54,13 @@ export const Alignment: Story = {
 };
 
 export const ConfirmedButtonDemo: Story = {
-	render() {
+	render(args) {
 		return (
 			<ConfirmedButton
 				confirmText="Are you sure?"
 				confirmTitle="Confirm"
 				onConfirm={() => console.log('confirmed')}
+				{...args}
 			>
 				Confirm
 			</ConfirmedButton>
