@@ -88,6 +88,7 @@ export const themeColors = {
 	white: 'var(--color-white)',
 	wash: 'var(--color-wash)',
 	transparent: 'transparent',
+	current: 'currentColor',
 
 	// magic tokens
 	bg: 'var(--v-bg-altered, var(--v-bg, transparent))',

@@ -1,5 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
+import { AnimatePresence, motion } from 'motion/react';
 import {
 	ButtonHTMLAttributes,
 	Children,
@@ -8,6 +9,7 @@ import {
 	useCallback,
 	useState,
 } from 'react';
+import useMergedRef from '../../hooks/useMergedRef.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
@@ -57,8 +59,10 @@ export function Button({
 	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
+	const finalRef = useMergedRef(useAnnotateWithChildParts(), ref);
+
 	const buttonProps = {
-		ref: ref,
+		ref: finalRef,
 		...props,
 		disabled: disabled || isLoading,
 		'data-disabled': visuallyDisabled,
@@ -94,7 +98,7 @@ export function Button({
 	let hasIcon = false;
 	const wrappedChildren = Children.toArray(children).map((child, index) => {
 		if (child && typeof child === 'object' && 'type' in child) {
-			const isIcon = child.type === Icon;
+			const isIcon = child.type === Icon || child.type;
 			if (isIcon) {
 				hasIcon = true;
 				return child; // return icon as is
@@ -105,7 +109,7 @@ export function Button({
 
 		if ((!!child && typeof child === 'string') || typeof child === 'number') {
 			return (
-				<span key={`text-${index}`} data-auto-wrapped-label>
+				<span key={`text-${index}`} data-auto-wrapped-label className="flex">
 					{child}
 				</span>
 			);
@@ -120,15 +124,25 @@ export function Button({
 				data-has-icon={String(hasIcon || isLoading)}
 				data-has-label={String(hasLabel)}
 			>
-				{isLoading && !hasIcon && (
-					<Spinner size={16} className="inline-block w-1em h-1em" />
-				)}
+				<AnimatePresence>
+					{isLoading && !hasIcon && (
+						<motion.div
+							key="spinner"
+							initial={{ width: 0, marginLeft: '-0.5rem' }}
+							animate={{ width: 'auto', marginLeft: 0 }}
+							exit={{ width: 0, marginLeft: '-0.5rem' }}
+							className="flex-shrink-0 inline-block overflow-hidden my-auto flex"
+						>
+							<Spinner size={15} className="inline-block w-1em h-1em" />
+						</motion.div>
+					)}
+				</AnimatePresence>
 				{toggled !== undefined &&
 					(toggleMode === 'indicator' ||
 						toggleMode === 'color-and-indicator') && (
 						<ToggleIndicator value={toggled} />
 					)}
-				{children}
+				{wrappedChildren}
 			</Comp>
 		</IconLoadingProvider>
 	);
@@ -182,9 +196,11 @@ function applyPartAttributes(button: HTMLButtonElement) {
 		label: 0,
 	};
 	button.childNodes.forEach((child) => {
+		if (!(child instanceof HTMLElement || child instanceof SVGElement)) return;
+		if (child.style.display === 'none' || child.style.width === '0') return; // skip hidden elements
 		if (
 			(child instanceof HTMLElement || child instanceof SVGElement) &&
-			child.classList.contains('Icon')
+			child.classList.contains('icon')
 		) {
 			registry.icon++;
 		} else {

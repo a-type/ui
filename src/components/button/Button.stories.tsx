@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
 import { Button } from './Button.js';
 import { ConfirmedButton } from './ConfirmedButton.js';
@@ -13,6 +14,12 @@ const meta = {
 	},
 	args: {
 		children: 'Button',
+		loading: false,
+		color: 'default',
+		size: 'default',
+		visuallyDisabled: false,
+		disabled: false,
+		visuallyFocused: false,
 	},
 } satisfies Meta<typeof Button>;
 
@@ -20,7 +27,37 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	render: (args) => {
+		return (
+			<Box gap items="center">
+				<Button {...args} />
+				<Button {...args} color="primary">
+					<Icon name="placeholder" />
+					{args.children}
+				</Button>
+				<Button {...args} size="small" />
+			</Box>
+		);
+	},
+};
+
+export const WithIcon: Story = {
+	args: {
+		children: (
+			<>
+				<Icon name="placeholder" />
+				Iconic
+			</>
+		),
+	},
+};
+
+export const IconOnly: Story = {
+	args: {
+		children: <Icon name="placeholder" />,
+	},
+};
 
 export const Toggled: Story = {
 	render: (args) => {

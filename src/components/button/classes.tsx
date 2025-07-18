@@ -13,7 +13,7 @@ export function getButtonClassName({
 	align?: ButtonProps['align'];
 }) {
 	return clsx(
-		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border-solid border-thin border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-1 items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
+		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border-solid border-thin border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-sm items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
 		'layer-components:hover:(bg-[var(--bg)] bg-darken-1 ring-4)',
 		'layer-components:focus:outline-off',
 		'layer-components:focus-visible:(bg-[var(--bg)] outline-off bg-darken-1 ring-6)',
@@ -48,9 +48,10 @@ const colors = {
 export const buttonColorClasses = colors;
 
 const sizes = {
-	default: 'layer-variants:[&[data-has-icon=true]]:(p-2.35 text-sm rounded-lg)',
+	default:
+		'layer-variants:[&[data-has-icon=true][data-has-label=false]]:(p-2.35 text-sm rounded-lg)',
 	small:
-		'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-md) layer-variants:[&.size-small[data-has-icon=true]]:(p-2 text-xs rounded-lg -m-y-0.5)',
+		'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-md) layer-variants:[&.size-small[data-has-icon=true][data-has-label=false]]:(p-2 text-xs rounded-lg -m-y-0.5)',
 };
 
 const toggledClass =

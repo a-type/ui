@@ -15,6 +15,7 @@ const preview: Preview = {
 			},
 		},
 	},
+	tags: ['autodocs'],
 	globalTypes: {
 		theme: {
 			description: 'Color theme',
