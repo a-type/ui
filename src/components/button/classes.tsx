@@ -46,7 +46,7 @@ export function getButtonClassName({
 const colors = {
 	primary: `layer-variants:[&.btn-color-primary]:([--bg:var(--color-primary)] shadow-sm color-black border-primary-dark)`,
 	accent: `layer-variants:[&.btn-color-accent]:([--bg-neutral:var(--color-accent-wash)] [--bg:var(--color-accent-light)] shadow-sm color-black border-accent-dark)`,
-	default: `layer-variants:[&.btn-color-default]:([--bg-neutral:var(--color-white)] [--bg:var(--color-gray-light)] shadow-sm color-black border-gray-dark)`,
+	default: `layer-variants:[&.btn-color-default]:([--bg-neutral:var(--color-white)] [--bg:var(--color-gray)] shadow-sm color-black border-gray-dark focus-visible:bg-lighten-1 hover:bg-lighten-1)`,
 	ghost: `layer-variants:[&.btn-color-ghost]:([--bg-neutral:transparent] [--bg:oklch(from_var(--color-gray)_l_c_h/50%)] color-dark-blend)`,
 	destructive: `layer-variants:[&.btn-color-destructive]:([--bg:var(--color-attention)] shadow-sm border-attention-dark color-black)`,
 	ghostDestructive: `layer-variants:[&.btn-color-ghostDestructive]:([--bg-neutral:transparent] [--bg:var(--color-attention-light)] color-attention-dark hover:(color-black) focus-visible:(color-black))`,
