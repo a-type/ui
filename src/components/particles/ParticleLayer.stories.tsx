@@ -39,8 +39,8 @@ function ExplodeButton() {
 		);
 	};
 	return (
-		<Button size="icon" onClick={burst}>
-			💥
+		<Button onClick={burst}>
+			<Button.Icon>💥</Button.Icon>
 		</Button>
 	);
 }

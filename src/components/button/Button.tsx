@@ -9,6 +9,7 @@ import {
 	useCallback,
 	useState,
 } from 'react';
+import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
@@ -26,7 +27,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 		| 'accent'
 		| 'contrast'
 		| 'unstyled';
-	size?: 'default' | 'small';
+	/**
+	 * icon and icon-small are deprecated.
+	 */
+	size?: 'default' | 'small' | 'icon' | 'icon-small';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';
@@ -37,7 +41,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	ref?: Ref<HTMLButtonElement>;
 }
 
-export function Button({
+export function ButtonRoot({
 	className,
 	color,
 	size,
@@ -140,7 +144,7 @@ export function Button({
 				{toggled !== undefined &&
 					(toggleMode === 'indicator' ||
 						toggleMode === 'color-and-indicator') && (
-						<ToggleIndicator value={toggled} />
+						<ButtonToggleIndicator value={toggled} />
 					)}
 				{wrappedChildren}
 			</Comp>
@@ -148,7 +152,7 @@ export function Button({
 	);
 }
 
-const ToggleIndicator = memo(function ToggleIndicator({
+export const ButtonToggleIndicator = memo(function ToggleIndicator({
 	value,
 }: {
 	value: boolean;
@@ -163,6 +167,17 @@ const ToggleIndicator = memo(function ToggleIndicator({
 			}}
 		/>
 	);
+});
+
+// allows custom icons to trigger icon button behavior
+export const ButtonIcon = withClassName(
+	'div',
+	'icon flex-shrink-0 inline-block',
+);
+
+export const Button = Object.assign(ButtonRoot, {
+	ToggleIndicator: ButtonToggleIndicator,
+	Icon: ButtonIcon,
 });
 
 function useAnnotateWithChildParts() {

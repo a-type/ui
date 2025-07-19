@@ -263,7 +263,6 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 	return (
 		<Button
 			color="ghost"
-			size="icon"
 			className={clsx(
 				'layer-variants:(absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm z-10)',
 				className,

@@ -40,7 +40,6 @@ export function DatePicker({
 		>
 			<MonthRow>
 				<MonthButton
-					size="icon"
 					color="ghost"
 					onClick={() =>
 						setDisplay((cur) => ({
@@ -53,7 +52,6 @@ export function DatePicker({
 				</MonthButton>
 				<MonthLabel>{monthLabel}</MonthLabel>
 				<MonthButton
-					size="icon"
 					color="ghost"
 					onClick={() =>
 						setDisplay((cur) => ({
@@ -143,7 +141,6 @@ export function DateRangePicker({
 		>
 			<RangeLayout>
 				<MonthButton
-					size="icon"
 					color="ghost"
 					className="[grid-area:prevMonth]"
 					onClick={() =>
@@ -160,7 +157,6 @@ export function DateRangePicker({
 					{nextMonthLabel}
 				</MonthLabel>
 				<MonthButton
-					size="icon"
 					color="ghost"
 					className="[grid-area:nextMonth]"
 					onClick={() =>

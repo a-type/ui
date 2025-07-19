@@ -1,9 +1,16 @@
 import clsx from 'clsx';
-import type { ButtonProps } from './Button.jsx';
+import { type ButtonProps } from './Button.jsx';
+
+const sizeMap = {
+	default: 'default',
+	small: 'small',
+	icon: 'default',
+	'icon-small': 'small',
+} satisfies Record<string, 'default' | 'small'>;
 
 export function getButtonClassName({
 	color,
-	size,
+	size: rawSize,
 	toggleable,
 	align,
 }: {
@@ -12,6 +19,8 @@ export function getButtonClassName({
 	toggleable?: boolean;
 	align?: ButtonProps['align'];
 }) {
+	const size = sizeMap[rawSize ?? 'default'];
+
 	return clsx(
 		'layer-components:(px-4 py-2 bg-[var(--bg-neutral,var(--bg))] [--webkit-tap-highlight-color:transparent] [line-height:1] text-size-md font-inherit border-solid border-thin border-transparent rounded-lg cursor-pointer font-bold flex flex-row gap-sm items-center relative overflow-visible select-none all:transition duration-200 whitespace-nowrap ring-bg)',
 		'layer-components:hover:(bg-[var(--bg)] bg-darken-1 ring-4)',

@@ -53,6 +53,7 @@ const meta = {
 		controls: { expanded: true },
 		layout: 'fullscreen',
 	},
+	tags: [],
 } satisfies Meta;
 
 export default meta;
@@ -121,7 +122,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Card.Footer>
 								<Card.Actions>
 									<Button size="small">Action 1</Button>
-									<Button size="icon-small" color="ghost">
+									<Button size="small" color="ghost">
 										<Icon name="placeholder" />
 									</Button>
 								</Card.Actions>
@@ -135,7 +136,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Card.Footer>
 								<Card.Actions>
 									<Button size="small">Action 1</Button>
-									<Button size="icon-small" color="ghost">
+									<Button size="small" color="ghost">
 										<Icon name="placeholder" />
 									</Button>
 								</Card.Actions>

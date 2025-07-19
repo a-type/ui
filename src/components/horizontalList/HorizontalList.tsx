@@ -169,7 +169,6 @@ export function HorizontalList({
 					>
 						<Button
 							onClick={toggleOpen}
-							size="icon"
 							color="ghost"
 							className={clsx(
 								'flex-shrink-0 bg-[var(--scroll-bg)] sticky left-0 top-2 z-1',

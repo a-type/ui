@@ -46,12 +46,12 @@ export const Default: Story = {
 				<CardFooter>
 					<CardActions>
 						<Button size="small">Button</Button>
-						<Button size="icon-small" color="primary">
+						<Button size="small" color="primary">
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>
 					<CardMenu>
-						<Button size="icon-small" color="ghost">
+						<Button size="small" color="ghost">
 							<Icon name="dots" />
 						</Button>
 					</CardMenu>
@@ -68,7 +68,7 @@ export const Default: Story = {
 				<CardFooter>
 					<CardActions>
 						<Button size="small">Button</Button>
-						<Button size="icon-small" color="ghost">
+						<Button size="small" color="ghost">
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>
@@ -89,7 +89,7 @@ export const Compact: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon-small" color="ghost">
+					<Button size="small" color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -108,7 +108,7 @@ export const NonInteractive: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
+					<Button color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -129,7 +129,7 @@ export const AsChild: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
+					<Button color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -150,7 +150,7 @@ export const AsChildNonInteractive: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
+					<Button color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -249,7 +249,7 @@ export const VisuallyFocused: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="icon" color="ghost">
+					<Button color="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -270,7 +270,7 @@ export const CardsInBox: Story = {
 					<CardFooter>
 						<CardActions>
 							<Button size="small">Button</Button>
-							<Button size="icon" color="ghost">
+							<Button color="ghost">
 								<Icon name="placeholder" />
 							</Button>
 						</CardActions>
@@ -284,7 +284,7 @@ export const CardsInBox: Story = {
 					<CardFooter>
 						<CardActions>
 							<Button size="small">Button</Button>
-							<Button size="icon" color="ghost">
+							<Button color="ghost">
 								<Icon name="placeholder" />
 							</Button>
 						</CardActions>

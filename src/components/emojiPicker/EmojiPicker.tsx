@@ -71,11 +71,11 @@ export const EmojiPickerEmoji = withClassName(
 			color="ghost"
 			toggled={p.emoji.isActive}
 			toggleMode="color"
-			size="icon-small"
+			size="small"
 			aria-label={p.emoji.label}
 			className="text-lg p-xs"
 		>
-			{p.emoji.emoji}
+			<Button.Icon>{p.emoji.emoji}</Button.Icon>
 		</Button>
 	),
 	'',
@@ -122,12 +122,12 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 					color="ghost"
 					toggled={option.skinTone === skinTone}
 					toggleMode="color"
-					size="icon-small"
+					size="small"
 					aria-label={`Skin tone ${option}`}
 					className="text-md p-xs"
 					onClick={() => setSkinTone(option.skinTone)}
 				>
-					{option.emoji}
+					<Button.Icon>{option.emoji}</Button.Icon>
 				</Button>
 			))}
 		</Box>
