@@ -1,5 +1,15 @@
 # @a-type/ui
 
+## 2.7.0
+
+### Minor Changes
+
+- e22799a: New button loading behavior. Remove small-icon and icon sizes.
+
+### Patch Changes
+
+- 1ab82e4: darken soft shadows
+
 ## 2.6.2
 
 ### Patch Changes
