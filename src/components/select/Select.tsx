@@ -18,7 +18,8 @@ import {
 } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { BoxContext } from '../box/Box.js';
-import { Button, ButtonProps, getButtonClassName } from '../button/index.js';
+import { Button, ButtonProps } from '../button/Button.js';
+import { getButtonClassName } from '../button/classes.js';
 import { Icon } from '../icon/index.js';
 
 export const SelectItem = ({
