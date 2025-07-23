@@ -21,7 +21,7 @@ export const Icon = function Icon({
 	const loading = useIconLoading();
 
 	if (loading) {
-		return <Spinner size={size} className="inline-block" />;
+		return <Spinner size={size} className="icon inline-block" />;
 	}
 
 	return (

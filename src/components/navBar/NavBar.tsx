@@ -8,9 +8,9 @@ export const navBarItemClass = classNames(
 	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-sm border-none cursor-pointer text-sm transition-colors h-full gap-6px relative color-black select-none)',
 	'layer-components:active:bg-darken-2',
 	'layer-components:hover:bg-darken-1',
-	'layer-components:focus-visible:(outline-none bg-darken-2)',
-	'layer-components:[&[data-active=true]]:(bg-[var(--bg)] bg-darken-1 color-black)',
-	'layer-components:([--bg:var(--color-primary-wash)] [--fill:var(--color-primary)])',
+	'layer-components:focus-visible:(outline-none bg-darken-2 ring-1 ring-primary)',
+	'layer-components:[&[data-active=true]]:(bg-primary-light/50 color-lighten-2 color-black)',
+	'layer-components:([--fill:var(--color-primary)])',
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
 
@@ -30,9 +30,9 @@ export const NavBarItem = function NavBarItem({
 	color,
 	...rest
 }: NavBarItemProps & {
-	ref?: React.Ref<HTMLDivElement>;
+	ref?: React.Ref<HTMLButtonElement>;
 }) {
-	const Comp = asChild ? Slot : 'div';
+	const Comp = asChild ? Slot : 'button';
 
 	return (
 		<Comp
@@ -40,11 +40,9 @@ export const NavBarItem = function NavBarItem({
 			className={classNames(
 				navBarItemClass,
 				color === 'neutral' && [
-					'layer-variants:active:bg-gray-dark-blend layer-variants:md:active:bg-gray-dark-blend',
-					'layer-variants:hover:bg-gray-dark-blend',
-					'layer-variants:focus-visible:(bg-gray-dark-blend)',
-					'layer-variants:[&[data-active=true]]:(bg-gray-dark-blend color-black)',
-					'layer-variants:([--bg:var(--color-gray-blend)] [--fill:var(--color-gray)])',
+					'layer-variants:[&[data-active=true]]:(bg-gray/30 color-black)',
+					'layer-variants:([--fill:var(--color-gray)])',
+					'layer-variants:focus-visible:ring-gray',
 				],
 				className,
 			)}

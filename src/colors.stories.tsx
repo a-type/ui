@@ -6,14 +6,14 @@ const meta = {
 	argTypes: {
 		customHue: {
 			control: {
-				type: 'range',
+				type: 'number',
 				min: 0,
 				max: 360,
 			},
 		},
 		customRotate: {
 			control: {
-				type: 'range',
+				type: 'number',
 				min: -20,
 				max: 20,
 			},

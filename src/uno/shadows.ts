@@ -1,7 +1,7 @@
 export function getShadows(hard = false) {
-	const opacity1 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5)*2)`;
-	const opacity2 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5))`;
-	const opacity3 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5)/2)`;
+	const opacity1 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5) * 2 * (1 + var(--dyn-source-mode-adjust, 0)))`;
+	const opacity2 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5) * (1 + var(--dyn-source-mode-adjust, 0)))`;
+	const opacity3 = `calc(var(--un-shadow-opacity,0.1)*(1 + var(--global-shadow-spread,1) * 0.5) / 2 * (1 + var(--dyn-source-mode-adjust, 0)))`;
 	return {
 		sm: `var(--un-shadow-inset) 0 calc(0px * var(--v-shadow-y-mult,1)) calc(1px * var(--global-shadow-spread,1)) 0 rgb(from var(--un-shadow-color) r g b / ${opacity1}),
 			var(--un-shadow-inset) 0 calc(1px * var(--v-shadow-y-mult,1)) calc(2px * var(--global-shadow-spread,1)) 0 rgb(from var(--un-shadow-color) r g b / ${opacity1})`,

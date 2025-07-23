@@ -84,6 +84,7 @@
 		"motion": "^12.23.6",
 		"pluralize": "^8.0.0",
 		"react-hot-toast": "^2.4.1",
+		"react-is": "^19.1.0",
 		"valtio": "^2.1.4"
 	},
 	"devDependencies": {
@@ -99,6 +100,7 @@
 		"@types/pluralize": "^0.0.33",
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",
+		"@types/react-is": "^19.0.0",
 		"@types/w3c-image-capture": "^1.0.10",
 		"@unocss/cli": "66.0.0",
 		"@unocss/core": "66.0.0",

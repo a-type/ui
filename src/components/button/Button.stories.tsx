@@ -104,3 +104,21 @@ export const ConfirmedButtonDemo: Story = {
 		);
 	},
 };
+
+export const FragmentTest: Story = {
+	render(args) {
+		return (
+			<Box gap items="center">
+				<Button {...args}>
+					<>{args.children}</>
+				</Button>
+				<Button {...args}>
+					<>
+						<Icon name="placeholder" />
+						{args.children}
+					</>
+				</Button>
+			</Box>
+		);
+	},
+};

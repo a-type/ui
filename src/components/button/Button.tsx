@@ -1,14 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
-import {
-	ButtonHTMLAttributes,
-	Children,
-	memo,
-	Ref,
-	useCallback,
-	useState,
-} from 'react';
+import { ButtonHTMLAttributes, memo, Ref, useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
@@ -97,45 +90,21 @@ export function ButtonRoot({
 		return <Comp {...buttonProps}>{children}</Comp>;
 	}
 
-	// wrap and inspect children
-	let hasLabel = false;
-	let hasIcon = false;
-	const wrappedChildren = Children.toArray(children).map((child, index) => {
-		if (child && typeof child === 'object' && 'type' in child) {
-			const isIcon = child.type === Icon || child.type;
-			if (isIcon) {
-				hasIcon = true;
-				return child; // return icon as is
-			}
-		}
-
-		hasLabel = true; // mark that we have a label
-
-		if ((!!child && typeof child === 'string') || typeof child === 'number') {
-			return (
-				<span key={`text-${index}`} data-auto-wrapped-label className="flex">
-					{child}
-				</span>
-			);
-		}
-		return child;
-	});
-
 	return (
 		<IconLoadingProvider value={isLoading}>
-			<Comp
-				{...buttonProps}
-				data-has-icon={String(hasIcon || isLoading)}
-				data-has-label={String(hasLabel)}
-			>
+			<Comp {...buttonProps}>
 				<AnimatePresence>
-					{isLoading && !hasIcon && (
+					{isLoading && (
 						<motion.div
 							key="spinner"
 							initial={{ width: 0, marginLeft: '-0.5rem' }}
 							animate={{ width: 'auto', marginLeft: 0 }}
 							exit={{ width: 0, marginLeft: '-0.5rem' }}
-							className="flex-shrink-0 inline-block overflow-hidden my-auto flex"
+							className={clsx(
+								'flex-shrink-0 inline-block overflow-hidden my-auto flex',
+								'[[data-has-icon=true]>&]:hidden',
+							)}
+							data-default-loader
 						>
 							<Spinner size={15} className="inline-block w-1em h-1em" />
 						</motion.div>
@@ -146,7 +115,7 @@ export function ButtonRoot({
 						toggleMode === 'color-and-indicator') && (
 						<ButtonToggleIndicator value={toggled} />
 					)}
-				{wrappedChildren}
+				{children}
 			</Comp>
 		</IconLoadingProvider>
 	);
@@ -222,6 +191,9 @@ function applyPartAttributes(button: HTMLButtonElement) {
 			registry.label++;
 		}
 	});
+	if (button.textContent) {
+		registry.label++;
+	}
 	button.setAttribute('data-has-icon', String(registry.icon > 0));
 	button.setAttribute('data-has-label', String(registry.label > 0));
 	button.setAttribute('data-icon-count', String(registry.icon));

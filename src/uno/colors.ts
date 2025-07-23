@@ -6,7 +6,7 @@ export const colorConstants = `
 `;
 
 const lightness = {
-	wash: `calc(1 + 0.45 * var(--dyn-mode-mult, 1))`,
+	wash: `calc(1 + (0.1 + 0.35 * var(--dyn-mode-dark)) * var(--dyn-mode-mult, 1))`,
 	light: `calc(1 + 0.25 * var(--dyn-mode-mult, 1))`,
 	dark: `calc(1 - 0.25 * var(--dyn-mode-mult, 1))`,
 	ink: `calc(1 - 0.45 * var(--dyn-mode-mult, 1))`,
@@ -27,7 +27,7 @@ export const dynamicThemeComputedColors = (name: string) => {
 	--color-${name}-ink: oklch(from var(--color-${name}) calc(l * ${lightness.ink}) calc(var(--dyn-${name}-sat-mult) * (c * var(--dyn-saturation-x-ink, 1) + 0.01)) ${hue.ink});
 
 	--color-${name}-gray: oklch(from var(--color-${name}) l calc(c * 0.1 * var(--global-saturation, 1)) h);
-	--color-${name}-gray-wash: oklch(from var(--color-${name}-gray) calc(l * ${lightness.wash}) calc(c * 0.9) ${hue.wash});
+	--color-${name}-gray-wash: oklch(from var(--color-${name}-gray) calc(l * ${lightness.wash} * 1.1) calc(c * 0.9) ${hue.wash});
 	--color-${name}-gray-light: oklch(from var(--color-${name}-gray) calc(l * ${lightness.light}) c ${hue.light});
 	--color-${name}-gray-dark: oklch(from var(--color-${name}-gray) calc(l * ${lightness.dark}) c ${hue.dark});
 	--color-${name}-gray-ink: oklch(from var(--color-${name}-gray) calc(l * ${lightness.ink}) c ${hue.ink});
@@ -46,7 +46,7 @@ ${dynamicThemeComputedColors('accent')}
 
 --color-wash: var(--color-gray-wash);
 --palette-black: var(--color-gray-ink);
---palette-white: oklch(from var(--color-wash) calc(0.999 * var(--dyn-mode-mult,1)) calc(c * var(--global-saturation, 1)) h);
+--palette-white: oklch(from var(--color-wash) calc(1 * var(--dyn-mode-light,1)) 0.001 h);
 /* A dark-mode only contrast color */
 --color-dark-mode-contrast: oklch(from var(--color-gray-ink) l c h / calc(100% * var(--dyn-source-mode-adjust, 0)));
 `;

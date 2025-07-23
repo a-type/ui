@@ -646,6 +646,8 @@ export default function presetAtype({
 					--dyn-mode-sign: 1;
 					--dyn-source-mode-adjust: 0;
 					--dyn-mode-lighten-mult: 1;
+					--dyn-mode-light: 1;
+					--dyn-mode-dark: 0;
 					--color-dark-blend: var(--palette-dark-blend);
 					--color-light-blend: var(--palette-light-blend);
 					--color-dark-blend-2: var(--palette-dark-blend-2);
@@ -673,10 +675,12 @@ export default function presetAtype({
 					const darkMode = `
 						--wash-saturation-tweak: ${darkModeSaturationTweak};
 						--mode-mult: -1;
-						--dyn-mode-mult: -1.6;
+						--dyn-mode-mult: -1.25;
 						--dyn-mode-lighten-mult: -1;
 						--dyn-mode-sign: -1;
 						--dyn-source-mode-adjust: 1;
+						--dyn-mode-dark: 1;
+						--dyn-mode-light: 0;
 						--color-dark-blend: var(--palette-light-blend);
 						--color-light-blend: var(--palette-dark-blend);
 						--color-dark-blend-2: var(--palette-light-blend-2);
@@ -703,7 +707,7 @@ export default function presetAtype({
 					`;
 
 					const dynThemes: Record<string, DynamicThemeColor> = {
-						lemon: { hue: 91.8, hueRotate: 3 },
+						lemon: { hue: 91.8, hueRotate: 12 },
 						leek: { hue: 160.88, hueRotate: -1 },
 						tomato: { hue: 10.51, hueRotate: -2 },
 						blueberry: { hue: 248.14, hueRotate: 4 },
@@ -804,7 +808,7 @@ export default function presetAtype({
 					--z-tooltip: 10000;
 					--z-overdraw: 100000;
 
-					--un-shadow-color: var(--palette-true-black);
+					--un-shadow-color: #000000;
 					--un-shadow-opacity: 10%;
 
 					--arrow-size: 1rem;
