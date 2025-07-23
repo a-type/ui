@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.2
+
+### Patch Changes
+
+- 8ca8bc1: more color changes, fix button fragments
+
 ## 2.7.1
 
 ### Patch Changes
