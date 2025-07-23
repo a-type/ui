@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.1
+
+### Patch Changes
+
+- 696178a: change import
+
 ## 2.7.0
 
 ### Minor Changes
