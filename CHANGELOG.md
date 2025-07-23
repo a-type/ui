@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.3
+
+### Patch Changes
+
+- ff4491a: remove scrollbar from action bar
+
 ## 2.7.2
 
 ### Patch Changes
