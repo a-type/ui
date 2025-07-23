@@ -29,7 +29,7 @@ export function ActionBar({
 			>
 				<div
 					className={classNames(
-						'layer-components:(flex flex-row items-center justify-start w-full overflow-y-hidden overflow-x-auto pr-80px relative h-full) layer-components:[&::-webkit-scrollbar]:hidden',
+						'layer-components:(flex flex-row items-center justify-start w-full overflow-y-hidden overflow-x-overlay pr-80px relative h-full) layer-components:[&::-webkit-scrollbar]:hidden',
 						wrap && 'layer-variants:flex-wrap',
 					)}
 				>
