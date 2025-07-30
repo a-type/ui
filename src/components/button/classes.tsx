@@ -13,11 +13,13 @@ export function getButtonClassName({
 	size: rawSize,
 	toggleable,
 	align,
+	disableIconMode,
 }: {
 	color?: ButtonProps['color'];
 	size?: ButtonProps['size'];
 	toggleable?: boolean;
 	align?: ButtonProps['align'];
+	disableIconMode?: boolean;
 }) {
 	const size = sizeMap[rawSize ?? 'default'];
 
@@ -33,6 +35,7 @@ export function getButtonClassName({
 		colors[color ?? 'default'],
 		`btn-color-${color ?? 'default'}`,
 		sizes[size ?? 'default'],
+		disableIconMode ? '' : iconModeSizes[size ?? 'default'],
 		`size-${size ?? 'default'}`,
 		toggleable && toggledClass,
 		align && aligns[align],
@@ -57,10 +60,14 @@ const colors = {
 export const buttonColorClasses = colors;
 
 const sizes = {
+	default: '',
+	small: 'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-md)',
+};
+const iconModeSizes = {
 	default:
 		'layer-variants:[&[data-has-icon=true][data-has-label=false]]:(p-2.35 text-sm rounded-lg)',
 	small:
-		'layer-variants:[&.size-small]:(px-4 py-1 text-sm rounded-md) layer-variants:[&.size-small[data-has-icon=true][data-has-label=false]]:(p-2 text-xs rounded-lg -m-y-0.5)',
+		'layer-variants:[&.size-small[data-has-icon=true][data-has-label=false]]:(p-2 text-xs rounded-lg -m-y-0.5)',
 };
 
 const toggledClass =

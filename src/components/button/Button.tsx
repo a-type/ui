@@ -31,6 +31,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	loading?: boolean;
 	asChild?: boolean;
 	visuallyFocused?: boolean;
+	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 }
 
@@ -47,6 +48,7 @@ export function ButtonRoot({
 	children,
 	disabled,
 	asChild,
+	disableIconMode,
 	ref,
 	...props
 }: ButtonProps) {
@@ -75,6 +77,7 @@ export function ButtonRoot({
 					toggled !== undefined &&
 					(toggleMode === 'color' || toggleMode === 'color-and-indicator'),
 				align,
+				disableIconMode,
 			}),
 			className,
 		),
@@ -139,10 +142,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName(
-	'div',
-	'icon flex-shrink-0 inline-block',
-);
+export const ButtonIcon = withClassName('div', 'icon flex-shrink-0 flex');
 
 export const Button = Object.assign(ButtonRoot, {
 	ToggleIndicator: ButtonToggleIndicator,

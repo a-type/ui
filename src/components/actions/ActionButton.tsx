@@ -42,6 +42,7 @@ export function ActionButton({
 			<CollapsibleContent data-horizontal>
 				<Button
 					size="small"
+					disableIconMode
 					className={classNames(
 						'layer-variants:(border-gray-dark font-normal whitespace-nowrap m-2 flex flex-row gap-2 items-center py-0.25 rounded-md mx-1 min-h-7.5)',
 						className,

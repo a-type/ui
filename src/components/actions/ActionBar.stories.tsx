@@ -12,7 +12,6 @@ const meta = {
 		children: [
 			<ActionButton key="1">
 				<Icon name="plus" />
-				Add
 			</ActionButton>,
 			<ActionButton key="2">
 				<Icon name="pencil" />
