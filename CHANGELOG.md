@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.4
+
+### Patch Changes
+
+- e18f235: fix action button size when icon only
+
 ## 2.7.3
 
 ### Patch Changes
