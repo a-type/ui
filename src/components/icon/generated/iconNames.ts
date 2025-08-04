@@ -117,6 +117,9 @@ export const iconNames = [
 	'suitDiamond',
 	'suitHeart',
 	'chat',
+	'minus',
+	'plus',
+	'flame',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];

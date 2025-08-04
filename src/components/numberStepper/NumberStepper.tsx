@@ -1,8 +1,8 @@
 import { fractionToText } from '@a-type/utils';
-import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
 import { ReactNode } from 'react';
 import { Button } from '../button/index.js';
+import { Icon } from '../icon/Icon.js';
 
 export interface NumberStepperProps {
 	value: number;
@@ -78,12 +78,22 @@ export function NumberStepper({
 			)}
 			{...rest}
 		>
-			<Button color="ghost" onClick={decrement} disabled={!canDecrement}>
-				<MinusIcon />
+			<Button
+				color="ghost"
+				onClick={decrement}
+				disabled={!canDecrement}
+				aria-label="Decrement value"
+			>
+				<Icon name="minus" />
 			</Button>
 			<div className="w-80px text-center">{renderValue(value)}</div>
-			<Button color="ghost" onClick={increment} disabled={!canIncrement}>
-				<PlusIcon />
+			<Button
+				color="ghost"
+				onClick={increment}
+				disabled={!canIncrement}
+				aria-label="Increment value"
+			>
+				<Icon name="plus" />
 			</Button>
 		</div>
 	);
