@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.6
+
+### Patch Changes
+
+- e5414be: new icons, replace old icons
+
 ## 2.7.5
 
 ### Patch Changes
