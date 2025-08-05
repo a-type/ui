@@ -96,6 +96,7 @@ export const iconNames = [
 	'textAlignRight',
 	'textAlignCenter',
 	'textJustify',
+	'menu',
 	'paragraph',
 	'highlight',
 	'pushLeft',

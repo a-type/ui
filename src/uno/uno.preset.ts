@@ -254,7 +254,7 @@ export default function presetAtype({
 					}`,
 					'checkbox-fade': `{
 						from { background-color: var(--v-bg-altered,var(--v-bg)); opacity: 1; }
-						to { background-color: transparent; opacity: 0.5; border-color: transparent; }
+						to { background-color: transparent; opacity: 0.9; border-color: transparent; box-shadow: none; }
 					}`,
 				},
 				timingFns: {

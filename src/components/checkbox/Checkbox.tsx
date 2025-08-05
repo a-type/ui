@@ -1,9 +1,9 @@
 'use client';
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
 import classNames from 'clsx';
 import { Ref } from 'react';
+import { Icon } from '../icon/Icon.js';
 
 export interface CheckboxProps extends CheckboxPrimitive.CheckboxProps {
 	/**
@@ -48,7 +48,7 @@ export function CheckboxIndicator({
 			className={classNames('absolute center color-black', className)}
 			{...props}
 		>
-			{children ?? <CheckIcon width={18} height={18} />}
+			{children ?? <Icon name="check" size={16} />}
 		</CheckboxPrimitive.Indicator>
 	);
 }

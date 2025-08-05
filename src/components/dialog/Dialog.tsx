@@ -1,7 +1,6 @@
 'use client';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { useDrag } from '@use-gesture/react';
 import classNames from 'clsx';
@@ -19,6 +18,7 @@ import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
 import { BoxContext } from '../box/Box.js';
 import { Button } from '../button/index.js';
+import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
 import { useConfig } from '../provider/Provider.js';
 import { selectTriggerClassName } from '../select/index.js';
@@ -312,7 +312,7 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 			{...props}
 		>
 			<span>{children}</span>
-			<ChevronDownIcon />
+			<Icon name="chevron" />
 		</DialogPrimitive.Trigger>
 	);
 };
@@ -339,7 +339,7 @@ export const DialogSelectItem = function DialogSelectItem({
 		<DialogSelectItemRoot {...props}>
 			<span className="flex-1">{children}</span>
 			<RadioGroupPrimitive.Indicator className="flex-0-0-auto">
-				<CheckIcon />
+				<Icon name="check" />
 			</RadioGroupPrimitive.Indicator>
 		</DialogSelectItemRoot>
 	);

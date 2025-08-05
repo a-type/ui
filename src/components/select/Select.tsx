@@ -1,10 +1,5 @@
 'use client';
 
-import {
-	CheckIcon,
-	ChevronDownIcon,
-	ChevronUpIcon,
-} from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import classNames from 'clsx';
 import {
@@ -56,7 +51,7 @@ export const SelectItemIndicatorRoot = withClassName(
 export const SelectItemIndicator = withNoNativeRender(
 	(props: SelectPrimitive.SelectItemIndicatorProps) => (
 		<SelectItemIndicatorRoot {...props}>
-			<CheckIcon />
+			<Icon name="check" />
 		</SelectItemIndicatorRoot>
 	),
 );
@@ -167,13 +162,13 @@ export const SelectContent = withPassthroughNativeRender(
 						ref={forwardedRef}
 					>
 						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
-							<ChevronUpIcon />
+							<Icon name="chevron" className="rotate-180" />
 						</SelectPrimitive.ScrollUpButton>
 						<SelectPrimitive.Viewport style={viewportStyle}>
 							{children}
 						</SelectPrimitive.Viewport>
 						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
-							<ChevronDownIcon />
+							<Icon name="chevron" />
 						</SelectPrimitive.ScrollDownButton>
 					</SelectPrimitive.Content>
 				</BoxContext.Provider>
@@ -199,7 +194,7 @@ export const NativeSelect = ({
 				ref={forwardedRef}
 			/>
 			<div className="absolute right-1 top-50% translate-y-[-50%] pointer-events-none">
-				<ChevronDownIcon className="w-4 h-4 m-2" />
+				<Icon name="chevron" className="w-4 h-4 m-2" />
 			</div>
 		</div>
 	);
