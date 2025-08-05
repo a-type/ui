@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.7.5
+
+### Patch Changes
+
+- 564a290: a11y for numberstepper, new icons
+
 ## 2.7.4
 
 ### Patch Changes
