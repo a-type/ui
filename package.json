@@ -6,6 +6,7 @@
 		"/dist",
 		"/src"
 	],
+	"sideEffects": false,
 	"exports": {
 		".": {
 			"import": "./dist/esm/index.js",
@@ -31,7 +32,7 @@
 		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
 		"build:prefix": "node ./scripts/addUnoInclude.js",
 		"build:process": "unocss \"./dist/**/*.js\" -o ./dist/css/main.css --write-transformed -m -c uno.config.js",
-		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:process",
+		"build": "pnpm run build:transpile && pnpm run build:process",
 		"ci:version": "pnpm changeset version",
 		"ci:publish": "pnpm changeset publish --access=public",
 		"prepublish": "pnpm run build",
