@@ -1,5 +1,11 @@
 # @a-type/ui
 
+## 2.8.0
+
+### Minor Changes
+
+- f884350: set sideEffects false in hopes of adding some tree shaking
+
 ## 2.7.6
 
 ### Patch Changes
