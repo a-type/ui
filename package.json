@@ -113,5 +113,13 @@
 		"storybook": "8.4.7",
 		"typescript": "^5.7.2",
 		"unocss": "66.0.0"
+	},
+	"pnpm": {
+		"ignoredBuiltDependencies": [
+			"esbuild"
+		],
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }
