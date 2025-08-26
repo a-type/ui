@@ -32,7 +32,7 @@
 		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
 		"build:prefix": "node ./scripts/addUnoInclude.js",
 		"build:process": "unocss --write-transformed -o ./dist/css/main.css -m -c uno.config.js \"./dist/**/*.js\"",
-		"build": "pnpm run build:transpile && pnpm run build:process && pnpm run build:prefix",
+		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:process",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
 		"storybook": "storybook dev -p 6006",

@@ -27,7 +27,7 @@ export function Avatar({
 				'layer-components:(flex items-center justify-center rounded-lg border-default overflow-hidden w-24px aspect-1 select-none relative bg-white flex-shrink-0)',
 				popIn &&
 					'layer-variants:(animate-pop-in-from-half animate-ease-springy animate-duration-200)',
-				empty && 'layer-components(border-dashed bg-gray-light)',
+				empty && 'layer-components:(border-dashed bg-gray-light)',
 				className,
 			)}
 			{...rest}
