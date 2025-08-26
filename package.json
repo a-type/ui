@@ -31,7 +31,7 @@
 	"scripts": {
 		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
 		"build:prefix": "node ./scripts/addUnoInclude.js",
-		"build:process": "unocss \"./dist/**/*.js\" -o ./dist/css/main.css --write-transformed -m -c uno.config.js",
+		"build:process": "unocss --write-transformed -o ./dist/css/main.css -m -c uno.config.js \"./dist/**/*.js\"",
 		"build": "pnpm run build:transpile && pnpm run build:process && pnpm run build:prefix",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
@@ -112,7 +112,7 @@
 		"react-dom": "19.0.0",
 		"storybook": "8.4.7",
 		"typescript": "^5.7.2",
-		"unocss": "66.0.0"
+		"unocss": "^66.0.0"
 	},
 	"pnpm": {
 		"ignoredBuiltDependencies": [
