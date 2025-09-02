@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
-import { SlotDiv } from '../utility/SlotDiv.js';
-import { withClassName } from '../../hooks.js';
 import { Children, ReactNode, useEffect, useState } from 'react';
+import { withClassName } from '../../hooks.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
 
 export interface MarqueeProps {
 	className?: string;
@@ -26,12 +26,12 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 	return (
 		<div
 			className={clsx(
-				'relative overflow-hidden layer-components:w-full layer-components:h-full',
+				'layer-components:(relative overflow-hidden w-full h-full)',
 				className,
 			)}
 		>
 			<div
-				className="absolute top-0 left-0 h-full w-full overflow-visible flex flex-row transition-transform duration-300"
+				className="layer-components:(absolute top-0 left-0 h-full w-full overflow-visible flex flex-row transition-transform duration-300)"
 				style={{ transform: `translateX(${offset})` }}
 			>
 				{children}
@@ -42,7 +42,7 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 
 const MarqueeItem = withClassName(
 	SlotDiv,
-	'w-full h-full flex-shrink-0 object-cover',
+	'layer-components:(w-full h-full flex-shrink-0 object-cover)',
 );
 
 Marquee.Item = MarqueeItem;
