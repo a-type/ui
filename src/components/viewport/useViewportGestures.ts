@@ -33,6 +33,7 @@ export interface ViewportGestureControlOptions {
 			event: PointerEvent | TouchEvent | MouseEvent | KeyboardEvent;
 		},
 	) => boolean;
+	dragButtons?: number[];
 }
 
 export function useViewportGestureControls(
@@ -110,7 +111,6 @@ export function useViewportGestureControls(
 					return;
 				}
 
-				// by default, viewport pans on middle click drags.
 				viewport.setPanRelative(
 					viewport.viewportDeltaToWorld({
 						x: -state.delta[0],
@@ -129,7 +129,7 @@ export function useViewportGestureControls(
 		{
 			drag: {
 				pointer: {
-					buttons: [1, 2, 3],
+					buttons: options?.dragButtons ?? [1, 2, 3],
 				},
 			},
 		},
