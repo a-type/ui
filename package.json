@@ -6,7 +6,9 @@
 		"/dist",
 		"/src"
 	],
-	"sideEffects": false,
+	"sideEffects": [
+		".*\\.css$"
+	],
 	"exports": {
 		".": {
 			"import": "./dist/esm/index.js",
