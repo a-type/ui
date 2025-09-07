@@ -45,6 +45,24 @@ export function useIsKeyboardOpen() {
 		);
 	}, virtualKeyboardBehavior !== 'displace');
 
+	const [simulateKeyboardOpen, setSimulateKeyboardOpen] = useState<
+		boolean | undefined
+	>(undefined);
+	useEffect(() => {
+		function handleOpen() {
+			setSimulateKeyboardOpen(true);
+		}
+		window.addEventListener('simulate-keyboard-open', handleOpen);
+		function handleClose() {
+			setSimulateKeyboardOpen(false);
+		}
+		window.addEventListener('simulate-keyboard-close', handleClose);
+		return () => {
+			window.removeEventListener('simulate-keyboard-open', handleOpen);
+			window.removeEventListener('simulate-keyboard-close', handleClose);
+		};
+	}, []);
+
 	const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 	useEffect(() => {
 		if (!('virtualKeyboard' in navigator)) {
@@ -65,11 +83,25 @@ export function useIsKeyboardOpen() {
 		};
 	}, []);
 
+	if (simulateKeyboardOpen !== undefined) {
+		return simulateKeyboardOpen;
+	}
+
 	if (virtualKeyboardBehavior === 'displace') {
 		return isViewportConstrained;
 	}
 
 	return isKeyboardOpen;
+}
+
+if (typeof window !== 'undefined') {
+	(window as any).simulateKeyboardOpen = () => {
+		window.dispatchEvent(new Event('simulate-keyboard-open'));
+	};
+
+	(window as any).simulateKeyboardClose = () => {
+		window.dispatchEvent(new Event('simulate-keyboard-close'));
+	};
 }
 
 function useReactToViewportChanges(
