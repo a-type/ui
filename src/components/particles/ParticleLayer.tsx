@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ParticlesProvider } from './ParticleContext.js';
 import { Particles } from './particlesState.js';
@@ -15,8 +15,12 @@ export function ParticleLayer({
 			? null
 			: new Particles({ initialPoolSize: 100 }),
 	);
+	const [clientReady, setClientReady] = useState(false);
+	useEffect(() => {
+		setClientReady(true);
+	}, []);
 
-	if (!particles) {
+	if (!particles || !clientReady) {
 		return null;
 	}
 
