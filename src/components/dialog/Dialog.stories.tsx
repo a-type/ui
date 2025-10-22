@@ -213,3 +213,21 @@ export const MultiNested: Story = {
 		);
 	},
 };
+
+export const Selectable: Story = {
+	render() {
+		return (
+			<Dialog>
+				<Dialog.SelectTrigger>Open</Dialog.SelectTrigger>
+				<Dialog.Content>
+					<Dialog.Title>Hello world</Dialog.Title>
+					<Dialog.SelectList>
+						<Dialog.SelectItem value="option1">Option 1</Dialog.SelectItem>
+						<Dialog.SelectItem value="option2">Option 2</Dialog.SelectItem>
+						<Dialog.SelectItem value="option3">Option 3</Dialog.SelectItem>
+					</Dialog.SelectList>
+				</Dialog.Content>
+			</Dialog>
+		);
+	},
+};

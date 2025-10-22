@@ -324,7 +324,7 @@ export const DialogSelectList = withClassName(
 
 export const DialogSelectItemRoot = withClassName(
 	RadioGroupPrimitive.Item,
-	'layer-components:(flex items-center gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-transparent [&:nth-child(2n+1)]:bg-gray-blend cursor-pointer transition-all)',
+	'layer-components:(color-black flex items-center gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-gray-blend cursor-pointer transition-all)',
 	'layer-components:[&[data-state=checked]]:(bg-primary-wash color-primary-dark)',
 );
 
@@ -337,7 +337,9 @@ export const DialogSelectItem = function DialogSelectItem({
 }) {
 	return (
 		<DialogSelectItemRoot {...props}>
-			<span className="flex-1">{children}</span>
+			<span className="flex-1 flex-row items-center gap-md min-h-18px">
+				{children}
+			</span>
 			<RadioGroupPrimitive.Indicator className="flex-0-0-auto">
 				<Icon name="check" />
 			</RadioGroupPrimitive.Indicator>
