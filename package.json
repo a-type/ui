@@ -106,6 +106,7 @@
 		"@unocss/core": "66.0.0",
 		"@unocss/transformer-variant-group": "66.0.0",
 		"axios": "^1.5.0",
+		"bumpp": "^10.3.1",
 		"change-case": "^4.1.2",
 		"dotenv": "^16.3.1",
 		"fs-extra": "^11.1.1",
