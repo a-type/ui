@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../button/Button.js';
 import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
 
@@ -19,9 +20,11 @@ export const Default: Story = {
 	args: {
 		children: (
 			<>
-				<DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger asChild>
+					<Button>Open</Button>
+				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
-					<DropdownMenu.Item color="destructive">
+					<DropdownMenu.Item color="attention">
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
 						<DropdownMenu.ItemRightSlot>
 							<Icon name="flag" />

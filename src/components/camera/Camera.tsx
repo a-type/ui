@@ -217,7 +217,7 @@ const StyledShutterButton = withClassName(
 	'absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full cursor-pointer border-2 border-black border-solid ring-2 ring-white opacity-80',
 	'hover:bg-gray-wash hover:opacity-100',
 	'focus-visible:bg-lighten-1',
-	'focus:ring-primary focus:outline-none focus:opacity-100',
+	'focus:ring-accent focus:outline-none focus:opacity-100',
 	'sm:w-8 sm:h-8',
 );
 

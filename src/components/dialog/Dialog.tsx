@@ -1,5 +1,3 @@
-'use client';
-
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { useDrag } from '@use-gesture/react';
@@ -25,7 +23,7 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'layer-components:(fixed inset-0 z-dialog-backdrop animate-fade-in animate-duration-200 bg-overlay [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray)',
+	'layer-components:(fixed inset-0 z-backdrop animate-fade-in animate-duration-200 bg-black/15 [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
 );
@@ -33,14 +31,17 @@ const StyledOverlay = withClassName(
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
 	'layer-components:(z-dialog fixed shadow-xl shadow-up bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark)',
-	'layer-components:sm:(shadow-down)',
+	'layer-components:sm:shadow-down',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
-	'layer-components:(animate-dialog-in [&[data-state=closed]]:animate-dialog-out motion-reduce:animate-none)',
+	'layer-components:animate-dialog-in',
+	'layer-components:[&[data-state=closed]]:animate-dialog-out',
 );
 const sheetClassNames = classNames(
-	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 p-6 pt-8 w-full max-w-none pb-[calc(3rem+env(safe-area-inset-bottom,0px))] border-b-0)',
-	'layer-variants:lt-sm:(animate-ease-in animate-fade-in-up [&[data-state=closed]]:animate-fade-out-down)',
+	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 p-6 pt-8 w-full max-w-none)',
+	'layer-variants:lt-sm:pb-[calc(3rem+env(safe-area-inset-bottom,0px))]',
+	'layer-variants:lt-sm:(animate-fade-in-up)',
+	'layer-variants:lt-sm:[&[data-state=closed]]:animate-fade-out-down',
 );
 const sheetClassNameWithOverlayKeyboard = classNames(
 	'layer-variants:lt-sm:(bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))])',

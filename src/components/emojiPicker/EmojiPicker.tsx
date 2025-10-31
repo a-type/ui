@@ -39,7 +39,7 @@ export const EmojiPickerLoading = withClassName(
 	withProps(Core.Loading, {
 		children: <Spinner />,
 	}),
-	'layer-compoennts:(absolute inset-0 flex items-center justify-center bg-inherit)',
+	'layer-components:(absolute inset-0 flex items-center justify-center bg-inherit)',
 );
 export const EmojiPickerEmpty = withClassName(
 	withProps(Core.Empty, {
@@ -53,7 +53,7 @@ export const EmojiPickerCategoryHeader = (
 ) => (
 	<div
 		className={clsx(
-			'layer-components:(bg-inherit px-md py-sm text-xs font-semibold text-gray-dark sticky top-0)',
+			'layer-components:(bg-inherit px-md py-sm text-xs font-semibold color-gray-dark sticky top-0)',
 			props.className,
 		)}
 	>
@@ -65,10 +65,10 @@ export const EmojiPickerRow = withClassName(
 	'layer-components:(scroll-my-xs px-xs)',
 );
 export const EmojiPickerEmoji = withClassName(
-	(p: EmojiPickerListEmojiProps) => (
+	(p: Omit<EmojiPickerListEmojiProps, 'color'>) => (
 		<Button
 			{...p}
-			color="ghost"
+			emphasis="ghost"
 			toggled={p.emoji.isActive}
 			toggleMode="color"
 			size="small"
@@ -119,7 +119,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 			{options.map((option) => (
 				<Button
 					key={option.skinTone}
-					color="ghost"
+					emphasis="ghost"
 					toggled={option.skinTone === skinTone}
 					toggleMode="color"
 					size="small"

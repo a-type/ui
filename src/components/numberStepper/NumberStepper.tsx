@@ -69,7 +69,7 @@ export function NumberStepper({
 			className={classNames(
 				'layer-components:(flex items-center border-solid border border-gray-dark rounded-lg overflow-hidden w-min-content flex-shrink-0 bg-white shadow-sm)',
 				disabled &&
-					'layer-variants:(border-gray-dark-blend bg-transparent shadow-none)',
+					'layer-variants:(border-gray-dark/80 bg-transparent shadow-none)',
 				{
 					'layer-variants:(bg-accent-wash color-black)':
 						!!highlightChange && value !== 1,
@@ -79,7 +79,7 @@ export function NumberStepper({
 			{...rest}
 		>
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				onClick={decrement}
 				disabled={!canDecrement}
 				aria-label="Decrement value"
@@ -88,7 +88,7 @@ export function NumberStepper({
 			</Button>
 			<div className="w-80px text-center">{renderValue(value)}</div>
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				onClick={increment}
 				disabled={!canIncrement}
 				aria-label="Increment value"

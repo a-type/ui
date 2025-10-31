@@ -8,7 +8,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	withProps(Box, { container: 'reset' }),
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-1 color-black shadow-sm)',
+	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-0.5 color-black shadow-sm)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -41,10 +41,13 @@ export function CardMain({
 				!!compact && 'layer-variants:(pb-0)',
 				isInteractive &&
 					classNames(
-						'layer-components:cursor-pointer layer-components:hover:(bg-gray-blend color-black shadow-sm-inset) layer-components:focus:outline-none',
-						'layer-components:focus-visible:(outline-none ring-inset ring-4 ring-gray)',
-						'layer-components:[&[data-visually-focused=true]]:(ring-inset ring-4 ring-gray)',
-						'layer-components:[&[data-visually-disabled=true]]:(cursor-default) layer-components:disabled:(cursor-default)',
+						'layer-components:cursor-pointer',
+						'layer-components:hover:(bg-black/10 color-black)',
+						'layer-components:focus:outline-none',
+						'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-gray)',
+						'layer-components:[&[data-visually-focused=true]]:(bg-black/10 ring-inset ring-4 ring-gray)',
+						'layer-components:disabled:(cursor-default)',
+						'layer-components:[&[data-visually-disabled=true]]:(cursor-default)',
 					),
 				className,
 			)}
@@ -59,14 +62,14 @@ export function CardMain({
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-gray-dark-blend text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1 transition-colors)',
+	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-gray-dark/50 border-t-none border-l-none text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1 transition-colors)',
 	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
 	'layer-components:[[data-interactive=true]:hover>&]:(bg-darken-2)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-light-blend color-black rounded-md mx-2 my-0.5 border border-solid border-gray-dark-blend text-xs relative z-1)',
+	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-white/80 color-black rounded-md mx-2 my-0.5 border border-solid border-gray-dark/50 text-xs relative z-1)',
 	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
 	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
 );
@@ -90,12 +93,12 @@ export const CardFooter = withClassName(
 
 export const CardActions = withClassName(
 	'div',
-	'layer-components:(ml-0 mr-auto flex flex-row gap-2 items-center bg-white rounded-lg p-0 border border-solid border-gray-dark-blend)',
+	'layer-components:(ml-0 mr-auto flex flex-row gap-2 items-center bg-white/50 rounded-lg p-0 border border-solid border-gray-dark/50)',
 );
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-overlay py-0.5 rounded-lg p-0)',
+	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-white/50 py-0.5 rounded-lg p-0)',
 );
 
 export const cardGridColumns = {

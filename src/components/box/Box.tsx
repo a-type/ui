@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { createContext, Ref, useContext, useMemo } from 'react';
+import { PaletteName } from '../../uno/logic/color.js';
 import { ThemeName } from '../colorPicker/ColorPicker.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
@@ -49,13 +50,15 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	wrap?: BoxResponsive<boolean>;
 	p?: BoxResponsive<BoxSpacingSize | boolean>;
 	container?: boolean | 'reset';
-	surface?: boolean | 'primary' | 'accent' | 'default' | 'attention' | 'wash';
+	surface?: boolean;
+	color?: PaletteName;
 	theme?: ThemeName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
 	grow?: boolean;
 	elevated?: ShadowValue;
+	rounded?: 'sm' | 'md' | 'lg' | 'xl' | boolean;
 	ref?: Ref<HTMLDivElement>;
 }
 
@@ -72,6 +75,7 @@ export function Box({
 	container,
 	style: userStyle,
 	surface,
+	color,
 	theme,
 	border,
 	full,
@@ -79,6 +83,7 @@ export function Box({
 	col,
 	grow,
 	elevated,
+	rounded,
 	ref,
 	...rest
 }: BoxProps) {
@@ -103,8 +108,9 @@ export function Box({
 			style={style}
 			className={clsx(
 				'layer-components:flex layer-components:relative',
+				color && `palette-${color}`,
 				{
-					'layer-components:flex-row': hasDefault(direction, 'row'),
+					'layer-components:flex-row': hasDefault(direction, 'row') && !col,
 					'layer-components:flex-col': hasDefault(direction, 'col') || col,
 					'layer-components:flex-row-reverse': hasDefault(
 						direction,
@@ -179,17 +185,19 @@ export function Box({
 					'layer-components:lg:p-md': isResponsive(p) && p.lg === 'md',
 					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
 					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
-					'layer-components:rounded-lg': !!surface,
-					'layer-components:(bg-white border-gray-ink)':
-						surface === true || surface === 'default',
-					'layer-components:(bg-wash border-gray-ink)': surface === 'wash',
-					'layer-components:(bg-primary-wash border-primary-dark color-primary-ink)':
-						surface === 'primary',
-					'layer-components:(bg-accent-wash border-accent-dark color-accent-ink)':
-						surface === 'accent',
-					'layer-components:(bg-attention-wash border-attention-dark color-attention-ink)':
-						surface === 'attention',
-					'layer-components:(border border-solid rounded-lg)': border,
+
+					'layer-components:rounded-sm': rounded === 'sm',
+					'layer-components:rounded-md': rounded === 'md',
+					'layer-components:rounded-lg':
+						rounded === 'lg' ||
+						rounded === true ||
+						(rounded === undefined && (surface || border)),
+					'layer-components:rounded-xl': rounded === 'xl',
+
+					'layer-components:(bg-main-wash bg-darken-1 border-main-dark color-main-ink)':
+						!!surface,
+
+					'layer-components:(border border-solid)': border,
 					'layer-components:w-full': full === true || full === 'width',
 					'layer-components:h-full': full === true || full === 'height',
 					'layer-components:overflow-hidden': overflow === 'hidden',

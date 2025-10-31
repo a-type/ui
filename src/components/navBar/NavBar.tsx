@@ -7,10 +7,9 @@ import { Icon, IconProps } from '../icon/index.js';
 export const navBarItemClass = classNames(
 	'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-sm border-none cursor-pointer text-sm transition-colors h-full gap-6px relative color-black select-none)',
 	'layer-components:active:bg-darken-2',
-	'layer-components:hover:bg-darken-1',
-	'layer-components:focus-visible:(outline-none bg-darken-2 ring-1 ring-primary)',
-	'layer-components:[&[data-active=true]]:(bg-primary-light/50 color-lighten-2 color-black)',
-	'layer-components:([--fill:var(--color-primary)])',
+	'layer-components:hover:(bg-main-light)',
+	'layer-components:focus-visible:(outline-none bg-darken-2 ring-1 ring-accent)',
+	'layer-components:[&[data-active=true]]:(bg-main-light/50 color-lighten-2 color-black)',
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
 
@@ -19,7 +18,7 @@ export interface NavBarItemProps {
 	className?: string;
 	children?: ReactNode;
 	active?: boolean;
-	color?: 'primary' | 'neutral';
+	color?: 'primary' | 'gray';
 }
 
 export const NavBarItem = function NavBarItem({
@@ -27,7 +26,7 @@ export const NavBarItem = function NavBarItem({
 	asChild,
 	className,
 	active,
-	color,
+	color = 'primary',
 	...rest
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLButtonElement>;
@@ -37,15 +36,7 @@ export const NavBarItem = function NavBarItem({
 	return (
 		<Comp
 			ref={ref}
-			className={classNames(
-				navBarItemClass,
-				color === 'neutral' && [
-					'layer-variants:[&[data-active=true]]:(bg-gray/30 color-black)',
-					'layer-variants:([--fill:var(--color-gray)])',
-					'layer-variants:focus-visible:ring-gray',
-				],
-				className,
-			)}
+			className={classNames(navBarItemClass, `palette-${color}`, className)}
 			data-active={active}
 			{...rest}
 		/>
@@ -54,7 +45,8 @@ export const NavBarItem = function NavBarItem({
 
 export const NavBarItemIconWrapper = withClassName(
 	'div',
-	'layer-components:(relative flex) layer-components:md:(p-6px rounded-lg bg-gray-blend)',
+	'layer-components:(relative flex)',
+	'layer-components:md:(p-6px rounded-lg bg-gray-blend)',
 	'layer-variants:md:[*[data-active=true]_&]:bg-[var(--bg)]',
 );
 
@@ -83,8 +75,8 @@ export const NavBarItemIcon = function NavBarItemIcon({
 		<Comp
 			name={name}
 			className={clsx(
-				'layer-components:(relative z-1 flex fill-none color-inherit)',
-				'layer-variants:[*[data-active=true]_&]:fill-[var(--fill)]',
+				'layer-components:(relative z-1 flex color-inherit)',
+				'layer-variants:[*[data-active=true]_&]:fill-main',
 				className,
 			)}
 			{...rest}
@@ -97,7 +89,8 @@ export const NavBarItemIcon = function NavBarItemIcon({
 
 export const NavBarItemPip = withClassName(
 	'div',
-	'layer-components:(absolute top-6px right-6px w-6px h-6px rounded-lg bg-attention shadow-sm)',
+	'palette-attention',
+	'layer-components:(absolute top-6px right-6px w-6px h-6px rounded-lg bg-main shadow-sm)',
 );
 
 export const NavBarRoot = withClassName(

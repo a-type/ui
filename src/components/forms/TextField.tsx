@@ -15,6 +15,7 @@ import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { Input } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
+import { FieldLabel } from './FieldLabel.js';
 
 export type TextFieldProps = {
 	name: string;
@@ -135,9 +136,5 @@ export function TextAreaField({
 
 export const FieldRoot = withClassName(
 	'div',
-	'flex flex-col items-stretch gap-1 self-stretch',
-);
-export const FieldLabel = withClassName(
-	'label',
-	'inline-flex flex-col gap-1 text-sm font-bold color-dark-blend mb-1',
+	'flex flex-col items-stretch gap-xs self-stretch',
 );

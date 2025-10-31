@@ -40,7 +40,7 @@ export function DatePicker({
 		>
 			<MonthRow>
 				<MonthButton
-					color="ghost"
+					emphasis="ghost"
 					onClick={() =>
 						setDisplay((cur) => ({
 							month: cur.month - 1,
@@ -52,7 +52,7 @@ export function DatePicker({
 				</MonthButton>
 				<MonthLabel>{monthLabel}</MonthLabel>
 				<MonthButton
-					color="ghost"
+					emphasis="ghost"
 					onClick={() =>
 						setDisplay((cur) => ({
 							month: cur.month + 1,
@@ -141,7 +141,7 @@ export function DateRangePicker({
 		>
 			<RangeLayout>
 				<MonthButton
-					color="ghost"
+					emphasis="ghost"
 					className="[grid-area:prevMonth]"
 					onClick={() =>
 						setDisplay((cur) => ({
@@ -157,7 +157,7 @@ export function DateRangePicker({
 					{nextMonthLabel}
 				</MonthLabel>
 				<MonthButton
-					color="ghost"
+					emphasis="ghost"
 					className="[grid-area:nextMonth]"
 					onClick={() =>
 						setDisplay((cur) => ({
@@ -209,7 +209,7 @@ const CalendarDay = withClassName(
 	'border border-solid border-transparent bg-white mr--1px mb--1px relative color-black',
 	'flex items-center justify-center transition cursor-pointer',
 	'[&[data-highlighted]]:(z-1 outline-accent)',
-	'hover:(z-1 outline-accent)',
+	'hover:(z-1 outline outline-accent)',
 	'active:(bg-accent-light rounded)',
 	'[&[data-selected]]:(bg-accent z-2 rounded)',
 	'[&[data-in-range]]:(bg-accent-wash bg-darken-2 rounded-none z-1)',

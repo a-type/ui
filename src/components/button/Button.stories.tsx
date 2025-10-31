@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { paletteNames } from '../../uno/logic/color.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
 import { Button } from './Button.js';
@@ -8,14 +9,20 @@ import { ConfirmedButton } from './ConfirmedButton.js';
 const meta = {
 	title: 'Components/Button',
 	component: Button,
-	argTypes: {},
+	argTypes: {
+		color: {
+			control: 'select',
+			options: paletteNames,
+		},
+	},
 	parameters: {
 		controls: { expanded: true },
 	},
 	args: {
 		children: 'Button',
 		loading: false,
-		color: 'default',
+		color: 'gray',
+		emphasis: 'default',
 		size: 'default',
 		visuallyDisabled: false,
 		disabled: false,

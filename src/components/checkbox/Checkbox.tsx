@@ -25,12 +25,13 @@ export function CheckboxRoot({
 		<CheckboxPrimitive.Root
 			{...props}
 			className={classNames(
-				'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border-default transition rounded-lg shadow-sm)',
-				'layer-components:focus-visible:(outline-off ring-4 ring-primary)',
+				'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border border-default transition-all rounded-lg shadow-sm cursor-pointer)',
+				'layer-components:focus-visible:(outline-off ring-4 ring-accent)',
 				checkedMode === 'faded'
-					? 'layer-components:[&[data-state=checked]]:(bg-primary animate-checkbox-fade animate-forwards)'
-					: 'layer-components:[&[data-state=checked]]:(bg-primary border-primary-dark)',
-				'layer-components:[&:hover:not(:disabled)]:shadow-[0_0_0_1px_var(--color-black)]',
+					? 'layer-components:[&[data-state=checked]]:(bg-main animate-checkbox-fade animate-forwards)'
+					: 'layer-components:[&[data-state=checked]]:(bg-main border-main-ink)',
+				'layer-components:[&:hover:not(:disabled)]:(bg-lighten-2 ring-bg ring-2)',
+				'layer-components:[&:active:not(:disabled)]:(bg-darken-1 ring-4)',
 				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
 				className,
 			)}

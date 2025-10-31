@@ -186,7 +186,7 @@ function ImageUploaderPrebuilt({
 
 			<ImageUploaderEmptyControls>
 				<ImageUploaderFileButton />
-				<Button color="ghost" onClick={openCamera}>
+				<Button emphasis="ghost" onClick={openCamera}>
 					<Icon name="camera" />
 					<span>Camera</span>
 				</Button>
@@ -206,7 +206,7 @@ function ImageUploaderPrebuilt({
 					<CameraFullscreenButton />
 					<Button
 						onClick={() => setCameraOpen(false)}
-						color="ghost"
+						emphasis="ghost"
 						size="small"
 						className="color-white absolute top-2 left-2"
 					>
@@ -244,7 +244,7 @@ export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
 	}, [inputId]);
 
 	return (
-		<Button color="ghost" asChild visuallyFocused={focused} {...props}>
+		<Button emphasis="ghost" asChild visuallyFocused={focused} {...props}>
 			<label htmlFor={inputId}>
 				{children ?? (
 					<>
@@ -262,7 +262,7 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 	if (!value) return null;
 	return (
 		<Button
-			color="ghost"
+			emphasis="ghost"
 			className={clsx(
 				'layer-variants:(absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm z-10)',
 				className,
@@ -306,10 +306,9 @@ export function ImageUploaderEmptyControls({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg)',
+				'layer-components:(absolute bg-gray-light inset-0 flex flex-col items-center justify-center gap-3 rounded-lg)',
 				{
-					'layer-components:bg-[rgba(0,0,0,0.05)]': !draggingOver,
-					'layer-components:bg-[rgba(0,0,0,0.1)]': draggingOver,
+					'layer-components:bg-darken-2': draggingOver,
 				},
 				className,
 			)}

@@ -68,17 +68,25 @@ function DemoUI({ className }: { className?: string }) {
 			<PageContent>
 				<div className={clsx('grid gap-2 grid-cols-2')}>
 					<Box gap wrap p>
-						<Button color="primary">Primary</Button>
-						<Button color="accent">Accent</Button>
+						<Button color="primary" emphasis="primary">
+							Primary
+						</Button>
+						<Button color="accent" emphasis="primary">
+							Accent
+						</Button>
 						<Button>Default</Button>
-						<Button color="contrast">Contrast</Button>
-						<Button color="destructive">Destructive</Button>
-						<Button color="ghost">Ghost</Button>
-						<Button color="ghostAccent">Ghost Accent</Button>
-						<Button size="small" color="destructive">
+						<Button emphasis="contrast">Contrast</Button>
+						<Button color="attention" emphasis="primary">
+							Destructive
+						</Button>
+						<Button emphasis="ghost">Ghost</Button>
+						<Button color="accent" emphasis="ghost">
+							Ghost Accent
+						</Button>
+						<Button size="small" color="attention" emphasis="primary">
 							Destructive Small
 						</Button>
-						<Button size="small" color="ghostDestructive">
+						<Button size="small" color="attention" emphasis="ghost">
 							Ghost Destructive Small
 						</Button>
 					</Box>
@@ -122,7 +130,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Card.Footer>
 								<Card.Actions>
 									<Button size="small">Action 1</Button>
-									<Button size="small" color="ghost">
+									<Button size="small" emphasis="ghost">
 										<Icon name="placeholder" />
 									</Button>
 								</Card.Actions>
@@ -136,7 +144,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Card.Footer>
 								<Card.Actions>
 									<Button size="small">Action 1</Button>
-									<Button size="small" color="ghost">
+									<Button size="small" emphasis="ghost">
 										<Icon name="placeholder" />
 									</Button>
 								</Card.Actions>
@@ -239,15 +247,16 @@ function DemoUI({ className }: { className?: string }) {
 						onChange={() => {}}
 					/>
 					<Progress value={50} className="m-auto" />
-					<Box surface="primary" p gap d="col">
+					<Box surface color="primary" p gap d="col">
 						<H1>Primary surface</H1>
 						<H2>Primary surface</H2>
 						<H3>Primary surface</H3>
 						<div>Primary surface</div>
-						<Button color="ghost">Ghost</Button>
+						<Button emphasis="ghost">Ghost</Button>
 					</Box>
 					<Box
-						surface="accent"
+						surface
+						color="accent"
 						p
 						d="col"
 						className="max-h-200px"
@@ -271,13 +280,14 @@ function DemoUI({ className }: { className?: string }) {
 						<TextSkeleton maxLength={10} />
 						Accent surface
 					</Box>
-					<Box surface="default" p d="col">
+					<Box surface p d="col">
 						Default surface
 					</Box>
-					<Box surface="attention" p d="col">
+					<Box surface color="attention" p d="col">
 						<H2>Attention surface</H2>
 						<H3>Attention surface</H3>
 						Attention surface
+						<Button emphasis="ghost">Ghost</Button>
 					</Box>
 					<Box>
 						<Note>Note note</Note>
@@ -303,7 +313,7 @@ function DemoUI({ className }: { className?: string }) {
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 1 long</NavBarItemText>
 					</NavBarItem>
-					<NavBarItem active={true}>
+					<NavBarItem active>
 						<NavBarItemIconWrapper>
 							<NavBarItemIcon asChild>
 								<Icon name="book" />
@@ -312,7 +322,15 @@ function DemoUI({ className }: { className?: string }) {
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />
 					</NavBarItem>
-					<NavBarItem color="neutral" active={true}>
+					<NavBarItem color="gray">
+						<NavBarItemIconWrapper>
+							<NavBarItemIcon asChild>
+								<Icon name="book" />
+							</NavBarItemIcon>
+						</NavBarItemIconWrapper>
+						<NavBarItemText>Neutral</NavBarItemText>
+					</NavBarItem>
+					<NavBarItem color="gray" active>
 						<NavBarItemIconWrapper>
 							<NavBarItemIcon asChild>
 								<Icon name="book" />
@@ -337,7 +355,7 @@ export const Nesting: Story = {
 	render() {
 		return (
 			<Box d="col" p gap>
-				<Box d="row" gap surface="primary">
+				<Box d="row" gap surface color="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
 				<DemoUI className="theme-eggplant override-dark flex-1" />
@@ -378,25 +396,21 @@ export const Override: Story = {
 export const Custom: Story = {
 	render() {
 		const [theme, setTheme] = useState({
-			'--dyn-primary-source': 70,
-			'--dyn-accent-source': 290,
+			'--p-primary-hue': 70,
+			'--p-accent-hue': 290,
 			'--global-saturation': 0.5,
 			'--global-border-scale': 1.5,
 			'--global-spacing-scale': 1,
 			'--global-corner-scale': 1,
-			'--dyn-primary-hue-rotate': 0,
-			'--dyn-accent-hue-rotate': 0,
 		});
 		const reroll = () => {
 			setTheme({
-				'--dyn-primary-source': Math.floor(Math.random() * 360),
-				'--dyn-accent-source': Math.floor(Math.random() * 360),
+				'--p-primary-hue': Math.floor(Math.random() * 360),
+				'--p-accent-hue': Math.floor(Math.random() * 360),
 				'--global-saturation': Math.random(),
 				'--global-border-scale': Math.random() * 2,
 				'--global-spacing-scale': Math.random() * 2,
 				'--global-corner-scale': Math.random() * 1.25,
-				'--dyn-primary-hue-rotate': Math.random() * 4 - 2,
-				'--dyn-accent-hue-rotate': Math.random() * 4 - 2,
 			});
 		};
 		return (

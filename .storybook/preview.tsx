@@ -39,12 +39,12 @@ const preview: Preview = {
 		},
 		saturation: {
 			description: 'Color saturation',
-			defaultValue: '40',
+			defaultValue: '50',
 			type: 'number',
 			toolbar: {
 				title: 'Saturation',
 				icon: 'contrast',
-				items: ['0', '10', '15', '20', '40', '60', '80', '100'],
+				items: ['0', '10', '25', '50', '75', '100'],
 				dynamicTitle: true,
 			},
 		},

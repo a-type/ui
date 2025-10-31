@@ -169,11 +169,11 @@ export function HorizontalList({
 					>
 						<Button
 							onClick={toggleOpen}
-							color="ghost"
+							emphasis="ghost"
 							className={clsx(
-								'flex-shrink-0 bg-[var(--scroll-bg)] sticky left-0 top-2 z-1',
+								'layer-variants:(flex-shrink-0 sticky left-0 top-2 z-1)',
 								!open &&
-									'rounded-none h-full border-r border-r-solid border-r-gray',
+									'layer-variants:(rounded-none h-full border-r border-r-solid border-r-gray)',
 							)}
 						>
 							<Icon

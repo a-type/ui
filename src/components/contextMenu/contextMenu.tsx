@@ -23,7 +23,7 @@ export const ContextMenuContent = function Content({
 						'layer-components:transform-origin-[var(--radix-context-menu-transform-origin)]',
 						'layer-components:[&[data-state=open]]:animate-popover-in',
 						'layer-components:[&[data-state=closed]]:animate-popover-out',
-						'layer-components:(max-h-[var(--radix-context-menu-content-available-height)] overflow-y-auto)',
+						'layer-components:(max-h-[var(--radix-context-menu-content-available-height)] overflow-y-auto overflow-unstable)',
 						'important:motion-reduce:animate-none',
 						className,
 					)}
@@ -47,7 +47,7 @@ export const ContextMenuArrow = withClassName(
 
 export const ContextMenuItem = withClassName(
 	ContextMenuPrimitive.Item,
-	'layer-components:(flex items-center py-1 px-2 relative pl-25px select-none outline-none cursor-pointer)',
+	'layer-components:(flex items-center overflow-hidden min-h-touch py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
 	'layer-components:(hover:(bg-gray bg-lighten-3) [&[data-highlighted=true]]:(bg-gray bg-lighten-3) [&[data-disabled=true]]:(opacity-50 cursor-default) disabled:(opacity-50 cursor-default))',
 );
 

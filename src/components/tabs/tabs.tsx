@@ -6,20 +6,27 @@ export const TabsRoot = withClassName(TabsPrimitive.Root, '');
 
 export const TabsList = withClassName(
 	TabsPrimitive.List,
-	'flex flex-row flex-wrap py-2 px-2 items-start gap-2',
+	'layer-components:(flex flex-row items-start gap-2)',
+	'layer-components:(border border-thin border-color rounded-xl)',
+	'layer-components:(shadow-sm bg-white)',
+	'layer-components:(overflow-x-auto overflow-unstable w-max-content max-w-full)',
 );
 
 export const TabsTriggerBase = withClassName(
 	TabsPrimitive.Trigger,
-	'layer-components:(flex flex-row items-center cursor-pointer justify-center gap-2 color-black py-1 px-5 bg-wash text-md min-w-100px rounded-lg border-default font-semibold color-gray-ink border-gray-dark transition-all cursor-pointer select-none font-inherit flex-shrink-0 shadow-sm)',
-	'layer-components:hover:(bg-darken-1 ring-4 ring-bg)',
-	'layer-components:focus-visible:(bg-darken-1 ring-4 ring-bg outline-off)',
-	'[&[data-state=active]]:(bg-[var(--bg)] font-semibold color-black cursor-default hover:bg-darken-1 relative z-1)',
+	'layer-components:(flex flex-row items-center justify-center gap-2 py-xs px-lg)',
+	'layer-components:(transition-all cursor-pointer select-none)',
+	'layer-components:(text-center text-md font-semibold color-gray-ink font-inherit text-nowrap)',
+	'layer-components:(min-w-100px min-h-touch flex-shrink-0)',
+	'layer-components:(bg-transparent border border-transparent rounded-lg)',
+	'layer-components:hover:[&[data-state=inactive]]:(bg-gray-light bg-darken-1 ring-4 ring-bg)',
+	'layer-components:focus-visible:(bg-darken-1 ring-4 ring-accent-dark outline-off border border-black)',
+	'[&[data-state=active]]:(cursor-default border-gray-dark relative z-1)',
 );
 
 const colorClasses = {
-	default: 'layer-variants:([--bg:var(--color-white)])',
-	primary: 'layer-variants:([--bg:var(--color-primary)])',
+	default: 'layer-variants:[&[data-state=active]]:(bg-gray)',
+	primary: 'layer-variants:[&[data-state=active]]:(bg-main-light)',
 };
 
 export interface TabsTriggerProps

@@ -17,7 +17,7 @@ const meta = {
 				<Icon name="pencil" />
 				Edit
 			</ActionButton>,
-			<ActionButton key="3" color="accent">
+			<ActionButton key="3" color="accent" emphasis="primary">
 				<Icon name="globe" />
 				Publish
 			</ActionButton>,
@@ -49,7 +49,7 @@ export const Default: Story = {};
 export const OnBackground: Story = {
 	render: (args) => {
 		return (
-			<Box surface="accent" overflow="hidden">
+			<Box color="accent" surface overflow="hidden">
 				<ActionBar {...args} />
 			</Box>
 		);

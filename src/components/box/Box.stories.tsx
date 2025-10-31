@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { paletteNames } from '../../uno/logic/color.js';
 import { Button } from '../button/Button.js';
+import { Checkbox } from '../checkbox/Checkbox.js';
+import { Progress } from '../progress/Progress.js';
+import { Slider } from '../slider/Slider.js';
+import { Switch } from '../switch/Switch.js';
+import { ToggleGroup } from '../toggleGroup/toggleGroup.js';
 import { Box } from './Box.js';
 
 const meta = {
@@ -47,9 +53,9 @@ const meta = {
 		container: {
 			type: 'boolean',
 		},
-		theme: {
+		color: {
 			type: 'string',
-			options: ['lemon', 'leek', 'tomato', 'eggplant', 'blueberry', 'salt'],
+			options: paletteNames,
 			control: {
 				type: 'select',
 			},
@@ -60,18 +66,6 @@ const meta = {
 			},
 		},
 	},
-	args: {
-		children: (
-			<>
-				<Button color="primary">Primary</Button>
-				<Button color="accent">Accent</Button>
-				<Button>Default</Button>
-			</>
-		),
-		p: 'md',
-		gap: 'md',
-		border: true,
-	},
 	parameters: {
 		controls: { expanded: true },
 	},
@@ -81,27 +75,85 @@ export default meta;
 
 type Story = StoryObj<typeof Box>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	args: {
+		children: (
+			<>
+				<Button emphasis="primary">Primary</Button>
+				<Button emphasis="ghost">Ghost</Button>
+				<Button>Default</Button>
+			</>
+		),
+		p: 'md',
+		gap: 'md',
+		border: true,
+	},
+};
 
 export const NestedContainers: Story = {
 	render(args) {
 		return (
-			<Box {...args} container surface="accent" direction="col">
-				<Box {...args} container surface="primary">
-					<Box {...args} surface="default">
+			<Box {...args} container surface color="accent" direction="col">
+				<Box {...args} container surface color="primary">
+					<Box {...args} surface>
 						<Button>Button</Button>
 						<Button>Button</Button>
 					</Box>
-					<Box {...args} surface="attention">
+					<Box {...args} surface color="attention">
 						<Button>Button</Button>
 						<Button>Button</Button>
 					</Box>
 				</Box>
-				<Box {...args} surface="wash">
+				<Box {...args} surface color="gray">
 					<Button>Button</Button>
 					<Button>Button</Button>
 				</Box>
 			</Box>
+		);
+	},
+};
+
+function SurfaceContent({ name }: { name: string }) {
+	return (
+		<>
+			<div>{name} Surface</div>
+			<Box gap layout="center start">
+				<Button emphasis="primary">Primary</Button>
+				<Checkbox checked />
+				<Switch checked />
+			</Box>
+			<Progress value={50} className="w-full" />
+			<ToggleGroup type="single" defaultValue="one">
+				<ToggleGroup.Item value="one">One</ToggleGroup.Item>
+				<ToggleGroup.Item value="two">Two</ToggleGroup.Item>
+			</ToggleGroup>
+			<Slider defaultValue={[30]} className="w-full" />
+		</>
+	);
+}
+export const Surfaces: Story = {
+	render(args) {
+		return (
+			<div className="grid gap-lg grid-cols-3" {...args}>
+				<Box surface p="lg" col gap>
+					<SurfaceContent name="Default" />
+				</Box>
+				<Box surface color="primary" p="lg" col gap>
+					<SurfaceContent name="Primary" />
+				</Box>
+				<Box surface color="accent" p="lg" col gap>
+					<SurfaceContent name="Accent" />
+				</Box>
+				<Box surface color="gray" p="lg" col gap>
+					<SurfaceContent name="Gray" />
+				</Box>
+				<Box surface color="attention" p="lg" col gap>
+					<SurfaceContent name="Attention" />
+				</Box>
+				<Box surface color="success" p="lg" col gap>
+					<SurfaceContent name="Success" />
+				</Box>
+			</div>
 		);
 	},
 };

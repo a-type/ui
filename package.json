@@ -70,8 +70,8 @@
 		"@radix-ui/react-toggle-group": "^1.1.1",
 		"@radix-ui/react-tooltip": "^1.1.5",
 		"@react-spring/web": "^9.7.5",
-		"@unocss/preset-mini": "66.0.0",
-		"@unocss/preset-wind3": "66.0.0",
+		"@unocss/preset-mini": "66.5.4",
+		"@unocss/preset-wind3": "66.5.4",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
 		"calendar-blocks": "^0.3.1",
@@ -102,9 +102,9 @@
 		"@types/react-dom": "^19.0.2",
 		"@types/react-is": "^19.0.0",
 		"@types/w3c-image-capture": "^1.0.10",
-		"@unocss/cli": "66.0.0",
-		"@unocss/core": "66.0.0",
-		"@unocss/transformer-variant-group": "66.0.0",
+		"@unocss/cli": "66.5.4",
+		"@unocss/core": "66.5.4",
+		"@unocss/transformer-variant-group": "66.5.4",
 		"axios": "^1.5.0",
 		"bumpp": "^10.3.1",
 		"change-case": "^4.1.2",
@@ -115,7 +115,7 @@
 		"react-dom": "19.0.0",
 		"storybook": "8.4.7",
 		"typescript": "^5.7.2",
-		"unocss": "^66.0.0"
+		"unocss": "^66.5.4"
 	},
 	"pnpm": {
 		"ignoredBuiltDependencies": [

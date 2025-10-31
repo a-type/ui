@@ -48,3 +48,25 @@ export const Default: Story = {
 		);
 	},
 } satisfies Story;
+
+export const WithManyTabs: Story = {
+	render: (args) => {
+		const [value, setValue] = useState('tab1');
+		return (
+			<TabsRoot value={value} onValueChange={setValue}>
+				<TabsList>
+					{Array.from({ length: 20 }).map((_, i) => (
+						<TabsTrigger key={i} value={`tab${i + 1}`} color={args.color}>
+							Tab {i + 1}
+						</TabsTrigger>
+					))}
+				</TabsList>
+				{Array.from({ length: 20 }).map((_, i) => (
+					<TabsContent key={i} value={`tab${i + 1}`}>
+						<div>Tab {i + 1} content</div>
+					</TabsContent>
+				))}
+			</TabsRoot>
+		);
+	},
+} satisfies Story;

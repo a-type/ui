@@ -3,7 +3,10 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { PaletteName } from '../../uno/logic/color.js';
 import { BoxContext } from '../box/Box.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
+import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
 
 const StyledContent = withClassName(
 	function DropdownMenuContent(
@@ -15,7 +18,7 @@ const StyledContent = withClassName(
 			</BoxContext.Provider>
 		);
 	},
-	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-gray-dark)',
+	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-gray-dark flex flex-col)',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
 	'layer-components:[&[data-state=open]]:animate-popover-in',
 	'layer-components:[&[data-state=closed]]:animate-popover-out',
@@ -24,32 +27,28 @@ const StyledContent = withClassName(
 	'will-change-transform',
 );
 const itemClassName = classNames(
-	'layer-components:(text-md leading-4 color-black flex items-center pr-4 pl-8 py-2 relative text-left select-none cursor-pointer)',
-	'layer-components:[&[data-disabled]]:(color-gray-dark pointer-events-none)',
-	'layer-components:focus-visible:(bg-gray bg-lighten-3 color-black)',
-	'layer-components:hover:(bg-gray bg-lighten-3 color-black)',
+	'layer-components:(text-md leading-4 color-main-ink flex items-center pr-4 pl-8 py-sm min-h-touch relative text-left select-none cursor-pointer)',
+	'layer-components:[&[data-disabled]]:(color-gray-dark bg-white pointer-events-none)',
+	'layer-components:focus-visible:(bg-main-wash bg-darken-1 color-black)',
+	'layer-components:hover:(bg-main-wash bg-darken-1 color-black)',
 	'layer-components:focus:outline-none',
 );
 const StyledItemBase = withClassName(DropdownMenuPrimitive.Item, itemClassName);
 export interface DropdownMenuItemProps
 	extends DropdownMenuPrimitive.DropdownMenuItemProps {
-	color?: 'default' | 'destructive';
+	color?: PaletteName;
 	ref?: Ref<HTMLDivElement>;
 }
 const StyledItem = ({
 	ref: forwardedRef,
 	className,
-	color,
+	color = 'gray',
 	...props
 }: DropdownMenuItemProps) => {
 	return (
 		<StyledItemBase
 			{...props}
-			className={clsx(
-				color === 'destructive' &&
-					'layer-variants:(color-attention-dark hover:bg-attention-light focus-visible:bg-attention-light)',
-				className,
-			)}
+			className={clsx(color && `palette-${color}`, className)}
 			ref={forwardedRef}
 		/>
 	);
@@ -92,7 +91,6 @@ const StyledPortal = DropdownMenuPrimitive.Portal;
 
 // Exports
 export const DropdownMenuRoot = DropdownMenuPrimitive.Root;
-export const DropdownMenuTrigger = StyledTrigger;
 export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
 export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
@@ -101,6 +99,20 @@ export const DropdownMenuItemIndicator = StyledItemIndicator;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuArrow = StyledArrow;
+
+export function DropdownMenuTrigger(
+	props: DropdownMenuPrimitive.DropdownMenuTriggerProps,
+) {
+	return (
+		<DropdownTriggerProvider>
+			<StyledTrigger {...props} />
+		</DropdownTriggerProvider>
+	);
+}
+export const DropdownMenuTriggerIcon = withClassName(
+	SlotDiv,
+	'layer-components:[[data-state=open]>&]:rotate-180 layer-components:transition-transform',
+);
 
 export const DropdownMenuContent = ({
 	children,
@@ -112,7 +124,9 @@ export const DropdownMenuContent = ({
 	return (
 		<StyledPortal forceMount={forceMount}>
 			<StyledContent {...props}>
-				<div className="overflow-hidden rounded-md">{children}</div>
+				<div className="layer-components:(overflow-y-auto overflow-unstable max-h-full rounded-md min-h-0)">
+					{children}
+				</div>
 				<StyledArrow />
 			</StyledContent>
 		</StyledPortal>
@@ -123,7 +137,7 @@ export const DropdownMenuItemRightSlot = withClassName('div', 'ml-auto pl-md');
 
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
 	Content: DropdownMenuContent,
-	Trigger: StyledTrigger,
+	Trigger: DropdownMenuTrigger,
 	Item: StyledItem,
 	CheckboxItem: StyledCheckboxItem,
 	RadioGroup: DropdownMenuPrimitive.RadioGroup,
@@ -133,4 +147,5 @@ export const DropdownMenu = Object.assign(DropdownMenuRoot, {
 	Separator: StyledSeparator,
 	Arrow: StyledArrow,
 	ItemRightSlot: DropdownMenuItemRightSlot,
+	TriggerIcon: DropdownMenuTriggerIcon,
 });

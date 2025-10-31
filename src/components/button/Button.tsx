@@ -1,29 +1,21 @@
 import { Slot } from '@radix-ui/react-slot';
-import classNames, { clsx } from 'clsx';
+import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import { ButtonHTMLAttributes, memo, Ref, useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import { PaletteName } from '../../uno/logic/color.js';
+import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
+import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
 import { getButtonClassName } from './classes.js';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	color?:
-		| 'primary'
-		| 'default'
-		| 'ghost'
-		| 'destructive'
-		| 'ghostDestructive'
-		| 'ghostAccent'
-		| 'accent'
-		| 'contrast'
-		| 'unstyled';
-	/**
-	 * icon and icon-small are deprecated.
-	 */
-	size?: 'default' | 'small' | 'icon' | 'icon-small';
+	color?: PaletteName;
+	emphasis?: 'primary' | 'default' | 'ghost' | 'contrast' | 'unstyled';
+	size?: 'default' | 'small';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';
@@ -38,6 +30,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function ButtonRoot({
 	className,
 	color,
+	emphasis = 'default',
 	size,
 	toggled,
 	toggleMode = 'color-and-indicator',
@@ -58,6 +51,9 @@ export function ButtonRoot({
 	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
+	const isDropdownTrigger = useIsDropdownTrigger();
+	console.log('isDropdownTrigger', isDropdownTrigger);
+
 	const finalRef = useMergedRef(useAnnotateWithChildParts(), ref);
 
 	const buttonProps = {
@@ -69,9 +65,10 @@ export function ButtonRoot({
 		'data-size': size,
 		'data-loading': isLoading,
 		tabIndex: visuallyDisabled ? -1 : undefined,
-		className: classNames(
+		className: clsx(
 			getButtonClassName({
 				color,
+				emphasis,
 				size,
 				toggleable:
 					toggled !== undefined &&
@@ -119,6 +116,11 @@ export function ButtonRoot({
 						<ButtonToggleIndicator value={toggled} />
 					)}
 				{children}
+				{isDropdownTrigger && (
+					<DropdownMenuTriggerIcon asChild>
+						<Icon name="chevron" />
+					</DropdownMenuTriggerIcon>
+				)}
 			</Comp>
 		</IconLoadingProvider>
 	);

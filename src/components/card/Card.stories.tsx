@@ -51,7 +51,7 @@ export const Default: Story = {
 						</Button>
 					</CardActions>
 					<CardMenu>
-						<Button size="small" color="ghost">
+						<Button size="small" emphasis="ghost">
 							<Icon name="dots" />
 						</Button>
 					</CardMenu>
@@ -68,7 +68,7 @@ export const Default: Story = {
 				<CardFooter>
 					<CardActions>
 						<Button size="small">Button</Button>
-						<Button size="small" color="ghost">
+						<Button size="small" emphasis="ghost">
 							<Icon name="placeholder" />
 						</Button>
 					</CardActions>

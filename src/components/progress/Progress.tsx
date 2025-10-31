@@ -1,5 +1,7 @@
 import * as ProgressPrimitive from '@radix-ui/react-progress';
+import clsx from 'clsx';
 import { withClassName } from '../../hooks.js';
+import { PaletteName } from '../../uno/logic/color.js';
 
 export const ProgressRoot = withClassName(
 	ProgressPrimitive.Root,
@@ -7,9 +9,8 @@ export const ProgressRoot = withClassName(
 );
 export const ProgressIndicator = withClassName(
 	ProgressPrimitive.Indicator,
-	'layer-components:(bg-primary w-full h-6px translate-x-[calc(-100%*(1-var(--value)))] rounded-lg transition-transform)',
-	'layer-components:[&[data-state=complete]]:(bg-accent)',
-	'layer-variants:[&[data-color=accent]]:(bg-accent)',
+	'layer-components:(bg-main w-full h-6px translate-x-[calc(-100%*(1-var(--value)))] rounded-lg transition-transform)',
+	'layer-components:[&[data-state=complete]]:(bg-success)',
 );
 
 const ProgressBase = function ProgressBase({
@@ -18,15 +19,21 @@ const ProgressBase = function ProgressBase({
 	color,
 	max = 100,
 	value,
+	className,
 	...props
 }: ProgressPrimitive.ProgressProps & {
 	ref?: React.Ref<HTMLDivElement>;
-	color?: 'accent';
+	color?: PaletteName;
 }) {
 	return (
-		<ProgressRoot {...props} value={value} max={max} ref={ref}>
+		<ProgressRoot
+			{...props}
+			className={clsx(color && `palette-${color}`, className)}
+			value={value}
+			max={max}
+			ref={ref}
+		>
 			<ProgressIndicator
-				data-color={color}
 				// @ts-ignore
 				style={{ '--value': (value || 0) / max }}
 			/>

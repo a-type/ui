@@ -1,0 +1,55 @@
+import { Preflight } from 'unocss';
+import { preflight } from './_util.js';
+
+export const globalPreflight: Preflight = preflight({
+	getCSS: () => `
+:root {
+	--font-sans: "Inter", sans-serif;
+	--font-serif: "Domine", serif;
+	--font-title: "Inter", sans-serif;
+	--font-default: var(--font-sans, sans-serif);
+
+	--z-nowPlaying: 40;
+	--z-nav: 50;
+	--z-menu: 100;
+	--z-menuTrigger: 101;
+	--z-backdrop: 900;
+	--z-dialog: 1000;
+	--z-tooltip: 10000;
+	--z-overdraw: 100000;
+
+	--un-shadow-color: #000000;
+	--un-shadow-opacity: 10%;
+
+	--arrow-size: 1rem;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-default);
+	font-size: 16px;
+	min-height: 100%;
+	--webkit-font-smoothing: antialiased;
+}
+
+body {
+	overflow: overlay;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+}
+
+@property --v-shadow-y-mult {
+	syntax: "*";
+	inherits: false;
+}
+`,
+});

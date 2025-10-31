@@ -103,8 +103,8 @@ export function EditableText({
 			className={clsx(
 				inputClassName,
 				'layer-variants:(border-transparent bg-transparent w-auto inline-flex items-center gap-2 font-size-inherit color-inherit shadow-none text-left)',
-				'layer-variants:hover:(bg-gray-blend)',
-				'layer-variants:focus-visible:(outline-none bg-gray-dark-blend)',
+				'layer-variants:hover:(bg-main-light/80)',
+				'layer-variants:focus-visible:(outline-none bg-main-light/80 ring-2 ring-accent)',
 				'cursor-pointer',
 				className,
 			)}
@@ -112,7 +112,7 @@ export function EditableText({
 			{...rest}
 		>
 			{value}
-			<Icon name="pencil" className="stroke-gray-blend opacity-50" />
+			<Icon name="pencil" className="stroke-main-dark opacity-50" />
 		</button>
 	);
 }
