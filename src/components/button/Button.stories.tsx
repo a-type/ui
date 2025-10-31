@@ -44,6 +44,9 @@ export const Default: Story = {
 					{args.children}
 				</Button>
 				<Button {...args} size="small" />
+				<Button {...args}>
+					<Icon name="placeholder" />
+				</Button>
 			</Box>
 		);
 	},
@@ -66,6 +69,17 @@ export const IconOnly: Story = {
 	},
 };
 
+export const IconTransition: Story = {
+	render: (args) => {
+		const [toggled, setToggled] = useState(false);
+		return (
+			<Button {...args} onClick={() => setToggled((v) => !v)}>
+				{toggled ? <Icon name="check" /> : 'no icon'}
+			</Button>
+		);
+	},
+};
+
 export const Toggled: Story = {
 	render: (args) => {
 		const [on, setOn] = useState(false);
@@ -79,10 +93,10 @@ export const Alignment: Story = {
 		return (
 			<div className="col">
 				<div className="row border-default">
-					<Button size="small" {...args}>
+					<Button {...args} size="small">
 						Button
 					</Button>
-					<Button size="small" {...args}>
+					<Button {...args} size="small">
 						<Icon name="placeholder" />
 					</Button>
 				</div>
@@ -123,6 +137,11 @@ export const FragmentTest: Story = {
 					<>
 						<Icon name="placeholder" />
 						{args.children}
+					</>
+				</Button>
+				<Button>
+					<>
+						<Icon name="placeholder" />
 					</>
 				</Button>
 			</Box>

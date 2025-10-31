@@ -1,7 +1,15 @@
 import { Slot } from '@radix-ui/react-slot';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
-import { ButtonHTMLAttributes, memo, Ref, useCallback, useState } from 'react';
+import {
+	ButtonHTMLAttributes,
+	Children,
+	memo,
+	ReactNode,
+	Ref,
+	useCallback,
+	useState,
+} from 'react';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { PaletteName } from '../../uno/logic/color.js';
@@ -51,8 +59,11 @@ export function ButtonRoot({
 	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
+	const childArray = Children.toArray(children);
+	const iconChildCount = childArray.filter(isIconChild).length;
+	const hasLabelChild = childArray.length > iconChildCount;
+
 	const isDropdownTrigger = useIsDropdownTrigger();
-	console.log('isDropdownTrigger', isDropdownTrigger);
 
 	const finalRef = useMergedRef(useAnnotateWithChildParts(), ref);
 
@@ -64,6 +75,9 @@ export function ButtonRoot({
 		'data-focus': visuallyFocused,
 		'data-size': size,
 		'data-loading': isLoading,
+		'data-has-label': hasLabelChild || undefined,
+		'data-icon-count': iconChildCount > 0 ? iconChildCount : undefined,
+		'data-dropdown-trigger': isDropdownTrigger ? true : undefined,
 		tabIndex: visuallyDisabled ? -1 : undefined,
 		className: clsx(
 			getButtonClassName({
@@ -199,4 +213,15 @@ function applyPartAttributes(button: HTMLButtonElement) {
 	button.setAttribute('data-has-icon', String(registry.icon > 0));
 	button.setAttribute('data-has-label', String(registry.label > 0));
 	button.setAttribute('data-icon-count', String(registry.icon));
+}
+
+function isIconChild(child: ReactNode): boolean {
+	if (typeof child !== 'object' || child === null) return false;
+	if ('type' in child) {
+		const type = (child as any).type;
+		if (type === ButtonIcon) return true;
+		if (type === Icon) return true;
+		if (typeof type === 'function' && type.displayName === 'Icon') return true;
+	}
+	return false;
 }
