@@ -244,7 +244,7 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 	if (devices.length === 2) {
 		return (
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				className="absolute bottom-2 left-2 color-white"
 				onClick={swapCamera}
 			>
@@ -259,7 +259,10 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 			onValueChange={selectDeviceId}
 		>
 			<Select.Trigger asChild>
-				<Button color="ghost" className="absolute bottom-2 left-2 color-white">
+				<Button
+					emphasis="ghost"
+					className="absolute bottom-2 left-2 color-white"
+				>
 					<Icon name="refresh" />
 				</Button>
 			</Select.Trigger>
@@ -279,7 +282,7 @@ export const CameraFullscreenButton = (props: ButtonProps) => {
 	return (
 		<Button
 			{...props}
-			color="ghost"
+			emphasis="ghost"
 			className="absolute top-2 right-2 color-white"
 			onClick={() => setFullscreen(!fullscreen)}
 		>

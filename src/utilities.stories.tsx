@@ -30,14 +30,16 @@ export const AnchorPosition: Story = {
 					Button
 				</Button>
 				<Box
-					surface="primary"
+					color="primary"
+					surface
 					p
 					className="fixed anchor-to-demo left-[anchor(right)] top-[anchor(bottom)]"
 				>
 					Anchored to button
 				</Box>
 				<Box
-					surface="accent"
+					color="accent"
+					surface
 					p
 					className="anchor-to-container fixed right-[anchor(right)] bottom-[anchor(bottom)]"
 				>

@@ -184,7 +184,7 @@ export const Inheritance: Story = {
 			  }
 			: {};
 		return (
-			<Box surface="primary" p="xl" className="theme" style={style}>
+			<Box color="primary" surface p="xl" className="theme" style={style}>
 				<Box
 					className="border-bg border-darken-5 color-bg color-darken-5"
 					border
@@ -201,7 +201,7 @@ export const TweakOpacity: Story = {
 	render() {
 		// none of these elements have root opacity; all opacity is done through colors
 		return (
-			<Box surface="accent" className="h-32" full="width" p gap>
+			<Box color="accent" surface className="h-32" full="width" p gap>
 				<Box
 					className="bg-primary/100 h-full color-primary-dark/100 ring ring-primary-light/100 border border-black/100"
 					grow

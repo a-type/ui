@@ -432,7 +432,8 @@ export const Trippy: Story = {
 			spacingScale: 0.5,
 			cornerScale: 0.5,
 		});
-		setInterval((dt) => {
+		const dt = 1000;
+		setInterval(() => {
 			const current = ref.current;
 			if (!current) return;
 			values.current.primarySource =
@@ -472,7 +473,7 @@ export const Trippy: Story = {
 			);
 			current.style.setProperty('--dyn-primary-hue-rotate', '0');
 			current.style.setProperty('--dyn-accent-hue-rotate', '0');
-		}, 1000);
+		}, dt);
 		return (
 			<div ref={ref}>
 				<DemoUI className="theme" />

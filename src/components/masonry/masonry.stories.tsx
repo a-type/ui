@@ -35,7 +35,8 @@ const content = (spans?: boolean) =>
 			<Box
 				key={i}
 				layout="center center"
-				surface="primary"
+				color="primary"
+				surface
 				border
 				style={{ height: size }}
 				data-span={spans ? span : undefined}

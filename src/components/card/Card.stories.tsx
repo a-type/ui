@@ -89,7 +89,7 @@ export const Compact: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button size="small" color="ghost">
+					<Button size="small" emphasis="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -108,7 +108,7 @@ export const NonInteractive: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -129,7 +129,7 @@ export const AsChild: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -150,7 +150,7 @@ export const AsChildNonInteractive: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -249,7 +249,7 @@ export const VisuallyFocused: Story = {
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
-					<Button color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="placeholder" />
 					</Button>
 				</CardActions>
@@ -270,7 +270,7 @@ export const CardsInBox: Story = {
 					<CardFooter>
 						<CardActions>
 							<Button size="small">Button</Button>
-							<Button color="ghost">
+							<Button emphasis="ghost">
 								<Icon name="placeholder" />
 							</Button>
 						</CardActions>
@@ -284,7 +284,7 @@ export const CardsInBox: Story = {
 					<CardFooter>
 						<CardActions>
 							<Button size="small">Button</Button>
-							<Button color="ghost">
+							<Button emphasis="ghost">
 								<Icon name="placeholder" />
 							</Button>
 						</CardActions>

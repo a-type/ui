@@ -20,7 +20,7 @@ const CenterButton = () => {
 	const viewport = useViewport();
 
 	return (
-		<Button color="ghost" size="small" onClick={() => viewport.recenter()}>
+		<Button emphasis="ghost" size="small" onClick={() => viewport.recenter()}>
 			<Icon name="locate" />
 		</Button>
 	);

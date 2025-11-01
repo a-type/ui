@@ -32,17 +32,17 @@ export function ViewportZoomControls({
 	return (
 		<Box gap col className={clsx(className)} {...props}>
 			{fit && (
-				<Button color="ghost" size="small" onClick={reset}>
+				<Button emphasis="ghost" size="small" onClick={reset}>
 					<Icon name="maximize" />
 				</Button>
 			)}
 			{zoomIn && (
-				<Button color="ghost" size="small" onClick={doZoomIn}>
+				<Button emphasis="ghost" size="small" onClick={doZoomIn}>
 					<Icon name="zoomIn" />
 				</Button>
 			)}
 			{zoomOut && (
-				<Button color="ghost" size="small" onClick={doZoomOut}>
+				<Button emphasis="ghost" size="small" onClick={doZoomOut}>
 					<Icon name="zoomOut" />
 				</Button>
 			)}

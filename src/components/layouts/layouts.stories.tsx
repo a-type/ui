@@ -121,7 +121,7 @@ export const ManualWidth: Story = {
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
 						</NavBarItem>
-						<NavBarItem color="neutral" active={true}>
+						<NavBarItem color="gray" active={true}>
 							<NavBarItemIconWrapper>
 								<NavBarItemIcon asChild>
 									<Icon name="book" />

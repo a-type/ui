@@ -32,7 +32,7 @@ export const Default: Story = {
 export const OnBackground: Story = {
 	render(args) {
 		return (
-			<Box col gap p surface="attention" layout="start center">
+			<Box col gap p color="attention" surface layout="start center">
 				<TextSkeleton {...args} />
 				<TextSkeleton {...args} />
 				<TextSkeleton {...args} />
