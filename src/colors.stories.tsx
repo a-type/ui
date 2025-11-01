@@ -44,14 +44,13 @@ export const Default: Story = {
 			<Box col>
 				<input type="color" className="sticky top-0 z-1" />
 				<Box full>
-					<Box d="col" grow p surface="default">
+					<Box d="col" grow p surface>
 						<Range className="theme" style={style} />
 						<Range className="theme-lemon" />
 						<Range className="theme-leek" />
 						<Range className="theme-tomato" />
 						<Range className="theme-eggplant" />
 						<Range className="theme-blueberry" />
-						<Range className="theme-salt" />
 						<Box className="h-100px">
 							<Box grow className="bg-gray-wash" />
 							<Box grow className="bg-gray-light" />
@@ -59,20 +58,20 @@ export const Default: Story = {
 							<Box grow className="bg-gray-dark" />
 							<Box grow className="bg-gray-ink" />
 						</Box>
+						<Range className="palette-high-contrast" />
 						<Box className="h-100px">
 							<Box grow className="bg-black" />
 							<Box grow className="bg-wash" />
 							<Box grow className="bg-white" />
 						</Box>
 					</Box>
-					<Box d="col" className="override-dark theme" grow p surface="default">
+					<Box d="col" className="override-dark theme" grow p>
 						<Range className="theme" style={style} />
 						<Range className="theme-lemon" />
 						<Range className="theme-leek" />
 						<Range className="theme-tomato" />
 						<Range className="theme-eggplant" />
 						<Range className="theme-blueberry" />
-						<Range className="theme-salt" />
 						<Box className="h-100px">
 							<Box grow className="bg-gray-wash" />
 							<Box grow className="bg-gray-light" />
@@ -80,6 +79,7 @@ export const Default: Story = {
 							<Box grow className="bg-gray-dark" />
 							<Box grow className="bg-gray-ink" />
 						</Box>
+						<Range className="palette-high-contrast" />
 						<Box className="h-100px">
 							<Box grow className="bg-black" />
 							<Box grow className="bg-wash" />

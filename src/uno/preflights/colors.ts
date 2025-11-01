@@ -97,11 +97,15 @@ export const colorPreflight = preflight({
 }
 
 ${paletteNames
-	.filter((n) => n !== 'gray')
+	.filter((n) => n !== 'gray' && n !== 'high-contrast')
 	.map(createPaletteClass)
 	.join('\n')}
-.palette-gray.palette-gray {
+.palette-gray {
 	--l-saturation: calc(0.3 * var(--global-saturation, 0));
+}
+.palette-high-contrast {
+	--l-saturation: 0;
+	--l-lightness-spread: 10;
 }
 
 body {

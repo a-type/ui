@@ -134,24 +134,27 @@ function SurfaceContent({ name }: { name: string }) {
 export const Surfaces: Story = {
 	render(args) {
 		return (
-			<div className="grid gap-lg grid-cols-3" {...args}>
-				<Box surface p="lg" col gap>
-					<SurfaceContent name="Default" />
+			<div className="grid gap-lg grid-cols-2 md:grid-cols-3 bg-wash" {...args}>
+				<Box {...args} surface="white" p="lg" col gap>
+					<SurfaceContent name="White" />
 				</Box>
-				<Box surface color="primary" p="lg" col gap>
+				<Box {...args} surface color="primary" p="lg" col gap>
 					<SurfaceContent name="Primary" />
 				</Box>
-				<Box surface color="accent" p="lg" col gap>
+				<Box {...args} surface color="accent" p="lg" col gap>
 					<SurfaceContent name="Accent" />
 				</Box>
-				<Box surface color="gray" p="lg" col gap>
+				<Box {...args} surface color="gray" p="lg" col gap>
 					<SurfaceContent name="Gray" />
 				</Box>
-				<Box surface color="attention" p="lg" col gap>
+				<Box {...args} surface color="attention" p="lg" col gap>
 					<SurfaceContent name="Attention" />
 				</Box>
-				<Box surface color="success" p="lg" col gap>
+				<Box {...args} surface color="success" p="lg" col gap>
 					<SurfaceContent name="Success" />
+				</Box>
+				<Box {...args} surface color="high-contrast" p="lg" col gap>
+					<SurfaceContent name="High Contrast" />
 				</Box>
 			</div>
 		);

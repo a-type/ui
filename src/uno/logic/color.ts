@@ -31,6 +31,7 @@ export const paletteNames = [
 	'blueberry',
 	'eggplant',
 	'gray',
+	'high-contrast',
 ] as const;
 export type PaletteName = (typeof paletteNames)[number];
 
@@ -44,13 +45,13 @@ export function createColorRange(
 ) {
 	return {
 		wash: globalColor(
-			`var(--mode-l-neutral) + (var(--mode-l-range-up) * var(--mode-mult,1))`,
+			`var(--mode-l-neutral) + (var(--mode-l-range-up) * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
 			saturation ??
 				`var(--mode-s-neutral) + (var(--mode-s-range-up) * var(--mode-mult,1))`,
 			sourceHue,
 		),
 		light: globalColor(
-			`var(--mode-l-neutral) + (var(--mode-l-range-up) * 0.5 * var(--mode-mult,1))`,
+			`var(--mode-l-neutral) + (var(--mode-l-range-up) * 0.5 * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
 			saturation ??
 				`var(--mode-s-neutral) + (var(--mode-s-range-up) * 0.75 * var(--mode-mult,1))`,
 			sourceHue,
@@ -61,13 +62,13 @@ export function createColorRange(
 			sourceHue,
 		),
 		dark: globalColor(
-			`var(--mode-l-neutral) - (var(--mode-l-range-down) * 0.35 * var(--mode-mult,1))`,
+			`var(--mode-l-neutral) - (var(--mode-l-range-down) * 0.35 * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
 			saturation ??
 				`var(--mode-s-neutral) - (var(--mode-s-range-down) * 0.5 * var(--mode-mult,1))`,
 			sourceHue,
 		),
 		ink: globalColor(
-			`var(--mode-l-neutral) - (var(--mode-l-range-down) * var(--mode-mult,1))`,
+			`var(--mode-l-neutral) - (var(--mode-l-range-down) * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
 			saturation ??
 				`var(--mode-s-neutral) - (var(--mode-s-range-down) * var(--mode-mult,1))`,
 			sourceHue,
@@ -76,7 +77,7 @@ export function createColorRange(
 }
 
 export const whiteBlackRange = createColorRange(paletteHues.primary, {
-	saturation: '0.5%',
+	saturation: '0.4%',
 });
 
 export function lighten(base: string, level: string) {

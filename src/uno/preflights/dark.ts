@@ -3,7 +3,7 @@ import { preflight } from './_util.js';
 const lightModeCSS = `
 --mode-mult: 1;
 --mode-l-neutral: 90%;
---mode-l-range-up: 15%;
+--mode-l-range-up: 10%;
 --mode-l-range-down: 70%;
 --mode-s-neutral: 75%;
 --mode-s-range-up: -55%;
