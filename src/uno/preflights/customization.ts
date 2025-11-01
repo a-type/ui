@@ -24,7 +24,7 @@ export const customizationPreflight = ({
 			return `
 @layer preflightBase {
 	:root {
-		--global-saturation: ${saturation}%;
+		--global-saturation: ${saturation / 100};
 		--global-corner-scale: ${cornerScale};
 		--global-spacing-scale: ${scale};
 		--global-border-scale: ${borderScale};
