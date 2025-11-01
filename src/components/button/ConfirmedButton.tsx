@@ -65,9 +65,14 @@ export function ConfirmedButton({
 				<P>{confirmText}</P>
 				<DialogActions>
 					<DialogClose asChild>
-						<Button>{cancelAction}</Button>
+						<Button emphasis="default">{cancelAction}</Button>
 					</DialogClose>
-					<Button loading={loading} onClick={confirm} color={confirmColor}>
+					<Button
+						loading={loading}
+						onClick={confirm}
+						emphasis="primary"
+						color={confirmColor}
+					>
 						{confirmAction}
 					</Button>
 				</DialogActions>
