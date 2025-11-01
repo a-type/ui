@@ -49,7 +49,7 @@ export const ContextMenuItem = withClassName(
 	ContextMenuPrimitive.Item,
 	'palette-gray',
 	'layer-components:(flex items-center overflow-hidden min-h-touch py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
-	'layer-components:hover:(bg-main-wash bg-darken-1) layer-components:[&[data-highlighted=true]]:(bg-main-wash bg-darken-1)',
+	'layer-components:hover:bg-main-light layer-components:[&[data-highlighted=true]]:bg-main-light',
 	'layer-components:[&[data-disabled=true]]:(opacity-50 cursor-default) layer-components:disabled:(opacity-50 cursor-default))',
 );
 

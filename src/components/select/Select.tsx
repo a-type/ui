@@ -46,7 +46,7 @@ export const SelectItemRoot = withClassName(
 );
 export const SelectItemIndicatorRoot = withClassName(
 	SelectPrimitive.ItemIndicator,
-	'absolute left-0 w-25px inline-flex items-center justify-center',
+	'layer-components:(absolute left-0 w-25px inline-flex items-center justify-center)',
 );
 export const SelectItemIndicator = withNoNativeRender(
 	(props: SelectPrimitive.SelectItemIndicatorProps) => (

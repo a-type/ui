@@ -29,8 +29,8 @@ const StyledContent = withClassName(
 const itemClassName = classNames(
 	'layer-components:(text-md leading-4 color-main-ink flex items-center pr-4 pl-8 py-sm min-h-touch relative text-left select-none cursor-pointer)',
 	'layer-components:[&[data-disabled]]:(color-gray-dark bg-white pointer-events-none)',
-	'layer-components:focus-visible:(bg-main-wash bg-darken-1 color-black)',
-	'layer-components:hover:(bg-main-wash bg-darken-1 color-black)',
+	'layer-components:focus-visible:(bg-main-light color-black)',
+	'layer-components:hover:(bg-main-light color-black)',
 	'layer-components:focus:outline-none',
 );
 const StyledItemBase = withClassName(DropdownMenuPrimitive.Item, itemClassName);
