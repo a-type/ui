@@ -42,13 +42,15 @@ export const ContextMenuContent = function Content({
 
 export const ContextMenuArrow = withClassName(
 	ContextMenuPrimitive.Arrow,
-	'layer-components:(arrow)',
+	'layer-components:arrow',
 );
 
 export const ContextMenuItem = withClassName(
 	ContextMenuPrimitive.Item,
+	'palette-gray',
 	'layer-components:(flex items-center overflow-hidden min-h-touch py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
-	'layer-components:(hover:(bg-gray bg-lighten-3) [&[data-highlighted=true]]:(bg-gray bg-lighten-3) [&[data-disabled=true]]:(opacity-50 cursor-default) disabled:(opacity-50 cursor-default))',
+	'layer-components:hover:(bg-main-wash bg-darken-1) layer-components:[&[data-highlighted=true]]:(bg-main-wash bg-darken-1)',
+	'layer-components:[&[data-disabled=true]]:(opacity-50 cursor-default) layer-components:disabled:(opacity-50 cursor-default))',
 );
 
 export const ContextMenuTrigger = withClassName(

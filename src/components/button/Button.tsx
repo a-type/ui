@@ -22,7 +22,13 @@ import { getButtonClassName } from './classes.js';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	color?: PaletteName;
-	emphasis?: 'primary' | 'default' | 'ghost' | 'contrast' | 'unstyled';
+	emphasis?:
+		| 'primary'
+		| 'default'
+		| 'ghost'
+		| 'contrast'
+		| 'light'
+		| 'unstyled';
 	size?: 'default' | 'small';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';

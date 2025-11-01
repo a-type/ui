@@ -43,7 +43,6 @@ import {
 import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
-import { useAnimationFrame } from './hooks.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
 
 const meta = {
@@ -433,7 +432,7 @@ export const Trippy: Story = {
 			spacingScale: 0.5,
 			cornerScale: 0.5,
 		});
-		useAnimationFrame((dt) => {
+		setInterval((dt) => {
 			const current = ref.current;
 			if (!current) return;
 			values.current.primarySource =
@@ -473,7 +472,7 @@ export const Trippy: Story = {
 			);
 			current.style.setProperty('--dyn-primary-hue-rotate', '0');
 			current.style.setProperty('--dyn-accent-hue-rotate', '0');
-		});
+		}, 1000);
 		return (
 			<div ref={ref}>
 				<DemoUI className="theme" />

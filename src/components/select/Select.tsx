@@ -161,13 +161,13 @@ export const SelectContent = withPassthroughNativeRender(
 						{...props}
 						ref={forwardedRef}
 					>
-						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
+						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
 							<Icon name="chevron" className="rotate-180" />
 						</SelectPrimitive.ScrollUpButton>
 						<SelectPrimitive.Viewport style={viewportStyle}>
 							{children}
 						</SelectPrimitive.Viewport>
-						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-primary-dark cursor-default">
+						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
 							<Icon name="chevron" />
 						</SelectPrimitive.ScrollDownButton>
 					</SelectPrimitive.Content>

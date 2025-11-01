@@ -52,7 +52,7 @@ export function createColorRange(
 		light: globalColor(
 			`var(--mode-l-neutral) + (var(--mode-l-range-up) * 0.5 * var(--mode-mult,1))`,
 			saturation ??
-				`var(--mode-s-neutral) + (var(--mode-s-range-up) * 0.5 * var(--mode-mult,1))`,
+				`var(--mode-s-neutral) + (var(--mode-s-range-up) * 0.75 * var(--mode-mult,1))`,
 			sourceHue,
 		),
 		DEFAULT: globalColor(
@@ -61,7 +61,7 @@ export function createColorRange(
 			sourceHue,
 		),
 		dark: globalColor(
-			`var(--mode-l-neutral) - (var(--mode-l-range-down) * 0.5 * var(--mode-mult,1))`,
+			`var(--mode-l-neutral) - (var(--mode-l-range-down) * 0.35 * var(--mode-mult,1))`,
 			saturation ??
 				`var(--mode-s-neutral) - (var(--mode-s-range-down) * 0.5 * var(--mode-mult,1))`,
 			sourceHue,

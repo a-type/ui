@@ -194,7 +194,7 @@ export function Box({
 						(rounded === undefined && (surface || border)),
 					'layer-components:rounded-xl': rounded === 'xl',
 
-					'layer-components:(bg-main-wash bg-darken-1 border-main-dark color-main-ink)':
+					'layer-components:(bg-main-wash border-main-dark color-main-ink)':
 						!!surface,
 
 					'layer-components:(border border-solid)': border,

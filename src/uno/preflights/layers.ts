@@ -3,5 +3,5 @@ import { preflight } from './_util.js';
 
 export const layerPreflight: Preflight = preflight({
 	getCSS: () =>
-		`@layer preflightBase, preflightVariant, components, responsive, variants, utilities;`,
+		`@layer preflightBase, preflightVariant, components, composed, responsive, variants, utilities, user;`,
 });

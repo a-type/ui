@@ -244,7 +244,13 @@ export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
 	}, [inputId]);
 
 	return (
-		<Button emphasis="ghost" asChild visuallyFocused={focused} {...props}>
+		<Button
+			emphasis="ghost"
+			size="small"
+			asChild
+			visuallyFocused={focused}
+			{...props}
+		>
 			<label htmlFor={inputId}>
 				{children ?? (
 					<>

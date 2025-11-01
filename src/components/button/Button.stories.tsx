@@ -21,7 +21,6 @@ const meta = {
 	args: {
 		children: 'Button',
 		loading: false,
-		color: 'gray',
 		emphasis: 'default',
 		size: 'default',
 		visuallyDisabled: false,
@@ -37,16 +36,25 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
 	render: (args) => {
 		return (
-			<Box gap items="center">
-				<Button {...args} />
-				<Button {...args} color="primary">
-					<Icon name="placeholder" />
-					{args.children}
-				</Button>
-				<Button {...args} size="small" />
-				<Button {...args}>
-					<Icon name="placeholder" />
-				</Button>
+			<Box col gap>
+				<Box gap items="center">
+					<Button {...args} />
+					<Button {...args} color="primary">
+						<Icon name="placeholder" />
+						{args.children}
+					</Button>
+					<Button {...args} size="small" />
+					<Button {...args}>
+						<Icon name="placeholder" />
+					</Button>
+				</Box>
+				<Box gap items="center">
+					<Button emphasis="primary">Primary</Button>
+					<Button emphasis="default">Default</Button>
+					<Button emphasis="light">Light</Button>
+					<Button emphasis="ghost">Ghost</Button>
+					<Button emphasis="contrast">Contrast</Button>
+				</Box>
 			</Box>
 		);
 	},

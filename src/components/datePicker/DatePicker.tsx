@@ -6,6 +6,7 @@ import {
 import classNames from 'clsx';
 import { useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
+import { PaletteName } from '../../uno/logic/color.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 
@@ -13,12 +14,14 @@ export interface DatePickerProps {
 	value: Date | null;
 	onChange: (date: Date | null) => void;
 	className?: string;
+	color?: PaletteName;
 }
 
 export function DatePicker({
 	value,
 	onChange,
 	className,
+	color,
 	...rest
 }: DatePickerProps) {
 	const [{ month, year }, setDisplay] = useState(() => ({
@@ -33,7 +36,8 @@ export function DatePicker({
 	return (
 		<div
 			className={classNames(
-				'flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)]',
+				color && `palette-${color}`,
+				'layer-components:(flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)])',
 				className,
 			)}
 			{...rest}
@@ -208,16 +212,16 @@ const CalendarDay = withClassName(
 	BaseCalendarDay,
 	'border border-solid border-transparent bg-white mr--1px mb--1px relative color-black',
 	'flex items-center justify-center transition cursor-pointer',
-	'[&[data-highlighted]]:(z-1 outline-accent)',
-	'hover:(z-1 outline outline-accent)',
-	'active:(bg-accent-light rounded)',
-	'[&[data-selected]]:(bg-accent z-2 rounded)',
-	'[&[data-in-range]]:(bg-accent-wash bg-darken-2 rounded-none z-1)',
-	'[&[data-range-start]]:(bg-accent rounded-l rounded-r-none z-1)',
-	'[&[data-range-end]]:(bg-accent rounded-r rounded-l-none z-1)',
+	'[&[data-highlighted]]:(z-1 ring-2 ring-accent)',
+	'hover:(z-1 ring-2 ring-accent)',
+	'active:(bg-main-light rounded)',
+	'[&[data-selected]]:(bg-main z-2 rounded)',
+	'[&[data-in-range]]:(bg-main-wash bg-darken-2 rounded-none z-1)',
+	'[&[data-range-start]]:(bg-main rounded-l rounded-r-none z-1)',
+	'[&[data-range-end]]:(bg-main rounded-r rounded-l-none z-1)',
 	'disabled:(opacity-50 cursor-default)',
 	// today dot
-	"[&[data-today]]:before:(content-[''] absolute left-[2px] top-[2px] w-[6px] h-[6px] rounded-lg bg-primary)",
+	"[&[data-today]]:before:(content-[''] absolute left-[1px] top-[1px] w-[6px] h-[6px] rounded-lg bg-attention border-1 border-solid border-black)",
 	// calendar edges
 	'[&[data-top-edge]]:(border-t-gray)',
 	'[&[data-bottom-edge]]:(border-b-gray)',

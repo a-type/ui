@@ -325,8 +325,8 @@ export const DialogSelectList = withClassName(
 
 export const DialogSelectItemRoot = withClassName(
 	RadioGroupPrimitive.Item,
-	'layer-components:(color-black flex items-center gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-gray-blend cursor-pointer transition-all)',
-	'layer-components:[&[data-state=checked]]:(bg-primary-wash color-primary-dark)',
+	'layer-components:(color-black flex items-center border-1 border-solid border-bg gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-gray-light cursor-pointer transition-all)',
+	'layer-components:[&[data-state=checked]]:(bg-main-wash color-main-ink border-color)',
 );
 
 export const DialogSelectItem = function DialogSelectItem({

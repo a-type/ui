@@ -32,13 +32,14 @@ export function ColorPicker({ value, onChange, showSalt }: ColorPickerProps) {
 		'leek',
 		'blueberry',
 		'eggplant',
+		'salt',
 	].includes(value || '')
 		? (value as ThemeName)
 		: 'lemon';
 
 	return (
 		<Select value={resolvedValue} onValueChange={onChange}>
-			<SelectTrigger>
+			<SelectTrigger className="layer-composed:p-sm">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent className="z-[calc(var(--z-dialog)+1)]">

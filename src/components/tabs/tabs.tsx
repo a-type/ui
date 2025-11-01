@@ -20,7 +20,7 @@ export const TabsTriggerBase = withClassName(
 	'layer-components:(min-w-100px min-h-touch flex-shrink-0)',
 	'layer-components:(bg-transparent border border-transparent rounded-lg)',
 	'layer-components:hover:[&[data-state=inactive]]:(bg-gray-light bg-darken-1 ring-4 ring-bg)',
-	'layer-components:focus-visible:(bg-darken-1 ring-4 ring-accent-dark outline-off border border-black)',
+	'layer-components:focus-visible:(bg-darken-1 ring-4 ring-accent outline-off border border-black)',
 	'[&[data-state=active]]:(cursor-default border-gray-dark relative z-1)',
 );
 

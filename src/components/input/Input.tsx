@@ -11,7 +11,7 @@ import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.j
 export const inputClassName = classNames(
 	'layer-components:(px-5 py-1.25 text-md font-inherit rounded-lg bg-white select-auto min-w-60px color-black border-solid border-width-thin border-gray-dark shadow-sm-inset transition-shadow)',
 	'layer-components:focus:(outline-none bg-lighten-3 ring-4	ring-white)',
-	'layer-components:focus-visible:(outline-none ring-gray)',
+	'layer-components:focus-visible:(outline-none ring-accent ring-4)',
 	'layer-components:disabled:(bg-transparent border-gray placeholder-gray-dark shadow-none)',
 	'layer-components:md:(min-w-120px)',
 	'layer-variants:[&[data-size="small"]]:(px-md py-xs text-sm rounded-md min-w-40px)',
