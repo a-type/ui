@@ -39,6 +39,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	visuallyFocused?: boolean;
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
+	disableDropdownTriggerIcon?: boolean;
 }
 
 export function ButtonRoot({
@@ -56,6 +57,7 @@ export function ButtonRoot({
 	disabled,
 	asChild,
 	disableIconMode,
+	disableDropdownTriggerIcon,
 	ref,
 	...props
 }: ButtonProps) {
@@ -69,7 +71,11 @@ export function ButtonRoot({
 	const iconChildCount = childArray.filter(isIconChild).length;
 	const hasLabelChild = childArray.length > iconChildCount;
 
-	const isDropdownTrigger = useIsDropdownTrigger();
+	const isDropdownTriggerFromContext = useIsDropdownTrigger();
+	const isDropdownTrigger =
+		!disableDropdownTriggerIcon &&
+		hasLabelChild &&
+		isDropdownTriggerFromContext;
 
 	const finalRef = useMergedRef(useAnnotateWithChildParts(), ref);
 
