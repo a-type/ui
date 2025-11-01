@@ -76,13 +76,13 @@ export const colorRules: Rule[] = [
 	[
 		/^bg-lighten-(\d+\.?\d*)$/,
 		(match, { theme }) => ({
-			'--v-bg-altered': lighten('var(--v-bg,var(--color-white))', match[1]),
+			'--v-bg-altered': lighten('var(--v-bg,var(--mode-white))', match[1]),
 		}),
 	],
 	[
 		/^bg-darken-(\d+\.?\d*)$/,
 		(match, { theme }) => ({
-			'--v-bg-altered': darken('var(--v-bg,var(--color-white))', match[1]),
+			'--v-bg-altered': darken('var(--v-bg,var(--mode-white))', match[1]),
 		}),
 	],
 	[

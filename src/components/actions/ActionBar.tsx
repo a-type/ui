@@ -22,7 +22,7 @@ export function ActionBar({
 					'layer-components:(flex flex-row items-center justify-start w-full overflow-hidden relative h-[max-content] transition-[height] springy)',
 					'layer-components:[&:empty]:height-0',
 					!disableShadow &&
-						'after:(content-[""] absolute right-0 top-0 bottom-0 w-50px z-1 bg-gradient-to-l from-[color:var(--v-bg,var(--color-wash))] from-20% to-transparent pointer-events-none)',
+						'after:(content-[""] absolute right-0 top-0 bottom-0 w-50px z-1 bg-gradient-to-l from-[color:var(--v-bg,var(--mode-white))] from-20% to-transparent pointer-events-none)',
 					className,
 				)}
 				{...rest}

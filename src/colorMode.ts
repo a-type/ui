@@ -33,9 +33,8 @@ const updateMode = () => {
 		'meta[name=theme-color]',
 	);
 
-	// evaluate the var(--color-wash) css var for the bar color
-	const root = document.documentElement;
-	const cssVar = '--color-wash';
+	const root = document.body;
+	const cssVar = 'background-color';
 	const color = getComputedStyle(root).getPropertyValue(cssVar);
 
 	if (finalMode === 'dark') {

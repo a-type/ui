@@ -9,6 +9,7 @@ const lightModeCSS = `
 --mode-s-range-up: -55%;
 --mode-s-range-down: 20%;
 --mode-white: #ffffff;
+--mode-black: #000000;
 `;
 
 const darkModeCSS = `
@@ -20,6 +21,7 @@ const darkModeCSS = `
 --mode-s-range-up: 40%;
 --mode-s-range-down: -30%;
 --mode-white: #000000;
+--mode-black: #ffffff;
 `;
 
 export const darkModePreflight = preflight({

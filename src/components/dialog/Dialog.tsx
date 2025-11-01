@@ -23,7 +23,7 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	DialogPrimitive.Overlay,
-	'layer-components:(fixed inset-0 z-backdrop animate-fade-in animate-duration-200 bg-black/15 [box-shadow:inset_0_30px_60px_0px_var(--color-overlay)] border-top-1 border-top-solid border-top-gray)',
+	'layer-components:(fixed inset-0 z-backdrop animate-fade-in animate-duration-200 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
 );

@@ -20,8 +20,8 @@ export const colors = {
 
 	// magic tokens
 	bg: 'var(--v-bg-altered, var(--v-bg, transparent))',
-	fg: 'var(--v-color-altered, var(--v-color, var(--color-black)))',
-	color: 'var(--v-color-altered, var(--v-color, var(--color-black)))',
+	fg: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
+	color: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
 	border: 'var(--v-border-altered, var(--v-border, transparent))',
 
 	primary: createColorRange(paletteHues.primary),

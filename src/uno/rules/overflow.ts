@@ -6,7 +6,7 @@ export const overflowRules: Rule[] = [
 		{
 			'scrollbar-gutter': 'stable',
 			'scrollbar-color':
-				'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
+				'hsl(from var(--v-color-altered,var(--v-color,var(--mode-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 		},
 	],
 	[
@@ -15,7 +15,7 @@ export const overflowRules: Rule[] = [
 			overflow: 'auto',
 			'scrollbar-gutter': 'stable',
 			'scrollbar-color':
-				'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
+				'hsl(from var(--v-color-altered,var(--v-color,var(--mode-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 		},
 	],
 	[
@@ -24,7 +24,7 @@ export const overflowRules: Rule[] = [
 			'overflow-y': 'auto',
 			'scrollbar-gutter': 'stable',
 			'scrollbar-color':
-				'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
+				'hsl(from var(--v-color-altered,var(--v-color,var(--mode-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 		},
 	],
 	[
@@ -33,7 +33,7 @@ export const overflowRules: Rule[] = [
 			'overflow-x': 'auto',
 			'scrollbar-gutter': 'stable',
 			'scrollbar-color':
-				'hsl(from var(--v-color-altered,var(--v-color,var(--color-black))) h calc(s * 0.2) calc(l * 4)) transparent',
+				'hsl(from var(--v-color-altered,var(--v-color,var(--mode-black))) h calc(s * 0.2) calc(l * 4)) transparent',
 		},
 	],
 	[
