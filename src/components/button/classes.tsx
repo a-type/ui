@@ -27,9 +27,8 @@ export function getButtonClassName({
 
 	return clsx(
 		color && `palette-${color}`,
-		'layer-components:(px-4 py-2)',
-		'layer-components:(leading-none text-md font-inherit font-bold select-none)',
-		'layer-components:(border-solid border-thin border-color rounded-lg)',
+		'layer-components:(leading-none font-inherit font-bold select-none)',
+		'layer-components:(border-solid border-thin border-color)',
 		'layer-components:(cursor-pointer)',
 		'layer-components:(flex flex-row gap-sm items-center)',
 		'layer-components:(relative overflow-visible whitespace-nowrap)',
@@ -52,6 +51,7 @@ export function getButtonClassName({
 		color === 'gray' && '[--l-saturation:0] hov',
 
 		{
+			'layer-components:(px-4 py-2 text-md rounded-lg)': size === 'default',
 			'layer-components:(px-4 py-1 text-sm rounded-md)': size === 'small',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(p-2.35 text-sm rounded-lg)':
 				size === 'default' && !disableIconMode,
