@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
-import { ThemeName } from '../components/index.js';
+import { PaletteName } from '../uno/logic/color.js';
 
-export function useOverrideTheme(theme: ThemeName | null | undefined) {
+export function useOverrideTheme(theme: PaletteName | null | undefined) {
 	useLayoutEffect(() => {
 		if (!theme) {
 			return;

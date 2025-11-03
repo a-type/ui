@@ -36,7 +36,6 @@ import {
 	Provider,
 	Select,
 	TextSkeleton,
-	ThemeName,
 	ToggleGroup,
 	Tooltip,
 } from './components/index.js';
@@ -44,6 +43,7 @@ import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
+import { PaletteName } from './uno/logic/color.js';
 
 const meta = {
 	title: 'Theme Demo',
@@ -365,7 +365,7 @@ export const Nesting: Story = {
 
 export const Override: Story = {
 	render() {
-		const [theme, setTheme] = useState<ThemeName | null>(null);
+		const [theme, setTheme] = useState<PaletteName | null>(null);
 		useOverrideTheme(theme);
 		const colorMode = useColorMode();
 		return (

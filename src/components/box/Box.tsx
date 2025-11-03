@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { createContext, Ref, useContext, useMemo } from 'react';
 import { PaletteName } from '../../uno/logic/color.js';
-import { ThemeName } from '../colorPicker/ColorPicker.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export type BoxAlignment = 'center' | 'stretch' | 'start' | 'end';
@@ -52,7 +51,6 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	container?: boolean | 'reset';
 	surface?: boolean | 'white';
 	color?: PaletteName;
-	theme?: ThemeName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
@@ -76,7 +74,6 @@ export function Box({
 	style: userStyle,
 	surface,
 	color,
-	theme,
 	border,
 	full,
 	overflow,
@@ -217,7 +214,6 @@ export function Box({
 					'layer-components:shadow-inset': elevated?.startsWith('-'),
 					'layer-components:(shadow-up)': elevated?.endsWith('-up'),
 				},
-				theme && `theme-${theme}`,
 				className,
 			)}
 		/>
