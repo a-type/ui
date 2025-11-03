@@ -39,7 +39,7 @@ export const Default: Story = {
 			<Box col gap>
 				<Box gap items="center">
 					<Button {...args} />
-					<Button {...args} color="primary">
+					<Button {...args}>
 						<Icon name="placeholder" />
 						{args.children}
 					</Button>

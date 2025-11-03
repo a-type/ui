@@ -1,8 +1,8 @@
-'use client';
-
-import classNames from 'clsx';
+import { SelectTriggerProps } from '@radix-ui/react-select';
+import classNames, { clsx } from 'clsx';
 import { ReactNode } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { PaletteName, paletteNames } from '../../uno/logic/color.js';
 import {
 	Select,
 	SelectContent,
@@ -11,35 +11,29 @@ import {
 	SelectValue,
 } from '../select/Select.js';
 
-export type ThemeName =
-	| 'lemon'
-	| 'tomato'
-	| 'leek'
-	| 'blueberry'
-	| 'eggplant'
-	| 'salt';
-
-export interface ColorPickerProps {
-	value: ThemeName | null;
-	onChange: (value: ThemeName) => void;
-	showSalt?: boolean;
+export interface ColorPickerProps
+	extends Omit<SelectTriggerProps, 'value' | 'onChange' | 'color'> {
+	value: PaletteName | null;
+	onChange: (value: PaletteName) => void;
+	showGray?: boolean;
 }
 
-export function ColorPicker({ value, onChange, showSalt }: ColorPickerProps) {
-	const resolvedValue = [
-		'lemon',
-		'tomato',
-		'leek',
-		'blueberry',
-		'eggplant',
-		'salt',
-	].includes(value || '')
-		? (value as ThemeName)
-		: 'lemon';
+export function ColorPicker({
+	value,
+	onChange,
+	showGray,
+	className,
+	...rest
+}: ColorPickerProps) {
+	const resolvedValue =
+		value && paletteNames.includes(value) ? (value as PaletteName) : 'lemon';
 
 	return (
 		<Select value={resolvedValue} onValueChange={onChange}>
-			<SelectTrigger className="layer-composed:p-sm">
+			<SelectTrigger
+				className={clsx('layer-composed:p-sm', className)}
+				{...rest}
+			>
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent className="z-[calc(var(--z-dialog)+1)]">
@@ -63,9 +57,9 @@ export function ColorPicker({ value, onChange, showSalt }: ColorPickerProps) {
 					<ColorSwatch value="eggplant" />
 					<ItemLabel>Eggplant</ItemLabel>
 				</SelectItem>
-				{showSalt && (
-					<SelectItem value="salt">
-						<ColorSwatch value="salt" />
+				{showGray && (
+					<SelectItem value="gray">
+						<ColorSwatch value="gray" />
 						<ItemLabel>Salt</ItemLabel>
 					</SelectItem>
 				)}
@@ -80,14 +74,14 @@ export function ColorSwatch({
 	value,
 	children,
 }: {
-	value: ThemeName;
+	value: PaletteName;
 	children?: ReactNode;
 }) {
 	return (
 		<div
 			className={classNames(
-				'bg-primary w-16px h-16px rounded-sm',
-				`theme-${value ?? 'lemon'}`,
+				'bg-main w-16px h-16px rounded-sm',
+				`palette-${value ?? 'lemon'}`,
 			)}
 		>
 			{children}

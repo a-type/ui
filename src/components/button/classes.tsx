@@ -44,7 +44,7 @@ export function getButtonClassName({
 			'layer-components:(bg-main-light color-main-ink)': emphasis === 'light',
 			'layer-components:bg-white layer-variants:focus-visible:bg-white':
 				emphasis === 'default',
-			'layer-components:(bg-transparent aria-pressed:bg-main-wash)':
+			'layer-components:(bg-transparent aria-pressed:bg-main-wash color-main-ink)':
 				emphasis === 'ghost',
 			'layer-components:(bg-black)': emphasis === 'contrast',
 		},

@@ -186,7 +186,7 @@ function ImageUploaderPrebuilt({
 
 			<ImageUploaderEmptyControls>
 				<ImageUploaderFileButton />
-				<Button emphasis="ghost" onClick={openCamera}>
+				<Button emphasis="ghost" size="small" onClick={openCamera}>
 					<Icon name="camera" />
 					<span>Camera</span>
 				</Button>
