@@ -9,10 +9,9 @@ export const globalPreflight: Preflight = preflight({
 	--font-title: "Inter", sans-serif;
 	--font-default: var(--font-sans, sans-serif);
 
-	--z-nowPlaying: 40;
+	--z-now-playing: 40;
 	--z-nav: 50;
 	--z-menu: 100;
-	--z-menuTrigger: 101;
 	--z-backdrop: 900;
 	--z-dialog: 1000;
 	--z-tooltip: 10000;
