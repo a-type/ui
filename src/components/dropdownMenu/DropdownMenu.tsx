@@ -3,7 +3,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 import { BoxContext } from '../box/Box.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import { DropdownTriggerProvider } from './DropdownTriggerContext.js';

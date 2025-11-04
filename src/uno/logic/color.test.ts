@@ -1,0 +1,119 @@
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import {
+	ColorEvaluationContext,
+	livePropertyColorContext,
+	snapshotColorContext,
+} from './color.js';
+import { palettes } from './palettes.js';
+
+let contextElement: HTMLElement;
+beforeEach(() => {
+	contextElement = document.createElement('div');
+	contextElement.classList.add('palette-leek');
+	document.body.appendChild(contextElement);
+});
+afterEach(() => {
+	document.body.removeChild(contextElement);
+});
+
+describe('context snapshot evaluation', () => {
+	it('should snapshot color context from element properties', () => {
+		const context = snapshotColorContext(contextElement, 'main');
+		expect(context).toEqual({
+			sourceHue: '165.88',
+			localLightnessSpread: '1',
+			localSaturation: '1',
+			globalSaturation: '0.5',
+			mode: {
+				lNeutral: '90%',
+				lRangeUp: '10%',
+				lRangeDown: '70%',
+				sNeutral: '75%',
+				sRangeUp: '-55%',
+				sRangeDown: '20%',
+				mult: '1',
+			},
+		} satisfies ColorEvaluationContext);
+	});
+});
+
+describe('oklch color evaluation tools', () => {
+	const { wash, default: DEFAULT } = palettes.main.definitions;
+
+	it('should resolve lch values', () => {
+		const ctx = snapshotColorContext(contextElement, 'main');
+		const { l, c, h } = wash.raw(ctx);
+		expect(l.value).toBeCloseTo(100, 1);
+		expect(l.unit).toBe('%');
+		expect(c.value).toBeCloseTo(10, 1);
+		expect(c.unit).toBe('%');
+		expect(h.value).toBe(165.88);
+	});
+
+	it('should print a valid oklch color string', () => {
+		const colorString = wash.print(
+			livePropertyColorContext('var(--p-main-hue, 91.8)'),
+		);
+		expect(colorString).toMatchInlineSnapshot(
+			`"oklch(calc(clamp(0%, (var(--mode-l-neutral) + (var(--mode-l-range-up) * var(--mode-mult, 1) * var(--l-lightness-spread, 1))), 100%)) calc(clamp(0%, (1 * var(--l-saturation, 1) * var(--global-saturation, 1) * (var(--mode-s-neutral) + (var(--mode-s-range-up) * var(--mode-mult, 1)))), 100%)) calc(var(--p-main-hue, 91.8)))"`,
+		);
+	});
+	it('should evaluate a valid oklch color value using element property values', () => {
+		const context = snapshotColorContext(contextElement, 'main');
+		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(100% 100% 100%)"`,
+		);
+		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#fff"`);
+		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(100% 10% 165.88)"`,
+		);
+
+		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(40.747% 99.344% 77.98%)"`,
+		);
+		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#68fdc7"`);
+		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(90% 37.5% 165.88)"`,
+		);
+	});
+	it('should evaluate different named palettes in addition to main', () => {
+		const context = snapshotColorContext(contextElement, 'attention');
+		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(100% 100% 100%)"`,
+		);
+		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#fff"`);
+		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(100% 10% 30)"`,
+		);
+
+		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(100% 80.069% 75.637%)"`,
+		);
+		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#ffccc1"`);
+		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(90% 37.5% 30)"`,
+		);
+	});
+	it('works in dark mode', () => {
+		const darkMode = document.createElement('div');
+		darkMode.classList.add('override-dark', 'palette-leek');
+		document.body.appendChild(darkMode);
+		const context = snapshotColorContext(darkMode, 'main');
+		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(0% 14.06% 7.3466%)"`,
+		);
+		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#002413"`);
+		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(22% 20% 165.88)"`,
+		);
+
+		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
+			`"rgb(0% 60.697% 41.999%)"`,
+		);
+		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#009b6b"`);
+		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
+			`"oklch(60% 40% 165.88)"`,
+		);
+		document.body.removeChild(darkMode);
+	});
+});

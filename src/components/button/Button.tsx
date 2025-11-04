@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
 import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';

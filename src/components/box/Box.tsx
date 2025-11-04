@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { createContext, Ref, useContext, useMemo } from 'react';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export type BoxAlignment = 'center' | 'stretch' | 'start' | 'end';

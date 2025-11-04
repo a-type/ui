@@ -1,7 +1,7 @@
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import clsx from 'clsx';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 
 export const SliderRoot = withClassName(
 	SliderPrimitive.Root,

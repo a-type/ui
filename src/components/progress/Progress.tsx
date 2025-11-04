@@ -1,7 +1,7 @@
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import clsx from 'clsx';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 
 export const ProgressRoot = withClassName(
 	ProgressPrimitive.Root,

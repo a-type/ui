@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 import { Box, Button, Dialog, Icon, Provider } from '../components/index.js';
-import { useTitleBarColor } from './useTitleBarColor.js';
+import { useThemedTitleBar, useTitleBarColor } from './useTitleBarColor.js';
 
 const meta = {
 	title: 'Hooks/useTitleBarColor',
@@ -95,6 +95,6 @@ function MockTitleBar() {
 }
 
 function Overrider() {
-	useTitleBarColor('#ff0000');
+	useThemedTitleBar('primary', 'dark');
 	return null;
 }

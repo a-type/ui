@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 import { type ButtonProps } from './Button.jsx';
 
 export function getButtonClassName({

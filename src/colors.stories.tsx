@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import clsx from 'clsx';
+import { CSSProperties } from 'react';
 import { Box } from './components/index.js';
+import { snapshotColorContext } from './uno/logic/color.js';
+import { palettes } from './uno/logic/palettes.js';
 
 const meta = {
 	title: 'System/Colors',
@@ -11,17 +15,9 @@ const meta = {
 				max: 360,
 			},
 		},
-		customRotate: {
-			control: {
-				type: 'number',
-				min: -20,
-				max: 20,
-			},
-		},
 	},
 	args: {
 		customHue: 0,
-		customRotate: 0,
 	},
 	parameters: {
 		controls: { expanded: true },
@@ -36,55 +32,45 @@ export const Default: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--dyn-primary-source': args.customHue,
-					'--dyn-primary-hue-rotate': args.customRotate,
+					'--p-primary-hue': args.customHue,
 			  }
 			: {};
+
+		const ranges = (
+			<>
+				<Range className="theme" style={style} />
+				<Range className="theme-lemon" />
+				<Range className="theme-leek" />
+				<Range className="theme-tomato" />
+				<Range className="theme-eggplant" />
+				<Range className="theme-blueberry" />
+				<Range className="palette-attention" />
+				<Range className="palette-success" />
+				<Box className="h-100px">
+					<Box grow className="bg-gray-wash" />
+					<Box grow className="bg-gray-light" />
+					<Box grow className="bg-gray" />
+					<Box grow className="bg-gray-dark" />
+					<Box grow className="bg-gray-ink" />
+				</Box>
+				<Range className="palette-high-contrast" />
+				<Box className="h-100px">
+					<Box grow className="bg-black" />
+					<Box grow className="bg-wash" />
+					<Box grow className="bg-white" />
+				</Box>
+			</>
+		);
+
 		return (
 			<Box col>
 				<input type="color" className="sticky top-0 z-1" />
 				<Box full>
 					<Box d="col" grow p surface>
-						<Range className="theme" style={style} />
-						<Range className="theme-lemon" />
-						<Range className="theme-leek" />
-						<Range className="theme-tomato" />
-						<Range className="theme-eggplant" />
-						<Range className="theme-blueberry" />
-						<Box className="h-100px">
-							<Box grow className="bg-gray-wash" />
-							<Box grow className="bg-gray-light" />
-							<Box grow className="bg-gray" />
-							<Box grow className="bg-gray-dark" />
-							<Box grow className="bg-gray-ink" />
-						</Box>
-						<Range className="palette-high-contrast" />
-						<Box className="h-100px">
-							<Box grow className="bg-black" />
-							<Box grow className="bg-wash" />
-							<Box grow className="bg-white" />
-						</Box>
+						{ranges}
 					</Box>
 					<Box d="col" className="override-dark theme" grow p>
-						<Range className="theme" style={style} />
-						<Range className="theme-lemon" />
-						<Range className="theme-leek" />
-						<Range className="theme-tomato" />
-						<Range className="theme-eggplant" />
-						<Range className="theme-blueberry" />
-						<Box className="h-100px">
-							<Box grow className="bg-gray-wash" />
-							<Box grow className="bg-gray-light" />
-							<Box grow className="bg-gray" />
-							<Box grow className="bg-gray-dark" />
-							<Box grow className="bg-gray-ink" />
-						</Box>
-						<Range className="palette-high-contrast" />
-						<Box className="h-100px">
-							<Box grow className="bg-black" />
-							<Box grow className="bg-wash" />
-							<Box grow className="bg-white" />
-						</Box>
+						{ranges}
 					</Box>
 				</Box>
 			</Box>
@@ -95,19 +81,22 @@ export const Default: Story = {
 function Swatch({
 	className,
 	children,
+	style,
 }: {
 	className?: string;
 	children?: React.ReactNode;
+	style?: CSSProperties;
 }) {
 	return (
 		<div
-			className={className}
+			className={clsx(className, 'color-contrast')}
 			style={{
 				height: '100px',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 				flex: '1',
+				...style,
 			}}
 		>
 			{children}
@@ -118,11 +107,11 @@ function Swatch({
 function Range({ className, style }: { className?: string; style?: any }) {
 	return (
 		<Box className={className} style={style}>
-			<Swatch className="bg-primary-wash" />
-			<Swatch className="bg-primary-light" />
-			<Swatch className="bg-primary" />
-			<Swatch className="bg-primary-dark" />
-			<Swatch className="bg-primary-ink" />
+			<Swatch className="bg-main-wash" />
+			<Swatch className="bg-main-light" />
+			<Swatch className="bg-main" />
+			<Swatch className="bg-main-dark" />
+			<Swatch className="bg-main-ink" />
 		</Box>
 	);
 }
@@ -131,8 +120,7 @@ export const Modifiers: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--dyn-primary-source': args.customHue,
-					'--dyn-primary-hue-rotate': args.customRotate,
+					'--p-primary-hue': args.customHue,
 			  }
 			: {};
 		return (
@@ -158,19 +146,19 @@ function ModifierRange({
 }) {
 	return (
 		<Box className={className} style={style}>
-			<Swatch className="bg-primary-wash">W</Swatch>
-			<Swatch className="bg-primary-light bg-lighten-3">L+3</Swatch>
-			<Swatch className="bg-primary-light">L</Swatch>
-			{/* <Swatch className="bg-primary bg-lighten-5">P+5</Swatch> */}
-			<Swatch className="bg-primary bg-lighten-3">P+3</Swatch>
-			<Swatch className="bg-primary bg-lighten-1">P+1</Swatch>
-			<Swatch className="bg-primary">P</Swatch>
-			<Swatch className="bg-primary bg-darken-1">P-1</Swatch>
-			<Swatch className="bg-primary bg-darken-3">P-3</Swatch>
-			{/* <Swatch className="bg-primary bg-darken-5">P-5</Swatch> */}
-			<Swatch className="bg-primary-dark">D</Swatch>
-			<Swatch className="bg-primary-dark bg-darken-3">D-3</Swatch>
-			<Swatch className="bg-primary-ink">I</Swatch>
+			<Swatch className="bg-main-wash">W</Swatch>
+			<Swatch className="bg-main-light bg-lighten-2">L+2</Swatch>
+			<Swatch className="bg-main-light">L</Swatch>
+			{/* <Swatch className="bg-main bg-lighten-5">P+5</Swatch> */}
+			<Swatch className="bg-main bg-lighten-2">P+2</Swatch>
+			<Swatch className="bg-main bg-lighten-1">P+1</Swatch>
+			<Swatch className="bg-main">P</Swatch>
+			<Swatch className="bg-main bg-darken-1">P-1</Swatch>
+			<Swatch className="bg-main bg-darken-2">P-2</Swatch>
+			{/* <Swatch className="bg-main bg-darken-5">P-5</Swatch> */}
+			<Swatch className="bg-main-dark">D</Swatch>
+			<Swatch className="bg-main-dark bg-darken-2">D-2</Swatch>
+			<Swatch className="bg-main-ink">I</Swatch>
 		</Box>
 	);
 }
@@ -179,8 +167,7 @@ export const Inheritance: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--dyn-primary-source': args.customHue,
-					'--dyn-primary-hue-rotate': args.customRotate,
+					'--p-primary-hue': args.customHue,
 			  }
 			: {};
 		return (
@@ -261,6 +248,42 @@ export const TweakOpacity: Story = {
 					grow
 				>
 					10
+				</Box>
+			</Box>
+		);
+	},
+};
+
+export const ComputedColors: Story = {
+	render() {
+		const ctx = snapshotColorContext(undefined, 'primary');
+		const hexValues = [
+			palettes.primary.definitions.wash.computeHex(ctx),
+			palettes.primary.definitions.light.computeHex(ctx),
+			palettes.primary.definitions.default.computeHex(ctx),
+			palettes.primary.definitions.dark.computeHex(ctx),
+			palettes.primary.definitions.ink.computeHex(ctx),
+		];
+		const oklchValues = [
+			palettes.primary.definitions.wash.computeOklch(ctx),
+			palettes.primary.definitions.light.computeOklch(ctx),
+			palettes.primary.definitions.default.computeOklch(ctx),
+			palettes.primary.definitions.dark.computeOklch(ctx),
+			palettes.primary.definitions.ink.computeOklch(ctx),
+		];
+
+		return (
+			<Box col>
+				<Range className="theme" />
+				<Box className="h-100px">
+					{oklchValues.map((oklch) => (
+						<Swatch style={{ backgroundColor: oklch }}>OK</Swatch>
+					))}
+				</Box>
+				<Box className="h-100px">
+					{hexValues.map((hex) => (
+						<Swatch style={{ backgroundColor: hex }}>Hex</Swatch>
+					))}
 				</Box>
 			</Box>
 		);

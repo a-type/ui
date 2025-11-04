@@ -43,7 +43,7 @@ import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
-import { PaletteName } from './uno/logic/color.js';
+import { PaletteName } from './uno/index.js';
 
 const meta = {
 	title: 'Theme Demo',

@@ -1,8 +1,4 @@
-import {
-	createColorRange,
-	paletteHues,
-	whiteBlackRange,
-} from '../logic/color.js';
+import { palettes } from '../logic/palettes.js';
 
 const contrastClamp = 'clamp(0, (0.36 / y - 1) * infinity, 1)';
 
@@ -11,25 +7,23 @@ export const colors = {
 	transparent: 'transparent',
 	current: 'currentColor',
 
-	black: whiteBlackRange.ink,
-	white: whiteBlackRange.wash,
-	wash: createColorRange(paletteHues.primary, {
-		saturation: '3%',
-	}).wash,
-	contrast: `color(from var(--l-contrast-bg,var(--v-bg-altered,var(--v-bg,var(--mode-white)))) xyz-d65 ${contrastClamp} ${contrastClamp} ${contrastClamp})`,
+	black: palettes.highContrast.styles.ink,
+	white: palettes.highContrast.styles.wash,
+	wash: palettes.gray.styles.wash,
 
 	// magic tokens
+	contrast: `color(from var(--l-contrast-bg,var(--v-bg-altered,var(--v-bg,var(--mode-white)))) xyz-d65 ${contrastClamp} ${contrastClamp} ${contrastClamp})`,
 	bg: 'var(--v-bg-altered, var(--v-bg, transparent))',
 	fg: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
 	color: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
 	border: 'var(--v-border-altered, var(--v-border, transparent))',
 
-	primary: createColorRange(paletteHues.primary),
-	accent: createColorRange(paletteHues.accent),
-	attention: createColorRange(paletteHues.attention),
-	success: createColorRange(paletteHues.success),
+	primary: palettes.primary.styles,
+	accent: palettes.accent.styles,
+	attention: palettes.attention.styles,
+	success: palettes.success.styles,
 
-	main: createColorRange(paletteHues.main),
+	main: palettes.main.styles,
 
-	gray: createColorRange(paletteHues.primary, { saturation: '5%' }),
+	gray: palettes.gray.styles,
 } as const;

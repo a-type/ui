@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { paletteNames } from '../../uno/logic/color.js';
+import { paletteNames } from '../../uno/index.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
 import { Button } from './Button.js';

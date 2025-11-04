@@ -23,7 +23,15 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Theme',
 				icon: 'paintbrush',
-				items: ['lemon', 'eggplant', 'leek', 'tomato', 'blueberry', 'salt'],
+				items: [
+					'lemon',
+					'eggplant',
+					'leek',
+					'tomato',
+					'blueberry',
+					'gray',
+					'high-contrast',
+				],
 				dynamicTitle: true,
 			},
 		},

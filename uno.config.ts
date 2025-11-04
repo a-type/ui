@@ -20,9 +20,9 @@ export default defineConfig({
 	presets: [
 		presetAtype({
 			borderScale: 1,
-			roundedness: 1,
-			scale: 'md',
-			saturation: 100,
+			cornerScale: 1,
+			scale: 1,
+			saturation: 50,
 		}),
 	],
 	transformers: [variantGroup()],

@@ -2,7 +2,7 @@ import { SelectTriggerProps } from '@radix-ui/react-select';
 import classNames, { clsx } from 'clsx';
 import { ReactNode } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { PaletteName, paletteNames } from '../../uno/logic/color.js';
+import { PaletteName, paletteNames } from '../../uno/index.js';
 import {
 	Select,
 	SelectContent,

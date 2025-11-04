@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { paletteNames } from '../../uno/logic/color.js';
+import { paletteNames } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
 import { Checkbox } from '../checkbox/Checkbox.js';
 import { Progress } from '../progress/Progress.js';

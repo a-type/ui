@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 
 export interface NoteProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode;

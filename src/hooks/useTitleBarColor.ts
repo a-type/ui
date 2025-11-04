@@ -1,11 +1,19 @@
-import { useCallback, useEffect } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
 import { useResolvedColorMode } from '../colorMode.js';
+import { snapshotColorContext } from '../uno/logic/color.js';
+import {
+	ColorLogicalPaletteDefinitions,
+	palettes,
+} from '../uno/logic/palettes.js';
 
 let defaultColor = '#ffffff';
+function getCurrentColor() {
+	return document
+		.querySelector('meta[name=theme-color]')
+		?.getAttribute('content');
+}
 if (typeof document !== 'undefined') {
-	defaultColor =
-		document.querySelector('meta[name=theme-color]')?.getAttribute('content') ??
-		defaultColor;
+	defaultColor = getCurrentColor() ?? defaultColor;
 }
 
 function changeThemeColor(color: string) {
@@ -51,4 +59,44 @@ export function useSetTitleBarColor() {
 	const setColor = useCallback((color: string) => changeThemeColor(color), []);
 	const resetColor = useCallback(() => changeThemeColor(defaultColor), []);
 	return { setColor, resetColor };
+}
+
+export function useThemedTitleBar(
+	paletteName: 'primary' | 'accent' | 'gray',
+	value: keyof ColorLogicalPaletteDefinitions,
+	options?: { contextElement?: RefObject<HTMLElement> },
+) {
+	const { setColor } = useSetTitleBarColor();
+
+	useEffect(() => {
+		const previousColor = getCurrentColor();
+
+		function update() {
+			const palette = palettes[paletteName];
+			const context = snapshotColorContext(
+				options?.contextElement?.current,
+				paletteName,
+			);
+			const color = palette.definitions[value].computeOklch(context);
+			setColor(color);
+		}
+		update();
+
+		const observer = new MutationObserver(() => {
+			update();
+		});
+		observer.observe(
+			options?.contextElement?.current ?? document.documentElement,
+			{
+				attributes: true,
+				attributeFilter: ['class'],
+			},
+		);
+
+		if (previousColor) {
+			return () => {
+				setColor(previousColor);
+			};
+		}
+	}, [setColor, paletteName, value, options?.contextElement]);
 }

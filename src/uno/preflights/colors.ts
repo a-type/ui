@@ -1,10 +1,15 @@
-import { paletteNames, whiteBlackRange } from '../logic/color.js';
+import {
+	graySaturation,
+	highContrastSaturation,
+	paletteNames,
+	palettes,
+} from '../logic/palettes.js';
 import { preflight } from './_util.js';
 
 const baseThemeCSS = `
---v-color: ${whiteBlackRange.ink};
+--v-color: ${palettes.highContrast.styles.ink};
 color: var(--v-color);
---v-bg: ${whiteBlackRange.wash};
+--v-bg: ${palettes.highContrast.styles.wash};
 background-color: var(--v-bg);
 `;
 
@@ -21,14 +26,7 @@ export const colorPreflight = preflight({
 	--p-success-hue: 140;
 }
 
-.theme-lemon {
-	--p-primary-hue: var(--p-lemon-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
-}
-.theme-override-lemon.theme-override-lemon {
+.theme-lemon, .theme-override-lemon.theme-override-lemon {
 	--p-primary-hue: var(--p-lemon-hue);
 	--p-accent-hue: var(--p-leek-hue);
 	--l-main-hue: var(--p-primary-hue);
@@ -36,14 +34,7 @@ export const colorPreflight = preflight({
 	${baseThemeCSS}
 }
 
-.theme-leek {
-	--p-primary-hue: var(--p-leek-hue);
-	--p-accent-hue: var(--p-lemon-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
-}
-.theme-override-leek.theme-override-leek {
+.theme-leek, .theme-override-leek.theme-override-leek {
 	--p-primary-hue: var(--p-leek-hue);
 	--p-accent-hue: var(--p-lemon-hue);
 	--l-main-hue: var(--p-primary-hue);
@@ -51,14 +42,7 @@ export const colorPreflight = preflight({
 	${baseThemeCSS}
 }
 
-.theme-tomato {
-	--p-primary-hue: var(--p-tomato-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
-}
-.theme-override-tomato.theme-override-tomato {
+.theme-tomato, .theme-override-tomato.theme-override-tomato {
 	--p-primary-hue: var(--p-tomato-hue);
 	--p-accent-hue: var(--p-leek-hue);
 	--l-main-hue: var(--p-primary-hue);
@@ -66,14 +50,7 @@ export const colorPreflight = preflight({
 	${baseThemeCSS}
 }
 
-.theme-blueberry {
-	--p-primary-hue: var(--p-blueberry-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
-}
-.theme-override-blueberry.theme-override-blueberry {
+.theme-blueberry, .theme-override-blueberry.theme-override-blueberry {
 	--p-primary-hue: var(--p-blueberry-hue);
 	--p-accent-hue: var(--p-leek-hue);
 	--l-main-hue: var(--p-primary-hue);
@@ -81,18 +58,22 @@ export const colorPreflight = preflight({
 	${baseThemeCSS}
 }
 
-.theme-eggplant {
+.theme-eggplant, .theme-override-eggplant.theme-override-eggplant {
 	--p-primary-hue: var(--p-eggplant-hue);
 	--p-accent-hue: var(--p-leek-hue);
 	--l-main-hue: var(--p-primary-hue);
 
 	${baseThemeCSS}
 }
-.theme-override-eggplant.theme-override-eggplant {
-	--p-primary-hue: var(--p-eggplant-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
 
+.theme-gray, .theme-salt, .theme-override-gray.theme-override-gray {
+	--l-saturation: ${graySaturation};
+	${baseThemeCSS}
+}
+
+.theme-high-contrast, .theme-override-high-contrast.theme-override-high-contrast {
+	--l-saturation: ${highContrastSaturation};
+	--l-lightness-spread: 10;
 	${baseThemeCSS}
 }
 
@@ -101,10 +82,10 @@ ${paletteNames
 	.map(createPaletteClass)
 	.join('\n')}
 .palette-gray {
-	--l-saturation: calc(0.3 * var(--global-saturation, 0));
+	--l-saturation: ${graySaturation};
 }
 .palette-high-contrast {
-	--l-saturation: 0;
+	--l-saturation: ${highContrastSaturation};
 	--l-lightness-spread: 10;
 }
 

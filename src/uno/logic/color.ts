@@ -1,84 +1,16 @@
-export function globalColor(
-	l: string | number,
-	c: string | number,
-	h: string | number,
-) {
-	return `oklch(${clampedPercent(`calc(${l})`)} ${clampedPercent(
-		`calc(var(--l-saturation,1) * var(--global-saturation) * (${c}))`,
-	)} ${h})`;
-}
+import {
+	ColorSpace,
+	to as convert,
+	OKLCH,
+	PlainColorObject,
+	serialize,
+	sRGB,
+	toGamut,
+} from 'colorjs.io/fn';
+import { type PaletteName } from './palettes.js';
 
-export function clampedPercent(value: string | number) {
-	return `clamp(0%, ${value}, 100%)`;
-}
-
-export const paletteHues = {
-	primary: 'var(--p-primary-hue,91.8)',
-	accent: 'var(--p-accent-hue,160.88)',
-	main: 'var(--l-main-hue,var(--p-primary-hue,91.8))',
-	attention: 'var(--p-attention-hue,30)',
-	success: 'var(--p-success-hue,140)',
-};
-
-export const paletteNames = [
-	'primary',
-	'accent',
-	'attention',
-	'success',
-	'lemon',
-	'leek',
-	'tomato',
-	'blueberry',
-	'eggplant',
-	'gray',
-	'high-contrast',
-] as const;
-export type PaletteName = (typeof paletteNames)[number];
-
-export function createColorRange(
-	sourceHue: string,
-	{
-		saturation,
-	}: {
-		saturation?: string;
-	} = {},
-) {
-	return {
-		wash: globalColor(
-			`var(--mode-l-neutral) + (var(--mode-l-range-up) * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
-			saturation ??
-				`var(--mode-s-neutral) + (var(--mode-s-range-up) * var(--mode-mult,1))`,
-			sourceHue,
-		),
-		light: globalColor(
-			`var(--mode-l-neutral) + (var(--mode-l-range-up) * 0.5 * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
-			saturation ??
-				`var(--mode-s-neutral) + (var(--mode-s-range-up) * 0.75 * var(--mode-mult,1))`,
-			sourceHue,
-		),
-		DEFAULT: globalColor(
-			`var(--mode-l-neutral)`,
-			saturation ?? `var(--mode-s-neutral)`,
-			sourceHue,
-		),
-		dark: globalColor(
-			`var(--mode-l-neutral) - (var(--mode-l-range-down) * 0.35 * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
-			saturation ??
-				`var(--mode-s-neutral) - (var(--mode-s-range-down) * 0.5 * var(--mode-mult,1))`,
-			sourceHue,
-		),
-		ink: globalColor(
-			`var(--mode-l-neutral) - (var(--mode-l-range-down) * var(--mode-mult,1) * var(--l-lightness-spread,1))`,
-			saturation ??
-				`var(--mode-s-neutral) - (var(--mode-s-range-down) * var(--mode-mult,1))`,
-			sourceHue,
-		),
-	};
-}
-
-export const whiteBlackRange = createColorRange(paletteHues.primary, {
-	saturation: '0.4%',
-});
+ColorSpace.register(sRGB);
+ColorSpace.register(OKLCH);
 
 export function lighten(base: string, level: string) {
 	return mod(base, level, 1);
@@ -96,4 +28,412 @@ function mod(base: string, level: string, sign: number) {
 		` calc(c * (1 - (${level} * 0.1 * ${sign} * (1 + (1 - var(--global-saturation, 0))))))` +
 		` h)`
 	);
+}
+
+/**
+ * Values to inject for contextual color variables.
+ */
+export interface ColorEvaluationContext {
+	mode: {
+		lNeutral: string;
+		lRangeUp: string;
+		lRangeDown: string;
+		sNeutral: string;
+		sRangeUp: string;
+		sRangeDown: string;
+		mult: string;
+	};
+	sourceHue: string;
+	globalSaturation: string;
+	localLightnessSpread: string;
+	localSaturation: string;
+}
+
+export function livePropertyColorContext(
+	sourceHue: string,
+): ColorEvaluationContext {
+	return {
+		mode: {
+			lNeutral: 'var(--mode-l-neutral)',
+			lRangeUp: 'var(--mode-l-range-up)',
+			lRangeDown: 'var(--mode-l-range-down)',
+			sNeutral: 'var(--mode-s-neutral)',
+			sRangeUp: 'var(--mode-s-range-up)',
+			sRangeDown: 'var(--mode-s-range-down)',
+			mult: 'var(--mode-mult, 1)',
+		},
+		sourceHue,
+		globalSaturation: 'var(--global-saturation, 1)',
+		localLightnessSpread: 'var(--l-lightness-spread, 1)',
+		localSaturation: 'var(--l-saturation, 1)',
+	};
+}
+
+// helpers to avoid having to hardcode the synchronized variables
+function stripVar(property: string) {
+	return property.replace(/var\((--[a-zA-Z0-9-_]+)(,[^)]+)?\)/g, '$1').trim();
+}
+function getFallback(property: string) {
+	const match = property.match(/var\(--[a-zA-Z0-9-_]+,([^)]+)\)/);
+	if (match) {
+		return match[1].trim();
+	}
+	return null;
+}
+function evaluatePropertiesRecursively(
+	computed: CSSStyleDeclaration,
+	context: ColorEvaluationContext,
+	result: any = {},
+) {
+	for (const key in context) {
+		const value = context[key as keyof ColorEvaluationContext];
+		if (typeof value === 'string') {
+			if (value.startsWith('var(')) {
+				const varName = stripVar(value);
+				const evaluatedVar = computed.getPropertyValue(varName).trim();
+				if (evaluatedVar) {
+					result[key as keyof ColorEvaluationContext] = evaluatedVar;
+				} else {
+					const fallback = getFallback(value);
+					if (fallback !== null) {
+						result[key as keyof ColorEvaluationContext] = fallback;
+					} else {
+						throw new Error(
+							`CSS variable ${varName} is not defined and no fallback is provided.`,
+						);
+					}
+				}
+			}
+		} else {
+			result[key as keyof ColorEvaluationContext] =
+				evaluatePropertiesRecursively(computed, value as any, {} as any) as any;
+		}
+	}
+	return result;
+}
+
+/**
+ * "Snapshots" a color context as real values from the given scope element.
+ * Defaults to body.
+ */
+export function snapshotColorContext(
+	scope: HTMLElement = document.body,
+	palette: PaletteName | 'main',
+): ColorEvaluationContext {
+	const styles = getComputedStyle(scope);
+	const sourceHue =
+		palette === 'main' ? `var(--l-main-hue)` : `var(--p-${palette}-hue)`;
+	return evaluatePropertiesRecursively(
+		styles,
+		livePropertyColorContext(sourceHue),
+	) as ColorEvaluationContext;
+}
+
+export interface OklchColorEquation {
+	l: ColorEquation;
+	c: ColorEquation;
+	h: ColorEquation;
+
+	/**
+	 * Prints the CSS value of the color equation, including all
+	 * calculations and variable references.
+	 */
+	print(context: ColorEvaluationContext): string;
+	/**
+	 * Uses the equation and provided context to compute a static
+	 * OKLCH color string with calculations and references resolved.
+	 */
+	computeOklch(context: ColorEvaluationContext): string;
+	/**
+	 * Uses the equation and provided context to compute a static
+	 * sRGB color string with calculations and references resolved.
+	 * This is not as accurate as computeOklch, as it converts to sRGB gamut.
+	 */
+	computeSrgb(context: ColorEvaluationContext): string;
+	/**
+	 * Uses the equation and provided context to compute a static
+	 * HEX color string with calculations and references resolved.
+	 * This is not as accurate as computeOklch, as it converts to sRGB gamut.
+	 */
+	computeHex(context: ColorEvaluationContext): string;
+	/**
+	 * Returns the raw computed L, C, H values as numbers with units.
+	 */
+	raw(ctx: ColorEvaluationContext): {
+		l: ComputationResult;
+		c: ComputationResult;
+		h: ComputationResult;
+	};
+}
+export type ColorEquation = OperationTree;
+type ColorContextEvaluation = (ctx: ColorEvaluationContext) => string;
+type OperationTree =
+	| AddOperation
+	| SubtractOperation
+	| MultiplyOperation
+	| LiteralOperation
+	| ClampOperation;
+interface AddOperation {
+	type: 'add';
+	values: ColorEquation[];
+}
+interface SubtractOperation {
+	type: 'subtract';
+	values: ColorEquation[];
+}
+interface MultiplyOperation {
+	type: 'multiply';
+	values: ColorEquation[];
+}
+interface LiteralOperation {
+	type: 'literal';
+	value: ColorContextEvaluation;
+}
+interface ClampOperation {
+	type: 'clamp';
+	values: ColorEquation[];
+}
+const colorEquationTools = {
+	literal: (value: ColorContextEvaluation): LiteralOperation => {
+		return { type: 'literal', value };
+	},
+	add: (...values: ColorEquation[]): AddOperation => {
+		return { type: 'add', values };
+	},
+	subtract: (...values: ColorEquation[]): SubtractOperation => {
+		return { type: 'subtract', values };
+	},
+	multiply: (...values: ColorEquation[]): MultiplyOperation => {
+		return { type: 'multiply', values };
+	},
+	clamp: (
+		equation: ColorEquation,
+		min: ColorEquation,
+		max: ColorEquation,
+	): ColorEquation => {
+		return { type: 'clamp', values: [min, equation, max] };
+	},
+};
+
+function printEquation(
+	equation: ColorEquation,
+	context: ColorEvaluationContext,
+): string {
+	switch (equation.type) {
+		case 'literal':
+			return equation.value(context);
+		case 'add':
+			return `(${equation.values
+				.map((v) => printEquation(v, context))
+				.join(' + ')})`;
+		case 'subtract':
+			return `(${equation.values
+				.map((v) => printEquation(v, context))
+				.join(' - ')})`;
+		case 'multiply':
+			return `(${equation.values
+				.map((v) => printEquation(v, context))
+				.join(' * ')})`;
+		case 'clamp':
+			if (equation.values.length !== 3) {
+				throw new Error(
+					'Clamp operation requires exactly 3 values: min, value, max',
+				);
+			}
+			return `clamp(${equation.values
+				.map((v) => printEquation(v, context))
+				.join(', ')})`;
+	}
+}
+
+interface ComputationResult {
+	value: number;
+	unit: '%' | '';
+}
+
+function add(a: ComputationResult, b: ComputationResult): ComputationResult {
+	if (a.unit !== b.unit) {
+		throw new Error('Cannot add values with different units');
+	}
+	return { value: a.value + b.value, unit: a.unit };
+}
+
+function subtract(
+	a: ComputationResult,
+	b: ComputationResult,
+): ComputationResult {
+	if (a.unit !== b.unit) {
+		throw new Error('Cannot subtract values with different units');
+	}
+	return { value: a.value - b.value, unit: a.unit };
+}
+
+function multiply(
+	a: ComputationResult,
+	b: ComputationResult,
+): ComputationResult {
+	if (a.unit === '%' && b.unit === '%') {
+		return { value: (a.value * b.value) / 100, unit: '%' };
+	}
+	const unit = a.unit === '%' || b.unit === '%' ? '%' : '';
+	return { value: a.value * b.value, unit };
+}
+
+function clamp(
+	value: ComputationResult,
+	min: ComputationResult,
+	max: ComputationResult,
+): ComputationResult {
+	if (value.unit !== min.unit || value.unit !== max.unit) {
+		throw new Error('Cannot clamp values with different units');
+	}
+	return {
+		value: Math.min(Math.max(value.value, min.value), max.value),
+		unit: value.unit,
+	};
+}
+
+function printComputationResult(result: ComputationResult): string {
+	return result.unit === '%' ? `${result.value}%` : `${result.value}`;
+}
+
+function resolveComputationResult(
+	result: ComputationResult,
+	outputRange: [number, number],
+): number {
+	if (result.unit === '%') {
+		const [min, max] = outputRange;
+		return min + (result.value / 100) * (max - min);
+	} else {
+		return result.value;
+	}
+}
+
+function evaluateLiteral(literal: string): ComputationResult {
+	if (literal.endsWith('%')) {
+		const asNumber = Number(literal.slice(0, -1));
+		if (isNaN(asNumber)) {
+			throw new Error(`Literal value did not evaluate to a number: ${literal}`);
+		}
+		return { value: asNumber, unit: '%' };
+	} else {
+		const asNumber = Number(literal);
+		if (isNaN(asNumber)) {
+			throw new Error(`Literal value did not evaluate to a number: ${literal}`);
+		}
+		return { value: asNumber, unit: '' };
+	}
+}
+
+function computeEquation(
+	equation: ColorEquation,
+	context: ColorEvaluationContext,
+): ComputationResult {
+	switch (equation.type) {
+		case 'literal':
+			return evaluateLiteral(equation.value(context));
+		case 'add':
+			return equation.values.reduce<ComputationResult>(
+				(sum, v) => add(sum, computeEquation(v, context)),
+				{ value: 0, unit: '%' },
+			);
+		case 'subtract':
+			if (equation.values.length === 0) {
+				return { value: 0, unit: '%' };
+			}
+			const first = computeEquation(equation.values[0], context);
+			return equation.values
+				.slice(1)
+				.reduce(
+					(difference, v) => subtract(difference, computeEquation(v, context)),
+					first,
+				);
+		case 'multiply':
+			return equation.values.reduce<ComputationResult>(
+				(product, v) => multiply(product, computeEquation(v, context)),
+				{ value: 1, unit: '' },
+			);
+		case 'clamp':
+			if (equation.values.length !== 3) {
+				throw new Error(
+					'Clamp operation requires exactly 3 values: min, value, max',
+				);
+			}
+			const min = computeEquation(equation.values[0], context);
+			const value = computeEquation(equation.values[1], context);
+			const max = computeEquation(equation.values[2], context);
+			return clamp(value, min, max);
+		default:
+			throw new Error(`Unknown equation type: ${(equation as any).type}`);
+	}
+}
+
+export function oklchBuilder(
+	impl: (tools: typeof colorEquationTools) => {
+		l: ColorEquation;
+		c: ColorEquation;
+		h: ColorEquation;
+	},
+): OklchColorEquation {
+	const equations = impl(colorEquationTools);
+
+	return {
+		...equations,
+		print(context: ColorEvaluationContext): string {
+			const l = printEquation(equations.l, context);
+			const c = printEquation(equations.c, context);
+			const h = printEquation(equations.h, context);
+			return `oklch(calc(${l}) calc(${c}) calc(${h}))`;
+		},
+		computeSrgb(context: ColorEvaluationContext): string {
+			const l = computeEquation(equations.l, context);
+			const c = computeEquation(equations.c, context);
+			const h = computeEquation(equations.h, context);
+			const asColor: PlainColorObject = {
+				space: OKLCH,
+				alpha: 1,
+				coords: [
+					resolveComputationResult(l, [0, 1]),
+					resolveComputationResult(c, [0, 0.4]),
+					resolveComputationResult(h, [0, 360]),
+				],
+			};
+			return serialize(toGamut(convert(asColor, 'srgb'), {}));
+		},
+		computeHex(context: ColorEvaluationContext): string {
+			const l = computeEquation(equations.l, context);
+			const c = computeEquation(equations.c, context);
+			const h = computeEquation(equations.h, context);
+			const asColor: PlainColorObject = {
+				space: OKLCH,
+				alpha: 1,
+				coords: [
+					resolveComputationResult(l, [0, 1]),
+					resolveComputationResult(c, [0, 0.4]),
+					resolveComputationResult(h, [0, 360]),
+				],
+			};
+			return serialize(toGamut(convert(asColor, 'srgb')), {
+				format: 'hex',
+			});
+		},
+		computeOklch(context: ColorEvaluationContext): string {
+			const l = computeEquation(equations.l, context);
+			const c = computeEquation(equations.c, context);
+			const h = computeEquation(equations.h, context);
+			return `oklch(${printComputationResult(l)} ${printComputationResult(
+				c,
+			)} ${printComputationResult(h)})`;
+		},
+		raw(context: ColorEvaluationContext): {
+			l: ComputationResult;
+			c: ComputationResult;
+			h: ComputationResult;
+		} {
+			const l = computeEquation(equations.l, context);
+			const c = computeEquation(equations.c, context);
+			const h = computeEquation(equations.h, context);
+			return { l, c, h };
+		},
+	};
 }

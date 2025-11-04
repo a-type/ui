@@ -6,7 +6,7 @@ import {
 import classNames from 'clsx';
 import { useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 

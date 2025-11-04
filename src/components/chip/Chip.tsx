@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
 import { HTMLAttributes, Ref } from 'react';
-import { PaletteName } from '../../uno/logic/color.js';
+import { PaletteName } from '../../uno/index.js';
 
 export interface ChipProps extends HTMLAttributes<HTMLElement> {
 	color?: PaletteName;
