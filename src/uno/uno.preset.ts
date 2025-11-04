@@ -1,6 +1,7 @@
 import presetWind3 from '@unocss/preset-wind3';
 import { Preset } from 'unocss';
 import { ThemeCustomizationConfig } from './preflights/customization.js';
+import { FontsPreflightOptions } from './preflights/fonts.js';
 import { preflights } from './preflights/index.js';
 import { rules } from './rules/index.js';
 import { shortcuts } from './shortcuts/index.js';
@@ -8,9 +9,13 @@ import { theme } from './theme/index.js';
 import { variants } from './variants/index.js';
 
 export default function presetAtype(
-	config: ThemeCustomizationConfig & {
-		noPreflight?: boolean;
-	} = {},
+	config: ThemeCustomizationConfig &
+		FontsPreflightOptions & {
+			noPreflight?: boolean;
+		} = {
+		interFontLocation:
+			'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
+	},
 ): Preset {
 	return {
 		name: 'atype',

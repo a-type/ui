@@ -47,6 +47,7 @@ export interface ColorPaletteStyles {
 	DEFAULT: string;
 	dark: string;
 	ink: string;
+	[key: string]: string;
 }
 
 export interface ColorLogicalPalette {

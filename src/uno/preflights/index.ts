@@ -6,11 +6,12 @@ import {
 	ThemeCustomizationConfig,
 } from './customization.js';
 import { darkModePreflight } from './dark.js';
+import { fontsPreflight, FontsPreflightOptions } from './fonts.js';
 import { globalPreflight } from './globals.js';
 import { layerPreflight } from './layers.js';
 
 export const preflights = (
-	config: ThemeCustomizationConfig,
+	config: ThemeCustomizationConfig & FontsPreflightOptions,
 ): Preflight<any>[] => [
 	layerPreflight,
 	basePreflight,
@@ -18,4 +19,5 @@ export const preflights = (
 	colorPreflight,
 	darkModePreflight,
 	customizationPreflight(config),
+	fontsPreflight(config),
 ];

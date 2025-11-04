@@ -1,3 +1,4 @@
+import { Theme } from '@unocss/preset-mini';
 import { palettes } from '../logic/palettes.js';
 
 const contrastClamp = 'clamp(0, (0.36 / y - 1) * infinity, 1)';
@@ -26,4 +27,4 @@ export const colors = {
 	main: palettes.main.styles,
 
 	gray: palettes.gray.styles,
-} as const;
+} satisfies Record<string, string | Theme['colors']>;
