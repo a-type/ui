@@ -256,7 +256,7 @@ export const TweakOpacity: Story = {
 
 export const ComputedColors: Story = {
 	render() {
-		const ctx = snapshotColorContext(undefined, 'primary');
+		const ctx = snapshotColorContext('primary');
 		const hexValues = [
 			palettes.primary.definitions.wash.computeHex(ctx),
 			palettes.primary.definitions.light.computeHex(ctx),

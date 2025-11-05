@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
 	ColorEvaluationContext,
 	livePropertyColorContext,
@@ -6,19 +6,9 @@ import {
 } from './color.js';
 import { palettes } from './palettes.js';
 
-let contextElement: HTMLElement;
-beforeEach(() => {
-	contextElement = document.createElement('div');
-	contextElement.classList.add('palette-leek');
-	document.body.appendChild(contextElement);
-});
-afterEach(() => {
-	document.body.removeChild(contextElement);
-});
-
 describe('context snapshot evaluation', () => {
 	it('should snapshot color context from element properties', () => {
-		const context = snapshotColorContext(contextElement, 'main');
+		const context = snapshotColorContext('leek');
 		expect(context).toEqual({
 			sourceHue: '165.88',
 			localLightnessSpread: '1',
@@ -41,7 +31,7 @@ describe('oklch color evaluation tools', () => {
 	const { wash, default: DEFAULT } = palettes.main.definitions;
 
 	it('should resolve lch values', () => {
-		const ctx = snapshotColorContext(contextElement, 'main');
+		const ctx = snapshotColorContext('leek');
 		const { l, c, h } = wash.raw(ctx);
 		expect(l.value).toBeCloseTo(100, 1);
 		expect(l.unit).toBe('%');
@@ -59,7 +49,7 @@ describe('oklch color evaluation tools', () => {
 		);
 	});
 	it('should evaluate a valid oklch color value using element property values', () => {
-		const context = snapshotColorContext(contextElement, 'main');
+		const context = snapshotColorContext('leek');
 		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
 			`"rgb(100% 100% 100%)"`,
 		);
@@ -77,7 +67,7 @@ describe('oklch color evaluation tools', () => {
 		);
 	});
 	it('should evaluate different named palettes in addition to main', () => {
-		const context = snapshotColorContext(contextElement, 'attention');
+		const context = snapshotColorContext('attention');
 		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
 			`"rgb(100% 100% 100%)"`,
 		);
@@ -98,7 +88,7 @@ describe('oklch color evaluation tools', () => {
 		const darkMode = document.createElement('div');
 		darkMode.classList.add('override-dark', 'palette-leek');
 		document.body.appendChild(darkMode);
-		const context = snapshotColorContext(darkMode, 'main');
+		const context = snapshotColorContext('leek', 'dark');
 		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
 			`"rgb(0% 14.06% 7.3466%)"`,
 		);

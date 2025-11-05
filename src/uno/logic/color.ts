@@ -117,16 +117,24 @@ function evaluatePropertiesRecursively(
  * Defaults to body.
  */
 export function snapshotColorContext(
-	scope: HTMLElement = document.body,
-	palette: PaletteName | 'main',
+	palette: PaletteName,
+	mode?: 'light' | 'dark',
 ): ColorEvaluationContext {
-	const styles = getComputedStyle(scope);
-	const sourceHue =
-		palette === 'main' ? `var(--l-main-hue)` : `var(--p-${palette}-hue)`;
-	return evaluatePropertiesRecursively(
+	const scopeElement = document.createElement('div');
+	scopeElement.classList.add(`palette-${palette}`);
+	if (mode) {
+		scopeElement.classList.add(`override-${mode}`);
+	}
+	scopeElement.style.position = 'absolute';
+	scopeElement.style.visibility = 'hidden';
+	document.body.appendChild(scopeElement);
+	const styles = getComputedStyle(scopeElement);
+	const evaluated = evaluatePropertiesRecursively(
 		styles,
-		livePropertyColorContext(sourceHue),
+		livePropertyColorContext(`var(--l-main-hue)`),
 	) as ColorEvaluationContext;
+	document.body.removeChild(scopeElement);
+	return evaluated;
 }
 
 export interface OklchColorEquation {

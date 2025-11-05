@@ -1,8 +1,9 @@
-import { RefObject, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useResolvedColorMode } from '../colorMode.js';
 import { snapshotColorContext } from '../uno/logic/color.js';
 import {
 	ColorLogicalPaletteDefinitions,
+	PaletteName,
 	palettes,
 } from '../uno/logic/palettes.js';
 
@@ -62,9 +63,10 @@ export function useSetTitleBarColor() {
 }
 
 export function useThemedTitleBar(
-	paletteName: 'primary' | 'accent' | 'gray',
+	paletteName: PaletteName,
 	value: keyof ColorLogicalPaletteDefinitions,
-	options?: { contextElement?: RefObject<HTMLElement> },
+	/** If not provided, will inherit from app */
+	mode?: 'light' | 'dark',
 ) {
 	const { setColor } = useSetTitleBarColor();
 
@@ -72,31 +74,17 @@ export function useThemedTitleBar(
 		const previousColor = getCurrentColor();
 
 		function update() {
-			const palette = palettes[paletteName];
-			const context = snapshotColorContext(
-				options?.contextElement?.current,
-				paletteName,
-			);
+			const palette = palettes[paletteName] ?? palettes.primary;
+			const context = snapshotColorContext(paletteName, mode);
 			const color = palette.definitions[value].computeOklch(context);
 			setColor(color);
 		}
 		update();
-
-		const observer = new MutationObserver(() => {
-			update();
-		});
-		observer.observe(
-			options?.contextElement?.current ?? document.documentElement,
-			{
-				attributes: true,
-				attributeFilter: ['class'],
-			},
-		);
 
 		if (previousColor) {
 			return () => {
 				setColor(previousColor);
 			};
 		}
-	}, [setColor, paletteName, value, options?.contextElement]);
+	}, [setColor, paletteName, value, mode]);
 }

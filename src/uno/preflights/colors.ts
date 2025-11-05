@@ -7,9 +7,9 @@ import {
 import { preflight } from './_util.js';
 
 const baseThemeCSS = `
---v-color: ${palettes.highContrast.styles.ink};
+--v-color: ${palettes['high-contrast'].styles.ink};
 color: var(--v-color);
---v-bg: ${palettes.highContrast.styles.wash};
+--v-bg: ${palettes['high-contrast'].styles.wash};
 background-color: var(--v-bg);
 `;
 

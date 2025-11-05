@@ -253,7 +253,7 @@ export const palettes = {
 		sourceHue: paletteHues.main,
 		saturation: graySaturation,
 	}),
-	highContrast: createColorLogicalPalette({
+	['high-contrast']: createColorLogicalPalette({
 		sourceHue: paletteHues.main,
 		saturation: highContrastSaturation,
 	}),

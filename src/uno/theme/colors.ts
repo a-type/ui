@@ -8,8 +8,8 @@ export const colors = {
 	transparent: 'transparent',
 	current: 'currentColor',
 
-	black: palettes.highContrast.styles.ink,
-	white: palettes.highContrast.styles.wash,
+	black: palettes['high-contrast'].styles.ink,
+	white: palettes['high-contrast'].styles.wash,
 	wash: palettes.gray.styles.wash,
 
 	// magic tokens
