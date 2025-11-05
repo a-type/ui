@@ -67,10 +67,12 @@ export function useThemedTitleBar(
 	value: keyof ColorLogicalPaletteDefinitions,
 	/** If not provided, will inherit from app */
 	mode?: 'light' | 'dark',
+	skip?: boolean,
 ) {
 	const { setColor } = useSetTitleBarColor();
 
 	useEffect(() => {
+		if (skip) return;
 		const previousColor = getCurrentColor();
 
 		function update() {
@@ -86,5 +88,5 @@ export function useThemedTitleBar(
 				setColor(previousColor);
 			};
 		}
-	}, [setColor, paletteName, value, mode]);
+	}, [setColor, paletteName, value, mode, skip]);
 }

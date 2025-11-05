@@ -1,8 +1,10 @@
 import type { Preview } from '@storybook/react';
 import { useEffect } from 'react';
-import 'virtual:uno.css';
 import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
+// @ts-ignore
+import 'virtual:uno.css';
+// @ts-ignore
 import './preview.css';
 
 const preview: Preview = {
