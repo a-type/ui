@@ -52,7 +52,8 @@ export function getButtonClassName({
 
 		{
 			'layer-components:(px-4 py-2 text-md rounded-lg)': size === 'default',
-			'layer-components:(px-4 py-1 text-sm rounded-md)': size === 'small',
+			'layer-components:(px-4 py-0.25 min-h-touch text-sm rounded-md)':
+				size === 'small',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(p-2.35 text-sm rounded-lg)':
 				size === 'default' && !disableIconMode,
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(p-2 text-xs rounded-lg -m-y-0.5)':

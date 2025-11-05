@@ -5,11 +5,11 @@ export const width: Theme['width'] = {
 	full: '100%',
 	'min-content': 'min-content',
 	'max-content': 'max-content',
-	touch: '40px',
+	touch: '30px',
 };
 
 export const height: Theme['height'] = {
 	'min-content': 'min-content',
 	'max-content': 'max-content',
-	touch: '40px',
+	touch: '30px',
 };
