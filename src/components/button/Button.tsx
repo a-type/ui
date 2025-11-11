@@ -88,6 +88,7 @@ export function ButtonRoot({
 		'data-size': size,
 		'data-loading': isLoading,
 		'data-has-label': hasLabelChild || undefined,
+		'data-has-icon': iconChildCount > 0 ? true : undefined,
 		'data-icon-count': iconChildCount > 0 ? iconChildCount : undefined,
 		'data-dropdown-trigger': isDropdownTrigger ? true : undefined,
 		tabIndex: visuallyDisabled ? -1 : undefined,
