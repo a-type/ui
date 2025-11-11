@@ -6,10 +6,12 @@ export const width: Theme['width'] = {
 	'min-content': 'min-content',
 	'max-content': 'max-content',
 	touch: '30px',
+	'touch-large': '40px',
 };
 
 export const height: Theme['height'] = {
 	'min-content': 'min-content',
 	'max-content': 'max-content',
 	touch: '30px',
+	'touch-large': '40px',
 };

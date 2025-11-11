@@ -41,7 +41,7 @@ export const SelectItem = ({
 
 export const SelectItemRoot = withClassName(
 	SelectPrimitive.Item,
-	'layer-components:(text-md leading-4 color-black flex items-center flex-row h-36px pr-4 pl-35px min-h-touch relative select-none)',
+	'layer-components:(text-md leading-4 color-black flex items-center flex-row h-36px pr-4 pl-35px min-h-touch-large relative select-none)',
 	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-gray-light color-black)',
 );
 export const SelectItemIndicatorRoot = withClassName(

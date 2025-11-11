@@ -7,7 +7,7 @@ export const TabsRoot = withClassName(TabsPrimitive.Root, '');
 export const TabsList = withClassName(
 	TabsPrimitive.List,
 	'layer-components:(flex flex-row items-start gap-2)',
-	'layer-components:(border border-thin border-color rounded-xl)',
+	'layer-components:(border-solid border-thin border-fg rounded-xl)',
 	'layer-components:(shadow-sm bg-white)',
 	'layer-components:(overflow-x-auto overflow-unstable w-max-content max-w-full)',
 );

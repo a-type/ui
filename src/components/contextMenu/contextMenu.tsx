@@ -48,7 +48,7 @@ export const ContextMenuArrow = withClassName(
 export const ContextMenuItem = withClassName(
 	ContextMenuPrimitive.Item,
 	'palette-gray',
-	'layer-components:(flex items-center overflow-hidden min-h-touch py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
+	'layer-components:(flex items-center overflow-hidden min-h-touch-large py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
 	'layer-components:hover:bg-main-light layer-components:[&[data-highlighted=true]]:bg-main-light',
 	'layer-components:[&[data-disabled=true]]:(opacity-50 cursor-default) layer-components:disabled:(opacity-50 cursor-default))',
 );

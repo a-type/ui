@@ -44,7 +44,7 @@ export function ActionButton({
 					size="small"
 					disableIconMode
 					className={classNames(
-						'layer-variants:(border-gray-dark font-normal m-2 mx-1)',
+						'layer-variants:(font-normal m-2 mx-1)',
 						className,
 					)}
 					asChild={asChild}

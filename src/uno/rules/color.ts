@@ -95,10 +95,14 @@ export const colorRules: Rule[] = [
 			if (!parsed?.color) {
 				return undefined;
 			}
+			const thisColor = parsed.opacity
+				? 'rgb(from var(--v-border-altered,var(--v-border)) r g b / var(--v-border-opacity,100%))'
+				: 'var(--v-border-altered,var(--v-border))';
 			return {
-				'border-color': parsed.opacity
-					? 'rgb(from var(--v-border-altered,var(--v-border)) r g b / var(--v-border-opacity,100%))'
-					: 'var(--v-border-altered,var(--v-border))',
+				'border-right-color': directionalBorderFallback('r', thisColor),
+				'border-bottom-color': directionalBorderFallback('b', thisColor),
+				'border-left-color': directionalBorderFallback('l', thisColor),
+				'border-top-color': directionalBorderFallback('t', thisColor),
 				'--v-border': parsed.color,
 				'--v-border-opacity': (parsed.opacity || 100) + '%',
 			};
@@ -122,6 +126,49 @@ export const colorRules: Rule[] = [
 			autocomplete: 'border-darken-<number>',
 		},
 	],
+	...['r', 'l', 't', 'b'].flatMap(
+		(dir) =>
+			[
+				[
+					new RegExp(`^border-${dir}-(.*)$`),
+					(match, { theme }) => {
+						if (match[1] === 'none') {
+							return undefined;
+						}
+						const parsed = parseColor(match[1], theme);
+						if (!parsed?.color) {
+							return undefined;
+						}
+						const thisColor = parsed.opacity
+							? `rgb(from var(--v-border-${dir}-altered,var(--v-border-${dir})) r g b / var(--v-border-${dir}-opacity,100%))`
+							: `var(--v-border-${dir}-altered,var(--v-border-${dir}))`;
+						return {
+							[`border-${dirnames[dir]}-color`]: thisColor,
+							[`--v-border-${dir}`]: parsed.color,
+							[`--v-border-${dir}-opacity`]: (parsed.opacity || 100) + '%',
+						};
+					},
+				],
+				[
+					new RegExp(`^border-${dir}-lighten-(\\d+\\.?\\d*)$`),
+					(match, { theme }) => ({
+						[`--v-border-${dir}-altered`]: lighten(
+							`var(--v-border-${dir},currentColor)`,
+							match[1],
+						),
+					}),
+				],
+				[
+					new RegExp(`^border-${dir}-darken-(\\d+\\.?\\d*)$`),
+					(match, { theme }) => ({
+						[`--v-border-${dir}-altered`]: darken(
+							`var(--v-border-${dir},currentColor)`,
+							match[1],
+						),
+					}),
+				],
+			] as Rule[],
+	),
 	[
 		/^ring-(.*)$/,
 		(match, { theme }) => {
@@ -151,3 +198,14 @@ export const colorRules: Rule[] = [
 		}),
 	],
 ];
+
+function directionalBorderFallback(side: 't' | 'r' | 'b' | 'l', color: string) {
+	return `var(--v-border-${side}-color-altered, var(--v-border-${side}-color, ${color}))`;
+}
+
+const dirnames: Record<string, string> = {
+	r: 'right',
+	l: 'left',
+	t: 'top',
+	b: 'bottom',
+};
