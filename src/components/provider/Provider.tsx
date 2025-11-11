@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { Toaster, ToastPosition } from 'react-hot-toast';
-import { useTitleBarColor, useVisualViewportOffset } from '../../hooks.js';
+import { useThemedTitleBar, useVisualViewportOffset } from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
@@ -13,6 +13,7 @@ export interface ProviderProps {
 	toastContainerClassName?: string;
 	disableViewportOffset?: boolean;
 	virtualKeyboardBehavior?: 'overlay' | 'displace';
+	disableTitleBarColor?: boolean;
 }
 
 /**
@@ -25,6 +26,7 @@ export function Provider({
 	toastContainerClassName,
 	disableViewportOffset,
 	virtualKeyboardBehavior = 'displace',
+	disableTitleBarColor,
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
 	const supportedVirtualKeyboardBehavior =
@@ -32,11 +34,7 @@ export function Provider({
 			? virtualKeyboardBehavior
 			: 'displace';
 	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
-	useTitleBarColor({
-		light: '#fdfdfd',
-		dark: '#020202',
-	});
-
+	useThemedTitleBar('high-contrast', 'wash', undefined, disableTitleBarColor);
 	const otherStuff = (
 		<>
 			<IconSpritesheet />

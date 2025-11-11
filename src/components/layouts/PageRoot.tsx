@@ -1,18 +1,9 @@
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
-import { useThemedTitleBar } from '../../hooks.js';
 
-export interface PageRootProps extends HTMLAttributes<HTMLDivElement> {
-	disableTitleBarColor?: boolean;
-}
+export interface PageRootProps extends HTMLAttributes<HTMLDivElement> {}
 
-export function PageRoot({
-	className,
-	children,
-	disableTitleBarColor,
-	...rest
-}: PageRootProps) {
-	useThemedTitleBar('high-contrast', 'wash', undefined, disableTitleBarColor);
+export function PageRoot({ className, children, ...rest }: PageRootProps) {
 	return (
 		<div
 			className={clsx(
