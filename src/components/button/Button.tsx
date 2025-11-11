@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import {
 	ButtonHTMLAttributes,
 	Children,
+	Fragment,
 	memo,
 	ReactNode,
 	Ref,
@@ -67,7 +68,7 @@ export function ButtonRoot({
 	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
-	const childArray = Children.toArray(children);
+	const childArray = childArrayWithoutFragments(children);
 	const iconChildCount = childArray.filter(isIconChild).length;
 	const hasLabelChild = childArray.length > iconChildCount;
 
@@ -237,4 +238,16 @@ function isIconChild(child: ReactNode): boolean {
 		if (typeof type === 'function' && type.displayName === 'Icon') return true;
 	}
 	return false;
+}
+
+function childArrayWithoutFragments(children: ReactNode): ReactNode[] {
+	const topArray = Children.toArray(children);
+	return topArray.flatMap((child) => {
+		if (typeof child === 'object' && child !== null && 'type' in child) {
+			if ((child as any).type === Fragment) {
+				return childArrayWithoutFragments((child as any).props.children);
+			}
+		}
+		return [child];
+	});
 }
