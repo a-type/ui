@@ -12,7 +12,7 @@ export function PageRoot({
 	disableTitleBarColor,
 	...rest
 }: PageRootProps) {
-	useThemedTitleBar('gray', 'wash', undefined, disableTitleBarColor);
+	useThemedTitleBar('high-contrast', 'wash', undefined, disableTitleBarColor);
 	return (
 		<div
 			className={clsx(
