@@ -14,28 +14,35 @@ function makeUseStorage(
 		// using useMemo to execute synchronous code in render just once.
 		// this hook comes before useLocalStorageCache because we want to load
 		// values into the cache before accessing them.
-		useMemo(() => {
+		const stored = useMemo(() => {
 			if (typeof window === 'undefined') return;
 
 			try {
 				const stored = storage.getItem(key);
-				if (stored) {
-					cache[key] = JSON.parse(stored);
-				}
+				if (stored === '"undefined"') return undefined;
+				if (stored === null) return undefined;
+				return JSON.parse(stored);
 			} catch (err) {
-				console.error(`Error loading use-${name} value for ${key}: ${err}`);
+				console.error(`Error parsing use-${name} value for ${key}: ${err}`);
 				storage.removeItem(key);
 			}
 		}, [key]);
-		const snapshot = useSnapshot(cache);
-		const storedValue = (snapshot[key] ?? initialValue) as T;
 
-		const hasValue = snapshot[key] !== undefined;
 		useEffect(() => {
-			if (!hasValue && writeInitialValue) {
+			if (stored !== undefined) {
+				cache[key] = stored;
+			}
+		}, [stored, key]);
+
+		const snapshot = useSnapshot(cache);
+		const storedValue = (snapshot[key] ?? stored ?? initialValue) as T;
+
+		useEffect(() => {
+			if (typeof window === 'undefined') return;
+			if (snapshot[key] === undefined && writeInitialValue) {
 				storage.setItem(key, JSON.stringify(initialValue));
 			}
-		}, [hasValue, initialValue, writeInitialValue, key]);
+		}, [!!snapshot[key], initialValue, writeInitialValue, key]);
 
 		// Return a wrapped version of useState's setter function that
 		// persists the new value to localStorage. It's throttled to prevent
@@ -85,12 +92,12 @@ const mockStorage: Storage = {
 };
 
 export const useLocalStorage = makeUseStorage(
-	typeof localStorage === 'undefined' ? mockStorage : localStorage,
+	typeof window === 'undefined' ? mockStorage : localStorage,
 	proxy({}),
 	'LocalStorage',
 );
 export const useSessionStorage = makeUseStorage(
-	typeof sessionStorage === 'undefined' ? mockStorage : sessionStorage,
+	typeof window === 'undefined' ? mockStorage : sessionStorage,
 	proxy({}),
 	'SessionStorage',
 );
