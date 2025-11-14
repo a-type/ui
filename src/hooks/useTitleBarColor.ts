@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
 import { useResolvedColorMode } from '../colorMode.js';
 import { snapshotColorContext } from '../uno/logic/color.js';
 import {
@@ -70,6 +70,20 @@ export function useThemedTitleBar(
 	skip?: boolean,
 ) {
 	const { setColor } = useSetTitleBarColor();
+	// using a variable to rerun the effect instead of subscribing in-effect...
+	// this is an attempt to preserve the cascading behavior in the React tree
+	// if a child calls this hook, so ideally the parent and child should both
+	// re-evaluate but the child should 'win'
+	const visible = useSyncExternalStore(
+		(onStoreChange) => {
+			document.addEventListener('visibilitychange', onStoreChange);
+			return () => {
+				document.removeEventListener('visibilitychange', onStoreChange);
+			};
+		},
+		() => document.visibilityState === 'visible',
+		() => true,
+	);
 
 	useEffect(() => {
 		if (skip) return;
@@ -88,5 +102,5 @@ export function useThemedTitleBar(
 				setColor(previousColor);
 			};
 		}
-	}, [setColor, paletteName, value, mode, skip]);
+	}, [setColor, paletteName, value, mode, skip, visible]);
 }
