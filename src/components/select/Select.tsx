@@ -12,7 +12,7 @@ import {
 	useContext,
 } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button, ButtonProps } from '../button/Button.js';
 import { getButtonClassName } from '../button/classes.js';
 import { Icon } from '../icon/index.js';
@@ -146,7 +146,7 @@ export const SelectContent = withPassthroughNativeRender(
 	({ ref: forwardedRef, children, inDialog, className, ...props }) => {
 		return (
 			<SelectPrimitive.Portal>
-				<BoxContext.Provider value={{ spacingScale: 1 }}>
+				<GroupScaleReset>
 					<SelectPrimitive.Content
 						className={classNames(
 							'layer-components:(overflow-hidden bg-white rounded-md border border-solid border border-black z-menu shadow-lg)',
@@ -171,7 +171,7 @@ export const SelectContent = withPassthroughNativeRender(
 							<Icon name="chevron" />
 						</SelectPrimitive.ScrollDownButton>
 					</SelectPrimitive.Content>
-				</BoxContext.Provider>
+				</GroupScaleReset>
 			</SelectPrimitive.Portal>
 		);
 	},

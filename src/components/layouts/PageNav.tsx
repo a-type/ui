@@ -3,7 +3,7 @@
 import classNames from 'clsx';
 import { HTMLAttributes, useRef } from 'react';
 import { useBoundsCssVars } from '../../hooks.js';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { HideWhileKeyboardOpen } from '../utility/HideWhileKeyboardOpen.js';
 
 export function PageNav({
@@ -31,9 +31,7 @@ export function PageNav({
 			)}
 			ref={ref}
 		>
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
-				{children}
-			</BoxContext.Provider>
+			<GroupScaleReset>{children}</GroupScaleReset>
 		</HideWhileKeyboardOpen>
 	);
 }

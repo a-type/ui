@@ -2,7 +2,7 @@ import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import classNames from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 
 export const ContextMenuRoot = ContextMenuPrimitive.Root;
 
@@ -16,7 +16,7 @@ export const ContextMenuContent = function Content({
 }) {
 	return (
 		<ContextMenuPrimitive.Portal>
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
+			<GroupScaleReset>
 				<ContextMenuPrimitive.Content
 					className={classNames(
 						'layer-components:(min-w-120px bg-white rounded-md overflow-hidden border-gray-dark border shadow-md z-menu)',
@@ -35,7 +35,7 @@ export const ContextMenuContent = function Content({
 					alignOffset={-10}
 					{...props}
 				/>
-			</BoxContext.Provider>
+			</GroupScaleReset>
 		</ContextMenuPrimitive.Portal>
 	);
 };

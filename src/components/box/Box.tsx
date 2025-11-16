@@ -1,5 +1,10 @@
 import clsx from 'clsx';
-import { createContext, Ref, useContext, useMemo } from 'react';
+import { Ref } from 'react';
+import {
+	GroupScaleLayer,
+	GroupScaleReset,
+	useGroupScaleStyles,
+} from '../../systems/GroupScale.js';
 import { PaletteName } from '../../uno/index.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
@@ -84,16 +89,7 @@ export function Box({
 	ref,
 	...rest
 }: BoxProps) {
-	const { spacingScale } = useContext(BoxContext);
-
-	const style = useMemo(
-		() => ({
-			...userStyle,
-			'--spacing-scale': container === 'reset' ? 1 : spacingScale,
-			'--local-corner-scale': container === 'reset' ? 1 : `${spacingScale}`,
-		}),
-		[userStyle, spacingScale, container],
-	);
+	const style = useGroupScaleStyles(userStyle);
 
 	const items = itemsSolo ?? align?.split(' ')[0];
 	const justify = justifySolo ?? align?.split(' ')[1];
@@ -220,26 +216,11 @@ export function Box({
 	);
 
 	if (container || p) {
-		return (
-			<BoxContext.Provider
-				value={{
-					spacingScale:
-						container === 'reset'
-							? 1
-							: spacingScale * SPACING_SCALE_NESTING_FACTOR,
-				}}
-			>
-				{main}
-			</BoxContext.Provider>
-		);
+		if (container === 'reset') {
+			return <GroupScaleReset>{main}</GroupScaleReset>;
+		}
+		return <GroupScaleLayer>{main}</GroupScaleLayer>;
 	}
 
 	return main;
 }
-
-const SPACING_SCALE_NESTING_FACTOR = 0.75;
-export const BoxContext = createContext<{
-	spacingScale: number;
-}>({
-	spacingScale: 1,
-});

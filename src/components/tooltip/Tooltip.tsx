@@ -1,8 +1,6 @@
-'use client';
-
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import classNames from 'clsx';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 
 export interface TooltipContentProps
 	extends TooltipPrimitive.TooltipContentProps {
@@ -17,7 +15,7 @@ function Content({
 }: TooltipPrimitive.TooltipContentProps) {
 	return (
 		<TooltipPrimitive.Portal>
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
+			<GroupScaleReset>
 				<TooltipPrimitive.Content
 					className={classNames(
 						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip)',
@@ -39,7 +37,7 @@ function Content({
 					{children}
 					<TooltipPrimitive.Arrow className="layer-components:arrow" />
 				</TooltipPrimitive.Content>
-			</BoxContext.Provider>
+			</GroupScaleReset>
 		</TooltipPrimitive.Portal>
 	);
 }

@@ -3,8 +3,8 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { PaletteName } from '../../uno/index.js';
-import { BoxContext } from '../box/Box.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
 
@@ -13,9 +13,9 @@ const StyledContent = withClassName(
 		props: DropdownMenuPrimitive.DropdownMenuContentProps,
 	) {
 		return (
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
+			<GroupScaleReset>
 				<DropdownMenuPrimitive.Content {...props} />
-			</BoxContext.Provider>
+			</GroupScaleReset>
 		);
 	},
 	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-gray-dark flex flex-col)',

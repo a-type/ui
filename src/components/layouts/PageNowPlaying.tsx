@@ -2,7 +2,7 @@
 
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { useConfig } from '../provider/Provider.js';
 
 export function PageNowPlaying({
@@ -17,7 +17,7 @@ export function PageNowPlaying({
 	const { virtualKeyboardBehavior } = useConfig();
 
 	return (
-		<BoxContext.Provider value={{ spacingScale: 1 }}>
+		<GroupScaleReset>
 			<div
 				{...props}
 				className={classNames(
@@ -39,6 +39,6 @@ export function PageNowPlaying({
 					className,
 				)}
 			/>
-		</BoxContext.Provider>
+		</GroupScaleReset>
 	);
 }

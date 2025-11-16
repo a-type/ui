@@ -1,7 +1,17 @@
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
-import { HTMLAttributes, MouseEvent, ReactNode, Ref } from 'react';
+import {
+	CSSProperties,
+	HTMLAttributes,
+	MouseEvent,
+	ReactNode,
+	Ref,
+} from 'react';
 import { withClassName, withProps } from '../../hooks.js';
+import {
+	GroupScaleLayer,
+	useGroupScaleStyles,
+} from '../../systems/GroupScale.js';
 import { Box } from '../box/Box.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
@@ -18,6 +28,8 @@ export function CardMain({
 	compact,
 	nonInteractive,
 	ref,
+	style,
+	children,
 	...rest
 }: {
 	asChild?: boolean;
@@ -29,47 +41,59 @@ export function CardMain({
 	nonInteractive?: boolean;
 	visuallyFocused?: boolean;
 	visuallyDisabled?: boolean;
+	style?: CSSProperties;
 	ref?: Ref<any>;
 }) {
 	const isInteractive = !nonInteractive && (!!asChild || !!rest.onClick);
 	const Comp = asChild ? Slot : isInteractive ? 'button' : 'div';
+
+	const scaleStyles = useGroupScaleStyles(style);
+
 	return (
-		<Comp
-			ref={ref}
-			className={classNames(
-				'layer-components:(flex flex-col items-start gap-1 transition pb-2 flex-1 min-h-40px bg-transparent border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-lg)',
-				!!compact && 'layer-variants:(pb-0)',
-				isInteractive &&
-					classNames(
-						'layer-components:cursor-pointer',
-						'layer-components:hover:(bg-black/10 color-black)',
-						'layer-components:focus:outline-none',
-						'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-accent)',
-						'layer-components:[&[data-visually-focused=true]]:(bg-black/10 ring-inset ring-4 ring-accent)',
-						'layer-components:disabled:(cursor-default)',
-						'layer-components:[&[data-visually-disabled=true]]:(cursor-default)',
-					),
-				className,
-			)}
-			data-compact={compact}
-			data-visually-focused={rest.visuallyFocused}
-			data-visually-disabled={rest.visuallyDisabled}
-			data-interactive={isInteractive}
-			{...rest}
-		/>
+		<GroupScaleLayer>
+			<Comp
+				ref={ref}
+				className={classNames(
+					'layer-components:(flex flex-col items-start gap-1 transition pb-xs flex-1 min-h-40px bg-transparent)',
+					'layer-components:(border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-md)',
+					!!compact && 'layer-variants:(pb-0)',
+					isInteractive &&
+						classNames(
+							'layer-components:cursor-pointer',
+							'layer-components:hover:(bg-black/10 color-black)',
+							'layer-components:focus:outline-none',
+							'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-accent)',
+							'layer-components:[&[data-visually-focused=true]]:(bg-black/10 ring-inset ring-4 ring-accent)',
+							'layer-components:disabled:(cursor-default)',
+							'layer-components:[&[data-visually-disabled=true]]:(cursor-default)',
+						),
+					className,
+				)}
+				data-compact={compact}
+				data-visually-focused={rest.visuallyFocused}
+				data-visually-disabled={rest.visuallyDisabled}
+				data-interactive={isInteractive}
+				style={scaleStyles}
+				{...rest}
+			>
+				{children}
+			</Comp>
+		</GroupScaleLayer>
 	);
 }
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 mt-0 bg-white py-2 px-3 rounded-lg rounded-bl-none rounded-tr-none w-auto mr-auto border border-solid border-gray-dark/50 border-t-none border-l-none text-md max-h-80px overflow-hidden text-ellipsis max-w-full text-inherit font-semibold relative z-1 transition-colors)',
-	'layer-components:[[data-compact=true]_&]:(py-1 text-sm)',
+	'layer-components:(flex flex-col gap-1 my-xs mx-xs py-xs px-md w-auto max-h-80px max-w-full relative z-1)',
+	'layer-components:(bg-white rounded-md border border-solid border-gray-dark transition-colors)',
+	'layer-components:(text-md overflow-hidden text-ellipsis text-inherit font-semibold)',
+	'layer-components:[[data-compact=true]_&]:(py-xs text-sm)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-white/80 color-black rounded-md mx-2 my-0.5 border border-solid border-gray-dark/50 text-xs relative z-1)',
-	'layer-variants:[[data-compact=true]_&]:(py-0 px-1 my-0 text-xs)',
+	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-white/80 color-black rounded-sm mx-2 my-0.5 border border-solid border-gray-dark/50 text-xs relative z-1)',
+	'layer-variants:[[data-compact=true]_&]:(py-0 px-sm my-0 text-xs)',
 	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {

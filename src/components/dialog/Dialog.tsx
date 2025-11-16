@@ -14,7 +14,7 @@ import {
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
@@ -160,7 +160,7 @@ export const Content = function Content({
 	return (
 		<DialogPrimitive.Portal>
 			<StyledOverlay />
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
+			<GroupScaleReset>
 				<StyledContent
 					data-dialog-content
 					{...bind(props)}
@@ -184,7 +184,7 @@ export const Content = function Content({
 					{!disableSheet && <DialogSwipeHandle />}
 					{children}
 				</StyledContent>
-			</BoxContext.Provider>
+			</GroupScaleReset>
 		</DialogPrimitive.Portal>
 	);
 };

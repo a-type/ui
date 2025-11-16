@@ -5,7 +5,7 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import classNames from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { BoxContext } from '../box/Box.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 
 const StyledContent = withClassName(
 	PopoverPrimitive.Content,
@@ -55,7 +55,7 @@ export const PopoverContent = function PopoverContent({
 }) {
 	return (
 		<PopoverPrimitive.Portal forceMount={forceMount}>
-			<BoxContext.Provider value={{ spacingScale: 1 }}>
+			<GroupScaleReset>
 				<StyledContent
 					{...props}
 					forceMount={forceMount}
@@ -73,7 +73,7 @@ export const PopoverContent = function PopoverContent({
 				>
 					{children}
 				</StyledContent>
-			</BoxContext.Provider>
+			</GroupScaleReset>
 		</PopoverPrimitive.Portal>
 	);
 };
