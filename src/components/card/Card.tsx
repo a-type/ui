@@ -84,10 +84,10 @@ export function CardMain({
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 my-xs mx-xs py-xs px-md w-auto max-h-80px max-w-full relative z-1)',
+	'layer-components:(flex flex-col gap-1 my-xs mx-xs py-xs px-sm w-auto max-h-80px max-w-full relative z-1)',
 	'layer-components:(bg-white rounded-md border border-solid border-gray-dark transition-colors)',
 	'layer-components:(text-md overflow-hidden text-ellipsis text-inherit font-semibold)',
-	'layer-components:[[data-compact=true]_&]:(py-xs text-sm)',
+	'layer-components:[[data-compact=true]_&]:(text-sm)',
 );
 
 const CardContentRoot = withClassName(
