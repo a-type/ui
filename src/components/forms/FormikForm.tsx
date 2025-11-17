@@ -4,7 +4,9 @@ import { CheckboxField } from './CheckboxField.js';
 import { Form } from './Form.js';
 import { NumberStepperField } from './NumberStepperField.js';
 import { SubmitButton } from './SubmitButton.js';
+import { SwitchField } from './SwitchField.js';
 import { TextAreaField, TextField } from './TextField.js';
+import { ToggleGroupField } from './ToggleGroupField.js';
 
 export interface FormikFormProps<T extends FormikValues = FormikValues>
 	extends FormikConfig<T> {
@@ -23,7 +25,7 @@ export function FormikFormRoot<Values extends FormikValues>({
 		async (values: Values, bag: FormikHelpers<Values>) => {
 			try {
 				bag.setSubmitting(true);
-				return await onSubmit(values, bag);
+				return await onSubmit?.(values, bag);
 			} finally {
 				bag.setSubmitting(false);
 			}
@@ -52,4 +54,6 @@ export const FormikForm = Object.assign(FormikFormRoot, {
 	NumberStepperField,
 	SubmitButton,
 	CheckboxField,
+	SwitchField,
+	ToggleGroupField,
 });

@@ -1,10 +1,10 @@
 import { useField } from 'formik';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import { Box } from '../box/Box.js';
-import { Checkbox } from '../checkbox/index.js';
+import { Switch } from '../switch/Switch.js';
 import { HorizontalFieldLabel } from './FieldLabel.js';
 
-export interface CheckboxFieldProps {
+export interface SwitchFieldProps {
 	name: string;
 	label?: string;
 	required?: boolean;
@@ -12,19 +12,19 @@ export interface CheckboxFieldProps {
 	id?: string;
 }
 
-export function CheckboxField({
+export function SwitchField({
 	name,
 	label,
 	className,
 	required,
 	id: providedId,
 	...rest
-}: CheckboxFieldProps) {
+}: SwitchFieldProps) {
 	const [props, _, tools] = useField({ name, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
 		<Box gap="sm" className={className}>
-			<Checkbox
+			<Switch
 				{...props}
 				checked={props.checked}
 				onCheckedChange={(v) => {

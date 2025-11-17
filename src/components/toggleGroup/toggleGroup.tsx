@@ -14,6 +14,9 @@ export const ToggleGroupItem = withClassName(
 	'layer-components:[&[data-state=on]]:(bg-main border-default shadow-sm hover:border-default)',
 );
 
+export type ToggleGroupProps =
+	| ToggleGroupPrimitive.ToggleGroupMultipleProps
+	| ToggleGroupPrimitive.ToggleGroupSingleProps;
 export const ToggleGroup = Object.assign(ToggleGroupRoot, {
 	Item: ToggleGroupItem,
 });
