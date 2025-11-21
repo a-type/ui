@@ -130,7 +130,7 @@ export function ButtonRoot({
 							exit={{ width: 0, marginLeft: '-0.5rem' }}
 							className={clsx(
 								'flex-shrink-0 inline-block overflow-hidden my-auto flex',
-								'[[data-has-icon=true]>&]:hidden',
+								'[[data-has-icon=true]_&]:hidden',
 							)}
 							data-default-loader
 						>
