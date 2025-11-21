@@ -145,9 +145,11 @@ export function ButtonRoot({
 					)}
 				{children}
 				{isDropdownTrigger && (
-					<DropdownMenuTriggerIcon asChild>
-						<Icon name="chevron" />
-					</DropdownMenuTriggerIcon>
+					<IconLoadingProvider value={false}>
+						<DropdownMenuTriggerIcon asChild>
+							<Icon name="chevron" />
+						</DropdownMenuTriggerIcon>
+					</IconLoadingProvider>
 				)}
 			</Comp>
 		</IconLoadingProvider>
@@ -167,6 +169,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 			style={{
 				width: value ? '15px' : 0,
 			}}
+			loading={false}
 		/>
 	);
 });

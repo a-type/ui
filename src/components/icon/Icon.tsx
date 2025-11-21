@@ -7,6 +7,7 @@ import { useIconLoading } from './IconLoadingContext.js';
 export interface IconProps extends HTMLAttributes<SVGSVGElement> {
 	name: IconName;
 	size?: number;
+	loading?: boolean;
 }
 
 export const Icon = function Icon({
@@ -14,11 +15,13 @@ export const Icon = function Icon({
 	name,
 	size = 15,
 	className,
+	loading: loadingProp,
 	...rest
 }: IconProps & {
 	ref?: React.Ref<SVGSVGElement>;
 }) {
-	const loading = useIconLoading();
+	const loadingContext = useIconLoading();
+	const loading = loadingProp !== false && (loadingProp || loadingContext);
 
 	if (loading) {
 		return <Spinner size={size} className="icon inline-block" />;
