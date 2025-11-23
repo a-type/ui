@@ -24,7 +24,12 @@ export const Icon = function Icon({
 	const loading = loadingProp !== false && (loadingProp || loadingContext);
 
 	if (loading) {
-		return <Spinner size={size} className="icon inline-block" />;
+		return (
+			<Spinner
+				size={size}
+				className={classNames('icon inline-block flex-shrink-0', className)}
+			/>
+		);
 	}
 
 	return (

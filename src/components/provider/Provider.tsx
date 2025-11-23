@@ -1,16 +1,14 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { Toaster, ToastPosition } from 'react-hot-toast';
 import { useThemedTitleBar, useVisualViewportOffset } from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
+import { Toaster } from '../toasts/toasts.js';
 import { TooltipProvider } from '../tooltip/index.js';
 
 export interface ProviderProps {
 	children?: ReactNode;
 	disableParticles?: boolean;
-	toastPosition?: ToastPosition;
-	toastContainerClassName?: string;
 	disableViewportOffset?: boolean;
 	virtualKeyboardBehavior?: 'overlay' | 'displace';
 	disableTitleBarColor?: boolean;
@@ -22,8 +20,6 @@ export interface ProviderProps {
 export function Provider({
 	children,
 	disableParticles,
-	toastPosition = 'top-center',
-	toastContainerClassName,
 	disableViewportOffset,
 	virtualKeyboardBehavior = 'displace',
 	disableTitleBarColor,
@@ -38,10 +34,7 @@ export function Provider({
 	const otherStuff = (
 		<>
 			<IconSpritesheet />
-			<Toaster
-				position={toastPosition}
-				containerClassName={toastContainerClassName}
-			/>
+			<Toaster />
 		</>
 	);
 
