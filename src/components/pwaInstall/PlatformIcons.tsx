@@ -38,8 +38,8 @@ export function SafariPlusSquareIcon() {
 			id="pwa-add"
 			width="24"
 			height="24"
-			viewBox="0 0 25 25"
-			fill="none"
+			viewBox="-4 -4 33 33"
+			fill="currentColor"
 			className="v-middle"
 		>
 			<g>
