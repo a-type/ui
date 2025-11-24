@@ -26,11 +26,12 @@ const StyledOverlay = withClassName(
 	'layer-components:(fixed inset-0 z-backdrop animate-fade-in animate-duration-200 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray)',
 	'layer-components:[&[data-state=closed]]:animate-fade-out',
 	'motion-reduce:animate-none',
+	'layer-components:backdrop-blur-sm',
 );
 
 const StyledContent = withClassName(
 	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl shadow-up bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark)',
+	'layer-components:(z-dialog fixed shadow-xl bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark)',
 	'layer-components:sm:shadow-down',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
@@ -38,7 +39,7 @@ const StyledContent = withClassName(
 	'layer-components:[&[data-state=closed]]:animate-dialog-out',
 );
 const sheetClassNames = classNames(
-	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 p-6 pt-8 w-full max-w-none)',
+	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 p-6 pt-8 w-full max-w-none shadow-up)',
 	'layer-variants:lt-sm:pb-[calc(3rem+env(safe-area-inset-bottom,0px))]',
 	'layer-variants:lt-sm:(animate-fade-in-up)',
 	'layer-variants:lt-sm:[&[data-state=closed]]:animate-fade-out-down',
@@ -67,6 +68,34 @@ function sheetCloseGestureLogic(
 	const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
 	content.style.setProperty('--gesture-y', `${gestureY}px`);
 	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
+}
+
+// filter out gestures that are within scrollable descendants
+// if those elements are not scrolled to the top already
+function filterScrollables(
+	target: HTMLElement,
+	root: HTMLElement,
+	dy: number,
+	vy: number,
+) {
+	// always allow upward swipes
+	if (vy < 0) {
+		return false;
+	}
+
+	let cur: HTMLElement | null = target;
+	while (cur) {
+		if (cur === root) return false;
+		cur = cur.parentElement;
+		if (
+			cur &&
+			cur.scrollHeight > cur.clientHeight &&
+			cur.scrollTop !== 0 &&
+			vy > 0
+		)
+			return true;
+	}
+	return false;
 }
 
 export interface DialogContentProps
@@ -146,8 +175,24 @@ export const Content = function Content({
 	const close = useContext(DialogCloseContext);
 	const isSmall = useMediaQuery('(max-width: 640px)');
 	const bind = useDrag(
-		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
-			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
+		({
+			swipe: [, swipeY],
+			movement: [, dy],
+			velocity: [, vy],
+			last,
+			active,
+			target,
+		}) => {
+			if (
+				filterScrollables(target as HTMLElement, gestureRef.current!, dy, vy)
+			) {
+				return;
+			}
+			if (
+				(active || last) &&
+				gestureRef.current &&
+				gestureRef.current.scrollTop < 3
+			) {
 				sheetCloseGestureLogic(swipeY, dy, vy, last, close, gestureRef.current);
 			}
 		},

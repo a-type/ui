@@ -10,6 +10,7 @@ import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Dialog } from '../dialog/Dialog.js';
 import { Icon } from '../icon/Icon.js';
+import { Lightbox } from '../lightbox/Lightbox.js';
 import { Ol } from '../lists/lists.js';
 import { P } from '../typography/typography.js';
 import {
@@ -45,6 +46,8 @@ export function PwaInstallTrigger({
 		return null;
 	}
 
+	const primaryIcon = manifest?.icons?.[0];
+
 	return (
 		<Dialog>
 			<Dialog.Trigger {...rest} asChild>
@@ -55,7 +58,19 @@ export function PwaInstallTrigger({
 				)}
 			</Dialog.Trigger>
 			<Dialog.Content>
-				<Dialog.Title>
+				<Dialog.Title className="flex flex-row gap-md items-center">
+					{primaryIcon && (
+						<img
+							src={primaryIcon.src}
+							alt={
+								primaryIcon.label ??
+								manifest?.short_name ??
+								manifest?.name ??
+								'App Icon'
+							}
+							className="inline-block w-1em h-1em rounded"
+						/>
+					)}
 					Install {manifest?.short_name ?? manifest?.name ?? 'App'}
 				</Dialog.Title>
 				{showInstructions ? (
@@ -79,7 +94,9 @@ export function PwaInstallTrigger({
 							This site is also an app. You can install it right now for easier
 							access and more features.
 						</Dialog.Description>
-						{manifest?.description && <P>{manifest.description}</P>}
+						{manifest?.description && (
+							<P className="mb-sm">{manifest.description}</P>
+						)}
 						<ManifestImageGallery manifestPath={manifestPath} />
 						<Dialog.Actions>
 							<Dialog.Close asChild>
@@ -156,14 +173,27 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 	}
 
 	return (
-		<Box overflow="auto-x" gap className="h-240px">
+		<Box overflow="auto-x" p="sm" gap className="h-240px">
 			{manifest.screenshots?.map((screenshot, index) => (
-				<img
-					key={index}
-					src={screenshot.src}
-					alt={screenshot.label || `Screenshot ${index + 1}`}
-					className="h-full rounded object-contain"
-				/>
+				<Lightbox.Root key={screenshot.src}>
+					<Lightbox.Trigger asChild>
+						<Lightbox.Image
+							tabIndex={0}
+							key={index}
+							src={screenshot.src}
+							alt={screenshot.label || `Screenshot ${index + 1}`}
+						/>
+					</Lightbox.Trigger>
+					<Lightbox.Portal>
+						<Lightbox.Overlay className="z-10000" />
+						<Lightbox.Content className="z-10001">
+							<Lightbox.Image
+								src={screenshot.src}
+								alt={screenshot.label || `Screenshot ${index + 1}`}
+							/>
+						</Lightbox.Content>
+					</Lightbox.Portal>
+				</Lightbox.Root>
 			))}
 		</Box>
 	);

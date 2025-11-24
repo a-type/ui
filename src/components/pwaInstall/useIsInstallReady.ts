@@ -1,5 +1,5 @@
 import { proxy, useSnapshot } from 'valtio';
-import { getIsPWAInstalled } from '../../platform.js';
+import { getIsPWAInstalled, PRETEND_INSTALLABLE } from '../../platform.js';
 
 let deferredPrompt: BeforeInstallPromptEvent | null = null;
 const installState = proxy({
@@ -20,6 +20,10 @@ if (typeof window !== 'undefined') {
 		// Optionally, send analytics event that PWA install promo was shown.
 		console.log(`Ready to show custom install prompt`);
 	});
+}
+
+if (PRETEND_INSTALLABLE) {
+	installState.installReady = true;
 }
 
 export function useIsInstallReady() {

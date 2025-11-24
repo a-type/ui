@@ -1,6 +1,10 @@
-const PRETEND_PWA =
+export const PRETEND_PWA =
 	(typeof localStorage !== 'undefined' &&
 		localStorage.getItem('pretendPWA')) === 'true';
+
+export const PRETEND_INSTALLABLE =
+	typeof localStorage !== 'undefined' &&
+	localStorage.getItem('pretendInstallable') === 'true';
 
 export function getIsPWAInstalled() {
 	return (
@@ -73,6 +77,9 @@ export function getIsMobile() {
 }
 
 export function getSupportsPWAInstallPrompt() {
+	if (PRETEND_INSTALLABLE) {
+		return true;
+	}
 	return typeof window !== 'undefined' && 'BeforeInstallPromptEvent' in window;
 }
 

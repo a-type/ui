@@ -1,0 +1,52 @@
+{
+	"id": "gnocchi-main",
+	"name": "Gnocchi",
+	"short_name": "Gnocchi",
+	"description": "Your grocery list, done better.",
+	"theme_color": "#fdfdff",
+	"background_color": "#fdfdff",
+	"scope": "https://gnocchi.biscuits.club/",
+	"icons": [
+		{
+			"src": "android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "android-chrome-512x512-mask.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "screenshots/list.png",
+			"type": "image/png",
+			"sizes": "1080x2219"
+		},
+		{
+			"src": "screenshots/recipes.png",
+			"type": "image/png",
+			"sizes": "847x1742"
+		},
+		{
+			"src": "screenshots/cooking.png",
+			"type": "image/png",
+			"sizes": "1079x2220"
+		}
+	],
+	"categories": ["food"],
+	"display": "standalone",
+	"start_url": "/?directLaunch=true",
+	"share_target": {
+		"action": "share",
+		"method": "POST",
+		"enctype": "multipart/form-data"
+	}
+}

@@ -33,12 +33,26 @@ function DummyContent() {
 	return (
 		<div className="col">
 			<H1>Some content</H1>
-			<P>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
-				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
-				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi. Nulla
-				facil
-			</P>
+			<div className="overflow-y-auto max-h-20vh">
+				<P>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+					porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget
+					ligula accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi.
+					Nulla facil
+				</P>
+				<P>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+					porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget
+					ligula accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi.
+					Nulla facil
+				</P>
+				<P>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+					porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget
+					ligula accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi.
+					Nulla facil
+				</P>
+			</div>
 			<Button disabled color="primary">
 				Click me
 			</Button>

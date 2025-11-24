@@ -21,6 +21,14 @@ export const theme: Theme = {
 	boxShadow,
 	easing,
 	animation,
+	blur: {
+		sm: '2px',
+		md: '4px',
+		lg: '8px',
+		xl: '16px',
+		'2xl': '24px',
+		'3xl': '40px',
+	},
 	zIndex: {
 		nav: 'var(--z-nav)',
 		menu: 'var(--z-menu)',
