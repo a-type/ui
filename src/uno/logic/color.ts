@@ -1,16 +1,4 @@
-import {
-	ColorSpace,
-	to as convert,
-	OKLCH,
-	PlainColorObject,
-	serialize,
-	sRGB,
-	toGamut,
-} from 'colorjs.io/fn';
 import { type PaletteName } from './palettes.js';
-
-ColorSpace.register(sRGB);
-ColorSpace.register(OKLCH);
 
 export function lighten(base: string, level: string) {
 	return mod(base, level, 1);
@@ -152,18 +140,6 @@ export interface OklchColorEquation {
 	 * OKLCH color string with calculations and references resolved.
 	 */
 	computeOklch(context: ColorEvaluationContext): string;
-	/**
-	 * Uses the equation and provided context to compute a static
-	 * sRGB color string with calculations and references resolved.
-	 * This is not as accurate as computeOklch, as it converts to sRGB gamut.
-	 */
-	computeSrgb(context: ColorEvaluationContext): string;
-	/**
-	 * Uses the equation and provided context to compute a static
-	 * HEX color string with calculations and references resolved.
-	 * This is not as accurate as computeOklch, as it converts to sRGB gamut.
-	 */
-	computeHex(context: ColorEvaluationContext): string;
 	/**
 	 * Returns the raw computed L, C, H values as numbers with units.
 	 */
@@ -392,38 +368,6 @@ export function oklchBuilder(
 			const c = printEquation(equations.c, context);
 			const h = printEquation(equations.h, context);
 			return `oklch(calc(${l}) calc(${c}) calc(${h}))`;
-		},
-		computeSrgb(context: ColorEvaluationContext): string {
-			const l = computeEquation(equations.l, context);
-			const c = computeEquation(equations.c, context);
-			const h = computeEquation(equations.h, context);
-			const asColor: PlainColorObject = {
-				space: OKLCH,
-				alpha: 1,
-				coords: [
-					resolveComputationResult(l, [0, 1]),
-					resolveComputationResult(c, [0, 0.4]),
-					resolveComputationResult(h, [0, 360]),
-				],
-			};
-			return serialize(toGamut(convert(asColor, 'srgb'), {}));
-		},
-		computeHex(context: ColorEvaluationContext): string {
-			const l = computeEquation(equations.l, context);
-			const c = computeEquation(equations.c, context);
-			const h = computeEquation(equations.h, context);
-			const asColor: PlainColorObject = {
-				space: OKLCH,
-				alpha: 1,
-				coords: [
-					resolveComputationResult(l, [0, 1]),
-					resolveComputationResult(c, [0, 0.4]),
-					resolveComputationResult(h, [0, 360]),
-				],
-			};
-			return serialize(toGamut(convert(asColor, 'srgb')), {
-				format: 'hex',
-			});
 		},
 		computeOklch(context: ColorEvaluationContext): string {
 			const l = computeEquation(equations.l, context);

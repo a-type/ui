@@ -50,36 +50,18 @@ describe('oklch color evaluation tools', () => {
 	});
 	it('should evaluate a valid oklch color value using element property values', () => {
 		const context = snapshotColorContext('leek');
-		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(100% 100% 100%)"`,
-		);
-		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#fff"`);
 		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(100% 10% 165.88)"`,
 		);
-
-		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(40.747% 99.344% 77.98%)"`,
-		);
-		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#68fdc7"`);
 		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(90% 37.5% 165.88)"`,
 		);
 	});
 	it('should evaluate different named palettes in addition to main', () => {
 		const context = snapshotColorContext('attention');
-		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(100% 100% 100%)"`,
-		);
-		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#fff"`);
 		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(100% 10% 30)"`,
 		);
-
-		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(100% 80.069% 75.637%)"`,
-		);
-		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#ffccc1"`);
 		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(90% 37.5% 30)"`,
 		);
@@ -89,18 +71,9 @@ describe('oklch color evaluation tools', () => {
 		darkMode.classList.add('override-dark', 'palette-leek');
 		document.body.appendChild(darkMode);
 		const context = snapshotColorContext('leek', 'dark');
-		expect(wash.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(0% 14.06% 7.3466%)"`,
-		);
-		expect(wash.computeHex(context)).toMatchInlineSnapshot(`"#002413"`);
 		expect(wash.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(22% 20% 165.88)"`,
 		);
-
-		expect(DEFAULT.computeSrgb(context)).toMatchInlineSnapshot(
-			`"rgb(0% 60.697% 41.999%)"`,
-		);
-		expect(DEFAULT.computeHex(context)).toMatchInlineSnapshot(`"#009b6b"`);
 		expect(DEFAULT.computeOklch(context)).toMatchInlineSnapshot(
 			`"oklch(60% 40% 165.88)"`,
 		);
