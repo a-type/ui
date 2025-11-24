@@ -19,7 +19,8 @@
 		"isolatedModules": true,
 		"outDir": "./dist/esm",
 		"rootDir": "./src",
-		"jsx": "react-jsx"
+		"jsx": "react-jsx",
+		"types": ["dom-chromium-installation-events", "web-app-manifest"]
 	},
 	"include": ["src"]
 }

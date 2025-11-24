@@ -26,6 +26,10 @@ export const Toaster = (props: { className?: string }) => {
 		>
 			<AnimatePresence>
 				{visibleToasts.map((toast) => {
+					const message =
+						typeof toast.message === 'function'
+							? toast.message(toast)
+							: toast.message;
 					return (
 						<motion.div
 							key={toast.id}
@@ -59,7 +63,7 @@ export const Toaster = (props: { className?: string }) => {
 										: 'info'
 								}
 							/>
-							{toast.message}
+							{message}
 						</motion.div>
 					);
 				})}

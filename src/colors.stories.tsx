@@ -257,13 +257,6 @@ export const TweakOpacity: Story = {
 export const ComputedColors: Story = {
 	render() {
 		const ctx = snapshotColorContext('primary');
-		const hexValues = [
-			palettes.primary.definitions.wash.computeHex(ctx),
-			palettes.primary.definitions.light.computeHex(ctx),
-			palettes.primary.definitions.default.computeHex(ctx),
-			palettes.primary.definitions.dark.computeHex(ctx),
-			palettes.primary.definitions.ink.computeHex(ctx),
-		];
 		const oklchValues = [
 			palettes.primary.definitions.wash.computeOklch(ctx),
 			palettes.primary.definitions.light.computeOklch(ctx),
@@ -278,11 +271,6 @@ export const ComputedColors: Story = {
 				<Box className="h-100px">
 					{oklchValues.map((oklch) => (
 						<Swatch style={{ backgroundColor: oklch }}>OK</Swatch>
-					))}
-				</Box>
-				<Box className="h-100px">
-					{hexValues.map((hex) => (
-						<Swatch style={{ backgroundColor: hex }}>Hex</Swatch>
 					))}
 				</Box>
 			</Box>
