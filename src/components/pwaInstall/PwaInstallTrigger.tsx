@@ -1,7 +1,6 @@
 import { DialogTriggerProps } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import {
-	getIsMobile,
 	getIsSafari,
 	getOS,
 	getSupportsPWAInstallPrompt,
@@ -57,7 +56,7 @@ export function PwaInstallTrigger({
 					</Button>
 				)}
 			</Dialog.Trigger>
-			<Dialog.Content>
+			<Dialog.Content className="flex flex-col gap-xs">
 				<Dialog.Title className="flex flex-row gap-md items-center">
 					{primaryIcon && (
 						<img
@@ -116,9 +115,10 @@ export function PwaInstallTrigger({
 const supportsDirectInstall = getSupportsPWAInstallPrompt();
 
 function InstallInstructions() {
-	if (getOS() === 'iOS') {
+	const os = getOS();
+	if (os === 'iOS' || os === 'Mac OS') {
 		if (getIsSafari()) {
-			if (getIsMobile()) {
+			if (os === 'iOS') {
 				return (
 					<Ol>
 						<Ol.Item>
@@ -143,11 +143,16 @@ function InstallInstructions() {
 			}
 		} else {
 			return (
-				<Ol>
-					<Ol.Item>
-						<SafariIcon /> Open this site in Safari to continue.
-					</Ol.Item>
-				</Ol>
+				<>
+					<Ol>
+						<Ol.Item>
+							<SafariIcon /> Open this site in Safari to continue.
+						</Ol.Item>
+					</Ol>
+					<Box surface p>
+						Apple does not allow non-Safari browsers to install web apps.
+					</Box>
+				</>
 			);
 		}
 	}
@@ -182,6 +187,7 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 							key={index}
 							src={screenshot.src}
 							alt={screenshot.label || `Screenshot ${index + 1}`}
+							className="border border-default rounded-xs"
 						/>
 					</Lightbox.Trigger>
 					<Lightbox.Portal>

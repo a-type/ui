@@ -6,6 +6,10 @@ export const PRETEND_INSTALLABLE =
 	typeof localStorage !== 'undefined' &&
 	localStorage.getItem('pretendInstallable') === 'true';
 
+export const PRETEND_OS =
+	(typeof localStorage !== 'undefined' && localStorage.getItem('pretendOS')) ||
+	null;
+
 export function getIsPWAInstalled() {
 	return (
 		(typeof window !== 'undefined' && PRETEND_PWA) ||
@@ -14,6 +18,10 @@ export function getIsPWAInstalled() {
 }
 
 export function getOS() {
+	if (PRETEND_OS) {
+		return PRETEND_OS;
+	}
+
 	if (typeof window === 'undefined') {
 		return 'Server';
 	}
