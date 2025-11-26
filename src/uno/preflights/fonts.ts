@@ -1,15 +1,12 @@
 import { preflight } from './_util.js';
 
 export interface FontsPreflightOptions {
-	interFontLocation: string;
+	interFontLocation?: string;
 }
 
-export const fontsPreflight = (
-	{ interFontLocation }: FontsPreflightOptions = {
-		interFontLocation:
-			'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
-	},
-) =>
+export const fontsPreflight = ({
+	interFontLocation = 'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
+}: FontsPreflightOptions = {}) =>
 	preflight({
 		getCSS: () => `
 		@font-face {
