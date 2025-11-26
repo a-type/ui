@@ -59,9 +59,10 @@ function FakeLoadingDay({ value }: { value: CalendarDayValue }) {
 		);
 		return () => clearTimeout(timeout);
 	}, []);
+	const [disabled] = useState(() => Math.random() < 0.3);
 
 	return (
-		<DatePicker.CalendarDay value={value}>
+		<DatePicker.CalendarDay value={value} disabled={loading || disabled}>
 			{loading ? <Spinner size={10} /> : value.date.getDate()}
 		</DatePicker.CalendarDay>
 	);

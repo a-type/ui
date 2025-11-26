@@ -65,7 +65,7 @@ export const CalendarDay = withClassName(
 	'[&[data-in-range]]:(bg-main-light rounded-none z-1)',
 	'[&[data-range-start]]:(bg-main rounded-l rounded-r-none z-1)',
 	'[&[data-range-end]]:(bg-main rounded-r rounded-l-none z-1)',
-	'disabled:(opacity-50 cursor-default)',
+	'[&[data-disabled=true]]:(opacity-50 cursor-not-allowed)',
 	// today dot
 	"[&[data-today]]:before:(content-[''] absolute left-[1px] top-[1px] w-[6px] h-[6px] rounded-lg bg-attention border-1 border-solid border-black)",
 	// calendar edges
