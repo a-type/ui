@@ -7,15 +7,17 @@ import {
 } from './customization.js';
 import { darkModePreflight } from './dark.js';
 import { fontsPreflight, FontsPreflightOptions } from './fonts.js';
-import { globalPreflight } from './globals.js';
+import { globalPreflight, GlobalsPreflightConfig } from './globals.js';
 import { layerPreflight } from './layers.js';
 
 export const preflights = (
-	config: ThemeCustomizationConfig & FontsPreflightOptions,
+	config: ThemeCustomizationConfig &
+		FontsPreflightOptions &
+		GlobalsPreflightConfig,
 ): Preflight<any>[] => [
 	layerPreflight,
 	basePreflight,
-	globalPreflight,
+	globalPreflight(config),
 	colorPreflight,
 	darkModePreflight,
 	customizationPreflight(config),

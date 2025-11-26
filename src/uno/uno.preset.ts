@@ -2,6 +2,7 @@ import presetWind3 from '@unocss/preset-wind3';
 import { Preset } from 'unocss';
 import { ThemeCustomizationConfig } from './preflights/customization.js';
 import { FontsPreflightOptions } from './preflights/fonts.js';
+import { GlobalsPreflightConfig } from './preflights/globals.js';
 import { preflights } from './preflights/index.js';
 import { rules } from './rules/index.js';
 import { shortcuts } from './shortcuts/index.js';
@@ -10,7 +11,8 @@ import { variants } from './variants/index.js';
 
 export default function presetAtype(
 	config: ThemeCustomizationConfig &
-		FontsPreflightOptions & {
+		FontsPreflightOptions &
+		GlobalsPreflightConfig & {
 			noPreflight?: boolean;
 		} = {
 		interFontLocation:

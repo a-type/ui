@@ -1,14 +1,22 @@
-import { Preflight } from 'unocss';
 import { preflight } from './_util.js';
 
-export const globalPreflight: Preflight = preflight({
-	getCSS: () => `
+export interface GlobalsPreflightConfig {
+	disableZIndexes?: boolean;
+}
+
+export const globalPreflight = (config: GlobalsPreflightConfig) =>
+	preflight({
+		getCSS: () => `
 :root {
 	--font-sans: "Inter", sans-serif;
 	--font-serif: "Domine", serif;
 	--font-title: "Inter", sans-serif;
 	--font-default: var(--font-sans, sans-serif);
 
+	${
+		config.disableZIndexes
+			? ''
+			: `
 	--z-now-playing: 40;
 	--z-nav: 50;
 	--z-menu: 100;
@@ -16,6 +24,8 @@ export const globalPreflight: Preflight = preflight({
 	--z-dialog: 1000;
 	--z-tooltip: 10000;
 	--z-overdraw: 100000;
+	`
+	}
 
 	--un-shadow-color: #000000;
 	--un-shadow-opacity: 10%;
@@ -91,4 +101,4 @@ a {
 	inherits: false;
 }
 `,
-});
+	});
