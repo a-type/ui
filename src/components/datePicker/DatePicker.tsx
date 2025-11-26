@@ -1,14 +1,88 @@
-import {
-	CalendarDay as BaseCalendarDay,
-	Calendar,
-	CalendarDays,
-} from 'calendar-blocks';
-import classNames from 'clsx';
-import { useCallback, useState } from 'react';
-import { withClassName } from '../../hooks.js';
+import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
+import { clsx } from 'clsx';
+import { ReactNode, useState } from 'react';
 import { PaletteName } from '../../uno/index.js';
-import { Button } from '../button/index.js';
 import { Icon } from '../icon/index.js';
+import {
+	CalendarDay,
+	CalendarGrid,
+	DayLabels,
+	MonthButton,
+	MonthLabel,
+	MonthRow,
+} from './Calendar.js';
+
+function DatePickerMonthControls({}: {}) {
+	const { setDisplayInfo, month, year } = useCalendarContext();
+	const monthLabel = new Date(year, month).toLocaleDateString('en-US', {
+		month: 'long',
+		year: 'numeric',
+	});
+
+	return (
+		<MonthRow>
+			<MonthButton
+				emphasis="ghost"
+				onClick={() =>
+					setDisplayInfo({
+						month: month - 1,
+						year: year,
+					})
+				}
+			>
+				<Icon name="arrowLeft" />
+			</MonthButton>
+			<MonthLabel>{monthLabel}</MonthLabel>
+			<MonthButton
+				emphasis="ghost"
+				onClick={() =>
+					setDisplayInfo({
+						month: month + 1,
+						year: year,
+					})
+				}
+			>
+				<Icon name="arrowRight" />
+			</MonthButton>
+		</MonthRow>
+	);
+}
+
+function DatePickerRoot({
+	className,
+	color,
+	value,
+	onChange,
+	children,
+	...rest
+}: DatePickerProps & {
+	children?: ReactNode;
+}) {
+	const [{ month, year }, setDisplay] = useState(() => ({
+		month: new Date().getMonth(),
+		year: new Date().getFullYear(),
+	}));
+
+	return (
+		<div
+			className={clsx(
+				color && `palette-${color}`,
+				'layer-components:(flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)])',
+			)}
+			{...rest}
+		>
+			<Calendar
+				displayMonth={month}
+				displayYear={year}
+				value={value}
+				onChange={onChange}
+				onDisplayChange={setDisplay}
+			>
+				{children}
+			</Calendar>
+		</div>
+	);
+}
 
 export interface DatePickerProps {
 	value: Date | null;
@@ -17,245 +91,26 @@ export interface DatePickerProps {
 	color?: PaletteName;
 }
 
-export function DatePicker({
-	value,
-	onChange,
-	className,
-	color,
-	...rest
-}: DatePickerProps) {
-	const [{ month, year }, setDisplay] = useState(() => ({
-		month: new Date().getMonth(),
-		year: new Date().getFullYear(),
-	}));
-	const monthLabel = new Date(year, month).toLocaleDateString('en-US', {
-		month: 'long',
-		year: 'numeric',
-	});
-
+function DatePickerDefault(props: DatePickerProps) {
 	return (
-		<div
-			className={classNames(
-				color && `palette-${color}`,
-				'layer-components:(flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)])',
-				className,
-			)}
-			{...rest}
-		>
-			<MonthRow>
-				<MonthButton
-					emphasis="ghost"
-					onClick={() =>
-						setDisplay((cur) => ({
-							month: cur.month - 1,
-							year: cur.year,
-						}))
-					}
-				>
-					<Icon name="arrowLeft" />
-				</MonthButton>
-				<MonthLabel>{monthLabel}</MonthLabel>
-				<MonthButton
-					emphasis="ghost"
-					onClick={() =>
-						setDisplay((cur) => ({
-							month: cur.month + 1,
-							year: cur.year,
-						}))
-					}
-				>
-					<Icon name="arrowRight" />
-				</MonthButton>
-			</MonthRow>
-			<Calendar
-				displayMonth={month}
-				displayYear={year}
-				value={value}
-				onChange={onChange}
-				onDisplayChange={setDisplay}
-			>
-				<CalendarGrid>
-					<DayLabels />
-					<CalendarDays>
-						{(value) => <CalendarDay value={value} key={value.key} />}
-					</CalendarDays>
-				</CalendarGrid>
-			</Calendar>
-		</div>
+		<DatePickerRoot {...props}>
+			<DatePickerMonthControls />
+			<CalendarGrid>
+				{(value) => <CalendarDay value={value} key={value.key} />}
+			</CalendarGrid>
+		</DatePickerRoot>
 	);
 }
 
-export interface DateRangePickerProps {
-	value: { start: Date | null; end: Date | null };
-	onChange: (value: { start: Date | null; end: Date | null }) => void;
-	className?: string;
-}
-
-export function DateRangePicker({
-	value,
-	onChange,
-	className,
-}: DateRangePickerProps) {
-	const [{ month, year }, setDisplay] = useState(() => ({
-		month: new Date().getMonth(),
-		year: new Date().getFullYear(),
-	}));
-	const monthLabel = new Date(year, month).toLocaleDateString('en-US', {
-		month: 'long',
-		year: 'numeric',
-	});
-	const nextMonth = new Date(year, month + 1);
-	const nextMonthLabel = nextMonth.toLocaleDateString('en-US', {
-		month: 'long',
-		year: 'numeric',
-	});
-	const onDisplayChange = useCallback(
-		({ month: newMonth, year: newYear }: { month: number; year: number }) => {
-			/**
-			 * Important UX consideration:
-			 *
-			 * since we are displaying 2 months at once, we don't
-			 * always want to change our view if the user's cursor
-			 * date moves from one month to another. Specifically,
-			 * if they move from the first visible month to the
-			 * second visible month, we don't need to change the view,
-			 * since they are still within the visible range.
-			 * So, we write logic to ignore that case!
-			 */
-			if (newMonth === month + 1 && newYear === year) {
-				return; // ignore movement from the first to the second frame
-			}
-
-			setDisplay({
-				month: newMonth,
-				year: newYear,
-			});
-		},
-		[month, year],
-	);
-
-	return (
-		<Calendar
-			displayMonth={month}
-			displayYear={year}
-			rangeValue={value}
-			onRangeChange={(range) => onChange(range)}
-			onDisplayChange={onDisplayChange}
-			className={classNames('flex justify-center', className)}
-		>
-			<RangeLayout>
-				<MonthButton
-					emphasis="ghost"
-					className="[grid-area:prevMonth]"
-					onClick={() =>
-						setDisplay((cur) => ({
-							month: cur.month - 1,
-							year: cur.year,
-						}))
-					}
-				>
-					<Icon name="arrowLeft" />
-				</MonthButton>
-				<MonthLabel className="[grid-area:leftMonth]">{monthLabel}</MonthLabel>
-				<MonthLabel className="[grid-area:rightMonth] !hidden !sm:block">
-					{nextMonthLabel}
-				</MonthLabel>
-				<MonthButton
-					emphasis="ghost"
-					className="[grid-area:nextMonth]"
-					onClick={() =>
-						setDisplay((cur) => ({
-							month: cur.month + 1,
-							year: cur.year,
-						}))
-					}
-				>
-					<Icon name="arrowRight" />
-				</MonthButton>
-				<CalendarGrid className="[grid-area:leftGrid]">
-					<DayLabels />
-					<CalendarDays>
-						{(value) => <CalendarDay value={value} key={value.key} />}
-					</CalendarDays>
-				</CalendarGrid>
-				<CalendarGrid className="[grid-area:rightGrid] !hidden !sm:grid">
-					<DayLabels />
-					<CalendarDays monthOffset={1}>
-						{(value) => <CalendarDay value={value} key={value.key} />}
-					</CalendarDays>
-				</CalendarGrid>
-			</RangeLayout>
-		</Calendar>
-	);
-}
-
-const MonthRow = withClassName(
-	'div',
-	'flex flex-row justify-between items-center w-full',
-);
-
-const MonthLabel = withClassName(
-	'span',
-	'text-sm font-bold min-w-0 overflow-hidden text-center text-ellipsis',
-	'self-center',
-);
-
-const MonthButton = withClassName(Button, 'self-center');
-
-const CalendarGrid = withClassName(
-	'div',
-	'grid grid-cols-[repeat(7,var(--day-size,32px))] [grid-auto-rows:var(--day-size,32px)]',
-	'height-[calc(var(--day-size,32px)*7)] rounded overflow-hidden p-2',
-);
-
-const CalendarDay = withClassName(
-	BaseCalendarDay,
-	'border border-solid border-transparent bg-white mr--1px mb--1px relative color-black',
-	'flex items-center justify-center transition cursor-pointer',
-	'[&[data-highlighted]]:(z-1 ring-2 ring-accent)',
-	'hover:(z-1 ring-2 ring-accent)',
-	'active:(bg-main-light rounded)',
-	'[&[data-selected]]:(bg-main z-2 rounded)',
-	'[&[data-in-range]]:(bg-main-light rounded-none z-1)',
-	'[&[data-range-start]]:(bg-main rounded-l rounded-r-none z-1)',
-	'[&[data-range-end]]:(bg-main rounded-r rounded-l-none z-1)',
-	'disabled:(opacity-50 cursor-default)',
-	// today dot
-	"[&[data-today]]:before:(content-[''] absolute left-[1px] top-[1px] w-[6px] h-[6px] rounded-lg bg-attention border-1 border-solid border-black)",
-	// calendar edges
-	'[&[data-top-edge]]:(border-t-gray)',
-	'[&[data-bottom-edge]]:(border-b-gray)',
-	'[&[data-first-column]]:(border-l-gray)',
-	'[&[data-last-column]]:(border-r-gray)',
-	'[&[data-day-first]]:(border-l-gray rounded-tl)',
-	'[&[data-day-last]]:(border-r-gray rounded-br)',
-	'[&[data-first-column][data-bottom-edge]]:rounded-bl',
-	'[&[data-last-column][data-bottom-edge]]:rounded-br',
-	'[&[data-first-column][data-top-edge]]:rounded-tl',
-	'[&[data-last-column][data-top-edge]]:rounded-tr',
-	'[&[data-different-month]]:[visibility:hidden]',
-);
-
-const DayLabel = withClassName(
-	'div',
-	'flex items-center justify-center text-sm color-gray-dark',
-);
-
-const DayLabels = () => (
-	<>
-		<DayLabel>S</DayLabel>
-		<DayLabel>M</DayLabel>
-		<DayLabel>T</DayLabel>
-		<DayLabel>W</DayLabel>
-		<DayLabel>T</DayLabel>
-		<DayLabel>F</DayLabel>
-		<DayLabel>S</DayLabel>
-	</>
-);
-
-const RangeLayout = withClassName(
-	'div',
-	'grid [grid-template-areas:"prevMonth_leftMonth_nextMonth""leftGrid_leftGrid_leftGrid"] [grid-template-columns:auto_1fr_auto]',
-	'[grid-template-rows:auto_1fr] gap-2',
-	'sm:grid-areas-[prevMonth_leftMonth_rightMonth_nextMonth]-[leftGrid_leftGrid_rightGrid_rightGrid] sm:[grid-template-columns:auto_1fr_1fr_auto]',
-);
+export const DatePicker = Object.assign(DatePickerDefault, {
+	Root: DatePickerRoot,
+	Calendar,
+	CalendarDay,
+	CalendarDays,
+	CalendarGrid,
+	DayLabels,
+	MonthControls: DatePickerMonthControls,
+	MonthButton,
+	MonthLabel,
+	MonthRow,
+});

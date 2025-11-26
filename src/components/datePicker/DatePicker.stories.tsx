@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { DatePicker, DateRangePicker } from './DatePicker.js';
+import { CalendarDayValue } from 'calendar-blocks';
+import { useEffect, useState } from 'react';
+import { Spinner } from '../spinner/Spinner.js';
+import { DatePicker } from './DatePicker.js';
+import { DateRangePicker } from './DateRangePicker.js';
 
 const meta = {
 	title: 'Components/DatePicker',
@@ -31,3 +34,35 @@ export const Range: Story = {
 		return <DateRangePicker value={value} onChange={setValue} />;
 	},
 };
+
+export const CustomComposition: Story = {
+	render() {
+		const [value, setValue] = useState<Date | null>(null);
+
+		return (
+			<DatePicker.Root value={value} onChange={setValue}>
+				<DatePicker.MonthControls />
+				<DatePicker.CalendarGrid>
+					{(value) => <FakeLoadingDay value={value} key={value.key} />}
+				</DatePicker.CalendarGrid>
+			</DatePicker.Root>
+		);
+	},
+};
+
+function FakeLoadingDay({ value }: { value: CalendarDayValue }) {
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		const timeout = setTimeout(
+			() => setLoading(false),
+			Math.random() * 2000 + 500,
+		);
+		return () => clearTimeout(timeout);
+	}, []);
+
+	return (
+		<DatePicker.CalendarDay value={value}>
+			{loading ? <Spinner size={10} /> : value.date.getDate()}
+		</DatePicker.CalendarDay>
+	);
+}
