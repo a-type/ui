@@ -9,6 +9,7 @@ import {
 	ReactNode,
 	Ref,
 	useCallback,
+	useDebugValue,
 	useState,
 } from 'react';
 import { withClassName } from '../../hooks.js';
@@ -72,6 +73,10 @@ export function ButtonRoot({
 	const iconChildCount = childArray.filter(isIconChild).length;
 	const hasLabelChild = childArray.length > iconChildCount;
 
+	useDebugValue(
+		`Children introspection: Icons: ${iconChildCount}, Label: ${hasLabelChild}, Total: ${childArray.length}`,
+	);
+
 	const isDropdownTriggerFromContext = useIsDropdownTrigger();
 	const isDropdownTrigger =
 		!disableDropdownTriggerIcon &&
@@ -88,8 +93,8 @@ export function ButtonRoot({
 		'data-focus': visuallyFocused,
 		'data-size': size,
 		'data-loading': isLoading,
-		'data-has-label': hasLabelChild || undefined,
-		'data-has-icon': iconChildCount > 0 ? true : undefined,
+		'data-has-label': hasLabelChild,
+		'data-has-icon': iconChildCount > 0,
 		'data-icon-count': iconChildCount > 0 ? iconChildCount : undefined,
 		'data-dropdown-trigger': isDropdownTrigger ? true : undefined,
 		tabIndex: visuallyDisabled ? -1 : undefined,
@@ -155,6 +160,7 @@ export function ButtonRoot({
 		</IconLoadingProvider>
 	);
 }
+ButtonRoot.displayName = 'Button';
 
 export const ButtonToggleIndicator = memo(function ToggleIndicator({
 	value,
@@ -176,6 +182,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 
 // allows custom icons to trigger icon button behavior
 export const ButtonIcon = withClassName('div', 'icon flex-shrink-0 flex');
+ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {
 	ToggleIndicator: ButtonToggleIndicator,
@@ -212,6 +219,7 @@ function applyPartAttributes(button: HTMLButtonElement) {
 		icon: 0,
 		label: 0,
 	};
+	const iconNodes: (HTMLElement | SVGElement)[] = [];
 	button.childNodes.forEach((child) => {
 		if (!(child instanceof HTMLElement || child instanceof SVGElement)) return;
 		if (child.style.display === 'none' || child.style.width === '0') return; // skip hidden elements
@@ -220,12 +228,15 @@ function applyPartAttributes(button: HTMLButtonElement) {
 			child.classList.contains('icon')
 		) {
 			registry.icon++;
+			iconNodes.push(child);
 		} else {
 			registry.label++;
 		}
 	});
 	if (button.textContent) {
-		registry.label++;
+		const iconText = iconNodes.map((n) => n.textContent).join('');
+		const labelText = button.textContent.replace(iconText, '').trim();
+		if (labelText.length > 0) registry.label++;
 	}
 	button.setAttribute('data-has-icon', String(registry.icon > 0));
 	button.setAttribute('data-has-label', String(registry.label > 0));
@@ -235,10 +246,19 @@ function applyPartAttributes(button: HTMLButtonElement) {
 function isIconChild(child: ReactNode): boolean {
 	if (typeof child !== 'object' || child === null) return false;
 	if ('type' in child) {
-		const type = (child as any).type;
-		if (type === ButtonIcon) return true;
-		if (type === Icon) return true;
-		if (typeof type === 'function' && type.displayName === 'Icon') return true;
+		const type = child.type;
+		if (
+			type === ButtonIcon ||
+			type === 'ButtonIcon' ||
+			(type as any).displayName === 'ButtonIcon'
+		)
+			return true;
+		if (
+			type === Icon ||
+			type === 'Icon' ||
+			(type as any).displayName === 'Icon'
+		)
+			return true;
 	}
 	return false;
 }

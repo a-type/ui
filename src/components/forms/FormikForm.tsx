@@ -1,6 +1,7 @@
 import { Formik, FormikConfig, FormikHelpers, FormikValues } from 'formik';
 import { useCallback } from 'react';
 import { CheckboxField } from './CheckboxField.js';
+import { EmojiField } from './EmojiField.js';
 import { Form } from './Form.js';
 import { NumberStepperField } from './NumberStepperField.js';
 import { SubmitButton } from './SubmitButton.js';
@@ -56,4 +57,5 @@ export const FormikForm = Object.assign(FormikFormRoot, {
 	CheckboxField,
 	SwitchField,
 	ToggleGroupField,
+	EmojiField,
 });

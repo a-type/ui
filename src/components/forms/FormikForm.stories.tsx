@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CheckboxField } from './CheckboxField.js';
+import { EmojiField } from './EmojiField.js';
 import { FormikForm } from './FormikForm.js';
 import { NumberStepperField } from './NumberStepperField.js';
 import { SubmitButton } from './SubmitButton.js';
@@ -36,6 +37,7 @@ export const Default: Story = {
 					tos: false,
 					newsletter: false,
 					plan: 'basic',
+					emoji: '',
 				}}
 				{...args}
 			>
@@ -56,6 +58,7 @@ export const Default: Story = {
 						Enterprise
 					</ToggleGroupField.Item>
 				</ToggleGroupField>
+				<EmojiField name="emoji" label="Favorite Emoji" />
 				<SubmitButton>Sign up</SubmitButton>
 			</FormikForm>
 		);

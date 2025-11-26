@@ -12,6 +12,7 @@ import { withClassName, withProps } from '../../hooks.js';
 import { useLocalStorage } from '../../hooks/useStorage.js';
 import { Box, BoxProps } from '../box/Box.js';
 import { Button } from '../button/Button.js';
+import { Icon } from '../icon/Icon.js';
 import { inputClassName } from '../input/Input.js';
 import { Spinner } from '../spinner/Spinner.js';
 
@@ -21,7 +22,7 @@ export const EmojiPickerRoot = withClassName(
 );
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
-	'layer-components:(z-10)',
+	'layer-components:(z-10 min-w-80px)',
 	inputClassName,
 );
 export const EmojiPickerViewport = ({
@@ -137,8 +138,13 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 export interface EmojiPickerProps
 	extends Omit<EmojiPickerRootProps, 'emoji' | 'onEmojiSelect'> {
 	onValueChange: (value: string, label: string) => void;
+	onClear?: () => void;
 }
-const EmojiPickerPrefab = ({ onValueChange, ...props }: EmojiPickerProps) => {
+const EmojiPickerPrefab = ({
+	onValueChange,
+	onClear,
+	...props
+}: EmojiPickerProps) => {
 	const [skinTone] = useEmojiSkinTone();
 	return (
 		<EmojiPickerRoot
@@ -146,7 +152,15 @@ const EmojiPickerPrefab = ({ onValueChange, ...props }: EmojiPickerProps) => {
 			onEmojiSelect={(emoji) => onValueChange(emoji.emoji, emoji.label)}
 			skinTone={skinTone}
 		>
-			<EmojiPickerSearch />
+			<Box col gap items="start" full="width">
+				<EmojiPickerSearch />
+				{onClear && (
+					<Button emphasis="ghost" size="small" onClick={() => onClear()}>
+						<Icon name="x" />
+						Clear selection
+					</Button>
+				)}
+			</Box>
 			<EmojiPickerViewport>
 				<EmojiPickerList />
 				<EmojiPickerLoading />
