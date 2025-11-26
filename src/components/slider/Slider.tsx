@@ -6,18 +6,21 @@ import { PaletteName } from '../../uno/index.js';
 export const SliderRoot = withClassName(
 	SliderPrimitive.Root,
 	'layer-components:(relative flex items-center select-none touch-none w-full h-30px translate-z-0)',
+	'layer-variants:[&[data-orientation=vertical]]:(flex-col h-full w-30px)',
 );
 export const SliderTrack = withClassName(
 	SliderPrimitive.Track,
-	'layer-components:(bg-transparent relative grow rounded-lg h-9px border border-1 border-solid border-black)',
+	'layer-components:(bg-transparent relative grow rounded-lg h-9px border border-1 border-solid border-black transition-colors)',
+	'layer-variants:[&[data-orientation=vertical]]:(w-9px h-full flex-1)',
 );
 export const SliderRange = withClassName(
 	SliderPrimitive.Range,
-	'layer-components:(absolute bg-main rounded-lg h-full)',
+	'layer-components:(absolute bg-main rounded-lg h-full transition-colors)',
+	'layer-variants:[&[data-orientation=vertical]]:(w-full h-auto)',
 );
 export const SliderThumb = withClassName(
 	SliderPrimitive.Thumb,
-	'layer-components:(block cursor-pointer w-5 h-5 bg-white shadow-sm rounded-lg ring-2 ring-black touch-none transition-all)',
+	'layer-components:(flex items-center justify-center leading-none cursor-pointer w-5 h-5 bg-white shadow-sm rounded-lg ring-2 ring-black touch-none transition-all)',
 	'layer-components:hover:(shadow-md)',
 	'layer-components:active:(shadow-lg ring-4 ring-main-dark ring-opacity-50 bg-main-light)',
 	'layer-components:focus-visible:(shadow-lg ring-4 ring-accent ring-opacity-50 outline-none bg-main-light)',
