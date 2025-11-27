@@ -124,7 +124,7 @@ export const DropdownMenuContent = ({
 	return (
 		<StyledPortal forceMount={forceMount}>
 			<StyledContent {...props}>
-				<div className="layer-components:(overflow-y-auto overflow-unstable max-h-full rounded-md min-h-0)">
+				<div className="layer-components:(overflow-y-auto overflow-x-hidden overflow-unstable max-h-full rounded-md min-h-0)">
 					{children}
 				</div>
 				<StyledArrow />

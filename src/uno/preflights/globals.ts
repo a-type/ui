@@ -13,12 +13,12 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	--font-title: "Inter", sans-serif;
 	--font-default: var(--font-sans, sans-serif);
 
+	--z-now-playing: 40;
+	--z-nav: 50;
 	${
 		config.disableZIndexes
 			? ''
 			: `
-	--z-now-playing: 40;
-	--z-nav: 50;
 	--z-menu: 100;
 	--z-backdrop: 900;
 	--z-dialog: 1000;

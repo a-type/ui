@@ -27,7 +27,7 @@ export function ParticleLayer({
 	const canvas = (
 		<canvas
 			ref={particles.setCanvas}
-			className="fixed inset-0 w-full h-full z-[100000] pointer-events-none"
+			className="fixed inset-0 w-full h-full z-[1000000] pointer-events-none"
 		/>
 	);
 

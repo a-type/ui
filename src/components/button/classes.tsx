@@ -27,7 +27,7 @@ export function getButtonClassName({
 
 	return clsx(
 		color && `palette-${color}`,
-		'layer-components:(leading-none font-inherit font-bold select-none)',
+		'layer-components:(leading-none font-inherit font-bold select-none leading-1)',
 		'layer-components:(border-solid border-thin border-color)',
 		'layer-components:(cursor-pointer)',
 		'layer-components:(flex flex-row gap-sm items-center)',
