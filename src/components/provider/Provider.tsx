@@ -3,6 +3,7 @@ import { useThemedTitleBar, useVisualViewportOffset } from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
+import { PwaInstall } from '../pwaInstall/PwaInstall.js';
 import { Toaster } from '../toasts/toasts.js';
 import { TooltipProvider } from '../tooltip/index.js';
 
@@ -12,6 +13,7 @@ export interface ProviderProps {
 	disableViewportOffset?: boolean;
 	virtualKeyboardBehavior?: 'overlay' | 'displace';
 	disableTitleBarColor?: boolean;
+	manifestPath?: string;
 }
 
 /**
@@ -23,6 +25,7 @@ export function Provider({
 	disableViewportOffset,
 	virtualKeyboardBehavior = 'displace',
 	disableTitleBarColor,
+	manifestPath,
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
 	const supportedVirtualKeyboardBehavior =
@@ -35,6 +38,7 @@ export function Provider({
 		<>
 			<IconSpritesheet />
 			<Toaster />
+			<PwaInstall manifestPath={manifestPath} />
 		</>
 	);
 
