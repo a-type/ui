@@ -1,6 +1,6 @@
 export const PRETEND_PWA =
-	(typeof localStorage !== 'undefined' &&
-		localStorage.getItem('pretendPWA')) === 'true';
+	typeof localStorage !== 'undefined' &&
+	localStorage.getItem('pretendPWA') === 'true';
 
 export const PRETEND_INSTALLABLE =
 	typeof localStorage !== 'undefined' &&
@@ -11,10 +11,8 @@ export const PRETEND_OS =
 	null;
 
 export function getIsPWAInstalled() {
-	return (
-		(typeof window !== 'undefined' && PRETEND_PWA) ||
-		window.matchMedia('(display-mode: standalone)').matches
-	);
+	if (typeof window === 'undefined') return false;
+	return PRETEND_PWA || window.matchMedia('(display-mode: standalone)').matches;
 }
 
 export function getOS() {
