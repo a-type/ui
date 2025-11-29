@@ -46,6 +46,10 @@ body {
 	overflow: overlay;
 }
 
+#main {
+	isolation: isolate;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
