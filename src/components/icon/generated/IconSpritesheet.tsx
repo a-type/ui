@@ -1285,6 +1285,21 @@ export const IconSpritesheet = (props: any) => (
 					strokeLinejoin="round"
 				/>
 			</symbol>
+			<symbol id="icon-angles" viewBox="0 0 15 15">
+				<path
+					d="M13.5 13.5C13.5 13.5 7.5 13.5 6.5 13.5M1.5 13.5L11.5 3.5M1.5 13.5V8.5M1.5 13.5H6.5M1.5 1.5V8.5M1.5 8.5C4.31319 8.70943 6.24778 10.5212 6.5 13.5"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</symbol>
+			<symbol id="icon-magnet" viewBox="0 0 15 15">
+				<path
+					d="M2 7V13.5H4.75V7C4.75 5.5 6.13697 4.44009 7.5 4.5C8.86303 4.55991 10.25 5.5 10.25 7V13.5H13V7C13 3 10.25 1.49996 7.5 1.5C4.75 1.50004 2 3 2 7Z"
+					stroke="currentColor"
+				/>
+				<path d="M4.75 11H2M10.25 11H13" stroke="currentColor" />
+			</symbol>
 		</defs>
 	</svg>
 );
