@@ -2,6 +2,7 @@ export type * from 'react-hot-toast';
 export { toast } from 'react-hot-toast';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
+import { createPortal } from 'react-dom';
 import { DefaultToastOptions, useToaster } from 'react-hot-toast';
 import { useResolvedColorMode } from '../../colorMode.js';
 import { Icon } from '../icon/Icon.js';
@@ -14,10 +15,10 @@ export const Toaster = (props: { className?: string }) => {
 	const { startPause, endPause } = handlers;
 	const visibleToasts = toasts.filter((t) => t.visible);
 
-	return (
+	return createPortal(
 		<div
 			className={clsx(
-				'fixed z-toast flex flex-col items-center gap-xs left-1/2 center-x top-sm max-w-400px',
+				'fixed z-100000 flex flex-col items-center gap-xs left-1/2 center-x top-sm max-w-400px',
 				mode === 'dark' ? 'override-light' : 'override-dark',
 				props.className,
 			)}
@@ -68,6 +69,7 @@ export const Toaster = (props: { className?: string }) => {
 					);
 				})}
 			</AnimatePresence>
-		</div>
+		</div>,
+		document.body,
 	);
 };
