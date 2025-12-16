@@ -17,12 +17,12 @@ export function ViewportZoomControls({
 }) {
 	const viewport = useViewport();
 	const doZoomIn = () => {
-		viewport.setZoom(viewport.zoom * 1.3, {
+		viewport.setZoom((v) => v * 1.3, {
 			origin: 'control',
 		});
 	};
 	const doZoomOut = () => {
-		viewport.setZoom(viewport.zoom / 1.3, {
+		viewport.setZoom((v) => v / 1.3, {
 			origin: 'control',
 		});
 	};

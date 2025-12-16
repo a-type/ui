@@ -518,7 +518,7 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 	 * @param centroid a screen coordinate position which should remain visually stable during the zoom
 	 */
 	setZoom = (
-		zoom: number,
+		zoom: number | ((cur: number) => number),
 		{
 			origin = 'animation',
 			centroid,
@@ -529,6 +529,7 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 			gestureComplete?: boolean;
 		} = {},
 	) => {
+		const value = typeof zoom === 'function' ? zoom(this._zoom) : zoom;
 		// the pan position is also updated to keep the focal point in the same screen position
 		if (centroid) {
 			// the objective is to keep the focal point at the same logical position onscreen -
@@ -538,7 +539,7 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 			// start out by recording the world position of the focal point before zoom
 			const priorFocalWorldPoint = this.viewportToWorld(centroid);
 			// then apply the zoom
-			this._zoom = clamp(zoom, this.zoomMin, this.zoomMax);
+			this._zoom = clamp(value, this.zoomMin, this.zoomMax);
 			// now determine the difference, in screen pixels, between the old focal point
 			// and the world point it used to be "over"
 			const priorFocalScreenPoint = this.worldToViewport(priorFocalWorldPoint);
@@ -549,7 +550,7 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 				gestureComplete,
 			});
 		} else {
-			this._zoom = clamp(zoom, this.zoomMin, this.zoomMax);
+			this._zoom = clamp(value, this.zoomMin, this.zoomMax);
 			// apply a pan with the current pan position to recalculate pan
 			// boundaries from the new zoom and enforce them
 			this.rawPan(this.panPosition, { origin, gestureComplete });
@@ -558,21 +559,6 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 		if (gestureComplete) {
 			this.emit('zoomSettled', this.zoom, origin);
 		}
-	};
-
-	/**
-	 * Adjusts the zoom of the viewport camera relative to the current value. See doZoom
-	 * for details on parameters.
-	 */
-	relativeZoom = (
-		zoomDelta: number,
-		details: {
-			origin?: ViewportEventOrigin;
-			centroid?: Vector2;
-			gestureComplete?: boolean;
-		},
-	) => {
-		this.setZoom(this.zoom + zoomDelta, details);
 	};
 
 	/**

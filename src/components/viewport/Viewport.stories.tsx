@@ -41,3 +41,28 @@ export const Default: Story = {
 		);
 	},
 };
+
+export const HighZoomLevel: Story = {
+	render(args) {
+		return (
+			<Viewport
+				className="h-600px w-full"
+				defaultZoom={100}
+				maxZoom={1000}
+				minZoom={10}
+				{...args}
+			>
+				<img
+					src="https://resources.biscuits.club/images/pashka.jpg"
+					width={10}
+				/>
+				<Viewport.Control>
+					<Viewport.ZoomControls />
+				</Viewport.Control>
+				<Viewport.Control position="bottom-right">
+					<CenterButton />
+				</Viewport.Control>
+			</Viewport>
+		);
+	},
+};

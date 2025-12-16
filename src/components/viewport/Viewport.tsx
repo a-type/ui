@@ -118,10 +118,12 @@ export function ViewportRoot({
 					<div
 						className={clsx(
 							'w-full h-full flex-1 relative touch-none contain-strict select-none overflow-hidden',
+							'focus-visible:(ring ring-accent)',
 							className,
 						)}
 						{...gestureProps}
 						{...keyboardProps}
+						tabIndex={0}
 						ref={finalRef}
 					>
 						<ViewportContent viewport={viewport}>{children}</ViewportContent>

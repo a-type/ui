@@ -51,7 +51,7 @@ export function useViewportGestureControls(
 				if (memo === undefined) return d;
 				const diff = d - memo;
 				if (diff !== 0) {
-					viewport.relativeZoom(diff / PINCH_GESTURE_DAMPING, {
+					viewport.setZoom((v) => v * (1 + diff / PINCH_GESTURE_DAMPING), {
 						origin: 'direct',
 						centroid: { x: origin[0], y: origin[1] },
 						gestureComplete: last,
@@ -62,7 +62,7 @@ export function useViewportGestureControls(
 			onWheel: ({ delta: [x, y], event, last, metaKey, ctrlKey }) => {
 				if (ctrlKey || metaKey) {
 					const { value, type } = dampenedWheelZoom(-y);
-					viewport.relativeZoom(value, {
+					viewport.setZoom((v) => v * (1 + value), {
 						origin: type === 'wheel' ? 'control' : 'direct',
 						centroid: { x: event.clientX, y: event.clientY },
 						gestureComplete: last,
@@ -147,7 +147,7 @@ const CONTROLLED_KEYS = [
 	'ArrowLeft',
 	'ArrowRight',
 ];
-const PAN_SPEED = 1;
+const PAN_SPEED = 0.5;
 const ZOOM_SPEED = 0.001;
 
 export function useKeyboardControls(viewport: ViewportState) {
@@ -195,9 +195,6 @@ export function useKeyboardControls(viewport: ViewportState) {
 	}, []);
 
 	useEffect(() => {
-		const { current: el } = elementRef;
-		if (!el) return;
-
 		// begin a loop which tracks delta time and applies it to
 		// pan velocity for smooth panning regardless of framerate
 		let lastFrameTime: number | null = null;
@@ -213,12 +210,12 @@ export function useKeyboardControls(viewport: ViewportState) {
 			lastFrameTime = now;
 
 			if (activeKeys.pressed.has('=') || activeKeys.pressed.has('+')) {
-				viewport.relativeZoom(delta * ZOOM_SPEED, {
+				viewport.setZoom((v) => v * (1 + delta * ZOOM_SPEED), {
 					origin: 'direct',
 					gestureComplete: true,
 				});
 			} else if (activeKeys.pressed.has('-')) {
-				viewport.relativeZoom(delta * -ZOOM_SPEED, {
+				viewport.setZoom((v) => v * (1 + delta * -ZOOM_SPEED), {
 					origin: 'direct',
 					gestureComplete: true,
 				});
@@ -233,8 +230,8 @@ export function useKeyboardControls(viewport: ViewportState) {
 				: activeKeys.pressed.has('ArrowDown')
 				? 1
 				: 0;
-			velocity.x = delta * xInput * PAN_SPEED;
-			velocity.y = delta * yInput * PAN_SPEED;
+			velocity.x = (delta * xInput * PAN_SPEED) / viewport.zoom;
+			velocity.y = (delta * yInput * PAN_SPEED) / viewport.zoom;
 			if (velocity.x !== 0 || velocity.y !== 0) {
 				viewport.setPanRelative(velocity, {
 					origin: 'direct',
