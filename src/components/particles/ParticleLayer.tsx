@@ -31,9 +31,11 @@ export function ParticleLayer({
 		/>
 	);
 
+	const ssr = typeof document === 'undefined';
+
 	return (
 		<ParticlesProvider value={particles}>
-			{noPortal ? canvas : createPortal(canvas, document.body)}
+			{noPortal || ssr ? canvas : createPortal(canvas, document.body)}
 			{children}
 		</ParticlesProvider>
 	);

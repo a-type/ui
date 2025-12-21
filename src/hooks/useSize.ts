@@ -107,7 +107,7 @@ export function useBounds<E extends HTMLElement>(
 
 export function useBoundsCssVars<E extends HTMLElement>(
 	debounceMs?: number,
-	applyToRef?: RefObject<HTMLElement>,
+	applyToRef?: RefObject<HTMLElement | null>,
 	propertyNames?: {
 		left: string;
 		top: string;

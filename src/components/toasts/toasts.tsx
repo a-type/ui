@@ -15,6 +15,11 @@ export const Toaster = (props: { className?: string }) => {
 	const { startPause, endPause } = handlers;
 	const visibleToasts = toasts.filter((t) => t.visible);
 
+	const target = typeof document === 'undefined' ? null : document.body;
+	if (!target) {
+		return null;
+	}
+
 	return createPortal(
 		<div
 			className={clsx(
@@ -70,6 +75,6 @@ export const Toaster = (props: { className?: string }) => {
 				})}
 			</AnimatePresence>
 		</div>,
-		document.body,
+		target,
 	);
 };

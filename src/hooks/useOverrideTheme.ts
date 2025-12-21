@@ -3,7 +3,7 @@ import { PaletteName } from '../uno/index.js';
 
 export function useOverrideTheme(theme: PaletteName | null | undefined) {
 	useLayoutEffect(() => {
-		if (!theme) {
+		if (!theme || typeof document === 'undefined') {
 			return;
 		}
 		document.body.classList.add(`theme-override-${theme}`);

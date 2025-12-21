@@ -11,7 +11,9 @@ export function PageNav({
 	children,
 	...props
 }: HTMLAttributes<HTMLDivElement>) {
-	const bodyRef = useRef(document.documentElement);
+	const bodyRef = useRef(
+		typeof document === 'undefined' ? null : document.documentElement,
+	);
 	const ref = useBoundsCssVars<HTMLDivElement>(undefined, bodyRef, {
 		left: '--nav-left',
 		top: '--nav-top',

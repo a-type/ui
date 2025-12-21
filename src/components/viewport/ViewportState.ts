@@ -136,8 +136,10 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 		this._center = this.getCanvasCenter();
 
 		this.bindRoot(boundElement ?? null);
-		document.addEventListener('gesturestart', preventDefault);
-		document.addEventListener('gesturechange', preventDefault);
+		if (typeof document !== 'undefined') {
+			document.addEventListener('gesturestart', preventDefault);
+			document.addEventListener('gesturechange', preventDefault);
+		}
 	}
 
 	private setBoundElementSize = (size: Size, offset?: Vector2) => {
@@ -368,8 +370,10 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 	}
 
 	dispose = () => {
-		document.removeEventListener('gesturestart', preventDefault);
-		document.removeEventListener('gesturechange', preventDefault);
+		if (typeof document !== 'undefined') {
+			document.removeEventListener('gesturestart', preventDefault);
+			document.removeEventListener('gesturechange', preventDefault);
+		}
 	};
 
 	updateConfig = (config: Partial<ViewportConfig>) => {

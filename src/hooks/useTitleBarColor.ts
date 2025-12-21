@@ -18,6 +18,9 @@ if (typeof document !== 'undefined') {
 }
 
 function changeThemeColor(color: string) {
+	if (typeof document === 'undefined') {
+		return;
+	}
 	// evaluate css var if necessary
 	if (color.startsWith('var(')) {
 		const root = document.documentElement;
