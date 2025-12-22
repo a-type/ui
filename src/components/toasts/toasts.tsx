@@ -1,80 +1,261 @@
-export type * from 'react-hot-toast';
-export { toast } from 'react-hot-toast';
+import {
+	Toast,
+	ToastManagerAddOptions,
+	ToastManagerPromiseOptions,
+	ToastObject,
+} from '@base-ui/react/toast';
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'motion/react';
-import { createPortal } from 'react-dom';
-import { DefaultToastOptions, useToaster } from 'react-hot-toast';
+import { ReactNode } from 'react';
 import { useResolvedColorMode } from '../../colorMode.js';
+import { Button, ButtonProps } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
+import { Spinner } from '../spinner/Spinner.js';
 
-const toastOptions: DefaultToastOptions = {};
+export const manager = Toast.createToastManager();
 
-export const Toaster = (props: { className?: string }) => {
-	const mode = useResolvedColorMode();
-	const { toasts, handlers } = useToaster(toastOptions);
-	const { startPause, endPause } = handlers;
-	const visibleToasts = toasts.filter((t) => t.visible);
-
-	const target = typeof document === 'undefined' ? null : document.body;
-	if (!target) {
-		return null;
-	}
-
-	return createPortal(
-		<div
-			className={clsx(
-				'fixed z-100000 flex flex-col items-center gap-xs left-1/2 center-x top-sm max-w-400px',
-				mode === 'dark' ? 'override-light' : 'override-dark',
-				props.className,
-			)}
-			onMouseEnter={startPause}
-			onMouseLeave={endPause}
-		>
-			<AnimatePresence>
-				{visibleToasts.map((toast) => {
-					const message =
-						typeof toast.message === 'function'
-							? toast.message(toast)
-							: toast.message;
-					return (
-						<motion.div
-							key={toast.id}
-							className={clsx(
-								{
-									'palette-success': toast.type === 'success',
-									'palette-attention': toast.type === 'error',
-									'palette-info': toast.type === 'blank',
-								},
-								'bg-main-wash color-black rounded-md shadow-md px-md py-sm',
-								'flex flex-row gap-sm',
-							)}
-							{...toast.ariaProps}
-							initial={{ scale: 0.8, opacity: 0, y: -20 }}
-							exit={{ scale: 0.8, opacity: 0, y: -20 }}
-							animate={{
-								scale: 1,
-								opacity: 1,
-								y: 0,
-							}}
-							layout
-						>
-							<Icon
-								className="mt-2px"
-								loading={toast.type === 'loading'}
-								name={
-									toast.type === 'success'
-										? 'check'
-										: toast.type === 'error'
-										? 'warning'
-										: 'info'
-								}
-							/>
-							{message}
-						</motion.div>
-					);
-				})}
-			</AnimatePresence>
-		</div>,
-		target,
+export const DefaultToastProvider = ({
+	children,
+	...rest
+}: {
+	children?: React.ReactNode;
+	timeout?: number;
+}) => {
+	return (
+		<Toast.Provider toastManager={manager} {...rest}>
+			{children}
+		</Toast.Provider>
 	);
 };
+
+export function Toaster() {
+	return (
+		<Toast.Portal>
+			<Toast.Viewport className="overflow-clip">
+				<ToastList />
+			</Toast.Viewport>
+		</Toast.Portal>
+	);
+}
+
+function ToastList() {
+	const { toasts: untypedToasts } = Toast.useToastManager();
+	const mode = useResolvedColorMode();
+
+	const toasts = untypedToasts as Array<ToastObject<CustomToastData>>;
+
+	return toasts.map((toast) => (
+		<Toast.Root
+			key={toast.id}
+			toast={toast}
+			swipeDirection={['up', 'right', 'left']}
+			className={clsx(
+				// variable setup
+				'[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))]',
+				'[--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))]',
+				'[--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]',
+				// basic positioning
+				'absolute left-0 top-xs left-auto z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
+				'h-[--height]',
+				'flex flex-col gap-xs items-center',
+				// other properties
+				'select-none',
+				// animation and interaction
+				'translate-x-[--toast-swipe-movement-x] translate-y-[calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height)))] scale-[var(--scale)]',
+				'[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
+				// ::after
+				'after:(absolute top-full left-0 h-[calc(var(--gap)+1px)] w-full content-empty)',
+				// starting style
+				'data-[starting-style]:(-translate-y-150%)',
+				// limited
+				'data-[limited]:opacity-0',
+				//expanded
+				'data-[expanded]:(h-[--toast-height] translate-x-[--toast-swipe-movement-x] translate-y-[--offset-y] scale-100)',
+				// ending styles
+				'data-[ending-style]:(opacity-0)',
+				// natural or close button
+				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(-translate-y-150% scale-90 opacity-50)',
+				// swiping down
+				'data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
+				'data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
+				// swiping left
+				'data-[ending-style]:data-[swipe-direction=left]:(translate-x-[calc(var(--toast-swipe-movement-x)-150%)] translate-y-[var(--offset-y)])',
+				'data-[expanded]:data-[ending-style]:data-[swipe-direction=left]:(translate-x-[calc(var(--toast-swipe-movement-x)-150%)] translate-y-[var(--offset-y)])',
+				// swiping right
+				'data-[ending-style]:data-[swipe-direction=right]:(translate-x-[calc(var(--toast-swipe-movement-x)+150%)] translate-y-[var(--offset-y)])',
+				'data-[expanded]:data-[ending-style]:data-[swipe-direction=right]:(translate-x-[calc(var(--toast-swipe-movement-x)+150%)] translate-y-[var(--offset-y)])',
+				// swiping up
+				'data-[ending-style]:data-[swipe-direction=up]:(translate-y-[calc(var(--toast-swipe-movement-y)-150%)])',
+				'data-[expanded]:data-[ending-style]:data-[swipe-direction=up]:(translate-y-[calc(var(--toast-swipe-movement-y)-150%)])',
+				// themeing
+				{
+					'palette-success': toast.type === 'success',
+					'palette-attention': toast.type === 'error',
+					'palette-info': toast.type === 'blank',
+				},
+				mode === 'dark' ? 'override-light' : 'override-dark',
+			)}
+		>
+			<Toast.Content className="[&[data-behind]:not([data-expanded])]:pointer-events-none flex flex-col gap-2px max-w-sm">
+				<div
+					className={clsx(
+						'layer-components:(bg-main-wash color-black rounded-md b-1 b-solid b-black shadow-md pl-md pr-sm py-sm relative)',
+						'layer-components:(flex flex-row gap-sm)',
+						'[[data-behind]:not([data-expanded])_&]:(bg-darken-2 max-h-[--height])',
+					)}
+				>
+					<div
+						className={clsx(
+							'flex flex-row gap-xs items-center',
+							'[[data-behind]:not([data-expanded])_&]:(opacity-0) [[data-expanded]_&]:(opacity-100) transition-opacity [transition-duration:250ms]',
+						)}
+					>
+						<div className="flex flex-col gap-xs">
+							<Toast.Title className="text-sm leading-tight font-bold m-0" />
+							<div className="flex gap-sm">
+								{toast.data?.loading ? (
+									<Spinner size={15} className="relative top-2px" />
+								) : toast.type === 'success' ? (
+									<Icon
+										name="check"
+										color="success"
+										className="relative top-2px"
+									/>
+								) : toast.type === 'error' ? (
+									<Icon
+										name="warning"
+										color="attention"
+										className="relative top-2px"
+									/>
+								) : null}
+								<Toast.Description className="text-sm m-0" />
+							</div>
+						</div>
+						<Toast.Close
+							className="mb-auto [[data-behind]:not([data-expanded])_&]:(invisible)"
+							aria-label="Close"
+							render={
+								<Button size="small" emphasis="ghost">
+									<Icon name="x" />
+								</Button>
+							}
+						/>
+					</div>
+				</div>
+				{toast.data?.actions && (
+					<div className="flex gap-xxs items-center ml-auto [[data-behind]:not([data-expanded])_&]:(opacity-0) transition-opacity">
+						{toast.data.actions.toReversed().map((action, index: number) => (
+							<Toast.Action
+								key={index}
+								className="text-xs"
+								onClick={action.onClick}
+								render={
+									<Button
+										size="small"
+										emphasis={action.emphasis}
+										color={action.color}
+									/>
+								}
+							>
+								{action.label}
+							</Toast.Action>
+						))}
+					</div>
+				)}
+			</Toast.Content>
+		</Toast.Root>
+	));
+}
+
+export interface CustomToastData {
+	actions?: {
+		label: ReactNode;
+		onClick: () => void;
+		emphasis?: ButtonProps['emphasis'];
+		color?: ButtonProps['color'];
+	}[];
+	loading?: boolean;
+}
+
+export interface ToastOptions extends ToastManagerAddOptions<CustomToastData> {
+	/** @deprecated - use timeout */
+	duration?: number;
+}
+
+function baseToast(
+	messageOrOptions: string | ToastOptions,
+	maybeOptions?: ToastOptions,
+) {
+	const description =
+		typeof messageOrOptions === 'string' ? messageOrOptions : undefined;
+	const options =
+		typeof messageOrOptions === 'string' ? maybeOptions : messageOrOptions;
+	const extraOptions =
+		typeof messageOrOptions === 'string' && maybeOptions ? maybeOptions : {};
+
+	const finalOptions = {
+		description,
+		timeout:
+			options?.duration ??
+			extraOptions?.duration ??
+			options?.timeout ??
+			extraOptions?.timeout,
+		...options,
+		...extraOptions,
+	};
+	if (options?.id) {
+		manager.update<CustomToastData>(options.id, finalOptions);
+		return options.id;
+	}
+	return manager.add(finalOptions);
+}
+
+export const toast = Object.assign(baseToast, {
+	success(
+		messageOrOptions: string | ToastOptions,
+		maybeOptions?: ToastOptions,
+	) {
+		return baseToast(messageOrOptions, {
+			type: 'success',
+			...maybeOptions,
+		});
+	},
+	error(messageOrOptions: string | ToastOptions, maybeOptions?: ToastOptions) {
+		return baseToast(messageOrOptions, {
+			type: 'error',
+			...maybeOptions,
+		});
+	},
+	promise: function <T>(
+		promise: Promise<T>,
+		options: ToastManagerPromiseOptions<T, CustomToastData>,
+	) {
+		return manager.promise(promise, options);
+	},
+	loading: function (
+		messageOrOptions: string | ToastOptions,
+		maybeOptions?: ToastOptions,
+	) {
+		const id = baseToast(messageOrOptions, {
+			timeout: 0,
+			data: { loading: true },
+			...maybeOptions,
+		});
+
+		return {
+			id,
+			complete: (
+				messageOrOptions: string | ToastOptions,
+				maybeOptions?: ToastOptions,
+			) => {
+				baseToast(messageOrOptions, {
+					id,
+					data: { loading: false },
+					...maybeOptions,
+				});
+			},
+		};
+	},
+});
+
+export type * from '@base-ui/react/toast';
+export { Toast };

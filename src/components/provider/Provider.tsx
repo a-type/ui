@@ -4,7 +4,7 @@ import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavi
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
 import { PwaInstall } from '../pwaInstall/PwaInstall.js';
-import { Toaster } from '../toasts/toasts.js';
+import { DefaultToastProvider, Toaster } from '../toasts/toasts.js';
 import { TooltipProvider } from '../tooltip/index.js';
 
 export interface ProviderProps {
@@ -47,10 +47,12 @@ export function Provider({
 			<ConfigContext.Provider
 				value={{ virtualKeyboardBehavior: supportedVirtualKeyboardBehavior }}
 			>
-				<TooltipProvider>
-					{children}
-					{otherStuff}
-				</TooltipProvider>
+				<DefaultToastProvider>
+					<TooltipProvider>
+						{children}
+						{otherStuff}
+					</TooltipProvider>
+				</DefaultToastProvider>
 			</ConfigContext.Provider>
 		);
 
@@ -58,12 +60,14 @@ export function Provider({
 		<ConfigContext.Provider
 			value={{ virtualKeyboardBehavior: supportedVirtualKeyboardBehavior }}
 		>
-			<TooltipProvider>
-				<ParticleLayer>
-					{children}
-					{otherStuff}
-				</ParticleLayer>
-			</TooltipProvider>
+			<DefaultToastProvider>
+				<TooltipProvider>
+					<ParticleLayer>
+						{children}
+						{otherStuff}
+					</ParticleLayer>
+				</TooltipProvider>
+			</DefaultToastProvider>
 		</ConfigContext.Provider>
 	);
 }

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { toast } from 'react-hot-toast';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
+import { toast } from './toasts.js';
 
 const meta = {
 	title: 'Components/toasts',
@@ -24,7 +24,7 @@ export const Default: Story = {
 						toast(
 							'This is a default toast! With a lot of text. Enough to wrap around.',
 							{
-								duration: 10_000,
+								duration: 120_000,
 							},
 						);
 					}}
@@ -35,7 +35,7 @@ export const Default: Story = {
 					color="success"
 					onClick={() => {
 						toast.success('This is a success toast!', {
-							duration: 10_000,
+							duration: 20_000,
 						});
 					}}
 				>
@@ -45,7 +45,7 @@ export const Default: Story = {
 					color="attention"
 					onClick={() => {
 						toast.error('This is an error toast!', {
-							duration: 10_000,
+							duration: 20_000,
 						});
 					}}
 				>
@@ -53,10 +53,13 @@ export const Default: Story = {
 				</Button>
 				<Button
 					onClick={() => {
-						const id = toast.loading('This is a loading toast!');
+						const { complete } = toast.loading('This is a loading toast!');
 						setTimeout(() => {
-							toast.success('Loading complete!', { id, duration: 5000 });
-						}, 3000);
+							complete('Loading complete!', {
+								duration: 5000,
+								type: 'success',
+							});
+						}, 5000);
 					}}
 				>
 					Show Loading Toast
@@ -68,7 +71,8 @@ export const Default: Story = {
 								await new Promise((resolve) => setTimeout(resolve, 3000));
 							})(),
 							{
-								loading: 'Promise is loading...',
+								loading:
+									'Promise is loading... This text is longer to test animation of transition',
 								success: 'Promise resolved!',
 								error: 'Promise rejected.',
 							},
@@ -76,6 +80,44 @@ export const Default: Story = {
 					}}
 				>
 					Show Promise Toast
+				</Button>
+				<Button
+					onClick={() => {
+						toast('This is a toast with actions!', {
+							timeout: 20_000,
+							data: {
+								actions: [
+									{
+										label: 'Retry',
+										emphasis: 'primary',
+										onClick: () => {
+											alert('Retry clicked!');
+										},
+									},
+									{
+										label: 'Undo',
+										emphasis: 'light',
+										onClick: () => {
+											alert('Undo clicked!');
+										},
+									},
+								],
+							},
+						});
+					}}
+				>
+					Show Toast with Actions
+				</Button>
+				<Button
+					onClick={() => {
+						toast({
+							title: 'Rich Toast',
+							description: 'This toast has both a title and a description.',
+							timeout: 20_000,
+						});
+					}}
+				>
+					Show Rich Toast
 				</Button>
 			</Box>
 		);
