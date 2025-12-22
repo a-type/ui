@@ -271,6 +271,12 @@ export const toast = Object.assign(baseToast, {
 	close: function (id: string) {
 		return manager.close(id);
 	},
+	/**
+	 * @deprecated use `toast.close` instead
+	 */
+	dismiss: function (id: string) {
+		return manager.close(id);
+	},
 });
 
 export type * from '@base-ui/react/toast';
