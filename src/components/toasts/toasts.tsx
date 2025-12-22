@@ -181,10 +181,10 @@ export interface ToastOptions extends ToastManagerAddOptions<CustomToastData> {
 	duration?: number;
 }
 
-function baseToast(
+function toOptions(
 	messageOrOptions: string | ToastOptions,
 	maybeOptions?: ToastOptions,
-) {
+): ToastOptions {
 	const description =
 		typeof messageOrOptions === 'string' ? messageOrOptions : undefined;
 	const options =
@@ -202,10 +202,14 @@ function baseToast(
 		...options,
 		...extraOptions,
 	};
-	if (options?.id) {
-		manager.update<CustomToastData>(options.id, finalOptions);
-		return options.id;
-	}
+	return finalOptions;
+}
+
+function baseToast(
+	messageOrOptions: string | ToastOptions,
+	maybeOptions?: ToastOptions,
+) {
+	const finalOptions = toOptions(messageOrOptions, maybeOptions);
 	return manager.add(finalOptions);
 }
 
@@ -247,13 +251,25 @@ export const toast = Object.assign(baseToast, {
 				messageOrOptions: string | ToastOptions,
 				maybeOptions?: ToastOptions,
 			) => {
-				baseToast(messageOrOptions, {
+				manager.update(
 					id,
-					data: { loading: false },
-					...maybeOptions,
-				});
+					toOptions(messageOrOptions, {
+						...maybeOptions,
+						data: { loading: false },
+					}),
+				);
 			},
 		};
+	},
+	update: function (
+		id: string,
+		messageOrOptions: string | ToastOptions,
+		maybeOptions?: ToastOptions,
+	) {
+		return manager.update(id, toOptions(messageOrOptions, maybeOptions));
+	},
+	close: function (id: string) {
+		return manager.close(id);
 	},
 });
 
