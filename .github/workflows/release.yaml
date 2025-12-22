@@ -42,6 +42,15 @@ jobs:
 
       - name: Publish
         run: pnpm publish --access public --no-git-checks
+        if: (!contains(github.ref_name, '-beta') && !contains(github.ref_name, '-alpha'))
+
+      - name: Publish Beta
+        run: pnpm publish --access public --tag beta --no-git-checks
+        if: contains(github.ref_name, '-beta')
+
+      - name: Publish Alpha
+        run: pnpm publish --access public --tag alpha --no-git-checks
+        if: contains(github.ref_name, '-alpha')
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
