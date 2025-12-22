@@ -54,7 +54,7 @@ function ToastList() {
 				'[--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))]',
 				'[--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]',
 				// basic positioning
-				'absolute left-0 top-xs left-auto z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
+				'fixed left-0 top-xs left-auto z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
 				'h-[--height]',
 				'flex flex-col gap-xs items-center',
 				// other properties
