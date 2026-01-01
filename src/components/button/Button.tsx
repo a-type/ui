@@ -2,7 +2,6 @@ import {
 	Button as BaseButton,
 	ButtonProps as BaseButtonProps,
 } from '@base-ui/react/button';
-import { Slot } from '@radix-ui/react-slot';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import {
@@ -40,8 +39,6 @@ export type ButtonProps = BaseButtonProps & {
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
-	/** @deprecated use render */
-	asChild?: boolean;
 	visuallyFocused?: boolean;
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
@@ -61,14 +58,11 @@ export function ButtonRoot({
 	loading,
 	children,
 	disabled,
-	asChild,
 	disableIconMode,
 	disableDropdownTriggerIcon,
 	ref,
 	...props
 }: ButtonProps) {
-	const Comp = asChild ? Slot : BaseButton;
-
 	const isFormSubmitting = false;
 	const isSubmitLoading =
 		'type' in props && props.type === 'submit' && isFormSubmitting;
@@ -122,15 +116,9 @@ export function ButtonRoot({
 		buttonProps['aria-pressed'] = !!toggled;
 	}
 
-	// for asChild, no need to do the rest of this stuff.
-	if (asChild) {
-		// avoid rendering loading spinner with asChild
-		return <Comp {...buttonProps}>{children}</Comp>;
-	}
-
 	return (
 		<IconLoadingProvider value={isLoading}>
-			<Comp {...buttonProps}>
+			<BaseButton {...buttonProps}>
 				<AnimatePresence>
 					{isLoading && (
 						<motion.div
@@ -156,12 +144,10 @@ export function ButtonRoot({
 				{children}
 				{isDropdownTrigger && (
 					<IconLoadingProvider value={false}>
-						<DropdownMenuTriggerIcon asChild>
-							<Icon name="chevron" />
-						</DropdownMenuTriggerIcon>
+						<DropdownMenuTriggerIcon render={<Icon name="chevron" />} />
 					</IconLoadingProvider>
 				)}
-			</Comp>
+			</BaseButton>
 		</IconLoadingProvider>
 	);
 }

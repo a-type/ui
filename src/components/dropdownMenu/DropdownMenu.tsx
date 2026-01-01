@@ -24,10 +24,18 @@ const StyledContent = withClassName(
 			</GroupScaleReset>
 		);
 	},
-	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-gray-dark flex flex-col transition)',
+	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-black flex flex-col transition)',
 	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
-	'data-[starting-style]:(opacity-0 scale-95 translate-y-4px)',
-	'data-[ending-style]:(opacity-0 scale-95 translate-y-0)',
+
+	'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+	'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+	'layer-components:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
+	'layer-components:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
+	'layer-components:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
+	'layer-components:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
+	'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
+	'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
+
 	'important:motion-reduce:animate-none',
 	'will-change-transform',
 );
@@ -82,6 +90,8 @@ const StyledArrow = withClassName(
 		</BaseMenu.Arrow>
 	),
 	'layer-components:(arrow)',
+	'layer-components:data-[closed]:(opacity-0 scale-0)',
+	'layer-components:data-[open]:(opacity-100 scale-100)',
 );
 
 const StyledTrigger = withClassName(BaseMenu.Trigger, 'select-none');
@@ -120,25 +130,39 @@ export const DropdownMenuTriggerIcon = withClassName(
 export const DropdownMenuContent = ({
 	children,
 	forceMount,
+	keepMounted,
 	side,
 	sideOffset = 8,
 	align,
 	alignOffset,
+	anchor,
+	arrowPadding = 2,
+	collisionAvoidance,
+	collisionBoundary,
+	collisionPadding,
+	sticky,
+	positionMethod,
 	...props
-}: MenuPopupProps & {
-	forceMount?: boolean;
-	side?: MenuPositionerProps['side'];
-	sideOffset?: MenuPositionerProps['sideOffset'];
-	align?: MenuPositionerProps['align'];
-	alignOffset?: MenuPositionerProps['alignOffset'];
-}) => {
+}: MenuPopupProps &
+	MenuPositionerProps & {
+		/** @deprecated - use keepMounted */
+		forceMount?: boolean;
+		keepMounted?: boolean;
+	}) => {
 	return (
-		<StyledPortal keepMounted={forceMount}>
+		<StyledPortal keepMounted={keepMounted ?? forceMount}>
 			<BaseMenu.Positioner
 				sideOffset={sideOffset}
 				side={side}
 				align={align}
 				alignOffset={alignOffset}
+				anchor={anchor}
+				arrowPadding={arrowPadding}
+				collisionAvoidance={collisionAvoidance}
+				collisionBoundary={collisionBoundary}
+				collisionPadding={collisionPadding}
+				sticky={sticky}
+				positionMethod={positionMethod}
 			>
 				<StyledContent {...props}>
 					<div className="layer-components:(overflow-y-auto overflow-x-hidden overflow-unstable max-h-full rounded-md min-h-0)">

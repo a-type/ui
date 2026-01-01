@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './Select.js';
 
@@ -21,16 +22,18 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {
 	render(args) {
 		return (
-			<Select {...args}>
-				<SelectTrigger />
-				<SelectContent>
-					{['One', 'Two', 'Three'].map((item) => (
-						<SelectItem key={item} value={item}>
-							{item}
-						</SelectItem>
-					))}
-				</SelectContent>
-			</Select>
+			<Box full layout="center center" className="min-h-200px">
+				<Select {...args}>
+					<SelectTrigger />
+					<SelectContent>
+						{['One', 'Two', 'Three'].map((item) => (
+							<SelectItem key={item} value={item}>
+								{item}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+			</Box>
 		);
 	},
 };

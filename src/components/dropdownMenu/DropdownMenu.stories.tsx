@@ -54,7 +54,7 @@ export const Sides: Story = {
 			p="xl"
 			className="mt-200px"
 		>
-			<DropdownMenu open>
+			<DropdownMenu open={args.open}>
 				<DropdownMenu.Trigger asChild>
 					<Button>Top</Button>
 				</DropdownMenu.Trigger>
@@ -67,7 +67,7 @@ export const Sides: Story = {
 					</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu>
-			<DropdownMenu open>
+			<DropdownMenu open={args.open}>
 				<DropdownMenu.Trigger asChild>
 					<Button>Right</Button>
 				</DropdownMenu.Trigger>
@@ -80,7 +80,7 @@ export const Sides: Story = {
 					</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu>
-			<DropdownMenu open>
+			<DropdownMenu open={args.open}>
 				<DropdownMenu.Trigger asChild>
 					<Button>Left</Button>
 				</DropdownMenu.Trigger>
@@ -93,7 +93,7 @@ export const Sides: Story = {
 					</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu>
-			<DropdownMenu open>
+			<DropdownMenu open={args.open}>
 				<DropdownMenu.Trigger asChild>
 					<Button>Bottom</Button>
 				</DropdownMenu.Trigger>
