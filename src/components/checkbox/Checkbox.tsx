@@ -1,11 +1,15 @@
 'use client';
 
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import {
+	Checkbox as BaseCheckbox,
+	CheckboxIndicatorProps,
+	CheckboxRootProps,
+} from '@base-ui/react/checkbox';
 import classNames from 'clsx';
 import { Ref } from 'react';
 import { Icon } from '../icon/Icon.js';
 
-export interface CheckboxProps extends CheckboxPrimitive.CheckboxProps {
+export interface CheckboxProps extends CheckboxRootProps {
 	/**
 	 * The checked visual state. Prominent mode means the checked version is visually
 	 * emphasized to the user. Faded means the checked version is visually de-emphasized.
@@ -22,14 +26,14 @@ export function CheckboxRoot({
 	...props
 }: CheckboxProps) {
 	return (
-		<CheckboxPrimitive.Root
+		<BaseCheckbox.Root
 			{...props}
 			className={classNames(
-				'layer-components:(w-28px h-28px flex-shrink-0 relative bg-white border border-default transition-all rounded-lg shadow-sm cursor-pointer)',
+				'layer-components:(block w-28px h-28px flex-shrink-0 relative bg-white border border-default transition-all rounded-lg shadow-sm cursor-pointer)',
 				'layer-components:focus-visible:(outline-off ring-4 ring-accent)',
 				checkedMode === 'faded'
-					? 'layer-components:[&[data-state=checked]]:(bg-main animate-checkbox-fade animate-forwards)'
-					: 'layer-components:[&[data-state=checked]]:(bg-main border-main-ink)',
+					? 'layer-components:data-[checked]:(bg-main animate-checkbox-fade animate-forwards)'
+					: 'layer-components:data-[checked]:(bg-main border-main-ink)',
 				'layer-components:[&:hover:not(:disabled)]:(bg-lighten-2 ring-bg ring-2)',
 				'layer-components:[&:active:not(:disabled)]:(bg-darken-1 ring-4)',
 				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
@@ -43,14 +47,14 @@ export function CheckboxIndicator({
 	children,
 	className,
 	...props
-}: CheckboxPrimitive.CheckboxIndicatorProps) {
+}: CheckboxIndicatorProps) {
 	return (
-		<CheckboxPrimitive.Indicator
+		<BaseCheckbox.Indicator
 			className={classNames('absolute center color-black', className)}
 			{...props}
 		>
 			{children ?? <Icon name="check" size={16} />}
-		</CheckboxPrimitive.Indicator>
+		</BaseCheckbox.Indicator>
 	);
 }
 

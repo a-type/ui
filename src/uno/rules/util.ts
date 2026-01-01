@@ -17,7 +17,7 @@ export const utilRules: Rule[] = [
 				'z-index': 0,
 			};
 			yield {
-				[ctx.symbols.selector]: (selector) => `span:has(${selector}):after`,
+				[ctx.symbols.selector]: (selector) => `${selector}:after`,
 				content: '""',
 				position: 'absolute',
 				top: '0',
@@ -25,6 +25,26 @@ export const utilRules: Rule[] = [
 				right: '1.5px',
 				height: '1px',
 				background: 'var(--v-bg-altered,var(--v-bg))',
+			};
+			yield {
+				[ctx.symbols.selector]: (selector) => `${selector}[data-side="top"]`,
+				transform: 'rotate(0deg)',
+				bottom: 'calc(-1 * var(--arrow-size) / 2)',
+			};
+			yield {
+				[ctx.symbols.selector]: (selector) => `${selector}[data-side="right"]`,
+				transform: 'rotate(90deg)',
+				left: 'calc(-1 * var(--arrow-size) * 0.75)',
+			};
+			yield {
+				[ctx.symbols.selector]: (selector) => `${selector}[data-side="left"]`,
+				transform: 'rotate(-90deg)',
+				right: 'calc(-1 * var(--arrow-size) * 0.75)',
+			};
+			yield {
+				[ctx.symbols.selector]: (selector) => `${selector}[data-side="bottom"]`,
+				transform: 'rotate(180deg)',
+				top: 'calc(-1 * var(--arrow-size) / 2)',
 			};
 		},
 	],

@@ -1,6 +1,8 @@
+import { Button } from '@base-ui/react/button';
+import { UseRenderComponentProps } from '@base-ui/react/use-render';
 import { Slot } from '@radix-ui/react-slot';
 import classNames, { clsx } from 'clsx';
-import { ReactNode, Ref } from 'react';
+import { ReactElement, ReactNode, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Icon, IconProps } from '../icon/index.js';
 
@@ -13,12 +15,14 @@ export const navBarItemClass = classNames(
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
 
-export interface NavBarItemProps {
+export interface NavBarItemProps extends UseRenderComponentProps<'button'> {
+	/** @deprecated use render */
 	asChild?: boolean;
 	className?: string;
 	children?: ReactNode;
 	active?: boolean;
 	color?: 'primary' | 'gray';
+	render?: ReactElement | (() => ReactElement);
 }
 
 export const NavBarItem = function NavBarItem({
@@ -31,13 +35,12 @@ export const NavBarItem = function NavBarItem({
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
-	const Comp = asChild ? Slot : 'button';
-
 	return (
-		<Comp
+		<Button
 			ref={ref}
 			className={classNames(navBarItemClass, `palette-${color}`, className)}
 			data-active={active}
+			render={asChild ? (rest.children as ReactElement) : undefined}
 			{...rest}
 		/>
 	);
@@ -56,6 +59,7 @@ export const NavBarItemText = withClassName(
 );
 
 interface NavBarItemIconProps {
+	/** @deprecated use render */
 	asChild?: boolean;
 	name?: IconProps['name'];
 	className?: string;

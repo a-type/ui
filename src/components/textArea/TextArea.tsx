@@ -1,20 +1,13 @@
 'use client';
 
+import { Input, InputProps } from '@base-ui/react/input';
 import classNames from 'clsx';
-import {
-	ChangeEvent,
-	HTMLProps,
-	useCallback,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { inputClassName } from '../input/index.js';
 
-export interface TextAreaProps
-	extends Omit<HTMLProps<HTMLTextAreaElement>, 'ref'> {
+export interface TextAreaProps extends InputProps {
 	className?: string;
 	autoSize?: boolean;
 	autoSelect?: boolean;
@@ -22,8 +15,10 @@ export interface TextAreaProps
 	padBottomPixels?: number;
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
-	onValueChange?: (value: string) => void;
+	rows?: number;
 }
+
+type HandleChange = Exclude<InputProps['onValueChange'], undefined>;
 
 export const TextArea = function TextArea({
 	ref,
@@ -40,9 +35,9 @@ export const TextArea = function TextArea({
 	onValueChange,
 	...rest
 }: TextAreaProps & {
-	ref?: React.Ref<HTMLTextAreaElement>;
+	ref?: React.Ref<any>;
 }) {
-	const innerRef = useRef<HTMLTextAreaElement>(null);
+	const innerRef = useRef<any>(null);
 	const finalRef = useMergedRef(innerRef, ref);
 
 	const [innerValue, setInnerValue] = useState('');
@@ -61,21 +56,18 @@ export const TextArea = function TextArea({
 		}
 	}, [autoSize, padBottomPixels, finalValue]);
 
-	const handleChange = useCallback(
-		(e: ChangeEvent<HTMLTextAreaElement>) => {
-			setInnerValue((e.target as HTMLTextAreaElement).value);
-			if (onChange) {
-				onChange(e);
-			}
+	const handleValueChange = useCallback<HandleChange>(
+		(value, eventDetails) => {
+			setInnerValue(value);
 			if (onValueChange) {
-				onValueChange(e.target.value);
+				onValueChange(value, eventDetails);
 			}
 		},
 		[onChange, onValueChange],
 	);
 
-	const handleFocus = useCallback(
-		(e: React.FocusEvent<HTMLTextAreaElement>) => {
+	const handleFocus = useCallback<Exclude<InputProps['onFocus'], undefined>>(
+		(e) => {
 			if (autoSelect) {
 				e.target.select();
 			}
@@ -92,7 +84,8 @@ export const TextArea = function TextArea({
 	);
 
 	return (
-		<textarea
+		<Input
+			render={<textarea rows={autoSize ? 1 : rows} />}
 			ref={finalRef}
 			className={classNames(
 				inputClassName,
@@ -104,8 +97,7 @@ export const TextArea = function TextArea({
 				},
 				className,
 			)}
-			rows={autoSize ? 1 : rows}
-			onChange={handleChange}
+			onValueChange={handleValueChange}
 			onFocus={handleFocus}
 			placeholder={placeholder ?? randomPlaceholder}
 			{...rest}

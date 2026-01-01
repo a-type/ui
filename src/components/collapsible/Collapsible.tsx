@@ -1,15 +1,25 @@
 'use client';
-import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import {
+	Collapsible as BaseCollapsible,
+	CollapsiblePanelProps,
+	CollapsibleRootProps,
+} from '@base-ui/react/collapsible';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 
-export const CollapsibleRoot = CollapsiblePrimitive.Root;
+export const CollapsibleRoot = BaseCollapsible.Root;
 const CollapsibleContentBase = withClassName(
-	CollapsiblePrimitive.Content,
-	'overflow-hidden',
-	'layer-components:[&[data-state=open]]:(animate-radix-collapsible-open-vertical animate-duration-300 animate-ease-springy) layer-components:[&[data-state=closed]]:(animate-radix-collapsible-close-vertical animate-duration-300 animate-ease-springy)',
-	'layer-variants:[&[data-horizontal][data-state=open]]:(animate-radix-collapsible-open-horizontal animate-duration-300 animate-ease-springy) layer-variants:[&[data-horizontal][data-state=closed]]:(animate-radix-collapsible-close-horizontal animate-duration-300 animate-ease-springy)',
-	'layer-variants:[&[data-both][data-state=open]]:(animate-radix-collapsible-open-both animate-duration-300 animate-ease-springy) layer-variants:[&[data-both][data-state=closed]]:(animate-radix-collapsible-close-both animate-duration-300 animate-ease-springy)',
+	BaseCollapsible.Panel,
+	'overflow-hidden transition-all',
+	'data-[vertical]:h-[--collapsible-panel-height] data-[horizontal]:w-[--collapsible-panel-width]',
+	'data-[both]:(h-[--collapsible-panel-height] w-[--collapsible-panel-width])',
+	'data-[starting-style]:data-[vertical]:(h-0)',
+	'data-[starting-style]:data-[both]:(h-0 w-0)',
+	'data-[ending-style]:data-[vertical]:(h-0)',
+	'data-[ending-style]:data-[both]:(h-0 w-0)',
+	'data-[starting-style]:data-[horizontal]:(w-0)',
+	'data-[ending-style]:data-[horizontal]:(w-0)',
+	'data-[hidden]:[&:not([hidden="until-found"])]:(hidden)',
 );
 // specifically removing className... it's causing problems?
 export const CollapsibleContent = function CollapsibleContent({
@@ -17,28 +27,29 @@ export const CollapsibleContent = function CollapsibleContent({
 	horizontal,
 	both,
 	...props
-}: CollapsiblePrimitive.CollapsibleContentProps & {
+}: CollapsiblePanelProps & {
 	horizontal?: boolean;
 	both?: boolean;
 	ref?: Ref<HTMLDivElement>;
 }) {
-	return (
-		<CollapsibleContentBase
-			data-horizontal={horizontal}
-			data-both={both}
-			{...props}
-			ref={ref}
-		/>
-	);
+	const extraProps: any = {};
+	if (horizontal) {
+		extraProps['data-horizontal'] = true;
+	} else if (both) {
+		extraProps['data-both'] = true;
+	} else {
+		extraProps['data-vertical'] = true;
+	}
+	return <CollapsibleContentBase {...extraProps} {...props} ref={ref} />;
 };
-export const CollapsibleTrigger = CollapsiblePrimitive.Trigger;
+export const CollapsibleTrigger = BaseCollapsible.Trigger;
 
 export const CollapsibleSimple = ({
 	horizontal,
 	both,
 	children,
 	...props
-}: CollapsiblePrimitive.CollapsibleProps & {
+}: CollapsibleRootProps & {
 	horizontal?: boolean;
 	both?: boolean;
 }) => (

@@ -1,8 +1,12 @@
+import { Separator as BaseSeparator } from '@base-ui/react/separator';
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 
-const DividerBase = withClassName('div', 'w-full h-1px bg-black relative');
+const DividerBase = withClassName(
+	BaseSeparator,
+	'w-full h-1px bg-black relative',
+);
 
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
 	compensate?: 0 | 1 | 2 | 3 | 4 | 5 | 6;

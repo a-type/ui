@@ -1,3 +1,4 @@
+import { Input as BaseUIInput } from '@base-ui/react/input';
 import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
 import {
@@ -63,7 +64,7 @@ export const Input = function Input({
 		placeholdersIntervalMs,
 	);
 
-	const Component = asChild ? Slot : 'input';
+	const Component = asChild ? Slot : BaseUIInput;
 
 	return (
 		<Component

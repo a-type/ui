@@ -1,8 +1,11 @@
+import {
+	Button as BaseButton,
+	ButtonProps as BaseButtonProps,
+} from '@base-ui/react/button';
 import { Slot } from '@radix-ui/react-slot';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-	ButtonHTMLAttributes,
 	Children,
 	Fragment,
 	memo,
@@ -22,7 +25,7 @@ import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
 import { getButtonClassName } from './classes.js';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export type ButtonProps = BaseButtonProps & {
 	color?: PaletteName;
 	emphasis?:
 		| 'primary'
@@ -37,12 +40,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
+	/** @deprecated use render */
 	asChild?: boolean;
 	visuallyFocused?: boolean;
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
-}
+};
 
 export function ButtonRoot({
 	className,
@@ -63,10 +67,11 @@ export function ButtonRoot({
 	ref,
 	...props
 }: ButtonProps) {
-	const Comp = asChild ? Slot : 'button';
+	const Comp = asChild ? Slot : BaseButton;
 
 	const isFormSubmitting = false;
-	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
+	const isSubmitLoading =
+		'type' in props && props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
 	const childArray = childArrayWithoutFragments(children);

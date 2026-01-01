@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
@@ -40,4 +41,71 @@ export const Default: Story = {
 			</>
 		),
 	},
+};
+
+export const Sides: Story = {
+	render: (args) => (
+		<Box
+			col
+			gap="xl"
+			items="center"
+			justify="center"
+			full
+			p="xl"
+			className="mt-200px"
+		>
+			<DropdownMenu open>
+				<DropdownMenu.Trigger asChild>
+					<Button>Top</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content side="top">
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 2</DropdownMenu.Label>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+			<DropdownMenu open>
+				<DropdownMenu.Trigger asChild>
+					<Button>Right</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content side="right">
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 2</DropdownMenu.Label>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+			<DropdownMenu open>
+				<DropdownMenu.Trigger asChild>
+					<Button>Left</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content side="left" sideOffset={8}>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 2</DropdownMenu.Label>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+			<DropdownMenu open>
+				<DropdownMenu.Trigger asChild>
+					<Button>Bottom</Button>
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content side="bottom" sideOffset={8}>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item>
+						<DropdownMenu.Label>Item 2</DropdownMenu.Label>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+		</Box>
+	),
 };
