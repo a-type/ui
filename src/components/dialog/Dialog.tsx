@@ -13,6 +13,7 @@ import {
 	ComponentPropsWithoutRef,
 	createContext,
 	Ref,
+	TouchEvent,
 	useCallback,
 	useContext,
 	useRef,
@@ -30,7 +31,7 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	BaseDialog.Backdrop,
-	'layer-components:(fixed inset-0 z-backdrop bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray transition)',
+	'layer-components:(fixed inset-0 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray transition)',
 	'layer-components:backdrop-blur-sm',
 	'data-[starting-style]:(opacity-0)',
 	'data-[ending-style]:(opacity-0)',
@@ -38,7 +39,7 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	BaseDialog.Popup,
-	'layer-components:(z-dialog fixed shadow-xl bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark transition)',
+	'layer-components:(fixed shadow-xl bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark transition pointer-events-auto)',
 	'layer-components:sm:shadow-down',
 	'transform-gpu',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
@@ -63,7 +64,6 @@ const sheetClassNameWithDisplaceKeyboard = clsx(
 function sheetCloseGestureLogic(
 	swipeY: number,
 	dy: number,
-	vy: number,
 	last: boolean,
 	close: () => void,
 	content: HTMLElement,
@@ -77,6 +77,7 @@ function sheetCloseGestureLogic(
 	const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
 	content.style.setProperty('--gesture-y', `${gestureY}px`);
 	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
+	// content.style.setProperty('touch-action', last ? 'auto' : 'none');
 }
 
 // filter out gestures that are within scrollable descendants
@@ -100,7 +101,7 @@ function filterScrollables(
 			cur &&
 			cur.scrollHeight > cur.clientHeight &&
 			cur.scrollTop !== 0 &&
-			vy > 0
+			vy >= 0
 		)
 			return true;
 	}
@@ -115,6 +116,8 @@ export interface DialogContentProps extends DialogPopupProps {
 	ref?: Ref<HTMLDivElement>;
 }
 
+const SWIPE_VELOCITY_THRESHOLD = 1.5;
+
 export const Content = function Content({
 	ref,
 	children,
@@ -128,10 +131,7 @@ export const Content = function Content({
 	const wasOpenRef = useRef(false);
 	const openRef = useCallback(
 		(element: HTMLDivElement | null) => {
-			if (
-				!wasOpenRef.current &&
-				element?.getAttribute('data-state') === 'open'
-			) {
+			if (!wasOpenRef.current && element?.hasAttribute('data-open')) {
 				wasOpenRef.current = true;
 
 				const matchesSmall =
@@ -169,7 +169,7 @@ export const Content = function Content({
 						}),
 					);
 				}, 180);
-			} else if (element?.getAttribute('data-state') === 'closed') {
+			} else if (!element?.hasAttribute('data-open')) {
 				wasOpenRef.current = false;
 			}
 		},
@@ -184,36 +184,93 @@ export const Content = function Content({
 
 	const close = useContext(DialogCloseContext);
 	const isSmall = useMediaQuery('(max-width: 640px)');
-	const bind = useDrag(
-		({
-			swipe: [, swipeY],
-			movement: [, dy],
-			velocity: [, vy],
-			last,
-			active,
-			target,
-		}) => {
+
+	const gestureState = useRef({
+		sy: 0,
+		dy: 0,
+		vy: 0,
+		active: false,
+		timeStamp: 0,
+		filtered: false,
+	});
+
+	const onTouchStart = useCallback(
+		(event: TouchEvent) => {
+			if (!isSmall || disableSheet) return;
+			const touch = event.touches[0];
+			gestureState.current.sy = touch.clientY;
+			gestureState.current.timeStamp = event.timeStamp;
+		},
+		[isSmall, disableSheet],
+	);
+	const onTouchMove = useCallback(
+		(event: TouchEvent) => {
+			if (!isSmall || disableSheet) return;
+
+			const touch = event.touches[0];
+			const dy = touch.clientY - gestureState.current.sy;
+			const vy =
+				(dy - gestureState.current.dy) /
+				(event.timeStamp -
+					(gestureState.current.timeStamp ?? event.timeStamp - 1));
+
+			gestureState.current.dy = dy;
+			gestureState.current.vy = vy;
+
 			if (
-				filterScrollables(target as HTMLElement, gestureRef.current!, dy, vy)
+				gestureState.current.filtered ||
+				filterScrollables(
+					event.target as HTMLElement,
+					gestureRef.current!,
+					dy,
+					vy,
+				)
 			) {
-				console.log('filtered');
+				gestureState.current.filtered = true;
+				console.log('filtered touchmove');
 				return;
 			}
-			if (
-				(active || last) &&
-				gestureRef.current &&
-				gestureRef.current.scrollTop < 3
-			) {
-				console.log('handling');
-				sheetCloseGestureLogic(swipeY, dy, vy, last, close, gestureRef.current);
-			} else {
-				console.log('not handling');
+			if (!gestureState.current.active) {
+				gestureState.current.active = true;
+				gestureState.current.sy = touch.clientY;
 			}
+
+			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
+				console.log('touchmove dy, vy', dy, vy);
+				sheetCloseGestureLogic(
+					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
+					dy,
+					false,
+					close,
+					gestureRef.current,
+				);
+			}
+
+			gestureState.current.timeStamp = event.timeStamp;
 		},
-		{
-			axis: 'y',
-			enabled: isSmall && !disableSheet,
+		[isSmall, disableSheet, close],
+	);
+
+	const onTouchEnd = useCallback(
+		(event: TouchEvent) => {
+			if (gestureState.current.active && gestureRef.current) {
+				const { vy, dy } = gestureState.current;
+				sheetCloseGestureLogic(
+					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
+					dy,
+					true,
+					close,
+					gestureRef.current,
+				);
+			}
+			gestureState.current.active = false;
+			gestureState.current.filtered = false;
+			gestureState.current.timeStamp = event.timeStamp;
+			gestureState.current.vy = 0;
+			gestureState.current.dy = 0;
+			gestureState.current.sy = 0;
 		},
+		[close],
 	);
 
 	return (
@@ -223,7 +280,11 @@ export const Content = function Content({
 				<StyledContent
 					data-dialog-content
 					ref={finalRef}
-					{...bind(props)}
+					{...props}
+					onTouchStart={onTouchStart}
+					onTouchMove={onTouchMove}
+					onTouchEnd={onTouchEnd}
+					onTouchCancel={onTouchEnd}
 					className={clsx(
 						{
 							'layer-variants:md:max-w-800px': width === 'lg',
@@ -261,7 +322,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
 			const content = findParentDialogContent(innerRef.current);
 			if (!content) return;
-			sheetCloseGestureLogic(swipeY, dy, vy, last, close, content);
+			sheetCloseGestureLogic(swipeY, dy, last, close, content);
 		},
 		{
 			target: innerRef,
