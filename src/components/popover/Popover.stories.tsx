@@ -19,14 +19,13 @@ export const Default: Story = {
 	render(args) {
 		return (
 			<Popover {...args}>
-				<Popover.Trigger asChild>
-					<Button color="primary" size="small">
-						Open Popover
-					</Button>
+				<Popover.Trigger render={<Button color="primary" size="small" />}>
+					Open Popover
 				</Popover.Trigger>
 				<Popover.Content className="p-md">
 					<Popover.Arrow />
-					<p>This is a popover content.</p>
+					<Popover.Title>Hello</Popover.Title>
+					<Popover.Description>This is a popover content.</Popover.Description>
 				</Popover.Content>
 			</Popover>
 		);
