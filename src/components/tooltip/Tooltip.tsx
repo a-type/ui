@@ -1,9 +1,17 @@
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import {
+	TooltipPopupProps,
+	TooltipPositionerProps,
+	Tooltip as TooltipPrimitive,
+	TooltipTriggerProps,
+} from '@base-ui/react/tooltip';
 import classNames from 'clsx';
+import { ReactElement, ReactNode } from 'react';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
+import { ArrowSvg } from '../utility/ArrowSvg.js';
 
 export interface TooltipContentProps
-	extends TooltipPrimitive.TooltipContentProps {
+	extends TooltipPopupProps,
+		Omit<TooltipPositionerProps, 'className' | 'style' | 'render'> {
 	color?: 'contrast' | 'white' | 'neutral' | 'attention';
 }
 
@@ -11,32 +19,63 @@ function Content({
 	children,
 	className,
 	color = 'contrast',
+	render,
+	side,
+	sideOffset,
+	align,
+	alignOffset,
+	anchor,
+	disableAnchorTracking,
+	sticky,
+	arrowPadding,
+	collisionAvoidance,
+	collisionBoundary,
+	collisionPadding,
+	positionMethod,
 	...props
-}: TooltipPrimitive.TooltipContentProps) {
+}: TooltipContentProps) {
 	return (
 		<TooltipPrimitive.Portal>
 			<GroupScaleReset>
-				<TooltipPrimitive.Content
-					className={classNames(
-						'layer-components:(relative rounded-sm py-2 px-3 text-sm leading-tight shadow-sm select-none hidden z-tooltip)',
-						'[&[data-state=delayed-open]]:flex',
-						'[&[data-state=instant-open]]:flex',
-						'layer-components:transform-origin-[var(--radix-tooltip-content-transform-origin)]',
-						'layer-components:[&[data-state=delayed-open]]:animate-popover-in',
-						{
-							'layer-variants:(bg-black color-white)': color === 'contrast',
-							'layer-variants:(bg-white color-black)':
-								color === 'white' || color === 'neutral',
-							'layer-variants:(bg-attention-ink color-white)':
-								color === 'attention',
-						},
-						className,
-					)}
-					{...props}
+				<TooltipPrimitive.Positioner
+					side={side}
+					sideOffset={sideOffset}
+					align={align}
+					alignOffset={alignOffset}
+					anchor={anchor}
+					disableAnchorTracking={disableAnchorTracking}
+					sticky={sticky}
+					arrowPadding={arrowPadding}
+					collisionAvoidance={collisionAvoidance}
+					collisionBoundary={collisionBoundary}
+					collisionPadding={collisionPadding}
+					positionMethod={positionMethod}
 				>
-					{children}
-					<TooltipPrimitive.Arrow className="layer-components:arrow" />
-				</TooltipPrimitive.Content>
+					<TooltipPrimitive.Popup
+						render={render}
+						className={classNames(
+							'layer-components:(relative rounded-sm py-xs px-sm text-sm leading-tight shadow-sm select-none flex transition)',
+							'layer-components:data-[instant]:transition-none',
+							'layer-components:data-[starting-style]:(opacity-0 scale-95)',
+							'layer-components:data-[ending-style]:(opacity-0 scale-95)',
+							'layer-components:transform-origin-[var(--transform-origin)]',
+							{
+								'layer-variants:(bg-black color-white)': color === 'contrast',
+								'layer-variants:(bg-white color-black border border-gray)':
+									color === 'white' || color === 'neutral',
+								'layer-variants:(bg-attention-ink color-white)':
+									color === 'attention',
+							},
+							className,
+						)}
+						{...props}
+					>
+						{children}
+						<TooltipPrimitive.Arrow className="layer-components:arrow">
+							<ArrowSvg />
+						</TooltipPrimitive.Arrow>
+					</TooltipPrimitive.Popup>
+				</TooltipPrimitive.Positioner>
 			</GroupScaleReset>
 		</TooltipPrimitive.Portal>
 	);
@@ -45,8 +84,10 @@ function Content({
 export const TooltipProvider = TooltipPrimitive.Provider;
 
 export interface TooltipProps
-	extends Omit<TooltipPrimitive.TooltipTriggerProps, 'content'> {
-	content: React.ReactNode;
+	extends Omit<TooltipTriggerProps, 'content' | 'children'>,
+		Pick<TooltipContentProps, 'side' | 'sideOffset' | 'color'> {
+	content: ReactNode;
+	children: ReactElement;
 	open?: boolean;
 	disabled?: boolean;
 }
@@ -65,15 +106,13 @@ export const Tooltip = Object.assign(
 		...rest
 	}: TooltipProps & {
 		ref?: React.Ref<HTMLButtonElement>;
-	} & Pick<TooltipContentProps, 'color' | 'sideOffset' | 'side'>) {
+	}) {
 		return (
 			<TooltipPrimitive.Root open={open}>
 				{disabled ? (
 					children
 				) : (
-					<TooltipPrimitive.TooltipTrigger asChild ref={ref} {...rest}>
-						{children}
-					</TooltipPrimitive.TooltipTrigger>
+					<TooltipPrimitive.Trigger ref={ref} {...rest} render={children} />
 				)}
 				<Content
 					color={color}
@@ -87,7 +126,7 @@ export const Tooltip = Object.assign(
 		);
 	},
 	{
-		Trigger: TooltipPrimitive.TooltipTrigger,
+		Trigger: TooltipPrimitive.Trigger,
 		Content,
 	},
 );
