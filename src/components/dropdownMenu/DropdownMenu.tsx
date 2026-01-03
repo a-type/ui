@@ -36,6 +36,8 @@ const StyledContent = withClassName(
 	'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
 	'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
 
+	'layer-components:(max-h-[--available-height] max-w-[--available-width])',
+
 	'important:motion-reduce:animate-none',
 	'will-change-transform',
 );

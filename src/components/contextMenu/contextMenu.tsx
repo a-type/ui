@@ -28,6 +28,7 @@ export const ContextMenuContent = function Content({
 							'layer-components:data-[ending-style]:(opacity-0 scale-95)',
 							'layer-components:(overflow-y-auto overflow-unstable)',
 							'important:motion-reduce:animate-none',
+							'layer-components:(max-h-[--available-height] max-w-[--available-width])',
 							className,
 						)}
 						onClick={(ev) => {

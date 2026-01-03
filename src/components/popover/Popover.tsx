@@ -19,9 +19,7 @@ const StyledContent = withClassName(
 	'layer-components:data-[starting-style]:(opacity-0 scale-95 translate-y-4px)',
 	'layer-components:data-[ending-style]:(opacity-0 scale-95 translate-y-4px)',
 	'important:motion-reduce:transition-none',
-	'layer-components:(max-h-[var(--available-height,10000px)])',
-	'layer-components:[&[data-state=open]]:(opacity-100 flex flex-col)',
-	'layer-components:[&[data-state=closed]]:pointer-events-none',
+	'layer-components:(max-h-[--available-height] max-w-[--available-width])',
 );
 
 const StyledArrow = withClassName(
