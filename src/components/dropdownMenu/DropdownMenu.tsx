@@ -190,4 +190,5 @@ export const DropdownMenu = Object.assign(DropdownMenuRoot, {
 	Arrow: StyledArrow,
 	ItemRightSlot: DropdownMenuItemRightSlot,
 	TriggerIcon: DropdownMenuTriggerIcon,
+	createHandle: BaseMenu.createHandle,
 });

@@ -128,5 +128,6 @@ export const Tooltip = Object.assign(
 	{
 		Trigger: TooltipPrimitive.Trigger,
 		Content,
+		createHandle: TooltipPrimitive.createHandle,
 	},
 );

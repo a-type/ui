@@ -133,4 +133,5 @@ export const Popover = Object.assign(PopoverRoot, {
 	Anchor: PopoverAnchor,
 	Title: PopoverTitle,
 	Description: PopoverDescription,
+	createHandle: PopoverPrimitive.createHandle,
 });
