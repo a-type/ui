@@ -25,7 +25,7 @@ const StyledContent = withClassName(
 		);
 	},
 	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-black flex flex-col transition)',
-	'layer-components:transform-origin-[var(--radix-dropdown-menu-transform-origin)]',
+	'layer-components:transform-origin-[var(--transform-origin)]',
 
 	'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
 	'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',

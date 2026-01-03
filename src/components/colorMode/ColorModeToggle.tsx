@@ -1,10 +1,13 @@
-import { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group';
+import { ToggleGroupProps } from '@base-ui/react/toggle-group';
 import { setColorMode, useColorMode } from '../../colorMode.js';
 import { Icon } from '../icon/Icon.js';
 import { ToggleGroup } from '../toggleGroup/toggleGroup.js';
 
 export interface ColorModeToggleProps
-	extends Omit<ToggleGroupSingleProps, 'type'> {}
+	extends Omit<ToggleGroupProps, 'type' | 'onValueChange' | 'value'> {
+	value?: 'light' | 'dark' | 'system';
+	onValueChange?: (value: 'light' | 'dark' | 'system', event: any) => void;
+}
 
 export function ColorModeToggle({
 	value: userValue,
@@ -14,19 +17,17 @@ export function ColorModeToggle({
 }: ColorModeToggleProps) {
 	const colorMode = useColorMode();
 	const value = userValue ?? colorMode;
-	const onValueChange = (value: string) => {
-		if (userOnValueChange) {
-			userOnValueChange(value);
-		} else {
-			setColorMode(value as 'light' | 'dark' | 'system');
-		}
-	};
 
 	return (
 		<ToggleGroup
-			value={value}
-			onValueChange={onValueChange}
-			type="single"
+			value={[value]}
+			onValueChange={([value], ev) => {
+				if (userOnValueChange) {
+					userOnValueChange(value, ev);
+				} else {
+					setColorMode(value as 'light' | 'dark' | 'system');
+				}
+			}}
 			className={className}
 			{...rest}
 		>

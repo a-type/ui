@@ -1,7 +1,7 @@
-import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
 import { useIsKeyboardOpen } from '../../hooks.js';
+import { SlotDiv } from './SlotDiv.js';
 
 export interface HideWhileKeyboardOpenProps
 	extends HTMLAttributes<HTMLDivElement> {
@@ -18,10 +18,8 @@ export const HideWhileKeyboardOpen = function HideWhileKeyboardOpen({
 }) {
 	const isKeyboardOpen = useIsKeyboardOpen();
 
-	const Comp = asChild ? Slot : 'div';
-
 	return (
-		<Comp
+		<SlotDiv
 			ref={ref}
 			className={clsx(isKeyboardOpen && 'layer-responsive:hidden', className)}
 			{...rest}

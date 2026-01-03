@@ -1,6 +1,5 @@
 import { Button } from '@base-ui/react/button';
 import { UseRenderComponentProps } from '@base-ui/react/use-render';
-import { Slot } from '@radix-ui/react-slot';
 import classNames, { clsx } from 'clsx';
 import { ReactElement, ReactNode, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
@@ -59,8 +58,6 @@ export const NavBarItemText = withClassName(
 );
 
 interface NavBarItemIconProps {
-	/** @deprecated use render */
-	asChild?: boolean;
 	name?: IconProps['name'];
 	className?: string;
 	children?: ReactNode;
@@ -69,14 +66,12 @@ interface NavBarItemIconProps {
 export const NavBarItemIcon = function NavBarItemIcon({
 	ref,
 	children,
-	asChild,
 	className,
 	name = 'placeholder',
 	...rest
 }: NavBarItemIconProps) {
-	const Comp = asChild ? Slot : Icon;
 	return (
-		<Comp
+		<Icon
 			name={name}
 			className={clsx(
 				'layer-components:(relative z-1 flex color-inherit)',
@@ -87,7 +82,7 @@ export const NavBarItemIcon = function NavBarItemIcon({
 			ref={ref}
 		>
 			{children}
-		</Comp>
+		</Icon>
 	);
 };
 

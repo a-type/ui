@@ -22,6 +22,7 @@ import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js'
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
 import { getButtonClassName } from './classes.js';
 
 export type ButtonProps = BaseButtonProps & {
@@ -172,7 +173,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName('div', 'icon flex-shrink-0 flex');
+export const ButtonIcon = withClassName(SlotDiv, 'icon flex-shrink-0 flex');
 ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {

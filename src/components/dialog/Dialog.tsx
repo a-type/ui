@@ -444,7 +444,7 @@ export const DialogClose = function DialogClose({
 	);
 };
 
-export type { DialogProps } from '@radix-ui/react-dialog';
+export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
 export const DialogActions = withClassName(
 	'div',

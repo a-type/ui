@@ -1,5 +1,8 @@
-import { Dialog, DialogPopupProps } from '@base-ui/react/dialog';
-import { DialogCloseProps } from '@radix-ui/react-dialog';
+import {
+	Dialog,
+	DialogCloseProps,
+	DialogPopupProps,
+} from '@base-ui/react/dialog';
 import { ReactElement, ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Button } from '../button/Button.js';

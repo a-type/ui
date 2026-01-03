@@ -23,7 +23,7 @@ export const ContextMenuContent = function Content({
 					<BaseContextMenu.Popup
 						className={classNames(
 							'layer-components:(min-w-120px bg-white rounded-md overflow-hidden border-gray-dark border shadow-md z-menu)',
-							'layer-components:transform-origin-[var(--radix-context-menu-transform-origin)]',
+							'layer-components:transform-origin-[var(--transform-origin)]',
 							'layer-components:data-[starting-style]:(opacity-0 scale-95)',
 							'layer-components:data-[ending-style]:(opacity-0 scale-95)',
 							'layer-components:(overflow-y-auto overflow-unstable)',

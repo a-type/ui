@@ -1,5 +1,4 @@
 import { Input as BaseUIInput } from '@base-ui/react/input';
-import { Slot } from '@radix-ui/react-slot';
 import classNames from 'clsx';
 import {
 	ChangeEvent,
@@ -20,7 +19,6 @@ export const inputClassName = classNames(
 
 export interface InputProps extends ComponentPropsWithRef<'input'> {
 	autoSelect?: boolean;
-	asChild?: boolean;
 	/** Shuffle between random placeholders */
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
@@ -34,7 +32,6 @@ export const Input = function Input({
 	onFocus,
 	onChange,
 	onValueChange,
-	asChild,
 	placeholders,
 	placeholder,
 	placeholdersIntervalMs = 5000,
@@ -64,10 +61,8 @@ export const Input = function Input({
 		placeholdersIntervalMs,
 	);
 
-	const Component = asChild ? Slot : BaseUIInput;
-
 	return (
-		<Component
+		<BaseUIInput
 			onFocus={handleFocus}
 			onChange={handleChange}
 			className={classNames(inputClassName, className)}

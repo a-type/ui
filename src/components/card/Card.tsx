@@ -1,4 +1,4 @@
-import { Slot } from '@radix-ui/react-slot';
+import { useRender, UseRenderRenderProp } from '@base-ui/react/use-render';
 import classNames from 'clsx';
 import {
 	CSSProperties,
@@ -23,16 +23,23 @@ export const CardRoot = withClassName(
 );
 
 export function CardMain({
-	asChild,
 	className,
 	compact,
 	nonInteractive,
 	ref,
 	style,
 	children,
+	visuallyDisabled,
+	visuallyFocused,
+	render,
 	...rest
 }: {
-	asChild?: boolean;
+	render?: UseRenderRenderProp<{
+		visuallyFocused?: boolean;
+		visuallyDisabled?: boolean;
+		interactive?: boolean;
+		compact?: boolean;
+	}>;
 	className?: string;
 	onClick?: (ev: MouseEvent) => void;
 	children?: ReactNode;
@@ -44,42 +51,46 @@ export function CardMain({
 	style?: CSSProperties;
 	ref?: Ref<any>;
 }) {
-	const isInteractive = !nonInteractive && (!!asChild || !!rest.onClick);
-	const Comp = asChild ? Slot : isInteractive ? 'button' : 'div';
+	const isInteractive = !nonInteractive && (!!render || !!rest.onClick);
 
 	const scaleStyles = useGroupScaleStyles(style);
 
-	return (
-		<GroupScaleLayer>
-			<Comp
-				ref={ref}
-				className={classNames(
-					'layer-components:(flex flex-col items-start gap-1 transition pb-xs flex-1 min-h-40px bg-transparent)',
-					'layer-components:(border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-md)',
-					!!compact && 'layer-variants:(pb-0)',
-					isInteractive &&
-						classNames(
-							'layer-components:cursor-pointer',
-							'layer-components:hover:(bg-black/10 color-black)',
-							'layer-components:focus:outline-none',
-							'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-accent)',
-							'layer-components:[&[data-visually-focused=true]]:(bg-black/10 ring-inset ring-4 ring-accent)',
-							'layer-components:disabled:(cursor-default)',
-							'layer-components:[&[data-visually-disabled=true]]:(cursor-default)',
-						),
-					className,
-				)}
-				data-compact={compact}
-				data-visually-focused={rest.visuallyFocused}
-				data-visually-disabled={rest.visuallyDisabled}
-				data-interactive={isInteractive}
-				style={scaleStyles}
-				{...rest}
-			>
-				{children}
-			</Comp>
-		</GroupScaleLayer>
-	);
+	const rootProps = {
+		...rest,
+		className: classNames(
+			'layer-components:(flex flex-col items-start gap-1 transition pb-xs flex-1 min-h-40px bg-transparent)',
+			'layer-components:(border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-md)',
+			!!compact && 'layer-variants:(pb-0)',
+			isInteractive &&
+				classNames(
+					'layer-components:cursor-pointer',
+					'layer-components:hover:(bg-black/10 color-black)',
+					'layer-components:focus:outline-none',
+					'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-accent)',
+					'layer-components:data-[visually-focused]:(bg-black/10 ring-inset ring-4 ring-accent)',
+					'layer-components:disabled:(cursor-default)',
+					'layer-components:data-[visually-disabled]:(cursor-default)',
+				),
+			className,
+		),
+		style: scaleStyles,
+		children,
+	};
+
+	const root = useRender({
+		defaultTagName: isInteractive ? 'button' : 'div',
+		props: rootProps,
+		ref,
+		render,
+		state: {
+			interactive: !!isInteractive,
+			compact: !!compact,
+			visuallyFocused: !!visuallyFocused,
+			visuallyDisabled: !!visuallyDisabled,
+		},
+	});
+
+	return <GroupScaleLayer>{root}</GroupScaleLayer>;
 }
 
 export const CardTitle = withClassName(
@@ -87,21 +98,27 @@ export const CardTitle = withClassName(
 	'layer-components:(flex flex-col gap-1 my-xs mx-xs py-xs px-sm w-auto max-h-80px max-w-full relative z-1)',
 	'layer-components:(bg-white rounded-md border border-solid border-gray-dark transition-colors)',
 	'layer-components:(text-md overflow-hidden text-ellipsis text-inherit font-semibold)',
-	'layer-components:[[data-compact=true]_&]:(text-sm)',
+	'layer-components:[[data-compact]_&]:(text-sm)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
 	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-white/80 color-black rounded-sm mx-2 my-0.5 border border-solid border-gray-dark/50 text-xs relative z-1)',
-	'layer-variants:[[data-compact=true]_&]:(py-0 px-sm my-0 text-xs)',
-	'layer-variants:[&[data-unstyled=true]]:(p-0 [background:unset] border-none)',
+	'layer-variants:[[data-compact]_&]:(py-0 px-sm my-0 text-xs)',
+	'layer-variants:[&[data-unstyled]]:(p-0 [background:unset] border-none)',
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
 	ref?: Ref<HTMLDivElement>;
 }
 export function CardContent({ unstyled, ref, ...rest }: CardContentProps) {
-	return <CardContentRoot ref={ref} data-unstyled={unstyled} {...rest} />;
+	return (
+		<CardContentRoot
+			ref={ref}
+			data-unstyled={unstyled || undefined}
+			{...rest}
+		/>
+	);
 }
 
 export const CardImage = withClassName(

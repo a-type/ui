@@ -33,31 +33,35 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	--arrow-size: 1rem;
 }
 
-html, body {
-	margin: 0;
-	padding: 0;
-	font-family: var(--font-default);
-	font-size: 16px;
-	min-height: 100%;
-	--webkit-font-smoothing: antialiased;
-}
+@layer preflightBase {
+	html, body {
+		margin: 0;
+		padding: 0;
+		font-family: var(--font-default);
+		font-size: 16px;
+		min-height: 100%;
+		--webkit-font-smoothing: antialiased;
+	}
 
-body {
-	overflow: overlay;
-}
+	body {
+		overflow: overlay;
+	}
 
-#main {
-	isolation: isolate;
-}
+	#main {
+		isolation: isolate;
+	}
 
-a {
-	color: inherit;
-	text-decoration: none;
-}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 
-* {
-	box-sizing: border-box;
-	-webkit-tap-highlight-color: transparent;
+	* {
+		box-sizing: border-box;
+		-webkit-tap-highlight-color: transparent;
+		border-style: solid;
+		border-width: 0;
+	}
 }
 
 @property --v-shadow-y-mult {

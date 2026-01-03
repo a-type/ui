@@ -10,12 +10,6 @@ export const animation: Theme['animation'] = {
 	keyframes: {
 		'progress-bar': `{0% { width: 0% } 100% { width: 100% }}`,
 		'pop-up': `{from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); }}`,
-		// TODO: move this out to app
-		'item-disappear': `{
-					0% {opacity:1;transform:translateY(0);height:var(--height);}
-					25% {opacity:1;transform:translateY(0);height:var(--height);}
-					100% {opacity:0;transform:translateY(30px);height:0;margin-top:0;}
-				}`,
 		'expand-scale-x': `{
 					from { transform: scaleX(0) }
 					to { transform: scaleX(1) }
@@ -34,40 +28,10 @@ export const animation: Theme['animation'] = {
 						opacity: 0;
 					}
 				}`,
-		'scan-line': `{
-					0% { top: 0% }
-					30% { top: 100% }
-					70% { top: 100% }
-					100% { top: 0% }
-				}`,
 		'pop-in-from-half': `{
 					0% { opacity: 0; transform: scale(0.5) }
 					100% { opacity: 1; transform: scale(1) }
 				}`,
-		'radix-collapsible-open-vertical': `{
-            from { height: 0 }
-            to { height: var(--radix-collapsible-content-height) }
-          }`,
-		'radix-collapsible-close-vertical': `{
-            from { height: var(--radix-collapsible-content-height) }
-            to { height: 0 }
-          }`,
-		'radix-collapsible-open-horizontal': `{
-            from { width: 0 }
-            to { width: var(--radix-collapsible-content-width) }
-          }`,
-		'radix-collapsible-close-horizontal': `{
-            from { width: var(--radix-collapsible-content-width) }
-            to { width: 0 }
-          }`,
-		'radix-collapsible-open-both': `{
-						from { width: 0; height: 0 }
-						to { width: var(--radix-collapsible-content-width); height: var(--radix-collapsible-content-height) }
-					}`,
-		'radix-collapsible-close-both': `{
-						from { width: var(--radix-collapsible-content-width); height: var(--radix-collapsible-content-height) }
-						to { width: 0; height: 0 }
-					}`,
 		'peek-close': `{
 						from { height: calc(var(--collapsible-height) + 80px); max-height: none; }
 						to { height: min(var(--peek-height, 120px), var(--collapsible-height)); max-height: var(--peek-height, 120px); }
@@ -125,22 +89,6 @@ export const animation: Theme['animation'] = {
 						0% { opacity: 1; transform: translate3d(0, 0, 0); }
 						100% { opacity: 0; transform: translate3d(100px, 0, 0); }
 					}`,
-		'popover-in': `{
-						0% { opacity: 0; transform: scale(0.95); }
-						100% { opacity: 1; transform: scale(1); }
-					}`,
-		'popover-out': `{
-						0% { opacity: 1; transform: scale(1); }
-						100% { opacity: 0; transform: scale(0.95); }
-					}`,
-		'dialog-in': `{
-						0% { opacity: 0; transform: translateY(20px) translate(-50%, -50%); }
-						100% { opacity: 1; transform: translateY(0) translate(-50%, -50%); }
-					}`,
-		'dialog-out': `{
-						0% { opacity: 1; transform: translateY(0) translate(-50%, -50%); }
-						100% { opacity: 0; transform: translateY(20px) translate(-50%, -50%); }
-					}`,
 		'checkbox-fade': `{
 						from { background-color: var(--v-bg-altered,var(--v-bg)); opacity: 1; }
 						to { background-color: transparent; opacity: 0.9; border-color: transparent; box-shadow: none; }
@@ -165,16 +113,7 @@ export const animation: Theme['animation'] = {
 		'fade-in-right-big': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'fade-in': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'fade-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'scan-line': 'linear',
-		'radix-collapsible-open-vertical': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'radix-collapsible-close-vertical': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'radix-collapsible-open-horizontal': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'radix-collapsible-close-horizontal': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'radix-collapsible-open-both': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'radix-collapsible-close-both': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'item-disappear': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'dialog-in': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'dialog-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'checkbox-fade': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 	},
 	durations: {
@@ -193,18 +132,7 @@ export const animation: Theme['animation'] = {
 		'fade-in-right-big': '300ms',
 		'fade-in': '200ms',
 		'fade-out': '200ms',
-		'scan-line': '1.5s',
-		'radix-collapsible-open-vertical': '200ms',
-		'radix-collapsible-close-vertical': '200ms',
-		'radix-collapsible-open-horizontal': '200ms',
-		'radix-collapsible-close-horizontal': '200ms',
-		'radix-collapsible-open-both': '200ms',
-		'radix-collapsible-close-both': '200ms',
 		'item-disappear': '300ms',
-		'popover-in': '100ms',
-		'popover-out': '100ms',
-		'dialog-in': '200ms',
-		'dialog-out': '200ms',
 		'checkbox-fade': '5000ms',
 		'pop-up': '200ms',
 	},
