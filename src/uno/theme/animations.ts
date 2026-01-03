@@ -113,7 +113,6 @@ export const animation: Theme['animation'] = {
 		'fade-in-right-big': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'fade-in': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'fade-out': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-		'item-disappear': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 		'checkbox-fade': 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
 	},
 	durations: {
@@ -132,7 +131,6 @@ export const animation: Theme['animation'] = {
 		'fade-in-right-big': '300ms',
 		'fade-in': '200ms',
 		'fade-out': '200ms',
-		'item-disappear': '300ms',
 		'checkbox-fade': '5000ms',
 		'pop-up': '200ms',
 	},

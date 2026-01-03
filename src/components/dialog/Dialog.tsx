@@ -77,7 +77,6 @@ function sheetCloseGestureLogic(
 	const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
 	content.style.setProperty('--gesture-y', `${gestureY}px`);
 	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
-	// content.style.setProperty('touch-action', last ? 'auto' : 'none');
 }
 
 // filter out gestures that are within scrollable descendants
@@ -227,7 +226,6 @@ export const Content = function Content({
 				)
 			) {
 				gestureState.current.filtered = true;
-				console.log('filtered touchmove');
 				return;
 			}
 			if (!gestureState.current.active) {
@@ -236,7 +234,6 @@ export const Content = function Content({
 			}
 
 			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
-				console.log('touchmove dy, vy', dy, vy);
 				sheetCloseGestureLogic(
 					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
 					dy,
