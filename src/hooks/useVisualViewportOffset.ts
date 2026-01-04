@@ -132,24 +132,47 @@ function useReactToViewportChanges(
 		const update = () => {
 			stableCb(viewport);
 		};
-		let prevTimeout: number | undefined;
-		const debouncedUpdate = () => {
-			if (prevTimeout) {
-				clearTimeout(prevTimeout);
+
+		const WAIT = 50;
+		let timeoutId: number | undefined;
+		let lastInvoke = 0;
+
+		// call immediately once
+		update();
+		lastInvoke = Date.now();
+
+		const throttledUpdate = () => {
+			const now = Date.now();
+			const remaining = WAIT - (now - lastInvoke);
+
+			if (remaining <= 0) {
+				if (timeoutId) {
+					clearTimeout(timeoutId);
+					timeoutId = undefined;
+				}
+				lastInvoke = now;
+				update();
+			} else if (!timeoutId) {
+				timeoutId = window.setTimeout(() => {
+					timeoutId = undefined;
+					lastInvoke = Date.now();
+					update();
+				}, remaining);
 			}
-			prevTimeout = window.setTimeout(update, 50);
 		};
 
-		update();
-
-		window.addEventListener('scroll', debouncedUpdate, { passive: true });
+		window.addEventListener('scroll', throttledUpdate, { passive: true });
 		viewport.addEventListener('resize', update);
-		viewport.addEventListener('scroll', debouncedUpdate, { passive: true });
+		viewport.addEventListener('scroll', throttledUpdate, { passive: true });
 
 		return () => {
-			window.removeEventListener('scroll', debouncedUpdate);
+			if (timeoutId) {
+				clearTimeout(timeoutId);
+				timeoutId = undefined;
+			}
+			window.removeEventListener('scroll', throttledUpdate);
 			viewport.removeEventListener('resize', update);
-			viewport.removeEventListener('scroll', debouncedUpdate);
+			viewport.removeEventListener('scroll', throttledUpdate);
 		};
 	}, [stableCb, disable]);
 }

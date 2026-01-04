@@ -57,7 +57,8 @@ const sheetClassNames = clsx(
 	'data-[ending-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
 );
 const sheetClassNameWithOverlayKeyboard = clsx(
-	'layer-variants:lt-sm:(bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))])',
+	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',
+	'layer-variants:lt-sm:max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))]',
 );
 const sheetClassNameWithDisplaceKeyboard = clsx(
 	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',

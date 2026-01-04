@@ -21,8 +21,8 @@ export const ScrollAreaViewport = withClassName(
 export const ScrollAreaVerticalFades = withClassName(
 	'div',
 	'layer-components:(pointer-events-none absolute inset-0 [--scroll-area-overflow-y-start:inherit] [--scroll-area-overflow-y-end:inherit])',
-	'layer-components:before:(content-empty [--scroll-area-overflow-y-start:inherit] top-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-start,,40px))] bg-gradient-to-b bg-gradient-from-bg bg-gradient-to-transparent)',
-	'layer-components:after:(content-empty [--scroll-area-overflow-y-end:inherit] bottom-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-end,,40px))] bg-gradient-to-t bg-gradient-from-bg bg-gradient-to-transparent)',
+	'layer-components:before:(content-empty [--scroll-area-overflow-y-start:inherit] top-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-start,,40px))] bg-gradient-to-b bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
+	'layer-components:after:(content-empty [--scroll-area-overflow-y-end:inherit] bottom-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-end,,40px))] bg-gradient-to-t bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
 );
 
 export const ScrollAreaHorizontalFades = withClassName(
@@ -78,11 +78,16 @@ export const ScrollAreaCorner = withClassName(
 	'layer-components:(bg-transparent)',
 );
 
-const ScrollAreaDefault = (props: ScrollAreaRootProps) => (
+const ScrollAreaDefault = ({
+	disableFades,
+	...props
+}: ScrollAreaRootProps & {
+	disableFades?: boolean;
+}) => (
 	<ScrollAreaRoot {...props}>
 		<ScrollAreaViewport>
 			{props.children}
-			<ScrollAreaViewportFades />
+			{!disableFades && <ScrollAreaViewportFades />}
 		</ScrollAreaViewport>
 		<ScrollAreaScrollbar />
 		<ScrollAreaScrollbar orientation="horizontal" />
