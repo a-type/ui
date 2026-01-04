@@ -3,12 +3,7 @@ import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../button/index.js';
 import { CollapsibleSimple } from '../collapsible/Collapsible.js';
 import { Icon } from '../icon/index.js';
-import {
-	ScrollAreaProps,
-	ScrollAreaRoot,
-	ScrollAreaScrollbar,
-	ScrollAreaViewport,
-} from '../scrollArea/ScrollArea.js';
+import { ScrollArea } from '../scrollArea/ScrollArea.js';
 
 export interface HorizontalListProps {
 	open?: boolean;
@@ -16,7 +11,6 @@ export interface HorizontalListProps {
 	children: ReactNode;
 	className?: string;
 	contentClassName?: string;
-	background?: ScrollAreaProps['background'];
 	onCanOpenChange?: (canOpen: boolean) => void;
 	openDirection?: 'up' | 'down';
 	disableInternalOpenToggle?: boolean;
@@ -28,7 +22,6 @@ export function HorizontalList({
 	children,
 	className,
 	contentClassName,
-	background,
 	onCanOpenChange,
 	openDirection = 'down',
 	disableInternalOpenToggle,
@@ -144,18 +137,17 @@ export function HorizontalList({
 	const chevronFlip = openDirection === 'down' ? open : !open;
 
 	return (
-		<ScrollAreaRoot
+		<ScrollArea.Root
 			className={clsx(
 				'flex flex-col',
 				'layer-components:max-h-300px',
 				className,
 			)}
-			background={background}
 			data-state={open ? 'open' : 'closed'}
 			{...rest}
 		>
-			<ScrollAreaViewport ref={containerRef}>
-				<div
+			<ScrollArea.Viewport ref={containerRef}>
+				<ScrollArea.Content
 					className={clsx(
 						'layer-components:(px-3 pt-3 pb-4 gap-2)',
 						'flex flex-row items-center gap-2 flex-shrink-0 w-max-content w-auto)',
@@ -186,10 +178,10 @@ export function HorizontalList({
 						</Button>
 					</CollapsibleSimple>
 					{children}
-				</div>
-			</ScrollAreaViewport>
-			<ScrollAreaScrollbar />
-			<ScrollAreaScrollbar orientation="horizontal" />
-		</ScrollAreaRoot>
+				</ScrollArea.Content>
+			</ScrollArea.Viewport>
+			<ScrollArea.Scrollbar />
+			<ScrollArea.Scrollbar orientation="horizontal" />
+		</ScrollArea.Root>
 	);
 }

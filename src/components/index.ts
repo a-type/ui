@@ -40,6 +40,7 @@ export * from './provider/Provider.js';
 export * from './pwaInstall/index.js';
 export * from './relativeTime/index.js';
 export * from './richEditor/index.js';
+export * from './scrollArea/ScrollArea.js';
 export * from './select/index.js';
 export * from './skeletons/skeletons.js';
 export * from './slider/index.js';

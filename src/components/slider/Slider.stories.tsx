@@ -42,7 +42,7 @@ export const CustomStyles: Story = {
 					if (Array.isArray(v)) {
 						setValue(v[0]);
 					} else {
-						setValue(v);
+						setValue(v as number);
 					}
 				}}
 				color={value < 0 ? 'attention' : value > 0 ? 'success' : 'primary'}

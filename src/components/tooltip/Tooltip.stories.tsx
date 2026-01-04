@@ -3,7 +3,7 @@ import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Tooltip } from './Tooltip.js';
 
-const meta = {
+const meta: Meta = {
 	title: 'Components/Tooltip',
 	component: Tooltip,
 	argTypes: {
@@ -19,7 +19,7 @@ const meta = {
 		content: 'hello world',
 		color: 'contrast',
 	},
-} satisfies Meta<typeof Tooltip>;
+};
 
 export default meta;
 

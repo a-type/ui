@@ -179,9 +179,10 @@ export const MultiNested: Story = {
 					<DummyContent />
 					<Select value="">
 						<Select.Trigger>
-							<Select.Value placeholder="Select an option" />
+							<Select.Value />
 						</Select.Trigger>
 						<Select.Content>
+							<Select.Item value={null}>Select an option</Select.Item>
 							<Select.Item value="option1">Option 1</Select.Item>
 							<Select.Item value="option2">Option 2</Select.Item>
 							<Select.Item value="option3">Option 3</Select.Item>

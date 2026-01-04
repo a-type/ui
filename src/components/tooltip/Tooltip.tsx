@@ -9,6 +9,8 @@ import { ReactElement, ReactNode } from 'react';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 
+export type * from '@base-ui/react/tooltip';
+
 export interface TooltipContentProps
 	extends TooltipPopupProps,
 		Omit<TooltipPositionerProps, 'className' | 'style' | 'render'> {
