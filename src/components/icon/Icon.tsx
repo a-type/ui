@@ -4,7 +4,11 @@ import { Spinner } from '../spinner/Spinner.js';
 import { IconName } from './generated/iconNames.js';
 import { useIconLoading } from './IconLoadingContext.js';
 
-export interface IconProps extends UseRenderComponentProps<'svg'> {
+export interface IconProps
+	extends UseRenderComponentProps<
+		'svg',
+		{ size: number; name: IconName; loading: boolean }
+	> {
 	name: IconName;
 	size?: number;
 	loading?: boolean;
@@ -16,6 +20,7 @@ export const Icon = function Icon({
 	size = 15,
 	className,
 	loading: loadingProp,
+	render,
 	...rest
 }: IconProps & {
 	ref?: React.Ref<SVGSVGElement>;
@@ -42,6 +47,7 @@ export const Icon = function Icon({
 			name,
 			loading,
 		},
+		render,
 	});
 
 	if (loading) {

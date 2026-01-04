@@ -38,6 +38,32 @@ export const Default: Story = {
 	},
 };
 
+export const LongListWithItemLabels: Story = {
+	render({ defaultValue, value, ...args }) {
+		return (
+			<Box full layout="center center" className="min-h-200px">
+				<Select
+					{...args}
+					defaultValue={0}
+					itemToStringLabel={(i: number) => `Item number ${i + 1}`}
+				>
+					<SelectTrigger />
+					<SelectContent>
+						{new Array(50).fill(null).map((_, i) => {
+							const item = `Item number ${i + 1}`;
+							return (
+								<SelectItem key={item} value={i}>
+									{item}
+								</SelectItem>
+							);
+						})}
+					</SelectContent>
+				</Select>
+			</Box>
+		);
+	},
+};
+
 export const CompareSelectAndButton: Story = {
 	render(args) {
 		return (

@@ -123,6 +123,13 @@ export const SelectArrow = ({ className, ...props }: SelectArrowProps) => (
 	</BaseSelect.Arrow>
 );
 
+const scrollArrowClass = clsx(
+	'layer-components:(w-full bg-white z-1 text-center cursor-default select-none rounded-sm h-1rem text-xs flex items-center justify-center)',
+	'layer-components:before:(content-empty absolute w-full h-full left-0)',
+	'layer-components:data-[direction=up]:data-[side=none]:before:(-top-full)',
+	'layer-components:data-[direction=down]:(bottom-0 data-[side=none]:before:(-bottom-full))',
+);
+
 const contentStyle = {
 	zIndex: 1001,
 	'--local-corner-scale': '1',
@@ -168,11 +175,9 @@ export const SelectContent = ({
 					positionMethod={positionMethod}
 					className={classNames(
 						'layer-components:(z-1 outline-none select-none)',
+						'layer-components:(transform-origin-[--transform-origin])',
 					)}
 				>
-					<BaseSelect.ScrollUpArrow className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
-						<Icon name="chevron" className="rotate-180" />
-					</BaseSelect.ScrollUpArrow>
 					<SelectArrow
 						className={clsx(
 							'layer-components:(border-black transition transform)',
@@ -201,11 +206,14 @@ export const SelectContent = ({
 						{...props}
 						ref={forwardedRef}
 					>
+						<BaseSelect.ScrollUpArrow className={scrollArrowClass}>
+							<Icon name="chevron" className="rotate-180" />
+						</BaseSelect.ScrollUpArrow>
 						<BaseSelect.List style={viewportStyle}>{children}</BaseSelect.List>
+						<BaseSelect.ScrollDownArrow className={scrollArrowClass}>
+							<Icon name="chevron" />
+						</BaseSelect.ScrollDownArrow>
 					</BaseSelect.Popup>
-					<BaseSelect.ScrollDownArrow className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
-						<Icon name="chevron" />
-					</BaseSelect.ScrollDownArrow>
 				</BaseSelect.Positioner>
 			</GroupScaleReset>
 		</BaseSelect.Portal>

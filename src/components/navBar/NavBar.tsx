@@ -61,7 +61,6 @@ interface NavBarItemIconProps extends Omit<IconProps, 'name'> {
 }
 export const NavBarItemIcon = function NavBarItemIcon({
 	ref,
-	children,
 	className,
 	name = 'placeholder',
 	...rest
@@ -76,9 +75,7 @@ export const NavBarItemIcon = function NavBarItemIcon({
 			)}
 			{...rest}
 			ref={ref}
-		>
-			{children}
-		</Icon>
+		/>
 	);
 };
 

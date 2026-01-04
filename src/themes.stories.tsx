@@ -310,7 +310,7 @@ function DemoUI({ className }: { className?: string }) {
 					</NavBarItem>
 					<NavBarItem active>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon render={<Icon name="book" />} />
+							<NavBarItemIcon name="book" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />

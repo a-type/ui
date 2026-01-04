@@ -4,7 +4,6 @@ import { ScrollArea } from './ScrollArea.js';
 
 const meta = {
 	title: 'Components/ScrollArea',
-	component: ScrollArea,
 	argTypes: {
 		direction: {
 			control: { type: 'select' },

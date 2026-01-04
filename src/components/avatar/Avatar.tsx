@@ -13,6 +13,7 @@ export interface AvatarProps extends BaseAvatarProps {
 	imageSrc?: string | null;
 	name?: string;
 	crossOrigin?: HTMLProps<HTMLImageElement>['crossOrigin'];
+	size?: string | number;
 }
 
 export function Avatar({
@@ -21,6 +22,8 @@ export function Avatar({
 	imageSrc,
 	name,
 	crossOrigin,
+	style,
+	size,
 	...rest
 }: AvatarProps) {
 	const empty = !name && !imageSrc;
@@ -34,6 +37,7 @@ export function Avatar({
 				empty && 'layer-components:(border-dashed bg-gray-light)',
 				className,
 			)}
+			style={size ? { width: size, height: size, ...style } : style}
 			{...rest}
 		>
 			{imageSrc && (
@@ -45,7 +49,12 @@ export function Avatar({
 					crossOrigin={crossOrigin}
 				/>
 			)}
-			<BaseAvatar.Fallback>{name?.charAt(0) || '?'}</BaseAvatar.Fallback>
+			<BaseAvatar.Fallback
+				className="text-size-[calc(0.5px*var(--avatar-size,24px))]"
+				style={{ '--avatar-size': size } as any}
+			>
+				{name?.charAt(0) || '?'}
+			</BaseAvatar.Fallback>
 			{empty && <Icon name="profile" />}
 		</BaseAvatar.Root>
 	);

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
+import { Avatar } from '../avatar/Avatar.js';
 import { Button } from '../button/index.js';
 import { Card } from '../card/Card.js';
 import { Input } from '../input/index.js';
@@ -70,7 +71,11 @@ export const Default: Story = {
 						</NavBarItem>
 						<NavBarItem color="gray" active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon name="book" />
+								<NavBarItemIcon
+									render={(_, { size }) => (
+										<Avatar name="Grant Forrest" size={size} />
+									)}
+								/>
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Neutral</NavBarItemText>
 							<NavBarItemPip />
@@ -188,7 +193,7 @@ export const WithVirtualKeyboard: Story = {
 						</NavBarItem>
 						<NavBarItem active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon name="book" />
+								<NavBarItemIcon render={<Avatar name="Grant Forrest" />} />
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
