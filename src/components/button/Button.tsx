@@ -1,8 +1,10 @@
-import { Slot } from '@radix-ui/react-slot';
+import {
+	Button as BaseButton,
+	ButtonProps as BaseButtonProps,
+} from '@base-ui/react/button';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-	ButtonHTMLAttributes,
 	Children,
 	Fragment,
 	memo,
@@ -20,9 +22,10 @@ import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js'
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
 import { getButtonClassName } from './classes.js';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export type ButtonProps = BaseButtonProps & {
 	color?: PaletteName;
 	emphasis?:
 		| 'primary'
@@ -37,12 +40,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
-	asChild?: boolean;
 	visuallyFocused?: boolean;
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
-}
+};
 
 export function ButtonRoot({
 	className,
@@ -57,16 +59,14 @@ export function ButtonRoot({
 	loading,
 	children,
 	disabled,
-	asChild,
 	disableIconMode,
 	disableDropdownTriggerIcon,
 	ref,
 	...props
 }: ButtonProps) {
-	const Comp = asChild ? Slot : 'button';
-
 	const isFormSubmitting = false;
-	const isSubmitLoading = props.type === 'submit' && isFormSubmitting;
+	const isSubmitLoading =
+		'type' in props && props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
 	const childArray = childArrayWithoutFragments(children);
@@ -117,15 +117,9 @@ export function ButtonRoot({
 		buttonProps['aria-pressed'] = !!toggled;
 	}
 
-	// for asChild, no need to do the rest of this stuff.
-	if (asChild) {
-		// avoid rendering loading spinner with asChild
-		return <Comp {...buttonProps}>{children}</Comp>;
-	}
-
 	return (
 		<IconLoadingProvider value={isLoading}>
-			<Comp {...buttonProps}>
+			<BaseButton {...buttonProps}>
 				<AnimatePresence>
 					{isLoading && (
 						<motion.div
@@ -151,12 +145,10 @@ export function ButtonRoot({
 				{children}
 				{isDropdownTrigger && (
 					<IconLoadingProvider value={false}>
-						<DropdownMenuTriggerIcon asChild>
-							<Icon name="chevron" />
-						</DropdownMenuTriggerIcon>
+						<DropdownMenuTriggerIcon render={<Icon name="chevron" />} />
 					</IconLoadingProvider>
 				)}
-			</Comp>
+			</BaseButton>
 		</IconLoadingProvider>
 	);
 }
@@ -181,7 +173,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName('div', 'icon flex-shrink-0 flex');
+export const ButtonIcon = withClassName(SlotDiv, 'icon flex-shrink-0 flex');
 ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {

@@ -5,15 +5,14 @@ import { useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../button/Button.js';
 import { CollapsibleContent, CollapsibleRoot } from '../collapsible/index.js';
 
-export interface ActionButtonProps extends ButtonProps {
+export type ActionButtonProps = ButtonProps & {
 	visible?: boolean;
-}
+};
 
 export function ActionButton({
 	children,
 	className,
 	visible = true,
-	asChild,
 	...rest
 }: ActionButtonProps) {
 	// this rather convoluted logic is meant to do:
@@ -47,7 +46,6 @@ export function ActionButton({
 						'layer-variants:(font-normal m-2 mx-1)',
 						className,
 					)}
-					asChild={asChild}
 					{...rest}
 				>
 					{children}

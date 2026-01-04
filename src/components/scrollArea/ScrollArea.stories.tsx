@@ -1,63 +1,104 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import clsx from 'clsx';
 import { ScrollArea } from './ScrollArea.js';
 
 const meta = {
 	title: 'Components/ScrollArea',
-	component: ScrollArea,
-	argTypes: {},
+	argTypes: {
+		direction: {
+			control: { type: 'select' },
+			options: ['vertical', 'horizontal', 'both'],
+		},
+	},
+	args: {
+		direction: 'vertical',
+	},
 	parameters: {
 		controls: { expanded: true },
 	},
-} satisfies Meta<typeof ScrollArea>;
+} satisfies Meta<{ direction: 'vertical' | 'horizontal' | 'both' }>;
 
 export default meta;
 
-type Story = StoryObj<typeof ScrollArea>;
+type Story = StoryObj<{ direction: 'vertical' | 'horizontal' | 'both' }>;
 
 export const Default: Story = {
-	render(args) {
+	render({ direction }) {
 		return (
-			<ScrollArea {...args}>
-				<div className="flex flex-col gap-2">
-					{Array.from({ length: 100 }, (_, i) => (
-						<div
-							key={i}
-							className="h-10 w-full bg-primary-wash color-primary flex items-center justify-center"
-						>
-							Item {i + 1}
-						</div>
-					))}
-				</div>
-			</ScrollArea>
-		);
-	},
-};
-
-export const StickToBottom: Story = {
-	render(args) {
-		const [itemCount, setItemCount] = useState(50);
-		return (
-			<div className="flex flex-col gap-2 w-full h-full overflow-hidden">
-				<button onClick={() => setItemCount((prev) => prev + 1)}>
-					Add Item
-				</button>
-				<button onClick={() => setItemCount((prev) => prev - 1)}>
-					Remove Item
-				</button>
-				<ScrollArea {...args} className="flex-1" stickToBottom>
-					<div className="flex flex-col gap-2">
-						{Array.from({ length: itemCount }, (_, i) => (
-							<div
-								key={i}
-								className="h-10 w-full bg-primary-wash color-primary flex items-center justify-center"
-							>
-								Item {i + 1}
-							</div>
-						))}
+			<ScrollArea style={{ height: '200px', width: '400px' }}>
+				<ScrollArea.Content>
+					<div
+						className={clsx(
+							direction === 'horizontal' && 'w-10000px',
+							direction === 'both' && 'w-800px',
+						)}
+					>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+							risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+							nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+							ligula massa, varius a, semper congue, euismod non, mi. Proin
+							porttitor, orci nec nonummy molestie, enim est eleifend mi, non
+							fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa,
+							scelerisque vitae, consequat in, pretium a, enim. Pellentesque
+							congue. Ut in risus volutpat libero pharetra tempor. Cras
+							vestibulum bibendum augue. Praesent egestas leo in pede. Praesent
+							blandit odio eu enim. Pellentesque sed dui ut augue blandit
+							sodales. Vestibulum ante ipsum primis in faucibus orci luctus et
+							ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed
+							pede pellentesque fermentum. Maecenas adipiscing ante non diam
+							sollicitudin ornare. Morbi in sem quis dui placerat ornare.
+							Pellentesque odio nisi, euismod in, pharetra a, ultricies in,
+							diam. Sed arcu. Cras consectetur. Vivamus fermentum nibh in augue.
+							Praesent a lacus at urna consequat rhoncus. Morbi dapibus sapien
+							vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget
+							metus. Vestibulum commodo. Ut rhoncus gravida arcu.
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+							risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+							nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+							ligula massa, varius a, semper congue, euismod non, mi. Proin
+							porttitor, orci nec nonummy molestie, enim est eleifend mi, non
+							fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa,
+							scelerisque vitae, consequat in, pretium a, enim. Pellentesque
+							congue. Ut in risus volutpat libero pharetra tempor. Cras
+							vestibulum bibendum augue. Praesent egestas leo in pede. Praesent
+							blandit odio eu enim. Pellentesque sed dui ut augue blandit
+							sodales. Vestibulum ante ipsum primis in faucibus orci luctus et
+							ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed
+							pede pellentesque fermentum. Maecenas adipiscing ante non diam
+							sollicitudin ornare. Morbi in sem quis dui placerat ornare.
+							Pellentesque odio nisi, euismod in, pharetra a, ultricies in,
+							diam. Sed arcu. Cras consectetur. Vivamus fermentum nibh in augue.
+							Praesent a lacus at urna consequat rhoncus. Morbi dapibus sapien
+							vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget
+							metus. Vestibulum commodo. Ut rhoncus gravida arcu.
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+							risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+							nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+							ligula massa, varius a, semper congue, euismod non, mi. Proin
+							porttitor, orci nec nonummy molestie, enim est eleifend mi, non
+							fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa,
+							scelerisque vitae, consequat in, pretium a, enim. Pellentesque
+							congue. Ut in risus volutpat libero pharetra tempor. Cras
+							vestibulum bibendum augue. Praesent egestas leo in pede. Praesent
+							blandit odio eu enim. Pellentesque sed dui ut augue blandit
+							sodales. Vestibulum ante ipsum primis in faucibus orci luctus et
+							ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed
+							pede pellentesque fermentum. Maecenas adipiscing ante non diam
+							sollicitudin ornare. Morbi in sem quis dui placerat ornare.
+							Pellentesque odio nisi, euismod in, pharetra a, ultricies in,
+							diam. Sed arcu. Cras consectetur. Vivamus fermentum nibh in augue.
+							Praesent a lacus at urna consequat rhoncus. Morbi dapibus sapien
+							vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget
+							metus. Vestibulum commodo. Ut rhoncus gravida arcu.
+						</p>
 					</div>
-				</ScrollArea>
-			</div>
+				</ScrollArea.Content>
+			</ScrollArea>
 		);
 	},
 };

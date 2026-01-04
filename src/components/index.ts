@@ -1,4 +1,4 @@
-export { Slot, Slottable, type SlotProps } from '@radix-ui/react-slot';
+export * from '@base-ui/react/use-render';
 export * from './actions/index.js';
 export * from './avatar/index.js';
 export * from './box/Box.js';

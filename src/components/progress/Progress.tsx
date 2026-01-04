@@ -1,16 +1,24 @@
-import * as ProgressPrimitive from '@radix-ui/react-progress';
+import {
+	Progress as ProgressPrimitive,
+	ProgressRootProps,
+	ProgressValueProps,
+} from '@base-ui/react/progress';
 import clsx from 'clsx';
 import { withClassName } from '../../hooks.js';
 import { PaletteName } from '../../uno/index.js';
 
 export const ProgressRoot = withClassName(
 	ProgressPrimitive.Root,
-	'layer-components:(w-full relative overflow-hidden border border-default rounded-lg)',
+	'layer-components:(grid grid-columns-[1fr_1fr] gap-col-md gap-row-xs items-center w-full)',
 );
 export const ProgressIndicator = withClassName(
 	ProgressPrimitive.Indicator,
-	'layer-components:(bg-main w-full h-6px translate-x-[calc(-100%*(1-var(--value)))] rounded-lg transition-transform)',
-	'layer-components:[&[data-state=complete]]:(bg-success)',
+	'layer-components:(bg-main w-full h-full rounded-lg transition-transform)',
+	'layer-components:data-[complete]:(bg-success)',
+);
+export const ProgressTrack = withClassName(
+	ProgressPrimitive.Track,
+	'layer-components:(w-full relative overflow-hidden ring ring-black ring-1 rounded-lg h-6px)',
 );
 
 const ProgressBase = function ProgressBase({
@@ -21,22 +29,64 @@ const ProgressBase = function ProgressBase({
 	value,
 	className,
 	...props
-}: ProgressPrimitive.ProgressProps & {
+}: ProgressRootProps & {
 	ref?: React.Ref<HTMLDivElement>;
 	color?: PaletteName;
 }) {
 	return (
-		<ProgressRoot
+		<ProgressPrimitive.Root
 			{...props}
-			className={clsx(color && `palette-${color}`, className)}
+			className={clsx(
+				color && `palette-${color}`,
+				'layer-components:w-full',
+				className,
+			)}
 			value={value}
 			max={max}
 			ref={ref}
 		>
-			<ProgressIndicator
-				// @ts-ignore
-				style={{ '--value': (value || 0) / max }}
-			/>
+			<ProgressTrack>
+				<ProgressIndicator />
+			</ProgressTrack>
+		</ProgressPrimitive.Root>
+	);
+};
+
+const ProgressLabel = withClassName(
+	ProgressPrimitive.Label,
+	'layer-components:(font-size-xs color-gray-ink col-start-1 row-start-1)',
+);
+
+const ProgressValue = withClassName(
+	ProgressPrimitive.Value,
+	'layer-components:(font-size-xs font-semibold color-gray-ink col-start-2 row-start-1 justify-self-end)',
+);
+
+export const ProgressLabeled = function ProgressLabeled({
+	ref,
+	children,
+	label,
+	className,
+	color,
+	formatValue,
+	...props
+}: ProgressRootProps & {
+	ref?: React.Ref<HTMLDivElement>;
+	label: React.ReactNode;
+	color?: PaletteName;
+	formatValue?: ProgressValueProps['children'];
+}) {
+	return (
+		<ProgressRoot
+			ref={ref}
+			className={clsx(color && `palette-${color}`, className)}
+			{...props}
+		>
+			<ProgressLabel>{label}</ProgressLabel>
+			<ProgressValue>{formatValue}</ProgressValue>
+			<ProgressTrack className="col-span-2">
+				<ProgressIndicator />
+			</ProgressTrack>
 		</ProgressRoot>
 	);
 };
@@ -44,4 +94,8 @@ const ProgressBase = function ProgressBase({
 export const Progress = Object.assign(ProgressBase, {
 	Root: ProgressRoot,
 	Indicator: ProgressIndicator,
+	Track: ProgressTrack,
+	Labeled: ProgressLabeled,
+	Label: ProgressLabel,
+	Value: ProgressValue,
 });

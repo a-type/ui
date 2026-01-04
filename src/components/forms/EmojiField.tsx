@@ -9,11 +9,12 @@ import { Icon } from '../icon/Icon.js';
 import { Popover } from '../popover/Popover.js';
 import { HorizontalFieldLabel } from './FieldLabel.js';
 
-export interface EmojiFieldProps extends ButtonProps {
+export type EmojiFieldProps = Omit<ButtonProps, 'className'> & {
 	name: string;
 	label?: string;
 	required?: string;
-}
+	className?: string;
+};
 
 export function EmojiField({
 	name,
@@ -29,19 +30,21 @@ export function EmojiField({
 	return (
 		<Box gap="sm" className={className}>
 			<Popover open={open} onOpenChange={setOpen}>
-				<Popover.Trigger asChild>
-					<Button
-						id={id}
-						aria-label="Select emoji"
-						size="small"
-						className={clsx('p-0 transition-color', className)}
-						{...rest}
-					>
-						<Button.Icon className="text-[19px] w-touch h-touch flex items-center justify-center">
-							{props.value || <Icon name="smile" />}
-						</Button.Icon>
-					</Button>
-				</Popover.Trigger>
+				<Popover.Trigger
+					render={
+						<Button
+							id={id}
+							aria-label="Select emoji"
+							size="small"
+							className={clsx('p-0 transition-color', className)}
+							{...rest}
+						>
+							<Button.Icon className="text-[19px] w-touch h-touch flex items-center justify-center">
+								{props.value || <Icon name="smile" />}
+							</Button.Icon>
+						</Button>
+					}
+				/>
 				<Popover.Content>
 					<EmojiPicker
 						onValueChange={(v) => {

@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
 	ComponentPropsWithRef,
 	ComponentType,
@@ -8,11 +8,11 @@ import {
 
 export function withClassName<T extends ComponentType<any> | ElementType<any>>(
 	Component: T,
-	...cs: Parameters<typeof classNames>
+	...cs: Parameters<typeof clsx>
 ): FunctionComponent<ComponentPropsWithRef<T>> {
 	const WithClassName = (props: any) => {
 		const { className, ...rest } = props;
-		return <Component {...rest} className={classNames(cs, className)} />;
+		return <Component {...rest} className={clsx(cs, className)} />;
 	};
 	return WithClassName as any;
 }

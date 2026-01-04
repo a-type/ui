@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { paletteNames } from '../../uno/index.js';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Chip } from './Chip.js';
@@ -6,7 +7,12 @@ import { Chip } from './Chip.js';
 const meta = {
 	title: 'Components/Chip',
 	component: Chip,
-	argTypes: {},
+	argTypes: {
+		color: {
+			control: 'select',
+			options: paletteNames,
+		},
+	},
 	args: {
 		children: 'Chip',
 	},
@@ -45,13 +51,14 @@ export const Colors: Story = {
 };
 
 export const AsButton: Story = {
-	render() {
+	render(args) {
 		return (
 			<Box gap items="center">
-				<Button asChild>
-					<Chip color="primary">Clickable Chip</Chip>
-				</Button>
-				<Chip>Non-clickable Chip</Chip>
+				<Button
+					{...args}
+					render={<Chip color="primary">Clickable Chip</Chip>}
+				/>
+				<Chip {...args}>Non-clickable Chip</Chip>
 			</Box>
 		);
 	},

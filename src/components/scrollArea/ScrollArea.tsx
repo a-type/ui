@@ -1,96 +1,108 @@
-import * as Primitive from '@radix-ui/react-scroll-area';
-import { Ref } from 'react';
+import {
+	ScrollArea as BaseScrollArea,
+	ScrollAreaRootProps,
+	ScrollAreaScrollbarProps,
+} from '@base-ui/react/scroll-area';
 import { withClassName } from '../../hooks.js';
-import { useStayScrolledToBottom } from '../../hooks/useStayScrolledToBottom.js';
 
-const ScrollAreaRootImpl = withClassName(Primitive.Root, 'overflow-hidden');
+export type * from '@base-ui/react/scroll-area';
 
-export interface ScrollAreaRootProps extends Primitive.ScrollAreaProps {
-	background?: 'white' | 'wash' | 'primary-wash' | 'primary' | 'black';
-	ref?: Ref<HTMLDivElement>;
-}
-
-export const ScrollAreaRoot = function ScrollAreaRoot({
-	ref,
-	background,
-	...props
-}: ScrollAreaRootProps) {
-	return <ScrollAreaRootImpl ref={ref} {...props} />;
-};
-
-export const ScrollAreaViewport = withClassName(
-	Primitive.Viewport,
-	'h-full w-full rounded-inherit',
-	'[background:linear-gradient(var(--v-bg)_30%,rgba(255,255,255,0))_center_top,linear-gradient(rgba(255,255,255,0),var(--v-bg)_70%)_center_bottom,radial-gradient(farthest-side_at_50%_0,oklch(from_var(--v-bg)_calc(l*0.9)_c_h),rgba(0,0,0,0))_center_top,radial-gradient(farthest-side_at_50%_100%,oklch(from_var(--v-bg)_calc(l*0.9)_c_h),rgba(0,0,0,0))_center_bottom]',
-	'![background-repeat:no-repeat] ![background-size:100%_40px,100%_40px,100%_14px,100%_14px]',
-	'![background-attachment:local,local,scroll,scroll]',
+export const ScrollAreaRoot = withClassName(
+	BaseScrollArea.Root,
+	'layer-components:(min-w-0 min-h-0 flex flex-col)',
 );
 
-export const ScrollAreaScrollbarRoot = withClassName(
-	Primitive.Scrollbar,
-	'layer-components:(flex select-none touch-none p-0.5 bg-inherit bg-lighten-2 transition-colors duration-160ms ease-out)',
-	'layer-components:[&[data-orientation=vertical]]:w-2.5',
-	'layer-components:[&[data-orientation=horizontal]]:(flex-col h-2.5)',
+export const ScrollAreaViewport = withClassName(
+	BaseScrollArea.Viewport,
+	'layer-components:(h-full outline-none overscroll-contain min-h-0)',
+	'layer-components:focus-visible:(outline-none ring-2 ring-accent)',
+);
+
+export const ScrollAreaVerticalFades = withClassName(
+	'div',
+	'layer-components:(pointer-events-none absolute inset-0 [--scroll-area-overflow-y-start:inherit] [--scroll-area-overflow-y-end:inherit])',
+	'layer-components:before:(content-empty [--scroll-area-overflow-y-start:inherit] top-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-start,,40px))] bg-gradient-to-b bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
+	'layer-components:after:(content-empty [--scroll-area-overflow-y-end:inherit] bottom-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-end,,40px))] bg-gradient-to-t bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
+);
+
+export const ScrollAreaHorizontalFades = withClassName(
+	'div',
+	'layer-components:(pointer-events-none absolute inset-0 [--scroll-area-overflow-x-start:inherit] [--scroll-area-overflow-x-end:inherit])',
+	'layer-components:before:(content-empty [--scroll-area-overflow-x-start:inherit] left-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-start,,40px))] bg-gradient-to-r bg-gradient-from-bg bg-gradient-to-transparent)',
+	'layer-components:after:(content-empty [--scroll-area-overflow-x-end:inherit] right-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-end,,40px))] bg-gradient-to-l bg-gradient-from-bg bg-gradient-to-transparent)',
+);
+
+export const ScrollAreaViewportFades = () => (
+	<>
+		<ScrollAreaVerticalFades />
+		<ScrollAreaHorizontalFades />
+	</>
+);
+
+export const ScrollAreaContent = withClassName(
+	BaseScrollArea.Content,
+	'layer-components:(flex flex-col)',
 );
 
 export const ScrollAreaThumb = withClassName(
-	Primitive.Thumb,
-	'layer-components:(flex-1 rounded-lg relative bg-inherit bg-darken-2)',
-	'before:(content-[""] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full min-w-44px min-h-44px)',
+	BaseScrollArea.Thumb,
+	'layer-components:(rounded-inherit bg-fg/25)',
+	'layer-components:data-[orientation=horizontal]:(h-full)',
+	'layer-components:data-[orientation=vertical]:(w-full)',
 );
 
-export const ScrollAreaScrollbar = function ScrollAreaScrollbar({
-	ref,
+const ComposedScrollbar = ({
+	children,
 	...props
-}: Primitive.ScrollAreaScrollbarProps & {
-	ref?: Ref<HTMLDivElement>;
-}) {
-	return (
-		<ScrollAreaScrollbarRoot {...props} ref={ref}>
-			<ScrollAreaThumb />
-		</ScrollAreaScrollbarRoot>
-	);
-};
-
-export interface ScrollAreaProps extends Primitive.ScrollAreaProps {
-	background?: ScrollAreaRootProps['background'];
-	orientation?: 'vertical' | 'both';
-	ref?: Ref<HTMLDivElement>;
-	stickToBottom?: boolean;
-}
-
-/**
- * @deprecated - just use Box with overflow prop
- */
-export const ScrollArea = Object.assign(
-	function ScrollArea({
-		ref,
-		children,
-		orientation,
-		stickToBottom,
-		...props
-	}: ScrollAreaProps) {
-		const { ref: stickRef, onScroll } = useStayScrolledToBottom(stickToBottom);
-
-		return (
-			<ScrollAreaRoot data-scroll-root ref={ref} {...props}>
-				<ScrollAreaViewport
-					data-scroll-viewport
-					ref={stickRef}
-					onScroll={onScroll}
-				>
-					{children}
-				</ScrollAreaViewport>
-				<ScrollAreaScrollbar />
-				{orientation === 'both' && (
-					<ScrollAreaScrollbar orientation="horizontal" />
-				)}
-			</ScrollAreaRoot>
-		);
-	},
-	{
-		Root: ScrollAreaRoot,
-		Viewport: ScrollAreaViewport,
-		Scrollbar: ScrollAreaScrollbar,
-	},
+}: ScrollAreaScrollbarProps) => (
+	<BaseScrollArea.Scrollbar {...props}>
+		{children ?? <ScrollAreaThumb />}
+	</BaseScrollArea.Scrollbar>
 );
+ComposedScrollbar.displayName = 'ScrollAreaScrollbar';
+
+export const ScrollAreaScrollbar = withClassName(
+	ComposedScrollbar,
+	'layer-components:(flex rounded-full relative select-none touch-none pointer-events-none m-xxs opacity-0)',
+	'layer-components:(bg-fg/5 transition-[opacity,height,width])',
+	'layer-components:data-[hovering]:(opacity-100 pointer-events-auto)',
+	'layer-components:data-[scrolling]:(duration-0)',
+	'layer-components:before:(content-empty absolute)',
+
+	'layer-components:data-[orientation=vertical]:(w-0.25rem justify-center before:(w-1.25rem h-full) hover:w-0.5rem)',
+	'layer-components:data-[orientation=horizontal]:(h-0.25rem items-center before:(h-1.25rem w-full) hover:h-0.5rem)',
+);
+
+export const ScrollAreaCorner = withClassName(
+	BaseScrollArea.Corner,
+	'layer-components:(bg-transparent)',
+);
+
+const ScrollAreaDefault = ({
+	disableFades,
+	...props
+}: ScrollAreaRootProps & {
+	disableFades?: boolean;
+}) => (
+	<ScrollAreaRoot {...props}>
+		<ScrollAreaViewport>
+			{props.children}
+			{!disableFades && <ScrollAreaViewportFades />}
+		</ScrollAreaViewport>
+		<ScrollAreaScrollbar />
+		<ScrollAreaScrollbar orientation="horizontal" />
+		<ScrollAreaCorner />
+	</ScrollAreaRoot>
+);
+
+export const ScrollArea = Object.assign(ScrollAreaDefault, {
+	Root: ScrollAreaRoot,
+	Content: ScrollAreaContent,
+	Viewport: ScrollAreaViewport,
+	Scrollbar: ScrollAreaScrollbar,
+	Thumb: ScrollAreaThumb,
+	Corner: ScrollAreaCorner,
+	ViewportFades: ScrollAreaViewportFades,
+	VerticalFades: ScrollAreaVerticalFades,
+	HorizontalFades: ScrollAreaHorizontalFades,
+});

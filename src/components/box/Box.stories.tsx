@@ -123,7 +123,7 @@ function SurfaceContent({ name }: { name: string }) {
 				<Switch checked />
 			</Box>
 			<Progress value={50} className="w-full" />
-			<ToggleGroup type="single" defaultValue="one">
+			<ToggleGroup defaultValue={['one']}>
 				<ToggleGroup.Item value="one">One</ToggleGroup.Item>
 				<ToggleGroup.Item value="two">Two</ToggleGroup.Item>
 			</ToggleGroup>

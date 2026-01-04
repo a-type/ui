@@ -247,18 +247,17 @@ export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
 		<Button
 			emphasis="ghost"
 			size="small"
-			asChild
+			render={<label htmlFor={inputId} />}
+			nativeButton={false}
 			visuallyFocused={focused}
 			{...props}
 		>
-			<label htmlFor={inputId}>
-				{children ?? (
-					<>
-						<Icon name="upload" />
-						<span>{dragging ? 'Drop' : 'Upload'}</span>
-					</>
-				)}
-			</label>
+			{children ?? (
+				<>
+					<Icon name="upload" />
+					<span>{dragging ? 'Drop' : 'Upload'}</span>
+				</>
+			)}
 		</Button>
 	);
 }

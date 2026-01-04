@@ -1,16 +1,16 @@
-import { Slot } from '@radix-ui/react-slot';
-import { HTMLProps } from 'react';
+import { useRender, UseRenderComponentProps } from '@base-ui/react/use-render';
 
-export interface SlotDivProps extends HTMLProps<HTMLDivElement> {
-	asChild?: boolean;
-}
+export interface SlotDivProps extends UseRenderComponentProps<'div'> {}
 export const SlotDiv = function SlotDiv({
 	ref,
-	asChild,
+	render,
 	...rest
 }: SlotDivProps) {
-	if (asChild) {
-		return <Slot ref={ref} {...rest} />;
-	}
-	return <div ref={ref} {...rest} />;
+	const result = useRender({
+		defaultTagName: 'div',
+		props: rest,
+		ref,
+		render,
+	});
+	return result;
 };

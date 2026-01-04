@@ -1,6 +1,7 @@
-import { Slot } from '@radix-ui/react-slot';
+import { Button } from '@base-ui/react/button';
+import { UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames, { clsx } from 'clsx';
-import { ReactNode, Ref } from 'react';
+import { ReactElement, ReactNode, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Icon, IconProps } from '../icon/index.js';
 
@@ -13,17 +14,16 @@ export const navBarItemClass = classNames(
 	'layer-responsive:md:(flex-row-reverse h-auto justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
 
-export interface NavBarItemProps {
-	asChild?: boolean;
+export interface NavBarItemProps extends UseRenderComponentProps<'button'> {
 	className?: string;
 	children?: ReactNode;
 	active?: boolean;
 	color?: 'primary' | 'gray';
+	render?: ReactElement | (() => ReactElement);
 }
 
 export const NavBarItem = function NavBarItem({
 	ref,
-	asChild,
 	className,
 	active,
 	color = 'primary',
@@ -31,10 +31,8 @@ export const NavBarItem = function NavBarItem({
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
-	const Comp = asChild ? Slot : 'button';
-
 	return (
-		<Comp
+		<Button
 			ref={ref}
 			className={classNames(navBarItemClass, `palette-${color}`, className)}
 			data-active={active}
@@ -55,8 +53,7 @@ export const NavBarItemText = withClassName(
 	'layer-components:(overflow-hidden inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:md:(text-md leading-normal)',
 );
 
-interface NavBarItemIconProps {
-	asChild?: boolean;
+interface NavBarItemIconProps extends Omit<IconProps, 'name'> {
 	name?: IconProps['name'];
 	className?: string;
 	children?: ReactNode;
@@ -64,15 +61,12 @@ interface NavBarItemIconProps {
 }
 export const NavBarItemIcon = function NavBarItemIcon({
 	ref,
-	children,
-	asChild,
 	className,
 	name = 'placeholder',
 	...rest
 }: NavBarItemIconProps) {
-	const Comp = asChild ? Slot : Icon;
 	return (
-		<Comp
+		<Icon
 			name={name}
 			className={clsx(
 				'layer-components:(relative z-1 flex color-inherit)',
@@ -81,9 +75,7 @@ export const NavBarItemIcon = function NavBarItemIcon({
 			)}
 			{...rest}
 			ref={ref}
-		>
-			{children}
-		</Comp>
+		/>
 	);
 };
 

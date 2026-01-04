@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 import { Button, ButtonProps } from '../button/Button.js';
 
-export function SubmitButton(props: ButtonProps) {
+export function SubmitButton({ nativeButton: _, ...props }: ButtonProps) {
 	const { isSubmitting, isValid } = useFormikContext();
 	return (
 		<Button
@@ -9,8 +9,8 @@ export function SubmitButton(props: ButtonProps) {
 			disabled={!isValid}
 			color="primary"
 			emphasis="primary"
-			type="submit"
 			{...props}
+			type="submit"
 		/>
 	);
 }

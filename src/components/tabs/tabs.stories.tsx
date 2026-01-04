@@ -7,7 +7,7 @@ const meta = {
 	argTypes: {
 		color: {
 			control: 'select',
-			options: ['default', 'primary'],
+			options: ['gray', 'primary'],
 		},
 	},
 	parameters: {
@@ -24,16 +24,10 @@ export const Default: Story = {
 		const [value, setValue] = useState('tab1');
 		return (
 			<TabsRoot value={value} onValueChange={setValue}>
-				<TabsList>
-					<TabsTrigger value="tab1" color={args.color}>
-						Tab 1
-					</TabsTrigger>
-					<TabsTrigger value="tab2" color={args.color}>
-						Tab 2 (long)
-					</TabsTrigger>
-					<TabsTrigger value="tab3" color={args.color}>
-						Tab 3
-					</TabsTrigger>
+				<TabsList color={args.color}>
+					<TabsTrigger value="tab1">Tab 1</TabsTrigger>
+					<TabsTrigger value="tab2">Tab 2 (long)</TabsTrigger>
+					<TabsTrigger value="tab3">Tab 3</TabsTrigger>
 				</TabsList>
 				<TabsContent value="tab1">
 					<div>Tab 1 content</div>
@@ -54,9 +48,9 @@ export const WithManyTabs: Story = {
 		const [value, setValue] = useState('tab1');
 		return (
 			<TabsRoot value={value} onValueChange={setValue}>
-				<TabsList>
+				<TabsList color={args.color}>
 					{Array.from({ length: 20 }).map((_, i) => (
-						<TabsTrigger key={i} value={`tab${i + 1}`} color={args.color}>
+						<TabsTrigger key={i} value={`tab${i + 1}`}>
 							Tab {i + 1}
 						</TabsTrigger>
 					))}

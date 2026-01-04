@@ -1,140 +1,133 @@
-'use client';
-
-import * as SelectPrimitive from '@radix-ui/react-select';
-import classNames from 'clsx';
 import {
-	ComponentPropsWithRef,
-	ComponentType,
-	ElementType,
-	FunctionComponent,
-	ReactNode,
-	createContext,
-	useContext,
-} from 'react';
+	Select as BaseSelect,
+	SelectArrowProps,
+	SelectIconProps,
+	SelectItemIndicatorProps,
+	SelectItemProps,
+	SelectPopupProps,
+	SelectPositionerProps,
+	SelectRootProps,
+} from '@base-ui/react/select';
+import classNames, { clsx } from 'clsx';
+import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button, ButtonProps } from '../button/Button.js';
 import { getButtonClassName } from '../button/classes.js';
 import { Icon } from '../icon/index.js';
+import { ArrowSvg } from '../utility/ArrowSvg.js';
 
 export const SelectItem = ({
 	ref: forwardedRef,
 	children,
 	className,
 	...props
-}: SelectPrimitive.SelectItemProps & {
+}: SelectItemProps & {
 	ref?: React.Ref<HTMLDivElement>;
 }) => {
-	const isNative = useContext(IsNativeContext);
-
-	if (isNative) {
-		return <option value={props.value}>{children}</option>;
-	}
-
 	return (
 		<SelectItemRoot className={className} {...props} ref={forwardedRef}>
-			<SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+			<BaseSelect.ItemText>{children}</BaseSelect.ItemText>
 			<SelectItemIndicator />
 		</SelectItemRoot>
 	);
 };
 
 export const SelectItemRoot = withClassName(
-	SelectPrimitive.Item,
+	BaseSelect.Item,
 	'layer-components:(text-md leading-4 color-black flex items-center flex-row h-36px pr-4 pl-35px min-h-touch-large relative select-none)',
 	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-gray-light color-black)',
 );
 export const SelectItemIndicatorRoot = withClassName(
-	SelectPrimitive.ItemIndicator,
+	BaseSelect.ItemIndicator,
 	'layer-components:(absolute left-0 w-25px inline-flex items-center justify-center)',
 );
-export const SelectItemIndicator = withNoNativeRender(
-	(props: SelectPrimitive.SelectItemIndicatorProps) => (
-		<SelectItemIndicatorRoot {...props}>
-			<Icon name="check" />
-		</SelectItemIndicatorRoot>
-	),
+export const SelectItemIndicator = (props: SelectItemIndicatorProps) => (
+	<SelectItemIndicatorRoot {...props}>
+		<Icon name="check" />
+	</SelectItemIndicatorRoot>
 );
-export const SelectItemText = withClassName(SelectPrimitive.ItemText, '');
-export const SelectGroup = (props: SelectPrimitive.SelectGroupProps) => {
-	const isNative = useContext(IsNativeContext);
+export const SelectItemText = withClassName(BaseSelect.ItemText, '');
+export const SelectGroup = BaseSelect.Group;
 
-	if (isNative) {
-		return (
-			<optgroup id={props.id} className={props.className}>
-				{props.children}
-			</optgroup>
-		);
-	}
-
-	return <SelectPrimitive.Group {...props} />;
-};
-
-export const SelectRoot = SelectPrimitive.Root;
+export const SelectRoot = BaseSelect.Root;
 export const selectTriggerClassName = classNames(
 	getButtonClassName({}),
-	'layer-components:([all:unset] inline-flex [&[data-placeholder]]:color-gray-dark)',
+	'layer-components:([all:unset] inline-flex data-[placeholder]:color-gray-dark)',
 );
-export const SelectTriggerBase = withNoNativeRender(
-	withClassName(SelectPrimitive.Trigger, selectTriggerClassName),
+export const SelectTriggerBase = withClassName(
+	BaseSelect.Trigger,
+	selectTriggerClassName,
 );
-export const UnstyledSelectTrigger = withNoNativeRender(
-	SelectPrimitive.Trigger,
-);
+export const UnstyledSelectTrigger = BaseSelect.Trigger;
 
-export interface SelectTriggerProps extends ButtonProps {}
+export type SelectTriggerProps = ButtonProps;
 export const SelectTrigger = function SelectTrigger({
 	ref,
 	children,
-	asChild,
+	render,
 	...props
 }: SelectTriggerProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	return (
-		<UnstyledSelectTrigger asChild {...props} ref={ref}>
-			<Button className="gap-2 font-normal" asChild={asChild}>
-				{children || (
-					<>
-						<SelectValue />
-						<SelectIcon />
-					</>
-				)}
-			</Button>
+		<UnstyledSelectTrigger
+			{...props}
+			className="layer-components:(font-normal)"
+			ref={ref}
+			render={render || <Button className="gap-2 font-normal" />}
+		>
+			{children || (
+				<>
+					<SelectValue />
+					<SelectIcon />
+				</>
+			)}
 		</UnstyledSelectTrigger>
 	);
 };
 
-export const SelectValue = withNoNativeRender(
-	withClassName(SelectPrimitive.Value, 'flex flex-row'),
+export const SelectValue = withClassName(BaseSelect.Value, 'flex flex-row');
+export const SelectGroupLabel = withClassName(
+	BaseSelect.GroupLabel,
+	'px-25px text-xs leading-6 color-black select-none',
 );
-export const SelectLabel = withNoNativeRender(
-	withClassName(
-		SelectPrimitive.Label,
-		'px-25px text-xs leading-6 color-black select-none',
-	),
+export const SelectSeparator = withClassName(
+	BaseSelect.Separator,
+	'h-1px bg-gray-light m-1',
 );
-export const SelectSeparator = withNoNativeRender(
-	withClassName(SelectPrimitive.Separator, 'h-1px bg-gray-light m-1'),
+export const SelectIcon = ({
+	ref: forwardedRef,
+	className,
+	...props
+}: SelectIconProps & {
+	ref?: React.Ref<HTMLDivElement>;
+}) => {
+	return (
+		<BaseSelect.Icon
+			className={classNames('color-inherit ml-auto', className)}
+			{...props}
+			ref={forwardedRef}
+		>
+			<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
+		</BaseSelect.Icon>
+	);
+};
+
+export const SelectArrow = ({ className, ...props }: SelectArrowProps) => (
+	<BaseSelect.Arrow
+		className={clsx('layer-components:arrow', className)}
+		{...props}
+	>
+		<ArrowSvg />
+	</BaseSelect.Arrow>
 );
-export const SelectIcon = withNoNativeRender(
-	({
-		ref: forwardedRef,
-		className,
-		...props
-	}: SelectPrimitive.SelectIconProps & {
-		ref?: React.Ref<HTMLDivElement>;
-	}) => {
-		return (
-			<SelectPrimitive.Icon
-				className={classNames('color-inherit ml-auto', className)}
-				{...props}
-				ref={forwardedRef}
-			>
-				<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
-			</SelectPrimitive.Icon>
-		);
-	},
+
+const scrollArrowClass = clsx(
+	'layer-components:(w-full bg-white z-1 text-center cursor-default select-none rounded-sm h-1rem text-xs flex items-center justify-center)',
+	'layer-components:before:(content-empty absolute w-full h-full left-0)',
+	'layer-components:data-[direction=up]:data-[side=none]:before:(-top-full)',
+	'layer-components:data-[direction=down]:(bottom-0 data-[side=none]:before:(-bottom-full))',
 );
 
 const contentStyle = {
@@ -142,111 +135,94 @@ const contentStyle = {
 	'--local-corner-scale': '1',
 } as React.CSSProperties;
 const viewportStyle = { '--local-corner-scale': '0.9' } as React.CSSProperties;
-export const SelectContent = withPassthroughNativeRender(
-	({ ref: forwardedRef, children, inDialog, className, ...props }) => {
-		return (
-			<SelectPrimitive.Portal>
-				<GroupScaleReset>
-					<SelectPrimitive.Content
+export const SelectContent = ({
+	ref: forwardedRef,
+	children,
+	className,
+	side,
+	sideOffset = 8,
+	align,
+	alignOffset,
+	alignItemWithTrigger = true,
+	disableAnchorTracking,
+	arrowPadding,
+	anchor,
+	collisionAvoidance,
+	collisionBoundary,
+	collisionPadding,
+	sticky,
+	positionMethod,
+	...props
+}: SelectPopupProps &
+	SelectPositionerProps & { ref?: Ref<HTMLDivElement> }) => {
+	return (
+		<BaseSelect.Portal>
+			<GroupScaleReset>
+				<BaseSelect.Backdrop />
+				<BaseSelect.Positioner
+					side={side}
+					sideOffset={sideOffset}
+					align={align}
+					alignOffset={alignOffset}
+					alignItemWithTrigger={alignItemWithTrigger}
+					disableAnchorTracking={disableAnchorTracking}
+					arrowPadding={arrowPadding}
+					anchor={anchor}
+					collisionAvoidance={collisionAvoidance}
+					collisionBoundary={collisionBoundary}
+					collisionPadding={collisionPadding}
+					sticky={sticky}
+					positionMethod={positionMethod}
+					className={classNames(
+						'layer-components:(z-1 outline-none select-none)',
+						'layer-components:(transform-origin-[--transform-origin])',
+					)}
+				>
+					<SelectArrow
+						className={clsx(
+							'layer-components:(border-black transition transform)',
+							'layer-components:data-[closed]:(opacity-0 scale-0)',
+							'layer-components:data-[open]:(opacity-100 scale-100)',
+						)}
+					/>
+					<BaseSelect.Popup
 						className={classNames(
-							'layer-components:(overflow-hidden bg-white rounded-md border border-solid border border-black z-menu shadow-lg)',
-							'layer-components:transform-origin-[var(--radix-select-content-transform-origin)]',
-							'layer-components:[&[data-state=open]]:animate-popover-in',
-							'layer-components:[&[data-state=closed]]:animate-popover-out',
-							'layer-components:(min-w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)])',
-							inDialog && 'z-[calc(var(--z-dialog)+1)]',
+							'layer-components:(overflow-hidden bg-white rounded-md border border-solid border border-black shadow-lg bg-clip-padding transition)',
+							'layer-components:transform-origin-[var(--transform-origin)]',
+							'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+							'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+							'layer-components:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
+							'layer-components:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
+							'layer-components:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
+							'layer-components:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
+							'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
+							'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
+							'important:motion-reduce:animate-none',
+							'layer-components:data-[side=none]:(translate-y-0px min-w-[calc(var(--anchor-width)+2rem)])',
+							'layer-components:(min-w-[var(--anchor-width)] max-h-[var(--available-height)])',
 							className,
 						)}
 						style={contentStyle}
 						{...props}
 						ref={forwardedRef}
 					>
-						<SelectPrimitive.ScrollUpButton className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
+						<BaseSelect.ScrollUpArrow className={scrollArrowClass}>
 							<Icon name="chevron" className="rotate-180" />
-						</SelectPrimitive.ScrollUpButton>
-						<SelectPrimitive.Viewport style={viewportStyle}>
-							{children}
-						</SelectPrimitive.Viewport>
-						<SelectPrimitive.ScrollDownButton className="flex items-center justify-center h-25px bg-white color-main-dark cursor-default">
+						</BaseSelect.ScrollUpArrow>
+						<BaseSelect.List style={viewportStyle}>{children}</BaseSelect.List>
+						<BaseSelect.ScrollDownArrow className={scrollArrowClass}>
 							<Icon name="chevron" />
-						</SelectPrimitive.ScrollDownButton>
-					</SelectPrimitive.Content>
-				</GroupScaleReset>
-			</SelectPrimitive.Portal>
-		);
-	},
-);
-
-export const NativeSelect = ({
-	ref: forwardedRef,
-	className,
-	...props
-}: React.SelectHTMLAttributes<HTMLSelectElement> & {
-	ref?: React.Ref<HTMLSelectElement>;
-}) => {
-	return (
-		<div className={classNames('relative', className)}>
-			<select
-				className={classNames(
-					'appearance-none font-inherit bg-white inline-flex items-center justify-center rounded-lg px-3 py-1 pr-8 text-sm gap-2 color-black border-solid border border-gray hover:border-gray-dark focus:outline-none focus-visible:shadow-focus [&[data-placeholder]]:color-gray-dark',
-				)}
-				{...props}
-				ref={forwardedRef}
-			/>
-			<div className="absolute right-1 top-50% translate-y-[-50%] pointer-events-none">
-				<Icon name="chevron" className="w-4 h-4 m-2" />
-			</div>
-		</div>
+						</BaseSelect.ScrollDownArrow>
+					</BaseSelect.Popup>
+				</BaseSelect.Positioner>
+			</GroupScaleReset>
+		</BaseSelect.Portal>
 	);
 };
 
-export type SelectProps<T extends string = string> = {
-	children?: ReactNode;
-	value: T;
-	onValueChange?: (value: T) => void;
-	className?: string;
-	id?: string;
-	/** Native on mobile; otherwise use custom select impl */
-	mobileNative?: boolean;
-	/** won't work on mobile and mobileNative=true */
-	open?: boolean;
-	/** won't work on mobile and mobileNative=true */
-	onOpenChange?: (open: boolean) => void;
-};
-/**
- * A high-level Select which converts to native on mobile. Use with SelectItem.
- */
-const SelectBase = <T extends string = string>({
-	children,
-	value,
-	onValueChange,
-	mobileNative,
-	...rest
-}: SelectProps<T>) => {
-	const mobile = isMobile();
-
-	if (mobile && mobileNative) {
-		return (
-			<IsNativeContext.Provider value={true}>
-				<NativeSelect
-					onChange={(ev) => {
-						onValueChange?.(ev.target.value as any);
-					}}
-					value={value}
-					{...rest}
-				>
-					{children}
-				</NativeSelect>
-			</IsNativeContext.Provider>
-		);
-	}
-
-	return (
-		<SelectRoot value={value} onValueChange={onValueChange}>
-			{children}
-		</SelectRoot>
-	);
-};
+export interface SelectProps<T extends string = string>
+	extends SelectRootProps<T> {}
+const SelectBase = SelectRoot;
 
 export const Select = Object.assign(SelectBase, {
 	Root: SelectRoot,
@@ -254,45 +230,9 @@ export const Select = Object.assign(SelectBase, {
 	Group: SelectGroup,
 	Trigger: SelectTrigger,
 	Value: SelectValue,
-	Label: SelectLabel,
+	GroupLabel: SelectGroupLabel,
 	Separator: SelectSeparator,
 	Icon: SelectIcon,
 	Content: SelectContent,
+	Arrow: SelectArrow,
 });
-
-function isMobile() {
-	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-		navigator.userAgent,
-	);
-}
-
-// facilitate the auto native switching
-const IsNativeContext = createContext(false);
-
-function withNoNativeRender<T extends ComponentType<any> | ElementType<any>>(
-	Component: T,
-): FunctionComponent<ComponentPropsWithRef<T>> {
-	const WithNoNativeRender = (props: any) => {
-		const isNative = useContext(IsNativeContext);
-
-		if (isNative) return null;
-
-		return <Component {...props} />;
-	};
-	return WithNoNativeRender as any;
-}
-
-function withPassthroughNativeRender<
-	T extends ComponentType<any> | ElementType<any>,
->(Component: T): FunctionComponent<ComponentPropsWithRef<T>> {
-	const WithPassthroughNativeRender = (props: any) => {
-		const isNative = useContext(IsNativeContext);
-
-		if (isNative) {
-			return <>{props.children}</>;
-		}
-
-		return <Component {...props} />;
-	};
-	return WithPassthroughNativeRender as any;
-}

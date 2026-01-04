@@ -3,7 +3,7 @@ import { Icon } from '../icon/Icon.js';
 import { pwaInstallerState } from './state.js';
 import { useIsInstalled } from './useIsInstallReady.js';
 
-export interface PwaInstallTriggerProps extends ButtonProps {}
+export type PwaInstallTriggerProps = ButtonProps & {};
 
 export function PwaInstallTrigger({
 	children,

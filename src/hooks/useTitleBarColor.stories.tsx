@@ -28,9 +28,7 @@ export const Default: Story = {
 						</p>
 					</Box>
 					<Dialog>
-						<Dialog.Trigger asChild>
-							<Button>Override</Button>
-						</Dialog.Trigger>
+						<Dialog.Trigger render={<Button />}>Override</Dialog.Trigger>
 						<Dialog.Content>
 							<Dialog.Title>Overriding color</Dialog.Title>
 							<Dialog.Description>

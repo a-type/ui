@@ -31,27 +31,52 @@ export const CustomStyles: Story = {
 		style: { height: '200px' },
 		min: -2,
 		max: 2,
-		defaultValue: [0],
+		defaultValue: 0,
 	},
 	render: (args) => {
-		const [value, setValue] = useState([0]);
+		const [value, setValue] = useState<number>(0);
 		return (
-			<Slider.Root value={value} onValueChange={setValue} {...args}>
+			<Slider.Base
+				value={value}
+				onValueChange={(v) => {
+					if (Array.isArray(v)) {
+						setValue(v[0]);
+					} else {
+						setValue(v as number);
+					}
+				}}
+				color={value < 0 ? 'attention' : value > 0 ? 'success' : 'primary'}
+				{...args}
+			>
 				<Slider.Track
 					className={clsx({
-						'bg-attention': value[0] === -2,
-						'bg-attention-light': value[0] === -1,
-						'bg-main': value[0] === 0,
-						'bg-success-light': value[0] === 1,
-						'bg-success': value[0] === 2,
+						'bg-attention': value === -2,
+						'bg-attention-light': value === -1,
+						'bg-main': value === 0,
+						'bg-success-light': value === 1,
+						'bg-success': value === 2,
 					})}
-				/>
-				<Slider.Thumb className="w-24px h-24px">
-					<div className="text-lg">
-						{['😭', '😔', '😐', '😊', '😃'][value[0] + 2]}
-					</div>
-				</Slider.Thumb>
-			</Slider.Root>
+				>
+					<Slider.Indicator />
+					<Slider.Thumb className="w-24px h-24px">
+						<div className="text-lg">
+							{['😭', '😔', '😐', '😊', '😃'][(value as number) + 2]}
+						</div>
+					</Slider.Thumb>
+				</Slider.Track>
+			</Slider.Base>
 		);
 	},
+};
+
+export const WithValue: Story = {
+	args: {
+		defaultValue: 50,
+	},
+	render: (args) => (
+		<Slider.Root {...args}>
+			<Slider.Ui />
+			<Slider.Value />
+		</Slider.Root>
+	),
 };

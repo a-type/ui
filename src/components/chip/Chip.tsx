@@ -1,22 +1,21 @@
-import { Slot } from '@radix-ui/react-slot';
+import { UseRenderRenderProp } from '@base-ui/react/use-render';
 import classNames from 'clsx';
 import { HTMLAttributes, Ref } from 'react';
 import { PaletteName } from '../../uno/index.js';
+import { SlotDiv } from '../utility/SlotDiv.js';
 
 export interface ChipProps extends HTMLAttributes<HTMLElement> {
 	color?: PaletteName;
-	asChild?: boolean;
+	render?: UseRenderRenderProp;
 	ref?: Ref<any>;
 }
 
-export function Chip({ className, color, asChild, ref, ...rest }: ChipProps) {
-	const Component = asChild ? Slot : 'div';
+export function Chip({ className, color, ...rest }: ChipProps) {
 	return (
-		<Component
-			ref={ref}
+		<SlotDiv
 			className={classNames(
 				color && `palette-${color}`,
-				'layer-composed:(inline-flex flex-row gap-1 items-center whitespace-nowrap)',
+				'layer-composed:(inline-flex flex-row gap-1 items-center whitespace-nowrap font-normal)',
 				'layer-composed:(bg-main-wash color-contrast border-light border-solid border rounded-lg)',
 				'layer-composed:(px-sm py-xs text-xs)',
 				className,

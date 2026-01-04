@@ -1,16 +1,25 @@
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import {
+	Dialog as BaseDialog,
+	DialogCloseProps,
+	DialogPopupProps,
+	DialogRootProps,
+	DialogTriggerProps,
+} from '@base-ui/react/dialog';
+import { Radio as BaseRadio } from '@base-ui/react/radio';
+import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
 import { useDrag } from '@use-gesture/react';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import {
 	ComponentPropsWithoutRef,
-	ComponentPropsWithRef,
 	createContext,
+	Ref,
+	TouchEvent,
 	useCallback,
 	useContext,
 	useRef,
 	useState,
 } from 'react';
+import { withProps } from '../../hooks.js';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
@@ -19,42 +28,45 @@ import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
 import { useConfig } from '../provider/Provider.js';
+import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
-	DialogPrimitive.Overlay,
-	'layer-components:(fixed inset-0 z-backdrop animate-fade-in animate-duration-200 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray)',
-	'layer-components:[&[data-state=closed]]:animate-fade-out',
-	'motion-reduce:animate-none',
+	BaseDialog.Backdrop,
+	'layer-components:(fixed inset-0 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray transition)',
 	'layer-components:backdrop-blur-sm',
+	'data-[starting-style]:(opacity-0)',
+	'data-[ending-style]:(opacity-0)',
 );
 
 const StyledContent = withClassName(
-	DialogPrimitive.Content,
-	'layer-components:(z-dialog fixed shadow-xl bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark)',
+	BaseDialog.Popup,
+	'layer-components:(fixed shadow-xl bg-white border border-gray border border-gray-dark transition pointer-events-auto overflow-hidden flex flex-col items-stretch)',
 	'layer-components:sm:shadow-down',
-	'transform-gpu !motion-reduce:animate-none',
-	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
-	'layer-components:animate-dialog-in',
-	'layer-components:[&[data-state=closed]]:animate-dialog-out',
+	'transform-gpu',
+	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh rounded-lg border-b-1)',
+
+	'data-[starting-style]:layer-components:(opacity-0 scale-95)',
+	'data-[ending-style]:layer-components:(opacity-0 scale-95)',
 );
-const sheetClassNames = classNames(
-	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 p-6 pt-8 w-full max-w-none shadow-up)',
-	'layer-variants:lt-sm:pb-[calc(3rem+env(safe-area-inset-bottom,0px))]',
-	'layer-variants:lt-sm:(animate-fade-in-up)',
-	'layer-variants:lt-sm:[&[data-state=closed]]:animate-fade-out-down',
+const sheetClassNames = clsx(
+	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 pt-lg w-screen max-w-none shadow-up)',
+	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
+
+	'data-[starting-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
+	'data-[ending-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
 );
-const sheetClassNameWithOverlayKeyboard = classNames(
-	'layer-variants:lt-sm:(bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))] max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))])',
+const sheetClassNameWithOverlayKeyboard = clsx(
+	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',
+	'layer-variants:lt-sm:max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))]',
 );
-const sheetClassNameWithDisplaceKeyboard = classNames(
+const sheetClassNameWithDisplaceKeyboard = clsx(
 	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',
 );
 
 function sheetCloseGestureLogic(
 	swipeY: number,
 	dy: number,
-	vy: number,
 	last: boolean,
 	close: () => void,
 	content: HTMLElement,
@@ -91,19 +103,23 @@ function filterScrollables(
 			cur &&
 			cur.scrollHeight > cur.clientHeight &&
 			cur.scrollTop !== 0 &&
-			vy > 0
+			vy >= 0
 		)
 			return true;
 	}
 	return false;
 }
 
-export interface DialogContentProps
-	extends ComponentPropsWithRef<typeof DialogPrimitive.Content> {
+export interface DialogContentProps extends DialogPopupProps {
 	width?: 'sm' | 'md' | 'lg';
 	disableSheet?: boolean;
+	disableDefaultClose?: boolean;
+	/** @deprecated */
 	outerClassName?: string;
+	ref?: Ref<HTMLDivElement>;
 }
+
+const SWIPE_VELOCITY_THRESHOLD = 1.5;
 
 export const Content = function Content({
 	ref,
@@ -112,16 +128,14 @@ export const Content = function Content({
 	outerClassName,
 	className,
 	disableSheet,
+	disableDefaultClose,
 	...props
 }: DialogContentProps) {
 	const particles = useParticles();
 	const wasOpenRef = useRef(false);
 	const openRef = useCallback(
 		(element: HTMLDivElement | null) => {
-			if (
-				!wasOpenRef.current &&
-				element?.getAttribute('data-state') === 'open'
-			) {
+			if (!wasOpenRef.current && element?.hasAttribute('data-open')) {
 				wasOpenRef.current = true;
 
 				const matchesSmall =
@@ -159,58 +173,32 @@ export const Content = function Content({
 						}),
 					);
 				}, 180);
-			} else if (element?.getAttribute('data-state') === 'closed') {
+			} else if (!element?.hasAttribute('data-open')) {
 				wasOpenRef.current = false;
 			}
 		},
 		[particles, disableSheet],
 	);
 
-	const gestureRef = useRef<HTMLDivElement>(null);
-
+	const { gestureRef, onTouchStart, onTouchMove, onTouchEnd } =
+		useDialogInherentSwipe({ disableSheet });
 	const finalRef = useMergedRef(ref, openRef, gestureRef);
 
 	const { virtualKeyboardBehavior } = useConfig();
 
-	const close = useContext(DialogCloseContext);
-	const isSmall = useMediaQuery('(max-width: 640px)');
-	const bind = useDrag(
-		({
-			swipe: [, swipeY],
-			movement: [, dy],
-			velocity: [, vy],
-			last,
-			active,
-			target,
-		}) => {
-			if (
-				filterScrollables(target as HTMLElement, gestureRef.current!, dy, vy)
-			) {
-				return;
-			}
-			if (
-				(active || last) &&
-				gestureRef.current &&
-				gestureRef.current.scrollTop < 3
-			) {
-				sheetCloseGestureLogic(swipeY, dy, vy, last, close, gestureRef.current);
-			}
-		},
-		{
-			axis: 'y',
-			enabled: isSmall && !disableSheet,
-		},
-	);
-
 	return (
-		<DialogPrimitive.Portal>
+		<BaseDialog.Portal>
 			<StyledOverlay />
 			<GroupScaleReset>
 				<StyledContent
 					data-dialog-content
-					{...bind(props)}
 					ref={finalRef}
-					className={classNames(
+					{...props}
+					onTouchStart={onTouchStart}
+					onTouchMove={onTouchMove}
+					onTouchEnd={onTouchEnd}
+					onTouchCancel={onTouchEnd}
+					className={clsx(
 						{
 							'layer-variants:md:max-w-800px': width === 'lg',
 							'layer-variants:max-w-600px': width === 'md',
@@ -226,13 +214,110 @@ export const Content = function Content({
 						outerClassName || className,
 					)}
 				>
+					{!disableDefaultClose && <DialogDefaultClose />}
 					{!disableSheet && <DialogSwipeHandle />}
-					{children}
+					<ScrollArea className="w-full h-full">
+						<ScrollArea.Content className="p-md">{children}</ScrollArea.Content>
+					</ScrollArea>
 				</StyledContent>
 			</GroupScaleReset>
-		</DialogPrimitive.Portal>
+		</BaseDialog.Portal>
 	);
 };
+
+function useDialogInherentSwipe({ disableSheet }: { disableSheet?: boolean }) {
+	const gestureRef = useRef<HTMLDivElement>(null);
+
+	const close = useContext(DialogCloseContext);
+	const isSmall = useMediaQuery('(max-width: 640px)');
+
+	const gestureState = useRef({
+		sy: 0,
+		dy: 0,
+		vy: 0,
+		active: false,
+		timeStamp: 0,
+		filtered: false,
+	});
+
+	const onTouchStart = useCallback(
+		(event: TouchEvent) => {
+			if (!isSmall || disableSheet) return;
+			const touch = event.touches[0];
+			gestureState.current.sy = touch.clientY;
+			gestureState.current.timeStamp = event.timeStamp;
+		},
+		[isSmall, disableSheet],
+	);
+	const onTouchMove = useCallback(
+		(event: TouchEvent) => {
+			if (!isSmall || disableSheet) return;
+
+			const touch = event.touches[0];
+			const dy = touch.clientY - gestureState.current.sy;
+			const vy =
+				(dy - gestureState.current.dy) /
+				(event.timeStamp -
+					(gestureState.current.timeStamp ?? event.timeStamp - 1));
+
+			gestureState.current.dy = dy;
+			gestureState.current.vy = vy;
+
+			if (
+				gestureState.current.filtered ||
+				filterScrollables(
+					event.target as HTMLElement,
+					gestureRef.current!,
+					dy,
+					vy,
+				)
+			) {
+				gestureState.current.filtered = true;
+				return;
+			}
+			if (!gestureState.current.active) {
+				gestureState.current.active = true;
+				gestureState.current.sy = touch.clientY;
+			}
+
+			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
+				sheetCloseGestureLogic(
+					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
+					dy,
+					false,
+					close,
+					gestureRef.current,
+				);
+			}
+
+			gestureState.current.timeStamp = event.timeStamp;
+		},
+		[isSmall, disableSheet, close],
+	);
+	const onTouchEnd = useCallback(
+		(event: TouchEvent) => {
+			if (gestureState.current.active && gestureRef.current) {
+				const { vy, dy } = gestureState.current;
+				sheetCloseGestureLogic(
+					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
+					dy,
+					true,
+					close,
+					gestureRef.current,
+				);
+			}
+			gestureState.current.active = false;
+			gestureState.current.filtered = false;
+			gestureState.current.timeStamp = event.timeStamp;
+			gestureState.current.vy = 0;
+			gestureState.current.dy = 0;
+			gestureState.current.sy = 0;
+		},
+		[close],
+	);
+
+	return { gestureRef, onTouchStart, onTouchMove, onTouchEnd };
+}
 
 export const DialogSwipeHandle = function DialogSwipeHandle({
 	ref,
@@ -247,7 +332,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
 			const content = findParentDialogContent(innerRef.current);
 			if (!content) return;
-			sheetCloseGestureLogic(swipeY, dy, vy, last, close, content);
+			sheetCloseGestureLogic(swipeY, dy, last, close, content);
 		},
 		{
 			target: innerRef,
@@ -259,7 +344,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 		<div
 			ref={finalRef}
 			{...props}
-			className={classNames(
+			className={clsx(
 				'layer-components:(absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-lg cursor-grab sm:hidden touch-none)',
 				className,
 			)}
@@ -279,69 +364,101 @@ function findParentDialogContent(
 
 const DialogCloseContext = createContext<() => void>(() => {});
 
+export const DialogDefaultClose = function DialogDefaultClose({
+	ref,
+	className,
+	...props
+}: DialogCloseProps & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
+	return (
+		<DialogClose
+			className={clsx(
+				'absolute top-sm right-sm hidden sm:flex z-101',
+				className,
+			)}
+			aria-label="Close dialog"
+			ref={ref}
+			{...props}
+			render={<Button emphasis="ghost" size="small" />}
+		>
+			<Icon name="x" />
+		</DialogClose>
+	);
+};
+
 const StyledTitle = withClassName(
-	DialogPrimitive.Title,
+	BaseDialog.Title,
 	'layer-components:(font-title color-black text-3xl mb-4 mt-0)',
 );
 
 const StyledDescription = withClassName(
-	DialogPrimitive.Description,
+	BaseDialog.Description,
 	'layer-components:(mt-3 mb-6 color-gray-dark text-md leading-6)',
 );
 
 // Exports
-const DialogRoot = (props: DialogPrimitive.DialogProps) => {
-	const [innerOpen, innerOnOpenChange] = useState(props.defaultOpen);
+const DialogRoot = (props: DialogRootProps) => {
+	const [innerOpen, innerOnOpenChange] = useState(props.defaultOpen || false);
 	const open = props.open ?? innerOpen;
-	const onOpenChange = useCallback(
-		(open: boolean) => {
+	const onOpenChange = useCallback<
+		Exclude<DialogRootProps['onOpenChange'], undefined>
+	>(
+		(open, eventDetails) => {
 			innerOnOpenChange(open);
-			props.onOpenChange?.(open);
+			props.onOpenChange?.(open, eventDetails);
 		},
 		[props.onOpenChange],
 	);
 
 	const close = useCallback(() => {
-		onOpenChange(false);
+		onOpenChange(false, {
+			allowPropagation() {},
+			cancel() {},
+			isCanceled: false,
+			event: null as any,
+			isPropagationAllowed: true,
+			preventUnmountOnClose() {},
+			reason: 'imperative-action',
+			trigger: undefined,
+		});
 	}, [onOpenChange]);
 
 	return (
 		<DialogCloseContext.Provider value={close}>
-			<DialogPrimitive.Root
-				{...props}
-				open={open}
-				onOpenChange={onOpenChange}
-			/>
+			<BaseDialog.Root {...props} open={open} onOpenChange={onOpenChange} />
 		</DialogCloseContext.Provider>
 	);
 };
 
-export const DialogTrigger = DialogPrimitive.Trigger;
+export const DialogTrigger = withProps(BaseDialog.Trigger, {
+	render: <Button />,
+});
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
 export const DialogClose = function DialogClose({
-	ref,
-	asChild,
 	children,
+	render,
 	...props
-}: DialogPrimitive.DialogCloseProps & {
+}: DialogCloseProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	return (
-		<DialogPrimitive.DialogClose asChild ref={ref} {...props}>
-			{asChild === true ? children : <Button>{children ?? 'Close'}</Button>}
-		</DialogPrimitive.DialogClose>
+		<BaseDialog.Close
+			render={render ?? <Button emphasis="default" />}
+			{...props}
+		>
+			{children ?? 'Close'}
+		</BaseDialog.Close>
 	);
 };
 
-export type { DialogProps } from '@radix-ui/react-dialog';
+export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'layer-components:(flex justify-end sticky w-full gap-3 items-center bg-inherit py-4 translate-y-6 flex-wrap)',
-	'layer-components:bottom--6',
-	'layer-components:sm:(bottom-0)',
+	'layer-components:(flex justify-end self-end sticky gap-sm items-center flex-wrap z-100 pb-1px mt-md bottom-md rounded-lg bg-white [--global-shadow-spread:1] shadow-md shadow-white shadow-up)',
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
@@ -349,27 +466,27 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 	children,
 	className,
 	...props
-}: DialogPrimitive.DialogTriggerProps & {
+}: DialogTriggerProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	return (
-		<DialogPrimitive.Trigger
-			className={classNames(selectTriggerClassName, className)}
+		<BaseDialog.Trigger
+			className={clsx(selectTriggerClassName, className)}
 			{...props}
 		>
 			<span>{children}</span>
 			<Icon name="chevron" />
-		</DialogPrimitive.Trigger>
+		</BaseDialog.Trigger>
 	);
 };
 
 export const DialogSelectList = withClassName(
-	RadioGroupPrimitive.Root,
+	BaseRadioGroup,
 	'layer-components:(flex flex-col gap-2 overflow-y-auto p-2)',
 );
 
 export const DialogSelectItemRoot = withClassName(
-	RadioGroupPrimitive.Item,
+	BaseRadio.Root,
 	'layer-components:(color-black flex items-center border-1 border-solid border-bg gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-gray-light cursor-pointer transition-all)',
 	'layer-components:[&[data-state=checked]]:(bg-main-wash color-main-ink border-color)',
 );
@@ -386,9 +503,9 @@ export const DialogSelectItem = function DialogSelectItem({
 			<span className="flex-1 flex-row items-center gap-md min-h-18px">
 				{children}
 			</span>
-			<RadioGroupPrimitive.Indicator className="flex-0-0-auto">
+			<BaseRadio.Indicator className="flex-0-0-auto">
 				<Icon name="check" />
-			</RadioGroupPrimitive.Indicator>
+			</BaseRadio.Indicator>
 		</DialogSelectItemRoot>
 	);
 };

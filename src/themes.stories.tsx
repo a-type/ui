@@ -96,7 +96,7 @@ function DemoUI({ className }: { className?: string }) {
 							<Checkbox defaultChecked />
 							<span>Checkbox</span>
 						</Box>
-						<ToggleGroup type="single" defaultValue="1">
+						<ToggleGroup defaultValue={['1']}>
 							<ToggleGroup.Item value="1">Toggle 1</ToggleGroup.Item>
 							<ToggleGroup.Item value="2">Toggle 2</ToggleGroup.Item>
 						</ToggleGroup>
@@ -177,10 +177,8 @@ function DemoUI({ className }: { className?: string }) {
 						<AvatarList.Item index={2} name="John Smith" />
 					</AvatarList>
 					<ContextMenu>
-						<ContextMenu.Trigger asChild>
-							<Tooltip content="Hello World">
-								<Button>Hover or right click</Button>
-							</Tooltip>
+						<ContextMenu.Trigger render={<Tooltip content="Hello World" />}>
+							<Button>Hover or right click</Button>
 						</ContextMenu.Trigger>
 						<ContextMenu.Content>
 							<ContextMenu.Item>Item 1</ContextMenu.Item>
@@ -189,8 +187,8 @@ function DemoUI({ className }: { className?: string }) {
 						</ContextMenu.Content>
 					</ContextMenu>
 					<DropdownMenu>
-						<DropdownMenu.Trigger asChild className="m-auto">
-							<Button>Dropdown</Button>
+						<DropdownMenu.Trigger render={<Button />} className="m-auto">
+							Dropdown
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
 							<DropdownMenu.Item>Item 1</DropdownMenu.Item>
@@ -209,7 +207,7 @@ function DemoUI({ className }: { className?: string }) {
 							</DropdownMenu.Item>
 						</DropdownMenu.Content>
 					</DropdownMenu>
-					<Select value="1">
+					<Select value="1" itemToStringLabel={(i) => `Item ${i}`}>
 						<Select.Trigger />
 						<Select.Content>
 							<Select.Item value="1">Item 1</Select.Item>
@@ -225,9 +223,7 @@ function DemoUI({ className }: { className?: string }) {
 						</Select.Content>
 					</Select>
 					<Dialog>
-						<Dialog.Trigger asChild>
-							<Button>Click</Button>
-						</Dialog.Trigger>
+						<Dialog.Trigger render={<Button />}>Click</Dialog.Trigger>
 						<Dialog.Content>
 							<Dialog.Title>Hello there</Dialog.Title>
 							<Dialog.Description>Im a dialog</Dialog.Description>
@@ -314,26 +310,20 @@ function DemoUI({ className }: { className?: string }) {
 					</NavBarItem>
 					<NavBarItem active>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon asChild>
-								<Icon name="book" />
-							</NavBarItemIcon>
+							<NavBarItemIcon name="book" />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />
 					</NavBarItem>
 					<NavBarItem color="gray">
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon asChild>
-								<Icon name="book" />
-							</NavBarItemIcon>
+							<NavBarItemIcon render={<Icon name="book" />} />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Neutral</NavBarItemText>
 					</NavBarItem>
 					<NavBarItem color="gray" active>
 						<NavBarItemIconWrapper>
-							<NavBarItemIcon asChild>
-								<Icon name="book" />
-							</NavBarItemIcon>
+							<NavBarItemIcon render={<Icon name="book" />} />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Neutral</NavBarItemText>
 						<NavBarItemPip />

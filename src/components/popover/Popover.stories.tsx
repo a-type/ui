@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../button/Button.js';
 import { Popover } from './Popover.js';
 
-const meta = {
+const meta: Meta = {
 	title: 'Components/Popover',
 	component: Popover,
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },
 	},
-} satisfies Meta<typeof Popover>;
+};
 
 export default meta;
 
@@ -19,14 +19,13 @@ export const Default: Story = {
 	render(args) {
 		return (
 			<Popover {...args}>
-				<Popover.Trigger asChild>
-					<Button color="primary" size="small">
-						Open Popover
-					</Button>
+				<Popover.Trigger render={<Button color="primary" size="small" />}>
+					Open Popover
 				</Popover.Trigger>
 				<Popover.Content className="p-md">
 					<Popover.Arrow />
-					<p>This is a popover content.</p>
+					<Popover.Title>Hello</Popover.Title>
+					<Popover.Description>This is a popover content.</Popover.Description>
 				</Popover.Content>
 			</Popover>
 		);

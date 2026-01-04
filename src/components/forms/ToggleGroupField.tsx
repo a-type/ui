@@ -9,6 +9,7 @@ export type ToggleGroupFieldProps = ToggleGroupProps & {
 	required?: boolean;
 	className?: string;
 	id?: string;
+	type?: 'single' | 'multiple';
 };
 
 function ToggleGroupFieldDefault({
@@ -16,6 +17,7 @@ function ToggleGroupFieldDefault({
 	label,
 	required,
 	className,
+	type = 'single',
 	id,
 	...props
 }: ToggleGroupFieldProps) {
@@ -26,7 +28,13 @@ function ToggleGroupFieldDefault({
 			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
 			<ToggleGroup
 				{...fieldProps}
-				onValueChange={(v: any) => tools.setValue(v)}
+				onValueChange={(v) => {
+					if (type === 'multiple') {
+						tools.setValue(v);
+					} else {
+						tools.setValue(v[0]);
+					}
+				}}
 				{...props}
 				id={id}
 				className={className}

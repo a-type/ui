@@ -1,5 +1,9 @@
-import * as Dialog from '@radix-ui/react-dialog';
-import { ReactNode } from 'react';
+import {
+	Dialog,
+	DialogCloseProps,
+	DialogPopupProps,
+} from '@base-ui/react/dialog';
+import { ReactElement, ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
@@ -18,23 +22,27 @@ export const LightboxPortal = Dialog.Portal;
 export const LightboxTitle = () => (
 	<Dialog.Title className="sr-only">Lightbox</Dialog.Title>
 );
-export const LightboxClose = (props: Dialog.DialogCloseProps) => (
-	<Dialog.Close {...props} asChild className="absolute top-md right-md">
-		<Button aria-label="Close">
-			<Icon name="x" />
-		</Button>
-	</Dialog.Close>
+export const LightboxClose = (props: DialogCloseProps) => (
+	<Dialog.Close
+		{...props}
+		render={
+			<Button aria-label="Close">
+				<Icon name="x" />
+			</Button>
+		}
+		className="absolute top-md right-md"
+	/>
 );
 
 export const LightboxOverlay = withClassName(
-	Dialog.Overlay,
+	Dialog.Backdrop,
 	'layer-components:(fixed inset-0 bg-black/50 backdrop-blur-sm z-backdrop)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:[&[data-state=closed]]:animate-fade-out layer-components:(animate-fade-in animate-duration-200)',
 );
 
 export const LightboxContentRoot = withClassName(
-	Dialog.Content,
+	Dialog.Popup,
 	'layer-components:(fixed z-dialog bg-none border-none p-lg w-full h-full max-w-full max-h-full flex items-center justify-center)',
 	'transform-gpu !motion-reduce:animate-none',
 	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-h-85vh)',
@@ -42,7 +50,7 @@ export const LightboxContentRoot = withClassName(
 	'layer-components:[&[data-state=closed]]:animate-dialog-out',
 	'!pointer-events-none',
 );
-export const LightboxContent = (props: Dialog.DialogContentProps) => {
+export const LightboxContent = (props: DialogPopupProps) => {
 	return (
 		<LightboxContentRoot {...props}>
 			<LightboxTitle />
@@ -58,10 +66,14 @@ const LightboxContentInner = withClassName(
 	'layer-components:pointer-events-none layer-components:[&>*]:pointer-events-auto',
 );
 
-function LightboxDefault({ children }: LightboxProps) {
+function LightboxDefault({
+	children,
+}: Omit<LightboxProps, 'children'> & {
+	children?: ReactElement;
+}) {
 	return (
 		<Dialog.Root>
-			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
+			<Dialog.Trigger render={children}></Dialog.Trigger>
 			<Dialog.Portal>
 				<LightboxOverlay />
 				<LightboxContent>{children}</LightboxContent>

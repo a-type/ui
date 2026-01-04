@@ -57,8 +57,8 @@ export const Default: Story = {
 	render: (args) => {
 		const [open, setOpen] = useState(false);
 		return (
-			<div className="bg-black flex flex-col items-center h-full">
-				<div className="bg-white w-400px flex flex-col items-stretch h-full">
+			<div className="bg-black flex flex-col items-center h-full min-h-80vh">
+				<div className="bg-white w-400px flex flex-col items-stretch flex-1">
 					<Button
 						toggled={open}
 						onClick={() => setOpen(!open)}

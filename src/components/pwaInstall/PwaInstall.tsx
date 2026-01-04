@@ -1,4 +1,4 @@
-import { DialogTriggerProps } from '@radix-ui/react-dialog';
+import { DialogRootProps } from '@base-ui/react/dialog';
 import { useState } from 'react';
 import { useSnapshot } from 'valtio';
 import {
@@ -28,16 +28,11 @@ import {
 } from './useIsInstallReady.js';
 import { useWebManifest } from './useWebManifest.js';
 
-export interface PwaInstall extends DialogTriggerProps {
+export interface PwaInstall extends DialogRootProps {
 	manifestPath?: string;
 }
 
-export function PwaInstall({
-	children,
-	manifestPath,
-	asChild: _,
-	...rest
-}: PwaInstall) {
+export function PwaInstall({ children, manifestPath, ...rest }: PwaInstall) {
 	const installed = useIsInstalled();
 	const manifest = useWebManifest(manifestPath);
 	const { open } = useSnapshot(pwaInstallerState);
@@ -52,9 +47,11 @@ export function PwaInstall({
 
 	return (
 		<Dialog
+			{...rest}
 			open={open}
-			onOpenChange={(isOpen) => {
+			onOpenChange={(isOpen, ev) => {
 				pwaInstallerState.open = isOpen;
+				rest.onOpenChange?.(isOpen, ev);
 			}}
 		>
 			<Dialog.Content className="flex flex-col gap-xs" id="pwa-install-dialog">
@@ -80,8 +77,8 @@ export function PwaInstall({
 						</Dialog.Description>
 						<InstallInstructions />
 						<Dialog.Actions>
-							<Dialog.Close asChild>
-								<Button emphasis="ghost">Close</Button>
+							<Dialog.Close render={<Button emphasis="ghost" />}>
+								Close
 							</Dialog.Close>
 							<Button onClick={() => setShowInstructions(false)}>
 								<Icon name="arrowLeft" /> Back
@@ -99,8 +96,8 @@ export function PwaInstall({
 						)}
 						<ManifestImageGallery manifestPath={manifestPath} />
 						<Dialog.Actions>
-							<Dialog.Close asChild>
-								<Button emphasis="ghost">Close</Button>
+							<Dialog.Close render={<Button emphasis="ghost" />}>
+								Close
 							</Dialog.Close>
 							<InstallDeviceActions
 								showInstructions={() => setShowInstructions(true)}
@@ -182,15 +179,17 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 		<Box overflow="auto-x" p="sm" gap className="h-240px">
 			{manifest.screenshots?.map((screenshot, index) => (
 				<Lightbox.Root key={screenshot.src}>
-					<Lightbox.Trigger asChild>
-						<Lightbox.Image
-							tabIndex={0}
-							key={index}
-							src={screenshot.src}
-							alt={screenshot.label || `Screenshot ${index + 1}`}
-							className="border border-default rounded-xs"
-						/>
-					</Lightbox.Trigger>
+					<Lightbox.Trigger
+						render={
+							<Lightbox.Image
+								tabIndex={0}
+								key={index}
+								src={screenshot.src}
+								alt={screenshot.label || `Screenshot ${index + 1}`}
+								className="border border-default rounded-xs"
+							/>
+						}
+					/>
 					<Lightbox.Portal>
 						<Lightbox.Overlay className="z-10000" />
 						<Lightbox.Content className="z-10001">

@@ -19,10 +19,11 @@ type Story = StoryObj<typeof PwaInstallTrigger>;
 export const Default: Story = {
 	render(args) {
 		return (
-			<PwaInstallTrigger {...args} asChild>
-				<Button color="primary" emphasis="light">
-					<Icon name="star" /> Install
-				</Button>
+			<PwaInstallTrigger
+				{...args}
+				render={<Button color="primary" emphasis="light" />}
+			>
+				<Icon name="star" /> Install
 			</PwaInstallTrigger>
 		);
 	},

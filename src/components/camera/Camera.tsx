@@ -1,4 +1,7 @@
-import { Slot } from '@radix-ui/react-slot';
+import {
+	Button as BaseButton,
+	ButtonProps as BaseButtonProps,
+} from '@base-ui/react/button';
 import classNames from 'clsx';
 import {
 	MouseEvent,
@@ -17,8 +20,8 @@ import { Select, SelectContent, SelectItem } from '../select/index.js';
 
 const CameraContext = createContext<{
 	triggerCapture: () => void;
-	selectedDeviceId: string | undefined;
-	selectDeviceId: (id: string) => void;
+	selectedDeviceId: string | undefined | null;
+	selectDeviceId: (id: string | null) => void;
 	devices: MediaDeviceInfo[];
 	fullscreen: boolean;
 	setFullscreen: (fullscreen: boolean) => void;
@@ -61,7 +64,7 @@ export function CameraRoot({
 	}, [!!stream]);
 
 	const [selectedDeviceId, setSelectedDeviceId] = useState<
-		string | undefined
+		string | undefined | null
 	>();
 
 	const cleanupRef = useRef<() => void>(undefined);
@@ -71,7 +74,7 @@ export function CameraRoot({
 			navigator.mediaDevices
 				?.getUserMedia({
 					video: {
-						deviceId: selectedDeviceId,
+						deviceId: selectedDeviceId || undefined,
 						facingMode,
 					},
 				})
@@ -183,26 +186,23 @@ export function CameraRoot({
 	);
 }
 
-export interface CameraShutterButtonProps {
+export type CameraShutterButtonProps = BaseButtonProps & {
 	className?: string;
-	asChild?: boolean;
 	onClick?: (ev: MouseEvent<HTMLButtonElement>) => void;
 	ref?: Ref<HTMLButtonElement>;
-}
+};
 
 export function CameraShutterButton({
-	asChild,
 	onClick,
 	ref,
 	...rest
 }: CameraShutterButtonProps) {
-	const Comp = asChild ? Slot : StyledShutterButton;
 	const { triggerCapture } = useContext(CameraContext);
 
 	return (
-		<Comp
+		<StyledShutterButton
 			ref={ref}
-			aria-label={asChild ? undefined : 'Capture photo'}
+			aria-label={'Capture photo'}
 			onClick={(ev) => {
 				triggerCapture();
 				onClick?.(ev);
@@ -213,7 +213,7 @@ export function CameraShutterButton({
 }
 
 const StyledShutterButton = withClassName(
-	'button',
+	BaseButton,
 	'absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full cursor-pointer border-2 border-black border-solid ring-2 ring-white opacity-80',
 	'hover:bg-gray-wash hover:opacity-100',
 	'focus-visible:bg-lighten-1',
@@ -258,14 +258,16 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 			value={selectedDeviceId || 'default'}
 			onValueChange={selectDeviceId}
 		>
-			<Select.Trigger asChild>
-				<Button
-					emphasis="ghost"
-					className="absolute bottom-2 left-2 color-white"
-				>
-					<Icon name="refresh" />
-				</Button>
-			</Select.Trigger>
+			<Select.Trigger
+				render={
+					<Button
+						emphasis="ghost"
+						className="absolute bottom-2 left-2 color-white"
+					>
+						<Icon name="refresh" />
+					</Button>
+				}
+			/>
 			<SelectContent>
 				{devices.map((device) => (
 					<SelectItem key={device.deviceId} value={device.deviceId}>

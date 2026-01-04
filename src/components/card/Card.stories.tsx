@@ -33,9 +33,11 @@ export const Default: Story = {
 	render: (args) => (
 		<div className="row items-stretch">
 			<CardRoot {...args} className="min-h-20vh">
-				<CardImage asChild>
-					<img src="https://resources.biscuits.club/images/pashka.jpg" />
-				</CardImage>
+				<CardImage
+					render={
+						<img src="https://resources.biscuits.club/images/pashka.jpg" />
+					}
+				/>
 				<CardMain onClick={() => alert('clicked')}>
 					<CardTitle>Card Title</CardTitle>
 					<CardContent>
@@ -120,12 +122,14 @@ export const NonInteractive: Story = {
 export const AsChild: Story = {
 	render: () => (
 		<CardRoot>
-			<CardMain asChild>
-				<a href="#here">
-					<CardTitle>Card Title</CardTitle>
-					<CardContent>Other stuff</CardContent>
-				</a>
-			</CardMain>
+			<CardMain
+				render={
+					<a href="#here">
+						<CardTitle>Card Title</CardTitle>
+						<CardContent>Other stuff</CardContent>
+					</a>
+				}
+			/>
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>
@@ -141,12 +145,15 @@ export const AsChild: Story = {
 export const AsChildNonInteractive: Story = {
 	render: () => (
 		<CardRoot>
-			<CardMain asChild nonInteractive>
-				<button>
-					<CardTitle>Card Title</CardTitle>
-					<CardContent>Other stuff</CardContent>
-				</button>
-			</CardMain>
+			<CardMain
+				nonInteractive
+				render={
+					<button>
+						<CardTitle>Card Title</CardTitle>
+						<CardContent>Other stuff</CardContent>
+					</button>
+				}
+			/>
 			<CardFooter>
 				<CardActions>
 					<Button size="small">Button</Button>

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
+import { Avatar } from '../avatar/Avatar.js';
 import { Button } from '../button/index.js';
 import { Card } from '../card/Card.js';
-import { Icon } from '../icon/index.js';
 import { Input } from '../input/index.js';
 import {
 	NavBarItem,
@@ -64,18 +64,18 @@ export const Default: Story = {
 						</NavBarItem>
 						<NavBarItem active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon asChild>
-									<Icon name="book" />
-								</NavBarItemIcon>
+								<NavBarItemIcon name="book" />
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
 						</NavBarItem>
 						<NavBarItem color="gray" active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon asChild>
-									<Icon name="book" />
-								</NavBarItemIcon>
+								<NavBarItemIcon
+									render={(_, { size }) => (
+										<Avatar name="Grant Forrest" size={size} />
+									)}
+								/>
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Neutral</NavBarItemText>
 							<NavBarItemPip />
@@ -114,18 +114,14 @@ export const ManualWidth: Story = {
 						</NavBarItem>
 						<NavBarItem active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon asChild>
-									<Icon name="book" />
-								</NavBarItemIcon>
+								<NavBarItemIcon name="book" />
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
 						</NavBarItem>
 						<NavBarItem color="gray" active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon asChild>
-									<Icon name="book" />
-								</NavBarItemIcon>
+								<NavBarItemIcon name="book" />
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Neutral</NavBarItemText>
 							<NavBarItemPip />
@@ -197,9 +193,7 @@ export const WithVirtualKeyboard: Story = {
 						</NavBarItem>
 						<NavBarItem active={true}>
 							<NavBarItemIconWrapper>
-								<NavBarItemIcon asChild>
-									<Icon name="book" />
-								</NavBarItemIcon>
+								<NavBarItemIcon render={<Avatar name="Grant Forrest" />} />
 							</NavBarItemIconWrapper>
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />

@@ -1,4 +1,4 @@
-import { Slot } from '@radix-ui/react-slot';
+import { Input as BaseUIInput } from '@base-ui/react/input';
 import classNames from 'clsx';
 import {
 	ChangeEvent,
@@ -9,7 +9,7 @@ import {
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export const inputClassName = classNames(
-	'layer-components:(px-5 py-1.25 text-md font-inherit rounded-lg bg-white select-auto min-w-60px color-black border-solid border-width-thin border-gray-dark shadow-sm-inset transition-shadow)',
+	'layer-components:(px-5 py-1.25 text-md font-inherit rounded-lg bg-white select-auto min-w-60px color-black border-solid border-width-thin border-gray-dark shadow-sm shadow-inset transition-shadow)',
 	'layer-components:focus:(outline-none bg-lighten-3 ring-4	ring-white)',
 	'layer-components:focus-visible:(outline-none ring-accent ring-4)',
 	'layer-components:disabled:(bg-transparent border-gray placeholder-gray-dark shadow-none)',
@@ -19,7 +19,6 @@ export const inputClassName = classNames(
 
 export interface InputProps extends ComponentPropsWithRef<'input'> {
 	autoSelect?: boolean;
-	asChild?: boolean;
 	/** Shuffle between random placeholders */
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
@@ -33,7 +32,6 @@ export const Input = function Input({
 	onFocus,
 	onChange,
 	onValueChange,
-	asChild,
 	placeholders,
 	placeholder,
 	placeholdersIntervalMs = 5000,
@@ -63,10 +61,8 @@ export const Input = function Input({
 		placeholdersIntervalMs,
 	);
 
-	const Component = asChild ? Slot : 'input';
-
 	return (
-		<Component
+		<BaseUIInput
 			onFocus={handleFocus}
 			onChange={handleChange}
 			className={classNames(inputClassName, className)}
