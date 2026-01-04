@@ -5,7 +5,7 @@ import {
 } from '@base-ui/react/toggle-group';
 import { withClassName } from '../../hooks/withClassName.js';
 
-export const ToggleGroupRoot = withClassName(
+const ToggleGroupRoot = withClassName(
 	ToggleGroupPrimitive,
 	'layer-components:(inline-flex bg-main-light/20 rounded-lg gap-sm w-fit)',
 );

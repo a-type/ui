@@ -73,6 +73,7 @@ export const Default: Story = {
 					<DummyContent />
 					<DialogActions>
 						<DialogClose />
+						<Button emphasis="primary">Accept</Button>
 					</DialogActions>
 				</DialogContent>
 			</ParticleLayer>

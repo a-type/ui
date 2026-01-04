@@ -28,6 +28,7 @@ import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
 import { useConfig } from '../provider/Provider.js';
+import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
@@ -40,17 +41,17 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	BaseDialog.Popup,
-	'layer-components:(fixed shadow-xl bg-white overflow-y-auto border border-gray flex flex-col border border-gray-dark transition pointer-events-auto)',
+	'layer-components:(fixed shadow-xl bg-white border border-gray border border-gray-dark transition pointer-events-auto overflow-hidden flex flex-col items-stretch)',
 	'layer-components:sm:shadow-down',
 	'transform-gpu',
-	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh p-6 pt-8 rounded-lg border-b-1 pt-6)',
+	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh rounded-lg border-b-1)',
 
 	'data-[starting-style]:layer-components:(opacity-0 scale-95)',
 	'data-[ending-style]:layer-components:(opacity-0 scale-95)',
 );
 const sheetClassNames = clsx(
-	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 p-6 pt-8 w-full max-w-none shadow-up)',
-	'layer-variants:lt-sm:pb-[calc(3rem+env(safe-area-inset-bottom,0px))]',
+	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 pt-lg w-screen max-w-none shadow-up)',
+	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
 
 	'data-[starting-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
 	'data-[ending-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
@@ -111,6 +112,7 @@ function filterScrollables(
 export interface DialogContentProps extends DialogPopupProps {
 	width?: 'sm' | 'md' | 'lg';
 	disableSheet?: boolean;
+	disableDefaultClose?: boolean;
 	/** @deprecated */
 	outerClassName?: string;
 	ref?: Ref<HTMLDivElement>;
@@ -125,6 +127,7 @@ export const Content = function Content({
 	outerClassName,
 	className,
 	disableSheet,
+	disableDefaultClose,
 	...props
 }: DialogContentProps) {
 	const particles = useParticles();
@@ -176,11 +179,53 @@ export const Content = function Content({
 		[particles, disableSheet],
 	);
 
-	const gestureRef = useRef<HTMLDivElement>(null);
-
+	const { gestureRef, onTouchStart, onTouchMove, onTouchEnd } =
+		useDialogInherentSwipe({ disableSheet });
 	const finalRef = useMergedRef(ref, openRef, gestureRef);
 
 	const { virtualKeyboardBehavior } = useConfig();
+
+	return (
+		<BaseDialog.Portal>
+			<StyledOverlay />
+			<GroupScaleReset>
+				<StyledContent
+					data-dialog-content
+					ref={finalRef}
+					{...props}
+					onTouchStart={onTouchStart}
+					onTouchMove={onTouchMove}
+					onTouchEnd={onTouchEnd}
+					onTouchCancel={onTouchEnd}
+					className={clsx(
+						{
+							'layer-variants:md:max-w-800px': width === 'lg',
+							'layer-variants:max-w-600px': width === 'md',
+							'layer-variants:max-w-300px': width === 'sm',
+						},
+						!disableSheet && sheetClassNames,
+						!disableSheet &&
+							virtualKeyboardBehavior === 'overlay' &&
+							sheetClassNameWithOverlayKeyboard,
+						!disableSheet &&
+							virtualKeyboardBehavior === 'displace' &&
+							sheetClassNameWithDisplaceKeyboard,
+						outerClassName || className,
+					)}
+				>
+					{!disableDefaultClose && <DialogDefaultClose />}
+					{!disableSheet && <DialogSwipeHandle />}
+					<ScrollArea className="w-full h-full">
+						<ScrollArea.Content className="p-md">{children}</ScrollArea.Content>
+					</ScrollArea>
+				</StyledContent>
+			</GroupScaleReset>
+		</BaseDialog.Portal>
+	);
+};
+
+function useDialogInherentSwipe({ disableSheet }: { disableSheet?: boolean }) {
+	const gestureRef = useRef<HTMLDivElement>(null);
 
 	const close = useContext(DialogCloseContext);
 	const isSmall = useMediaQuery('(max-width: 640px)');
@@ -248,7 +293,6 @@ export const Content = function Content({
 		},
 		[isSmall, disableSheet, close],
 	);
-
 	const onTouchEnd = useCallback(
 		(event: TouchEvent) => {
 			if (gestureState.current.active && gestureRef.current) {
@@ -271,41 +315,8 @@ export const Content = function Content({
 		[close],
 	);
 
-	return (
-		<BaseDialog.Portal>
-			<StyledOverlay />
-			<GroupScaleReset>
-				<StyledContent
-					data-dialog-content
-					ref={finalRef}
-					{...props}
-					onTouchStart={onTouchStart}
-					onTouchMove={onTouchMove}
-					onTouchEnd={onTouchEnd}
-					onTouchCancel={onTouchEnd}
-					className={clsx(
-						{
-							'layer-variants:md:max-w-800px': width === 'lg',
-							'layer-variants:max-w-600px': width === 'md',
-							'layer-variants:max-w-300px': width === 'sm',
-						},
-						!disableSheet && sheetClassNames,
-						!disableSheet &&
-							virtualKeyboardBehavior === 'overlay' &&
-							sheetClassNameWithOverlayKeyboard,
-						!disableSheet &&
-							virtualKeyboardBehavior === 'displace' &&
-							sheetClassNameWithDisplaceKeyboard,
-						outerClassName || className,
-					)}
-				>
-					{!disableSheet && <DialogSwipeHandle />}
-					{children}
-				</StyledContent>
-			</GroupScaleReset>
-		</BaseDialog.Portal>
-	);
-};
+	return { gestureRef, onTouchStart, onTouchMove, onTouchEnd };
+}
 
 export const DialogSwipeHandle = function DialogSwipeHandle({
 	ref,
@@ -351,6 +362,29 @@ function findParentDialogContent(
 }
 
 const DialogCloseContext = createContext<() => void>(() => {});
+
+export const DialogDefaultClose = function DialogDefaultClose({
+	ref,
+	className,
+	...props
+}: DialogCloseProps & {
+	ref?: React.Ref<HTMLButtonElement>;
+}) {
+	return (
+		<DialogClose
+			className={clsx(
+				'absolute top-sm right-sm hidden sm:flex z-101',
+				className,
+			)}
+			aria-label="Close dialog"
+			ref={ref}
+			{...props}
+			render={<Button emphasis="ghost" size="small" />}
+		>
+			<Icon name="x" />
+		</DialogClose>
+	);
+};
 
 const StyledTitle = withClassName(
 	BaseDialog.Title,
@@ -423,9 +457,7 @@ export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'layer-components:(flex justify-end sticky w-full gap-3 items-center bg-inherit py-4 translate-y-6 flex-wrap)',
-	'layer-components:bottom--6',
-	'layer-components:sm:(bottom-0)',
+	'layer-components:(flex justify-end self-end sticky gap-sm items-center flex-wrap z-100 pb-1px mt-md bottom-md rounded-lg bg-white [--global-shadow-spread:1] shadow-md shadow-white shadow-up)',
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({

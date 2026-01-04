@@ -1,6 +1,7 @@
 import {
 	ScrollArea as BaseScrollArea,
 	ScrollAreaRootProps,
+	ScrollAreaScrollbarProps,
 } from '@base-ui/react/scroll-area';
 import { withClassName } from '../../hooks.js';
 
@@ -8,12 +9,12 @@ export type * from '@base-ui/react/scroll-area';
 
 export const ScrollAreaRoot = withClassName(
 	BaseScrollArea.Root,
-	'layer-components:(max-w-[calc(100vw-8rem)])',
+	'layer-components:(min-w-0 min-h-0 flex flex-col)',
 );
 
 export const ScrollAreaViewport = withClassName(
 	BaseScrollArea.Viewport,
-	'layer-components:(h-full outline-none overscroll-contain)',
+	'layer-components:(h-full outline-none overscroll-contain min-h-0)',
 	'layer-components:focus-visible:(outline-none ring-2 ring-accent)',
 );
 
@@ -43,23 +44,33 @@ export const ScrollAreaContent = withClassName(
 	'layer-components:(flex flex-col)',
 );
 
+export const ScrollAreaThumb = withClassName(
+	BaseScrollArea.Thumb,
+	'layer-components:(rounded-inherit bg-fg/25)',
+	'layer-components:data-[orientation=horizontal]:(h-full)',
+	'layer-components:data-[orientation=vertical]:(w-full)',
+);
+
+const ComposedScrollbar = ({
+	children,
+	...props
+}: ScrollAreaScrollbarProps) => (
+	<BaseScrollArea.Scrollbar {...props}>
+		{children ?? <ScrollAreaThumb />}
+	</BaseScrollArea.Scrollbar>
+);
+ComposedScrollbar.displayName = 'ScrollAreaScrollbar';
+
 export const ScrollAreaScrollbar = withClassName(
-	BaseScrollArea.Scrollbar,
+	ComposedScrollbar,
 	'layer-components:(flex rounded-full relative select-none touch-none pointer-events-none m-xxs opacity-0)',
-	'layer-components:(bg-main-dark/10 transition-[opacity,height,width])',
+	'layer-components:(bg-fg/5 transition-[opacity,height,width])',
 	'layer-components:data-[hovering]:(opacity-100 pointer-events-auto)',
 	'layer-components:data-[scrolling]:(duration-0)',
 	'layer-components:before:(content-empty absolute)',
 
 	'layer-components:data-[orientation=vertical]:(w-0.25rem justify-center before:(w-1.25rem h-full) hover:w-0.5rem)',
 	'layer-components:data-[orientation=horizontal]:(h-0.25rem items-center before:(h-1.25rem w-full) hover:h-0.5rem)',
-);
-
-export const ScrollAreaThumb = withClassName(
-	BaseScrollArea.Thumb,
-	'layer-components:(rounded-inherit bg-main-dark/50)',
-	'layer-components:data-[orientation=horizontal]:(h-full)',
-	'layer-components:data-[orientation=vertical]:(w-full)',
 );
 
 export const ScrollAreaCorner = withClassName(
@@ -70,23 +81,19 @@ export const ScrollAreaCorner = withClassName(
 const ScrollAreaDefault = (props: ScrollAreaRootProps) => (
 	<ScrollAreaRoot {...props}>
 		<ScrollAreaViewport>
-			<ScrollAreaContent>{props.children}</ScrollAreaContent>
+			{props.children}
 			<ScrollAreaViewportFades />
 		</ScrollAreaViewport>
-		<ScrollAreaScrollbar>
-			<ScrollAreaThumb />
-		</ScrollAreaScrollbar>
-		<ScrollAreaScrollbar orientation="horizontal">
-			<ScrollAreaThumb />
-		</ScrollAreaScrollbar>
+		<ScrollAreaScrollbar />
+		<ScrollAreaScrollbar orientation="horizontal" />
 		<ScrollAreaCorner />
 	</ScrollAreaRoot>
 );
 
 export const ScrollArea = Object.assign(ScrollAreaDefault, {
 	Root: ScrollAreaRoot,
-	Viewport: ScrollAreaViewport,
 	Content: ScrollAreaContent,
+	Viewport: ScrollAreaViewport,
 	Scrollbar: ScrollAreaScrollbar,
 	Thumb: ScrollAreaThumb,
 	Corner: ScrollAreaCorner,

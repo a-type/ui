@@ -4,14 +4,14 @@ import { Button } from '../button/Button.js';
 import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
 
-const meta = {
+const meta: Meta<typeof DropdownMenu> = {
 	title: 'Components/DropdownMenu',
 	component: DropdownMenu,
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },
 	},
-} satisfies Meta<typeof DropdownMenu>;
+};
 
 export default meta;
 

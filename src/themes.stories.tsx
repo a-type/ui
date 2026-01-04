@@ -207,7 +207,7 @@ function DemoUI({ className }: { className?: string }) {
 							</DropdownMenu.Item>
 						</DropdownMenu.Content>
 					</DropdownMenu>
-					<Select value="1">
+					<Select value="1" itemToStringLabel={(i) => `Item ${i}`}>
 						<Select.Trigger />
 						<Select.Content>
 							<Select.Item value="1">Item 1</Select.Item>

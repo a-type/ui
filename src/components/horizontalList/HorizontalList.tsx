@@ -139,7 +139,7 @@ export function HorizontalList({
 	return (
 		<ScrollArea.Root
 			className={clsx(
-				'flex flex-col',
+				'layer-components:(flex flex-col w-full)',
 				'layer-components:max-h-300px',
 				className,
 			)}
