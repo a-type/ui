@@ -10,6 +10,7 @@ export function SubmitButton(props: ButtonProps) {
 			color="primary"
 			emphasis="primary"
 			type="submit"
+			nativeButton
 			{...props}
 		/>
 	);

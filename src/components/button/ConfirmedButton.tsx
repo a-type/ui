@@ -55,15 +55,13 @@ export function ConfirmedButton({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button {...rest} />
-			</DialogTrigger>
+			<DialogTrigger render={<Button />} {...rest} />
 			<DialogContent>
 				<DialogTitle>{confirmTitle}</DialogTitle>
 				<P>{confirmText}</P>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button emphasis="default">{cancelAction}</Button>
+					<DialogClose render={<Button emphasis="default" />}>
+						{cancelAction}
 					</DialogClose>
 					<Button
 						loading={loading}

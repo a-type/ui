@@ -108,12 +108,12 @@ export function TextAreaField({
 	const [props] = useField(name);
 	const { submitForm } = useFormikContext();
 	const onKeyDownInner = useCallback(
-		(e: KeyboardEvent<HTMLTextAreaElement>) => {
+		(e: KeyboardEvent<HTMLInputElement>) => {
 			if (submitOnEnter && e.key === 'Enter' && !e.shiftKey) {
 				e.preventDefault();
 				submitForm();
 			}
-			onKeyDown?.(e);
+			onKeyDown?.(e as any);
 		},
 		[submitOnEnter, onKeyDown, submitForm],
 	);

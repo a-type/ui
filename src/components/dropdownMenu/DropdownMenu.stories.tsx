@@ -21,9 +21,7 @@ export const Default: Story = {
 	args: {
 		children: (
 			<>
-				<DropdownMenu.Trigger asChild>
-					<Button>Open</Button>
-				</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger render={<Button />}>Open</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					<DropdownMenu.Item color="attention">
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
@@ -55,9 +53,7 @@ export const Sides: Story = {
 			className="mt-200px"
 		>
 			<DropdownMenu open={args.open}>
-				<DropdownMenu.Trigger asChild>
-					<Button>Top</Button>
-				</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger render={<Button />}>Top</DropdownMenu.Trigger>
 				<DropdownMenu.Content side="top">
 					<DropdownMenu.Item>
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
@@ -68,9 +64,7 @@ export const Sides: Story = {
 				</DropdownMenu.Content>
 			</DropdownMenu>
 			<DropdownMenu open={args.open}>
-				<DropdownMenu.Trigger asChild>
-					<Button>Right</Button>
-				</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger render={<Button />}>Right</DropdownMenu.Trigger>
 				<DropdownMenu.Content side="right">
 					<DropdownMenu.Item>
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
@@ -81,9 +75,7 @@ export const Sides: Story = {
 				</DropdownMenu.Content>
 			</DropdownMenu>
 			<DropdownMenu open={args.open}>
-				<DropdownMenu.Trigger asChild>
-					<Button>Left</Button>
-				</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger render={<Button />}>Left</DropdownMenu.Trigger>
 				<DropdownMenu.Content side="left" sideOffset={8}>
 					<DropdownMenu.Item>
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
@@ -94,9 +86,7 @@ export const Sides: Story = {
 				</DropdownMenu.Content>
 			</DropdownMenu>
 			<DropdownMenu open={args.open}>
-				<DropdownMenu.Trigger asChild>
-					<Button>Bottom</Button>
-				</DropdownMenu.Trigger>
+				<DropdownMenu.Trigger render={<Button />}>Bottom</DropdownMenu.Trigger>
 				<DropdownMenu.Content side="bottom" sideOffset={8}>
 					<DropdownMenu.Item>
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>

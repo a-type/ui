@@ -1,10 +1,10 @@
+import { useRender, UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames from 'clsx';
-import { HTMLAttributes } from 'react';
 import { Spinner } from '../spinner/Spinner.js';
 import { IconName } from './generated/iconNames.js';
 import { useIconLoading } from './IconLoadingContext.js';
 
-export interface IconProps extends HTMLAttributes<SVGSVGElement> {
+export interface IconProps extends UseRenderComponentProps<'svg'> {
 	name: IconName;
 	size?: number;
 	loading?: boolean;
@@ -23,6 +23,27 @@ export const Icon = function Icon({
 	const loadingContext = useIconLoading();
 	const loading = loadingProp !== false && (loadingProp || loadingContext);
 
+	const slotted = useRender({
+		defaultTagName: 'svg',
+		ref,
+		props: {
+			className: classNames(
+				'icon',
+				'flex-shrink-0 layer-components:fill-none',
+				className,
+			),
+			width: size,
+			height: size,
+			children: <use xlinkHref={`#icon-${name}`} />,
+			...rest,
+		},
+		state: {
+			size,
+			name,
+			loading,
+		},
+	});
+
 	if (loading) {
 		return (
 			<Spinner
@@ -32,19 +53,5 @@ export const Icon = function Icon({
 		);
 	}
 
-	return (
-		<svg
-			ref={ref}
-			className={classNames(
-				'icon',
-				'flex-shrink-0 layer-components:fill-none',
-				className,
-			)}
-			width={size}
-			height={size}
-			{...rest}
-		>
-			<use xlinkHref={`#icon-${name}`} />
-		</svg>
-	);
+	return slotted;
 };

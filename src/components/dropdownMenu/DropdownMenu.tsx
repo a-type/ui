@@ -111,16 +111,10 @@ export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuArrow = StyledArrow;
 
-export function DropdownMenuTrigger({
-	asChild,
-	...props
-}: MenuTriggerProps & { asChild?: boolean }) {
+export function DropdownMenuTrigger({ ...props }: MenuTriggerProps) {
 	return (
 		<DropdownTriggerProvider>
-			<StyledTrigger
-				render={asChild ? (props.children as React.JSX.Element) : undefined}
-				{...props}
-			/>
+			<StyledTrigger {...props} />
 		</DropdownTriggerProvider>
 	);
 }

@@ -19,6 +19,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { withProps } from '../../hooks.js';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
@@ -395,49 +396,26 @@ const DialogRoot = (props: DialogRootProps) => {
 	);
 };
 
-export function DialogTrigger({
-	asChild,
-	...props
-}: DialogTriggerProps & {
-	/** @deprecated use render */
-	asChild?: boolean;
-}) {
-	return (
-		<BaseDialog.Trigger
-			render={
-				props.render ?? asChild
-					? (props.children as React.ReactElement)
-					: undefined
-			}
-			{...props}
-		/>
-	);
-}
+export const DialogTrigger = withProps(BaseDialog.Trigger, {
+	render: <Button />,
+});
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
 export const DialogClose = function DialogClose({
-	ref,
-	asChild,
 	children,
+	render,
 	...props
 }: DialogCloseProps & {
 	ref?: React.Ref<HTMLButtonElement>;
-	/** @deprecated use render */
-	asChild?: boolean;
 }) {
 	return (
 		<BaseDialog.Close
-			render={
-				asChild && children && typeof children === 'object' ? (
-					(children as any)
-				) : (
-					<Button>{children ?? 'Close'}</Button>
-				)
-			}
-			ref={ref}
+			render={render ?? <Button emphasis="default" />}
 			{...props}
-		/>
+		>
+			{children ?? 'Close'}
+		</BaseDialog.Close>
 	);
 };
 

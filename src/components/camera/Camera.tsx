@@ -188,13 +188,11 @@ export function CameraRoot({
 
 export type CameraShutterButtonProps = BaseButtonProps & {
 	className?: string;
-	asChild?: boolean;
 	onClick?: (ev: MouseEvent<HTMLButtonElement>) => void;
 	ref?: Ref<HTMLButtonElement>;
 };
 
 export function CameraShutterButton({
-	asChild,
 	onClick,
 	ref,
 	...rest
@@ -204,7 +202,7 @@ export function CameraShutterButton({
 	return (
 		<StyledShutterButton
 			ref={ref}
-			aria-label={asChild ? undefined : 'Capture photo'}
+			aria-label={'Capture photo'}
 			onClick={(ev) => {
 				triggerCapture();
 				onClick?.(ev);

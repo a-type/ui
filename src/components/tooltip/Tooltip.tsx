@@ -87,7 +87,7 @@ export interface TooltipProps
 	extends Omit<TooltipTriggerProps, 'content' | 'children'>,
 		Pick<TooltipContentProps, 'side' | 'sideOffset' | 'color'> {
 	content: ReactNode;
-	children: ReactElement;
+	children?: ReactElement;
 	open?: boolean;
 	disabled?: boolean;
 }

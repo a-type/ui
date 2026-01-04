@@ -64,9 +64,7 @@ export const Default: Story = {
 	args: {
 		children: (
 			<ParticleLayer noPortal>
-				<DialogTrigger asChild>
-					<Button>Open</Button>
-				</DialogTrigger>
+				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
 				<DialogContent>
 					<DialogTitle>Hello world</DialogTitle>
@@ -74,9 +72,7 @@ export const Default: Story = {
 					<DummyContent />
 					<DummyContent />
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
+						<DialogClose />
 					</DialogActions>
 				</DialogContent>
 			</ParticleLayer>
@@ -88,17 +84,13 @@ export const Small: Story = {
 	args: {
 		children: (
 			<ParticleLayer noPortal>
-				<DialogTrigger asChild>
-					<Button>Open</Button>
-				</DialogTrigger>
+				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
 				<DialogContent>
 					<DialogTitle>Hello world</DialogTitle>
 					<DummyContent />
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
+						<DialogClose />
 					</DialogActions>
 				</DialogContent>
 			</ParticleLayer>
@@ -110,16 +102,12 @@ export const NoSheet: Story = {
 	args: {
 		children: (
 			<ParticleLayer noPortal>
-				<DialogTrigger asChild>
-					<Button>Open</Button>
-				</DialogTrigger>
+				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
 				<DialogContent disableSheet>
 					<DialogTitle>Hello world</DialogTitle>
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
+						<DialogClose />
 					</DialogActions>
 				</DialogContent>
 			</ParticleLayer>
@@ -131,16 +119,12 @@ export const Positioned: Story = {
 	args: {
 		children: (
 			<ParticleLayer noPortal>
-				<DialogTrigger asChild>
-					<Button>Open</Button>
-				</DialogTrigger>
+				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
 				<DialogContent className="top-auto bottom-0px">
 					<DialogTitle>Hello world</DialogTitle>
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
+						<DialogClose />
 					</DialogActions>
 				</DialogContent>
 			</ParticleLayer>
@@ -166,17 +150,13 @@ export const VirtualKeyboard: Story = {
 		return (
 			<Provider virtualKeyboardBehavior="overlay">
 				<Dialog>
-					<DialogTrigger asChild>
-						<Button>Open</Button>
-					</DialogTrigger>
+					<DialogTrigger render={<Button />}>Open</DialogTrigger>
 					<DummyContent />
 					<DialogContent>
 						<DialogTitle>Hello world</DialogTitle>
 						<Input />
 						<DialogActions>
-							<DialogClose asChild>
-								<Button>Close</Button>
-							</DialogClose>
+							<DialogClose />
 							<Button onClick={() => setKeyboard((v) => !v)}>
 								Toggle fake kb
 							</Button>
@@ -193,9 +173,7 @@ export const MultiNested: Story = {
 	render() {
 		return (
 			<Dialog>
-				<DialogTrigger asChild>
-					<Button>Open</Button>
-				</DialogTrigger>
+				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DialogContent>
 					<DialogTitle>Hello world</DialogTitle>
 					<DummyContent />
@@ -210,9 +188,7 @@ export const MultiNested: Story = {
 						</Select.Content>
 					</Select>
 					<Dialog>
-						<DialogTrigger asChild>
-							<Button>Open nested</Button>
-						</DialogTrigger>
+						<DialogTrigger render={<Button />}>Open nested</DialogTrigger>
 						<DialogContent>
 							<DialogTitle>Nested dialog</DialogTitle>
 							<Tooltip content="This is a tooltip">

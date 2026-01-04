@@ -15,8 +15,6 @@ export const navBarItemClass = classNames(
 );
 
 export interface NavBarItemProps extends UseRenderComponentProps<'button'> {
-	/** @deprecated use render */
-	asChild?: boolean;
 	className?: string;
 	children?: ReactNode;
 	active?: boolean;
@@ -26,7 +24,6 @@ export interface NavBarItemProps extends UseRenderComponentProps<'button'> {
 
 export const NavBarItem = function NavBarItem({
 	ref,
-	asChild,
 	className,
 	active,
 	color = 'primary',
@@ -39,7 +36,6 @@ export const NavBarItem = function NavBarItem({
 			ref={ref}
 			className={classNames(navBarItemClass, `palette-${color}`, className)}
 			data-active={active}
-			render={asChild ? (rest.children as ReactElement) : undefined}
 			{...rest}
 		/>
 	);
@@ -57,7 +53,7 @@ export const NavBarItemText = withClassName(
 	'layer-components:(overflow-hidden inline-block text-xxs whitespace-nowrap text-ellipsis) layer-components:md:(text-md leading-normal)',
 );
 
-interface NavBarItemIconProps {
+interface NavBarItemIconProps extends Omit<IconProps, 'name'> {
 	name?: IconProps['name'];
 	className?: string;
 	children?: ReactNode;

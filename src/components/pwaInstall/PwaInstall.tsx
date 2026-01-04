@@ -77,8 +77,8 @@ export function PwaInstall({ children, manifestPath, ...rest }: PwaInstall) {
 						</Dialog.Description>
 						<InstallInstructions />
 						<Dialog.Actions>
-							<Dialog.Close asChild>
-								<Button emphasis="ghost">Close</Button>
+							<Dialog.Close render={<Button emphasis="ghost" />}>
+								Close
 							</Dialog.Close>
 							<Button onClick={() => setShowInstructions(false)}>
 								<Icon name="arrowLeft" /> Back
@@ -96,8 +96,8 @@ export function PwaInstall({ children, manifestPath, ...rest }: PwaInstall) {
 						)}
 						<ManifestImageGallery manifestPath={manifestPath} />
 						<Dialog.Actions>
-							<Dialog.Close asChild>
-								<Button emphasis="ghost">Close</Button>
+							<Dialog.Close render={<Button emphasis="ghost" />}>
+								Close
 							</Dialog.Close>
 							<InstallDeviceActions
 								showInstructions={() => setShowInstructions(true)}

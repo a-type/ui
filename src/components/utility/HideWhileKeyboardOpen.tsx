@@ -4,13 +4,10 @@ import { useIsKeyboardOpen } from '../../hooks.js';
 import { SlotDiv } from './SlotDiv.js';
 
 export interface HideWhileKeyboardOpenProps
-	extends HTMLAttributes<HTMLDivElement> {
-	asChild?: boolean;
-}
+	extends HTMLAttributes<HTMLDivElement> {}
 
 export const HideWhileKeyboardOpen = function HideWhileKeyboardOpen({
 	ref,
-	asChild,
 	className,
 	...rest
 }: HideWhileKeyboardOpenProps & {
