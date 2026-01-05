@@ -27,7 +27,7 @@ export const SelectItem = ({
 }) => {
 	return (
 		<SelectItemRoot className={className} {...props} ref={forwardedRef}>
-			<BaseSelect.ItemText>{children}</BaseSelect.ItemText>
+			<SelectItemText>{children}</SelectItemText>
 			<SelectItemIndicator />
 		</SelectItemRoot>
 	);
@@ -235,4 +235,7 @@ export const Select = Object.assign(SelectBase, {
 	Icon: SelectIcon,
 	Content: SelectContent,
 	Arrow: SelectArrow,
+	ItemRoot: SelectItemRoot,
+	ItemText: SelectItemText,
+	ItemIndicator: SelectItemIndicator,
 });
