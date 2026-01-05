@@ -248,7 +248,6 @@ export function ImageUploaderFileButton({ children, ...props }: ButtonProps) {
 			emphasis="ghost"
 			size="small"
 			render={<label htmlFor={inputId} />}
-			nativeButton={false}
 			visuallyFocused={focused}
 			{...props}
 		>
