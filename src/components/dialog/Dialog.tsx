@@ -19,10 +19,10 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { withProps } from '../../hooks.js';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
+import { withProps } from '../../hooks/withProps.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';

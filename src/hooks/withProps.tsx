@@ -14,7 +14,7 @@ type OptionalKeys<T> = {
 }[keyof T];
 export const withoutProps = <T extends {}, P extends OptionalKeys<T>>(
 	Component: React.ComponentType<T>,
-	remove: P[],
+	_remove: P[],
 ) => {
 	return (props: Omit<T, P>) => {
 		return <Component {...(props as any)} />;
