@@ -2,6 +2,7 @@ import {
 	PopoverPopupProps,
 	PopoverPositionerProps,
 	Popover as PopoverPrimitive,
+	PopoverTriggerProps,
 } from '@base-ui/react/popover';
 
 import { MenuArrowProps } from '@base-ui/react/menu';
@@ -20,6 +21,7 @@ const StyledContent = withClassName(
 	'layer-components:data-[ending-style]:(opacity-0 scale-95 translate-y-4px)',
 	'important:motion-reduce:transition-none',
 	'layer-components:(max-h-[--available-height] max-w-[--available-width])',
+	'layer-components:focus-visible:(outline-none ring-2 ring-accent)',
 );
 
 const StyledArrow = withClassName(
@@ -43,7 +45,9 @@ export const PopoverRoot = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverArrow = StyledArrow;
 export const PopoverClose = StyledClose;
-export const PopoverAnchor = PopoverPrimitive.Handle;
+export const PopoverAnchor = (props: PopoverTriggerProps) => (
+	<PopoverTrigger {...props} disabled />
+);
 
 export const PopoverContent = function PopoverContent({
 	ref,
