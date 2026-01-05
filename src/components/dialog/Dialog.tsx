@@ -22,7 +22,6 @@ import {
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
-import { withProps } from '../../hooks/withProps.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
@@ -431,9 +430,9 @@ const DialogRoot = (props: DialogRootProps) => {
 	);
 };
 
-export const DialogTrigger = withProps(BaseDialog.Trigger, {
-	render: <Button />,
-});
+export const DialogTrigger = ({ render, ...props }: DialogTriggerProps) => (
+	<BaseDialog.Trigger render={render || <Button />} {...props} />
+);
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
