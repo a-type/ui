@@ -5,6 +5,7 @@ import {
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import {
+	ButtonHTMLAttributes,
 	Children,
 	Fragment,
 	memo,
@@ -25,7 +26,9 @@ import { Spinner } from '../spinner/index.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import { getButtonClassName } from './classes.js';
 
-export type ButtonProps = BaseButtonProps & {
+export interface ButtonProps
+	extends ButtonHTMLAttributes<HTMLButtonElement>,
+		Pick<BaseButtonProps, 'render' | 'focusableWhenDisabled'> {
 	color?: PaletteName;
 	emphasis?:
 		| 'primary'
@@ -44,7 +47,7 @@ export type ButtonProps = BaseButtonProps & {
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
-};
+}
 
 export function ButtonRoot({
 	className,
