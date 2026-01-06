@@ -60,8 +60,15 @@ export const CollapsibleSimple = ({
 	</CollapsibleRoot>
 );
 
+export const CollapsibleIcon = withClassName(
+	'span',
+	'layer-components:transition-transform',
+	'layer-components:[[data-panel-open]_&]:rotate-180',
+);
+
 export const Collapsible = Object.assign(CollapsibleRoot, {
 	Content: CollapsibleContent,
 	Trigger: CollapsibleTrigger,
 	Simple: CollapsibleSimple,
+	Icon: CollapsibleIcon,
 });

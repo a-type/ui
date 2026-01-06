@@ -4,7 +4,10 @@ import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { PaletteName } from '../../uno/index.js';
 
-export const SliderRoot = BaseSlider.Root;
+export const SliderRoot = withClassName(
+	BaseSlider.Root,
+	'layer-components:w-full',
+);
 
 export const SliderControl = withClassName(
 	BaseSlider.Control,
