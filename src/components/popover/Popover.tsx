@@ -2,7 +2,6 @@ import {
 	PopoverPopupProps,
 	PopoverPositionerProps,
 	Popover as PopoverPrimitive,
-	PopoverTriggerProps,
 } from '@base-ui/react/popover';
 
 import { MenuArrowProps } from '@base-ui/react/menu';
@@ -45,9 +44,6 @@ export const PopoverRoot = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
 export const PopoverArrow = StyledArrow;
 export const PopoverClose = StyledClose;
-export const PopoverAnchor = (props: PopoverTriggerProps) => (
-	<PopoverTrigger {...props} disabled />
-);
 
 export const PopoverContent = function PopoverContent({
 	ref,
@@ -132,7 +128,6 @@ export const Popover = Object.assign(PopoverRoot, {
 	Arrow: PopoverArrow,
 	Close: PopoverClose,
 	Trigger: PopoverTrigger,
-	Anchor: PopoverAnchor,
 	Title: PopoverTitle,
 	Description: PopoverDescription,
 	createHandle: PopoverPrimitive.createHandle,

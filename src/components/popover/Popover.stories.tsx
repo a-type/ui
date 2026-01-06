@@ -31,22 +31,3 @@ export const Default: Story = {
 		);
 	},
 };
-
-export const Anchored: Story = {
-	render(args) {
-		return (
-			<div className="layer-components:(relative h-[200px] flex items-center justify-center)">
-				<Popover open {...args}>
-					<Popover.Anchor>Anchor</Popover.Anchor>
-					<Popover.Content className="p-md">
-						<Popover.Arrow />
-						<Popover.Title>Hello</Popover.Title>
-						<Popover.Description>
-							This is a popover content anchored to the center of the container.
-						</Popover.Description>
-					</Popover.Content>
-				</Popover>
-			</div>
-		);
-	},
-};
