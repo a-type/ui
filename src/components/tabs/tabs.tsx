@@ -45,7 +45,7 @@ export const TabsContent = withClassName(
 export const TabsList = ({
 	children,
 	className,
-	color = 'gray',
+	color = 'primary',
 	...props
 }: TabsListProps & {
 	color?: 'gray' | 'primary';
