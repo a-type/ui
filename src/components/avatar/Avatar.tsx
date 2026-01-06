@@ -49,12 +49,14 @@ export function Avatar({
 					crossOrigin={crossOrigin}
 				/>
 			)}
-			<BaseAvatar.Fallback
-				className="text-size-[calc(0.5px*var(--avatar-size,24px))]"
-				style={{ '--avatar-size': size } as any}
-			>
-				{name?.charAt(0) || '?'}
-			</BaseAvatar.Fallback>
+			{!empty && (
+				<BaseAvatar.Fallback
+					className="text-size-[calc(0.5px*var(--avatar-size,24px))]"
+					style={{ '--avatar-size': size } as any}
+				>
+					{name?.charAt(0) || '?'}
+				</BaseAvatar.Fallback>
+			)}
 			{empty && <Icon name="profile" />}
 		</BaseAvatar.Root>
 	);
