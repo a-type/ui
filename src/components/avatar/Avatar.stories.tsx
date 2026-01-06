@@ -39,3 +39,10 @@ export const FailedImage: Story = {
 		name: 'Fallback User',
 	},
 };
+
+export const Empty: Story = {
+	args: {
+		name: undefined,
+		imageSrc: undefined,
+	},
+};
