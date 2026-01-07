@@ -57,7 +57,7 @@ export function Avatar({
 					{name.charAt(0).toUpperCase()}
 				</BaseAvatar.Fallback>
 			)}
-			{!name && <Icon name="profile" />}
+			{empty && <Icon name="profile" />}
 		</BaseAvatar.Root>
 	);
 }
