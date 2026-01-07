@@ -1,4 +1,4 @@
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
 import { PaletteName } from '../../uno/index.js';
 
@@ -14,7 +14,12 @@ export function Note({ className, color, children, ...rest }: NoteProps) {
 			{...rest}
 		>
 			<div className="layer-components:(flex flex-row)">
-				<div className="layer-components:(flex-1 p-2 border border-solid border-main-dark bg-main-wash bg-darken-1 color-black relative text-sm italic) layer-variants:border-r-0">
+				<div
+					className={clsx(
+						'layer-components:(flex-1 p-2 border border-solid border-main-dark bg-main-wash bg-darken-1 color-black relative text-sm italic) layer-variants:border-r-0',
+						'layer-variants:[&_input,&_textarea]:shadow-none',
+					)}
+				>
 					{children}
 				</div>
 				<div
