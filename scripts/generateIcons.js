@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { camelCase } from 'change-case';
+import { config } from 'dotenv';
 import fs from 'fs-extra';
 import * as path from 'path';
 import prettier from 'prettier';
-import { camelCase } from 'change-case';
 import * as url from 'url';
-import { config } from 'dotenv';
 
 config({
 	debug: true,
@@ -23,7 +23,7 @@ const figmaClient = axios.create({
 });
 
 const FILE_ID = 'EjIaQMFX5kBnC59WS1clcA';
-const PAGE = 'Page 1';
+const PAGE = 'Brand';
 const FRAME = 'Icon';
 
 const baseDir = path.join(__dirname, '../src/components/icon/generated');
