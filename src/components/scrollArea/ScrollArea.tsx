@@ -4,6 +4,7 @@ import {
 	ScrollAreaRootProps,
 	ScrollAreaScrollbarProps,
 } from '@base-ui/react/scroll-area';
+import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 
 export type * from '@base-ui/react/scroll-area';
@@ -40,7 +41,9 @@ export const ScrollAreaViewportFades = () => (
 	</>
 );
 
-const BaseScrollContentWithoutMinWidth = (props: ScrollAreaContentProps) => (
+const BaseScrollContentWithoutMinWidth = (
+	props: ScrollAreaContentProps & { ref?: Ref<HTMLDivElement> },
+) => (
 	<BaseScrollArea.Content
 		{...props}
 		style={{ ...props.style, minWidth: undefined }}
