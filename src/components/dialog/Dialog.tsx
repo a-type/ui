@@ -116,6 +116,7 @@ export interface DialogContentProps extends DialogPopupProps {
 	/** @deprecated */
 	outerClassName?: string;
 	ref?: Ref<HTMLDivElement>;
+	innerClassName?: string;
 }
 
 const SWIPE_VELOCITY_THRESHOLD = 1.5;
@@ -128,6 +129,7 @@ export const Content = function Content({
 	className,
 	disableSheet,
 	disableDefaultClose,
+	innerClassName,
 	...props
 }: DialogContentProps) {
 	const particles = useParticles();
@@ -215,8 +217,21 @@ export const Content = function Content({
 				>
 					{!disableDefaultClose && <DialogDefaultClose />}
 					{!disableSheet && <DialogSwipeHandle />}
-					<ScrollArea className="w-full h-full">
-						<ScrollArea.Content className="p-md">{children}</ScrollArea.Content>
+					<ScrollArea
+						direction="vertical"
+						className="layer-components:(w-full h-full)"
+					>
+						<ScrollArea.Content
+							className={clsx(
+								'layer-components:(p-md flex flex-col gap-md)',
+								innerClassName,
+							)}
+							style={{
+								minWidth: undefined,
+							}}
+						>
+							{children}
+						</ScrollArea.Content>
 					</ScrollArea>
 				</StyledContent>
 			</GroupScaleReset>

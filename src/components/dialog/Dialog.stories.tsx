@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Input } from '../input/index.js';
 import { ParticleLayer } from '../particles/index.js';
@@ -71,6 +72,10 @@ export const Default: Story = {
 					<DummyContent />
 					<DummyContent />
 					<DummyContent />
+					<Box gap>
+						<Input placeholder="Type something..." />
+						<Button emphasis="primary">Submit</Button>
+					</Box>
 					<DialogActions>
 						<DialogClose />
 						<Button emphasis="primary">Accept</Button>

@@ -1,5 +1,6 @@
 import {
 	ScrollArea as BaseScrollArea,
+	ScrollAreaContentProps,
 	ScrollAreaRootProps,
 	ScrollAreaScrollbarProps,
 } from '@base-ui/react/scroll-area';
@@ -9,27 +10,27 @@ export type * from '@base-ui/react/scroll-area';
 
 export const ScrollAreaRoot = withClassName(
 	BaseScrollArea.Root,
-	'layer-components:(min-w-0 min-h-0 flex flex-col)',
+	'layer-components:(min-w-0 min-h-0 flex flex-col box-border)',
 );
 
 export const ScrollAreaViewport = withClassName(
 	BaseScrollArea.Viewport,
-	'layer-components:(h-full outline-none overscroll-contain min-h-0)',
+	'layer-components:(h-full outline-none min-h-0)',
 	'layer-components:focus-visible:(outline-none ring-2 ring-accent)',
 );
 
 export const ScrollAreaVerticalFades = withClassName(
 	'div',
 	'layer-components:(pointer-events-none absolute inset-0 [--scroll-area-overflow-y-start:inherit] [--scroll-area-overflow-y-end:inherit])',
-	'layer-components:before:(content-empty [--scroll-area-overflow-y-start:inherit] top-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-start,,40px))] bg-gradient-to-b bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
-	'layer-components:after:(content-empty [--scroll-area-overflow-y-end:inherit] bottom-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-end,,40px))] bg-gradient-to-t bg-gradient-from-bg bg-gradient-via-bg bg-gradient-to-transparent)',
+	'layer-components:before:(content-empty [--scroll-area-overflow-y-start:inherit] top-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-start,40px))] bg-gradient-to-b bg-gradient-from-bg bg-gradient-to-transparent)',
+	'layer-components:after:(content-empty [--scroll-area-overflow-y-end:inherit] bottom-0 block left-0 w-full absolute transition-height h-[min(40px,var(--scroll-area-overflow-y-end,40px))] bg-gradient-to-t bg-gradient-from-bg bg-gradient-to-transparent)',
 );
 
 export const ScrollAreaHorizontalFades = withClassName(
 	'div',
 	'layer-components:(pointer-events-none absolute inset-0 [--scroll-area-overflow-x-start:inherit] [--scroll-area-overflow-x-end:inherit])',
-	'layer-components:before:(content-empty [--scroll-area-overflow-x-start:inherit] left-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-start,,40px))] bg-gradient-to-r bg-gradient-from-bg bg-gradient-to-transparent)',
-	'layer-components:after:(content-empty [--scroll-area-overflow-x-end:inherit] right-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-end,,40px))] bg-gradient-to-l bg-gradient-from-bg bg-gradient-to-transparent)',
+	'layer-components:before:(content-empty [--scroll-area-overflow-x-start:inherit] left-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-start,40px))] bg-gradient-to-r bg-gradient-from-bg bg-gradient-to-transparent)',
+	'layer-components:after:(content-empty [--scroll-area-overflow-x-end:inherit] right-0 block top-0 h-full absolute transition-width w-[min(40px,var(--scroll-area-overflow-x-end,40px))] bg-gradient-to-l bg-gradient-from-bg bg-gradient-to-transparent)',
 );
 
 export const ScrollAreaViewportFades = () => (
@@ -39,9 +40,18 @@ export const ScrollAreaViewportFades = () => (
 	</>
 );
 
+const BaseScrollContentWithoutMinWidth = (props: ScrollAreaContentProps) => (
+	<BaseScrollArea.Content
+		{...props}
+		style={{ ...props.style, minWidth: undefined }}
+	/>
+);
+BaseScrollContentWithoutMinWidth.displayName = 'ScrollAreaContent';
+
 export const ScrollAreaContent = withClassName(
-	BaseScrollArea.Content,
+	BaseScrollContentWithoutMinWidth,
 	'layer-components:(flex flex-col)',
+	'layer-components:[[data-scroll-direction=horizontal]>&,[data-scroll-direction=both]>&]:min-w-min-content',
 );
 
 export const ScrollAreaThumb = withClassName(
@@ -80,17 +90,31 @@ export const ScrollAreaCorner = withClassName(
 
 const ScrollAreaDefault = ({
 	disableFades,
+	direction,
 	...props
 }: ScrollAreaRootProps & {
 	disableFades?: boolean;
+	direction?: 'vertical' | 'horizontal' | 'both';
 }) => (
 	<ScrollAreaRoot {...props}>
-		<ScrollAreaViewport>
+		<ScrollAreaViewport
+			style={{
+				overflow:
+					direction === 'vertical'
+						? 'clip scroll'
+						: direction === 'horizontal'
+						? 'scroll clip'
+						: 'scroll scroll',
+			}}
+			data-scroll-direction={direction}
+		>
 			{props.children}
 			{!disableFades && <ScrollAreaViewportFades />}
 		</ScrollAreaViewport>
-		<ScrollAreaScrollbar />
-		<ScrollAreaScrollbar orientation="horizontal" />
+		{direction !== 'horizontal' && <ScrollAreaScrollbar />}
+		{direction !== 'vertical' && (
+			<ScrollAreaScrollbar orientation="horizontal" />
+		)}
 		<ScrollAreaCorner />
 	</ScrollAreaRoot>
 );
