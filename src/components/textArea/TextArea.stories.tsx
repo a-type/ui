@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { TextArea } from './TextArea.js';
 
 const meta = {
@@ -25,5 +26,27 @@ export const Tall: Story = {
 		value:
 			'This is a tall text area\nit has a lot\n of content!\nas in, quite a bit\nI think',
 		autoSize: true,
+	},
+};
+
+export const Controlled: Story = {
+	render() {
+		const [value, setValue] = useState('Initial value');
+		return <TextArea value={value} onValueChange={setValue} autoSize />;
+	},
+};
+
+export const ControlledFromOnChange: Story = {
+	render() {
+		const [value, setValue] = useState('Initial value');
+		return (
+			<TextArea
+				value={value}
+				onChange={(ev) => {
+					setValue(ev.target.value);
+				}}
+				autoSize
+			/>
+		);
 	},
 };

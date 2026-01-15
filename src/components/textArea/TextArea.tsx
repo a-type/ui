@@ -28,7 +28,6 @@ export const TextArea = function TextArea({
 	className,
 	rows,
 	padBottomPixels = 0,
-	onChange,
 	placeholder,
 	placeholders,
 	placeholdersIntervalMs = 5000,
@@ -63,7 +62,7 @@ export const TextArea = function TextArea({
 				onValueChange(value, eventDetails);
 			}
 		},
-		[onChange, onValueChange],
+		[onValueChange],
 	);
 
 	const handleFocus = useCallback<Exclude<InputProps['onFocus'], undefined>>(

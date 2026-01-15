@@ -2,7 +2,6 @@
 
 import { debounce } from '@a-type/utils';
 import {
-	ChangeEvent,
 	FocusEvent,
 	KeyboardEventHandler,
 	MouseEventHandler,
@@ -97,10 +96,10 @@ export const LiveUpdateTextField = function LiveUpdateTextField({
 	);
 
 	// update local state instantly and parent eventually
-	const handleChange = useCallback(
-		(ev: ChangeEvent<any>) => {
-			setDisplayValue(ev.target.value);
-			debouncedOnChange(ev.target.value);
+	const handleValueChange = useCallback(
+		(value: string) => {
+			setDisplayValue(value);
+			debouncedOnChange(value);
 			didChange.current = true;
 		},
 		[debouncedOnChange],
@@ -113,7 +112,7 @@ export const LiveUpdateTextField = function LiveUpdateTextField({
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				value={displayValue}
-				onChange={handleChange}
+				onValueChange={handleValueChange}
 				autoSize
 				{...rest}
 			/>
@@ -125,7 +124,7 @@ export const LiveUpdateTextField = function LiveUpdateTextField({
 				onFocus={handleFocus}
 				onBlur={handleBlur}
 				value={displayValue}
-				onChange={handleChange}
+				onValueChange={handleValueChange}
 				type={type}
 				{...rest}
 			/>
