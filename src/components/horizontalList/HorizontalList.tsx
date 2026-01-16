@@ -139,7 +139,7 @@ export function HorizontalList({
 	return (
 		<ScrollArea.Root
 			className={clsx(
-				'layer-components:(flex flex-col w-full)',
+				'layer-components:(w-full flex flex-col)',
 				'layer-components:max-h-300px',
 				className,
 			)}
@@ -149,8 +149,8 @@ export function HorizontalList({
 			<ScrollArea.Viewport ref={containerRef}>
 				<ScrollArea.Content
 					className={clsx(
-						'layer-components:(px-3 pt-3 pb-4 gap-2)',
-						'flex flex-row items-center gap-2 flex-shrink-0 w-max-content w-auto)',
+						'layer-components:(gap-2 px-3 pb-4 pt-3)',
+						'w-auto) w-max-content flex flex-shrink-0 flex-row items-center gap-2',
 						contentClassName,
 					)}
 					ref={contentRef}
@@ -163,9 +163,9 @@ export function HorizontalList({
 							onClick={toggleOpen}
 							emphasis="ghost"
 							className={clsx(
-								'layer-variants:(flex-shrink-0 sticky left-0 top-2 z-1)',
+								'layer-variants:(sticky left-0 top-2 z-1 flex-shrink-0)',
 								!open &&
-									'layer-variants:(rounded-none h-full border-r border-r-solid border-r-gray)',
+									'layer-variants:(h-full border-r rounded-none border-r-solid border-r-gray)',
 							)}
 						>
 							<Icon

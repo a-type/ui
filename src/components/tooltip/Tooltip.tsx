@@ -56,16 +56,16 @@ function Content({
 					<TooltipPrimitive.Popup
 						render={render}
 						className={classNames(
-							'layer-components:(relative rounded-sm py-xs px-sm text-sm leading-tight shadow-sm select-none flex transition)',
+							'layer-components:(relative flex select-none rounded-sm px-sm py-xs text-sm leading-tight shadow-sm transition)',
 							'layer-components:data-[instant]:transition-none',
-							'layer-components:data-[starting-style]:(opacity-0 scale-95)',
-							'layer-components:data-[ending-style]:(opacity-0 scale-95)',
+							'layer-components:data-[starting-style]:(scale-95 opacity-0)',
+							'layer-components:data-[ending-style]:(scale-95 opacity-0)',
 							'layer-components:transform-origin-[var(--transform-origin)]',
 							{
-								'layer-variants:(bg-black color-white)': color === 'contrast',
-								'layer-variants:(bg-white color-black border border-gray)':
+								'layer-variants:(color-white bg-black)': color === 'contrast',
+								'layer-variants:(border color-black bg-white border-gray)':
 									color === 'white' || color === 'neutral',
-								'layer-variants:(bg-attention-ink color-white)':
+								'layer-variants:(color-white bg-attention-ink)':
 									color === 'attention',
 							},
 							className,

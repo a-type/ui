@@ -167,15 +167,15 @@ export function CameraRoot({
 				ref={ref}
 				className={classNames(
 					'override-light',
-					'layer-components:([font-family:inherit] color-white bg-black rounded-lg overflow-hidden min-w-4 min-h-4 relative)',
-					fullscreen && 'fixed inset-0 w-full h-full z-1000 rounded-none',
+					'layer-components:([font-family:inherit] relative min-h-4 min-w-4 overflow-hidden rounded-lg color-white bg-black)',
+					fullscreen && 'fixed inset-0 z-1000 h-full w-full rounded-none',
 					className,
 				)}
 				{...rest}
 			>
 				<video
 					ref={videoRef}
-					className="w-full h-full object-cover"
+					className="h-full w-full object-cover"
 					autoPlay
 					muted
 					playsInline
@@ -298,7 +298,7 @@ export const CameraFullscreenButton = (props: ButtonProps) => {
 		<Button
 			{...props}
 			emphasis="ghost"
-			className="absolute top-2 right-2 color-white"
+			className="absolute right-2 top-2 color-white"
 			onClick={() => setFullscreen(!fullscreen)}
 		>
 			<Icon name={fullscreen ? 'x' : 'maximize'} />

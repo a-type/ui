@@ -105,11 +105,11 @@ export const SelectIcon = ({
 }) => {
 	return (
 		<BaseSelect.Icon
-			className={classNames('color-inherit ml-auto', className)}
+			className={classNames('ml-auto color-inherit', className)}
 			{...props}
 			ref={forwardedRef}
 		>
-			<Icon name="chevron" className="w-[12px] h-[12px] relative top-1px" />
+			<Icon name="chevron" className="relative top-1px h-[12px] w-[12px]" />
 		</BaseSelect.Icon>
 	);
 };
@@ -124,10 +124,10 @@ export const SelectArrow = ({ className, ...props }: SelectArrowProps) => (
 );
 
 const scrollArrowClass = clsx(
-	'layer-components:(w-full bg-white z-1 text-center cursor-default select-none rounded-sm h-1rem text-xs flex items-center justify-center)',
-	'layer-components:before:(content-empty absolute w-full h-full left-0)',
+	'layer-components:(z-1 h-1rem w-full flex cursor-default select-none items-center justify-center rounded-sm text-center text-xs bg-white)',
+	'layer-components:before:(absolute left-0 h-full w-full content-empty)',
 	'layer-components:data-[direction=up]:data-[side=none]:before:(-top-full)',
-	'layer-components:data-[direction=down]:(bottom-0 data-[side=none]:before:(-bottom-full))',
+	'layer-components:data-[direction=down]:(bottom-0 data-[side=none]:before:-bottom-full)',
 );
 
 const contentStyle = {
@@ -174,32 +174,32 @@ export const SelectContent = ({
 					sticky={sticky}
 					positionMethod={positionMethod}
 					className={classNames(
-						'layer-components:(z-1 outline-none select-none)',
+						'layer-components:(z-1 select-none outline-none)',
 						'layer-components:(transform-origin-[--transform-origin])',
 					)}
 				>
 					<SelectArrow
 						className={clsx(
-							'layer-components:(border-black transition transform)',
-							'layer-components:data-[closed]:(opacity-0 scale-0)',
-							'layer-components:data-[open]:(opacity-100 scale-100)',
+							'layer-components:(transform transition border-black)',
+							'layer-components:data-[closed]:(scale-0 opacity-0)',
+							'layer-components:data-[open]:(scale-100 opacity-100)',
 						)}
 					/>
 					<BaseSelect.Popup
 						className={classNames(
-							'layer-components:(overflow-hidden bg-white rounded-md border border-solid border border-black shadow-lg bg-clip-padding transition)',
+							'layer-components:(overflow-hidden border border rounded-md border-solid bg-clip-padding shadow-lg transition bg-white border-black)',
 							'layer-components:transform-origin-[var(--transform-origin)]',
-							'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
-							'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
-							'layer-components:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
-							'layer-components:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
-							'layer-components:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
-							'layer-components:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
-							'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
-							'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
+							'layer-components:data-[starting-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
+							'layer-components:data-[ending-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
+							'layer-components:data-[starting-style]:data-[side=top]:(translate-y--4px opacity-0)',
+							'layer-components:data-[ending-style]:data-[side=top]:(translate-y-0 opacity-0)',
+							'layer-components:data-[starting-style]:data-[side=right]:(translate-x-4px opacity-0)',
+							'layer-components:data-[ending-style]:data-[side=right]:(translate-x-0 opacity-0)',
+							'layer-components:data-[starting-style]:data-[side=left]:(translate-x--4px opacity-0)',
+							'layer-components:data-[ending-style]:data-[side=left]:(translate-x-0 opacity-0)',
 							'important:motion-reduce:animate-none',
-							'layer-components:data-[side=none]:(translate-y-0px min-w-[calc(var(--anchor-width)+2rem)])',
-							'layer-components:(min-w-[var(--anchor-width)] max-h-[var(--available-height)])',
+							'layer-components:data-[side=none]:(min-w-[calc(var(--anchor-width)+2rem)] translate-y-0px)',
+							'layer-components:(max-h-[var(--available-height)] min-w-[var(--anchor-width)])',
 							className,
 						)}
 						style={contentStyle}

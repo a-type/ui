@@ -19,7 +19,7 @@ export function getButtonClassName({
 }) {
 	if (emphasis === 'unstyled') {
 		return clsx(
-			'layer-components:(p-0 m-0 border-none bg-transparent appearance-none)',
+			'layer-components:(m-0 appearance-none border-none p-0 bg-transparent)',
 			'layer-components:(cursor-pointer)',
 			'layer-components:focus:outline-off',
 		);
@@ -27,49 +27,49 @@ export function getButtonClassName({
 
 	return clsx(
 		color && `palette-${color}`,
-		'layer-components:(leading-none font-inherit font-bold select-none leading-1)',
-		'layer-components:(border-solid border-thin border-color)',
+		'layer-components:(select-none font-bold leading-1 leading-none font-inherit)',
+		'layer-components:(border-thin border-solid border-color)',
 		'layer-components:(cursor-pointer)',
-		'layer-components:(flex flex-row gap-sm items-center)',
+		'layer-components:(flex flex-row items-center gap-sm)',
 		'layer-components:(relative overflow-visible whitespace-nowrap)',
 		'layer-components:(transition-all duration-200)',
 		'layer-components:(shadow-sm ring-bg)',
 		'layer-components:(color-contrast)',
 
-		emphasis === 'ghost' && 'layer-variants:(shadow-none border-none)',
+		emphasis === 'ghost' && 'layer-variants:(border-none shadow-none)',
 		emphasis === 'contrast' && 'layer-variants:(border-bg hover:bg-gray-ink)',
 
 		{
 			'layer-components:bg-main': emphasis === 'primary',
-			'layer-components:(bg-main-light color-main-ink)': emphasis === 'light',
+			'layer-components:(color-main-ink bg-main-light)': emphasis === 'light',
 			'layer-components:bg-white layer-variants:focus-visible:bg-white':
 				emphasis === 'default',
-			'layer-components:(bg-transparent aria-pressed:bg-main-wash color-main-ink)':
+			'layer-components:(color-main-ink bg-transparent aria-pressed:bg-main-wash)':
 				emphasis === 'ghost',
 			'layer-components:(bg-black)': emphasis === 'contrast',
 		},
-		color === 'gray' && '[--l-saturation:0] hov',
+		color === 'gray' && 'hov [--l-saturation:0]',
 
 		{
-			'layer-components:(px-4 py-2 text-md rounded-lg)': size === 'default',
-			'layer-components:(px-4 py-0.25 min-h-touch text-sm rounded-md)':
+			'layer-components:(rounded-lg px-4 py-2 text-md)': size === 'default',
+			'layer-components:(min-h-touch rounded-md px-4 py-0.25 text-sm)':
 				size === 'small',
-			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(p-2.35 text-sm rounded-lg)':
+			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2.35 text-sm)':
 				size === 'default' && !disableIconMode,
-			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(p-2 text-xs rounded-lg -m-y-0.5)':
+			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2 text-xs -m-y-0.5)':
 				size === 'small' && !disableIconMode,
 		},
 
-		'layer-components:hover:(bg-main bg-lighten-2 ring-4)',
+		'layer-components:hover:(ring-4 bg-main bg-lighten-2)',
 
 		'layer-components:focus:outline-off',
-		'layer-components:focus-visible:(outline-off ring-accent ring-6)',
-		'layer-components:[&[data-focus=true]]:(ring-6 ring-accent outline-off)',
+		'layer-components:focus-visible:(outline-off ring-6 ring-accent)',
+		'layer-components:[&[data-focus=true]]:(outline-off ring-6 ring-accent)',
 
-		'layer-components:active:(bg-darken-1 ring-8)',
+		'layer-components:active:(ring-8 bg-darken-1)',
 
-		'layer-components:disabled:(opacity-50 cursor-default shadow-none ring-none)',
-		'layer-components:[&[data-disabled=true]]:(opacity-50 cursor-default shadow-none)',
+		'layer-components:disabled:(cursor-default opacity-50 shadow-none ring-none)',
+		'layer-components:[&[data-disabled=true]]:(cursor-default opacity-50 shadow-none)',
 
 		{
 			'layer-variants:[&[aria-pressed=false]]:[&:not(:hover)]:bg-transparent':

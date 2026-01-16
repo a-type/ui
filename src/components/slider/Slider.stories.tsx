@@ -58,7 +58,7 @@ export const CustomStyles: Story = {
 					})}
 				>
 					<Slider.Indicator />
-					<Slider.Thumb className="w-24px h-24px">
+					<Slider.Thumb className="h-24px w-24px">
 						<div className="text-lg">
 							{['😭', '😔', '😐', '😊', '😃'][(value as number) + 2]}
 						</div>

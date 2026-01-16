@@ -131,12 +131,12 @@ export function ButtonRoot({
 							animate={{ width: 'auto', marginLeft: 0 }}
 							exit={{ width: 0, marginLeft: '-0.5rem' }}
 							className={clsx(
-								'flex-shrink-0 inline-block overflow-hidden my-auto flex',
+								'my-auto inline-block flex flex-shrink-0 overflow-hidden',
 								'[[data-has-icon=true]_&]:hidden',
 							)}
 							data-default-loader
 						>
-							<Spinner size={15} className="inline-block w-1em h-1em" />
+							<Spinner size={15} className="inline-block h-1em w-1em" />
 						</motion.div>
 					)}
 				</AnimatePresence>
@@ -166,7 +166,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 		<Icon
 			aria-hidden
 			name="check"
-			className="transition-width w-0 ml--1"
+			className="ml--1 w-0 transition-width"
 			style={{
 				width: value ? '15px' : 0,
 			}}

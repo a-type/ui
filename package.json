@@ -91,6 +91,7 @@
 		"@types/web-app-manifest": "^1.0.9",
 		"@unocss/cli": "66.5.4",
 		"@unocss/core": "66.5.4",
+		"@unocss/eslint-config": "^66.6.0",
 		"@unocss/transformer-variant-group": "66.5.4",
 		"@vitejs/plugin-react": "^5.1.0",
 		"@vitest/browser-playwright": "^4.0.6",

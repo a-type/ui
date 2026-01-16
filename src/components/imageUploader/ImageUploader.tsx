@@ -146,7 +146,7 @@ export function ImageUploaderRoot({
 					accept="image/*"
 					onChange={onFileChange}
 					onClick={onFileClick}
-					className="absolute inset-0 pointer-events-none op-0"
+					className="pointer-events-none absolute inset-0 op-0"
 					id={inputId}
 				/>
 				{children}
@@ -193,7 +193,7 @@ function ImageUploaderPrebuilt({
 			</ImageUploaderEmptyControls>
 			{!props.value && cameraOpen && (
 				<CameraRoot
-					className="absolute w-full h-full z-1"
+					className="absolute z-1 h-full w-full"
 					format="image/png"
 					onCapture={(file) => {
 						props.onChange(file);
@@ -208,7 +208,7 @@ function ImageUploaderPrebuilt({
 						onClick={() => setCameraOpen(false)}
 						emphasis="ghost"
 						size="small"
-						className="color-white absolute top-2 left-2"
+						className="absolute left-2 top-2 color-white"
 					>
 						Cancel
 					</Button>
@@ -268,7 +268,7 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 		<Button
 			emphasis="ghost"
 			className={clsx(
-				'layer-variants:(absolute top-2 right-2 w-32px h-32px border-none p-2 cursor-pointer bg-white color-black rounded-lg transition-colors shadow-sm z-10)',
+				'layer-variants:(absolute right-2 top-2 z-10 h-32px w-32px cursor-pointer rounded-lg border-none p-2 shadow-sm transition-colors color-black bg-white)',
 				className,
 			)}
 			onClick={() => onChange(null)}
@@ -288,7 +288,7 @@ export function ImageUploaderDisplay({
 		<img
 			src={value}
 			className={clsx(
-				'layer-components:(w-full h-full object-cover object-center rounded-lg)',
+				'layer-components:(h-full w-full rounded-lg object-cover object-center)',
 				className,
 			)}
 			{...rest}
@@ -310,7 +310,7 @@ export function ImageUploaderEmptyControls({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(absolute bg-gray-light inset-0 flex flex-col items-center justify-center gap-3 rounded-lg)',
+				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-light)',
 				{
 					'layer-components:bg-darken-2': draggingOver,
 				},

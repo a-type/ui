@@ -25,7 +25,7 @@ export const Spinner = function Spinner({
 			role="progressbar"
 			{...props}
 			className={classNames(
-				'flex-shrink-0 inline-block animate-spin animate-ease-linear animate-iteration-infinite color-inherit animate-duration-1400 transform-origin-[50%_50%]',
+				'inline-block flex-shrink-0 transform-origin-[50%_50%] animate-spin animate-duration-1400 animate-ease-linear animate-iteration-infinite color-inherit',
 				className,
 			)}
 			style={{ width: size, height: size, ...style }}
@@ -37,7 +37,7 @@ export const Spinner = function Spinner({
 				} ${CIRCLE_SIZE} ${CIRCLE_SIZE}`}
 			>
 				<circle
-					className="stroke-current animate-spinner-stroke animate-ease-in-out animate-iteration-infinite animate-duration-1400 [stroke-dasharray:80_200] [stroke-dashoffset:0]"
+					className="[stroke-dasharray:80_200] [stroke-dashoffset:0] animate-spinner-stroke animate-duration-1400 animate-ease-in-out animate-iteration-infinite stroke-current"
 					cx={CIRCLE_SIZE}
 					cy={CIRCLE_SIZE}
 					r={(CIRCLE_SIZE - thickness) / 2}
@@ -58,7 +58,7 @@ export const FullScreenSpinner = function FullScreenSpinner({
 	return (
 		<div
 			ref={ref}
-			className="flex flex-row gap-4 w-full flex-1 justify-center items-center self-stretch"
+			className="w-full flex flex-1 flex-row items-center self-stretch justify-center gap-4"
 		>
 			<Spinner {...props} />
 		</div>

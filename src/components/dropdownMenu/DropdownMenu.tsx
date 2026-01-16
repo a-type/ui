@@ -42,10 +42,10 @@ const StyledContent = withClassName(
 	'will-change-transform',
 );
 const itemClassName = classNames(
-	'layer-components:(text-md leading-4 color-main-ink flex items-center pr-4 pl-8 py-sm min-h-touch-large relative text-left select-none cursor-pointer)',
-	'layer-components:[&[data-disabled]]:(color-gray-dark bg-white pointer-events-none)',
-	'layer-components:focus-visible:(bg-main-light color-black)',
-	'layer-components:hover:(bg-main-light color-black)',
+	'layer-components:(relative min-h-touch-large flex cursor-pointer select-none items-center py-sm pl-8 pr-4 text-left text-md leading-4 color-main-ink)',
+	'layer-components:[&[data-disabled]]:(pointer-events-none color-gray-dark bg-white)',
+	'layer-components:focus-visible:(color-black bg-main-light)',
+	'layer-components:hover:(color-black bg-main-light)',
 	'layer-components:focus:outline-none',
 );
 const StyledItemBase = withClassName(BaseMenu.Item, itemClassName);
@@ -161,7 +161,7 @@ export const DropdownMenuContent = ({
 				positionMethod={positionMethod}
 			>
 				<StyledContent {...props}>
-					<div className="layer-components:(overflow-y-auto overflow-x-hidden overflow-unstable max-h-full rounded-md min-h-0)">
+					<div className="layer-components:(max-h-full min-h-0 overflow-x-hidden rounded-md overflow-y-auto overflow-unstable)">
 						{children}
 					</div>
 					<StyledArrow />

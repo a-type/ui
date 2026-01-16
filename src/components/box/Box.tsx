@@ -100,7 +100,7 @@ export function Box({
 			{...rest}
 			style={style}
 			className={clsx(
-				'layer-components:flex layer-components:relative',
+				'layer-components:relative layer-components:flex',
 				color && `palette-${color}`,
 				{
 					'layer-components:flex-row': hasDefault(direction, 'row') && !col,
@@ -187,9 +187,9 @@ export function Box({
 						(rounded === undefined && (surface || border)),
 					'layer-components:rounded-xl': rounded === 'xl',
 
-					'layer-components:(bg-white border-gray-dark color-black)':
+					'layer-components:(color-black bg-white border-gray-dark)':
 						surface === 'white',
-					'layer-components:(bg-main-wash border-main-dark color-main-ink)':
+					'layer-components:(color-main-ink bg-main-wash border-main-dark)':
 						surface === true,
 
 					'layer-components:(border border-solid)': border,
@@ -197,9 +197,9 @@ export function Box({
 					'layer-components:h-full': full === true || full === 'height',
 					'layer-components:overflow-hidden': overflow === 'hidden',
 					'layer-components:overflow-auto': overflow === 'auto',
-					'layer-components:(overflow-x-auto overflow-y-hidden)':
+					'layer-components:(overflow-y-hidden overflow-x-auto)':
 						overflow === 'auto-x',
-					'layer-components:(overflow-y-auto overflow-x-hidden)':
+					'layer-components:(overflow-x-hidden overflow-y-auto)':
 						overflow === 'auto-y',
 					'layer-components:flex-grow': grow,
 					'layer-components:@container': container === true,

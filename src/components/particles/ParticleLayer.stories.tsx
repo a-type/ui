@@ -20,7 +20,7 @@ type Story = StoryObj<typeof ParticleLayer>;
 export const Default: Story = {
 	render() {
 		return (
-			<div className="w-full h-[100vh] relative flex flex-col items-center justify-center">
+			<div className="relative h-[100vh] w-full flex flex-col items-center justify-center">
 				<ExplodeButton />
 			</div>
 		);
@@ -54,7 +54,7 @@ export const HiddenTest: Story = {
 		return (
 			<>
 				<div
-					className="w-full relative flex flex-col items-center justify-center p-10"
+					className="relative w-full flex flex-col items-center justify-center p-10"
 					style={{ visibility: hide ? 'hidden' : 'visible' }}
 				>
 					<Icon name="placeholder" ref={targetRef} />

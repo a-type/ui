@@ -15,8 +15,8 @@ export function Chip({ className, color, ...rest }: ChipProps) {
 		<SlotDiv
 			className={classNames(
 				color && `palette-${color}`,
-				'layer-composed:(inline-flex flex-row gap-1 items-center whitespace-nowrap font-normal)',
-				'layer-composed:(bg-main-wash color-contrast border-light border-solid border rounded-lg)',
+				'layer-composed:(inline-flex flex-row items-center gap-1 whitespace-nowrap font-normal)',
+				'layer-composed:(border border-light rounded-lg border-solid color-contrast bg-main-wash)',
 				'layer-composed:(px-sm py-xs text-xs)',
 				className,
 			)}

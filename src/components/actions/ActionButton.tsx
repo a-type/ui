@@ -43,7 +43,7 @@ export function ActionButton({
 					size="small"
 					disableIconMode
 					className={classNames(
-						'layer-variants:(font-normal m-2 mx-1)',
+						'layer-variants:(m-2 mx-1 font-normal)',
 						className,
 					)}
 					{...rest}

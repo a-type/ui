@@ -29,14 +29,14 @@ export function CheckboxRoot({
 		<BaseCheckbox.Root
 			{...props}
 			className={classNames(
-				'layer-components:(block w-28px h-28px flex-shrink-0 relative bg-white border border-default transition-all rounded-lg shadow-sm cursor-pointer)',
+				'layer-components:(relative block h-28px w-28px flex-shrink-0 cursor-pointer border border-default rounded-lg shadow-sm transition-all bg-white)',
 				'layer-components:focus-visible:(outline-off ring-4 ring-accent)',
 				checkedMode === 'faded'
-					? 'layer-components:data-[checked]:(bg-main animate-checkbox-fade animate-forwards)'
+					? 'layer-components:data-[checked]:(animate-checkbox-fade animate-forwards bg-main)'
 					: 'layer-components:data-[checked]:(bg-main border-main-ink)',
-				'layer-components:[&:hover:not(:disabled)]:(bg-lighten-2 ring-bg ring-2)',
-				'layer-components:[&:active:not(:disabled)]:(bg-darken-1 ring-4)',
-				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
+				'layer-components:[&:hover:not(:disabled)]:(ring-2 bg-lighten-2 ring-bg)',
+				'layer-components:[&:active:not(:disabled)]:(ring-4 bg-darken-1)',
+				'layer-components:[&:disabled]:(shadow-none bg-transparent border-gray-light)',
 				className,
 			)}
 		/>

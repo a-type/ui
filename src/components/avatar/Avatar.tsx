@@ -31,9 +31,9 @@ export function Avatar({
 		<BaseAvatar.Root
 			data-pop={popIn}
 			className={classNames(
-				'layer-components:(flex items-center justify-center rounded-lg border-default overflow-hidden w-24px aspect-1 select-none relative bg-white flex-shrink-0)',
+				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden border-default rounded-lg bg-white)',
 				popIn &&
-					'layer-variants:(animate-pop-in-from-half animate-ease-springy animate-duration-200)',
+					'layer-variants:(animate-pop-in-from-half animate-duration-200 animate-ease-springy)',
 				empty && 'layer-components:(border-dashed bg-gray-light)',
 				className,
 			)}
@@ -42,7 +42,7 @@ export function Avatar({
 		>
 			{imageSrc && (
 				<BaseAvatar.Image
-					className="w-full h-full object-cover"
+					className="h-full w-full object-cover"
 					referrerPolicy="no-referrer"
 					src={imageSrc}
 					alt={`${name ?? 'user'}'s profile picture`}

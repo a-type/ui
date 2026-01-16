@@ -9,7 +9,7 @@ export function PageFixedArea({
 		<div
 			{...props}
 			className={classNames(
-				'layer-components:(sticky top-0 z-nav bg-wash w-full items-stretch gap-2 flex flex-col)',
+				'layer-components:(sticky top-0 z-nav w-full flex flex-col items-stretch gap-2 bg-wash)',
 				className,
 			)}
 		/>

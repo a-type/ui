@@ -31,7 +31,7 @@ export const EmojiPickerViewport = ({
 }: EmojiPickerViewportProps) => (
 	<Box
 		className={clsx(
-			'layer-components:(flex-1 min-h-0 overflow-hidden rounded-md bg-white)',
+			'layer-components:(min-h-0 flex-1 overflow-hidden rounded-md bg-white)',
 			className,
 		)}
 	>
@@ -59,7 +59,7 @@ export const EmojiPickerCategoryHeader = (
 ) => (
 	<div
 		className={clsx(
-			'layer-components:(bg-inherit px-md py-sm text-xs font-semibold color-gray-dark sticky top-0)',
+			'layer-components:(sticky top-0 px-md py-sm text-xs font-semibold color-gray-dark bg-inherit)',
 			props.className,
 		)}
 	>
@@ -79,7 +79,7 @@ export const EmojiPickerEmoji = withClassName(
 			toggleMode="color"
 			size="small"
 			aria-label={p.emoji.label}
-			className="text-lg p-xs"
+			className="p-xs text-lg"
 		>
 			<Button.Icon>{p.emoji.emoji}</Button.Icon>
 		</Button>
@@ -130,7 +130,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 					toggleMode="color"
 					size="small"
 					aria-label={`Skin tone ${option}`}
-					className="text-md p-xs"
+					className="p-xs text-md"
 					onClick={() => setSkinTone(option.skinTone)}
 				>
 					<Button.Icon>{option.emoji}</Button.Icon>

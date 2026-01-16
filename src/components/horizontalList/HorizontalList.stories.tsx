@@ -37,7 +37,7 @@ const meta = {
 				<Button size="small">Twenty four</Button>
 				<Button
 					color="primary"
-					className="sticky right-2 bottom-2 flex-shrink-0 shadow-sm ml-auto"
+					className="sticky bottom-2 right-2 ml-auto flex-shrink-0 shadow-sm"
 				>
 					<Icon name="plus" />
 				</Button>
@@ -57,17 +57,17 @@ export const Default: Story = {
 	render: (args) => {
 		const [open, setOpen] = useState(false);
 		return (
-			<div className="bg-black flex flex-col items-center h-full min-h-80vh">
-				<div className="bg-white w-400px flex flex-col items-stretch flex-1">
+			<div className="h-full min-h-80vh flex flex-col items-center bg-black">
+				<div className="w-400px flex flex-1 flex-col items-stretch bg-white">
 					<Button
 						toggled={open}
 						onClick={() => setOpen(!open)}
-						className="mt-auto mb-1 mr-1 self-end"
+						className="mb-1 mr-1 mt-auto self-end"
 					>
 						{open ? 'Close' : 'Open'}
 					</Button>
 					<HorizontalList
-						className="border-t border-t-solid border-t-black max-h-200px"
+						className="max-h-200px border-t border-t-solid border-t-black"
 						openDirection="up"
 						{...args}
 						open={open}
@@ -83,9 +83,9 @@ export const CantOpen: Story = {
 	render: (args) => {
 		const [more, setMore] = useState(false);
 		return (
-			<div className="bg-white w-full flex flex-col items-stretch h-full justify-end">
+			<div className="h-full w-full flex flex-col items-stretch justify-end bg-white">
 				<HorizontalList
-					className="border-t border-t-solid border-t-black max-h-200px"
+					className="max-h-200px border-t border-t-solid border-t-black"
 					openDirection="up"
 					{...args}
 				>
@@ -113,7 +113,7 @@ export const CantOpen: Story = {
 					)}
 					<Button
 						color="primary"
-						className="sticky right-2 bottom-2 flex-shrink-0 shadow-sm ml-auto"
+						className="sticky bottom-2 right-2 ml-auto flex-shrink-0 shadow-sm"
 					>
 						<Icon name="plus" />
 					</Button>

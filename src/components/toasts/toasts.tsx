@@ -51,19 +51,19 @@ function ToastList() {
 			className={clsx(
 				// variable setup
 				'[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))]',
-				'[--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))]',
+				'[--height:var(--toast-frontmost-height,var(--toast-height))] [--shrink:calc(1-var(--scale))]',
 				'[--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]',
 				// basic positioning
-				'fixed left-0 top-xs left-auto z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
+				'fixed left-0 left-auto top-xs z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
 				'h-[--height]',
-				'flex flex-col gap-xs items-center',
+				'flex flex-col items-center gap-xs',
 				// other properties
 				'select-none',
 				// animation and interaction
 				'translate-x-[--toast-swipe-movement-x] translate-y-[calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height)))] scale-[var(--scale)]',
 				'[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
 				// ::after
-				'after:(absolute top-full left-0 h-[calc(var(--gap)+1px)] w-full content-empty)',
+				'after:(absolute left-0 top-full h-[calc(var(--gap)+1px)] w-full content-empty)',
 				// starting style
 				'data-[starting-style]:(-translate-y-150%)',
 				// limited
@@ -73,7 +73,7 @@ function ToastList() {
 				// ending styles
 				'data-[ending-style]:(opacity-0)',
 				// natural or close button
-				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(-translate-y-150% scale-90 opacity-50)',
+				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(scale-90 opacity-50 -translate-y-150%)',
 				// swiping down
 				'data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
 				'data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
@@ -95,22 +95,22 @@ function ToastList() {
 				mode === 'dark' ? 'override-light' : 'override-dark',
 			)}
 		>
-			<Toast.Content className="[&[data-behind]:not([data-expanded])]:pointer-events-none flex flex-col gap-2px max-w-sm">
+			<Toast.Content className="max-w-sm flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
 				<div
 					className={clsx(
-						'layer-components:(bg-main-wash color-black rounded-md b-1 b-solid b-black shadow-md pl-md pr-sm py-sm relative)',
+						'layer-components:(relative b-1 b-black rounded-md b-solid py-sm pl-md pr-sm shadow-md color-black bg-main-wash)',
 						'layer-components:(flex flex-row gap-sm)',
-						'[[data-behind]:not([data-expanded])_&]:(bg-darken-2 max-h-[--height])',
+						'[[data-behind]:not([data-expanded])_&]:(max-h-[--height] bg-darken-2)',
 					)}
 				>
 					<div
 						className={clsx(
-							'flex flex-row gap-xs items-center',
-							'[[data-behind]:not([data-expanded])_&]:(opacity-0) [[data-expanded]_&]:(opacity-100) transition-opacity [transition-duration:250ms]',
+							'flex flex-row items-center gap-xs',
+							'[transition-duration:250ms] transition-opacity [[data-behind]:not([data-expanded])_&]:(opacity-0) [[data-expanded]_&]:(opacity-100)',
 						)}
 					>
 						<div className="flex flex-col gap-xs">
-							<Toast.Title className="text-sm leading-tight font-bold m-0" />
+							<Toast.Title className="m-0 text-sm font-bold leading-tight" />
 							<div className="flex gap-sm">
 								{toast.data?.loading ? (
 									<Spinner size={15} className="relative top-2px" />
@@ -127,7 +127,7 @@ function ToastList() {
 										className="relative top-2px"
 									/>
 								) : null}
-								<Toast.Description className="text-sm m-0" />
+								<Toast.Description className="m-0 text-sm" />
 							</div>
 						</div>
 						<Toast.Close
@@ -142,7 +142,7 @@ function ToastList() {
 					</div>
 				</div>
 				{toast.data?.actions && (
-					<div className="flex gap-xxs items-center ml-auto [[data-behind]:not([data-expanded])_&]:(opacity-0) transition-opacity">
+					<div className="ml-auto flex items-center gap-xxs transition-opacity [[data-behind]:not([data-expanded])_&]:(opacity-0)">
 						{toast.data.actions.toReversed().map((action, index: number) => (
 							<Toast.Action
 								key={index}

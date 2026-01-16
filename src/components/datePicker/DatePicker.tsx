@@ -67,7 +67,7 @@ function DatePickerRoot({
 		<div
 			className={clsx(
 				color && `palette-${color}`,
-				'layer-components:(flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)])',
+				'layer-components:(w-[calc(var(--day-size,32px)*7)] flex flex-col items-center justify-center)',
 				className,
 			)}
 			{...rest}

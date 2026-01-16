@@ -173,7 +173,7 @@ export const Inheritance: Story = {
 		return (
 			<Box color="primary" surface p="xl" className="theme" style={style}>
 				<Box
-					className="border-bg border-darken-5 color-bg color-darken-5"
+					className="color-bg color-darken-5 border-bg border-darken-5"
 					border
 					p="xl"
 				>
@@ -190,61 +190,61 @@ export const TweakOpacity: Story = {
 		return (
 			<Box color="accent" surface className="h-32" full="width" p gap>
 				<Box
-					className="bg-primary/100 h-full color-primary-dark/100 ring ring-primary-light/100 border border-black/100"
+					className="h-full border ring color-primary-dark/100 bg-primary/100 border-black/100 ring-primary-light/100"
 					grow
 				>
 					100
 				</Box>
 				<Box
-					className="bg-primary/90 h-full color-primary-dark/90 ring ring-primary-light/90 border border-black/90"
+					className="h-full border ring color-primary-dark/90 bg-primary/90 border-black/90 ring-primary-light/90"
 					grow
 				>
 					90
 				</Box>
 				<Box
-					className="bg-primary/80 h-full color-primary-dark/80 ring ring-primary-light/80 border border-black/80"
+					className="h-full border ring color-primary-dark/80 bg-primary/80 border-black/80 ring-primary-light/80"
 					grow
 				>
 					80
 				</Box>
 				<Box
-					className="bg-primary/70 h-full color-primary-dark/70 ring ring-primary-light/70 border border-black/70"
+					className="h-full border ring color-primary-dark/70 bg-primary/70 border-black/70 ring-primary-light/70"
 					grow
 				>
 					70
 				</Box>
 				<Box
-					className="bg-primary/60 h-full color-primary-dark/60 ring ring-primary-light/60 border border-black/60"
+					className="h-full border ring color-primary-dark/60 bg-primary/60 border-black/60 ring-primary-light/60"
 					grow
 				>
 					60
 				</Box>
 				<Box
-					className="bg-primary/50 h-full color-primary-dark/50 ring ring-primary-light/50 border border-black/50"
+					className="h-full border ring color-primary-dark/50 bg-primary/50 border-black/50 ring-primary-light/50"
 					grow
 				>
 					50
 				</Box>
 				<Box
-					className="bg-primary/40 h-full color-primary-dark/40 ring ring-primary-light/40 border border-black/40"
+					className="h-full border ring color-primary-dark/40 bg-primary/40 border-black/40 ring-primary-light/40"
 					grow
 				>
 					40
 				</Box>
 				<Box
-					className="bg-primary/30 h-full color-primary-dark/30 ring ring-primary-light/30 border border-black/30"
+					className="h-full border ring color-primary-dark/30 bg-primary/30 border-black/30 ring-primary-light/30"
 					grow
 				>
 					30
 				</Box>
 				<Box
-					className="bg-primary/20 h-full color-primary-dark/20 ring ring-primary-light/20 border border-black/20"
+					className="h-full border ring color-primary-dark/20 bg-primary/20 border-black/20 ring-primary-light/20"
 					grow
 				>
 					20
 				</Box>
 				<Box
-					className="bg-primary/10 h-full color-primary-dark/10 ring ring-primary-light/10 border border-black/10"
+					className="h-full border ring color-primary-dark/10 bg-primary/10 border-black/10 ring-primary-light/10"
 					grow
 				>
 					10

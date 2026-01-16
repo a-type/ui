@@ -48,7 +48,7 @@ export const Default: Story = {
 export const ConstraintTest: Story = {
 	render({ direction }) {
 		return (
-			<ScrollArea direction={direction} className="w-300px h-300px">
+			<ScrollArea direction={direction} className="h-300px w-300px">
 				<ScrollArea.Content>
 					<Box gap>
 						<Input placeholder="Test input" />

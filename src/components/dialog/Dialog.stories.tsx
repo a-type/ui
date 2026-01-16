@@ -34,7 +34,7 @@ function DummyContent() {
 	return (
 		<div className="col">
 			<H1>Some content</H1>
-			<div className="overflow-y-auto max-h-20vh">
+			<div className="max-h-20vh overflow-y-auto">
 				<P>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
 					porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget
@@ -127,7 +127,7 @@ export const Positioned: Story = {
 			<ParticleLayer noPortal>
 				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
-				<DialogContent className="top-auto bottom-0px">
+				<DialogContent className="bottom-0px top-auto">
 					<DialogTitle>Hello world</DialogTitle>
 					<DialogActions>
 						<DialogClose />
@@ -169,7 +169,7 @@ export const VirtualKeyboard: Story = {
 						</DialogActions>
 					</DialogContent>
 				</Dialog>
-				<div className="fixed bottom-0 h-[var(--mock-virtual-keyboard-height,0)] bg-black w-full transition-height left-0 right-0" />
+				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-black" />
 			</Provider>
 		);
 	},

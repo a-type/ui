@@ -30,7 +30,7 @@ export const LightboxClose = (props: DialogCloseProps) => (
 				<Icon name="x" />
 			</Button>
 		}
-		className="absolute top-md right-md"
+		className="absolute right-md top-md"
 	/>
 );
 

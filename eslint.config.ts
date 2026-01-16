@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import unocss from '@unocss/eslint-config/flat';
 import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
@@ -18,6 +19,7 @@ export default defineConfig([
 	},
 	tseslint.configs.recommended,
 	pluginReact.configs.flat['jsx-runtime'],
+	unocss as any,
 
 	{
 		rules: {

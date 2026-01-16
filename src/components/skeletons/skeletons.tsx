@@ -15,7 +15,7 @@ export const TextSkeleton = ({
 	return (
 		<span
 			className={classNames(
-				'inline-block shrink-0 w-full h-full rounded-md bg-gradient-to-r from-transparent via-fg to-transparent [background-size:400%_400%] max-w-full animate-skeleton animate-duration-1200 animate-ease-in-out animate-iteration-infinite animate-alternate opacity-30',
+				'[background-size:400%_400%] inline-block h-full max-w-full w-full shrink-0 animate-skeleton animate-duration-1200 animate-ease-in-out animate-alternate animate-iteration-infinite rounded-md from-transparent via-fg to-transparent bg-gradient-to-r opacity-30',
 				className,
 			)}
 			style={{

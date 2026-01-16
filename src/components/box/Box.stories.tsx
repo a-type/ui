@@ -134,7 +134,7 @@ function SurfaceContent({ name }: { name: string }) {
 export const Surfaces: Story = {
 	render(args) {
 		return (
-			<div className="grid gap-lg grid-cols-2 md:grid-cols-3 bg-wash" {...args}>
+			<div className="grid grid-cols-2 gap-lg bg-wash md:grid-cols-3" {...args}>
 				<Box {...args} surface="white" p="lg" col gap>
 					<SurfaceContent name="White" />
 				</Box>

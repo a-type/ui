@@ -58,7 +58,7 @@ export function Peek({ peekHeight = 120, children, className }: PeekProps) {
 		<div
 			className={classNames(
 				'relative',
-				'[&[data-state=closed]]:max-h-[var(--peek-height,120px)] overflow-hidden',
+				'overflow-hidden [&[data-state=closed]]:max-h-[var(--peek-height,120px)]',
 				hasInteracted.current &&
 					'animate-ease-default animate-forwards [&[data-state=closed]]:(animate-keyframes-peek-close animate-duration-300) [&[data-state=open]]:(animate-keyframes-peek-open animate-duration-600 animate-forwards)',
 				className,
@@ -79,10 +79,10 @@ export function Peek({ peekHeight = 120, children, className }: PeekProps) {
 				<button
 					data-state={open ? 'open' : 'closed'}
 					className={classNames(
-						'h-80px absolute bottom-0 z-1 bg-transparent border-none w-full cursor-pointer border-b border-b-solid border-white',
+						'absolute bottom-0 z-1 h-80px w-full cursor-pointer border-b border-none border-b-solid bg-transparent border-white',
 						'animate-fade-in',
-						'focus-visible:(outline-none bg-gradient-to-b from-transparent to-primary-wash border-b border-b-solid border-main',
-						'after:(content-["-_tap_to_expand_-"] p-3 color-gray-dark text-xs flex flex-col justify-end items-center absolute inset-0 top-auto h-80px bg-gradient-to-b from-transparent to-white)',
+						'focus-visible:(outline-none border-b border-b-solid from-transparent to-primary-wash bg-gradient-to-b border-main',
+						'after:(absolute inset-0 top-auto h-80px flex flex-col items-center justify-end from-transparent to-white bg-gradient-to-b p-3 text-xs content-["-_tap_to_expand_-"] color-gray-dark)',
 						'after:[&[data-state=open]]:content-["-_tap_to_collapse_-"]',
 					)}
 					onClick={toggle}

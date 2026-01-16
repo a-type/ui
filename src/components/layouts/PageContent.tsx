@@ -36,7 +36,7 @@ export function PageContent({
 			container="reset"
 			className={classNames(
 				'[grid-area:content]',
-				'layer-components:(max-w-full min-w-0 flex-1-0-auto mx-auto)',
+				'layer-components:flex-1-0-auto layer-components:(mx-auto max-w-full min-w-0)',
 				className,
 			)}
 			ref={finalRef}

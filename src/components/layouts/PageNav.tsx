@@ -26,9 +26,9 @@ export function PageNav({
 		<HideWhileKeyboardOpen
 			{...props}
 			className={classNames(
-				'layer-components:([grid-area:nav] sticky bottom-0 bg-inherit z-[var(--z-nav)] pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))])',
-				'layer-components:before:(content-[""] absolute inset-x-4 top-0 h-px bg-gray-dark/80)',
-				'layer-components:md:([grid-area:nav] sticky top-lg h-auto bottom-auto left-auto right-auto) layer-components:md:before:(hidden)',
+				'layer-components:([grid-area:nav] sticky bottom-0 z-[var(--z-nav)] pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))] bg-inherit)',
+				'layer-components:before:(absolute inset-x-4 top-0 h-px content-[""] bg-gray-dark/80)',
+				'layer-components:md:([grid-area:nav] sticky bottom-auto left-auto right-auto top-lg h-auto) layer-components:md:before:(hidden)',
 				className,
 			)}
 			ref={ref}

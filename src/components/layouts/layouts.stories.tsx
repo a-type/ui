@@ -135,7 +135,7 @@ export const ManualWidth: Story = {
 
 export const WithoutNav: Story = {
 	render: () => (
-		<PageRoot className="w-full h-full">
+		<PageRoot className="h-full w-full">
 			<PageContent>
 				<div className="text-center">
 					<h1 className="text-3xl font-bold">Hello, World!</h1>
@@ -170,7 +170,7 @@ export const WithVirtualKeyboard: Story = {
 		}, [keyboard]);
 
 		return (
-			<PageRoot className="w-full h-full">
+			<PageRoot className="h-full w-full">
 				<PageContent>
 					<div className="text-center">
 						<h1 className="text-3xl font-bold">Hello, World!</h1>
@@ -200,7 +200,7 @@ export const WithVirtualKeyboard: Story = {
 						</NavBarItem>
 					</NavBarRoot>
 				</PageNav>
-				<div className="fixed bottom-0 h-[var(--mock-virtual-keyboard-height,0)] bg-black w-full transition-height left-0 right-0" />
+				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-black" />
 			</PageRoot>
 		);
 	},

@@ -58,16 +58,16 @@ export function CardMain({
 	const rootProps = {
 		...rest,
 		className: classNames(
-			'layer-components:(flex flex-col items-start gap-1 transition pb-xs flex-1 min-h-40px bg-transparent)',
-			'layer-components:(border-none text-start text-inherit text-sm relative z-1 p-0 font-inherit outline-none rounded-t-md)',
+			'layer-components:(min-h-40px flex flex-1 flex-col items-start gap-1 pb-xs transition bg-transparent)',
+			'layer-components:(relative z-1 rounded-t-md border-none p-0 text-start text-sm text-inherit font-inherit outline-none)',
 			!!compact && 'layer-variants:(pb-0)',
 			isInteractive &&
 				classNames(
 					'layer-components:cursor-pointer',
-					'layer-components:hover:(bg-black/10 color-black)',
+					'layer-components:hover:(color-black bg-black/10)',
 					'layer-components:focus:outline-none',
-					'layer-components:focus-visible:(outline-none bg-black/10 ring-inset ring-4 ring-accent)',
-					'layer-components:data-[visually-focused]:(bg-black/10 ring-inset ring-4 ring-accent)',
+					'layer-components:focus-visible:(outline-none ring-4 ring-inset bg-black/10 ring-accent)',
+					'layer-components:data-[visually-focused]:(ring-4 ring-inset bg-black/10 ring-accent)',
 					'layer-components:disabled:(cursor-default)',
 					'layer-components:data-[visually-disabled]:(cursor-default)',
 				),

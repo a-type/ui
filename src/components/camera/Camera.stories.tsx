@@ -40,7 +40,7 @@ function CameraDemo({ facingMode }: { facingMode?: 'user' | 'environment' }) {
 			<Camera
 				facingMode={facingMode}
 				onCapture={setLatest}
-				className="w-64 h-64"
+				className="h-64 w-64"
 			/>
 			{latest && <img src={dataUri} className="w-full" />}
 		</div>

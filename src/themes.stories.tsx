@@ -65,7 +65,7 @@ function DemoUI({ className }: { className?: string }) {
 	return (
 		<PageRoot className={clsx('flex-1', className)}>
 			<PageContent>
-				<div className={clsx('grid gap-2 grid-cols-2')}>
+				<div className={clsx('grid grid-cols-2 gap-2')}>
 					<Box gap wrap p>
 						<Button color="primary" emphasis="primary">
 							Primary

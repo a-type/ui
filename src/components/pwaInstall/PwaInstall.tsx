@@ -55,7 +55,7 @@ export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 			}}
 		>
 			<Dialog.Content className="flex flex-col gap-xs" id="pwa-install-dialog">
-				<Dialog.Title className="flex flex-row gap-md items-center">
+				<Dialog.Title className="flex flex-row items-center gap-md">
 					{primaryIcon && (
 						<img
 							src={primaryIcon.src}
@@ -65,7 +65,7 @@ export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 								manifest?.name ??
 								'App Icon'
 							}
-							className="inline-block w-1em h-1em rounded"
+							className="inline-block h-1em w-1em rounded"
 						/>
 					)}
 					Install {manifest?.short_name ?? manifest?.name ?? 'App'}

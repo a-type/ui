@@ -34,7 +34,7 @@ function ImageUploaderDemo() {
 				file ? setValue(URL.createObjectURL(file)) : setValue(null)
 			}
 			value={value}
-			className="w-64 h-64"
+			className="h-64 w-64"
 		/>
 	);
 }

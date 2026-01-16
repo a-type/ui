@@ -84,7 +84,7 @@ export function ColorSwatch({
 	return (
 		<div
 			className={classNames(
-				'bg-main w-16px h-16px rounded-sm',
+				'h-16px w-16px rounded-sm bg-main',
 				`palette-${value ?? 'lemon'}`,
 				className,
 			)}

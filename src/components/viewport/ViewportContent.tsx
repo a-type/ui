@@ -90,7 +90,7 @@ export function ViewportContent({
 		<motion.div
 			{...rest}
 			className={clsx(
-				'layer-components:(absolute overflow-visible overscroll-none touch-none transform-origin-center select-none)',
+				'layer-components:(absolute transform-origin-center touch-none select-none overflow-visible overscroll-none)',
 				className,
 			)}
 			ref={finalRef}

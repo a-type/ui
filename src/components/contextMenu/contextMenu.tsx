@@ -22,10 +22,10 @@ export const ContextMenuContent = function Content({
 				<GroupScaleReset>
 					<BaseContextMenu.Popup
 						className={classNames(
-							'layer-components:(min-w-120px bg-white rounded-md overflow-hidden border-gray-dark border shadow-md z-menu)',
+							'layer-components:(z-menu min-w-120px overflow-hidden border rounded-md shadow-md bg-white border-gray-dark)',
 							'layer-components:transform-origin-[var(--transform-origin)]',
-							'layer-components:data-[starting-style]:(opacity-0 scale-95)',
-							'layer-components:data-[ending-style]:(opacity-0 scale-95)',
+							'layer-components:data-[starting-style]:(scale-95 opacity-0)',
+							'layer-components:data-[ending-style]:(scale-95 opacity-0)',
 							'layer-components:(overflow-y-auto overflow-unstable)',
 							'important:motion-reduce:animate-none',
 							'layer-components:(max-h-[--available-height] max-w-[--available-width])',

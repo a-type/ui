@@ -117,7 +117,7 @@ export function ViewportRoot({
 				>
 					<div
 						className={clsx(
-							'w-full h-full flex-1 relative touch-none contain-strict select-none overflow-hidden',
+							'contain-strict relative h-full w-full flex-1 touch-none select-none overflow-hidden',
 							'focus-visible:(ring ring-accent)',
 							className,
 						)}
@@ -155,8 +155,8 @@ export function ViewportControlContent({
 			className={clsx(
 				'layer-variants:(absolute)',
 				{
-					'layer-components:(top-sm left-sm)': position === 'top-left',
-					'layer-components:(top-sm right-sm)': position === 'top-right',
+					'layer-components:(left-sm top-sm)': position === 'top-left',
+					'layer-components:(right-sm top-sm)': position === 'top-right',
 					'layer-components:(bottom-sm left-sm)': position === 'bottom-left',
 					'layer-components:(bottom-sm right-sm)': position === 'bottom-right',
 				},

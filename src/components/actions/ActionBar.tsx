@@ -20,7 +20,7 @@ export function ActionBar({
 		<Suspense fallback={null}>
 			<div
 				className={classNames(
-					'layer-components:(flex flex-row items-center justify-start w-full overflow-hidden relative h-[max-content] transition-[height] springy)',
+					'layer-components:springy layer-components:(relative h-[max-content] w-full flex flex-row items-center justify-start overflow-hidden transition-[height])',
 					'layer-components:[&:empty]:height-0',
 					className,
 				)}
@@ -28,11 +28,11 @@ export function ActionBar({
 			>
 				<ScrollArea
 					disableFades={disableShadow}
-					className="layer-components:(flex-grow w-full h-full)"
+					className="layer-components:(h-full w-full flex-grow)"
 				>
 					<ScrollArea.Content
 						className={classNames(
-							'layer-composed:(flex flex-row items-center justify-start relative h-full)',
+							'layer-composed:(relative h-full flex flex-row items-center justify-start)',
 							wrap && 'layer-variants:flex-wrap',
 						)}
 					>

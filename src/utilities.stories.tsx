@@ -16,7 +16,7 @@ type Story = StoryObj;
 export const AnchorPosition: Story = {
 	render(args) {
 		return (
-			<div className="w-300px h-full overflow-auto anchor-container border">
+			<div className="h-full w-300px border anchor-container overflow-auto">
 				<P>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -33,7 +33,7 @@ export const AnchorPosition: Story = {
 					color="primary"
 					surface
 					p
-					className="fixed anchor-to-demo left-[anchor(right)] top-[anchor(bottom)]"
+					className="fixed left-[anchor(right)] top-[anchor(bottom)] anchor-to-demo"
 				>
 					Anchored to button
 				</Box>
@@ -41,7 +41,7 @@ export const AnchorPosition: Story = {
 					color="accent"
 					surface
 					p
-					className="anchor-to-container fixed right-[anchor(right)] bottom-[anchor(bottom)]"
+					className="fixed bottom-[anchor(bottom)] right-[anchor(right)] anchor-to-container"
 				>
 					Anchored to the outer box
 				</Box>

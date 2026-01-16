@@ -26,12 +26,12 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 	return (
 		<div
 			className={clsx(
-				'layer-components:(relative overflow-hidden w-full h-full)',
+				'layer-components:(relative h-full w-full overflow-hidden)',
 				className,
 			)}
 		>
 			<div
-				className="layer-components:(absolute top-0 left-0 h-full w-full overflow-visible flex flex-row transition-transform duration-300)"
+				className="layer-components:(absolute left-0 top-0 h-full w-full flex flex-row overflow-visible transition-transform duration-300)"
 				style={{ transform: `translateX(${offset})` }}
 			>
 				{children}

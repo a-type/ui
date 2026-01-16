@@ -111,6 +111,9 @@ importers:
       '@unocss/core':
         specifier: 66.5.4
         version: 66.5.4
+      '@unocss/eslint-config':
+        specifier: ^66.6.0
+        version: 66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@unocss/transformer-variant-group':
         specifier: 66.5.4
         version: 66.5.4
@@ -826,11 +829,18 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
+  '@pkgr/core@0.2.9':
+    resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
 
   '@quansync/fs@0.1.5':
     resolution: {integrity: sha512-lNS9hL2aS2NZgNW7BBj+6EBl4rOf8l+tQ0eRY6JWCI8jI2kc53gSoqbjojU0OnAWhzoXiOjFyGsHcDGePB3lhA==}
+
+  '@quansync/fs@1.0.0':
+    resolution: {integrity: sha512-4TJ3DFtlf1L5LDMaM6CanJ/0lckGNtJcMjQ1NAV6zDmA0tEHKZtxNKin8EgPaVX1YzljbxckyT2tJrpQKAtngQ==}
 
   '@rolldown/pluginutils@1.0.0-beta.43':
     resolution: {integrity: sha512-5Uxg7fQUCmfhax7FJke2+8B6cqgeUJUD9o2uXIKXhD+mG0mL6NObmVoi9wXEU1tY89mZKgAYA6fTbftx3q2ZPQ==}
@@ -1287,8 +1297,23 @@ packages:
     resolution: {integrity: sha512-TYwkUw9nZlLTBGCndsyrcHCJ7M+sEsJiK77Edggmd6B3urjkVc1cDjKF3k3tjg4ghQteGsc2akhzn1a4TouybQ==}
     engines: {node: '>=14'}
 
+  '@unocss/config@66.6.0':
+    resolution: {integrity: sha512-YvNk/b9jGmT1TQGDbHR+0VALnTsPLzSTzw90t09ggny9YxeF0XnsP06M5+H0EJPwpmdigBC++KEIMaK8SYDsaQ==}
+    engines: {node: '>=14'}
+
   '@unocss/core@66.5.4':
     resolution: {integrity: sha512-UDS2CRgyQCEFH+5kStDyJd7OFtgkIUZYn5Ahr5z7v3jc/pEfeOJ0mxsNAr+FgMS/xb17vy4sVFvx3jj/FwMZ1A==}
+
+  '@unocss/core@66.6.0':
+    resolution: {integrity: sha512-Sxm7HmhsPIIzxbPnWembPyobuCeA5j9KxL+jIOW2c+kZiTFjHeju7vuVWX9jmAMMC+UyDuuCQ4yE+kBo3Y7SWQ==}
+
+  '@unocss/eslint-config@66.6.0':
+    resolution: {integrity: sha512-SSW5OtPX6vtWjNCOZoGPpVN3SDgfzLMaMN53mMlwZkFVdH+pAAtXok/DqDKq33hJX5Z9KA9xjUanNt4qi46EVQ==}
+    engines: {node: '>=14'}
+
+  '@unocss/eslint-plugin@66.6.0':
+    resolution: {integrity: sha512-6i+kNVVGb5I+XOCUgLDHol6sxb28ahbJrmLL/eiAWflT850MUqtAlFeyHDYHzScnOFcPy1AcmeY0yM77GgERmg==}
+    engines: {node: '>=14'}
 
   '@unocss/extractor-arbitrary-variants@66.5.4':
     resolution: {integrity: sha512-JsgITF11Z2WdXzF8eO2/qkcFIff/dEEc9C2eKYOSUv5pe+RMZxXHoAw4x+D4n0UrGAbHpoUVaJ8E7kG0ayTbGw==}
@@ -1337,6 +1362,10 @@ packages:
 
   '@unocss/rule-utils@66.5.4':
     resolution: {integrity: sha512-LFzLuXQfZKI/qJBrsqkaVKlw0ECU8Xw7m+MaKIKyFH/hqggzkvNG0PyWU2HnPNzz1dIiVBn+Epfpz8pzi+MLFA==}
+    engines: {node: '>=14'}
+
+  '@unocss/rule-utils@66.6.0':
+    resolution: {integrity: sha512-v16l6p5VrefDx8P/gzWnp0p6/hCA0vZ4UMUN6SxHGVE6V+IBpX6I6Du3Egk9TdkhZ7o+Pe1NHxksHcjT0V/tww==}
     engines: {node: '>=14'}
 
   '@unocss/transformer-attributify-jsx@66.5.4':
@@ -2725,6 +2754,9 @@ packages:
   quansync@0.2.8:
     resolution: {integrity: sha512-4+saucphJMazjt7iOM27mbFCk+D9dd/zmgMDCzRZ8MEoBfYp7lAvoN38et/phRQF6wOPMy/OROBGgoWeSKyluA==}
 
+  quansync@1.0.0:
+    resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
+
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
 
@@ -2984,6 +3016,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  synckit@0.11.12:
+    resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+
   tabbable@6.3.0:
     resolution: {integrity: sha512-EIHvdY5bPLuWForiR/AN2Bxngzpuwn1is4asboytXtpTgsArc+WmSJKVLlhdh71u7jFcryDqB2A8lQvj78MkyQ==}
 
@@ -3093,8 +3129,14 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
+  unconfig-core@7.4.2:
+    resolution: {integrity: sha512-VgPCvLWugINbXvMQDf8Jh0mlbvNjNC6eSUziHsBCMpxR05OPrNrvDnyatdMjRgcHaaNsCqz+wjNXxNw1kRLHUg==}
+
   unconfig@7.3.3:
     resolution: {integrity: sha512-QCkQoOnJF8L107gxfHL0uavn7WD9b3dpBcFX6HtfQYmjw2YzWxGuFQ0N0J6tE9oguCBJn9KOvfqYDCMPHIZrBA==}
+
+  unconfig@7.4.2:
+    resolution: {integrity: sha512-nrMlWRQ1xdTjSnSUqvYqJzbTBFugoqHobQj58B2bc8qxHKBBHMNNsWQFP3Cd3/JZK907voM2geYPWqD4VK3MPQ==}
 
   universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
@@ -3932,11 +3974,17 @@ snapshots:
       '@types/react': 19.0.1
       react: 18.3.1
 
+  '@pkgr/core@0.2.9': {}
+
   '@polka/url@1.0.0-next.28': {}
 
   '@quansync/fs@0.1.5':
     dependencies:
       quansync: 0.2.11
+
+  '@quansync/fs@1.0.0':
+    dependencies:
+      quansync: 1.0.0
 
   '@rolldown/pluginutils@1.0.0-beta.43': {}
 
@@ -4481,7 +4529,35 @@ snapshots:
       '@unocss/core': 66.5.4
       unconfig: 7.3.3
 
+  '@unocss/config@66.6.0':
+    dependencies:
+      '@unocss/core': 66.6.0
+      unconfig: 7.4.2
+
   '@unocss/core@66.5.4': {}
+
+  '@unocss/core@66.6.0': {}
+
+  '@unocss/eslint-config@66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@unocss/eslint-plugin': 66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
+      - typescript
+
+  '@unocss/eslint-plugin@66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/utils': 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+      '@unocss/config': 66.6.0
+      '@unocss/core': 66.6.0
+      '@unocss/rule-utils': 66.6.0
+      magic-string: 0.30.21
+      synckit: 0.11.12
+    transitivePeerDependencies:
+      - eslint
+      - supports-color
+      - typescript
 
   '@unocss/extractor-arbitrary-variants@66.5.4':
     dependencies:
@@ -4564,6 +4640,11 @@ snapshots:
   '@unocss/rule-utils@66.5.4':
     dependencies:
       '@unocss/core': 66.5.4
+      magic-string: 0.30.21
+
+  '@unocss/rule-utils@66.6.0':
+    dependencies:
+      '@unocss/core': 66.6.0
       magic-string: 0.30.21
 
   '@unocss/transformer-attributify-jsx@66.5.4':
@@ -6177,6 +6258,8 @@ snapshots:
 
   quansync@0.2.8: {}
 
+  quansync@1.0.0: {}
+
   rc9@2.1.2:
     dependencies:
       defu: 6.1.4
@@ -6522,6 +6605,10 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  synckit@0.11.12:
+    dependencies:
+      '@pkgr/core': 0.2.9
+
   tabbable@6.3.0: {}
 
   tiny-invariant@1.3.1: {}
@@ -6630,12 +6717,25 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
+  unconfig-core@7.4.2:
+    dependencies:
+      '@quansync/fs': 1.0.0
+      quansync: 1.0.0
+
   unconfig@7.3.3:
     dependencies:
       '@quansync/fs': 0.1.5
       defu: 6.1.4
       jiti: 2.6.1
       quansync: 0.2.11
+
+  unconfig@7.4.2:
+    dependencies:
+      '@quansync/fs': 1.0.0
+      defu: 6.1.4
+      jiti: 2.6.1
+      quansync: 1.0.0
+      unconfig-core: 7.4.2
 
   universalify@2.0.0: {}
 

@@ -9,12 +9,12 @@ import {
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
 export const inputClassName = classNames(
-	'layer-components:(px-5 py-1.25 text-md font-inherit rounded-lg bg-white select-auto min-w-60px color-black border-solid border-width-thin border-gray-dark shadow-sm shadow-inset transition-shadow)',
-	'layer-components:focus:(outline-none bg-lighten-3 ring-4	ring-white)',
-	'layer-components:focus-visible:(outline-none ring-accent ring-4)',
-	'layer-components:disabled:(bg-transparent border-gray placeholder-gray-dark shadow-none)',
+	'layer-components:(min-w-60px select-auto border-width-thin rounded-lg border-solid px-5 py-1.25 text-md font-inherit shadow-sm shadow-inset transition-shadow color-black bg-white border-gray-dark)',
+	'layer-components:focus:(outline-none ring-4 bg-lighten-3 ring-white)',
+	'layer-components:focus-visible:(outline-none ring-4 ring-accent)',
+	'layer-components:disabled:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
 	'layer-components:md:(min-w-120px)',
-	'layer-variants:[&[data-size="small"]]:(px-md py-xs text-sm rounded-md min-w-40px)',
+	'layer-variants:[&[data-size="small"]]:(min-w-40px rounded-md px-md py-xs text-sm)',
 );
 
 export interface InputProps extends ComponentPropsWithRef<'input'> {

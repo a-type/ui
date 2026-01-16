@@ -39,7 +39,7 @@ export function EmojiField({
 							className={clsx('p-0 transition-color', className)}
 							{...rest}
 						>
-							<Button.Icon className="text-[19px] w-touch h-touch flex items-center justify-center">
+							<Button.Icon className="h-touch w-touch flex items-center justify-center text-[19px]">
 								{props.value || <Icon name="smile" />}
 							</Button.Icon>
 						</Button>

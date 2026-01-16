@@ -49,11 +49,11 @@ const StyledContent = withClassName(
 	'data-[ending-style]:layer-components:(opacity-0 scale-95)',
 );
 const sheetClassNames = clsx(
-	'layer-variants:lt-sm:(translate-0 left-0 right-0 top-auto h-min-content rounded-tl-xl rounded-tr-xl rounded-b-0 border-b-0 pt-lg w-screen max-w-none shadow-up)',
+	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-none w-screen translate-0 border-b-0 rounded-b-0 rounded-tl-xl rounded-tr-xl pt-lg shadow-up)',
 	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
 
-	'data-[starting-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
-	'data-[ending-style]:layer-variants:lt-sm:(opacity-0 translate-y-full)',
+	'data-[starting-style]:layer-variants:lt-sm:(translate-y-full opacity-0)',
+	'data-[ending-style]:layer-variants:lt-sm:(translate-y-full opacity-0)',
 );
 const sheetClassNameWithOverlayKeyboard = clsx(
 	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',
@@ -219,11 +219,11 @@ export const Content = function Content({
 					{!disableSheet && <DialogSwipeHandle />}
 					<ScrollArea
 						direction="vertical"
-						className="layer-components:(w-full h-full)"
+						className="layer-components:(h-full w-full)"
 					>
 						<ScrollArea.Content
 							className={clsx(
-								'layer-components:(p-md flex flex-col gap-md)',
+								'layer-components:(flex flex-col gap-md p-md)',
 								innerClassName,
 							)}
 							style={{
@@ -359,11 +359,11 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 			ref={finalRef}
 			{...props}
 			className={clsx(
-				'layer-components:(absolute top-0 left-50% transform-gpu -translate-x-1/2 w-20% py-2 rounded-lg cursor-grab sm:hidden touch-none)',
+				'layer-components:(absolute left-50% top-0 w-20% transform-gpu cursor-grab touch-none rounded-lg py-2 sm:hidden -translate-x-1/2)',
 				className,
 			)}
 		>
-			<div className="layer-components:(w-full h-[4px] bg-gray rounded-lg)" />
+			<div className="layer-components:(h-[4px] w-full rounded-lg bg-gray)" />
 		</div>
 	);
 };
@@ -388,7 +388,7 @@ export const DialogDefaultClose = function DialogDefaultClose({
 	return (
 		<DialogClose
 			className={clsx(
-				'absolute top-sm right-sm hidden sm:flex z-101',
+				'absolute right-sm top-sm z-101 hidden sm:flex',
 				className,
 			)}
 			aria-label="Close dialog"
@@ -512,7 +512,7 @@ export const DialogSelectItem = function DialogSelectItem({
 }) {
 	return (
 		<DialogSelectItemRoot {...props}>
-			<span className="flex-1 flex-row items-center gap-md min-h-18px">
+			<span className="min-h-18px flex-1 flex-row items-center gap-md">
 				{children}
 			</span>
 			<BaseRadio.Indicator className="flex-0-0-auto">
