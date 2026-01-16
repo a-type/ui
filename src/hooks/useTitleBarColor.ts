@@ -27,7 +27,7 @@ function changeThemeColor(color: string) {
 		const cssVar = color.slice(4, -1).trim();
 		color = getComputedStyle(root).getPropertyValue(cssVar);
 	}
-	var metaThemeColor = document.querySelector('meta[name=theme-color]');
+	let metaThemeColor = document.querySelector('meta[name=theme-color]');
 	if (!metaThemeColor) {
 		metaThemeColor = document.createElement('meta');
 		metaThemeColor.setAttribute('name', 'theme-color');

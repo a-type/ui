@@ -21,7 +21,7 @@ function ToggleGroupFieldDefault({
 	id,
 	...props
 }: ToggleGroupFieldProps) {
-	const [fieldProps, _, tools] = useField({ name, ...props });
+	const [fieldProps, _, tools] = useField({ name, required, ...props });
 
 	return (
 		<FieldRoot>

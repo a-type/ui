@@ -79,14 +79,14 @@ function makeUseStorage(
 }
 
 const mockStorage: Storage = {
-	getItem: (key: string) => {
+	getItem: () => {
 		return null;
 	},
-	setItem: (key: string, value: string) => {},
-	removeItem: (key: string) => {},
+	setItem: () => {},
+	removeItem: () => {},
 	length: 0,
 	clear: () => {},
-	key: (index: number) => {
+	key: () => {
 		return null;
 	},
 };

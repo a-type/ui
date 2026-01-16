@@ -27,7 +27,7 @@ export const Default: Story = {
 			alert(JSON.stringify(values, null, 2));
 		},
 	},
-	render({ initialValues, ...args }) {
+	render({ initialValues: _, ...args }) {
 		return (
 			<FormikForm
 				initialValues={{

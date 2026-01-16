@@ -11,7 +11,6 @@ export interface NumberStepperFieldProps
 	extends Omit<NumberStepperProps, 'value' | 'onChange'> {
 	name: string;
 	label?: string;
-	required?: boolean;
 	className?: string;
 	id?: string;
 	onChange?: (value: number) => void;
@@ -21,7 +20,6 @@ export function NumberStepperField({
 	name,
 	label,
 	className,
-	required,
 	id: providedId,
 	onChange,
 	...rest

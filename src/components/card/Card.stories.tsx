@@ -169,10 +169,7 @@ export const AsChildNonInteractive: Story = {
 export const Grid: Story = {
 	render: () => {
 		const [sizes, setSizes] = useState(() =>
-			Array.from(
-				{ length: 40 },
-				(_, i) => 50 + Math.floor(Math.random() * 300),
-			),
+			Array.from({ length: 40 }, () => 50 + Math.floor(Math.random() * 300)),
 		);
 		const remove = (index: number) =>
 			setSizes((v) => v.filter((_, i) => i !== index));
@@ -199,10 +196,7 @@ export const Grid: Story = {
 export const GridCompact: Story = {
 	render: () => {
 		const [sizes, setSizes] = useState(() =>
-			Array.from(
-				{ length: 40 },
-				(_, i) => 50 + Math.floor(Math.random() * 300),
-			),
+			Array.from({ length: 40 }, () => 50 + Math.floor(Math.random() * 300)),
 		);
 		const remove = (index: number) =>
 			setSizes((v) => v.filter((_, i) => i !== index));

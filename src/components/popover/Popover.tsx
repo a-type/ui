@@ -49,7 +49,6 @@ export const PopoverContent = function PopoverContent({
 	ref,
 	children,
 	forceMount,
-	disableBlur,
 	className,
 	radius = 'default',
 	padding = 'default',
@@ -71,7 +70,6 @@ export const PopoverContent = function PopoverContent({
 		radius?: 'none' | 'default' | 'md';
 		padding?: 'none' | 'default';
 		forceMount?: boolean;
-		disableBlur?: boolean;
 		ref?: Ref<HTMLDivElement>;
 	}) {
 	return (

@@ -27,13 +27,13 @@ export const colorRules: Rule[] = [
 	],
 	[
 		/^color-lighten-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-color-altered': lighten('var(--v-color,currentColor)', match[1]),
 		}),
 	],
 	[
 		/^color-darken-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-color-altered': darken('var(--v-color,currentColor)', match[1]),
 		}),
 	],
@@ -75,13 +75,13 @@ export const colorRules: Rule[] = [
 	],
 	[
 		/^bg-lighten-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-bg-altered': lighten('var(--v-bg,var(--mode-white))', match[1]),
 		}),
 	],
 	[
 		/^bg-darken-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-bg-altered': darken('var(--v-bg,var(--mode-white))', match[1]),
 		}),
 	],
@@ -110,7 +110,7 @@ export const colorRules: Rule[] = [
 	],
 	[
 		/^border-lighten-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-border-altered': lighten('var(--v-border,currentColor)', match[1]),
 		}),
 		{
@@ -119,7 +119,7 @@ export const colorRules: Rule[] = [
 	],
 	[
 		/^border-darken-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-border-altered': darken('var(--v-border,currentColor)', match[1]),
 		}),
 		{
@@ -151,7 +151,7 @@ export const colorRules: Rule[] = [
 				],
 				[
 					new RegExp(`^border-${dir}-lighten-(\\d+\\.?\\d*)$`),
-					(match, { theme }) => ({
+					(match) => ({
 						[`--v-border-${dir}-altered`]: lighten(
 							`var(--v-border-${dir},currentColor)`,
 							match[1],
@@ -160,7 +160,7 @@ export const colorRules: Rule[] = [
 				],
 				[
 					new RegExp(`^border-${dir}-darken-(\\d+\\.?\\d*)$`),
-					(match, { theme }) => ({
+					(match) => ({
 						[`--v-border-${dir}-altered`]: darken(
 							`var(--v-border-${dir},currentColor)`,
 							match[1],
@@ -187,13 +187,13 @@ export const colorRules: Rule[] = [
 	],
 	[
 		/^ring-lighten-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-ring-altered': lighten('var(--v-ring,currentColor)', match[1]),
 		}),
 	],
 	[
 		/^ring-darken-(\d+\.?\d*)$/,
-		(match, { theme }) => ({
+		(match) => ({
 			'--v-ring-altered': darken('var(--v-ring,currentColor)', match[1]),
 		}),
 	],

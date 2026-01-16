@@ -46,7 +46,7 @@ export function ConfirmedButton({
 		return (
 			<Button
 				{...rest}
-				onClick={(ev) => {
+				onClick={() => {
 					onConfirm();
 				}}
 			/>

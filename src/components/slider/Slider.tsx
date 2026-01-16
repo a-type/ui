@@ -70,13 +70,12 @@ export const SliderUi = ({
 );
 
 export interface SliderProps extends SliderRootProps {
-	label?: string;
 	color?: PaletteName;
 	ref?: Ref<HTMLDivElement>;
 }
 
 export const Slider = Object.assign(
-	function Slider({ label, ...props }: SliderProps) {
+	function Slider(props: SliderProps) {
 		return (
 			<SliderRoot {...props}>
 				<SliderUi />

@@ -245,7 +245,7 @@ export function useKeyboardControls(viewport: ViewportState) {
 		animationFrame = requestAnimationFrame(loop);
 
 		return () => {
-			animationFrame && cancelAnimationFrame(animationFrame);
+			if (animationFrame) cancelAnimationFrame(animationFrame);
 		};
 	}, [viewport]);
 

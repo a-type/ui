@@ -48,6 +48,7 @@ const ProgressBase = function ProgressBase({
 			<ProgressTrack>
 				<ProgressIndicator />
 			</ProgressTrack>
+			{children}
 		</ProgressPrimitive.Root>
 	);
 };
@@ -64,13 +65,12 @@ const ProgressValue = withClassName(
 
 export const ProgressLabeled = function ProgressLabeled({
 	ref,
-	children,
 	label,
 	className,
 	color,
 	formatValue,
 	...props
-}: ProgressRootProps & {
+}: Omit<ProgressRootProps, 'children'> & {
 	ref?: React.Ref<HTMLDivElement>;
 	label: React.ReactNode;
 	color?: PaletteName;

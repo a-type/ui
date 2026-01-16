@@ -46,7 +46,8 @@
 		"up-radix": "pnpm update \"@radix-ui/*\" --latest",
 		"bump": "bumpp",
 		"test": "vitest",
-		"test:browser": "vitest --config=vitest.browser.config.ts"
+		"test:browser": "vitest --config=vitest.browser.config.ts",
+		"lint": "eslint **/*.{ts,tsx} --fix"
 	},
 	"peerDependencies": {
 		"react": "^19",
@@ -73,6 +74,7 @@
 		"valtio": "^2.1.4"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.39.2",
 		"@storybook/addon-essentials": "8.4.7",
 		"@storybook/addon-interactions": "8.4.7",
 		"@storybook/addon-links": "8.4.7",
@@ -96,12 +98,17 @@
 		"bumpp": "^10.3.1",
 		"change-case": "^4.1.2",
 		"dotenv": "^16.3.1",
+		"eslint": "^9.39.2",
+		"eslint-plugin-react": "^7.37.5",
 		"fs-extra": "^11.1.1",
+		"globals": "^17.0.0",
+		"jiti": "^2.6.1",
 		"prettier": "^3.0.3",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"storybook": "8.4.7",
 		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.53.0",
 		"unocss": "^66.5.4",
 		"vitest": "^4.0.6",
 		"vitest-browser-react": "^2.0.2"

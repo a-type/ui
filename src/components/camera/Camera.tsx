@@ -2,7 +2,7 @@ import {
 	Button as BaseButton,
 	ButtonProps as BaseButtonProps,
 } from '@base-ui/react/button';
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import {
 	MouseEvent,
 	ReactNode,
@@ -221,9 +221,14 @@ const StyledShutterButton = withClassName(
 	'sm:w-8 sm:h-8',
 );
 
-export interface CameraDeviceSelectorProps {}
+export interface CameraDeviceSelectorProps {
+	className?: string;
+}
 
-export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
+export const CameraDeviceSelector = ({
+	className,
+	...props
+}: CameraDeviceSelectorProps) => {
 	const { devices, selectDeviceId, selectedDeviceId } =
 		useContext(CameraContext);
 	const swapCamera = () => {
@@ -245,8 +250,12 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 		return (
 			<Button
 				emphasis="ghost"
-				className="absolute bottom-2 left-2 color-white"
+				className={clsx(
+					'layer-components:(absolute bottom-2 left-2 color-white)',
+					className,
+				)}
 				onClick={swapCamera}
+				{...props}
 			>
 				<Icon name="refresh" />
 			</Button>
@@ -257,12 +266,16 @@ export const CameraDeviceSelector = (props: CameraDeviceSelectorProps) => {
 		<Select
 			value={selectedDeviceId || 'default'}
 			onValueChange={selectDeviceId}
+			{...props}
 		>
 			<Select.Trigger
 				render={
 					<Button
 						emphasis="ghost"
-						className="absolute bottom-2 left-2 color-white"
+						className={clsx(
+							'layer-components:(absolute bottom-2 left-2 color-white)',
+							className,
+						)}
 					>
 						<Icon name="refresh" />
 					</Button>
@@ -312,15 +325,15 @@ export const Camera = Object.assign(CameraBase, {
 
 function dataURItoFile(dataURI: string) {
 	// convert base64/URLEncoded data component to raw binary data held in a string
-	var byteString;
+	let byteString;
 	if (dataURI.split(',')[0].indexOf('base64') >= 0)
 		byteString = atob(dataURI.split(',')[1]);
 	else byteString = unescape(dataURI.split(',')[1]);
 	// separate out the mime component
-	var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+	const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 	// write the bytes of the string to a typed array
-	var ia = new Uint8Array(byteString.length);
-	for (var i = 0; i < byteString.length; i++) {
+	const ia = new Uint8Array(byteString.length);
+	for (let i = 0; i < byteString.length; i++) {
 		ia[i] = byteString.charCodeAt(i);
 	}
 	const fileExt = mimeString.split('/')[1];

@@ -12,7 +12,7 @@ import {
 	MonthRow,
 } from './Calendar.js';
 
-function DatePickerMonthControls({}: {}) {
+function DatePickerMonthControls() {
 	const { setDisplayInfo, month, year } = useCalendarContext();
 	const monthLabel = new Date(year, month).toLocaleDateString('en-US', {
 		month: 'long',
@@ -68,6 +68,7 @@ function DatePickerRoot({
 			className={clsx(
 				color && `palette-${color}`,
 				'layer-components:(flex flex-col items-center justify-center w-[calc(var(--day-size,32px)*7)])',
+				className,
 			)}
 			{...rest}
 		>

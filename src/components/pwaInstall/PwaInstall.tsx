@@ -28,11 +28,11 @@ import {
 } from './useIsInstallReady.js';
 import { useWebManifest } from './useWebManifest.js';
 
-export interface PwaInstall extends DialogRootProps {
+export interface PwaInstall extends Omit<DialogRootProps, 'children'> {
 	manifestPath?: string;
 }
 
-export function PwaInstall({ children, manifestPath, ...rest }: PwaInstall) {
+export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 	const installed = useIsInstalled();
 	const manifest = useWebManifest(manifestPath);
 	const { open } = useSnapshot(pwaInstallerState);

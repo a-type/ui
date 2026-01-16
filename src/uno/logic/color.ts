@@ -281,18 +281,6 @@ function printComputationResult(result: ComputationResult): string {
 	return result.unit === '%' ? `${result.value}%` : `${result.value}`;
 }
 
-function resolveComputationResult(
-	result: ComputationResult,
-	outputRange: [number, number],
-): number {
-	if (result.unit === '%') {
-		const [min, max] = outputRange;
-		return min + (result.value / 100) * (max - min);
-	} else {
-		return result.value;
-	}
-}
-
 function evaluateLiteral(literal: string): ComputationResult {
 	if (literal.endsWith('%')) {
 		const asNumber = Number(literal.slice(0, -1));

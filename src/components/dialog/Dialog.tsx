@@ -343,7 +343,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 	const close = useContext(DialogCloseContext);
 	const innerRef = useRef<HTMLDivElement>(null);
 	useDrag(
-		({ swipe: [, swipeY], movement: [, dy], velocity: [, vy], last }) => {
+		({ swipe: [, swipeY], movement: [, dy], last }) => {
 			const content = findParentDialogContent(innerRef.current);
 			if (!content) return;
 			sheetCloseGestureLogic(swipeY, dy, last, close, content);
@@ -476,7 +476,6 @@ export const DialogActions = withClassName(
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
-	ref,
 	children,
 	className,
 	...props
@@ -506,7 +505,6 @@ export const DialogSelectItemRoot = withClassName(
 );
 
 export const DialogSelectItem = function DialogSelectItem({
-	ref,
 	children,
 	...props
 }: ComponentPropsWithoutRef<typeof DialogSelectItemRoot> & {

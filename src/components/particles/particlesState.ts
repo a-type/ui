@@ -108,13 +108,11 @@ export class Particles {
 	};
 
 	private renderParticles = (ctx: CanvasRenderingContext2D, delta: number) => {
-		let freed = 0;
 		for (let i = 0; i < this.particles.length; i++) {
 			const particle = this.particles[i];
 			if (particle.render(ctx, delta)) {
 				particle.dispose();
 				this.freeParticles.push(particle);
-				freed++;
 			}
 		}
 	};
@@ -300,7 +298,7 @@ export const createElementBorderInitializer = ({
 	// randomly spawn particles around the border of the element by 'unwrapping' the selected borders as
 	// a single theoretical line, picking a random point on the line, and then converting that point
 	// back to a point on the border.
-	return (index: number) => {
+	return (_index: number) => {
 		// check that element is not hidden
 		if (
 			element instanceof HTMLElement &&
@@ -472,7 +470,7 @@ export const createWindowBorderInitializer = ({
 	border?: BorderName;
 	lifespan?: number;
 }): ParticleInitializer => {
-	return (index: number) => {
+	return (_index: number) => {
 		const rect = document.body.getBoundingClientRect();
 		let x = 0;
 		let y = 0;

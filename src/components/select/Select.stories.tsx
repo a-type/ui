@@ -39,7 +39,7 @@ export const Default: Story = {
 };
 
 export const LongListWithItemLabels: Story = {
-	render({ defaultValue, value, ...args }) {
+	render({ defaultValue: _, value: __, ...args }) {
 		return (
 			<Box full layout="center center" className="min-h-200px">
 				<Select
