@@ -47,7 +47,8 @@
 		"bump": "bumpp",
 		"test": "vitest",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
-		"lint": "eslint **/*.{ts,tsx} --fix"
+		"lint": "eslint **/*.{ts,tsx} --fix",
+		"prepare": "husky"
 	},
 	"peerDependencies": {
 		"react": "^19",
@@ -103,7 +104,9 @@
 		"eslint-plugin-react": "^7.37.5",
 		"fs-extra": "^11.1.1",
 		"globals": "^17.0.0",
+		"husky": "^9.1.7",
 		"jiti": "^2.6.1",
+		"lint-staged": "^16.2.7",
 		"prettier": "^3.0.3",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
@@ -120,6 +123,12 @@
 		],
 		"onlyBuiltDependencies": [
 			"esbuild"
+		]
+	},
+	"lint-staged": {
+		"**/*.{ts,tsx}": [
+			"prettier --write --cache",
+			"eslint --fix --cache"
 		]
 	}
 }
