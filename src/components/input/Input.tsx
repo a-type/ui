@@ -1,14 +1,9 @@
 import { Input as BaseInput } from '@base-ui/react/input';
 import clsx from 'clsx';
-import {
-	ComponentPropsWithRef,
-	FocusEvent,
-	FocusEventHandler,
-	MouseEventHandler,
-	useRef,
-} from 'react';
+import { ComponentPropsWithRef, FocusEvent, FocusEventHandler } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
+import { inputInfo } from '../../systems/inputs.js';
 
 export const inputClassName = clsx(
 	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit bg-transparent)',
@@ -24,7 +19,7 @@ const inputBorderClassName = clsx(
 	'layer-components:(flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-gray-dark)',
 	'layer-components:(w-max-content overflow-clip)',
 	'layer-components:[&:has(input:disabled)]:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
-	'layer-components:[&:has(input:focus-visible)]:(outline-none ring ring-4 transition-delay-80 ring-accent)',
+	'layer-components:[&:has(input:focus-visible)]:(outline-none ring ring-4 ring-accent)',
 	'layer-variants:[&:has(input:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
 	'layer-components:[&:has(input:hover)]:(border-black)',
 	'layer-components:[&>.icon]:(mx-sm)',
@@ -35,7 +30,6 @@ const InputBorder = withClassName('div', inputBorderClassName);
 const InnerInput = function InnerInput({
 	autoSelect,
 	onFocus,
-	onClick,
 	onBlur,
 	className,
 	placeholders,
@@ -45,20 +39,18 @@ const InnerInput = function InnerInput({
 
 	...props
 }: InputProps) {
-	const focusedAtRef = useRef<number | null>(null);
-	const handleClick: MouseEventHandler<HTMLInputElement> = (ev) => {
-		onClick?.(ev);
-		if (focusedAtRef.current && Date.now() - focusedAtRef.current < 200) {
-			ev.currentTarget.setAttribute('data-focus-clicked', 'true');
-		}
-	};
 	const handleFocus: FocusEventHandler<HTMLInputElement> = (
 		ev: FocusEvent<HTMLInputElement>,
 	) => {
 		if (autoSelect) {
 			ev.target.select();
 		}
-		focusedAtRef.current = Date.now();
+		if (
+			inputInfo.lastPointerDown &&
+			Date.now() - inputInfo.lastPointerDown < 200
+		) {
+			ev.currentTarget.setAttribute('data-focus-clicked', 'true');
+		}
 		onFocus?.(ev);
 	};
 	const handleBlur: FocusEventHandler<HTMLInputElement> = (ev) => {
@@ -76,7 +68,6 @@ const InnerInput = function InnerInput({
 			onFocus={handleFocus}
 			onValueChange={onValueChange}
 			onBlur={handleBlur}
-			onClick={handleClick}
 			className={clsx(inputClassName, className)}
 			{...props}
 		/>

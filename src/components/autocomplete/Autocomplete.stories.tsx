@@ -159,13 +159,13 @@ export const Grouped: Story = {
 							</GroupedAutocomplete.Group>
 						)}
 					</GroupedAutocomplete.List>
+					<GroupedAutocomplete.Empty>
+						No results found.
+					</GroupedAutocomplete.Empty>
 					<GroupedAutocomplete.Separator />
 					<div className="p-sm text-xs color-gray-dark">
 						Select your favorite fruit or berry.
 					</div>
-					<GroupedAutocomplete.Empty>
-						No results found.
-					</GroupedAutocomplete.Empty>
 				</GroupedAutocomplete.Content>
 			</GroupedAutocomplete>
 		);
@@ -185,7 +185,7 @@ export const NotPopover: Story = {
 				highlightItemOnHover={highlightItemOnHover}
 			>
 				<Box border p surface="white" col>
-					<GroupedAutocomplete.Input />
+					<GroupedAutocomplete.Input disableCaret className="w-full" />
 					<GroupedAutocomplete.List>
 						{(group) => (
 							<GroupedAutocomplete.Group key={group.category}>
