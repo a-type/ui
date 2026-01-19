@@ -44,6 +44,12 @@ export default defineConfig([
 				},
 			],
 			'@typescript-eslint/ban-ts-comment': 'off',
+			'unocss/order': [
+				'error',
+				{
+					unoFunctions: ['clsx', 'classNames', 'css', 'withClassName'],
+				},
+			],
 		},
 	},
 	{

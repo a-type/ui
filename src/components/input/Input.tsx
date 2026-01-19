@@ -1,21 +1,87 @@
-import { Input as BaseUIInput } from '@base-ui/react/input';
-import classNames from 'clsx';
+import { Input as BaseInput } from '@base-ui/react/input';
+import clsx from 'clsx';
 import {
-	ChangeEvent,
 	ComponentPropsWithRef,
 	FocusEvent,
-	useCallback,
+	FocusEventHandler,
+	MouseEventHandler,
+	useRef,
 } from 'react';
+import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 
-export const inputClassName = classNames(
-	'layer-components:(min-w-60px select-auto border-width-thin rounded-lg border-solid px-5 py-1.25 text-md font-inherit shadow-sm shadow-inset transition-shadow color-black bg-white border-gray-dark)',
-	'layer-components:focus:(outline-none ring-4 bg-lighten-3 ring-white)',
-	'layer-components:focus-visible:(outline-none ring-4 ring-accent)',
-	'layer-components:disabled:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
+export const inputClassName = clsx(
+	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit bg-transparent)',
 	'layer-components:md:(min-w-120px)',
-	'layer-variants:[&[data-size="small"]]:(min-w-40px rounded-md px-md py-xs text-sm)',
+	'layer-components:placeholder:(color-gray-dark)',
+	'layer-components:focus:(outline-none)',
+	'layer-components:focus-visible:(outline-none)',
+	'layer-components:first:(rounded-l-inherit pl-md)',
+	'layer-components:last:(rounded-r-inherit pr-md)',
 );
+
+const inputBorderClassName = clsx(
+	'layer-components:(flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-gray-dark)',
+	'layer-components:(w-max-content overflow-clip)',
+	'layer-components:[&:has(input:disabled)]:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
+	'layer-components:[&:has(input:focus-visible)]:(outline-none ring ring-4 transition-delay-80 ring-accent)',
+	'layer-variants:[&:has(input:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
+	'layer-components:[&:has(input:hover)]:(border-black)',
+	'layer-components:[&>.icon]:(mx-sm)',
+);
+
+const InputBorder = withClassName('div', inputBorderClassName);
+
+const InnerInput = function InnerInput({
+	autoSelect,
+	onFocus,
+	onClick,
+	onBlur,
+	className,
+	placeholders,
+	placeholder,
+	placeholdersIntervalMs = 5000,
+	onValueChange,
+
+	...props
+}: InputProps) {
+	const focusedAtRef = useRef<number | null>(null);
+	const handleClick: MouseEventHandler<HTMLInputElement> = (ev) => {
+		onClick?.(ev);
+		if (focusedAtRef.current && Date.now() - focusedAtRef.current < 200) {
+			ev.currentTarget.setAttribute('data-focus-clicked', 'true');
+		}
+	};
+	const handleFocus: FocusEventHandler<HTMLInputElement> = (
+		ev: FocusEvent<HTMLInputElement>,
+	) => {
+		if (autoSelect) {
+			ev.target.select();
+		}
+		focusedAtRef.current = Date.now();
+		onFocus?.(ev);
+	};
+	const handleBlur: FocusEventHandler<HTMLInputElement> = (ev) => {
+		onBlur?.(ev);
+		ev.currentTarget.removeAttribute('data-focus-clicked');
+	};
+	const randomPlaceholder = useRotatingShuffledValue(
+		placeholders ?? [],
+		placeholdersIntervalMs,
+	);
+
+	return (
+		<BaseInput
+			placeholder={placeholder ?? randomPlaceholder}
+			onFocus={handleFocus}
+			onValueChange={onValueChange}
+			onBlur={handleBlur}
+			onClick={handleClick}
+			className={clsx(inputClassName, className)}
+			{...props}
+		/>
+	);
+};
 
 export interface InputProps extends ComponentPropsWithRef<'input'> {
 	autoSelect?: boolean;
@@ -23,52 +89,28 @@ export interface InputProps extends ComponentPropsWithRef<'input'> {
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
 	onValueChange?: (value: string) => void;
-	sizeVariant?: 'default' | 'small';
+	borderRef?: React.Ref<HTMLDivElement>;
+	startAccessory?: React.ReactNode;
+	endAccessory?: React.ReactNode;
 }
 
-export const Input = function Input({
+const InputDefault = function InputDefault({
 	className,
-	autoSelect,
-	onFocus,
-	onChange,
-	onValueChange,
-	placeholders,
-	placeholder,
-	placeholdersIntervalMs = 5000,
-	sizeVariant,
+	borderRef,
+	startAccessory,
+	endAccessory,
 	...props
 }: InputProps) {
-	const handleFocus = useCallback(
-		(ev: FocusEvent<HTMLInputElement>) => {
-			if (autoSelect) {
-				ev.target.select();
-			}
-			onFocus?.(ev);
-		},
-		[onFocus, autoSelect],
-	);
-
-	const handleChange = useCallback(
-		(ev: ChangeEvent<HTMLInputElement>) => {
-			onValueChange?.(ev.target.value);
-			onChange?.(ev);
-		},
-		[onChange, onValueChange],
-	);
-
-	const randomPlaceholder = useRotatingShuffledValue(
-		placeholders ?? [],
-		placeholdersIntervalMs,
-	);
-
 	return (
-		<BaseUIInput
-			onFocus={handleFocus}
-			onChange={handleChange}
-			className={classNames(inputClassName, className)}
-			placeholder={placeholder ?? randomPlaceholder}
-			data-size={sizeVariant ?? 'default'}
-			{...props}
-		/>
+		<InputBorder ref={borderRef} className={className}>
+			{startAccessory}
+			<InnerInput {...props} />
+			{endAccessory}
+		</InputBorder>
 	);
 };
+
+export const Input = Object.assign(InputDefault, {
+	Border: InputBorder,
+	Input: InnerInput,
+});

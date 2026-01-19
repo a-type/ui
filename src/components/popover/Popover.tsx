@@ -9,19 +9,10 @@ import classNames from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
+import { popupClassName } from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 
-const StyledContent = withClassName(
-	PopoverPrimitive.Popup,
-	'layer-components:(rounded-lg min-w-120px bg-white shadow-lg max-w-90vw border border-black transition)',
-	'will-change-transform',
-	'layer-components:transform-origin-[var(--transform-origin)]',
-	'layer-components:data-[starting-style]:(opacity-0 scale-95 translate-y-4px)',
-	'layer-components:data-[ending-style]:(opacity-0 scale-95 translate-y-4px)',
-	'important:motion-reduce:transition-none',
-	'layer-components:(max-h-[--available-height] max-w-[--available-width])',
-	'layer-components:focus-visible:(outline-none ring-2 ring-accent)',
-);
+const StyledContent = withClassName(PopoverPrimitive.Popup, popupClassName);
 
 const StyledArrow = withClassName(
 	(props: MenuArrowProps) => (
@@ -30,13 +21,13 @@ const StyledArrow = withClassName(
 		</PopoverPrimitive.Arrow>
 	),
 	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(opacity-0 scale-0)',
-	'layer-components:data-[open]:(opacity-100 scale-100)',
+	'layer-components:data-[closed]:(scale-0 opacity-0)',
+	'layer-components:data-[open]:(scale-100 opacity-100)',
 );
 
 const StyledClose = withClassName(
 	PopoverPrimitive.Close,
-	'layer-components:([all:unset] [font-family:inherit] rounded-lg h-25px w-25px inline-flex items-center justify-center color-gray-dark/80 absolute top-5px right-5px hover:bg-lightBlend focus:shadow-focus)',
+	'layer-components:hover:bg-lightBlend layer-components:focus:shadow-focus layer-components:([all:unset] [font-family:inherit] absolute right-5px top-5px h-25px w-25px inline-flex items-center justify-center rounded-lg color-gray-dark/80)',
 );
 
 // Exports
@@ -113,12 +104,12 @@ export const PopoverContent = function PopoverContent({
 
 export const PopoverTitle = withClassName(
 	PopoverPrimitive.Title,
-	'layer-components:(text-md font-semibold m-0 mb-sm)',
+	'layer-components:(m-0 mb-sm text-md font-semibold)',
 );
 
 export const PopoverDescription = withClassName(
 	PopoverPrimitive.Description,
-	'layer-components:(text-sm text-gray-dark m-0)',
+	'layer-components:(m-0 text-sm text-gray-dark)',
 );
 
 export const Popover = Object.assign(PopoverRoot, {

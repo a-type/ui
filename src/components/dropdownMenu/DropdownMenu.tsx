@@ -7,11 +7,16 @@ import {
 	MenuPositionerProps,
 	MenuTriggerProps,
 } from '@base-ui/react/menu';
-import classNames, { clsx } from 'clsx';
+import { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { PaletteName } from '../../uno/index.js';
+import {
+	itemClassName,
+	itemListClassName,
+	popupClassName,
+} from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
@@ -24,30 +29,10 @@ const StyledContent = withClassName(
 			</GroupScaleReset>
 		);
 	},
-	'layer-components:(min-w-220px bg-white z-menu shadow-lg rounded-md border border-black flex flex-col transition)',
-	'layer-components:transform-origin-[var(--transform-origin)]',
-
-	'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
-	'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
-	'layer-components:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
-	'layer-components:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
-	'layer-components:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
-	'layer-components:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
-	'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
-	'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
-
-	'layer-components:(max-h-[--available-height] max-w-[--available-width])',
-
-	'important:motion-reduce:animate-none',
-	'will-change-transform',
+	popupClassName,
+	'layer-components:(min-w-220px)',
 );
-const itemClassName = classNames(
-	'layer-components:(relative min-h-touch-large flex cursor-pointer select-none items-center py-sm pl-8 pr-4 text-left text-md leading-4 color-main-ink)',
-	'layer-components:[&[data-disabled]]:(pointer-events-none color-gray-dark bg-white)',
-	'layer-components:focus-visible:(color-black bg-main-light)',
-	'layer-components:hover:(color-black bg-main-light)',
-	'layer-components:focus:outline-none',
-);
+
 const StyledItemBase = withClassName(BaseMenu.Item, itemClassName);
 export interface DropdownMenuItemProps extends MenuItemProps {
 	color?: PaletteName;
@@ -72,12 +57,12 @@ const StyledRadioItem = withClassName(BaseMenu.RadioItem, itemClassName);
 
 const StyledLabel = withClassName(
 	'span',
-	'layer-components:(pl-3 py-1 font-bold text-sm leading-6)',
+	'layer-components:(py-1 pl-3 text-sm font-bold leading-6)',
 );
 
 const StyledSeparator = withClassName(
 	BaseMenu.Separator,
-	'layer-components:(h-1px bg-gray m-5px)',
+	'layer-components:(m-5px h-1px bg-gray)',
 );
 
 const StyledItemIndicator = withClassName(
@@ -92,8 +77,8 @@ const StyledArrow = withClassName(
 		</BaseMenu.Arrow>
 	),
 	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(opacity-0 scale-0)',
-	'layer-components:data-[open]:(opacity-100 scale-100)',
+	'layer-components:data-[closed]:(scale-0 opacity-0)',
+	'layer-components:data-[open]:(scale-100 opacity-100)',
 );
 
 const StyledTrigger = withClassName(BaseMenu.Trigger, 'select-none');
@@ -120,7 +105,7 @@ export function DropdownMenuTrigger({ ...props }: MenuTriggerProps) {
 }
 export const DropdownMenuTriggerIcon = withClassName(
 	SlotDiv,
-	'layer-components:[[data-popup-open]>&]:rotate-180 layer-components:transition-transform',
+	'layer-components:transition-transform layer-components:[[data-popup-open]>&]:rotate-180',
 );
 
 export const DropdownMenuContent = ({
@@ -161,9 +146,7 @@ export const DropdownMenuContent = ({
 				positionMethod={positionMethod}
 			>
 				<StyledContent {...props}>
-					<div className="layer-components:(max-h-full min-h-0 overflow-x-hidden rounded-md overflow-y-auto overflow-unstable)">
-						{children}
-					</div>
+					<div className={itemListClassName}>{children}</div>
 					<StyledArrow />
 				</StyledContent>
 			</BaseMenu.Positioner>

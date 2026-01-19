@@ -1,12 +1,10 @@
-import { UseRenderRenderProp } from '@base-ui/react/use-render';
 import classNames from 'clsx';
-import { HTMLAttributes, Ref } from 'react';
+import { Ref } from 'react';
 import { PaletteName } from '../../uno/index.js';
-import { SlotDiv } from '../utility/SlotDiv.js';
+import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
-export interface ChipProps extends HTMLAttributes<HTMLElement> {
+export interface ChipProps extends SlotDivProps {
 	color?: PaletteName;
-	render?: UseRenderRenderProp;
 	ref?: Ref<any>;
 }
 
@@ -15,9 +13,9 @@ export function Chip({ className, color, ...rest }: ChipProps) {
 		<SlotDiv
 			className={classNames(
 				color && `palette-${color}`,
-				'layer-composed:(inline-flex flex-row items-center gap-1 whitespace-nowrap font-normal)',
+				'layer-composed:(inline-flex flex-row items-center gap-1 whitespace-nowrap text-xs font-normal)',
 				'layer-composed:(border border-light rounded-lg border-solid color-contrast bg-main-wash)',
-				'layer-composed:(px-sm py-xs text-xs)',
+				'layer-composed:[&:not(:is(button))]:(px-sm py-xs)',
 				className,
 			)}
 			role={rest.onClick ? 'button' : undefined}

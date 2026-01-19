@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
+import { Icon } from '../icon/Icon.js';
 import { Input } from './Input.js';
 
 const meta = {
@@ -24,7 +25,19 @@ export const ButtonAndInput: Story = {
 	render: (args) => (
 		<Box gap items="center">
 			<Input placeholder="Type something..." {...args} />
-			<Button size={args.sizeVariant}>Submit</Button>
+			<Button>Submit</Button>
 		</Box>
+	),
+};
+
+export const WithAccessories: Story = {
+	render: (args) => (
+		<Input.Border>
+			<Icon name="search" />
+			<Input.Input placeholder="Search..." {...args} />
+			<Button emphasis="ghost">
+				<Icon name="arrowRight" />
+			</Button>
+		</Input.Border>
 	),
 };
