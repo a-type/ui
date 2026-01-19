@@ -39,6 +39,7 @@ export * from './popover/index.js';
 export * from './progress/Progress.js';
 export * from './provider/Provider.js';
 export * from './pwaInstall/index.js';
+export * from './quickAction/QuickAction.js';
 export * from './relativeTime/index.js';
 export * from './richEditor/index.js';
 export * from './scrollArea/ScrollArea.js';

@@ -53,7 +53,7 @@ export default meta;
 
 type Story = StoryObj<Args>;
 
-interface Item {
+export interface Item {
 	id: string;
 	label: string;
 }

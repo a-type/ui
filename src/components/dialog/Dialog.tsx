@@ -32,7 +32,7 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	BaseDialog.Backdrop,
-	'layer-components:(fixed inset-0 bg-black/15 shadow-inset shadow-[0_30px_60px_0px] shadow-black/20 border-top-1 border-top-solid border-top-gray transition)',
+	'layer-components:border-top-1 layer-components:border-top-solid layer-components:border-top-gray layer-components:(fixed inset-0 shadow-[0_30px_60px_0px] shadow-black/20 shadow-inset transition bg-black/15)',
 	'layer-components:backdrop-blur-sm',
 	'data-[starting-style]:(opacity-0)',
 	'data-[ending-style]:(opacity-0)',
@@ -40,13 +40,13 @@ const StyledOverlay = withClassName(
 
 const StyledContent = withClassName(
 	BaseDialog.Popup,
-	'layer-components:(fixed shadow-xl bg-white border border-gray border border-gray-dark transition pointer-events-auto overflow-hidden flex flex-col items-stretch)',
+	'layer-components:(pointer-events-auto fixed flex flex-col items-stretch overflow-hidden border border shadow-xl transition bg-white border-gray-dark)',
 	'layer-components:sm:shadow-down',
 	'transform-gpu',
-	'layer-components:(left-50% top-50% translate-[-50%] w-90vw max-w-450px max-h-85vh rounded-lg border-b-1)',
+	'layer-components:(left-50% top-50% max-h-85vh max-w-450px w-90vw translate-[-50%] border-b-1 rounded-lg)',
 
-	'data-[starting-style]:layer-components:(opacity-0 scale-95)',
-	'data-[ending-style]:layer-components:(opacity-0 scale-95)',
+	'data-[starting-style]:layer-components:(scale-95 opacity-0)',
+	'data-[ending-style]:layer-components:(scale-95 opacity-0)',
 );
 const sheetClassNames = clsx(
 	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-none w-screen translate-0 border-b-0 rounded-b-0 rounded-tl-xl rounded-tr-xl pt-lg shadow-up)',
@@ -403,12 +403,12 @@ export const DialogDefaultClose = function DialogDefaultClose({
 
 const StyledTitle = withClassName(
 	BaseDialog.Title,
-	'layer-components:(font-title color-black text-3xl mb-4 mt-0)',
+	'layer-components:(mb-4 mt-0 text-3xl font-title color-black)',
 );
 
 const StyledDescription = withClassName(
 	BaseDialog.Description,
-	'layer-components:(mt-3 mb-6 color-gray-dark text-md leading-6)',
+	'layer-components:(mb-6 mt-3 text-md leading-6 color-gray-dark)',
 );
 
 // Exports
@@ -472,7 +472,7 @@ export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'layer-components:(flex justify-end self-end sticky gap-sm items-center flex-wrap z-100 pb-1px mt-md bottom-md rounded-lg bg-white [--global-shadow-spread:1] shadow-md shadow-white shadow-up)',
+	'layer-components:([--global-shadow-spread:1] sticky bottom-md z-100 mt-md flex flex-wrap items-center self-end justify-end gap-sm rounded-lg pb-1px shadow-md shadow-white bg-white shadow-up)',
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
@@ -495,13 +495,13 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 
 export const DialogSelectList = withClassName(
 	BaseRadioGroup,
-	'layer-components:(flex flex-col gap-2 overflow-y-auto p-2)',
+	'layer-components:(flex flex-col gap-2 p-2 overflow-y-auto)',
 );
 
 export const DialogSelectItemRoot = withClassName(
 	BaseRadio.Root,
-	'layer-components:(color-black flex items-center border-1 border-solid border-bg gap-3 w-full py-3 px-4 text-left border-none rounded-lg font-normal bg-gray-light cursor-pointer transition-all)',
-	'layer-components:[&[data-state=checked]]:(bg-main-wash color-main-ink border-color)',
+	'layer-components:(w-full flex cursor-pointer items-center gap-3 border-1 rounded-lg border-none border-solid px-4 py-3 text-left font-normal transition-all color-black bg-gray-light border-bg)',
+	'layer-components:[&[data-state=checked]]:(color-main-ink bg-main-wash border-color)',
 );
 
 export const DialogSelectItem = function DialogSelectItem({

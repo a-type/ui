@@ -7,11 +7,9 @@ import { useConfig } from '../provider/Provider.js';
 
 export function PageNowPlaying({
 	className,
-	unstyled,
 	keepAboveKeyboard,
 	...props
 }: HTMLAttributes<HTMLDivElement> & {
-	unstyled?: boolean;
 	keepAboveKeyboard?: boolean;
 }) {
 	const { virtualKeyboardBehavior } = useConfig();
@@ -27,9 +25,7 @@ export function PageNowPlaying({
 					'layer-components:bottom-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
 					'layer-components:transition-bottom',
 					'layer-components:md:(fixed bottom-3 left-[var(--content-left,20%)] top-auto w-[var(--content-width,100%)] items-end p-0 opacity-[var(--content-ready,0)] transition-opacity)',
-					unstyled
-						? 'layer-variants:p-2'
-						: 'layer-components:(m-2 min-w-32px w-auto items-center justify-center border-light rounded-xl p-2px shadow-md bg-wash)',
+					'layer-variants:p-2',
 					keepAboveKeyboard &&
 						virtualKeyboardBehavior === 'overlay' &&
 						'layer-variants:lt-md:bottom-[max(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px),var(--nav-height,env(safe-area-inset-bottom,0px))))]',
