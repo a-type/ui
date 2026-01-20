@@ -44,8 +44,9 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"up-radix": "pnpm update \"@radix-ui/*\" --latest",
-		"bump": "pnpm run build && bumpp",
+		"bump": "pnpm run typecheck && bumpp",
 		"test": "vitest",
+		"typecheck": "tsc --noEmit",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
 		"lint": "eslint **/*.{ts,tsx} --fix",
 		"prepare": "husky"
