@@ -1,7 +1,7 @@
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { inputClassName } from '../input/index.js';
 import { Input, InputProps } from '../input/Input.js';
 
 export interface TextAreaProps extends InputProps {
@@ -17,17 +17,15 @@ export interface TextAreaProps extends InputProps {
 
 type HandleChange = Exclude<InputProps['onValueChange'], undefined>;
 
-export const TextArea = function TextArea({
+function TextAreaInput({
 	ref,
-	autoSize,
-	className,
-	rows,
+	autoSize = true,
 	padBottomPixels = 0,
 	onValueChange,
+	className,
+	rows,
 	...rest
-}: TextAreaProps & {
-	ref?: React.Ref<any>;
-}) {
+}: TextAreaProps) {
 	const innerRef = useRef<any>(null);
 	const finalRef = useMergedRef(innerRef, ref);
 
@@ -58,23 +56,43 @@ export const TextArea = function TextArea({
 	);
 
 	return (
-		<Input.Border>
-			<Input.Input
-				render={<textarea rows={autoSize ? 1 : rows} />}
-				ref={finalRef}
-				className={classNames(
-					inputClassName,
-					'layer-components:([font-family:inherit] resize-none overflow-hidden color-inherit)',
-					'layer-variants:(rounded-lg px-4 py-4)',
-					{
-						'layer-components:[resize:vertical]': !autoSize,
-						'layer-components:[resize:none]': autoSize,
-					},
-					className,
-				)}
-				onValueChange={handleValueChange}
-				{...rest}
-			/>
-		</Input.Border>
+		<Input.Input
+			render={<textarea rows={autoSize ? 1 : rows} />}
+			ref={finalRef}
+			className={classNames(
+				'layer-composed:([font-family:inherit] overflow-hidden color-inherit)',
+				'layer-composed:py-md',
+				{
+					'layer-variants:[resize:vertical]': !autoSize,
+					'layer-variants:resize-none': autoSize,
+				},
+				className,
+			)}
+			onValueChange={handleValueChange}
+			{...rest}
+		/>
+	);
+}
+
+const TextAreaBorder = withClassName(
+	Input.Border,
+	clsx('layer-composed:rounded-lg'),
+);
+
+const TextAreaDefault = function TextArea({
+	className,
+	...rest
+}: TextAreaProps & {
+	ref?: React.Ref<any>;
+}) {
+	return (
+		<TextAreaBorder className={className}>
+			<TextAreaInput {...rest} />
+		</TextAreaBorder>
 	);
 };
+
+export const TextArea = Object.assign(TextAreaDefault, {
+	Border: TextAreaBorder,
+	Input: TextAreaInput,
+});

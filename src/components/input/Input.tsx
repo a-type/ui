@@ -21,10 +21,10 @@ export const inputClassName = clsx(
 const inputBorderClassName = clsx(
 	'layer-components:(flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-gray-dark)',
 	'layer-components:(w-max-content overflow-clip)',
-	'layer-components:[&:has(input:disabled)]:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
-	'layer-components:[&:has(input:focus-visible)]:(outline-none ring ring-4 ring-accent)',
-	'layer-variants:[&:has(input:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
-	'layer-components:[&:has(input:hover)]:(border-black)',
+	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
+	'layer-components:[&:has(input:focus-visible),&:has(textarea:focus-visible)]:(outline-none ring ring-4 ring-accent)',
+	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
+	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:(border-black)',
 	'layer-components:[&>.icon]:(mx-sm)',
 );
 

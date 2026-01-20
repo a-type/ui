@@ -18,3 +18,13 @@ export default meta;
 type Story = StoryObj<typeof Note>;
 
 export const Default: Story = {};
+
+export const Editable: Story = {
+	render(args) {
+		return (
+			<Note {...args}>
+				<Note.Input />
+			</Note>
+		);
+	},
+};

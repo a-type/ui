@@ -1,23 +1,30 @@
 import classNames, { clsx } from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
+import { withClassName } from '../../hooks.js';
 import { PaletteName } from '../../uno/index.js';
+import { TextArea } from '../textArea/TextArea.js';
 
 export interface NoteProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode;
 	color?: PaletteName;
 }
 
-export function Note({ className, color, children, ...rest }: NoteProps) {
+function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 	return (
 		<div
-			className={classNames(color && `palette-${color}`, className)}
+			className={classNames(
+				color && `palette-${color}`,
+				'layer-components:[&:has(input:focus-visible),&:has(textarea:focus-visible)]:(ring ring-4 ring-accent)',
+				'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(ring ring-4 bg-lighten-3 ring-main-light)',
+				className,
+			)}
 			{...rest}
 		>
 			<div className="layer-components:(flex flex-row)">
 				<div
 					className={clsx(
 						'layer-components:(relative flex-1 border border-solid p-2 text-sm italic color-black bg-main-wash bg-darken-1 border-main-dark) layer-variants:border-r-0',
-						'layer-variants:[&_input,&_textarea]:shadow-none',
+						'layer-variants:[&_input,&_textarea]:(border-none p-0 shadow-none bg-transparent ring-none)',
 					)}
 				>
 					{children}
@@ -42,3 +49,12 @@ export function Note({ className, color, children, ...rest }: NoteProps) {
 		</div>
 	);
 }
+
+export const NoteInput = withClassName(
+	TextArea.Input,
+	'layer-composed2:(w-full p-0)',
+);
+
+export const Note = Object.assign(NoteRoot, {
+	Input: NoteInput,
+});
