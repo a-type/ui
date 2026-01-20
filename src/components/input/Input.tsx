@@ -1,6 +1,9 @@
-import { Input as BaseInput } from '@base-ui/react/input';
+import {
+	Input as BaseInput,
+	InputProps as BaseInputProps,
+} from '@base-ui/react/input';
 import clsx from 'clsx';
-import { ComponentPropsWithRef, FocusEvent, FocusEventHandler } from 'react';
+import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { inputInfo } from '../../systems/inputs.js';
@@ -39,9 +42,7 @@ const InnerInput = function InnerInput({
 
 	...props
 }: InputProps) {
-	const handleFocus: FocusEventHandler<HTMLInputElement> = (
-		ev: FocusEvent<HTMLInputElement>,
-	) => {
+	const handleFocus: BaseInputProps['onFocus'] = (ev) => {
 		if (autoSelect) {
 			ev.target.select();
 		}
@@ -53,7 +54,7 @@ const InnerInput = function InnerInput({
 		}
 		onFocus?.(ev);
 	};
-	const handleBlur: FocusEventHandler<HTMLInputElement> = (ev) => {
+	const handleBlur: BaseInputProps['onBlur'] = (ev) => {
 		onBlur?.(ev);
 		ev.currentTarget.removeAttribute('data-focus-clicked');
 	};
@@ -74,15 +75,16 @@ const InnerInput = function InnerInput({
 	);
 };
 
-export interface InputProps extends ComponentPropsWithRef<'input'> {
+export interface InputProps extends Omit<BaseInputProps, 'className'> {
 	autoSelect?: boolean;
 	/** Shuffle between random placeholders */
 	placeholders?: string[];
 	placeholdersIntervalMs?: number;
-	onValueChange?: (value: string) => void;
 	borderRef?: React.Ref<HTMLDivElement>;
 	startAccessory?: React.ReactNode;
 	endAccessory?: React.ReactNode;
+	className?: string;
+	ref?: Ref<HTMLInputElement>;
 }
 
 const InputDefault = function InputDefault({
