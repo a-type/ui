@@ -54,10 +54,7 @@ export const AsButton: Story = {
 	render(args) {
 		return (
 			<Box gap items="center">
-				<Button
-					{...args}
-					render={<Chip color="primary">Clickable Chip</Chip>}
-				/>
+				<Button render={<Chip color="primary">Clickable Chip</Chip>} />
 				<Chip {...args}>Non-clickable Chip</Chip>
 			</Box>
 		);
