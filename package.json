@@ -44,7 +44,7 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"up-radix": "pnpm update \"@radix-ui/*\" --latest",
-		"bump": "bumpp",
+		"bump": "pnpm run build && bumpp",
 		"test": "vitest",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
 		"lint": "eslint **/*.{ts,tsx} --fix",

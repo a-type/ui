@@ -123,7 +123,7 @@ export function TextAreaField({
 		<FieldRoot className={className}>
 			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
 			<TextArea
-				ref={inputRef}
+				ref={inputRef as any}
 				{...props}
 				{...rest}
 				className={textAreaClassName}
@@ -136,5 +136,5 @@ export function TextAreaField({
 
 export const FieldRoot = withClassName(
 	'div',
-	'flex flex-col items-stretch gap-xs self-stretch',
+	'flex flex-col items-stretch self-stretch gap-xs',
 );
