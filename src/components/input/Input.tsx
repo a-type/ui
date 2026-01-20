@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
+import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { inputInfo } from '../../systems/inputs.js';
 
 export const inputClassName = clsx(
@@ -28,7 +29,18 @@ const inputBorderClassName = clsx(
 	'layer-components:[&>.icon]:(mx-sm)',
 );
 
-const InputBorder = withClassName('div', inputBorderClassName);
+function InputBorderImpl(
+	props: React.HTMLAttributes<HTMLDivElement> & {
+		ref?: Ref<HTMLDivElement>;
+	},
+) {
+	return (
+		<GroupScaleReset>
+			<div {...props} />
+		</GroupScaleReset>
+	);
+}
+const InputBorder = withClassName(InputBorderImpl, inputBorderClassName);
 
 const InnerInput = function InnerInput({
 	autoSelect,
