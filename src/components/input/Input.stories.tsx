@@ -41,3 +41,13 @@ export const WithAccessories: Story = {
 		</Input.Border>
 	),
 };
+
+export const NestedInBoxes: Story = {
+	render: (args) => (
+		<Box p border rounded>
+			<Box p border rounded>
+				<Input placeholder="Type something..." {...args} />
+			</Box>
+		</Box>
+	),
+};
