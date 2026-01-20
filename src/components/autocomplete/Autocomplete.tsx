@@ -48,10 +48,14 @@ export interface AutocompleteInputProps extends BaseAutocompleteInputProps {
 	ref?: React.Ref<HTMLInputElement>;
 	icon?: ReactNode;
 	disableCaret?: boolean;
+	disableClear?: boolean;
+	children?: ReactNode;
 }
 const AutocompleteInput = ({
 	disableCaret,
 	icon,
+	children,
+	disableClear,
 	...props
 }: AutocompleteInputProps) => {
 	const valueFromContext = useContext(ValueContext);
@@ -61,9 +65,11 @@ const AutocompleteInput = ({
 				<Input.Border ref={ref} className={className}>
 					{icon}
 					<Input.Input autoComplete="off" {...props} />
-					{(valueFromContext !== null || !disableCaret) && (
+					{((!disableClear && valueFromContext !== null) || !disableCaret) && (
 						<div className="flex items-center">
-							{valueFromContext !== null && <AutocompleteClear />}
+							{!disableClear && valueFromContext !== null && (
+								<AutocompleteClear />
+							)}
 							{!disableCaret && (
 								<BaseAutocomplete.Trigger
 									render={<Button emphasis="ghost" size="small" />}
@@ -73,6 +79,7 @@ const AutocompleteInput = ({
 							)}
 						</div>
 					)}
+					{children}
 				</Input.Border>
 			)}
 			{...props}

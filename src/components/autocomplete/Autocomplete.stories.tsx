@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Box } from '../box/Box.js';
+import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import { Autocomplete } from './Autocomplete.js';
 
@@ -185,7 +186,15 @@ export const NotPopover: Story = {
 				highlightItemOnHover={highlightItemOnHover}
 			>
 				<Box border p surface="white" col>
-					<GroupedAutocomplete.Input disableCaret className="w-full" />
+					<GroupedAutocomplete.Input
+						disableCaret
+						className="w-full"
+						disableClear
+					>
+						<Button size="small" emphasis="primary" className="aspect-1 h-full">
+							<Icon name="plus" />
+						</Button>
+					</GroupedAutocomplete.Input>
 					<GroupedAutocomplete.List>
 						{(group) => (
 							<GroupedAutocomplete.Group key={group.category}>
