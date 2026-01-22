@@ -2,7 +2,6 @@ import {
 	AutocompleteArrowProps,
 	Autocomplete as BaseAutocomplete,
 	AutocompleteGroupProps as BaseAutocompleteGroupProps,
-	AutocompleteInputProps as BaseAutocompleteInputProps,
 	AutocompleteItemProps as BaseAutocompleteItemProps,
 	AutocompleteListProps as BaseAutocompleteListProps,
 	AutocompletePopupProps as BaseAutocompletePopupProps,
@@ -15,36 +14,44 @@ import {
 	ComboboxRowProps as BaseAutocompleteRowProps,
 } from '@base-ui/react/combobox';
 import clsx from 'clsx';
-import { createContext, ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
 import { PaletteName } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
+import {
+	comboboxBackdropClassName,
+	ComboboxComposedInput,
+	comboboxEmptyClassName,
+	comboboxGroupClassName,
+	comboboxGroupItemClassName,
+	comboboxGroupItemListClassName,
+	comboboxGroupLabelClassName,
+	comboboxIconClassName,
+	ComboboxInputProps,
+	comboboxListClassName,
+	comboboxPopupClassName,
+	comboboxRowClassName,
+	ComboboxValueContext,
+} from '../combobox/Combobox.js';
 import { Icon } from '../icon/Icon.js';
-import { Input } from '../input/Input.js';
 import {
 	arrowClassName,
 	itemClassName,
-	itemListClassName,
-	popupClassName,
 	separatorClassName,
 } from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 
-const ValueContext = createContext<string | number | readonly string[] | null>(
-	null,
-);
-
 const AutocompleteRoot = (props: BaseAutocompleteRootProps<any>) => {
 	return (
-		<ValueContext.Provider value={props.value || null}>
+		<ComboboxValueContext.Provider value={props.value || null}>
 			<BaseAutocomplete.Root {...props} />
-		</ValueContext.Provider>
+		</ComboboxValueContext.Provider>
 	);
 };
 
-export interface AutocompleteInputProps extends BaseAutocompleteInputProps {
+export interface AutocompleteInputProps extends ComboboxInputProps {
 	ref?: React.Ref<HTMLInputElement>;
 	icon?: ReactNode;
 	disableCaret?: boolean;
@@ -56,47 +63,31 @@ const AutocompleteInput = ({
 	icon,
 	children,
 	disableClear,
-	...props
+	...outerProps
 }: AutocompleteInputProps) => {
-	const valueFromContext = useContext(ValueContext);
 	return (
 		<BaseAutocomplete.Input
-			render={({ ref, className, ...props }, state) => (
-				<Input.Border ref={ref} className={className}>
-					{icon}
-					<Input.Input autoComplete="off" {...props} />
-					{((!disableClear && valueFromContext !== null) || !disableCaret) && (
-						<div className="flex items-center">
-							{!disableClear && valueFromContext !== null && (
-								<AutocompleteClear />
-							)}
-							{!disableCaret && (
-								<BaseAutocomplete.Trigger
-									render={<Button emphasis="ghost" size="small" />}
-								>
-									<AutocompleteIcon data-open={state.open ? true : undefined} />
-								</BaseAutocomplete.Trigger>
-							)}
-						</div>
-					)}
+			render={(props, state) => (
+				<ComboboxComposedInput
+					{...props}
+					open={state.open}
+					disableCaret={disableCaret}
+					disableClear={disableClear}
+					icon={icon}
+				>
 					{children}
-				</Input.Border>
+				</ComboboxComposedInput>
 			)}
-			{...props}
+			{...outerProps}
 		/>
 	);
 };
 
-const AutocompleteIcon = withClassName(
+export const AutocompleteIcon = withClassName(
 	({ className, ...props }: BaseAutocompleteIconProps) => (
 		<BaseAutocomplete.Icon
 			{...props}
-			className={clsx(
-				'icon',
-				'layer-components:(flex shrink-0 items-center justify-center transition-transform)',
-				'layer-components:data-[open]:(rotate-180)',
-				className,
-			)}
+			className={clsx(comboboxIconClassName, className)}
 		>
 			<Icon name="chevron" />
 		</BaseAutocomplete.Icon>
@@ -105,13 +96,12 @@ const AutocompleteIcon = withClassName(
 
 const AutocompletePopup = withClassName(
 	BaseAutocomplete.Popup,
-	popupClassName,
-	'layer-components:(w-[--anchor-width])',
+	comboboxPopupClassName,
 );
 
 const AutocompleteBackdrop = withClassName(
 	BaseAutocomplete.Backdrop,
-	'layer-components:(fixed inset-0)',
+	comboboxBackdropClassName,
 );
 
 const AutocompleteArrow = ({ className, ...props }: AutocompleteArrowProps) => (
@@ -149,14 +139,12 @@ const AutocompleteContent = ({
 
 const AutocompleteList = withClassName(
 	BaseAutocomplete.List,
-	itemListClassName,
-	'layer-components:(flex flex-col overscroll-contain outline-none overflow-y-auto overflow-unstable)',
-	'layer-components:empty:(p-0)',
+	comboboxListClassName,
 );
 
 const AutocompleteEmpty = withClassName(
 	BaseAutocomplete.Empty,
-	'layer-components:[&:not(:empty)]:(p-sm text-sm color-gray-dark)',
+	comboboxEmptyClassName,
 );
 
 export interface AutocompleteItemProps extends BaseAutocompleteItemProps {
@@ -180,27 +168,24 @@ const AutocompleteGroup = ({
 	return (
 		<BaseAutocomplete.Group
 			{...props}
-			className={clsx(
-				'layer-components:(flex flex-col gap-xs overflow-hidden p-sm)',
-				className,
-			)}
+			className={clsx(comboboxGroupClassName, className)}
 		/>
 	);
 };
 
 const AutocompleteGroupItemList = withClassName(
 	SlotDiv,
-	'layer-components:(flex flex-row flex-wrap gap-xs)',
+	comboboxGroupItemListClassName,
 );
 
 const AutocompleteGroupLabel = withClassName(
 	BaseAutocomplete.GroupLabel,
-	'layer-components:(w-full px-xs text-xs font-medium uppercase color-gray-dark)',
+	comboboxGroupLabelClassName,
 );
 
 const AutocompleteRow: React.FC<BaseAutocompleteRowProps> = withClassName(
 	BaseAutocomplete.Row,
-	'layer-components:(flex items-center gap-xs)',
+	comboboxRowClassName,
 );
 
 const AutocompleteSeparator = withClassName(
@@ -224,12 +209,7 @@ function AutocompleteGroupItem({
 		<BaseAutocomplete.Item
 			render={replace ?? <Button render={<Chip render={render} />} />}
 			{...props}
-			className={clsx(
-				'palette-primary',
-				'layer-composed-2:(bg-white)',
-				'layer-composed-2:data-[highlighted]:(ring-2 bg-main-wash ring-primary)',
-				className,
-			)}
+			className={clsx(comboboxGroupItemClassName, className)}
 		/>
 	);
 }
@@ -238,7 +218,10 @@ export type AutocompleteClearProps = ButtonProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 	children?: ReactNode;
 };
-const AutocompleteClear = ({ children, ...props }: AutocompleteClearProps) => (
+export const AutocompleteClear = ({
+	children,
+	...props
+}: AutocompleteClearProps) => (
 	<BaseAutocomplete.Clear
 		render={<Button emphasis="ghost" size="small" />}
 		{...props}
@@ -276,7 +259,7 @@ const baseSubComponents = {
 function createAutocomplete<TItem>() {
 	function TypedRoot(
 		props: Omit<BaseAutocompleteRootProps<TItem>, 'items'> & {
-			items: readonly TItem[];
+			items?: readonly TItem[];
 		},
 	) {
 		return <AutocompleteRoot {...(props as any)} />;
@@ -290,10 +273,7 @@ function createAutocomplete<TItem>() {
 	}
 	return Object.assign(TypedRoot, {
 		...baseSubComponents,
-		Input: AutocompleteInput,
-		Content: AutocompleteContent,
 		List: TypedList,
-		Empty: AutocompleteEmpty,
 		Item: AutocompleteItem,
 	});
 }
