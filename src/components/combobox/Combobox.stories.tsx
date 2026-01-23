@@ -243,3 +243,47 @@ export const NotPopover: Story = {
 		);
 	},
 };
+
+export const MultiSelect: Story = {
+	render({ arrow, autoHighlight, highlightItemOnHover, creatable }) {
+		const [value, setValue] = useState<Item[]>([]);
+		return (
+			<ExampleCombobox.Multi
+				multiple
+				value={value}
+				onValueChange={setValue}
+				items={items}
+				autoHighlight={autoHighlight}
+				highlightItemOnHover={highlightItemOnHover}
+				showCreatableItem={creatable}
+			>
+				<ExampleCombobox.Chips className="w-300px">
+					<ExampleCombobox.MultiValue>
+						{(items) => (
+							<>
+								<ExampleCombobox.ChipsList>
+									{items.map((item) => (
+										<ExampleCombobox.Chip key={item.id}>
+											{item.label}
+										</ExampleCombobox.Chip>
+									))}
+								</ExampleCombobox.ChipsList>
+								<ExampleCombobox.Input />
+							</>
+						)}
+					</ExampleCombobox.MultiValue>
+				</ExampleCombobox.Chips>
+				<ExampleCombobox.Content arrow={arrow}>
+					<ExampleCombobox.List>
+						{(item) => (
+							<ExampleCombobox.Item key={item.id} value={item}>
+								{item.label}
+							</ExampleCombobox.Item>
+						)}
+					</ExampleCombobox.List>
+					<ExampleCombobox.Empty>No results found.</ExampleCombobox.Empty>
+				</ExampleCombobox.Content>
+			</ExampleCombobox.Multi>
+		);
+	},
+};

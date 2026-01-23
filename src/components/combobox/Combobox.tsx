@@ -5,6 +5,7 @@ import {
 	createContext,
 	ReactNode,
 	Ref,
+	RefObject,
 	useContext,
 	useRef,
 	useState,
@@ -23,7 +24,7 @@ import {
 	separatorClassName,
 } from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
-import { SlotDiv } from '../utility/SlotDiv.js';
+import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export const comboboxPopupClassName = clsx(
 	popupClassName,
@@ -101,16 +102,41 @@ export function ComboboxComposedInput({
 	render?: InputProps['render'];
 }) {
 	const hasValue = !!useContext(ComboboxValueContext);
+	const isInChips = useContext(ComboboxChipsContext);
+
+	const clearAndCaret = ((!disableClear && hasValue) || !disableCaret) && (
+		<div className="flex flex-shrink-0 items-center">
+			{!disableClear && hasValue && <ComboboxClear />}
+			{!disableCaret && <ComboboxTrigger open={open} />}
+		</div>
+	);
+
+	if (isInChips) {
+		return (
+			<div
+				className={clsx(
+					'max-w-full min-w-12ch flex flex-1 flex-row items-center gap-xs',
+					className,
+				)}
+			>
+				<Input.Input
+					autoComplete="off"
+					ref={ref}
+					className={clsx('layer-components:(min-w-3ch flex-1)')}
+					minLength={3}
+					{...props}
+				/>
+				{clearAndCaret}
+				{children}
+			</div>
+		);
+	}
+
 	return (
 		<Input.Border ref={ref} className={className}>
 			{icon}
-			<Input.Input autoComplete="off" {...props} />
-			{((!disableClear && hasValue) || !disableCaret) && (
-				<div className="flex items-center">
-					{!disableClear && hasValue && <ComboboxClear />}
-					{!disableCaret && <ComboboxTrigger open={open} />}
-				</div>
-			)}
+			<Input.Input autoComplete="off" minLength={3} {...props} />
+			{clearAndCaret}
 			{children}
 		</Input.Border>
 	);
@@ -162,8 +188,10 @@ function matchItem(
 	});
 }
 
-export interface ComboboxProps<TItem>
-	extends BaseCombobox.ComboboxRootProps<TItem> {
+export interface ComboboxProps<
+	TItem,
+	Multiple extends boolean | undefined = false,
+> extends BaseCombobox.ComboboxRootProps<TItem, Multiple> {
 	onCreate?: (value: string) => void;
 	showCreatableItem?: boolean;
 }
@@ -177,7 +205,7 @@ const ComboboxRoot = ({
 	onValueChange: userOnValueChange,
 	showCreatableItem,
 	...props
-}: ComboboxProps<any>) => {
+}: ComboboxProps<any, any>) => {
 	const highlightedItemRef = useRef<any>(null);
 	const handleItemHighlighted = (
 		item: any,
@@ -212,40 +240,44 @@ const ComboboxRoot = ({
 			: [makeCreatableItem(inputValue)]
 		: userItems;
 
-	return (
-		<ComboboxCreatableContext.Provider
-			value={{ inputValue, onInputEnter, showCreatableItem: canCreate }}
-		>
-			<ComboboxValueContext.Provider value={props.value || null}>
-				<BaseCombobox.Combobox.Root
-					{...props}
-					items={items}
-					inputValue={userInputValue}
-					itemToStringLabel={userItemToStringLabel}
-					onInputValueChange={(value, ev) => {
-						if (userInputValue === undefined) {
-							setInternalInputValue(value);
-						}
-						userOnInputValueChange?.(value, ev);
-					}}
-					onValueChange={(value, ev) => {
-						const creatable = getCreateableItem(value);
-						if (creatable) {
-							onCreate?.(creatable.value);
-							if (value === creatable) {
-								return;
-							}
-							if (Array.isArray(value)) {
-								value = value.filter((v) => v !== creatable);
-							}
-						}
+	const anchorRef = useRef<HTMLDivElement>(null);
 
-						userOnValueChange?.(value, ev);
-					}}
-					onItemHighlighted={handleItemHighlighted}
-				/>
-			</ComboboxValueContext.Provider>
-		</ComboboxCreatableContext.Provider>
+	return (
+		<ComboboxAnchorContext.Provider value={anchorRef}>
+			<ComboboxCreatableContext.Provider
+				value={{ inputValue, onInputEnter, showCreatableItem: canCreate }}
+			>
+				<ComboboxValueContext.Provider value={props.value || null}>
+					<BaseCombobox.Combobox.Root
+						{...props}
+						items={items}
+						inputValue={userInputValue}
+						itemToStringLabel={userItemToStringLabel}
+						onInputValueChange={(value, ev) => {
+							if (userInputValue === undefined) {
+								setInternalInputValue(value);
+							}
+							userOnInputValueChange?.(value, ev);
+						}}
+						onValueChange={(value, ev) => {
+							const creatable = getCreateableItem(value);
+							if (creatable) {
+								onCreate?.(creatable.value);
+								if (value === creatable) {
+									return;
+								}
+								if (Array.isArray(value)) {
+									value = value.filter((v) => v !== creatable);
+								}
+							}
+
+							userOnValueChange?.(value, ev);
+						}}
+						onItemHighlighted={handleItemHighlighted}
+					/>
+				</ComboboxValueContext.Provider>
+			</ComboboxCreatableContext.Provider>
+		</ComboboxAnchorContext.Provider>
 	);
 };
 
@@ -300,6 +332,67 @@ function ComboboxInput({
 	);
 }
 
+const ComboboxAnchorContext =
+	createContext<RefObject<HTMLDivElement | null> | null>(null);
+
+const ComboboxChipsContext = createContext(false);
+
+function ComboboxChips({
+	className,
+	...props
+}: BaseCombobox.ComboboxChipsProps) {
+	const anchorRef = useContext(ComboboxAnchorContext);
+	return (
+		<ComboboxChipsContext.Provider value={true}>
+			<BaseCombobox.Combobox.Chips
+				ref={anchorRef || undefined}
+				className={clsx(
+					'layer-components:(flex flex-row items-center gap-xs)',
+					className,
+				)}
+				render={<Input.Border />}
+				{...props}
+			/>
+		</ComboboxChipsContext.Provider>
+	);
+}
+
+const ComboboxChipsList = withClassName(
+	SlotDiv,
+	'layer-components:(flex flex-row flex-wrap gap-xs p-xs)',
+	'layer-components:empty:hidden',
+);
+
+function ComboboxChip({
+	className,
+	children,
+	...props
+}: BaseCombobox.ComboboxChipProps) {
+	return (
+		<BaseCombobox.Combobox.Chip
+			render={<Chip />}
+			className={clsx(
+				'layer-composed-2:(my-auto flex flex-row items-center gap-xs px-sm bg-white)',
+				className,
+			)}
+			{...props}
+		>
+			{children}
+			<BaseCombobox.Combobox.ChipRemove
+				render={
+					<Button
+						size="small"
+						emphasis="ghost"
+						className="min-h-0 min-w-0 p-0 leading-1"
+					>
+						<Icon name="x" size={10} />
+					</Button>
+				}
+			/>
+		</BaseCombobox.Combobox.Chip>
+	);
+}
+
 function ComboboxIcon({ className, ...props }: BaseCombobox.ComboboxIconProps) {
 	return (
 		<BaseCombobox.Combobox.Icon
@@ -346,10 +439,15 @@ function ComboboxContent({
 	children,
 	...props
 }: ComboboxPopupProps) {
+	const anchorRef = useContext(ComboboxAnchorContext);
 	return (
 		<BaseCombobox.Combobox.Portal>
 			<ComboboxBackdrop />
-			<BaseCombobox.Combobox.Positioner sideOffset={8} {...positioner}>
+			<BaseCombobox.Combobox.Positioner
+				sideOffset={8}
+				anchor={anchorRef}
+				{...positioner}
+			>
 				<ComboboxPopup {...props}>
 					{arrow && <ComboboxArrow />}
 					{children}
@@ -380,15 +478,34 @@ export interface ComboboxItemProps extends BaseCombobox.ComboboxItemProps {
 function ComboboxItem({
 	className,
 	color = 'gray',
+	children,
 	...props
 }: ComboboxItemProps) {
 	return (
 		<BaseCombobox.Combobox.Item
 			{...props}
-			className={clsx(color && `palette-${color}`, itemClassName, className)}
-		/>
+			className={clsx(
+				color && `palette-${color}`,
+				itemClassName,
+				'layer-components:data-[selected]:color-gray-dark',
+				className,
+			)}
+		>
+			{children}
+			<ComboboxItemIndicator />
+		</BaseCombobox.Combobox.Item>
 	);
 }
+
+const ComboboxItemIndicator = withClassName(
+	(props: BaseCombobox.ComboboxItemIndicatorProps) => (
+		<BaseCombobox.Combobox.ItemIndicator
+			{...props}
+			render={({ children: _, ...rest }) => <Icon name="check" {...rest} />}
+		/>
+	),
+	'layer-components:(ml-auto)',
+);
 
 const ComboboxGroup = withClassName(
 	BaseCombobox.Combobox.Group,
@@ -420,19 +537,49 @@ export interface ComboboxGroupItemProps
 	ref?: Ref<HTMLDivElement>;
 	replace?: BaseCombobox.ComboboxItemProps['render'];
 	render?: ChipProps['render'];
+	color?: ChipProps['color'];
 }
 function ComboboxGroupItem({
 	className,
 	replace,
 	render,
+	color,
+	children,
 	...props
 }: ComboboxGroupItemProps) {
 	return (
 		<BaseCombobox.Combobox.Item
-			render={replace ?? <Button render={<Chip render={render} />} />}
+			render={
+				replace ?? <Button render={<Chip render={render} color={color} />} />
+			}
 			{...props}
-			className={clsx(comboboxGroupItemClassName, className)}
-		/>
+			className={clsx(
+				comboboxGroupItemClassName,
+				'layer-components:data-[selected]:color-gray-dark',
+				className,
+			)}
+		>
+			{children}
+			<ComboboxItemIndicator className="layer-components:(h-10px w-10px)" />
+		</BaseCombobox.Combobox.Item>
+	);
+}
+
+export interface ComboboxMultiValueProps
+	extends BaseCombobox.ComboboxValueProps,
+		Omit<SlotDivProps, 'children'> {}
+function ComboboxMultiValue({
+	children,
+	className,
+	...props
+}: ComboboxMultiValueProps) {
+	return (
+		<SlotDiv
+			className={clsx('max-w-full flex flex-row flex-wrap gap-xs', className)}
+			{...props}
+		>
+			<BaseCombobox.Combobox.Value>{children}</BaseCombobox.Combobox.Value>
+		</SlotDiv>
 	);
 }
 
@@ -470,7 +617,12 @@ const baseSubComponents = {
 	ItemGroup: ComboboxGroupItem,
 	Icon: ComboboxIcon,
 	Clear: ComboboxClear,
+	Chips: ComboboxChips,
+	Chip: ComboboxChip,
+	ChipsList: ComboboxChipsList,
 
+	Value: BaseCombobox.Combobox.Value,
+	MultiValue: ComboboxMultiValue,
 	Positioner: BaseCombobox.Combobox.Positioner,
 	Portal: BaseCombobox.Combobox.Portal,
 	Backdrop: ComboboxBackdrop,
@@ -485,40 +637,71 @@ const baseSubComponents = {
 
 function createCombobox<TItem>() {
 	function TypedRoot(
-		props: Omit<ComboboxProps<TItem>, 'items'> & {
+		props: Omit<ComboboxProps<TItem, false>, 'items'> & {
 			items?: readonly TItem[];
 		},
 	) {
-		return <ComboboxRoot {...(props as any)} />;
+		return <ComboboxRoot {...props} />;
+	}
+	function TypedMultiRoot(
+		props: Omit<ComboboxProps<TItem, true>, 'items'> & {
+			items?: readonly TItem[];
+		},
+	) {
+		return <ComboboxRoot multiple {...props} />;
 	}
 	function TypedList(
 		props: Omit<BaseCombobox.ComboboxListProps, 'children'> & {
 			children?: ReactNode | ((item: TItem, index: number) => ReactNode);
 		},
 	) {
-		return <ComboboxList {...(props as any)} />;
+		return <ComboboxList {...props} />;
 	}
 	function TypedItem(
 		props: Omit<ComboboxItemProps, 'value'> & {
 			value: TItem;
 		},
 	) {
-		return <ComboboxItem {...(props as any)} />;
+		return <ComboboxItem {...props} />;
+	}
+	function TypedValue(
+		props: Omit<BaseCombobox.ComboboxValueProps, 'children'> & {
+			children?: ReactNode | ((item: TItem | null) => ReactNode);
+		},
+	) {
+		return <BaseCombobox.Combobox.Value {...props} />;
+	}
+	function TypedMultiValue(
+		props: Omit<ComboboxMultiValueProps, 'children'> & {
+			children?: ReactNode | ((items: TItem[]) => ReactNode);
+		},
+	) {
+		return <ComboboxMultiValue {...props} />;
 	}
 	return Object.assign(TypedRoot, {
 		...baseSubComponents,
+		Multi: TypedMultiRoot,
 		Item: TypedItem,
 		List: TypedList,
+		Value: TypedValue,
+		MultiValue: TypedMultiValue,
 	});
 }
 
 function createComboboxGrouped<TItemGroup extends { items: readonly any[] }>() {
 	function TypedRoot(
-		props: Omit<ComboboxProps<TItemGroup['items'][number]>, 'items'> & {
+		props: Omit<ComboboxProps<TItemGroup['items'][number], false>, 'items'> & {
 			items?: readonly TItemGroup[];
 		},
 	) {
 		return <ComboboxRoot {...(props as any)} />;
+	}
+	function TypedMultiRoot(
+		props: Omit<ComboboxProps<TItemGroup['items'][number], true>, 'items'> & {
+			items?: readonly TItemGroup[];
+		},
+	) {
+		return <ComboboxRoot multiple {...(props as any)} />;
 	}
 	function TypedList(
 		props: Omit<BaseCombobox.ComboboxListProps, 'children'> & {
@@ -534,14 +717,35 @@ function createComboboxGrouped<TItemGroup extends { items: readonly any[] }>() {
 	) {
 		return <ComboboxGroupItem {...(props as any)} />;
 	}
+	function TypedValue(
+		props: Omit<BaseCombobox.ComboboxValueProps, 'children'> & {
+			children?:
+				| ReactNode
+				| ((item: TItemGroup['items'][number] | null) => ReactNode);
+		},
+	) {
+		return <BaseCombobox.Combobox.Value {...props} />;
+	}
+	function TypedMultiValue(
+		props: Omit<ComboboxMultiValueProps, 'children'> & {
+			children?:
+				| ReactNode
+				| ((items: TItemGroup['items'][number][]) => ReactNode);
+		},
+	) {
+		return <ComboboxMultiValue {...props} />;
+	}
 	return Object.assign(TypedRoot, {
 		...baseSubComponents,
+		Multi: TypedMultiRoot,
 		Item: TypedItem,
 		List: TypedList,
 		Group: ComboboxGroup,
 		GroupList: ComboboxGroupItemList,
 		GroupLabel: ComboboxGroupLabel,
 		Row: ComboboxRow,
+		Value: TypedValue,
+		MultiValue: TypedMultiValue,
 	});
 }
 
