@@ -2,21 +2,21 @@ import { Rule } from 'unocss';
 
 export const clipPathRules: Rule[] = [
 	[
-		/^clip-(:?path-)?(.+)$/,
+		/^clip-(.+)$/,
 		([, path]) => ({
 			'clip-path': `url(#${path})`,
 		}),
 	],
 	[
-		/^clip-(:?path-)?none$/,
+		/^clip-none$/,
 		() => ({
 			'clip-path': 'none',
 		}),
 	],
 	[
-		/^clip-(:?path-)?inset-(.+)$/,
-		([, value, value2]) => {
-			const parts = (value2 || value).split(']-[');
+		/^clip-inset-(.+)$/,
+		([, value]) => {
+			const parts = value.split(']-[');
 			const unbracketed = parts
 				.map((part) => part.trim())
 				.map((part) => {
@@ -36,7 +36,7 @@ export const clipPathRules: Rule[] = [
 		},
 	],
 	[
-		/^clip-(:?path-)?circle-(.+)$/,
+		/^clip-circle-(.+)$/,
 		([, value]) => ({
 			'clip-path': `circle(${value})`,
 		}),

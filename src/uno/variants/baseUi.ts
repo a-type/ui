@@ -7,6 +7,7 @@ export const baseUIVariants: Variant[] = [
 			return {
 				matcher: matcher.replace('start-end:', ''),
 				selector: (s) => `${s}[data-starting-style], ${s}[data-ending-style]`,
+				order: 100,
 			};
 		}
 	},
