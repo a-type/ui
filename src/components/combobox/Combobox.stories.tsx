@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Box } from '../box/Box.js';
-import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import { Combobox } from './Combobox.js';
 
@@ -101,7 +100,17 @@ export const Default: Story = {
 				<ExampleCombobox.Input
 					icon={<Icon name="food" />}
 					className="w-[200px]"
-				/>
+				>
+					{creatable && (
+						<ExampleCombobox.CreateButton
+							size="small"
+							emphasis="primary"
+							className="aspect-1 h-full"
+						>
+							<Icon name="plus" />
+						</ExampleCombobox.CreateButton>
+					)}
+				</ExampleCombobox.Input>
 				<ExampleCombobox.Content arrow={arrow}>
 					<ExampleCombobox.List>
 						{(item) => (
@@ -217,9 +226,13 @@ export const NotPopover: Story = {
 			>
 				<Box border p surface="white" col>
 					<GroupedCombobox.Input disableCaret className="w-full" disableClear>
-						<Button size="small" emphasis="primary" className="aspect-1 h-full">
+						<GroupedCombobox.CreateButton
+							size="small"
+							emphasis="primary"
+							className="aspect-1 h-full"
+						>
 							<Icon name="plus" />
-						</Button>
+						</GroupedCombobox.CreateButton>
 					</GroupedCombobox.Input>
 					<GroupedCombobox.List>
 						{(group) => (

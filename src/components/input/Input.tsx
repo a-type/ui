@@ -11,7 +11,6 @@ import { inputInfo } from '../../systems/inputs.js';
 
 export const inputClassName = clsx(
 	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit bg-transparent)',
-	'layer-components:md:(min-w-120px)',
 	'layer-components:placeholder:(color-gray-dark)',
 	'layer-components:focus:(outline-none)',
 	'layer-components:focus-visible:(outline-none)',

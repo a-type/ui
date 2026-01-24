@@ -1,4 +1,3 @@
-import { ButtonProps } from '@base-ui/react/button';
 import * as BaseCombobox from '@base-ui/react/combobox';
 import clsx from 'clsx';
 import {
@@ -13,6 +12,7 @@ import {
 import { withClassName } from '../../hooks.js';
 import { PaletteName } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
+import { ButtonProps } from '../button/index.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
 import { Icon } from '../icon/Icon.js';
 import { Input, InputProps } from '../input/Input.js';
@@ -145,7 +145,7 @@ export function ComboboxComposedInput({
 export const ComboboxValueContext = createContext<any>(null);
 
 const ComboboxCreatableContext = createContext<{
-	onInputEnter?: (value: string) => void;
+	onCreate?: (value: string) => void;
 	inputValue: string;
 	showCreatableItem?: boolean;
 }>({
@@ -214,7 +214,7 @@ const ComboboxRoot = ({
 		highlightedItemRef.current = item;
 		onItemHighlighted?.(item, ev);
 	};
-	const onInputEnter = onCreate
+	const handleCreate = onCreate
 		? (value: string) => {
 				if (highlightedItemRef.current) return;
 				onCreate(value);
@@ -245,7 +245,11 @@ const ComboboxRoot = ({
 	return (
 		<ComboboxAnchorContext.Provider value={anchorRef}>
 			<ComboboxCreatableContext.Provider
-				value={{ inputValue, onInputEnter, showCreatableItem: canCreate }}
+				value={{
+					inputValue,
+					onCreate: handleCreate,
+					showCreatableItem: canCreate,
+				}}
 			>
 				<ComboboxValueContext.Provider value={props.value || null}>
 					<BaseCombobox.Combobox.Root
@@ -306,7 +310,7 @@ function ComboboxInput({
 	onKeyDown: userOnKeyDown,
 	...outerProps
 }: ComboboxInputProps) {
-	const { onInputEnter } = useContext(ComboboxCreatableContext);
+	const { onCreate: onInputEnter } = useContext(ComboboxCreatableContext);
 	const handleKeyDown: ComboboxInputProps['onKeyDown'] = (ev) => {
 		if (ev.key === 'Enter' && onInputEnter) {
 			onInputEnter(ev.currentTarget.value);
@@ -328,6 +332,21 @@ function ComboboxInput({
 				</ComboboxComposedInput>
 			)}
 			{...outerProps}
+		/>
+	);
+}
+
+function ComboboxCreateButton({ onClick, ...props }: ButtonProps) {
+	const { onCreate: onInputEnter, inputValue } = useContext(
+		ComboboxCreatableContext,
+	);
+	return (
+		<Button
+			onClick={(ev) => {
+				onInputEnter?.(inputValue);
+				onClick?.(ev);
+			}}
+			{...props}
 		/>
 	);
 }
@@ -620,6 +639,7 @@ const baseSubComponents = {
 	Chips: ComboboxChips,
 	Chip: ComboboxChip,
 	ChipsList: ComboboxChipsList,
+	CreateButton: ComboboxCreateButton,
 
 	Value: BaseCombobox.Combobox.Value,
 	MultiValue: ComboboxMultiValue,
