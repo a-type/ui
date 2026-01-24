@@ -1,4 +1,5 @@
 import { Variant } from 'unocss';
+import { baseUIVariants } from './baseUi.js';
 
 export const variants: Variant[] = [
 	/** Selects &+&, good for top borders */
@@ -9,4 +10,6 @@ export const variants: Variant[] = [
 			selector: (s) => `${s} + ${s}`,
 		};
 	},
+
+	...baseUIVariants,
 ];

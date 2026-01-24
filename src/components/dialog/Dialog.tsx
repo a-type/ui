@@ -34,8 +34,7 @@ const StyledOverlay = withClassName(
 	BaseDialog.Backdrop,
 	'layer-components:border-top-1 layer-components:border-top-solid layer-components:border-top-gray layer-components:(fixed inset-0 shadow-[0_30px_60px_0px] shadow-black/20 shadow-inset transition bg-black/15)',
 	'layer-components:backdrop-blur-sm',
-	'data-[starting-style]:(opacity-0)',
-	'data-[ending-style]:(opacity-0)',
+	'start-end:opacity-0',
 );
 
 const StyledContent = withClassName(
@@ -45,15 +44,13 @@ const StyledContent = withClassName(
 	'transform-gpu',
 	'layer-components:(left-50% top-50% max-h-85vh max-w-450px w-90vw translate-[-50%] border-b-1 rounded-lg)',
 
-	'data-[starting-style]:layer-components:(scale-95 opacity-0)',
-	'data-[ending-style]:layer-components:(scale-95 opacity-0)',
+	'layer-components:start-end:scale-95 layer-components:start-end:opacity-0',
 );
 const sheetClassNames = clsx(
 	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-none w-screen translate-0 border-b-0 rounded-b-0 rounded-tl-xl rounded-tr-xl pt-lg shadow-up)',
 	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
 
-	'data-[starting-style]:layer-variants:lt-sm:(translate-y-full opacity-0)',
-	'data-[ending-style]:layer-variants:lt-sm:(translate-y-full opacity-0)',
+	'layer-variants:start-end:lt-sm:(translate-y-full opacity-0)',
 );
 const sheetClassNameWithOverlayKeyboard = clsx(
 	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',

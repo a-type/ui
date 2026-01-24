@@ -58,8 +58,7 @@ function Content({
 						className={classNames(
 							'layer-components:(relative flex select-none rounded-sm px-sm py-xs text-sm leading-tight shadow-sm transition)',
 							'layer-components:data-[instant]:transition-none',
-							'layer-components:data-[starting-style]:(scale-95 opacity-0)',
-							'layer-components:data-[ending-style]:(scale-95 opacity-0)',
+							'layer-components:start-end:(scale-95 opacity-0)',
 							'layer-components:transform-origin-[var(--transform-origin)]',
 							{
 								'layer-variants:(color-white bg-black)': color === 'contrast',

@@ -1,9 +1,20 @@
 import { Dialog, DialogRootProps } from '@base-ui/react/dialog';
 import clsx from 'clsx';
-import { createContext, useContext, useId } from 'react';
+import { createContext, RefObject, useContext, useId, useRef } from 'react';
+import { useSize } from '../../hooks.js';
+import useMergedRef from '../../hooks/useMergedRef.js';
+import {
+	useMonitor,
+	useValueMonitor,
+	ValueMonitor,
+} from '../../systems/ValueMonitor.js';
 import { Button, ButtonProps } from '../button/Button.js';
 
 const QuickActionIdContext = createContext<string>('qab');
+
+const TriggerSizeContext = createContext<
+	ValueMonitor<{ width: number; height: number }>
+>(new ValueMonitor({ width: 0, height: 0 }));
 
 export const QuickActionRoot = ({
 	children,
@@ -12,12 +23,15 @@ export const QuickActionRoot = ({
 	children?: React.ReactNode;
 }) => {
 	const id = useId();
+	const triggerSizeMonitor = useValueMonitor({ width: 0, height: 0 });
 	return (
-		<Dialog.Root {...props}>
-			<QuickActionIdContext.Provider value={id.replace(/:/g, '')}>
-				{children}
-			</QuickActionIdContext.Provider>
-		</Dialog.Root>
+		<TriggerSizeContext.Provider value={triggerSizeMonitor}>
+			<Dialog.Root {...props}>
+				<QuickActionIdContext.Provider value={id.replace(/:/g, '')}>
+					{children}
+				</QuickActionIdContext.Provider>
+			</Dialog.Root>
+		</TriggerSizeContext.Provider>
 	);
 };
 
@@ -26,12 +40,20 @@ const QuickActionTrigger = ({
 	className,
 	emphasis = 'primary',
 	children,
+	ref,
 	...props
 }: QuickActionTriggerProps) => {
 	const layoutId = useContext(QuickActionIdContext);
+	const sizeMonitor = useContext(TriggerSizeContext);
+	const measureRef = useSize((size) => {
+		console.log('measure size', size);
+		sizeMonitor.set(size);
+	});
+	const finalRef = useMergedRef(ref, measureRef);
 	return (
 		<Dialog.Trigger
 			{...props}
+			ref={finalRef}
 			render={({ color: _, ...composed }) => (
 				<Button
 					color={props.color}
@@ -57,34 +79,56 @@ interface QuickActionContentProps {
 	children?: React.ReactNode;
 	className?: string;
 	align?: 'center' | 'start' | 'end';
+	ref?: RefObject<HTMLDivElement>;
 }
 const QuickActionContent = ({
 	children,
 	className,
 	align = 'center',
+	ref,
 }: QuickActionContentProps) => {
+	const innerRef = useRef<HTMLDivElement>(null);
+	const finalRef = useMergedRef(innerRef, ref);
 	const layoutId = useContext(QuickActionIdContext);
+	const triggerSizeMonitor = useContext(TriggerSizeContext);
+	useMonitor(triggerSizeMonitor, (size) => {
+		if (innerRef.current) {
+			const style = innerRef.current.style;
+			style.setProperty('--trigger-width', `${size.width}px`);
+			style.setProperty('--trigger-height', `${size.height}px`);
+		}
+	});
+
 	return (
-		<Dialog.Portal>
+		<Dialog.Portal keepMounted>
 			<Dialog.Popup
+				ref={finalRef}
 				className={clsx(
-					'layer-components:(contain-layout border-1 rounded-md border-solid shadow-lg transition-all bg-white border-black)',
+					'layer-components:(contain-layout border-1 rounded-md border-solid shadow-lg transition-all transition-ease-out bg-white border-black clip-inset-[-50px]-[-50px]-[-50px]-[-50px])',
 					'layer-components:(fixed bottom-[anchor(bottom)] overflow-clip)',
 					{
 						'[justify-self:anchor-center]': align === 'center',
 						'left-[anchor(left)]': align === 'start',
 						'right-[anchor(right)]': align === 'end',
 					},
-					'data-[starting-style]:([will-change:width,height,transform] h-[anchor-size(height)] w-[anchor-size(width)] rounded-200px opacity-0)',
-					'layer-components:[&[data-starting-style]>*]:opacity-0',
-					'data-[ending-style]:([will-change:width,height,transform] h-[anchor-size(height)] w-[anchor-size(width)] rounded-200px opacity-80)',
-					'layer-components:[&[data-ending-style]>*]:opacity-0',
+					{
+						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[calc((100%_-_var(--trigger-width))/2)]-[0]-[calc((100%_-_var(--trigger-width))/2)]-[round]-[200px]':
+							align === 'center',
+						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[calc(100%_-_var(--trigger-width))]-[0]-[0]-[round]-[200px]':
+							align === 'start',
+						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[0]-[0]-[calc(100%_-_var(--trigger-width))]-[round]-[200px]':
+							align === 'end',
+					},
+					'data-[ending-style]:opacity-0',
 					className,
 				)}
-				style={{
-					// @ts-ignore
-					'position-anchor': `--${layoutId}`,
-				}}
+				style={
+					{
+						positionAnchor: `--${layoutId}`,
+						'--trigger-width': triggerSizeMonitor.get().width + 'px',
+						'--trigger-height': triggerSizeMonitor.get().height + 'px',
+					} as any
+				}
 			>
 				{children}
 			</Dialog.Popup>

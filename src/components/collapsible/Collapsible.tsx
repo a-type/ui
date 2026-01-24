@@ -11,14 +11,11 @@ export const CollapsibleRoot = BaseCollapsible.Root;
 const CollapsibleContentBase = withClassName(
 	BaseCollapsible.Panel,
 	'overflow-hidden transition-all',
-	'data-[vertical]:h-[--collapsible-panel-height] data-[horizontal]:w-[--collapsible-panel-width]',
+	'data-[horizontal]:w-[--collapsible-panel-width] data-[vertical]:h-[--collapsible-panel-height]',
 	'data-[both]:(h-[--collapsible-panel-height] w-[--collapsible-panel-width])',
-	'data-[starting-style]:data-[vertical]:(h-0)',
-	'data-[starting-style]:data-[both]:(h-0 w-0)',
-	'data-[ending-style]:data-[vertical]:(h-0)',
-	'data-[ending-style]:data-[both]:(h-0 w-0)',
-	'data-[starting-style]:data-[horizontal]:(w-0)',
-	'data-[ending-style]:data-[horizontal]:(w-0)',
+	'start-end:data-[vertical]:(h-0)',
+	'start-end:data-[both]:(h-0 w-0)',
+	'start-end:data-[horizontal]:(w-0)',
 	'data-[hidden]:[&:not([hidden="until-found"])]:(hidden)',
 );
 // specifically removing className... it's causing problems?

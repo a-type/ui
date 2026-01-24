@@ -35,8 +35,8 @@ export const SelectItem = ({
 
 export const SelectItemRoot = withClassName(
 	BaseSelect.Item,
-	'layer-components:(text-md leading-4 color-black flex items-center flex-row h-36px pr-4 pl-35px min-h-touch-large relative select-none)',
-	'layer-components:[&[data-disabled]]:(color-gray pointer-events-none) [&[data-highlighted]]:(outline-none bg-gray-light color-black)',
+	'layer-components:(relative h-36px min-h-touch-large flex flex-row select-none items-center pl-35px pr-4 text-md leading-4 color-black)',
+	'[&[data-highlighted]]:(outline-none color-black bg-gray-light) layer-components:[&[data-disabled]]:(pointer-events-none color-gray)',
 );
 export const SelectItemIndicatorRoot = withClassName(
 	BaseSelect.ItemIndicator,
@@ -90,11 +90,11 @@ export const SelectTrigger = function SelectTrigger({
 export const SelectValue = withClassName(BaseSelect.Value, 'flex flex-row');
 export const SelectGroupLabel = withClassName(
 	BaseSelect.GroupLabel,
-	'px-25px text-xs leading-6 color-black select-none',
+	'select-none px-25px text-xs leading-6 color-black',
 );
 export const SelectSeparator = withClassName(
 	BaseSelect.Separator,
-	'h-1px bg-gray-light m-1',
+	'm-1 h-1px bg-gray-light',
 );
 export const SelectIcon = ({
 	ref: forwardedRef,

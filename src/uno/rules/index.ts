@@ -1,4 +1,5 @@
 import { anchorRules } from './anchor.js';
+import { clipPathRules } from './clipPath.js';
 import { colorRules } from './color.js';
 import { overflowRules } from './overflow.js';
 import { shadowRules } from './shadow.js';
@@ -10,4 +11,5 @@ export const rules = [
 	...overflowRules,
 	...shadowRules,
 	...utilRules,
+	...clipPathRules,
 ];

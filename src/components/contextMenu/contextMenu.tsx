@@ -24,8 +24,7 @@ export const ContextMenuContent = function Content({
 						className={classNames(
 							'layer-components:(z-menu min-w-120px overflow-hidden border rounded-md shadow-md bg-white border-gray-dark)',
 							'layer-components:transform-origin-[var(--transform-origin)]',
-							'layer-components:data-[starting-style]:(scale-95 opacity-0)',
-							'layer-components:data-[ending-style]:(scale-95 opacity-0)',
+							'layer-components:start-end:(scale-95 opacity-0)',
 							'layer-components:(overflow-y-auto overflow-unstable)',
 							'important:motion-reduce:animate-none',
 							'layer-components:(max-h-[--available-height] max-w-[--available-width])',
@@ -52,9 +51,9 @@ export const ContextMenuArrow = withClassName(
 export const ContextMenuItem = withClassName(
 	BaseContextMenu.Item,
 	'palette-gray',
-	'layer-components:(flex items-center overflow-hidden min-h-touch-large py-sm px-2 relative pl-25px select-none outline-none cursor-pointer)',
-	'layer-components:hover:bg-main-light layer-components:[&[data-highlighted=true]]:bg-main-light',
-	'layer-components:[&[data-disabled=true]]:(opacity-50 cursor-default) layer-components:disabled:(opacity-50 cursor-default))',
+	'layer-components:(relative min-h-touch-large flex cursor-pointer select-none items-center overflow-hidden px-2 py-sm pl-25px outline-none)',
+	'layer-components:[&[data-highlighted=true]]:bg-main-light layer-components:hover:bg-main-light',
+	'layer-components:disabled:cursor-default) layer-components:[&[data-disabled=true]]:(cursor-default opacity-50) layer-components:disabled:(opacity-50)',
 );
 
 export const ContextMenuTrigger = withClassName(BaseContextMenu.Trigger, '');
