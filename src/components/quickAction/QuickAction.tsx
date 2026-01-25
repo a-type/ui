@@ -1,4 +1,8 @@
-import { Dialog, DialogRootProps } from '@base-ui/react/dialog';
+import {
+	Dialog,
+	DialogPopupProps,
+	DialogRootProps,
+} from '@base-ui/react/dialog';
 import clsx from 'clsx';
 import { createContext, RefObject, useContext, useId, useRef } from 'react';
 import { useSize } from '../../hooks.js';
@@ -75,7 +79,7 @@ const QuickActionTrigger = ({
 	);
 };
 
-interface QuickActionContentProps {
+interface QuickActionContentProps extends DialogPopupProps {
 	children?: React.ReactNode;
 	className?: string;
 	align?: 'center' | 'start' | 'end';
@@ -86,6 +90,8 @@ const QuickActionContent = ({
 	className,
 	align = 'center',
 	ref,
+	style,
+	...rest
 }: QuickActionContentProps) => {
 	const innerRef = useRef<HTMLDivElement>(null);
 	const finalRef = useMergedRef(innerRef, ref);
@@ -100,7 +106,7 @@ const QuickActionContent = ({
 	});
 
 	return (
-		<Dialog.Portal keepMounted>
+		<Dialog.Portal>
 			<Dialog.Popup
 				ref={finalRef}
 				className={clsx(
@@ -127,8 +133,10 @@ const QuickActionContent = ({
 						positionAnchor: `--${layoutId}`,
 						'--trigger-width': triggerSizeMonitor.get().width + 'px',
 						'--trigger-height': triggerSizeMonitor.get().height + 'px',
+						...style,
 					} as any
 				}
+				{...rest}
 			>
 				{children}
 			</Dialog.Popup>
