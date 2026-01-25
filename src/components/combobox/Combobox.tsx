@@ -68,8 +68,7 @@ export const comboboxRowClassName = clsx(
 );
 
 export const comboboxGroupItemClassName = clsx(
-	'layer-composed-2:(bg-white)',
-	'layer-composed-2:data-[highlighted]:(ring-2 bg-main-wash ring-primary)',
+	'layer-composed-2:data-[highlighted]:(ring-2 bg-main-wash ring-main)',
 );
 
 export interface ComboboxInputProps
@@ -115,14 +114,17 @@ export function ComboboxComposedInput({
 		return (
 			<div
 				className={clsx(
-					'max-w-full min-w-12ch flex flex-1 flex-row items-center gap-xs',
+					'layer-components:(max-w-full min-w-12ch flex flex-1 flex-row items-center gap-xs)',
 					className,
 				)}
 			>
 				<Input.Input
 					autoComplete="off"
 					ref={ref}
-					className={clsx('layer-components:(min-w-3ch flex-1)')}
+					className={clsx(
+						'layer-components:(min-w-3ch flex-1)',
+						'layer-composed:pl-0',
+					)}
 					minLength={3}
 					{...props}
 				/>
@@ -297,7 +299,7 @@ function ComboboxTrigger({
 			render={<Button emphasis="ghost" size="small" />}
 			{...props}
 		>
-			{children ?? <ComboboxIcon data-open={open} />}
+			{children ?? <ComboboxIcon data-open={open ? true : undefined} />}
 		</BaseCombobox.Combobox.Trigger>
 	);
 }
@@ -367,6 +369,7 @@ function ComboboxChips({
 				ref={anchorRef || undefined}
 				className={clsx(
 					'layer-components:(flex flex-row items-center gap-xs)',
+					'layer-composed:pl-md',
 					className,
 				)}
 				render={<Input.Border />}
@@ -378,20 +381,23 @@ function ComboboxChips({
 
 const ComboboxChipsList = withClassName(
 	SlotDiv,
-	'layer-components:(flex flex-row flex-wrap gap-xs p-xs)',
+	'layer-components:(flex flex-row flex-wrap gap-xs px-sm py-xs -ml-md)',
 	'layer-components:empty:hidden',
 );
 
 function ComboboxChip({
 	className,
 	children,
+	color = 'gray',
 	...props
-}: BaseCombobox.ComboboxChipProps) {
+}: BaseCombobox.ComboboxChipProps & {
+	color?: ChipProps['color'];
+}) {
 	return (
 		<BaseCombobox.Combobox.Chip
-			render={<Chip />}
+			render={<Chip color={color} />}
 			className={clsx(
-				'layer-composed-2:(my-auto flex flex-row items-center gap-xs px-sm bg-white)',
+				'layer-composed-2:(my-auto flex flex-row items-center gap-xs px-sm)',
 				className,
 			)}
 			{...props}
@@ -562,7 +568,7 @@ function ComboboxGroupItem({
 	className,
 	replace,
 	render,
-	color,
+	color = 'gray',
 	children,
 	...props
 }: ComboboxGroupItemProps) {

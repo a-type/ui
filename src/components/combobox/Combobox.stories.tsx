@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { PaletteName } from '../../uno/index.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
 import { Combobox } from './Combobox.js';
@@ -128,11 +129,13 @@ export const Default: Story = {
 
 interface ItemGroup {
 	category: string;
+	color: PaletteName;
 	items: Item[];
 }
 const groupedItems: ItemGroup[] = [
 	{
 		category: 'Fruits',
+		color: 'lemon',
 		items: [
 			{ id: 'apple', label: 'Apple' },
 			{ id: 'banana', label: 'Banana' },
@@ -141,6 +144,7 @@ const groupedItems: ItemGroup[] = [
 	},
 	{
 		category: 'Berries',
+		color: 'blueberry',
 		items: [
 			{ id: 'strawberry', label: 'Strawberry' },
 			{ id: 'blueberry', label: 'Blueberry' },
@@ -180,7 +184,11 @@ export const Grouped: Story = {
 								</GroupedCombobox.GroupLabel>
 								<GroupedCombobox.GroupList>
 									{group.items.map((item) => (
-										<GroupedCombobox.Item key={item.id} value={item}>
+										<GroupedCombobox.Item
+											key={item.id}
+											value={item}
+											color={group.color}
+										>
 											{item.label}
 										</GroupedCombobox.Item>
 									))}
@@ -276,7 +284,7 @@ export const MultiSelect: Story = {
 							<>
 								<ExampleCombobox.ChipsList>
 									{items.map((item) => (
-										<ExampleCombobox.Chip key={item.id}>
+										<ExampleCombobox.Chip key={item.id} color={'accent'}>
 											{item.label}
 										</ExampleCombobox.Chip>
 									))}

@@ -330,7 +330,7 @@ function useDialogInherentSwipe({ disableSheet }: { disableSheet?: boolean }) {
 	return { gestureRef, onTouchStart, onTouchMove, onTouchEnd };
 }
 
-export const DialogSwipeHandle = function DialogSwipeHandle({
+export function DialogSwipeHandle({
 	ref,
 	className,
 	...props
@@ -363,7 +363,7 @@ export const DialogSwipeHandle = function DialogSwipeHandle({
 			<div className="layer-components:(h-[4px] w-full rounded-lg bg-gray)" />
 		</div>
 	);
-};
+}
 
 function findParentDialogContent(
 	element: HTMLElement | null,
