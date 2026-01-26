@@ -21,7 +21,7 @@ export default defineConfig({
 		presetAtype({
 			borderScale: 1,
 			cornerScale: 1,
-			scale: 1,
+			spacingScale: 1,
 			saturation: 50,
 		}),
 	],

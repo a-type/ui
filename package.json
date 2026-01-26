@@ -35,7 +35,7 @@
 		}
 	},
 	"scripts": {
-		"build:transpile": "tsc && tsc -P tsconfig-cjs.json",
+		"build:transpile": "tsc",
 		"build:prefix": "node ./scripts/addUnoInclude.js",
 		"build:process": "unocss --write-transformed -o ./dist/css/main.css -m -c uno.config.js \"./dist/**/*.js\"",
 		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:process",
@@ -47,7 +47,7 @@
 		"bump": "pnpm run typecheck && bumpp",
 		"test": "vitest",
 		"test:unit": "vitest --project=unit",
-		"test:snapshots": "vitest --project=snapshots",
+		"test:snapshots": "pnpm build && vitest --project=snapshots",
 		"typecheck": "tsc --noEmit",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
 		"lint": "eslint **/*.{ts,tsx} --fix",

@@ -1,1 +1,2 @@
-import 'virtual:uno.css';
+/// <reference types="vitest/browser" />
+import '../../dist/css/main.css';
