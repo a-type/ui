@@ -58,7 +58,7 @@ export function getButtonClassName({
 				size === 'small',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2.35 text-sm)':
 				size === 'default' && !disableIconMode,
-			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2 text-xs -m-y-0.5)':
+			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-sm text-xs -m-y-2xs)':
 				size === 'small' && !disableIconMode,
 		},
 

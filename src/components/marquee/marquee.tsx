@@ -42,7 +42,7 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 
 const MarqueeItem = withClassName(
 	SlotDiv,
-	'layer-components:(w-full h-full flex-shrink-0 object-cover)',
+	'layer-components:(h-full w-full flex-shrink-0 object-cover)',
 );
 
 Marquee.Item = MarqueeItem;

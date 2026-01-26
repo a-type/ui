@@ -54,6 +54,7 @@ export interface ColorPaletteStyles {
 export interface ColorLogicalPalette {
 	name: string;
 	sourceHue: string;
+	accentHue: string;
 	saturation?: string;
 	definitions: ColorLogicalPaletteDefinitions;
 	styles: ColorPaletteStyles;
@@ -61,10 +62,12 @@ export interface ColorLogicalPalette {
 
 export function createColorLogicalPalette({
 	sourceHue,
+	accentHue,
 	saturation,
 	name,
 }: {
 	sourceHue: string;
+	accentHue: string;
 	saturation?: string;
 	name: string;
 }): ColorLogicalPalette {
@@ -217,6 +220,7 @@ export function createColorLogicalPalette({
 	return {
 		name,
 		sourceHue,
+		accentHue,
 		saturation,
 		definitions,
 		styles: createPaletteStyles(sourceHue, definitions),
@@ -252,31 +256,38 @@ export const defaultPalettes = {
 	main: createColorLogicalPalette({
 		name: 'main',
 		sourceHue: paletteHues.main,
+		accentHue: paletteHues.accent,
 	}),
 	primary: createColorLogicalPalette({
 		name: 'primary',
 		sourceHue: paletteHues.primary,
+		accentHue: paletteHues.accent,
 	}),
 	accent: createColorLogicalPalette({
 		name: 'accent',
 		sourceHue: paletteHues.accent,
+		accentHue: paletteHues.accent,
 	}),
 	attention: createColorLogicalPalette({
 		name: 'attention',
 		sourceHue: paletteHues.attention,
+		accentHue: paletteHues.accent,
 	}),
 	success: createColorLogicalPalette({
 		name: 'success',
 		sourceHue: paletteHues.success,
+		accentHue: paletteHues.accent,
 	}),
 	gray: createColorLogicalPalette({
 		name: 'gray',
 		sourceHue: paletteHues.main,
 		saturation: graySaturation,
+		accentHue: paletteHues.accent,
 	}),
 	['high-contrast']: createColorLogicalPalette({
 		name: 'high-contrast',
 		sourceHue: paletteHues.main,
 		saturation: highContrastSaturation,
+		accentHue: paletteHues.accent,
 	}),
 };

@@ -6,9 +6,9 @@ export function useOverrideTheme(theme: PaletteName | null | undefined) {
 		if (!theme || typeof document === 'undefined') {
 			return;
 		}
-		document.body.classList.add(`theme-override-${theme}`);
+		document.body.classList.add(`theme-${theme}`);
 		return () => {
-			document.body.classList.remove(`theme-override-${theme}`);
+			document.body.classList.remove(`theme-${theme}`);
 		};
 	}, [theme]);
 }

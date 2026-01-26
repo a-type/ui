@@ -13,6 +13,9 @@ ${PROPS.MODE.S_RANGE_DOWN}: 20%;
 ${PROPS.MODE.WHITE}: #ffffff;
 ${PROPS.MODE.BLACK}: #000000;
 
+color: var(${PROPS.COLOR.INHERITED});
+background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
+
 ${palettePropertyReset(options)}
 `;
 
@@ -26,6 +29,9 @@ ${PROPS.MODE.S_RANGE_UP}: 40%;
 ${PROPS.MODE.S_RANGE_DOWN}: -30%;
 ${PROPS.MODE.WHITE}: #000000;
 ${PROPS.MODE.BLACK}: #ffffff;
+
+color: var(${PROPS.COLOR.INHERITED});
+background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
 
 ${palettePropertyReset(options)}
 `;

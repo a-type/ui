@@ -4,6 +4,7 @@ export const PROPS = {
 			PRIMARY_HUE: '--u-c-primary-hue',
 			ACCENT_HUE: '--u-c-accent-hue',
 			NAMED_HUE: (name: string) => `--u-c-${name}-hue`,
+			NAMED_ACCENT_HUE: (name: string) => `--u-c-${name}-accent-hue`,
 		},
 		SATURATION: '--u-saturation',
 		SHADOW_SPREAD: '--u-shadow-spread',

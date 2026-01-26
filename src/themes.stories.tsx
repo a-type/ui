@@ -347,7 +347,7 @@ export const Nesting: Story = {
 				<Box d="row" gap surface color="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
-				<DemoUI className="theme-eggplant override-dark flex-1" />
+				<DemoUI className="palette-eggplant override-dark flex-1" />
 			</Box>
 		);
 	},

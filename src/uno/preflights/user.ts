@@ -8,6 +8,7 @@ export interface UserPreflightOptions {
 	namedHues?: {
 		[name: string]: {
 			sourceHue: number;
+			accentHue: number;
 			saturation?: number;
 		};
 	};
@@ -46,10 +47,12 @@ export const userPreflight = ({
 		${
 			namedHues
 				? Object.entries(namedHues)
-						.map(
-							([name, config]) =>
-								`${PROPS.USER.COLOR.NAMED_HUE(name)}: ${config.sourceHue};`,
-						)
+						.flatMap(([name, config]) => [
+							`${PROPS.USER.COLOR.NAMED_HUE(name)}: ${config.sourceHue};`,
+							`${PROPS.USER.COLOR.NAMED_ACCENT_HUE(name)}: ${
+								config.accentHue
+							};`,
+						])
 						.join('\n')
 				: ''
 		}

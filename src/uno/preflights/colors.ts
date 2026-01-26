@@ -55,7 +55,11 @@ ${paletteColors(PROPS.PALETTE.SHADES, palette)}
 ${/* every palette defines its grays, too */ ''}
 ${paletteColors(PROPS.PALETTE.GRAY_SHADES, defaultPalettes.gray)}
 }
-`;
+
+.theme-${name} {
+	${PROPS.USER.COLOR.PRIMARY_HUE}: var(${PROPS.USER.COLOR.NAMED_HUE(name)});
+	${PROPS.USER.COLOR.ACCENT_HUE}: var(${PROPS.USER.COLOR.NAMED_ACCENT_HUE(name)});
+}`;
 }
 
 function toNamedPalettes(namedHues: ColorPreflightOptions['namedHues']) {
@@ -65,6 +69,7 @@ function toNamedPalettes(namedHues: ColorPreflightOptions['namedHues']) {
 			createColorLogicalPalette({
 				name,
 				sourceHue: config.sourceHue.toString(),
+				accentHue: config.accentHue.toString(),
 				saturation: config.saturation?.toString(),
 			}),
 		]),
@@ -88,6 +93,8 @@ export function palettePropertyReset(options: ColorPreflightOptions) {
 			([name, palette]) =>
 				paletteColors(PROPS.PALETTE.NAMED_SHADES(name), palette),
 		),
+		`${PROPS.COLOR.INHERITED}: ${defaultPalettes['high-contrast'].styles.ink};`,
+		`${PROPS.BACKGROUND_COLOR.INHERITED}: ${defaultPalettes['gray'].styles.wash};`,
 	].join('\n');
 }
 
@@ -129,8 +136,8 @@ ${paletteClass('high-contrast', defaultPalettes['high-contrast'], {
 body {
 	${PROPS.PALETTE.NAME}: 'primary';
 	${PROPS.COLOR.INHERITED}: ${defaultPalettes['high-contrast'].styles.ink};
-	color: var(${PROPS.COLOR.INHERITED});
 	${PROPS.BACKGROUND_COLOR.INHERITED}: ${defaultPalettes['gray'].styles.wash};
+	color: var(${PROPS.COLOR.INHERITED});
 	background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
 	${PROPS.PALETTE.MAIN_HUE}: var(${PROPS.USER.COLOR.PRIMARY_HUE});
 	${paletteColors(PROPS.PALETTE.SHADES, defaultPalettes.primary)}
