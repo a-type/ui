@@ -59,11 +59,11 @@ export default meta;
 
 type Story = StoryObj;
 
-function DemoUI({ className }: { className?: string }) {
+export function DemoUI({ className }: { className?: string }) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot className={clsx('flex-1', className)}>
+		<PageRoot data-testid="demo" className={clsx('flex-1', className)}>
 			<PageContent>
 				<div className={clsx('grid grid-cols-2 gap-2')}>
 					<Box gap wrap p>
