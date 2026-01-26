@@ -17,7 +17,7 @@ export const shadowRules: Rule[] = [
 	[
 		/^shadow-none$/,
 		() => ({
-			[PROPS.BUILT_IN.SHADOW]: 'none',
+			[PROPS.BUILT_IN.SHADOW]: '0 0 rgb(0 0 0 / 0)',
 			'box-shadow':
 				'var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow)',
 		}),

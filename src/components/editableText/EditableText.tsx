@@ -88,7 +88,10 @@ export function EditableText({
 				value={value}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				className={clsx('layer-variants:font-size-inherit', className)}
+				className={clsx(
+					'layer-variants:[&_input]:font-size-inherit',
+					className,
+				)}
 				id={id}
 				autoSelect={autoSelect}
 				onKeyDown={handleKeyDown}
@@ -102,7 +105,7 @@ export function EditableText({
 			onClick={() => setEditingFinal(true)}
 			className={clsx(
 				inputClassName,
-				'layer-variants:(w-auto inline-flex items-center gap-2 text-left font-size-inherit shadow-none color-inherit bg-transparent border-transparent)',
+				'layer-variants:(w-auto inline-flex items-center gap-sm rounded-md px-md text-left font-size-inherit color-inherit bg-transparent border-transparent shadow-none)',
 				'layer-variants:hover:(bg-main-light/80)',
 				'layer-variants:focus-visible:(outline-none ring-2 bg-main-light/80 ring-accent)',
 				'cursor-pointer',
@@ -112,7 +115,7 @@ export function EditableText({
 			{...rest}
 		>
 			{value}
-			<Icon name="pencil" className="stroke-main-dark opacity-50" />
+			<Icon name="pencil" className="stroke-main-dark opacity-80" />
 		</button>
 	);
 }

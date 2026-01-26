@@ -36,7 +36,7 @@ const meta = {
 				<Button size="small">Twenty three</Button>
 				<Button size="small">Twenty four</Button>
 				<Button
-					color="primary"
+					emphasis="primary"
 					className="sticky bottom-2 right-2 ml-auto flex-shrink-0 shadow-sm"
 				>
 					<Icon name="plus" />

@@ -59,7 +59,7 @@ export function HorizontalList({
 		if (!content || !container) {
 			return;
 		}
-		const contentWidth = content.offsetWidth;
+		const contentWidth = content.scrollWidth;
 		const containerHeight = container.offsetHeight;
 		const containerWidth = container.offsetWidth;
 		if (open && contentWidth > containerWidth) {
@@ -105,7 +105,8 @@ export function HorizontalList({
 				)
 				.finished.then(() => {
 					requestAnimationFrame(() => {
-						const canOpen = content.offsetWidth > container.offsetWidth;
+						const canOpen = container.scrollWidth > container.offsetWidth;
+						console.log('can open', canOpen);
 						emitCanOpenChange(canOpen);
 					});
 				});
@@ -124,7 +125,7 @@ export function HorizontalList({
 			if (!content || !container) {
 				return;
 			}
-			const canOpen = content.offsetWidth > container.offsetWidth;
+			const canOpen = container.scrollWidth > container.offsetWidth;
 			emitCanOpenChange(canOpen);
 		});
 		resizeObserver.observe(containerRef.current);
@@ -147,10 +148,10 @@ export function HorizontalList({
 			{...rest}
 		>
 			<ScrollArea.Viewport ref={containerRef}>
-				<ScrollArea.Content
+				<div
 					className={clsx(
 						'layer-components:(gap-2 px-3 pb-4 pt-3)',
-						'w-auto) w-max-content flex flex-shrink-0 flex-row items-center gap-2',
+						'w-max-content flex flex-shrink-0 flex-row items-center gap-2',
 						contentClassName,
 					)}
 					ref={contentRef}
@@ -158,6 +159,8 @@ export function HorizontalList({
 					<CollapsibleSimple
 						horizontal
 						open={internalCanOpen && !disableInternalOpenToggle}
+						data-can-open={internalCanOpen}
+						data-disabled={disableInternalOpenToggle ? '' : undefined}
 					>
 						<Button
 							onClick={toggleOpen}
@@ -178,7 +181,7 @@ export function HorizontalList({
 						</Button>
 					</CollapsibleSimple>
 					{children}
-				</ScrollArea.Content>
+				</div>
 			</ScrollArea.Viewport>
 			<ScrollArea.Scrollbar />
 			<ScrollArea.Scrollbar orientation="horizontal" />

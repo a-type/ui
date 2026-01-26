@@ -31,7 +31,7 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	${PROPS.BUILT_IN.SHADOW_COLOR}: #000000;
 	${PROPS.BUILT_IN.SHADOW_OPACITY}: 10%;
 
-	--arrow-size: 1rem;
+	${PROPS.UTILS.ARROW_SIZE}: 1rem;
 }
 
 @layer preflightBase {

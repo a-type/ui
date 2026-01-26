@@ -124,6 +124,7 @@ export const PROPS = {
 
 	UTILS: {
 		SHADOW_Y_MULT: '--t-shadow-y-mult',
+		ARROW_SIZE: '--t-arrow-size',
 	},
 
 	BUILT_IN: {
