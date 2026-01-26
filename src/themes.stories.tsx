@@ -334,12 +334,6 @@ export function DemoUI({ className }: { className?: string }) {
 	);
 }
 
-export const Default: Story = {
-	render() {
-		return <DemoUI />;
-	},
-};
-
 export const Nesting: Story = {
 	render() {
 		return (
