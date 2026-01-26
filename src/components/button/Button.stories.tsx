@@ -49,11 +49,21 @@ export const Default: Story = {
 					</Button>
 				</Box>
 				<Box gap items="center">
-					<Button emphasis="primary">Primary</Button>
-					<Button emphasis="default">Default</Button>
-					<Button emphasis="light">Light</Button>
-					<Button emphasis="ghost">Ghost</Button>
-					<Button emphasis="contrast">Contrast</Button>
+					<Button {...args} emphasis="primary">
+						Primary
+					</Button>
+					<Button {...args} emphasis="default">
+						Default
+					</Button>
+					<Button {...args} emphasis="light">
+						Light
+					</Button>
+					<Button {...args} emphasis="ghost">
+						Ghost
+					</Button>
+					<Button {...args} emphasis="contrast">
+						Contrast
+					</Button>
 				</Box>
 			</Box>
 		);

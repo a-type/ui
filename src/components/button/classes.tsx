@@ -52,8 +52,7 @@ export function getButtonClassName({
 		},
 
 		{
-			'layer-components:(rounded-lg px-4 py-2 text-md)':
-				size === 'default',
+			'layer-components:(rounded-lg px-4 py-2 text-md)': size === 'default',
 			'layer-components:(min-h-touch rounded-md px-4 py-0.25 text-sm)':
 				size === 'small',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2.35 text-sm)':

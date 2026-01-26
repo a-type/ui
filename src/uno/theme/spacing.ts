@@ -2,6 +2,8 @@ import { Theme } from '@unocss/preset-mini';
 import { PROPS } from '../logic/properties.js';
 
 export const spacing: Theme['spacing'] = {
+	0: '0px',
+	none: 'none',
 	'2xs': `calc(0.125rem * var(${PROPS.LOCALS.SPACING_SCALE},1) * var(${PROPS.USER.SPACING_SCALE},1))`,
 	xs: `calc(0.25rem * var(${PROPS.LOCALS.SPACING_SCALE},1) * var(${PROPS.USER.SPACING_SCALE},1))`,
 	sm: `calc(0.5rem * var(${PROPS.LOCALS.SPACING_SCALE},1) * var(${PROPS.USER.SPACING_SCALE},1))`,
