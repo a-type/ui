@@ -4,7 +4,7 @@ import {
 	livePropertyColorContext,
 	snapshotColorContext,
 } from './color.js';
-import { palettes } from './palettes.js';
+import { defaultPalettes } from './palettes.js';
 
 describe('context snapshot evaluation', () => {
 	it('should snapshot color context from element properties', () => {
@@ -28,7 +28,7 @@ describe('context snapshot evaluation', () => {
 });
 
 describe('oklch color evaluation tools', () => {
-	const { wash, default: DEFAULT } = palettes.main.definitions;
+	const { wash, default: DEFAULT } = defaultPalettes.main.definitions;
 
 	it('should resolve lch values', () => {
 		const ctx = snapshotColorContext('leek');

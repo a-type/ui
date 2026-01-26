@@ -1,10 +1,11 @@
 import { Theme } from '@unocss/preset-mini';
+import { PROPS } from '../logic/properties.js';
 
 export const fontFamily: Theme['fontFamily'] = {
-	default: 'var(--font-default, sans-serif)',
-	sans: 'var(--font-sans, sans-serif)',
-	serif: 'var(--font-serif, serif)',
-	title: 'var(--font-title, var(--font-default))',
+	default: `var(${PROPS.USER.FONTS.DEFAULT}, sans-serif)`,
+	sans: `var(${PROPS.USER.FONTS.SANS}, sans-serif)`,
+	serif: `var(${PROPS.USER.FONTS.SERIF}, serif)`,
+	title: `var(${PROPS.USER.FONTS.TITLE}, var(${PROPS.USER.FONTS.DEFAULT}))`,
 };
 export const fontSize: Theme['fontSize'] = {
 	xxs: ['0.625rem', '0.75rem'],

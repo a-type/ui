@@ -1,30 +1,51 @@
 import { Theme } from '@unocss/preset-mini';
-import { palettes } from '../logic/palettes.js';
+import { PROPS } from '../logic/properties.js';
+import { PreflightConfig } from '../preflights/index.js';
 
 const contrastClamp = 'clamp(0, (0.36 / y - 1) * infinity, 1)';
 
-export const colors = {
-	none: 'transparent',
-	transparent: 'transparent',
-	current: 'currentColor',
+export function makeThemeColors(options: PreflightConfig): Theme['colors'] {
+	return {
+		none: 'transparent',
+		transparent: 'transparent',
+		current: 'currentColor',
 
-	black: palettes['high-contrast'].styles.ink,
-	white: palettes['high-contrast'].styles.wash,
-	wash: palettes.gray.styles.wash,
+		black: `var(${PROPS.PALETTE.NAMED_SHADES('high-contrast').INK})`,
+		white: `var(${PROPS.PALETTE.NAMED_SHADES('high-contrast').WASH})`,
+		wash: `var(${PROPS.PALETTE.GRAY_SHADES.WASH})`,
 
-	// magic tokens
-	contrast: `color(from var(--l-contrast-bg,var(--v-bg-altered,var(--v-bg,var(--mode-white)))) xyz-d65 ${contrastClamp} ${contrastClamp} ${contrastClamp})`,
-	bg: 'var(--v-bg-altered, var(--v-bg, transparent))',
-	fg: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
-	color: 'var(--v-color-altered, var(--v-color, var(--mode-black)))',
-	border: 'var(--v-border-altered, var(--v-border, transparent))',
+		// magic tokens
+		contrast: `color(from var(${PROPS.BACKGROUND_COLOR.CONTRAST},var(${PROPS.BACKGROUND_COLOR.FINAL},var(${PROPS.BACKGROUND_COLOR.INHERITED},var(${PROPS.MODE.WHITE})))) xyz-d65 ${contrastClamp} ${contrastClamp} ${contrastClamp})`,
+		bg: `var(${PROPS.BACKGROUND_COLOR.FINAL}, var(${PROPS.BACKGROUND_COLOR.INHERITED}, transparent))`,
+		fg: `var(${PROPS.COLOR.FINAL}, var(${PROPS.COLOR.INHERITED}, var(${PROPS.MODE.BLACK})))`,
+		color: `var(${PROPS.COLOR.FINAL}, var(${PROPS.COLOR.INHERITED}, var(${PROPS.MODE.BLACK})))`,
+		border: `var(${PROPS.BORDER_COLOR.ALL.FINAL}, var(${PROPS.BORDER_COLOR.ALL.INHERITED}, transparent))`,
 
-	primary: palettes.primary.styles,
-	accent: palettes.accent.styles,
-	attention: palettes.attention.styles,
-	success: palettes.success.styles,
+		primary: shadesOf(PROPS.PALETTE.NAMED_SHADES('primary')),
+		accent: shadesOf(PROPS.PALETTE.NAMED_SHADES('accent')),
+		attention: shadesOf(PROPS.PALETTE.NAMED_SHADES('attention')),
+		success: shadesOf(PROPS.PALETTE.NAMED_SHADES('success')),
 
-	main: palettes.main.styles,
+		main: shadesOf(PROPS.PALETTE.SHADES),
+		gray: shadesOf(PROPS.PALETTE.GRAY_SHADES),
 
-	gray: palettes.gray.styles,
-} satisfies Record<string, string | Theme['colors']>;
+		...(options.namedHues
+			? Object.fromEntries(
+					Object.keys(options.namedHues).map(([name]) => [
+						name,
+						shadesOf(PROPS.PALETTE.NAMED_SHADES(name)),
+					]),
+			  )
+			: {}),
+	};
+}
+
+function shadesOf(entries: typeof PROPS.PALETTE.SHADES) {
+	return {
+		wash: `var(${entries.WASH})`,
+		light: `var(${entries.LIGHT})`,
+		DEFAULT: `var(${entries.MID})`,
+		dark: `var(${entries.DARK})`,
+		ink: `var(${entries.INK})`,
+	};
+}

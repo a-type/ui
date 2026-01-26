@@ -40,13 +40,13 @@ export function useWebManifest(
 ): WebAppManifest {
 	useEffect(() => {
 		if (abortController) {
-			abortController.abort();
+			abortController.abort('Component unmounted');
 		}
 		abortController = abortableManifestSync(manifestPath);
 
 		return () => {
 			if (abortController) {
-				abortController.abort();
+				abortController.abort('Component unmounted');
 			}
 		};
 	}, [manifestPath]);

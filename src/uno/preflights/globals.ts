@@ -1,3 +1,4 @@
+import { PROPS } from '../logic/properties.js';
 import { preflight } from './_util.js';
 
 export interface GlobalsPreflightConfig {
@@ -8,10 +9,10 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	preflight({
 		getCSS: () => `
 :root {
-	--font-sans: "Inter", sans-serif;
-	--font-serif: "Domine", serif;
-	--font-title: "Inter", sans-serif;
-	--font-default: var(--font-sans, sans-serif);
+	${PROPS.USER.FONTS.SANS}: "Inter", sans-serif;
+	${PROPS.USER.FONTS.SERIF}: "Domine", serif;
+	${PROPS.USER.FONTS.TITLE}: "Inter", sans-serif;
+	${PROPS.USER.FONTS.DEFAULT}: var(${PROPS.USER.FONTS.SANS}, sans-serif);
 
 	--z-now-playing: 40;
 	--z-nav: 50;
@@ -27,17 +28,17 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	`
 	}
 
-	--un-shadow-color: #000000;
-	--un-shadow-opacity: 10%;
+	${PROPS.BUILT_IN.SHADOW_COLOR}: #000000;
+	${PROPS.BUILT_IN.SHADOW_OPACITY}: 10%;
 
-	--arrow-size: 1rem;
+	${PROPS.UTILS.ARROW_SIZE}: 1rem;
 }
 
 @layer preflightBase {
 	html, body {
 		margin: 0;
 		padding: 0;
-		font-family: var(--font-default);
+		font-family: var(${PROPS.USER.FONTS.DEFAULT}, sans-serif);
 		font-size: 16px;
 		min-height: 100%;
 		--webkit-font-smoothing: antialiased;
@@ -62,51 +63,6 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 		border-style: solid;
 		border-width: 0;
 	}
-}
-
-@property --v-shadow-y-mult {
-	syntax: "*";
-	inherits: false;
-}
-
-@property --v-border-r-color {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-b-color {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-l-color {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-t-color {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-r-color-altered {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-b-color-altered {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-l-color-altered {
-	syntax: "<color>";
-	inherits: false;
-}
-
-@property --v-border-t-color-altered {
-	syntax: "<color>";
-	inherits: false;
 }
 `,
 	});

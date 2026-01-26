@@ -43,7 +43,7 @@ import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
 import { useOverrideTheme } from './hooks/useOverrideTheme.js';
-import { PaletteName } from './uno/index.js';
+import { PaletteName, PROPS } from './uno/index.js';
 
 const meta = {
 	title: 'Theme Demo',
@@ -59,11 +59,11 @@ export default meta;
 
 type Story = StoryObj;
 
-function DemoUI({ className }: { className?: string }) {
+export function DemoUI({ className }: { className?: string }) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot className={clsx('flex-1', className)}>
+		<PageRoot data-testid="demo" className={clsx('flex-1', className)}>
 			<PageContent>
 				<div className={clsx('grid grid-cols-2 gap-2')}>
 					<Box gap wrap p>
@@ -334,12 +334,6 @@ function DemoUI({ className }: { className?: string }) {
 	);
 }
 
-export const Default: Story = {
-	render() {
-		return <DemoUI />;
-	},
-};
-
 export const Nesting: Story = {
 	render() {
 		return (
@@ -347,7 +341,7 @@ export const Nesting: Story = {
 				<Box d="row" gap surface color="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
-				<DemoUI className="theme-eggplant override-dark flex-1" />
+				<DemoUI className="palette-eggplant override-dark flex-1" />
 			</Box>
 		);
 	},
@@ -385,21 +379,21 @@ export const Override: Story = {
 export const Custom: Story = {
 	render() {
 		const [theme, setTheme] = useState({
-			'--p-primary-hue': 70,
-			'--p-accent-hue': 290,
-			'--global-saturation': 0.5,
-			'--global-border-scale': 1.5,
-			'--global-spacing-scale': 1,
-			'--global-corner-scale': 1,
+			[PROPS.USER.COLOR.PRIMARY_HUE]: 70,
+			[PROPS.USER.COLOR.ACCENT_HUE]: 290,
+			[PROPS.USER.SATURATION]: 0.5,
+			[PROPS.USER.BORDER_SCALE]: 1.5,
+			[PROPS.USER.SPACING_SCALE]: 1,
+			[PROPS.USER.CORNER_SCALE]: 1,
 		});
 		const reroll = () => {
 			setTheme({
-				'--p-primary-hue': Math.floor(Math.random() * 360),
-				'--p-accent-hue': Math.floor(Math.random() * 360),
-				'--global-saturation': Math.random(),
-				'--global-border-scale': Math.random() * 2,
-				'--global-spacing-scale': Math.random() * 2,
-				'--global-corner-scale': Math.random() * 1.25,
+				[PROPS.USER.COLOR.PRIMARY_HUE]: Math.floor(Math.random() * 360),
+				[PROPS.USER.COLOR.ACCENT_HUE]: Math.floor(Math.random() * 360),
+				[PROPS.USER.SATURATION]: Math.random(),
+				[PROPS.USER.BORDER_SCALE]: Math.random() * 2,
+				[PROPS.USER.SPACING_SCALE]: Math.random() * 2,
+				[PROPS.USER.CORNER_SCALE]: Math.random() * 1.25,
 			});
 		};
 		return (
@@ -438,31 +432,29 @@ export const Trippy: Story = {
 				1 + Math.sin((Date.now() / 50000) * Math.PI * 2);
 			values.current.cornerScale = 1 + Math.sin(Date.now() / 3000);
 			current.style.setProperty(
-				'--dyn-primary-source',
+				PROPS.USER.COLOR.PRIMARY_HUE,
 				values.current.primarySource.toString(),
 			);
 			current.style.setProperty(
-				'--dyn-accent-source',
+				PROPS.USER.COLOR.ACCENT_HUE,
 				values.current.accentSource.toString(),
 			);
 			current.style.setProperty(
-				'--global-saturation',
+				PROPS.USER.SATURATION,
 				values.current.saturation.toString(),
 			);
 			current.style.setProperty(
-				'--global-border-scale',
+				PROPS.USER.BORDER_SCALE,
 				values.current.borderScale.toString(),
 			);
 			current.style.setProperty(
-				'--global-spacing-scale',
+				PROPS.USER.SPACING_SCALE,
 				values.current.spacingScale.toString(),
 			);
 			current.style.setProperty(
-				'--global-corner-scale',
+				PROPS.USER.CORNER_SCALE,
 				values.current.cornerScale.toString(),
 			);
-			current.style.setProperty('--dyn-primary-hue-rotate', '0');
-			current.style.setProperty('--dyn-accent-hue-rotate', '0');
 		}, dt);
 		return (
 			<div ref={ref}>

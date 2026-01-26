@@ -1,146 +1,172 @@
 import {
+	ColorLogicalPalette,
+	createColorLogicalPalette,
+	defaultPalettes,
 	graySaturation,
 	highContrastSaturation,
-	paletteNames,
-	palettes,
 } from '../logic/palettes.js';
+import { PROPS } from '../logic/properties.js';
 import { preflight } from './_util.js';
+import { UserPreflightOptions } from './user.js';
 
-const baseThemeCSS = `
---v-color: ${palettes['high-contrast'].styles.ink};
-color: var(--v-color);
---v-bg: ${palettes['gray'].styles.wash};
-background-color: var(--v-bg);
-`;
-
-export const colorPreflight = preflight({
-	getCSS: () => `
-:root {
-	--p-lemon-hue: 90.8;
-	--p-leek-hue: 165.88;
-	--p-tomato-hue: 10.51;
-	--p-blueberry-hue: 248.14;
-	--p-eggplant-hue: 280.21;
-
-	--p-attention-hue: 30;
-	--p-success-hue: 140;
+export interface ColorPreflightOptions {
+	namedHues?: UserPreflightOptions['namedHues'];
 }
 
-.theme-lemon, .theme-override-lemon.theme-override-lemon {
-	--p-primary-hue: var(--p-lemon-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
+function paletteColors(
+	shades: (typeof PROPS)['PALETTE']['SHADES'],
+	palette: ColorLogicalPalette,
+) {
+	return `
+${shades.WASH}: ${palette.styles.wash};
+${shades.LIGHT}: ${palette.styles.light};
+${shades.MID}: ${palette.styles.DEFAULT};
+${shades.DARK}: ${palette.styles.dark};
+${shades.INK}: ${palette.styles.ink};
+	`;
 }
 
-.theme-leek, .theme-override-leek.theme-override-leek {
-	--p-primary-hue: var(--p-leek-hue);
-	--p-accent-hue: var(--p-lemon-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
+function paletteClass(
+	name: string,
+	palette: ColorLogicalPalette,
+	{
+		mainHue,
+		saturation = 1,
+		lightnessSpread = 1,
+	}: {
+		// false to inherit from parent
+		mainHue?: string | string | boolean;
+		saturation?: number | string;
+		lightnessSpread?: number | string;
+	} = {},
+) {
+	return `.palette-${name}, .theme-${name} {
+${PROPS.PALETTE.NAME}: ${name};
+${
+	mainHue === false
+		? ''
+		: `${PROPS.PALETTE.MAIN_HUE}: var(${
+				mainHue || PROPS.USER.COLOR.NAMED_HUE(name)
+		  });`
+}
+${PROPS.PALETTE.SATURATION}: ${saturation};
+${PROPS.PALETTE.LIGHTNESS_SPREAD}: ${lightnessSpread};
+${paletteColors(PROPS.PALETTE.SHADES, palette)}
+${/* every palette defines its grays, too */ ''}
+${paletteColors(PROPS.PALETTE.GRAY_SHADES, defaultPalettes.gray)}
 }
 
-.theme-tomato, .theme-override-tomato.theme-override-tomato {
-	--p-primary-hue: var(--p-tomato-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
+.theme-${name} {
+	${PROPS.USER.COLOR.PRIMARY_HUE}: var(${PROPS.USER.COLOR.NAMED_HUE(name)});
+	${PROPS.USER.COLOR.ACCENT_HUE}: var(${PROPS.USER.COLOR.NAMED_ACCENT_HUE(name)});
+}`;
 }
 
-.theme-blueberry, .theme-override-blueberry.theme-override-blueberry {
-	--p-primary-hue: var(--p-blueberry-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
+function toNamedPalettes(namedHues: ColorPreflightOptions['namedHues']) {
+	return Object.fromEntries(
+		Object.entries(namedHues || {}).map(([name, config]) => [
+			name,
+			createColorLogicalPalette({
+				name,
+				sourceHue: config.sourceHue.toString(),
+				accentHue: config.accentHue.toString(),
+				saturation: config.saturation?.toString(),
+			}),
+		]),
+	);
 }
 
-.theme-eggplant, .theme-override-eggplant.theme-override-eggplant {
-	--p-primary-hue: var(--p-eggplant-hue);
-	--p-accent-hue: var(--p-leek-hue);
-	--l-main-hue: var(--p-primary-hue);
-
-	${baseThemeCSS}
+export function palettePropertyReset(options: ColorPreflightOptions) {
+	return [
+		paletteColors(
+			PROPS.PALETTE.NAMED_SHADES('primary'),
+			defaultPalettes.primary,
+		),
+		paletteColors(PROPS.PALETTE.NAMED_SHADES('accent'), defaultPalettes.accent),
+		paletteColors(PROPS.PALETTE.SHADES, defaultPalettes.main),
+		paletteColors(PROPS.PALETTE.GRAY_SHADES, defaultPalettes.gray),
+		paletteColors(
+			PROPS.PALETTE.NAMED_SHADES('high-contrast'),
+			defaultPalettes['high-contrast'],
+		),
+		...Object.entries(toNamedPalettes(options.namedHues)).map(
+			([name, palette]) =>
+				paletteColors(PROPS.PALETTE.NAMED_SHADES(name), palette),
+		),
+		`${PROPS.COLOR.INHERITED}: ${defaultPalettes['high-contrast'].styles.ink};`,
+		`${PROPS.BACKGROUND_COLOR.INHERITED}: ${defaultPalettes['gray'].styles.wash};`,
+	].join('\n');
 }
 
-.theme-gray, .theme-salt, .theme-override-gray.theme-override-gray {
-	--l-saturation: ${graySaturation};
-	${baseThemeCSS}
-}
+export const colorPreflight = (options: ColorPreflightOptions) =>
+	preflight({
+		getCSS: () => {
+			const namedPalettes = toNamedPalettes(options.namedHues || {});
 
-.theme-high-contrast, .theme-override-high-contrast.theme-override-high-contrast {
-	--l-saturation: ${highContrastSaturation};
-	--l-lightness-spread: 10;
-	${baseThemeCSS}
-}
+			return `
+${paletteClass('primary', defaultPalettes.primary, {
+	mainHue: PROPS.USER.COLOR.PRIMARY_HUE,
+})}
+${paletteClass('accent', defaultPalettes.accent, {
+	mainHue: PROPS.USER.COLOR.ACCENT_HUE,
+})}
 
-${paletteNames
-	.filter((n) => n !== 'gray' && n !== 'high-contrast')
-	.map(createPaletteClass)
+${Object.entries(namedPalettes)
+	// User-provided named hues -> .palette-xxx classes
+	.map(([name, palette]) => paletteClass(name, palette))
 	.join('\n')}
-.palette-gray {
-	--l-saturation: ${graySaturation};
+
+${/* useful to reset from gray, I guess? */ ''}
+.palette-main {
+	${PROPS.PALETTE.SATURATION}: 1;
+	${paletteColors(PROPS.PALETTE.SHADES, defaultPalettes.main)}
 }
-.palette-high-contrast {
-	--l-saturation: ${highContrastSaturation};
-	--l-lightness-spread: 10;
-}
+
+${paletteClass('gray', defaultPalettes.gray, {
+	saturation: graySaturation,
+	mainHue: false,
+})}
+
+${paletteClass('high-contrast', defaultPalettes['high-contrast'], {
+	saturation: highContrastSaturation,
+	lightnessSpread: 10,
+	mainHue: false,
+})}
 
 body {
-	${baseThemeCSS}
-	--l-main-hue: var(--p-primary-hue);
+	${PROPS.PALETTE.NAME}: 'primary';
+	${PROPS.COLOR.INHERITED}: ${defaultPalettes['high-contrast'].styles.ink};
+	${PROPS.BACKGROUND_COLOR.INHERITED}: ${defaultPalettes['gray'].styles.wash};
+	color: var(${PROPS.COLOR.INHERITED});
+	background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
+	${PROPS.PALETTE.MAIN_HUE}: var(${PROPS.USER.COLOR.PRIMARY_HUE});
+	${paletteColors(PROPS.PALETTE.SHADES, defaultPalettes.primary)}
+	${paletteColors(PROPS.PALETTE.GRAY_SHADES, defaultPalettes.gray)}
 }
 
-@property --v-bg-altered {
-	syntax: "*";
-	inherits: false;
-}
+${[
+	PROPS.COLOR,
+	PROPS.BACKGROUND_COLOR,
+	PROPS.BORDER_COLOR.ALL,
+	PROPS.BORDER_COLOR.TOP,
+	PROPS.BORDER_COLOR.RIGHT,
+	PROPS.BORDER_COLOR.BOTTOM,
+	PROPS.BORDER_COLOR.LEFT,
+	PROPS.RING_COLOR,
+]
+	.map((propGroup) => propertyDefinitions(propGroup))
+	.join('\n')}
+`;
+		},
+	});
 
-@property --v-color-altered {
-	syntax: "*";
-	inherits: false;
-}
-
-@property --v-border-altered {
-	syntax: "*";
-	inherits: false;
-}
-
-@property --v-ring-altered {
-	syntax: "*";
-	inherits: false;
-}
-
-@property --v-bg-opacity {
-	syntax: "<percentage>";
-	inherits: false;
-}
-
-@property --v-color-opacity {
-	syntax: "<percentage>";
-	inherits: false;
-}
-
-@property --v-border-opacity {
-	syntax: "<percentage>";
-	inherits: false;
-}
-
-@property --v-ring-opacity {
-	syntax: "<percentage>";
-	inherits: false;
-}
-`,
-});
-
-function createPaletteClass(sourceName: string) {
-	return `
-.palette-${sourceName} {
-	--l-main-hue: var(--p-${sourceName === 'gray' ? 'primary' : sourceName}-hue);
-	--l-saturation: 1;
-}
+function propertyDefinitions(propGroup: {
+	INHERITED: string;
+	FINAL: string;
+	OPACITY: string;
+}) {
+	return `@property ${propGroup.FINAL} { syntax: "*"; inherits: false; }
+@property ${propGroup.INHERITED} { syntax: "*"; inherits: true; }
+@property ${propGroup.OPACITY} { syntax: "<percentage>"; inherits: false; }
 `;
 }

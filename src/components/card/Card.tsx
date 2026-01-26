@@ -18,7 +18,7 @@ import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
 	withProps(Box, { container: 'reset' }),
-	'layer-components:(flex flex-col border-light rounded-lg text-lg overflow-hidden h-max-content relative bg-wash bg-darken-0.5 color-black shadow-sm)',
+	'layer-components:(relative h-max-content flex flex-col overflow-hidden border-thin rounded-lg text-lg shadow-sm color-black bg-wash bg-darken-0.5 border-gray border-darken-3)',
 	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
 );
 
@@ -95,17 +95,17 @@ export function CardMain({
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 my-xs mx-xs py-xs px-sm w-auto max-h-80px max-w-full relative z-1)',
-	'layer-components:(bg-white rounded-md border border-solid border-gray-dark transition-colors)',
-	'layer-components:(text-md overflow-hidden text-ellipsis text-inherit font-semibold)',
+	'layer-components:(relative z-1 mx-xs my-xs max-h-80px max-w-full w-auto flex flex-col gap-1 px-sm py-xs)',
+	'layer-components:(border rounded-md border-solid transition-colors bg-white border-gray-dark)',
+	'layer-components:(overflow-hidden text-ellipsis text-md text-inherit font-semibold)',
 	'layer-components:[[data-compact]_&]:(text-sm)',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(flex flex-col gap-1 px-2 py-1 bg-white/80 color-black rounded-sm mx-2 my-0.5 border border-solid border-gray-dark/50 text-xs relative z-1)',
-	'layer-variants:[[data-compact]_&]:(py-0 px-sm my-0 text-xs)',
-	'layer-variants:[&[data-unstyled]]:(p-0 [background:unset] border-none)',
+	'layer-components:(relative z-1 mx-2 my-0.5 flex flex-col gap-1 border rounded-sm border-solid px-2 py-1 text-xs color-black bg-white/80 border-gray-dark/50)',
+	'layer-variants:[[data-compact]_&]:(my-0 px-sm py-0 text-xs)',
+	'layer-variants:[&[data-unstyled]]:([background:unset] border-none p-0)',
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
@@ -123,22 +123,22 @@ export function CardContent({ unstyled, ref, ...rest }: CardContentProps) {
 
 export const CardImage = withClassName(
 	SlotDiv,
-	'layer-components:(absolute z-0 right-0 top-0 bottom-0 w-full h-full object-cover bg-cover bg-center)',
+	'layer-components:(absolute bottom-0 right-0 top-0 z-0 h-full w-full bg-cover bg-center object-cover)',
 );
 
 export const CardFooter = withClassName(
 	'div',
-	'layer-components:(flex flex-row flex-shrink-0 p-1 relative z-1)',
+	'layer-components:(relative z-1 flex flex-shrink-0 flex-row p-1)',
 );
 
 export const CardActions = withClassName(
 	'div',
-	'layer-components:(ml-0 mr-auto flex flex-row gap-2 items-center bg-white/50 rounded-lg p-0 border border-solid border-gray-dark/50)',
+	'layer-components:(ml-0 mr-auto flex flex-row items-center gap-2 border rounded-lg border-solid p-0 bg-white/50 border-gray-dark/50)',
 );
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(mr-0 ml-auto my-auto flex flex-row gap-1 items-center bg-white/50 py-0.5 rounded-lg p-0)',
+	'layer-components:(my-auto ml-auto mr-0 flex flex-row items-center gap-1 rounded-lg p-0 py-0.5 bg-white/50)',
 );
 
 export const cardGridColumns = {

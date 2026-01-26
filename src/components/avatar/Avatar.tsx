@@ -33,7 +33,7 @@ export function Avatar({
 			className={classNames(
 				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden border-default rounded-lg bg-white)',
 				popIn &&
-					'layer-variants:(animate-pop-in-from-half animate-duration-200 animate-ease-springy)',
+					'layer-variants:animate-pop-in-from-half layer-variants:animate-duration-200 layer-variants:animate-ease-springy',
 				empty && 'layer-components:(border-dashed bg-gray-light)',
 				className,
 			)}

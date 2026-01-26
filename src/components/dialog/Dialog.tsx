@@ -32,7 +32,7 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	BaseDialog.Backdrop,
-	'layer-components:border-top-1 layer-components:border-top-solid layer-components:border-top-gray layer-components:(fixed inset-0 shadow-[0_30px_60px_0px] shadow-black/20 shadow-inset transition bg-black/15)',
+	'layer-components:border-top-1 layer-components:border-top-gray layer-components:border-top-solid layer-components:(fixed inset-0 shadow-[0_30px_60px_0px] shadow-black/20 shadow-inset transition bg-black/15)',
 	'layer-components:backdrop-blur-sm',
 	'start-end:opacity-0',
 );

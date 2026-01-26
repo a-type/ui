@@ -8,10 +8,11 @@ import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { inputInfo } from '../../systems/inputs.js';
+import { PROPS } from '../../uno/index.js';
 
 export const inputClassName = clsx(
 	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit bg-transparent)',
-	'layer-components:placeholder:(color-gray-dark)',
+	'layer-components:placeholder:color-gray-dark',
 	'layer-components:focus:(outline-none)',
 	'layer-components:focus-visible:(outline-none)',
 	'layer-components:first:(rounded-l-inherit pl-md)',
@@ -19,24 +20,32 @@ export const inputClassName = clsx(
 );
 
 const inputBorderClassName = clsx(
-	'layer-components:([--local-corner-scale:1] [--spacing-scale:1])',
-	'layer-components:([--global-shadow-spread:0] flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
+	'layer-components:(flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
 	'layer-components:(w-max-content overflow-clip)',
-	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(shadow-none bg-transparent border-gray placeholder-gray-dark)',
+	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(bg-transparent border-gray shadow-none placeholder-gray-dark)',
 	'layer-components:[&:has(input:focus-visible),&:has(textarea:focus-visible)]:(outline-none ring ring-4 ring-accent)',
 	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
-	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:(border-black)',
-	'layer-components:[&>.icon]:(mx-sm)',
+	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:border-black',
+	'layer-components:[&>.icon]:mx-sm',
 );
 
-function InputBorderImpl(
-	props: React.HTMLAttributes<HTMLDivElement> & {
-		ref?: Ref<HTMLDivElement>;
-	},
-) {
+function InputBorderImpl({
+	style,
+	...props
+}: React.HTMLAttributes<HTMLDivElement> & {
+	ref?: Ref<HTMLDivElement>;
+}) {
 	return (
 		<GroupScaleReset>
-			<div {...props} />
+			<div
+				{...props}
+				style={{
+					[PROPS.LOCALS.CORNER_SCALE]: '1',
+					[PROPS.LOCALS.SPACING_SCALE]: '1',
+					[PROPS.USER.SHADOW_SPREAD]: '0',
+					...style,
+				}}
+			/>
 		</GroupScaleReset>
 	);
 }

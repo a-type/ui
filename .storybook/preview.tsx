@@ -5,6 +5,8 @@ import { Provider } from '../src/components/provider/Provider.js';
 // @ts-ignore
 import 'virtual:uno.css';
 // @ts-ignore
+import { PROPS } from '../src/uno/index.js';
+// @ts-ignore
 import './preview.css';
 
 const preview: Preview = {
@@ -112,43 +114,43 @@ const preview: Preview = {
 			}, [ctx.globals.mode, ctx.globals.theme]);
 			useEffect(() => {
 				document.documentElement.style.setProperty(
-					'--global-saturation',
+					PROPS.USER.SATURATION,
 					`${ctx.globals.saturation / 100}`,
 				);
 				return () => {
-					document.documentElement.style.removeProperty('--global-saturation');
+					document.documentElement.style.removeProperty(PROPS.USER.SATURATION);
 				};
 			}, [ctx.globals.saturation]);
 			useEffect(() => {
 				document.documentElement.style.setProperty(
-					'--global-spacing-scale',
+					PROPS.USER.SPACING_SCALE,
 					`${ctx.globals.spacing}`,
 				);
 				return () => {
 					document.documentElement.style.removeProperty(
-						'--global-spacing-scale',
+						PROPS.USER.SPACING_SCALE,
 					);
 				};
 			}, [ctx.globals.spacing]);
 			useEffect(() => {
 				document.documentElement.style.setProperty(
-					'--global-corner-scale',
+					PROPS.USER.CORNER_SCALE,
 					`${ctx.globals.corners}`,
 				);
 				return () => {
 					document.documentElement.style.removeProperty(
-						'--global-corner-scale',
+						PROPS.USER.CORNER_SCALE,
 					);
 				};
 			}, [ctx.globals.corners]);
 			useEffect(() => {
 				document.documentElement.style.setProperty(
-					'--global-shadow-spread',
+					PROPS.USER.SHADOW_SPREAD,
 					`${ctx.globals.shadows ? 0 : 1}`,
 				);
 				return () => {
 					document.documentElement.style.removeProperty(
-						'--global-shadow-spread',
+						PROPS.USER.SHADOW_SPREAD,
 					);
 				};
 			}, [ctx.globals.shadows]);
