@@ -23,8 +23,8 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 			<div className="layer-components:(flex flex-row)">
 				<div
 					className={clsx(
-						'layer-components:(relative flex-1 border border-solid p-2 text-sm italic color-black bg-main-wash bg-darken-1 border-main-dark) layer-variants:border-r-0',
-						'layer-variants:[&_input,&_textarea]:(border-none p-0 shadow-none bg-transparent ring-none)',
+						'layer-components:(relative flex-1 border border-solid p-sm text-sm italic color-black bg-main-wash bg-darken-1 border-main-dark) layer-variants:border-r-0',
+						'layer-variants:[&_input,&_textarea]:(border-none p-0 bg-transparent ring-none shadow-none)',
 					)}
 				>
 					{children}

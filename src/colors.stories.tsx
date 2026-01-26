@@ -2,8 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
 import { Box } from './components/index.js';
+import { PROPS } from './uno/index.js';
 import { snapshotColorContext } from './uno/logic/color.js';
-import { palettes } from './uno/logic/palettes.js';
+import { defaultPalettes } from './uno/logic/palettes.js';
 
 const meta = {
 	title: 'System/Colors',
@@ -32,27 +33,31 @@ export const Default: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--p-primary-hue': args.customHue,
+					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
 			  }
 			: {};
 
 		const ranges = (
 			<>
-				<Range className="theme" style={style} />
-				<Range className="theme-lemon" />
-				<Range className="theme-leek" />
-				<Range className="theme-tomato" />
-				<Range className="theme-eggplant" />
-				<Range className="theme-blueberry" />
+				<Range className="palette-primary" style={style} />
+				<Range className="palette-lemon" />
+				<Range className="palette-leek" />
+				<Range className="palette-tomato" />
+				<Range className="palette-eggplant" />
+				<Range className="palette-blueberry" />
 				<Range className="palette-attention" />
 				<Range className="palette-success" />
-				<Box className="h-100px">
+				<Box className="relative h-100px">
 					<Box grow className="bg-gray-wash" />
 					<Box grow className="bg-gray-light" />
 					<Box grow className="bg-gray" />
 					<Box grow className="bg-gray-dark" />
 					<Box grow className="bg-gray-ink" />
+					<div className="absolute left-0 top-0 text-xs color-white bg-black/50">
+						local gray
+					</div>
 				</Box>
+				<Range className="palette-gray" />
 				<Range className="palette-high-contrast" />
 				<Box className="h-100px">
 					<Box grow className="bg-black" />
@@ -106,12 +111,15 @@ function Swatch({
 
 function Range({ className, style }: { className?: string; style?: any }) {
 	return (
-		<Box className={className} style={style}>
+		<Box className={clsx('relative', className)} style={style}>
 			<Swatch className="bg-main-wash" />
 			<Swatch className="bg-main-light" />
 			<Swatch className="bg-main" />
 			<Swatch className="bg-main-dark" />
 			<Swatch className="bg-main-ink" />
+			<div className="absolute left-0 top-0 text-xs color-white bg-black/50">
+				{className}
+			</div>
 		</Box>
 	);
 }
@@ -120,7 +128,7 @@ export const Modifiers: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--p-primary-hue': args.customHue,
+					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
 			  }
 			: {};
 		return (
@@ -167,7 +175,7 @@ export const Inheritance: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					'--p-primary-hue': args.customHue,
+					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
 			  }
 			: {};
 		return (
@@ -258,11 +266,11 @@ export const ComputedColors: Story = {
 	render() {
 		const ctx = snapshotColorContext('primary');
 		const oklchValues = [
-			palettes.primary.definitions.wash.computeOklch(ctx),
-			palettes.primary.definitions.light.computeOklch(ctx),
-			palettes.primary.definitions.default.computeOklch(ctx),
-			palettes.primary.definitions.dark.computeOklch(ctx),
-			palettes.primary.definitions.ink.computeOklch(ctx),
+			defaultPalettes.primary.definitions.wash.computeOklch(ctx),
+			defaultPalettes.primary.definitions.light.computeOklch(ctx),
+			defaultPalettes.primary.definitions.default.computeOklch(ctx),
+			defaultPalettes.primary.definitions.dark.computeOklch(ctx),
+			defaultPalettes.primary.definitions.ink.computeOklch(ctx),
 		];
 
 		return (

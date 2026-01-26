@@ -56,6 +56,9 @@ importers:
       react-is:
         specifier: ^19.1.0
         version: 19.1.0
+      unocss-preset-completion:
+        specifier: ^0.3.0
+        version: 0.3.0
       valtio:
         specifier: ^2.1.4
         version: 2.1.4(@types/react@19.0.1)(react@19.0.0)
@@ -3285,6 +3288,9 @@ packages:
   universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+
+  unocss-preset-completion@0.3.0:
+    resolution: {integrity: sha512-Xmn9binBjTef3EN8rqaDqIKvPuUnK75+hAVEcPkoGyB0bsqMfKn3tEC7r8xPSmnhcipm8ETPZ9sAZQwoidUf5A==}
 
   unocss@66.5.4:
     resolution: {integrity: sha512-yNajR8ADgvOzLhDkMKAXVE/SHM4sDrtVhhCnhBjiUMOR0LHIYO7cqunJJudbccrsfJbRTn/odSTBGu9f2IaXOg==}
@@ -7011,6 +7017,8 @@ snapshots:
       unconfig-core: 7.4.2
 
   universalify@2.0.0: {}
+
+  unocss-preset-completion@0.3.0: {}
 
   unocss@66.5.4(postcss@8.5.6)(vite@7.1.12(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:

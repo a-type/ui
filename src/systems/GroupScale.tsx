@@ -1,4 +1,5 @@
 import { createContext, CSSProperties, ReactNode, useContext } from 'react';
+import { PROPS } from '../uno/index.js';
 
 export const GroupScaleContext = createContext<number>(1);
 
@@ -20,8 +21,8 @@ export function useGroupScale() {
 export function useGroupScaleStyles(composeStyles?: CSSProperties) {
 	const scale = useGroupScale();
 	return {
-		'--spacing-scale': scale,
-		'--local-corner-scale': scale,
+		[PROPS.LOCALS.SPACING_SCALE]: scale,
+		[PROPS.LOCALS.CORNER_SCALE]: scale,
 		...composeStyles,
 	};
 }

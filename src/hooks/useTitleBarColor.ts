@@ -2,9 +2,9 @@ import { useCallback, useEffect, useSyncExternalStore } from 'react';
 import { useResolvedColorMode } from '../colorMode.js';
 import { snapshotColorContext } from '../uno/logic/color.js';
 import {
+	ColorLogicalPalette,
 	ColorLogicalPaletteDefinitions,
-	PaletteName,
-	palettes,
+	defaultPalettes,
 } from '../uno/logic/palettes.js';
 
 let defaultColor = '#ffffff';
@@ -66,7 +66,9 @@ export function useSetTitleBarColor() {
 }
 
 export function useThemedTitleBar(
-	paletteName: PaletteName,
+	paletteOrName:
+		| Exclude<keyof typeof defaultPalettes, 'main'>
+		| ColorLogicalPalette,
 	value: keyof ColorLogicalPaletteDefinitions,
 	/** If not provided, will inherit from app */
 	mode?: 'light' | 'dark',
@@ -93,8 +95,12 @@ export function useThemedTitleBar(
 		const previousColor = getCurrentColor();
 
 		function update() {
-			const palette = palettes[paletteName] ?? palettes.primary;
-			const context = snapshotColorContext(paletteName, mode);
+			const palette =
+				typeof paletteOrName === 'string'
+					? defaultPalettes[paletteOrName] ?? defaultPalettes.primary
+					: paletteOrName;
+			console.log('snapshot:', palette.name, value, mode);
+			const context = snapshotColorContext(palette.name, mode);
 			const color = palette.definitions[value].computeOklch(context);
 			setColor(color);
 		}
@@ -105,5 +111,5 @@ export function useThemedTitleBar(
 				setColor(previousColor);
 			};
 		}
-	}, [setColor, paletteName, value, mode, skip, visible]);
+	}, [setColor, paletteOrName, value, mode, skip, visible]);
 }

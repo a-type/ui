@@ -37,7 +37,7 @@ export function ColorPicker({
 			>
 				<Button.Icon render={<ColorSwatch value={resolvedValue} />} />
 			</Select.Trigger>
-			<Select.Content className="z-[calc(var(--z-dialog)+1)]">
+			<Select.Content>
 				<Select.Item value="lemon">
 					<ColorSwatch value="lemon" />
 					<ItemLabel>Lemon</ItemLabel>

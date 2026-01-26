@@ -166,7 +166,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 		<Icon
 			aria-hidden
 			name="check"
-			className="ml--1 w-0 transition-width"
+			className="w-0 transition-width -ml-1"
 			style={{
 				width: value ? '15px' : 0,
 			}}
@@ -176,7 +176,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName(SlotDiv, 'icon flex-shrink-0 flex');
+export const ButtonIcon = withClassName(SlotDiv, 'icon flex flex-shrink-0');
 ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {

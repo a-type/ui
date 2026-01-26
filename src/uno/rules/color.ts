@@ -1,6 +1,7 @@
-import { parseColor } from '@unocss/preset-mini';
-import { Rule } from 'unocss';
+import { parseColor } from '@unocss/preset-mini/utils';
+import { Rule, symbols } from 'unocss';
 import { darken, lighten } from '../logic/color.js';
+import { PROPS } from '../logic/properties.js';
 
 export const colorRules: Rule[] = [
 	[
@@ -8,8 +9,8 @@ export const colorRules: Rule[] = [
 		(match, { theme }) => {
 			if (match[1] === 'inherit') {
 				return {
-					color: 'var(--v-color-altered,var(--v-color))',
-					'--v-color': 'unset',
+					color: `var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED}))`,
+					[PROPS.COLOR.INHERITED]: 'unset',
 				};
 			}
 			const parsed = parseColor(match[1], theme);
@@ -18,24 +19,39 @@ export const colorRules: Rule[] = [
 			}
 			return {
 				color: parsed.opacity
-					? 'rgb(from var(--v-color-altered,var(--v-color)) r g b / var(--v-color-opacity,100%))'
-					: 'var(--v-color-altered,var(--v-color))',
-				'--v-color': parsed.color,
-				'--v-color-opacity': (parsed.opacity || 100) + '%',
+					? `rgb(from var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED})) r g b / var(${PROPS.COLOR.OPACITY},100%))`
+					: `var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED}))`,
+				[PROPS.COLOR.INHERITED]: parsed.color,
+				[PROPS.COLOR.OPACITY]: (parsed.opacity || 100) + '%',
 			};
+		},
+		{
+			autocomplete: `color-$colors`,
 		},
 	],
 	[
-		/^color-lighten-(\d+\.?\d*)$/,
+		/^color-l(?:ighten)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-color-altered': lighten('var(--v-color,currentColor)', match[1]),
+			[PROPS.COLOR.FINAL]: lighten(
+				`var(${PROPS.COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'color-(l|lighten)-<number>',
+		},
 	],
 	[
-		/^color-darken-(\d+\.?\d*)$/,
+		/^color-d(?:arken)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-color-altered': darken('var(--v-color,currentColor)', match[1]),
+			[PROPS.COLOR.FINAL]: darken(
+				`var(${PROPS.COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'color-(d|darken)-<number>',
+		},
 	],
 	[
 		/^bg-(.*)$/,
@@ -43,15 +59,14 @@ export const colorRules: Rule[] = [
 			const { theme } = ctx;
 			if (match[1] === 'inherit') {
 				return {
-					'background-color':
-						'rgb(from var(--v-bg-altered,var(--v-bg)) r g b / var(--v-bg-opacity,100%))',
-					'--v-bg': 'unset',
+					'background-color': `rgb(from var(${PROPS.BACKGROUND_COLOR.FINAL},var(${PROPS.BACKGROUND_COLOR.INHERITED})) r g b / var(${PROPS.BACKGROUND_COLOR.OPACITY},100%))`,
+					[PROPS.BACKGROUND_COLOR.INHERITED]: 'unset',
 				};
 			}
 			if (match[1] === 'transparent') {
 				return {
 					'background-color': 'transparent',
-					'--v-bg': 'unset',
+					[PROPS.BACKGROUND_COLOR.INHERITED]: 'unset',
 				};
 			}
 			const parsed = parseColor(match[1], theme);
@@ -61,10 +76,10 @@ export const colorRules: Rule[] = [
 
 			const base = {
 				'background-color': parsed.opacity
-					? 'rgb(from var(--v-bg-altered,var(--v-bg)) r g b / var(--v-bg-opacity,100%))'
-					: 'var(--v-bg-altered,var(--v-bg))',
-				['--v-bg']: parsed.color,
-				['--v-bg-opacity']: (parsed.opacity || 100) + '%',
+					? `rgb(from var(${PROPS.BACKGROUND_COLOR.FINAL},var(${PROPS.BACKGROUND_COLOR.INHERITED})) r g b / var(${PROPS.BACKGROUND_COLOR.OPACITY},100%))`
+					: `var(${PROPS.BACKGROUND_COLOR.FINAL},var(${PROPS.BACKGROUND_COLOR.INHERITED}))`,
+				[PROPS.BACKGROUND_COLOR.INHERITED]: parsed.color,
+				[PROPS.BACKGROUND_COLOR.OPACITY]: (parsed.opacity || 100) + '%',
 			};
 
 			return base;
@@ -74,20 +89,32 @@ export const colorRules: Rule[] = [
 		},
 	],
 	[
-		/^bg-lighten-(\d+\.?\d*)$/,
+		/^bg-l(?:ighten)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-bg-altered': lighten('var(--v-bg,var(--mode-white))', match[1]),
+			[PROPS.BACKGROUND_COLOR.FINAL]: lighten(
+				`var(${PROPS.BACKGROUND_COLOR.INHERITED},var(${PROPS.MODE.WHITE}))`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'bg-(l|lighten)-<number>',
+		},
 	],
 	[
-		/^bg-darken-(\d+\.?\d*)$/,
+		/^bg-d(?:arken)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-bg-altered': darken('var(--v-bg,var(--mode-white))', match[1]),
+			[PROPS.BACKGROUND_COLOR.FINAL]: darken(
+				`var(${PROPS.BACKGROUND_COLOR.INHERITED},var(${PROPS.MODE.WHITE}))`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'bg-(d|darken)-<number>',
+		},
 	],
 	[
-		/^border-(.*)$/,
-		(match, { theme }) => {
+		/^(?:border|b)-(.*)$/,
+		function* (match, { theme, symbols }) {
 			if (match[1] === 'none') {
 				return undefined;
 			}
@@ -96,79 +123,109 @@ export const colorRules: Rule[] = [
 				return undefined;
 			}
 			const thisColor = parsed.opacity
-				? 'rgb(from var(--v-border-altered,var(--v-border)) r g b / var(--v-border-opacity,100%))'
-				: 'var(--v-border-altered,var(--v-border))';
-			return {
-				'border-right-color': directionalBorderFallback('r', thisColor),
-				'border-bottom-color': directionalBorderFallback('b', thisColor),
-				'border-left-color': directionalBorderFallback('l', thisColor),
-				'border-top-color': directionalBorderFallback('t', thisColor),
-				'--v-border': parsed.color,
-				'--v-border-opacity': (parsed.opacity || 100) + '%',
+				? `rgb(from var(${PROPS.BORDER_COLOR.ALL.FINAL},var(${PROPS.BORDER_COLOR.ALL.INHERITED})) r g b / var(${PROPS.BORDER_COLOR.ALL.OPACITY},100%))`
+				: `var(${PROPS.BORDER_COLOR.ALL.FINAL},var(${PROPS.BORDER_COLOR.ALL.INHERITED}))`;
+			yield {
+				[symbols.selector]: (selector) => `:where(${selector})`,
+				[PROPS.BORDER_COLOR.RIGHT
+					.INHERITED]: `var(${PROPS.BORDER_COLOR.RIGHT.FINAL},var(${PROPS.BORDER_COLOR.RIGHT.INHERITED},${thisColor}))`,
+				'border-right-color': `var(${PROPS.BORDER_COLOR.RIGHT.FINAL},var(${PROPS.BORDER_COLOR.RIGHT.INHERITED},${thisColor}))`,
+				[PROPS.BORDER_COLOR.LEFT
+					.INHERITED]: `var(${PROPS.BORDER_COLOR.LEFT.FINAL},var(${PROPS.BORDER_COLOR.LEFT.INHERITED},${thisColor}))`,
+				'border-left-color': `var(${PROPS.BORDER_COLOR.LEFT.FINAL},var(${PROPS.BORDER_COLOR.LEFT.INHERITED},${thisColor}))`,
+				[PROPS.BORDER_COLOR.TOP
+					.INHERITED]: `var(${PROPS.BORDER_COLOR.TOP.FINAL},var(${PROPS.BORDER_COLOR.TOP.INHERITED},${thisColor}))`,
+				'border-top-color': `var(${PROPS.BORDER_COLOR.TOP.FINAL},var(${PROPS.BORDER_COLOR.TOP.INHERITED},${thisColor}))`,
+				[PROPS.BORDER_COLOR.BOTTOM
+					.INHERITED]: `var(${PROPS.BORDER_COLOR.BOTTOM.FINAL},var(${PROPS.BORDER_COLOR.BOTTOM.INHERITED},${thisColor}))`,
+				'border-bottom-color': `var(${PROPS.BORDER_COLOR.BOTTOM.FINAL},var(${PROPS.BORDER_COLOR.BOTTOM.INHERITED},${thisColor}))`,
+			};
+			yield {
+				[PROPS.BORDER_COLOR.ALL.INHERITED]: parsed.color,
+				[PROPS.BORDER_COLOR.ALL.OPACITY]: (parsed.opacity || 100) + '%',
 			};
 		},
-	],
-	[
-		/^border-lighten-(\d+\.?\d*)$/,
-		(match) => ({
-			'--v-border-altered': lighten('var(--v-border,currentColor)', match[1]),
-		}),
 		{
-			autocomplete: 'border-lighten-<number>',
+			autocomplete: `(border|b)-$colors`,
 		},
 	],
 	[
-		/^border-darken-(\d+\.?\d*)$/,
+		/^(?:border|b)-l(?:ighten)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-border-altered': darken('var(--v-border,currentColor)', match[1]),
+			[PROPS.BORDER_COLOR.ALL.FINAL]: lighten(
+				`var(${PROPS.BORDER_COLOR.ALL.INHERITED},currentColor)`,
+				match[1],
+			),
 		}),
 		{
-			autocomplete: 'border-darken-<number>',
+			autocomplete: '(border|b)-l(?:ighten)?-<number>',
 		},
 	],
-	...['r', 'l', 't', 'b'].flatMap(
-		(dir) =>
+	[
+		/^(?:border|b)-d(?:arken)?-(\d+\.?\d*)$/,
+		(match) => ({
+			[PROPS.BORDER_COLOR.ALL.FINAL]: darken(
+				`var(${PROPS.BORDER_COLOR.ALL.INHERITED},currentColor)`,
+				match[1],
+			),
+		}),
+		{
+			autocomplete: '(border|b)-(d|darken)-<number>',
+		},
+	],
+	...(<const>['RIGHT', 'LEFT', 'TOP', 'BOTTOM']).flatMap((DIR) => {
+		const shorthand = DIR[0].toLowerCase();
+		return [
 			[
-				[
-					new RegExp(`^border-${dir}-(.*)$`),
-					(match, { theme }) => {
-						if (match[1] === 'none') {
-							return undefined;
-						}
-						const parsed = parseColor(match[1], theme);
-						if (!parsed?.color) {
-							return undefined;
-						}
-						const thisColor = parsed.opacity
-							? `rgb(from var(--v-border-${dir}-altered,var(--v-border-${dir})) r g b / var(--v-border-${dir}-opacity,100%))`
-							: `var(--v-border-${dir}-altered,var(--v-border-${dir}))`;
-						return {
-							[`border-${dirnames[dir]}-color`]: thisColor,
-							[`--v-border-${dir}`]: parsed.color,
-							[`--v-border-${dir}-opacity`]: (parsed.opacity || 100) + '%',
-						};
-					},
-				],
-				[
-					new RegExp(`^border-${dir}-lighten-(\\d+\\.?\\d*)$`),
-					(match) => ({
-						[`--v-border-${dir}-altered`]: lighten(
-							`var(--v-border-${dir},currentColor)`,
-							match[1],
-						),
-					}),
-				],
-				[
-					new RegExp(`^border-${dir}-darken-(\\d+\\.?\\d*)$`),
-					(match) => ({
-						[`--v-border-${dir}-altered`]: darken(
-							`var(--v-border-${dir},currentColor)`,
-							match[1],
-						),
-					}),
-				],
-			] as Rule[],
-	),
+				new RegExp(`^(?:border-|b-)${shorthand}-(.*)$`),
+				(match, { theme }) => {
+					if (match[1] === 'none') {
+						return undefined;
+					}
+					const parsed = parseColor(match[1], theme);
+					if (!parsed?.color) {
+						return undefined;
+					}
+					const thisColor = parsed.opacity
+						? `rgb(from var(${PROPS.BORDER_COLOR[DIR].FINAL},var(${PROPS.BORDER_COLOR[DIR].INHERITED})) r g b / var(${PROPS.BORDER_COLOR[DIR].OPACITY},100%))`
+						: `var(${PROPS.BORDER_COLOR[DIR].FINAL},var(${PROPS.BORDER_COLOR[DIR].INHERITED}))`;
+					return {
+						[`border-${dirnames[DIR]}-color`]: thisColor,
+						[`${PROPS.BORDER_COLOR[DIR].INHERITED}`]: parsed.color,
+						[`${PROPS.BORDER_COLOR[DIR].OPACITY}`]:
+							(parsed.opacity || 100) + '%',
+					};
+				},
+				{
+					autocomplete: `b-${shorthand}-$colors`,
+				},
+			],
+			[
+				new RegExp(`^(?:border|b)-${shorthand}-l(?:ighten)?-(\\d+\\.?\\d*)$`),
+				(match) => ({
+					[`${PROPS.BORDER_COLOR[DIR].FINAL}`]: lighten(
+						`var(${PROPS.BORDER_COLOR[DIR].INHERITED},currentColor)`,
+						match[1],
+					),
+				}),
+				{
+					autocomplete: `(?:border|b)-${shorthand}-(l|lighten)-<number>`,
+				},
+			],
+			[
+				new RegExp(`^(?:border|b)-${shorthand}-d(?:arken)?-(\\d+\\.?\\d*)$`),
+				(match) => ({
+					[`${PROPS.BORDER_COLOR[DIR].FINAL}`]: darken(
+						`var(${PROPS.BORDER_COLOR[DIR].INHERITED},currentColor)`,
+						match[1],
+					),
+				}),
+				{
+					autocomplete: `(border|b)${shorthand}-(d|darken)-<number>`,
+				},
+			],
+		] as Rule[];
+	}),
 	[
 		/^ring-(.*)$/,
 		(match, { theme }) => {
@@ -177,35 +234,139 @@ export const colorRules: Rule[] = [
 				return undefined;
 			}
 			return {
-				'--un-ring-color': parsed.opacity
-					? 'rgb(from var(--v-ring-altered,var(--v-ring)) r g b / var(--v-ring-opacity,100%))'
-					: 'var(--v-ring-altered,var(--v-ring))',
-				'--v-ring': parsed.color,
-				'--v-ring-opacity': (parsed.opacity || 100) + '%',
+				[PROPS.BUILT_IN.RING_COLOR]: parsed.opacity
+					? `rgb(from var(${PROPS.RING_COLOR.FINAL},var(${PROPS.RING_COLOR.INHERITED})) r g b / var(${PROPS.RING_COLOR.OPACITY},100%))`
+					: `var(${PROPS.RING_COLOR.FINAL},var(${PROPS.RING_COLOR.INHERITED}))`,
+				[PROPS.RING_COLOR.INHERITED]: parsed.color,
+				[PROPS.RING_COLOR.OPACITY]: (parsed.opacity || 100) + '%',
 			};
+		},
+		{
+			autocomplete: `ring-$colors`,
 		},
 	],
 	[
-		/^ring-lighten-(\d+\.?\d*)$/,
+		/^ring-l(:?ighten)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-ring-altered': lighten('var(--v-ring,currentColor)', match[1]),
+			[PROPS.RING_COLOR.FINAL]: lighten(
+				`var(${PROPS.RING_COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'ring-(l|lighten)-<number>',
+		},
 	],
 	[
-		/^ring-darken-(\d+\.?\d*)$/,
+		/^ring-d(?:arken)?-(\d+\.?\d*)$/,
 		(match) => ({
-			'--v-ring-altered': darken('var(--v-ring,currentColor)', match[1]),
+			[PROPS.RING_COLOR.FINAL]: darken(
+				`var(${PROPS.RING_COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
 		}),
+		{
+			autocomplete: 'ring-(d|darken)-<number>',
+		},
+	],
+	[
+		/^placeholder-(.*)$/,
+		function* (match, { theme }) {
+			const parsed = parseColor(match[1], theme);
+			if (!parsed?.color) {
+				return;
+			}
+			yield {
+				[symbols.selector]: (selector) => `${selector}::placeholder`,
+				color: parsed.opacity
+					? `rgb(from var(${PROPS.PLACEHOLDER_COLOR.FINAL},var(${PROPS.PLACEHOLDER_COLOR.INHERITED})) r g b / var(${PROPS.PLACEHOLDER_COLOR.OPACITY},100%))`
+					: `var(${PROPS.PLACEHOLDER_COLOR.FINAL},var(${PROPS.PLACEHOLDER_COLOR.INHERITED}))`,
+				[PROPS.PLACEHOLDER_COLOR.INHERITED]: parsed.color,
+				[PROPS.PLACEHOLDER_COLOR.OPACITY]: (parsed.opacity || 100) + '%',
+			};
+		},
+		{
+			autocomplete: `placeholder-$colors`,
+		},
+	],
+	[
+		/^placeholder-l(?:ighten)?-(\d+\.?\d*)$/,
+		function* (match) {
+			yield {
+				[symbols.selector]: (selector) => `${selector}::placeholder`,
+				[PROPS.PLACEHOLDER_COLOR.FINAL]: lighten(
+					`var(${PROPS.PLACEHOLDER_COLOR.INHERITED},currentColor)`,
+					match[1],
+				),
+			};
+		},
+		{
+			autocomplete: 'placeholder-(l|lighten)-<number>',
+		},
+	],
+	[
+		/^placeholder-d(?:arken)?-(\d+\.?\d*)$/,
+		function* (match) {
+			yield {
+				[symbols.selector]: (selector) => `${selector}::placeholder`,
+				[PROPS.PLACEHOLDER_COLOR.FINAL]: darken(
+					`var(${PROPS.PLACEHOLDER_COLOR.INHERITED},currentColor)`,
+					match[1],
+				),
+			};
+		},
+		{
+			autocomplete: 'placeholder-(d|darken)-<number>',
+		},
+	],
+	[
+		/^accent-(.*)$/,
+		(match, { theme }) => {
+			const parsed = parseColor(match[1], theme);
+			if (!parsed?.color) {
+				return undefined;
+			}
+			return {
+				'accent-color': parsed.opacity
+					? `rgb(from var(${PROPS.ACCENT_COLOR.FINAL},var(${PROPS.ACCENT_COLOR.INHERITED})) r g b / var(${PROPS.ACCENT_COLOR.OPACITY},100%))`
+					: `var(${PROPS.ACCENT_COLOR.FINAL},var(${PROPS.ACCENT_COLOR.INHERITED}))`,
+				[PROPS.ACCENT_COLOR.INHERITED]: parsed.color,
+				[PROPS.ACCENT_COLOR.OPACITY]: (parsed.opacity || 100) + '%',
+			};
+		},
+		{
+			autocomplete: `accent-$colors`,
+		},
+	],
+	[
+		/^accent-l(?:ighten)?-(\d+\.?\d*)$/,
+		(match) => ({
+			[PROPS.ACCENT_COLOR.FINAL]: lighten(
+				`var(${PROPS.ACCENT_COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
+		}),
+		{
+			autocomplete: 'accent-(l|lighten)-<number>',
+		},
+	],
+	[
+		/^accent-d(?:arken)?-(\d+\.?\d*)$/,
+		(match) => ({
+			[PROPS.ACCENT_COLOR.FINAL]: darken(
+				`var(${PROPS.ACCENT_COLOR.INHERITED},currentColor)`,
+				match[1],
+			),
+		}),
+		{
+			autocomplete: 'accent-(d|darken)-<number>',
+		},
 	],
 ];
 
-function directionalBorderFallback(side: 't' | 'r' | 'b' | 'l', color: string) {
-	return `var(--v-border-${side}-color-altered, var(--v-border-${side}-color, ${color}))`;
-}
-
 const dirnames: Record<string, string> = {
-	r: 'right',
-	l: 'left',
-	t: 'top',
-	b: 'bottom',
+	RIGHT: 'right',
+	LEFT: 'left',
+	TOP: 'top',
+	BOTTOM: 'bottom',
 };

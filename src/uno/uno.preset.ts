@@ -1,24 +1,19 @@
 import presetWind3 from '@unocss/preset-wind3';
 import { Preset } from 'unocss';
-import { ThemeCustomizationConfig } from './preflights/customization.js';
-import { FontsPreflightOptions } from './preflights/fonts.js';
-import { GlobalsPreflightConfig } from './preflights/globals.js';
-import { preflights } from './preflights/index.js';
+import { presetFunctionCompletion } from 'unocss-preset-completion';
+import { defaultPresetHues } from './defaults.js';
+import { PreflightConfig, preflights } from './preflights/index.js';
 import { rules } from './rules/index.js';
 import { shortcuts } from './shortcuts/index.js';
-import { theme } from './theme/index.js';
+import { makeTheme } from './theme/index.js';
 import { variants } from './variants/index.js';
 
 export default function presetAtype(
-	config: ThemeCustomizationConfig &
-		FontsPreflightOptions &
-		GlobalsPreflightConfig & {
-			noPreflight?: boolean;
-		} = {
-		interFontLocation:
-			'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
-	},
+	config: PreflightConfig & {
+		noPreflight?: boolean;
+	} = {},
 ): Preset {
+	const theme = makeTheme(config);
 	return {
 		name: 'atype',
 		enforce: 'post',
@@ -35,11 +30,29 @@ export default function presetAtype(
 		rules,
 		variants,
 		shortcuts,
-		preflights: config.noPreflight ? [] : preflights(config),
+		preflights: config.noPreflight
+			? []
+			: preflights({
+					primaryHue: defaultPresetHues.lemon.sourceHue,
+					accentHue: defaultPresetHues.leek.sourceHue,
+					namedHues: defaultPresetHues,
+					interFontLocation:
+						'https://resources.biscuits.club/fonts/Inter-VariableFont_slnt,wght.ttf',
+					...config,
+			  }),
 
 		presets: [
 			presetWind3({
 				preflight: false,
+			}),
+			presetFunctionCompletion({
+				autocompleteFunctions: [
+					'css',
+					'clsx',
+					'classNames',
+					'cx',
+					'withClassName',
+				],
 			}),
 		],
 	};

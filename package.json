@@ -75,6 +75,7 @@
 		"pluralize": "^8.0.0",
 		"react-hot-toast": "^2.6.0",
 		"react-is": "^19.1.0",
+		"unocss-preset-completion": "^0.3.0",
 		"valtio": "^2.1.4"
 	},
 	"devDependencies": {

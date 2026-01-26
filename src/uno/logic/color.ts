@@ -1,4 +1,4 @@
-import { type PaletteName } from './palettes.js';
+import { PROPS } from './properties.js';
 
 export function lighten(base: string, level: string) {
 	return mod(base, level, 1);
@@ -12,8 +12,8 @@ function mod(base: string, level: string, sign: number) {
 	return (
 		`oklch(from ` +
 		base +
-		` calc(l * (1 + ${level} / 30 * ${sign} * var(--mode-mult, 1)))` +
-		` calc(c * (1 - (${level} * 0.1 * ${sign} * (1 + (1 - var(--global-saturation, 0))))))` +
+		` calc(l * (1 + ${level} / 30 * ${sign} * var(${PROPS.MODE.MULT}, 1)))` +
+		` calc(c * (1 - (${level} * 0.1 * ${sign} * (1 + (1 - var(${PROPS.USER.SATURATION}, 0))))))` +
 		` h)`
 	);
 }
@@ -42,18 +42,18 @@ export function livePropertyColorContext(
 ): ColorEvaluationContext {
 	return {
 		mode: {
-			lNeutral: 'var(--mode-l-neutral)',
-			lRangeUp: 'var(--mode-l-range-up)',
-			lRangeDown: 'var(--mode-l-range-down)',
-			sNeutral: 'var(--mode-s-neutral)',
-			sRangeUp: 'var(--mode-s-range-up)',
-			sRangeDown: 'var(--mode-s-range-down)',
-			mult: 'var(--mode-mult, 1)',
+			lNeutral: `var(${PROPS.MODE.L_NEUTRAL})`,
+			lRangeUp: `var(${PROPS.MODE.L_RANGE_UP})`,
+			lRangeDown: `var(${PROPS.MODE.L_RANGE_DOWN})`,
+			sNeutral: `var(${PROPS.MODE.S_NEUTRAL})`,
+			sRangeUp: `var(${PROPS.MODE.S_RANGE_UP})`,
+			sRangeDown: `var(${PROPS.MODE.S_RANGE_DOWN})`,
+			mult: `var(${PROPS.MODE.MULT}, 1)`,
 		},
 		sourceHue,
-		globalSaturation: 'var(--global-saturation, 1)',
-		localLightnessSpread: 'var(--l-lightness-spread, 1)',
-		localSaturation: 'var(--l-saturation, 1)',
+		globalSaturation: `var(${PROPS.USER.SATURATION}, 1)`,
+		localLightnessSpread: `var(${PROPS.PALETTE.LIGHTNESS_SPREAD}, 1)`,
+		localSaturation: `var(${PROPS.PALETTE.SATURATION}, 1)`,
 	};
 }
 
@@ -105,7 +105,7 @@ function evaluatePropertiesRecursively(
  * Defaults to body.
  */
 export function snapshotColorContext(
-	palette: PaletteName,
+	palette: string,
 	mode?: 'light' | 'dark',
 ): ColorEvaluationContext {
 	const scopeElement = document.createElement('div');
@@ -119,7 +119,7 @@ export function snapshotColorContext(
 	const styles = getComputedStyle(scopeElement);
 	const evaluated = evaluatePropertiesRecursively(
 		styles,
-		livePropertyColorContext(`var(--l-main-hue)`),
+		livePropertyColorContext(`var(${PROPS.PALETTE.MAIN_HUE})`),
 	) as ColorEvaluationContext;
 	document.body.removeChild(scopeElement);
 	return evaluated;

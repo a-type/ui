@@ -3,20 +3,21 @@ import {
 	oklchBuilder,
 	OklchColorEquation,
 } from './color.js';
+import { PROPS } from './properties.js';
 
 export const paletteHues = {
-	primary: 'var(--p-primary-hue,91.8)',
-	accent: 'var(--p-accent-hue,160.88)',
-	main: 'var(--l-main-hue,var(--p-primary-hue,91.8))',
+	primary: `var(${PROPS.USER.COLOR.PRIMARY_HUE},91.8)`,
+	accent: `var(${PROPS.USER.COLOR.ACCENT_HUE},160.88)`,
+	main: `var(${PROPS.PALETTE.MAIN_HUE},var(${PROPS.USER.COLOR.PRIMARY_HUE},91.8))`,
 
-	attention: 'var(--p-attention-hue,30)',
-	success: 'var(--p-success-hue,140)',
+	attention: `var(${PROPS.PALETTE.NAMED_HUE('attention')},30)`,
+	success: `var(${PROPS.PALETTE.NAMED_HUE('success')},140)`,
 
-	lemon: 'var(--p-lemon-hue,90.8)',
-	leek: 'var(--p-leek-hue,165.88)',
-	tomato: 'var(--p-tomato-hue,10.51)',
-	blueberry: 'var(--p-blueberry-hue,248.14)',
-	eggplant: 'var(--p-eggplant-hue,280.21)',
+	lemon: `var(${PROPS.PALETTE.NAMED_HUE('lemon')},90.8)`,
+	leek: `var(${PROPS.PALETTE.NAMED_HUE('leek')},165.88)`,
+	tomato: `var(${PROPS.PALETTE.NAMED_HUE('tomato')},10.51)`,
+	blueberry: `var(${PROPS.PALETTE.NAMED_HUE('blueberry')},248.14)`,
+	eggplant: `var(${PROPS.PALETTE.NAMED_HUE('eggplant')},280.21)`,
 };
 
 export const paletteNames = [
@@ -51,6 +52,7 @@ export interface ColorPaletteStyles {
 }
 
 export interface ColorLogicalPalette {
+	name: string;
 	sourceHue: string;
 	saturation?: string;
 	definitions: ColorLogicalPaletteDefinitions;
@@ -60,9 +62,11 @@ export interface ColorLogicalPalette {
 export function createColorLogicalPalette({
 	sourceHue,
 	saturation,
+	name,
 }: {
 	sourceHue: string;
 	saturation?: string;
+	name: string;
 }): ColorLogicalPalette {
 	const definitions = {
 		wash: oklchBuilder(($) => ({
@@ -211,6 +215,7 @@ export function createColorLogicalPalette({
 		})),
 	};
 	return {
+		name,
 		sourceHue,
 		saturation,
 		definitions,
@@ -243,24 +248,35 @@ function createPaletteStyles(
 export const graySaturation = '0.15';
 export const highContrastSaturation = '0.04';
 
-export const palettes = {
-	main: createColorLogicalPalette({ sourceHue: paletteHues.main }),
-	primary: createColorLogicalPalette({ sourceHue: paletteHues.primary }),
-	accent: createColorLogicalPalette({ sourceHue: paletteHues.accent }),
-	attention: createColorLogicalPalette({ sourceHue: paletteHues.attention }),
-	success: createColorLogicalPalette({ sourceHue: paletteHues.success }),
+export const defaultPalettes = {
+	main: createColorLogicalPalette({
+		name: 'main',
+		sourceHue: paletteHues.main,
+	}),
+	primary: createColorLogicalPalette({
+		name: 'primary',
+		sourceHue: paletteHues.primary,
+	}),
+	accent: createColorLogicalPalette({
+		name: 'accent',
+		sourceHue: paletteHues.accent,
+	}),
+	attention: createColorLogicalPalette({
+		name: 'attention',
+		sourceHue: paletteHues.attention,
+	}),
+	success: createColorLogicalPalette({
+		name: 'success',
+		sourceHue: paletteHues.success,
+	}),
 	gray: createColorLogicalPalette({
+		name: 'gray',
 		sourceHue: paletteHues.main,
 		saturation: graySaturation,
 	}),
 	['high-contrast']: createColorLogicalPalette({
+		name: 'high-contrast',
 		sourceHue: paletteHues.main,
 		saturation: highContrastSaturation,
 	}),
-
-	lemon: createColorLogicalPalette({ sourceHue: paletteHues.lemon }),
-	leek: createColorLogicalPalette({ sourceHue: paletteHues.leek }),
-	tomato: createColorLogicalPalette({ sourceHue: paletteHues.tomato }),
-	blueberry: createColorLogicalPalette({ sourceHue: paletteHues.blueberry }),
-	eggplant: createColorLogicalPalette({ sourceHue: paletteHues.eggplant }),
 };
