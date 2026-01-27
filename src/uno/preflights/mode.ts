@@ -14,7 +14,6 @@ ${PROPS.MODE.WHITE}: #ffffff;
 ${PROPS.MODE.BLACK}: #000000;
 
 color: var(${PROPS.COLOR.INHERITED});
-background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
 
 ${palettePropertyReset(options)}
 `;
@@ -31,7 +30,6 @@ ${PROPS.MODE.WHITE}: #000000;
 ${PROPS.MODE.BLACK}: #ffffff;
 
 color: var(${PROPS.COLOR.INHERITED});
-background-color: var(${PROPS.BACKGROUND_COLOR.INHERITED});
 
 ${palettePropertyReset(options)}
 `;
