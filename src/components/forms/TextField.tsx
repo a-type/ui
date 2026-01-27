@@ -2,7 +2,6 @@
 
 import { useField, useFormikContext } from 'formik';
 import {
-	ComponentProps,
 	InputHTMLAttributes,
 	KeyboardEvent,
 	Ref,
@@ -13,23 +12,19 @@ import {
 import { withClassName } from '../../hooks.js';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { Input } from '../input/Input.js';
+import { Input, InputProps } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
 import { FieldLabel } from './FieldLabel.js';
 
 export type TextFieldProps = {
 	name: string;
 	label?: string;
-	required?: boolean;
-	type?: InputHTMLAttributes<HTMLInputElement>['type'];
-	className?: string;
-	placeholder?: string;
-	autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
 	autoFocus?: InputHTMLAttributes<HTMLInputElement>['autoFocus'];
 	autoFocusDelay?: number;
 	inputRef?: Ref<HTMLInputElement>;
 	inputClassName?: string;
-} & ComponentProps<typeof Input>;
+	ref?: Ref<HTMLDivElement>;
+} & Omit<InputProps, 'ref'>;
 
 const emptyRef = (() => {}) as any;
 
@@ -47,9 +42,7 @@ export const TextField = function TextField({
 	id: providedId,
 	inputClassName,
 	...rest
-}: TextFieldProps & {
-	ref?: React.Ref<HTMLDivElement>;
-}) {
+}: TextFieldProps) {
 	const [props] = useField({
 		name,
 		onChange,

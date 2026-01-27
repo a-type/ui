@@ -41,7 +41,12 @@ export const Default: Story = {
 				}}
 				{...args}
 			>
-				<TextField name="email" type="email" label="Email" />
+				<TextField
+					name="email"
+					type="email"
+					label="Email"
+					placeholder="you@example.com"
+				/>
 				<TextField name="password" type="password" label="Password" />
 				<NumberStepperField name="age" label="Age" min={13} max={100} />
 				<CheckboxField name="tos" label="I agree" />
