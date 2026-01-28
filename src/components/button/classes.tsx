@@ -36,7 +36,7 @@ export function getButtonClassName({
 		'layer-components:(shadow-sm ring-bg)',
 		'layer-components:color-contrast',
 
-		emphasis === 'ghost' && 'layer-variants:(border-none shadow-none)',
+		emphasis === 'ghost' && 'layer-variants:(border-transparent shadow-none)',
 		emphasis === 'contrast' &&
 			'layer-variants:border-bg layer-variants:hover:bg-gray-ink',
 
