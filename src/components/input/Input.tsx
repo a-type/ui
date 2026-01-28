@@ -11,7 +11,7 @@ import { inputInfo } from '../../systems/inputs.js';
 import { PROPS } from '../../uno/index.js';
 
 export const inputClassName = clsx(
-	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit bg-transparent)',
+	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit color-inherit bg-transparent)',
 	'layer-components:placeholder:color-gray-dark',
 	'layer-components:focus:(outline-none)',
 	'layer-components:focus-visible:(outline-none)',
