@@ -19,6 +19,9 @@ export const Default: Story = {
 	render(args) {
 		return (
 			<Box col gap>
+				<Box full="width" justify="end">
+					<Button>Test</Button>
+				</Box>
 				<Button
 					onClick={() => {
 						toast(

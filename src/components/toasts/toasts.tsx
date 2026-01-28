@@ -30,7 +30,7 @@ export const DefaultToastProvider = ({
 export function Toaster() {
 	return (
 		<Toast.Portal>
-			<Toast.Viewport className="overflow-clip">
+			<Toast.Viewport className="pointer-events-none overflow-clip">
 				<ToastList />
 			</Toast.Viewport>
 		</Toast.Portal>
@@ -58,7 +58,7 @@ function ToastList() {
 				'h-[--height]',
 				'flex flex-col items-center gap-xs',
 				// other properties
-				'select-none',
+				'pointer-events-none select-none',
 				// animation and interaction
 				'translate-x-[--toast-swipe-movement-x] translate-y-[calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height)))] scale-[var(--scale)]',
 				'[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
@@ -95,10 +95,10 @@ function ToastList() {
 				mode === 'dark' ? 'override-light' : 'override-dark',
 			)}
 		>
-			<Toast.Content className="max-w-sm flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
+			<Toast.Content className="pointer-events-auto max-w-sm flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
 				<div
 					className={clsx(
-						'layer-components:(relative b-1 b-black rounded-md b-solid py-sm pl-md pr-sm shadow-md color-black bg-main-wash)',
+						'layer-components:(relative b-1 rounded-md b-solid py-sm pl-md pr-sm shadow-md color-black bg-main-wash b-black)',
 						'layer-components:(flex flex-row gap-sm)',
 						'[[data-behind]:not([data-expanded])_&]:(max-h-[--height] bg-darken-2)',
 					)}
