@@ -26,6 +26,7 @@ export const Default: Story = {
 					<Popover.Arrow />
 					<Popover.Title>Hello</Popover.Title>
 					<Popover.Description>This is a popover content.</Popover.Description>
+					<Popover.Close />
 				</Popover.Content>
 			</Popover>
 		);

@@ -5,10 +5,12 @@ import {
 } from '@base-ui/react/popover';
 
 import { MenuArrowProps } from '@base-ui/react/menu';
-import classNames from 'clsx';
+import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { GroupScaleReset } from '../../systems/GroupScale.js';
+import { Button, ButtonProps } from '../button/Button.js';
+import { Icon } from '../icon/Icon.js';
 import { popupClassName } from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 
@@ -25,11 +27,29 @@ const StyledArrow = withClassName(
 	'layer-components:data-[open]:(scale-100 opacity-100)',
 );
 
-const StyledClose = withClassName(
-	PopoverPrimitive.Close,
-	'layer-components:hover:bg-lightBlend layer-components:focus:shadow-focus layer-components:([all:unset] [font-family:inherit] absolute right-5px top-5px h-25px w-25px inline-flex items-center justify-center rounded-lg color-gray-dark/80)',
+const StyledClose = ({
+	className,
+	inline,
+	...props
+}: ButtonProps & {
+	inline?: boolean;
+}) => (
+	<PopoverPrimitive.Close
+		render={
+			<Button
+				emphasis="ghost"
+				size="small"
+				className={clsx(
+					!inline && 'layer-composed:(absolute right-sm top-sm)',
+					className,
+				)}
+				{...props}
+			/>
+		}
+	>
+		<Icon name="x" />
+	</PopoverPrimitive.Close>
 );
-
 // Exports
 export const PopoverRoot = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
