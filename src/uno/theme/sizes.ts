@@ -7,6 +7,7 @@ export const width: Theme['width'] = {
 	'max-content': 'max-content',
 	touch: '30px',
 	'touch-large': '40px',
+	'touch-small': '24px',
 };
 
 export const height: Theme['height'] = {

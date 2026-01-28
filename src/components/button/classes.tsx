@@ -57,9 +57,11 @@ export function getButtonClassName({
 				size === 'small',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2.35 text-sm)':
 				size === 'default' && !disableIconMode,
-			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-sm text-xs -m-y-2xs)':
+			'layer-components:[&[data-has-icon=true][data-has-label=false]]:min-h-touch-small layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-sm text-xs -m-y-2xs)':
 				size === 'small' && !disableIconMode,
 		},
+		!disableIconMode &&
+			'layer-components:[&[data-has-icon=true][data-has-label=false]:not([aria-pressed])]:(aspect-1 items-center justify-center)',
 
 		'layer-components:hover:(ring-4 bg-main bg-lighten-2)',
 

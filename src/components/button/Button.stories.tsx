@@ -106,6 +106,18 @@ export const Toggled: Story = {
 	},
 };
 
+export const ToggledIcon: Story = {
+	render: (args) => {
+		const [on, setOn] = useState(false);
+		const toggle = () => setOn((v) => !v);
+		return (
+			<Button {...args} toggled={on} onClick={toggle}>
+				<Icon name="placeholder" />
+			</Button>
+		);
+	},
+};
+
 export const Alignment: Story = {
 	render(args) {
 		return (

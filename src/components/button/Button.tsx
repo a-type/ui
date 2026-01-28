@@ -166,9 +166,11 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 		<Icon
 			aria-hidden
 			name="check"
-			className="w-0 transition-width -ml-1"
+			className="w-0 transition-width"
 			style={{
 				width: value ? '15px' : 0,
+				marginRight: !value ? '-0.25rem' : 0,
+				marginLeft: !value ? '-0.25rem' : 0,
 			}}
 			loading={false}
 		/>
@@ -224,6 +226,8 @@ function applyPartAttributes(button: HTMLButtonElement) {
 		) {
 			registry.icon++;
 			iconNodes.push(child);
+		} else if (child.hasAttribute('data-default-loader')) {
+			// skip default loader
 		} else {
 			registry.label++;
 		}
