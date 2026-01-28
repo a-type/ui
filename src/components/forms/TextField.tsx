@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { useField, useFormikContext } from 'formik';
 import {
 	InputHTMLAttributes,
@@ -119,7 +120,7 @@ export function TextAreaField({
 				ref={inputRef as any}
 				{...props}
 				{...rest}
-				className={textAreaClassName}
+				className={clsx('layer-composed:w-full', textAreaClassName)}
 				id={id}
 				onKeyDown={onKeyDownInner}
 			/>
