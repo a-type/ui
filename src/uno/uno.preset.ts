@@ -8,11 +8,11 @@ import { shortcuts } from './shortcuts/index.js';
 import { makeTheme } from './theme/index.js';
 import { variants } from './variants/index.js';
 
-export default function presetAtype(
-	config: PreflightConfig & {
-		noPreflight?: boolean;
-	} = {},
-): Preset {
+export type PresetOptions = PreflightConfig & {
+	noPreflight?: boolean;
+};
+
+export default function presetAtype(config: PresetOptions = {}): Preset {
 	const theme = makeTheme(config);
 	return {
 		name: 'atype',
