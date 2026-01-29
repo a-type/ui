@@ -219,7 +219,7 @@ export function useVirtualKeyboardFocusBehavior({
 			) {
 				setTimeout(() => {
 					activeElement.scrollIntoView({ behavior: 'auto', block: 'start' });
-				}, 100);
+				}, 1000);
 			}
 		}
 
