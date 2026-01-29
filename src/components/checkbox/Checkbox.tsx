@@ -30,13 +30,13 @@ export function CheckboxRoot({
 			{...props}
 			className={classNames(
 				'layer-components:(relative block h-28px w-28px flex-shrink-0 cursor-pointer border border-default rounded-lg shadow-sm transition-all bg-white)',
-				'layer-components:focus-visible:(outline-off ring-4 ring-accent)',
+				'layer-components:foc-effect',
 				checkedMode === 'faded'
 					? 'layer-components:data-[checked]:(animate-checkbox-fade animate-forwards bg-main)'
 					: 'layer-components:data-[checked]:(bg-main border-main-ink)',
 				'layer-components:[&:hover:not(:disabled)]:(ring-2 bg-lighten-2 ring-bg)',
 				'layer-components:[&:active:not(:disabled)]:(ring-4 bg-darken-1)',
-				'layer-components:[&:disabled]:(shadow-none bg-transparent border-gray-light)',
+				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
 				className,
 			)}
 		/>

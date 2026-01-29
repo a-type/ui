@@ -14,7 +14,7 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 		<div
 			className={classNames(
 				color && `palette-${color}`,
-				'layer-components:[&:has(input:focus-visible),&:has(textarea:focus-visible)]:(ring ring-4 ring-accent)',
+				'foc-contained',
 				'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(ring ring-4 bg-lighten-3 ring-main-light)',
 				className,
 			)}

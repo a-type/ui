@@ -4,7 +4,7 @@ export const popupClassName = clsx(
 	'layer-primitives:(max-w-90vw min-w-120px border rounded-md shadow-lg transition bg-white border-black)',
 	'layer-primitives:transform-origin-[var(--transform-origin)]',
 	'layer-primitives:(max-h-[--available-height] max-w-[--available-width])',
-	'layer-primitives:focus-visible:(outline-none ring-2 ring-accent)',
+	'layer-primitives:foc',
 
 	'transform-origin-[--transform-origin] will-change-transform',
 	'important:motion-reduce:transition-none',

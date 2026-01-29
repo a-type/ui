@@ -24,7 +24,8 @@ export const TabsTrigger = withClassName(
 	'layer-components:(min-h-touch min-w-100px flex-shrink-0)',
 	'layer-components:(border rounded-lg bg-transparent border-transparent)',
 	'layer-components:hover:[&[data-state=inactive]]:(ring-4 bg-gray-light bg-darken-1 ring-bg)',
-	'layer-components:focus-visible:(outline-off border ring-4 bg-darken-1 border-black ring-accent)',
+	'layer-components:focus-visible:(border bg-darken-1 border-black)',
+	'foc',
 	'data-[active]:(cursor-default)',
 );
 

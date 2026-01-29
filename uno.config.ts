@@ -23,6 +23,7 @@ export default defineConfig({
 			cornerScale: 1,
 			spacingScale: 1,
 			saturation: 50,
+			focusColor: 'black',
 		}),
 	],
 	transformers: [variantGroup()],

@@ -14,7 +14,7 @@ export const ToggleGroupItem = withClassName(
 	'layer-components:(flex cursor-pointer items-center justify-center border-1 rounded-lg border-solid px-md py-sm text-nowrap transition-all color-black bg-gray/30 border-transparent)',
 	'layer-components:hover:(ring-2 bg-lighten-2 border-main-ink/20 ring-bg)',
 	'layer-components:active:(ring-4 bg-darken-1 border-main-ink/30)',
-	'layer-components:focus-visible:(outline-off ring-4 ring-accent)',
+	'layer-components:foc',
 	'layer-components:data-[pressed]:(border-default shadow-sm bg-main hover:border-default)',
 );
 

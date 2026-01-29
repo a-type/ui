@@ -23,7 +23,7 @@ const inputBorderClassName = clsx(
 	'layer-components:(min-w-60px flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
 	'layer-components:(w-max-content overflow-clip)',
 	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(bg-transparent border-gray shadow-none placeholder-gray-dark)',
-	'layer-components:[&:has(input:focus-visible),&:has(textarea:focus-visible)]:(outline-none ring ring-4 ring-accent)',
+	'layer-components:foc-contained',
 	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
 	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:border-black',
 	'layer-components:[&>.icon]:mx-sm',

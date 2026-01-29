@@ -48,7 +48,8 @@ export function getButtonClassName({
 				emphasis === 'default',
 			'layer-components:(color-main-ink bg-transparent aria-pressed:bg-main-wash)':
 				emphasis === 'ghost',
-			'layer-components:bg-black': emphasis === 'contrast',
+			'layer-components:bg-black layer-variants:focus-visible:ring-gray-dark':
+				emphasis === 'contrast',
 		},
 
 		{
@@ -65,9 +66,7 @@ export function getButtonClassName({
 
 		'layer-components:hover:(ring-4 bg-main bg-lighten-2)',
 
-		'layer-components:focus:outline-off',
-		'layer-components:focus-visible:(outline-off ring-6 ring-accent)',
-		'layer-components:[&[data-focus=true]]:(outline-off ring-6 ring-accent)',
+		'layer-components:foc-effect-lg',
 
 		'layer-components:active:(ring-8 bg-darken-1)',
 

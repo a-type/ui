@@ -17,6 +17,7 @@ export const PROPS = {
 			SERIF: '--u-font-serif',
 			TITLE: '--u-font-title',
 		},
+		FOCUS_COLOR: '--u-focus-color',
 	},
 
 	PALETTE: {
@@ -134,5 +135,10 @@ export const PROPS = {
 		SHADOW_COLOR: '--un-shadow-color',
 		SHADOW_OPACITY: '--un-shadow-opacity',
 		SHADOW: '--un-shadow',
+		RING_WIDTH: '--un-ring-width',
+		RING_STYLE: '--un-ring-style',
+		RING_OFFSET_SHADOW: '--un-ring-offset-shadow',
+		RING_SHADOW: '--un-ring-shadow',
+		RING_INSET: '--un-ring-inset',
 	},
 };

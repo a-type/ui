@@ -65,11 +65,11 @@ export function CardMain({
 				classNames(
 					'layer-components:cursor-pointer',
 					'layer-components:hover:(color-black bg-black/10)',
-					'layer-components:focus:outline-none',
-					'layer-components:focus-visible:(outline-none ring-4 ring-inset bg-black/10 ring-accent)',
-					'layer-components:data-[visually-focused]:(ring-4 ring-inset bg-black/10 ring-accent)',
+					'layer-components:foc-effect',
+					'layer-components:focus-visible:(ring-inset bg-black/10)',
+					'layer-components:data-[visually-focused]:(ring-inset bg-black/10)',
 					'layer-components:disabled:(cursor-default)',
-					'layer-components:data-[visually-disabled]:(cursor-default)',
+					'layer-components:data-[disabled]:(cursor-default)',
 				),
 			className,
 		),
@@ -85,8 +85,8 @@ export function CardMain({
 		state: {
 			interactive: !!isInteractive,
 			compact: !!compact,
-			visuallyFocused: !!visuallyFocused,
-			visuallyDisabled: !!visuallyDisabled,
+			focusVisible: !!visuallyFocused,
+			disabled: !!visuallyDisabled,
 		},
 	});
 

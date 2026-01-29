@@ -214,11 +214,11 @@ export function CameraShutterButton({
 
 const StyledShutterButton = withClassName(
 	BaseButton,
-	'absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full cursor-pointer border-2 border-black border-solid ring-2 ring-white opacity-80',
-	'hover:bg-gray-wash hover:opacity-100',
-	'focus-visible:bg-lighten-1',
-	'focus:ring-accent focus:outline-none focus:opacity-100',
-	'sm:w-8 sm:h-8',
+	'layer-components:(absolute bottom-3 left-1/2 h-16 w-16 cursor-pointer border-2 rounded-full border-solid opacity-80 ring-2 bg-white border-black ring-white -translate-x-1/2)',
+	'layer-components:(hover:opacity-100 hover:bg-gray-wash)',
+	'layer-components:focus-visible:bg-lighten-1',
+	'layer-components:(foc-effect focus:opacity-100)',
+	'layer-components:(sm:h-8 sm:w-8)',
 );
 
 export interface CameraDeviceSelectorProps {

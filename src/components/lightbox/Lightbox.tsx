@@ -16,7 +16,7 @@ export const LightboxRoot = Dialog.Root;
 export const LightboxTrigger = withClassName(
 	Dialog.Trigger,
 	'layer-components:cursor-pointer',
-	'layer-components:focus-visible:(outline-none ring ring-accent)',
+	'foc-effect',
 );
 export const LightboxPortal = Dialog.Portal;
 export const LightboxTitle = () => (

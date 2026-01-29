@@ -4,7 +4,9 @@ import { PreflightConfig } from '../preflights/index.js';
 
 const contrastClamp = 'clamp(0, (0.36 / y - 1) * infinity, 1)';
 
-export function makeThemeColors(options: PreflightConfig): Theme['colors'] {
+export function makeThemeColors({
+	namedHues,
+}: PreflightConfig): Theme['colors'] {
 	return {
 		none: 'transparent',
 		transparent: 'transparent',
@@ -26,12 +28,14 @@ export function makeThemeColors(options: PreflightConfig): Theme['colors'] {
 		attention: shadesOf(PROPS.PALETTE.NAMED_SHADES('attention')),
 		success: shadesOf(PROPS.PALETTE.NAMED_SHADES('success')),
 
+		focus: `var(${PROPS.USER.FOCUS_COLOR})`,
+
 		main: shadesOf(PROPS.PALETTE.SHADES),
 		gray: shadesOf(PROPS.PALETTE.GRAY_SHADES),
 
-		...(options.namedHues
+		...(namedHues
 			? Object.fromEntries(
-					Object.keys(options.namedHues).map(([name]) => [
+					Object.keys(namedHues).map(([name]) => [
 						name,
 						shadesOf(PROPS.PALETTE.NAMED_SHADES(name)),
 					]),

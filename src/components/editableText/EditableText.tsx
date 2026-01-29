@@ -107,7 +107,8 @@ export function EditableText({
 				inputClassName,
 				'layer-variants:(w-auto inline-flex items-center gap-sm rounded-md px-md text-left font-size-inherit color-inherit bg-transparent border-transparent shadow-none)',
 				'layer-variants:hover:(bg-main-light/80)',
-				'layer-variants:focus-visible:(outline-none ring-2 bg-main-light/80 ring-accent)',
+				'foc-effect',
+				'layer-variants:focus-visible:(bg-main-light/80)',
 				'cursor-pointer',
 				className,
 			)}

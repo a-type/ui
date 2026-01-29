@@ -167,8 +167,9 @@ export function HorizontalList({
 							emphasis="ghost"
 							className={clsx(
 								'layer-variants:(sticky left-0 top-2 z-1 flex-shrink-0)',
+								'ring-inset foc',
 								!open &&
-									'layer-variants:(h-full border-r rounded-none border-r-solid border-r-gray)',
+									'layer-variants:(h-full border-r rounded-l-sm rounded-r-none border-r-solid border-r-gray)',
 							)}
 						>
 							<Icon

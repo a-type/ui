@@ -18,6 +18,7 @@ export interface UserPreflightOptions {
 	cornerScale?: number;
 	shadowSpread?: number;
 	fontSize?: number;
+	focusColor?: 'black' | 'primary' | 'accent' | 'gray';
 }
 
 export const userPreflight = ({
@@ -30,6 +31,7 @@ export const userPreflight = ({
 	shadowSpread = 1,
 	namedHues,
 	fontSize = 16,
+	focusColor = 'accent',
 }: UserPreflightOptions) =>
 	preflight({
 		getCSS: () => {
@@ -44,6 +46,7 @@ export const userPreflight = ({
 
 		${PROPS.USER.COLOR.PRIMARY_HUE}: ${primaryHue};
 		${PROPS.USER.COLOR.ACCENT_HUE}: ${accentHue};
+		${PROPS.USER.FOCUS_COLOR}: var(${focusColors[focusColor]});
 		${
 			namedHues
 				? Object.entries(namedHues)
@@ -65,3 +68,13 @@ export const userPreflight = ({
 `;
 		},
 	});
+
+const focusColors: Record<
+	NonNullable<UserPreflightOptions['focusColor']>,
+	string
+> = {
+	black: PROPS.MODE.BLACK,
+	primary: PROPS.PALETTE.NAMED_SHADES('primary').DARK,
+	accent: PROPS.PALETTE.NAMED_SHADES('accent').MID,
+	gray: PROPS.PALETTE.GRAY_SHADES.DARK,
+};

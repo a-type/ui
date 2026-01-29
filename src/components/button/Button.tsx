@@ -93,7 +93,7 @@ export function ButtonRoot({
 		...props,
 		disabled: disabled || isLoading,
 		'data-disabled': visuallyDisabled,
-		'data-focus': visuallyFocused,
+		'data-focus-visible': visuallyFocused ? true : undefined,
 		'data-size': size,
 		'data-loading': isLoading,
 		'data-has-label': hasLabelChild,

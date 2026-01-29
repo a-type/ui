@@ -11,25 +11,26 @@ export const SliderRoot = withClassName(
 
 export const SliderControl = withClassName(
 	BaseSlider.Control,
-	'layer-components:(relative flex items-center select-none touch-none w-full h-30px translate-z-0)',
-	'layer-variants:[&[data-orientation=vertical]]:(flex-col h-full w-30px)',
+	'layer-components:(relative h-30px w-full flex translate-z-0 touch-none select-none items-center)',
+	'layer-variants:[&[data-orientation=vertical]]:(h-full w-30px flex-col)',
 );
 export const SliderTrack = withClassName(
 	BaseSlider.Track,
-	'layer-components:(bg-transparent relative grow rounded-lg h-7px ring-1 ring-black transition-colors select-none)',
-	'layer-variants:[&[data-orientation=vertical]]:(w-7px h-full flex-1)',
+	'layer-components:(relative h-7px grow select-none rounded-lg ring-1 transition-colors bg-transparent ring-black)',
+	'layer-variants:[&[data-orientation=vertical]]:(h-full w-7px flex-1)',
 );
 export const SliderRange = withClassName(
 	BaseSlider.Indicator,
-	'layer-components:(bg-main rounded-lg transition-colors)',
+	'layer-components:(rounded-lg transition-colors bg-main)',
 	'layer-variants:[&[data-orientation=vertical]]:(bg-main)',
 );
 export const SliderThumb = withClassName(
 	BaseSlider.Thumb,
-	'layer-components:(flex items-center justify-center leading-none cursor-pointer w-5 h-5 bg-white shadow-sm rounded-lg ring-2 ring-black touch-none transition-color)',
+	'layer-components:(h-5 w-5 flex cursor-pointer touch-none items-center justify-center rounded-lg leading-none shadow-sm ring-2 transition-color bg-white ring-black)',
 	'layer-components:hover:(shadow-md)',
-	'layer-components:active:(shadow-lg ring-4 ring-main-dark ring-opacity-50 bg-main-light)',
-	'layer-components:focus-visible:(shadow-lg ring-4 ring-accent ring-opacity-50 outline-none bg-main-light)',
+	'layer-components:active:(shadow-lg ring-4 ring-opacity-50 bg-main-light ring-main-dark)',
+	'layer-components:focus-visible:(shadow-lg bg-main-light)',
+	'foc-lg',
 	'layer-components:focus:(outline-none)',
 	'layer-components:disabled:(opacity-50)',
 );

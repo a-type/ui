@@ -118,7 +118,7 @@ export function ViewportRoot({
 					<div
 						className={clsx(
 							'contain-strict relative h-full w-full flex-1 touch-none select-none overflow-hidden',
-							'focus-visible:(ring ring-accent)',
+							'foc',
 							className,
 						)}
 						{...gestureProps}
