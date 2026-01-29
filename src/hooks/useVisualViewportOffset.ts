@@ -208,6 +208,10 @@ export function useVirtualKeyboardFocusBehavior({
 
 		function update() {
 			// const open = virtualKeyboard.boundingRect.height > 0;
+			document.body.style.setProperty(
+				'margin-bottom',
+				`${virtualKeyboard.boundingRect.height}px`,
+			);
 			const activeElement = document.activeElement;
 			if (
 				activeElement &&
