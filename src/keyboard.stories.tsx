@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input, TextArea } from './components/index.js';
+import {
+	Input,
+	PageContent,
+	PageNowPlaying,
+	PageRoot,
+	TextArea,
+} from './components/index.js';
 import { useVirtualKeyboardBehavior } from './hooks/useVirtualKeyboardBehavior.js';
 
 const meta = {
@@ -19,16 +25,21 @@ export const Default: Story = {
 	render(args) {
 		useVirtualKeyboardBehavior('overlay');
 		return (
-			<>
-				<div className="h-screen flex flex-col">
-					<div className="flex flex-grow flex-col items-center justify-center p-lg">
-						Focus the inputs below to see how the virtual keyboard behavior
-						works.
+			<PageRoot id="root">
+				<PageContent>
+					<div className="h-screen flex flex-col">
+						<div className="flex flex-grow flex-col items-center justify-center p-lg">
+							Focus the inputs below to see how the virtual keyboard behavior
+							works.
+						</div>
+						<Input className="w-full" />
+						<TextArea className="w-full" />
 					</div>
-					<Input className="w-full" />
-					<TextArea className="w-full" />
-				</div>
-			</>
+					<PageNowPlaying keepAboveKeyboard>
+						<Input placeholder="now playing" />
+					</PageNowPlaying>
+				</PageContent>
+			</PageRoot>
 		);
 	},
 };

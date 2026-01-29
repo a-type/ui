@@ -1,5 +1,9 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { useThemedTitleBar, useVisualViewportOffset } from '../../hooks.js';
+import {
+	useThemedTitleBar,
+	useVirtualKeyboardFocusBehavior,
+	useVisualViewportOffset,
+} from '../../hooks.js';
 import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
@@ -28,6 +32,7 @@ export function Provider({
 	manifestPath,
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
+	useVirtualKeyboardFocusBehavior();
 	const supportedVirtualKeyboardBehavior =
 		typeof navigator !== 'undefined' && 'virtualKeyboard' in navigator
 			? virtualKeyboardBehavior

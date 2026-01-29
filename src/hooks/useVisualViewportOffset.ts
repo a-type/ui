@@ -179,3 +179,53 @@ function useReactToViewportChanges(
 		};
 	}, [stableCb, disable]);
 }
+
+export interface VirtualKeyboardFocusOptions {
+	focusElementTypes?: string[];
+}
+export function useVirtualKeyboardFocusBehavior({
+	focusElementTypes = ['input', 'textarea', 'select'],
+}: VirtualKeyboardFocusOptions = {}) {
+	const stableFocusElementTypes = focusElementTypes
+		.map((type) => type.toLowerCase())
+		.join(',');
+	useEffect(() => {
+		if (typeof navigator === 'undefined' || typeof window === 'undefined') {
+			return;
+		}
+
+		if (!('virtualKeyboard' in navigator)) {
+			// no support
+			console.warn(
+				`virtual keyboard behavior set to 'overlay', but virtualKeyboard API is not supported in this browser.`,
+			);
+			return;
+		}
+
+		const virtualKeyboard = navigator.virtualKeyboard as any;
+
+		const matchElements = stableFocusElementTypes.split(',');
+
+		function update() {
+			const open = virtualKeyboard.boundingRect.height > 0;
+			if (open) {
+				console.log('keyboard opened');
+			}
+			const activeElement = document.activeElement;
+			if (
+				activeElement &&
+				matchElements.includes(activeElement.tagName.toLowerCase())
+			) {
+				setTimeout(() => {
+					console.log('scroll focused element');
+					activeElement.scrollIntoView(true);
+				}, 10);
+			}
+		}
+
+		virtualKeyboard.addEventListener('geometrychange', update);
+		return () => {
+			virtualKeyboard.removeEventListener('geometrychange', update);
+		};
+	}, [stableFocusElementTypes]);
+}
