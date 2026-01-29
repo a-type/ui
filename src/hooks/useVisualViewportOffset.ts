@@ -214,12 +214,13 @@ export function useVirtualKeyboardFocusBehavior({
 			);
 			const activeElement = document.activeElement;
 			if (
-				activeElement &&
-				matchElements.includes(activeElement.tagName.toLowerCase())
+				activeElement //&&
+				// matchElements.includes(activeElement.tagName.toLowerCase())
 			) {
 				setTimeout(() => {
-					activeElement.scrollIntoView({ behavior: 'auto', block: 'start' });
-				}, 1000);
+					console.log('scroll');
+					activeElement.scrollIntoView(true);
+				}, 5000);
 			}
 		}
 
