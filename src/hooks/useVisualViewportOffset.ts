@@ -40,6 +40,7 @@ export function useVisualViewportOffset(disable?: boolean) {
 export function useIsKeyboardOpen() {
 	const { virtualKeyboardBehavior } = useConfig();
 
+	// viewport heuristic
 	const [isViewportConstrained, setIsViewportConstrained] = useState(false);
 	useReactToViewportChanges((viewport) => {
 		// heuristic - 100px difference between visual viewport and window height
@@ -48,6 +49,7 @@ export function useIsKeyboardOpen() {
 		);
 	}, virtualKeyboardBehavior !== 'displace');
 
+	// simulated keyboard
 	const [simulateKeyboardOpen, setSimulateKeyboardOpen] = useState<
 		boolean | undefined
 	>(undefined);
@@ -69,6 +71,7 @@ export function useIsKeyboardOpen() {
 		};
 	}, []);
 
+	// virtual keyboard API
 	const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 	useEffect(() => {
 		if (typeof navigator === 'undefined' || typeof window === 'undefined') {
@@ -175,4 +178,48 @@ function useReactToViewportChanges(
 			viewport.removeEventListener('scroll', throttledUpdate);
 		};
 	}, [stableCb, disable]);
+}
+
+export interface VirtualKeyboardFocusOptions {
+	focusElementTypes?: string[];
+}
+export function useVirtualKeyboardFocusBehavior({
+	focusElementTypes = ['input', 'textarea', 'select'],
+}: VirtualKeyboardFocusOptions = {}) {
+	const stableFocusElementTypes = focusElementTypes
+		.map((type) => type.toLowerCase())
+		.join(',');
+	useEffect(() => {
+		if (typeof navigator === 'undefined' || typeof window === 'undefined') {
+			return;
+		}
+
+		if (!('virtualKeyboard' in navigator)) {
+			// no support
+			console.warn(
+				`virtual keyboard behavior set to 'overlay', but virtualKeyboard API is not supported in this browser.`,
+			);
+			return;
+		}
+
+		const virtualKeyboard = navigator.virtualKeyboard as any;
+
+		const matchElements = stableFocusElementTypes.split(',');
+
+		function update() {
+			// const open = virtualKeyboard.boundingRect.height > 0;
+			const activeElement = document.activeElement;
+			if (
+				activeElement &&
+				matchElements.includes(activeElement.tagName.toLowerCase())
+			) {
+				activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		}
+
+		virtualKeyboard.addEventListener('geometrychange', update);
+		return () => {
+			virtualKeyboard.removeEventListener('geometrychange', update);
+		};
+	}, [stableFocusElementTypes]);
 }
