@@ -209,11 +209,12 @@ export function useVirtualKeyboardFocusBehavior({
 		function update() {
 			const open = virtualKeyboard.boundingRect.height > 0;
 			if (open) {
+				console.log('keyboard opened');
 				document.body.style.setProperty(
-					'margin-bottom',
-					`${virtualKeyboard.boundingRect.height}px`,
+					'transform',
+					`translateY(-${virtualKeyboard.boundingRect.height}px)`,
 				);
-				document.body.scrollTop += virtualKeyboard.boundingRect.height;
+				// document.body.scrollTop += virtualKeyboard.boundingRect.height;
 			}
 			// const activeElement = document.activeElement;
 			// if (
