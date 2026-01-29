@@ -210,10 +210,10 @@ export function useVirtualKeyboardFocusBehavior({
 			const open = virtualKeyboard.boundingRect.height > 0;
 			if (open) {
 				console.log('keyboard opened');
-				document.body.style.setProperty(
-					'transform',
-					`translateY(-${virtualKeyboard.boundingRect.height}px)`,
-				);
+				// document.body.style.setProperty(
+				// 	'transform',
+				// 	`translateY(-${virtualKeyboard.boundingRect.height}px)`,
+				// );
 				// document.body.scrollTop += virtualKeyboard.boundingRect.height;
 			}
 			// const activeElement = document.activeElement;
