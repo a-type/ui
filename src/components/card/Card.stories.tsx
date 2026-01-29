@@ -262,36 +262,54 @@ export const VisuallyFocused: Story = {
 export const CardsInBox: Story = {
 	render() {
 		return (
-			<Box container p gap>
-				<CardRoot>
-					<CardMain onClick={() => {}}>
-						<CardTitle>Card Title</CardTitle>
-						<CardContent>Other stuff</CardContent>
-					</CardMain>
-					<CardFooter>
-						<CardActions>
-							<Button size="small">Button</Button>
-							<Button emphasis="ghost">
-								<Icon name="placeholder" />
-							</Button>
-						</CardActions>
-					</CardFooter>
-				</CardRoot>
-				<CardRoot>
-					<CardMain onClick={() => {}}>
-						<CardTitle>Card Title</CardTitle>
-						<CardContent>Other stuff</CardContent>
-					</CardMain>
-					<CardFooter>
-						<CardActions>
-							<Button size="small">Button</Button>
-							<Button emphasis="ghost">
-								<Icon name="placeholder" />
-							</Button>
-						</CardActions>
-					</CardFooter>
-				</CardRoot>
-			</Box>
+			<div className="w-full flex flex-row gap-lg">
+				<div className="flex-1">
+					<CardRoot>
+						<CardMain onClick={() => {}}>
+							<CardTitle>Card Title</CardTitle>
+							<CardContent>Other stuff</CardContent>
+						</CardMain>
+						<CardFooter>
+							<CardActions>
+								<Button size="small">Button</Button>
+								<Button emphasis="ghost" size="small">
+									<Icon name="placeholder" />
+								</Button>
+							</CardActions>
+						</CardFooter>
+					</CardRoot>
+				</div>
+				<Box p gap col grow>
+					<CardRoot>
+						<CardMain onClick={() => {}}>
+							<CardTitle>Card Title</CardTitle>
+							<CardContent>Other stuff</CardContent>
+						</CardMain>
+						<CardFooter>
+							<CardActions>
+								<Button size="small">Button</Button>
+								<Button emphasis="ghost" size="small">
+									<Icon name="placeholder" />
+								</Button>
+							</CardActions>
+						</CardFooter>
+					</CardRoot>
+					<CardRoot>
+						<CardMain onClick={() => {}}>
+							<CardTitle>Card Title</CardTitle>
+							<CardContent>Other stuff</CardContent>
+						</CardMain>
+						<CardFooter>
+							<CardActions>
+								<Button size="small">Button</Button>
+								<Button emphasis="ghost" size="small">
+									<Icon name="placeholder" />
+								</Button>
+							</CardActions>
+						</CardFooter>
+					</CardRoot>
+				</Box>
+			</div>
 		);
 	},
 };

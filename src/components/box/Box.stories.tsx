@@ -93,18 +93,16 @@ export const Default: Story = {
 export const NestedContainers: Story = {
 	render(args) {
 		return (
-			<Box {...args} container surface color="accent" direction="col">
-				<Box {...args} container surface color="primary">
-					<Box {...args} surface>
-						<Button>Button</Button>
-						<Button>Button</Button>
-					</Box>
-					<Box {...args} surface color="attention">
+			<Box {...args} p gap container surface color="accent" direction="col">
+				<Box {...args} p gap container surface items="center" color="primary">
+					<Button>Button</Button>
+					<Button>Button</Button>
+					<Box {...args} p gap surface color="attention">
 						<Button>Button</Button>
 						<Button>Button</Button>
 					</Box>
 				</Box>
-				<Box {...args} surface color="gray">
+				<Box {...args} p gap surface color="gray">
 					<Button>Button</Button>
 					<Button>Button</Button>
 				</Box>

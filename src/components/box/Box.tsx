@@ -89,7 +89,10 @@ export function Box({
 	ref,
 	...rest
 }: BoxProps) {
-	const style = useGroupScaleStyles(userStyle);
+	const style = useGroupScaleStyles(
+		userStyle,
+		container === 'reset' ? 1 : undefined,
+	);
 
 	const items = itemsSolo ?? align?.split(' ')[0];
 	const justify = justifySolo ?? align?.split(' ')[1];

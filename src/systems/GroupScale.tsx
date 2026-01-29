@@ -18,8 +18,12 @@ export function useGroupScale() {
 	return useContext(GroupScaleContext);
 }
 
-export function useGroupScaleStyles(composeStyles?: CSSProperties) {
-	const scale = useGroupScale();
+export function useGroupScaleStyles(
+	composeStyles?: CSSProperties,
+	forceScale?: number,
+) {
+	const ctxScale = useGroupScale();
+	const scale = forceScale ?? ctxScale;
 	return {
 		[PROPS.LOCALS.SPACING_SCALE]: scale,
 		[PROPS.LOCALS.CORNER_SCALE]: scale,
@@ -34,3 +38,13 @@ export const GroupScaleReset = ({ children }: { children: ReactNode }) => {
 		</GroupScaleContext.Provider>
 	);
 };
+
+export function withGroupScaleReset<T>(Component: React.ComponentType<T>) {
+	return function WithGroupScaleReset(props: T) {
+		return (
+			<GroupScaleReset>
+				<Component {...(props as any)} />
+			</GroupScaleReset>
+		);
+	};
+}
