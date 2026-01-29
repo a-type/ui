@@ -213,7 +213,9 @@ export function useVirtualKeyboardFocusBehavior({
 				activeElement &&
 				matchElements.includes(activeElement.tagName.toLowerCase())
 			) {
-				activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				setTimeout(() => {
+					activeElement.scrollIntoView({ behavior: 'auto', block: 'start' });
+				}, 10);
 			}
 		}
 
