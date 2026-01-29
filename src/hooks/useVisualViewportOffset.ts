@@ -207,21 +207,24 @@ export function useVirtualKeyboardFocusBehavior({
 		const matchElements = stableFocusElementTypes.split(',');
 
 		function update() {
-			// const open = virtualKeyboard.boundingRect.height > 0;
-			document.body.style.setProperty(
-				'margin-bottom',
-				`${virtualKeyboard.boundingRect.height}px`,
-			);
-			const activeElement = document.activeElement;
-			if (
-				activeElement //&&
-				// matchElements.includes(activeElement.tagName.toLowerCase())
-			) {
-				setTimeout(() => {
-					console.log('scroll');
-					activeElement.scrollIntoView(true);
-				}, 5000);
+			const open = virtualKeyboard.boundingRect.height > 0;
+			if (open) {
+				document.body.style.setProperty(
+					'margin-bottom',
+					`${virtualKeyboard.boundingRect.height}px`,
+				);
+				document.body.scrollTop += virtualKeyboard.boundingRect.height;
 			}
+			// const activeElement = document.activeElement;
+			// if (
+			// 	activeElement //&&
+			// 	// matchElements.includes(activeElement.tagName.toLowerCase())
+			// ) {
+			// 	setTimeout(() => {
+			// 		console.log('scroll');
+			// 		activeElement.scrollIntoView(true);
+			// 	}, 5000);
+			// }
 		}
 
 		virtualKeyboard.addEventListener('geometrychange', update);
