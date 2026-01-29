@@ -6,7 +6,7 @@ export const keyboardPreflight = preflight({
 		// content is not hidden behind the keyboard
 		`
 	body {
-		margin-bottom: env(keyboard-inset-bottom, 0px) !important;
+		margin-bottom: env(keyboard-inset-height, 0px) !important;
 	}
 `,
 });
