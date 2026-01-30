@@ -95,6 +95,20 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
+		tweaks: {
+			description: 'Show tweak pane',
+			defaultValue: true,
+			type: 'boolean',
+			toolbar: {
+				title: 'Tweaks',
+				icon: 'settings',
+				items: [
+					{ value: true, title: 'Show' },
+					{ value: false, title: 'Hide' },
+				],
+				dynamicTitle: true,
+			},
+		},
 	},
 	decorators: [
 		(Story, ctx) => {
@@ -155,7 +169,7 @@ const preview: Preview = {
 				};
 			}, [ctx.globals.shadows]);
 			return (
-				<Provider>
+				<Provider tweaks={ctx.globals.tweaks}>
 					<Story />
 				</Provider>
 			);

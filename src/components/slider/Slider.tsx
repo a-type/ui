@@ -94,5 +94,10 @@ export const Slider = Object.assign(
 		Thumb: SliderThumb,
 		Value: BaseSlider.Value,
 		Ui: SliderUi,
+
+		getSingle: (v: number | readonly number[]) => {
+			if (Array.isArray(v)) return v[0];
+			return v;
+		},
 	},
 );

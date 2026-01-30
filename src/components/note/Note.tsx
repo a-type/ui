@@ -34,7 +34,7 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 					aria-hidden
 				>
 					{/* folded corner */}
-					<div className="layer-components:(relative h-[20px] w-[20px] flex-[0_0_20px] border-0 border-solid border-main-dark) layer-variants:(border-b-1px border-l-1px)">
+					<div className="layer-components:(relative h-[20px] w-[20px] flex-[0_0_20px] border-0 border-solid border-main-dark) layer-variants:(border-b border-l)">
 						{/* top corner */}
 						<div
 							className={`layer-components:(box-content h-0 w-0 transform-origin-br translate--7px rotate--45 border-13px border-solid border-transparent border-r-main-wash border-r-darken-1)`}
@@ -43,7 +43,7 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 						<div className="layer-components:(absolute left-9px top--3px h-27px w-0.5px transform-origin-cc rotate--45 bg-main-dark)" />
 					</div>
 					{/* bottom right corner */}
-					<div className="layer-components:(flex-1 border-0 border-solid bg-main-wash bg-darken-1 border-main-dark) layer-variants:(border-b-1px border-r-1px)" />
+					<div className="layer-components:(flex-1 border-0 border-solid bg-main-wash bg-darken-1 border-main-dark) layer-variants:(border-b border-r)" />
 				</div>
 			</div>
 		</div>

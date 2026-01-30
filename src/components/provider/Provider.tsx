@@ -10,6 +10,7 @@ import { ParticleLayer } from '../particles/index.js';
 import { PwaInstall } from '../pwaInstall/PwaInstall.js';
 import { DefaultToastProvider, Toaster } from '../toasts/toasts.js';
 import { TooltipProvider } from '../tooltip/index.js';
+import { TweakPane } from './TweakPane.js';
 
 export interface ProviderProps {
 	children?: ReactNode;
@@ -18,6 +19,7 @@ export interface ProviderProps {
 	virtualKeyboardBehavior?: 'overlay' | 'displace';
 	disableTitleBarColor?: boolean;
 	manifestPath?: string;
+	tweaks?: boolean;
 }
 
 /**
@@ -30,6 +32,7 @@ export function Provider({
 	virtualKeyboardBehavior = 'displace',
 	disableTitleBarColor,
 	manifestPath,
+	tweaks,
 }: ProviderProps) {
 	useVisualViewportOffset(disableViewportOffset);
 	useVirtualKeyboardFocusBehavior();
@@ -44,6 +47,7 @@ export function Provider({
 			<IconSpritesheet />
 			<Toaster />
 			<PwaInstall manifestPath={manifestPath} />
+			{tweaks && <TweakPane />}
 		</>
 	);
 

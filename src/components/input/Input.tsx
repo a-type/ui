@@ -20,7 +20,7 @@ export const inputClassName = clsx(
 );
 
 const inputBorderClassName = clsx(
-	'layer-components:(min-w-60px flex flex-row items-center gap-xs border-1 rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
+	'layer-components:(min-w-60px flex flex-row items-center gap-xs border-1 border-thin rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
 	'layer-components:(w-max-content overflow-clip)',
 	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(bg-transparent border-gray shadow-none placeholder-gray-dark)',
 	'layer-components:foc-contained',

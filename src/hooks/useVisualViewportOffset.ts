@@ -181,14 +181,18 @@ function useReactToViewportChanges(
 }
 
 export interface VirtualKeyboardFocusOptions {
-	focusElementTypes?: string[];
+	shouldScrollIntoView?: (el: Element) => boolean;
+}
+function defaultShouldScrollIntoView(el: Element) {
+	if (['input', 'textarea', 'select'].includes(el.tagName.toLowerCase()))
+		return true;
+	if (el.hasAttribute('contenteditable')) return true;
+	return false;
 }
 export function useVirtualKeyboardFocusBehavior({
-	focusElementTypes = ['input', 'textarea', 'select'],
+	shouldScrollIntoView = defaultShouldScrollIntoView,
 }: VirtualKeyboardFocusOptions = {}) {
-	const stableFocusElementTypes = focusElementTypes
-		.map((type) => type.toLowerCase())
-		.join(',');
+	const stableShouldScroll = useStableCallback(shouldScrollIntoView);
 	useEffect(() => {
 		if (typeof navigator === 'undefined' || typeof window === 'undefined') {
 			return;
@@ -204,21 +208,19 @@ export function useVirtualKeyboardFocusBehavior({
 
 		const virtualKeyboard = navigator.virtualKeyboard as any;
 
-		const matchElements = stableFocusElementTypes.split(',');
-
 		function update() {
 			const open = virtualKeyboard.boundingRect.height > 0;
 			if (open) {
 				console.log('keyboard opened');
 			}
 			const activeElement = document.activeElement;
-			if (
-				activeElement &&
-				matchElements.includes(activeElement.tagName.toLowerCase())
-			) {
+			if (activeElement && stableShouldScroll(activeElement)) {
 				setTimeout(() => {
 					console.log('scroll focused element');
-					activeElement.scrollIntoView(true);
+					activeElement.scrollIntoView({
+						behavior: 'instant',
+						block: 'start',
+					});
 				}, 10);
 			}
 		}
@@ -227,5 +229,5 @@ export function useVirtualKeyboardFocusBehavior({
 		return () => {
 			virtualKeyboard.removeEventListener('geometrychange', update);
 		};
-	}, [stableFocusElementTypes]);
+	}, [stableShouldScroll]);
 }

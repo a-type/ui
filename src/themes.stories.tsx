@@ -35,6 +35,7 @@ import {
 	Progress,
 	Provider,
 	Select,
+	Slider,
 	TextSkeleton,
 	ToggleGroup,
 	Tooltip,
@@ -242,6 +243,7 @@ export function DemoUI({ className }: { className?: string }) {
 						onChange={() => {}}
 					/>
 					<Progress value={50} className="m-auto" />
+					<Slider defaultValue={50} min={0} max={100} />
 					<Box surface color="primary" p gap d="col">
 						<H1>Primary surface</H1>
 						<H2>Primary surface</H2>

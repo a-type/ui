@@ -9,16 +9,16 @@ import { PaletteName } from '../../uno/index.js';
 
 export const ProgressRoot = withClassName(
 	ProgressPrimitive.Root,
-	'layer-components:(grid grid-columns-[1fr_1fr] gap-col-md gap-row-xs items-center w-full)',
+	'layer-components:grid-columns-[1fr_1fr] layer-components:(grid w-full items-center gap-col-md gap-row-xs)',
 );
 export const ProgressIndicator = withClassName(
 	ProgressPrimitive.Indicator,
-	'layer-components:(bg-main w-full h-full rounded-lg transition-transform)',
+	'layer-components:(w-full rounded-lg transition-transform bg-main)',
 	'layer-components:data-[complete]:(bg-success)',
 );
 export const ProgressTrack = withClassName(
 	ProgressPrimitive.Track,
-	'layer-components:(w-full relative overflow-hidden ring ring-black ring-1 rounded-lg h-6px)',
+	'layer-components:(relative h-8px w-full overflow-hidden border rounded-lg border-black)',
 );
 
 const ProgressBase = function ProgressBase({
@@ -55,12 +55,12 @@ const ProgressBase = function ProgressBase({
 
 const ProgressLabel = withClassName(
 	ProgressPrimitive.Label,
-	'layer-components:(font-size-xs color-gray-ink col-start-1 row-start-1)',
+	'layer-components:(col-start-1 row-start-1 font-size-xs color-gray-ink)',
 );
 
 const ProgressValue = withClassName(
 	ProgressPrimitive.Value,
-	'layer-components:(font-size-xs font-semibold color-gray-ink col-start-2 row-start-1 justify-self-end)',
+	'layer-components:(col-start-2 row-start-1 justify-self-end font-size-xs font-semibold color-gray-ink)',
 );
 
 export const ProgressLabeled = function ProgressLabeled({
