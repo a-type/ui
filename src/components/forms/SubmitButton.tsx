@@ -7,7 +7,6 @@ export function SubmitButton(props: ButtonProps) {
 		<Button
 			loading={isSubmitting}
 			disabled={!isValid}
-			color="primary"
 			emphasis="primary"
 			{...props}
 			type="submit"

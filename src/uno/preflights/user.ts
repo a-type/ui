@@ -22,7 +22,7 @@ export interface UserPreflightOptions {
 }
 
 export const userPreflight = ({
-	saturation = 50,
+	saturation = 0.5,
 	primaryHue = defaultPresetHues.lemon.sourceHue,
 	accentHue = defaultPresetHues.leek.sourceHue,
 	spacingScale = 1,
@@ -35,10 +35,11 @@ export const userPreflight = ({
 }: UserPreflightOptions) =>
 	preflight({
 		getCSS: () => {
+			const sat = saturation > 1 ? saturation / 100 : saturation;
 			return `
 @layer preflightBase {
 	:root {
-		${PROPS.USER.SATURATION}: ${saturation / 100};
+		${PROPS.USER.SATURATION}: ${sat};
 		${PROPS.USER.CORNER_SCALE}: ${cornerScale};
 		${PROPS.USER.SPACING_SCALE}: ${spacingScale};
 		${PROPS.USER.BORDER_SCALE}: ${borderScale};

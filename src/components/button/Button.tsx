@@ -32,6 +32,7 @@ export interface ButtonProps
 	color?: PaletteName;
 	emphasis?:
 		| 'primary'
+		| 'main'
 		| 'default'
 		| 'ghost'
 		| 'contrast'
