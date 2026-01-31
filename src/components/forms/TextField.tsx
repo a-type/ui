@@ -69,7 +69,7 @@ export const TextField = function TextField({
 				{...rest}
 				id={id}
 				autoFocus={autoFocus}
-				className={inputClassName}
+				className={clsx('layer-composed:w-full', inputClassName)}
 				ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
 			/>
 		</FieldRoot>
@@ -130,5 +130,5 @@ export function TextAreaField({
 
 export const FieldRoot = withClassName(
 	'div',
-	'flex flex-col items-stretch self-stretch gap-xs',
+	'layer-components:(flex flex-col items-stretch self-stretch gap-xs)',
 );
