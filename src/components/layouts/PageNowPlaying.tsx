@@ -22,7 +22,8 @@ export function PageNowPlaying({
 			<div
 				{...props}
 				className={classNames(
-					'layer-components:(fixed left-0 right-0 z-[var(--z-now-playing)] flex flex-col items-center gap-2)',
+					disablePortal && 'layer-components:z-now-playing',
+					'layer-components:(fixed left-0 right-0 flex flex-col items-center gap-2)',
 					// on mobile, this must be positioned above any nav bar that's present,
 					// or at minimum in the safe area
 					'layer-components:bottom-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
