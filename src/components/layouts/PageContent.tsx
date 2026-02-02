@@ -1,8 +1,10 @@
-'use client';
 import classNames from 'clsx';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { useBoundsCssVars } from '../../hooks/useSize.js';
 import { Box, BoxProps } from '../box/Box.js';
+
+const bodyRef =
+	typeof document !== 'undefined' ? { current: document.body } : undefined;
 
 export function PageContent({
 	children,
@@ -11,7 +13,7 @@ export function PageContent({
 	p,
 	...rest
 }: BoxProps) {
-	const innerRef = useBoundsCssVars<HTMLDivElement>(200, undefined, {
+	const innerRef = useBoundsCssVars<HTMLDivElement>(200, bodyRef, {
 		left: '--content-left',
 		top: '--content-top',
 		width: '--content-width',

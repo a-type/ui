@@ -1,13 +1,24 @@
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
 
-export interface PageRootProps extends HTMLAttributes<HTMLDivElement> {}
+export interface PageRootProps extends HTMLAttributes<HTMLDivElement> {
+	mobileBasis?: '0' | 'auto';
+}
 
-export function PageRoot({ className, children, ...rest }: PageRootProps) {
+export function PageRoot({
+	className,
+	children,
+	mobileBasis = 'auto',
+	...rest
+}: PageRootProps) {
 	return (
 		<div
 			className={clsx(
-				'layer-components:(min-h-100dvh flex-shrink-1 flex-grow-1 flex-basis-0 bg-wash)',
+				// TODO: once I'm sure which one is right, remove the other
+				mobileBasis === '0'
+					? 'layer-components:flex-basis-0'
+					: 'layer-components:flex-basis-auto',
+				'layer-components:(min-h-100dvh flex-shrink-1 flex-grow-1 bg-wash)',
 				'layer-components:(grid grid-cols-[1fr] grid-rows-[1fr_auto] grid-areas-[content]-[nav] items-start justify-center)',
 				'md:layer-responsive:(grid-cols-[1fr_auto_20fr_1fr] grid-areas-[gutter1_nav_content_gutter2] h-auto min-h-auto bg-wash)',
 				'lg:layer-responsive:(grid-cols-[1fr_auto_min(800px,70vw)_1fr])',

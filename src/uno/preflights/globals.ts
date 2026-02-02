@@ -3,9 +3,13 @@ import { preflight } from './_util.js';
 
 export interface GlobalsPreflightConfig {
 	disableZIndexes?: boolean;
+	rootSelector?: string;
 }
 
-export const globalPreflight = (config: GlobalsPreflightConfig) =>
+export const globalPreflight = ({
+	disableZIndexes,
+	rootSelector = '#root, #main, #app, #storybook-root',
+}: GlobalsPreflightConfig) =>
 	preflight({
 		getCSS: () => `
 :root {
@@ -17,7 +21,7 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 	--z-now-playing: 40;
 	--z-nav: 50;
 	${
-		config.disableZIndexes
+		disableZIndexes
 			? ''
 			: `
 	--z-menu: 100;
@@ -48,8 +52,11 @@ export const globalPreflight = (config: GlobalsPreflightConfig) =>
 		overflow: overlay;
 	}
 
-	#main {
+	${rootSelector} {
 		isolation: isolate;
+		display: flex;
+		flex-direction: column;
+		min-height: 100dvh;
 	}
 
 	a {

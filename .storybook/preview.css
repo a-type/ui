@@ -1,10 +1,16 @@
 #storybook-root {
 	height: 100%;
 	isolation: isolate;
+	display: flex;
+	flex-direction: column;
 }
 
 body,
 html {
 	margin: 0;
 	padding: 0;
+}
+
+.sb-main-fullscreen {
+	height: 100dvh;
 }

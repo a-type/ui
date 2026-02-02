@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useEffect, useState } from 'react';
 import { Avatar } from '../avatar/Avatar.js';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Card } from '../card/Card.js';
 import { Input } from '../input/index.js';
@@ -36,7 +37,7 @@ export const Default: Story = {
 		const [content, setContent] = useState(true);
 		const toggleContent = () => setContent((prev) => !prev);
 		return (
-			<PageRoot className="bg-primary-wash">
+			<PageRoot>
 				<PageContent>
 					<div className="text-center">
 						<h1 className="text-3xl font-bold">Hello, World!</h1>
@@ -52,7 +53,11 @@ export const Default: Story = {
 							))}
 						</Card.Grid>
 					)}
-					<PageNowPlaying>Now playing</PageNowPlaying>
+					<PageNowPlaying>
+						<Box surface="white" elevated="lg" full p>
+							Now playing
+						</Box>
+					</PageNowPlaying>
 				</PageContent>
 				<PageNav>
 					<NavBarRoot>
@@ -90,7 +95,7 @@ export const Default: Story = {
 export const ManualWidth: Story = {
 	render: () => {
 		return (
-			<PageRoot className="bg-primary-wash">
+			<PageRoot>
 				<PageContent className="max-w-300px">
 					<div className="text-center">
 						<h1 className="text-3xl font-bold">Hello, World!</h1>
@@ -148,7 +153,11 @@ export const WithoutNav: Story = {
 						))}
 					</Card.Grid>
 				</div>
-				<PageNowPlaying>Now playing</PageNowPlaying>
+				<PageNowPlaying>
+					<Box full elevated="lg" p surface="white">
+						Now playing
+					</Box>
+				</PageNowPlaying>
 			</PageContent>
 		</PageRoot>
 	),
