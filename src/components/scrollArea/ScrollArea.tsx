@@ -14,7 +14,7 @@ export const ScrollAreaRoot = withClassName(
 	'layer-components:(box-border min-h-0 min-w-0 flex flex-col)',
 );
 
-export const ScrollAreaViewport = withClassName(
+export const StyledScrollAreaViewport = withClassName(
 	BaseScrollArea.Viewport,
 	'layer-components:(h-full min-h-0 outline-none)',
 	'layer-components:foc',
@@ -91,16 +91,16 @@ export const ScrollAreaCorner = withClassName(
 	'layer-components:(bg-transparent)',
 );
 
-const ScrollAreaDefault = ({
-	disableFades,
+export interface ScrollAreaViewportProps extends BaseScrollArea.Viewport.Props {
+	direction?: 'vertical' | 'horizontal' | 'both';
+}
+const ScrollAreaViewport = ({
 	direction,
 	...props
-}: ScrollAreaRootProps & {
-	disableFades?: boolean;
-	direction?: 'vertical' | 'horizontal' | 'both';
-}) => (
-	<ScrollAreaRoot {...props}>
-		<ScrollAreaViewport
+}: ScrollAreaViewportProps) => {
+	return (
+		<StyledScrollAreaViewport
+			{...props}
 			style={{
 				overflow:
 					direction === 'vertical'
@@ -110,7 +110,20 @@ const ScrollAreaDefault = ({
 						: 'scroll scroll',
 			}}
 			data-scroll-direction={direction}
-		>
+		/>
+	);
+};
+
+const ScrollAreaDefault = ({
+	disableFades,
+	direction,
+	...props
+}: ScrollAreaRootProps & {
+	disableFades?: boolean;
+	direction?: 'vertical' | 'horizontal' | 'both';
+}) => (
+	<ScrollAreaRoot {...props}>
+		<ScrollAreaViewport direction={direction}>
 			{props.children}
 			{!disableFades && <ScrollAreaViewportFades />}
 		</ScrollAreaViewport>

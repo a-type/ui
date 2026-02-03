@@ -97,16 +97,15 @@ const preview: Preview = {
 		},
 		tweaks: {
 			description: 'Show tweak pane',
-			defaultValue: true,
+			defaultValue: false,
 			type: 'boolean',
 			toolbar: {
 				title: 'Tweaks',
 				icon: 'settings',
 				items: [
-					{ value: true, title: 'Show' },
-					{ value: false, title: 'Hide' },
+					{ value: true, title: 'Show Tweaks' },
+					{ value: false, title: 'Hide Tweaks' },
 				],
-				dynamicTitle: true,
 			},
 		},
 	},
