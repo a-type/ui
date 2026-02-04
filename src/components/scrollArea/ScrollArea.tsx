@@ -93,6 +93,7 @@ export const ScrollAreaCorner = withClassName(
 
 export interface ScrollAreaViewportProps extends BaseScrollArea.Viewport.Props {
 	direction?: 'vertical' | 'horizontal' | 'both';
+	ref?: Ref<HTMLDivElement>;
 }
 const ScrollAreaViewport = ({
 	direction,
