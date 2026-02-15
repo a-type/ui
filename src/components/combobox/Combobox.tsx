@@ -28,7 +28,7 @@ import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export const comboboxPopupClassName = clsx(
 	popupClassName,
-	'layer-components:w-[--anchor-width]',
+	'layer-components:(w-[--anchor-width] flex flex-col)',
 );
 
 export const comboboxBackdropClassName = clsx(

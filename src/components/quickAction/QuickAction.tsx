@@ -50,7 +50,6 @@ const QuickActionTrigger = ({
 	const layoutId = useContext(QuickActionIdContext);
 	const sizeMonitor = useContext(TriggerSizeContext);
 	const measureRef = useSize((size) => {
-		console.log('measure size', size);
 		sizeMonitor.set(size);
 	});
 	const finalRef = useMergedRef(ref, measureRef);
