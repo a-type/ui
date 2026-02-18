@@ -10,23 +10,37 @@ async function fetchManifest(
 		signal: controller?.signal,
 	});
 	if (!response.ok) {
-		console.error(
+		console.debug(
 			`Failed to fetch web manifest: ${response.status} ${response.statusText}`,
 		);
 		return {};
 	}
 
-	const manifest = await response.json();
-	return manifest;
+	try {
+		const manifest = await response.json();
+		return manifest;
+	} catch (error) {
+		console.debug(`Error parsing web manifest JSON: ${error}`);
+		return {};
+	}
 }
 
 function abortableManifestSync(manifestPath: string) {
 	const controller = new AbortController();
-	fetchManifest(manifestPath, controller).then((manifest) => {
-		if (manifest) {
-			manifestState.value = manifest;
-		}
-	});
+	fetchManifest(manifestPath, controller)
+		.then((manifest) => {
+			if (manifest) {
+				manifestState.value = manifest;
+			}
+		})
+		.catch((error) => {
+			if (error.name === 'AbortError') {
+				return;
+			}
+			console.debug(
+				`Error fetching web manifest in useWebManifest (${manifestPath}): ${error}`,
+			);
+		});
 	return controller;
 }
 
