@@ -18,7 +18,7 @@ export interface ProviderProps {
 	disableViewportOffset?: boolean;
 	virtualKeyboardBehavior?: 'overlay' | 'displace';
 	disableTitleBarColor?: boolean;
-	manifestPath?: string;
+	manifestPath?: string | false;
 	tweaks?: boolean;
 }
 
@@ -46,7 +46,9 @@ export function Provider({
 		<>
 			<IconSpritesheet />
 			<Toaster />
-			<PwaInstall manifestPath={manifestPath} />
+			{manifestPath === false ? null : (
+				<PwaInstall manifestPath={manifestPath} />
+			)}
 			{tweaks && <TweakPane />}
 		</>
 	);
