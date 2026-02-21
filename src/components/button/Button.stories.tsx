@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { paletteNames } from '../../uno/index.js';
+import { Avatar } from '../avatar/Avatar.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
 import { Button } from './Button.js';
@@ -44,6 +45,9 @@ export const Default: Story = {
 						{args.children}
 					</Button>
 					<Button {...args} size="small" />
+					<Button {...args} size="wrapper">
+						<Button.Icon render={<Avatar name="A" />} />
+					</Button>
 					<Button {...args}>
 						<Icon name="placeholder" />
 					</Button>

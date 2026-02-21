@@ -28,7 +28,7 @@ export function getButtonClassName({
 	return clsx(
 		color && `palette-${color}`,
 		'layer-components:(select-none font-bold leading-1 leading-none font-inherit)',
-		'layer-components:(border-thin border-solid border-color)',
+		'layer-components:(border-solid border-color)',
 		'layer-components:(cursor-pointer)',
 		'layer-components:(flex flex-row items-center gap-sm)',
 		'layer-components:(relative overflow-visible whitespace-nowrap)',
@@ -53,9 +53,11 @@ export function getButtonClassName({
 		},
 
 		{
-			'layer-components:(rounded-lg px-4 py-2 text-md)': size === 'default',
-			'layer-components:(min-h-touch rounded-md px-4 py-0.25 text-sm)':
+			'layer-components:(border-thin rounded-lg px-4 py-2 text-md)':
+				size === 'default',
+			'layer-components:(min-h-touch border-thin rounded-md px-4 py-0.25 text-sm)':
 				size === 'small',
+			'layer-components:(border-0 rounded-lg p-0)': size === 'wrapper',
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-2.35 text-sm)':
 				size === 'default' && !disableIconMode,
 			'layer-components:[&[data-has-icon=true][data-has-label=false]]:min-h-touch-small layer-components:[&[data-has-icon=true][data-has-label=false]]:(rounded-lg p-sm text-xs -m-y-2xs)':

@@ -38,7 +38,7 @@ export interface ButtonProps
 		| 'contrast'
 		| 'light'
 		| 'unstyled';
-	size?: 'default' | 'small';
+	size?: 'default' | 'small' | 'wrapper';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
 	align?: 'start' | 'stretch' | 'end';

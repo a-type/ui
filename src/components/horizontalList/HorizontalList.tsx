@@ -106,7 +106,6 @@ export function HorizontalList({
 				.finished.then(() => {
 					requestAnimationFrame(() => {
 						const canOpen = container.scrollWidth > container.offsetWidth;
-						console.log('can open', canOpen);
 						emitCanOpenChange(canOpen);
 					});
 				});
