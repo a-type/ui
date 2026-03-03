@@ -14,7 +14,6 @@ export function useStayScrolledToBottom(enabled = true) {
 		const observer = new MutationObserver(() => {
 			if (!ref.current) return;
 			if (isScrolledToBottom) {
-				console.log('scrolling to bottom');
 				ref.current.scrollTop = ref.current.scrollHeight;
 			}
 		});
@@ -29,13 +28,6 @@ export function useStayScrolledToBottom(enabled = true) {
 		const isScrolledToBottom =
 			ref.current.scrollTop + ref.current.clientHeight >=
 			ref.current.scrollHeight - 10;
-		console.log(
-			'onScroll',
-			ref.current.scrollTop,
-			ref.current.clientHeight,
-			ref.current.scrollHeight,
-			isScrolledToBottom,
-		);
 		setIsScrolledToBottom(isScrolledToBottom);
 	}, []);
 

@@ -97,4 +97,5 @@ export const Tabs = Object.assign(TabsRoot, {
 	Trigger: TabsTrigger,
 	Content: TabsContent,
 	Indicator: TabsIndicator,
+	Unstyled: TabsPrimitive,
 });
