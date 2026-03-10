@@ -27,7 +27,7 @@ export function PageNowPlaying({
 					// on mobile, this must be positioned above any nav bar that's present,
 					// or at minimum in the safe area
 					'layer-components:bottom-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
-					'layer-components:md:(bottom-md left-[var(--content-left,0)] w-[var(--content-width,100%)] items-center p-0 opacity-[var(--content-ready,0)] transition-opacity)',
+					'layer-components:md:(bottom-md left-[var(--content-left,0)] w-[var(--content-width,100%)] items-center p-0 opacity-[var(--content-ready,0)] transition-opacity,bottom)',
 					'layer-variants:p-2',
 					keepAboveKeyboard &&
 						virtualKeyboardBehavior === 'overlay' &&
