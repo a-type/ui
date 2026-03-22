@@ -529,5 +529,7 @@ export const Dialog = Object.assign(DialogRoot, {
 	SelectTrigger: DialogSelectTrigger,
 	SelectList: DialogSelectList,
 	SelectItem: DialogSelectItem,
-	Unstyled: BaseDialog,
+	Unstyled: BaseDialog as DialogParts,
 });
+
+export type DialogParts = typeof BaseDialog;
