@@ -18,6 +18,9 @@ const preview: Preview = {
 				date: /Date$/i,
 			},
 		},
+		docs: {
+			codePanel: true,
+		},
 	},
 	globalTypes: {
 		theme: {
