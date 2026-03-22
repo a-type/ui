@@ -212,7 +212,9 @@ export const Content = function Content({
 						outerClassName || className,
 					)}
 				>
-					{!disableDefaultClose && <DialogDefaultClose />}
+					{!disableDefaultClose && (
+						<DialogDefaultClose showOnMobile={disableSheet} />
+					)}
 					{!disableSheet && <DialogSwipeHandle />}
 					<ScrollArea
 						direction="vertical"
@@ -378,14 +380,17 @@ const DialogCloseContext = createContext<() => void>(() => {});
 export const DialogDefaultClose = function DialogDefaultClose({
 	ref,
 	className,
+	showOnMobile,
 	...props
 }: DialogCloseProps & {
 	ref?: React.Ref<HTMLButtonElement>;
+	showOnMobile?: boolean;
 }) {
 	return (
 		<DialogClose
 			className={clsx(
-				'absolute right-sm top-sm z-101 hidden sm:flex',
+				'absolute right-sm top-sm z-101',
+				showOnMobile ? 'flex' : 'hidden sm:flex',
 				className,
 			)}
 			aria-label="Close dialog"
