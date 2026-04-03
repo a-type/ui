@@ -48,6 +48,7 @@ export interface ButtonProps
 	disableIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
+	disableDefaultLoadingIndicator?: boolean;
 }
 
 export function ButtonRoot({
@@ -65,6 +66,7 @@ export function ButtonRoot({
 	disabled,
 	disableIconMode,
 	disableDropdownTriggerIcon,
+	disableDefaultLoadingIndicator,
 	ref,
 	...props
 }: ButtonProps) {
@@ -125,7 +127,7 @@ export function ButtonRoot({
 		<IconLoadingProvider value={isLoading}>
 			<BaseButton {...buttonProps}>
 				<AnimatePresence>
-					{isLoading && (
+					{isLoading && !disableDefaultLoadingIndicator && (
 						<motion.div
 							key="spinner"
 							initial={{ width: 0, marginLeft: '-0.5rem' }}
