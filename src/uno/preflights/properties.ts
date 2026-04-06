@@ -8,10 +8,12 @@ export const propertiesPreflight = preflight({
 		return `
 @property ${PROPS.LOCALS.CORNER_SCALE} {
 	syntax: "*";
+	initial-value: 1;
 	inherits: false;
 }
 @property ${PROPS.UTILS.SHADOW_Y_MULT} {
 	syntax: "*";
+	initial-value: 1;
 	inherits: false;
 }
 `;

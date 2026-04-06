@@ -167,6 +167,6 @@ function propertyDefinitions(propGroup: {
 }) {
 	return `@property ${propGroup.FINAL} { syntax: "*"; inherits: false; }
 @property ${propGroup.INHERITED} { syntax: "*"; inherits: true; }
-@property ${propGroup.OPACITY} { syntax: "<percentage>"; inherits: false; }
+@property ${propGroup.OPACITY} { syntax: "<percentage>"; initial-value: 100%; inherits: false; }
 `;
 }
