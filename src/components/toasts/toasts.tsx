@@ -210,6 +210,7 @@ function baseToast(
 	maybeOptions?: ToastOptions,
 ) {
 	const finalOptions = toOptions(messageOrOptions, maybeOptions);
+	console.log('finalOptions', finalOptions);
 	return manager.add(finalOptions);
 }
 

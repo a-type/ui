@@ -122,6 +122,19 @@ export const Default: Story = {
 				>
 					Show Rich Toast
 				</Button>
+				<Button
+					onClick={() => {
+						toast({
+							id: 'unique-toast-id',
+							title: 'Unique Toast',
+							description:
+								"This toast has a unique ID. If you click the button multiple times, it won't create multiple toasts, but will update the existing one.",
+							timeout: 20_000,
+						});
+					}}
+				>
+					Show Unique Toast
+				</Button>
 			</Box>
 		);
 	},
