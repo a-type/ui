@@ -4,7 +4,11 @@ import { ToggleGroup } from './toggleGroup.js';
 const meta = {
 	title: 'Components/ToggleGroup',
 	component: ToggleGroup,
-	argTypes: {},
+	argTypes: {
+		multiple: {
+			type: 'boolean',
+		},
+	},
 	parameters: {
 		controls: { expanded: true },
 	},

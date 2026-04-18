@@ -118,7 +118,8 @@ export function ComboboxComposedInput({
 					className,
 				)}
 			>
-				<Input.Input
+				<BaseCombobox.Combobox.Input
+					render={<Input.Input />}
 					autoComplete="off"
 					ref={ref}
 					className={clsx(
@@ -137,7 +138,12 @@ export function ComboboxComposedInput({
 	return (
 		<Input.Border ref={ref} className={className}>
 			{icon}
-			<Input.Input autoComplete="off" minLength={3} {...props} />
+			<BaseCombobox.Combobox.Input
+				render={<Input.Input />}
+				autoComplete="off"
+				minLength={3}
+				{...props}
+			/>
 			{clearAndCaret}
 			{children}
 		</Input.Border>
