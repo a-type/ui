@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@a-type/utils':
-        specifier: ^1.1.4
-        version: 1.1.4
+        specifier: ^1.1.9
+        version: 1.1.9
       '@base-ui/react':
         specifier: ^1.4.0
         version: 1.4.0(@date-fns/tz@1.4.1)(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -198,8 +198,8 @@ importers:
 
 packages:
 
-  '@a-type/utils@1.1.4':
-    resolution: {integrity: sha512-RG82RwQs2or6iX1i/EcsnsXF8fq6G/2/r+I8x0gCFlDn6h+0P6EbZxMkTVBc8MTtN31m0mni3zhUd/1M4byAhg==}
+  '@a-type/utils@1.1.9':
+    resolution: {integrity: sha512-uVk5+Q0jKFCaGPrHybp7LNnfrp4BKurJNYEzoOAfCsDuri1vewmbXKg35ClsTQX2lxU3xPNm/2l/0mwP8NdpGg==}
 
   '@adobe/css-tools@4.4.1':
     resolution: {integrity: sha512-12WGKBQzjUAI4ayyF4IAtfw2QR/IDoqk6jTddXDhtYTJF9ASmoE1zst7cVtP0aL/F1jUJL5r+JxKXKEgHNbEUQ==}
@@ -3556,7 +3556,7 @@ packages:
 
 snapshots:
 
-  '@a-type/utils@1.1.4': {}
+  '@a-type/utils@1.1.9': {}
 
   '@adobe/css-tools@4.4.1': {}
 

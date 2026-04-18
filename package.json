@@ -59,7 +59,7 @@
 		"unocss": "^66"
 	},
 	"dependencies": {
-		"@a-type/utils": "^1.1.4",
+		"@a-type/utils": "^1.1.9",
 		"@base-ui/react": "^1.4.0",
 		"@emotion/is-prop-valid": "^1.4.0",
 		"@unocss/preset-mini": "66.5.4",
