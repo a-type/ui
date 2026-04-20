@@ -59,6 +59,7 @@ type OperationTree =
 	| AddOperation
 	| SubtractOperation
 	| MultiplyOperation
+	| DivideOperation
 	| LiteralOperation
 	| ClampOperation
 	| CastOperation
@@ -74,6 +75,10 @@ interface SubtractOperation {
 interface MultiplyOperation {
 	type: 'multiply';
 	values: ColorEquation[];
+}
+interface DivideOperation {
+	type: 'divide';
+	values: [ColorEquation, ColorEquation];
 }
 interface LiteralOperation {
 	type: 'literal';
@@ -111,6 +116,12 @@ const colorEquationTools = {
 	multiply: (...values: ColorEquation[]): MultiplyOperation => {
 		return { type: 'multiply', values };
 	},
+	divide: (
+		numerator: ColorEquation,
+		denominator: ColorEquation,
+	): DivideOperation => {
+		return { type: 'divide', values: [numerator, denominator] };
+	},
 	clamp: (
 		equation: ColorEquation,
 		min: ColorEquation,
@@ -146,6 +157,10 @@ export function printEquation(
 			return `(${equation.values
 				.map((v) => printEquation(v, context))
 				.join(' * ')})`;
+		case 'divide':
+			return `(${equation.values
+				.map((v) => printEquation(v, context))
+				.join(' / ')})`;
 		case 'clamp':
 			if (equation.values.length !== 3) {
 				throw new Error(
@@ -157,7 +172,7 @@ export function printEquation(
 				.join(', ')})`;
 		case 'cast':
 			return `(${printEquation(equation.value, context)} * ${
-				equation.unit === '%' ? '1' : '1'
+				equation.unit === '%' ? '100%' : '1'
 			})`;
 		case 'function':
 			return `${equation.name}(${equation.args
@@ -244,6 +259,31 @@ function multiply(
 	return { type: 'numeric', value: a.value * b.value, unit };
 }
 
+function divide(a: ComputationResult, b: ComputationResult): ComputationResult {
+	if (b.type === 'numeric' && b.value === 0) {
+		throw new Error('Division by zero');
+	}
+	if (a.type === 'numeric' && a.value === 0) {
+		return { type: 'numeric', value: 0, unit: a.unit };
+	}
+	if (b.type === 'numeric' && b.value === 1) {
+		return a;
+	}
+	if (a.type === 'calc' || b.type === 'calc' || a.unit !== b.unit) {
+		return {
+			type: 'calc',
+			value: `calc(${printComputationResult(a)} / ${printComputationResult(
+				b,
+			)})`,
+		};
+	}
+	if (a.unit === '%' && b.unit === '%') {
+		return { type: 'numeric', value: a.value / b.value, unit: '' };
+	}
+	const unit = a.unit === '%' && b.unit === '' ? '%' : '';
+	return { type: 'numeric', value: a.value / b.value, unit };
+}
+
 function clamp(
 	value: ComputationResult,
 	min: ComputationResult,
@@ -311,6 +351,8 @@ export function printComputationResult(result: ComputationResult): string {
 function evaluateLiteral(literal: string): ComputationResult {
 	if (literal.startsWith('var(')) {
 		return { type: 'calc', value: literal };
+	} else if (literal === 'PI') {
+		return { type: 'numeric', value: Math.PI, unit: '' };
 	} else if (literal.endsWith('%')) {
 		const asNumber = Number(literal.slice(0, -1));
 		if (isNaN(asNumber)) {
@@ -336,11 +378,11 @@ function computeEquation(
 		case 'add':
 			return equation.values.reduce<ComputationResult>(
 				(sum, v) => add(sum, computeEquation(v, context)),
-				{ type: 'numeric', value: 0, unit: '%' },
+				{ type: 'numeric', value: 0, unit: '' },
 			);
 		case 'subtract':
 			if (equation.values.length === 0) {
-				return { type: 'numeric', value: 0, unit: '%' };
+				return { type: 'numeric', value: 0, unit: '' };
 			}
 			const first = computeEquation(equation.values[0], context);
 			return equation.values
@@ -354,6 +396,13 @@ function computeEquation(
 				(product, v) => multiply(product, computeEquation(v, context)),
 				{ type: 'numeric', value: 1, unit: '' },
 			);
+		case 'divide':
+			if (equation.values.length !== 2) {
+				throw new Error('Divide operation requires exactly 2 values');
+			}
+			const numerator = computeEquation(equation.values[0], context);
+			const denominator = computeEquation(equation.values[1], context);
+			return divide(numerator, denominator);
 		case 'clamp':
 			if (equation.values.length !== 3) {
 				throw new Error(

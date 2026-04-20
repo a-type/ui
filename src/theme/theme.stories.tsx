@@ -35,10 +35,11 @@ export const Range: Story<{
 		return (
 			<div>
 				<div className="flex p-md bg-white">
-					{lightRange.map(({ css: color, name }, i) => (
+					{lightRange.map(({ equation, css: color, name }, i) => (
 						<div
 							key={i}
 							data-color={color}
+							data-dynamic={equation.printDynamic()}
 							data-name={name}
 							className="h-16 flex grow items-center justify-center text-xxs"
 							style={{ backgroundColor: color }}

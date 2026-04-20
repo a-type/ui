@@ -84,21 +84,34 @@ function presetLightnessRange(
 	highpoint: number,
 	lowpoint: number,
 ) {
-	return function (step: number, rangeSize: number) {
+	return function ($: ColorEquationTools, step: number, rangeSize: number) {
 		const halfRange = rangeSize / 2;
 		const normalizedStep = step - halfRange;
 		const greaterThanHalf = normalizedStep > 0;
 		const upperRange = highpoint - midpoint;
 		const lowerRange = midpoint - lowpoint;
-		return (
-			midpoint +
-			(normalizedStep / halfRange) * (greaterThanHalf ? upperRange : lowerRange)
+		return $.add(
+			$.literal(midpoint),
+			$.multiply(
+				$.literal(normalizedStep / halfRange),
+				$.literal(greaterThanHalf ? upperRange : lowerRange),
+			),
 		);
 	};
 }
 // chroma: reduced at either end of the range
-function presetChromaRange(step: number, rangeSize: number) {
-	return 0.1 + Math.sin((step / rangeSize) * Math.PI) * 0.9;
+function presetChromaRange(
+	$: ColorEquationTools,
+	step: number,
+	rangeSize: number,
+) {
+	return $.add(
+		$.literal(0.1),
+		$.multiply(
+			$.fn('sin', $.multiply($.literal(step / rangeSize), $.literal('PI'))),
+			$.literal(0.9),
+		),
+	);
 }
 
 export function createColorLightModeRange(
@@ -108,10 +121,8 @@ export function createColorLightModeRange(
 	return createColorRange({
 		...config,
 		size: defaultRangeItemNames.length,
-		lightness: ($, { step, rangeSize }) =>
-			$.literal(lightness(step, rangeSize)),
-		chroma: ($, { step, rangeSize }) =>
-			$.literal(presetChromaRange(step, rangeSize)),
+		lightness: ($, { step, rangeSize }) => lightness($, step, rangeSize),
+		chroma: ($, { step, rangeSize }) => presetChromaRange($, step, rangeSize),
 		name: (step) => defaultRangeItemNames[step] ?? `step-${step}`,
 	});
 }
@@ -123,10 +134,8 @@ export function createColorDarkModeRange(
 	return createColorRange({
 		...config,
 		size: defaultRangeItemNames.length,
-		lightness: ($, { step, rangeSize }) =>
-			$.literal(lightness(step, rangeSize)),
-		chroma: ($, { step, rangeSize }) =>
-			$.literal(presetChromaRange(step, rangeSize)),
+		lightness: ($, { step, rangeSize }) => lightness($, step, rangeSize),
+		chroma: ($, { step, rangeSize }) => presetChromaRange($, step, rangeSize),
 		name: (step) => defaultRangeItemNames[step] ?? `step-${step}`,
 	});
 }
