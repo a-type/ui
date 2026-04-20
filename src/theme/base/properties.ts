@@ -1,6 +1,6 @@
 export const PROP_PREFIX = '--🎨';
 
-function createProp(name: string, fallback?: string) {
+export function createProp(name: string, fallback?: string) {
 	return {
 		NAME: `${PROP_PREFIX}-${name}`,
 		FALLBACK: fallback,
@@ -9,6 +9,13 @@ function createProp(name: string, fallback?: string) {
 
 function isProp(value: any): value is ReturnType<typeof createProp> {
 	return typeof value === 'object' && value !== null && 'NAME' in value;
+}
+
+export function prefixProp(name: string, prefix: string) {
+	const cleanName = name.startsWith(PROP_PREFIX)
+		? name.slice(PROP_PREFIX.length)
+		: name;
+	return `${PROP_PREFIX}-${prefix}-${cleanName}`;
 }
 
 export const PROPS = {
@@ -26,6 +33,15 @@ export const PROPS = {
 		LIGHTNESS_SPREAD: createProp('🏠-lit-spread', '100%'),
 		SATURATION: createProp('🏠-sat', '1'),
 	},
+	COLOR: (name: string) => ({
+		WASH: createProp(`${name}-wash`),
+		LIGHTER: createProp(`${name}-lighter`),
+		LIGHT: createProp(`${name}-light`),
+		DEFAULT: createProp(`${name}-DEFAULT`),
+		DARK: createProp(`${name}-dark`),
+		DARKER: createProp(`${name}-darker`),
+		INK: createProp(`${name}-ink`),
+	}),
 };
 
 /**

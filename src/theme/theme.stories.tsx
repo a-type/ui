@@ -1,8 +1,6 @@
 import type { Meta, StoryObj as Story } from '@storybook/react';
-import {
-	createColorDarkModeRange,
-	createColorLightModeRange,
-} from './base/ranges.js';
+import { PROPS } from './base/properties.js';
+import { generateColorPreflight } from './preflights/generateColorRanges.js';
 
 const meta = {
 	title: 'theme',
@@ -24,42 +22,40 @@ export const Range: Story<{
 		sourceHue: 91.8,
 	},
 	render(args) {
-		const config = {
-			sourceHue: args.sourceHue,
-			context: {
-				appliedProperties: {},
-			},
-		};
-		const lightRange = createColorLightModeRange(config);
-		const darkRange = createColorDarkModeRange(config);
+		const rangeProps = PROPS.COLOR('primary');
+
+		const rangeSteps = Object.entries(rangeProps).map(([name, color]) => (
+			<div
+				key={name}
+				className="h-16 flex grow items-center justify-center text-xxs"
+				style={{ backgroundColor: `var(${color.NAME})` }}
+			>
+				{name}
+			</div>
+		));
+
 		return (
 			<div>
-				<div className="flex p-md bg-white">
-					{lightRange.map(({ equation, css: color, name }, i) => (
-						<div
-							key={i}
-							data-color={color}
-							data-dynamic={equation.printDynamic()}
-							data-name={name}
-							className="h-16 flex grow items-center justify-center text-xxs"
-							style={{ backgroundColor: color }}
-						>
-							{name}
-						</div>
-					))}
+				<style>
+					{generateColorPreflight({
+						namedHues: { primary: args.sourceHue },
+					})}
+				</style>
+				<div
+					className="mode-light flex p-md"
+					style={{
+						backgroundColor: `var(${PROPS.COLOR('neutral').WASH.NAME})`,
+					}}
+				>
+					{rangeSteps}
 				</div>
-				<div className="flex p-md bg-black">
-					{darkRange.map(({ css: color, name }, i) => (
-						<div
-							key={i}
-							data-color={color}
-							data-name={name}
-							className="h-16 flex grow items-center justify-center text-xxs"
-							style={{ backgroundColor: color }}
-						>
-							{name}
-						</div>
-					))}
+				<div
+					className="mode-dark flex p-md"
+					style={{
+						backgroundColor: `var(${PROPS.COLOR('neutral').WASH.NAME})`,
+					}}
+				>
+					{rangeSteps}
 				</div>
 			</div>
 		);

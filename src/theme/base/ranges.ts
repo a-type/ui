@@ -24,7 +24,7 @@ export interface ColorRangeConfig {
 	size?: number;
 	name: (step: number) => string;
 	/** Pre-compute steps based on defined properties. */
-	context: ColorEvaluationContext;
+	context?: ColorEvaluationContext;
 }
 
 export interface ColorRangeItem {

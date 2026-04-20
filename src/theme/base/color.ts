@@ -43,7 +43,7 @@ export interface OklchColorEquation {
 	 * Uses the equation and provided context to compute a static
 	 * OKLCH color string with calculations and references resolved.
 	 */
-	printComputed(context: ColorEvaluationContext): string;
+	printComputed(context?: ColorEvaluationContext): string;
 	/**
 	 * Returns the raw computed L, C, H values as numbers with units.
 	 */
@@ -500,11 +500,11 @@ export function oklchBuilder(
 			const h = printEquation(equations.h, dynamicContext);
 			return `oklch(calc(${l}) calc(${c}) calc(${h}))`;
 		},
-		printComputed(context: ColorEvaluationContext): string {
+		printComputed(context?: ColorEvaluationContext): string {
 			const { l, c, h } = compute({
 				appliedProperties: {
 					...selfReferencingPropertyMap,
-					...context.appliedProperties,
+					...context?.appliedProperties,
 				},
 			});
 			return `oklch(${printComputationResult(l)} ${printComputationResult(
