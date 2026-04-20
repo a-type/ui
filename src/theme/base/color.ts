@@ -333,8 +333,57 @@ function cast(value: ComputationResult, unit: '%' | ''): ComputationResult {
 	}
 }
 
+function numericToNumber(value: {
+	type: 'numeric';
+	value: number;
+	unit: string;
+}): number {
+	if (value.unit === '%') {
+		return value.value / 100;
+	}
+	return value.value;
+}
 function fnCall(name: string, ...args: ComputationResult[]): ComputationResult {
-	// TODO: inline some functions if all args are numerics
+	// inline some functions if all args are numerics
+	if (args.every((arg) => arg.type === 'numeric')) {
+		const argsInOrderAsNumbers = args.map((arg) =>
+			numericToNumber(arg as Extract<ComputationResult, { type: 'numeric' }>),
+		);
+		switch (name) {
+			case 'sin':
+				return {
+					type: 'numeric',
+					value: Math.sin(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
+			case 'cos':
+				return {
+					type: 'numeric',
+					value: Math.cos(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
+			case 'tan':
+				return {
+					type: 'numeric',
+					value: Math.tan(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
+			case 'min':
+				return {
+					type: 'numeric',
+					value: Math.min(...argsInOrderAsNumbers),
+					unit: '',
+				};
+			case 'max':
+				return {
+					type: 'numeric',
+					value: Math.max(...argsInOrderAsNumbers),
+					unit: '',
+				};
+			default:
+				break;
+		}
+	}
 	return {
 		type: 'calc',
 		value: `${name}(${args.map(printComputationResult).join(', ')})`,
