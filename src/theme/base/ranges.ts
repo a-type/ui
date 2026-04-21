@@ -104,9 +104,10 @@ function presetChromaRange(
 	$: ColorEquationTools,
 	step: number,
 	rangeSize: number,
+	lift = 0,
 ) {
 	return $.add(
-		$.literal(0.1),
+		$.literal(0.1 + lift),
 		$.multiply(
 			$.fn('sin', $.multiply($.literal(step / rangeSize), $.literal('PI'))),
 			$.literal(0.9),
@@ -130,12 +131,13 @@ export function createColorLightModeRange(
 export function createColorDarkModeRange(
 	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'>,
 ) {
-	const lightness = presetLightnessRange(0.8, 0.2, 1);
+	const lightness = presetLightnessRange(0.8, 0.25, 1);
 	return createColorRange({
 		...config,
 		size: defaultRangeItemNames.length,
 		lightness: ($, { step, rangeSize }) => lightness($, step, rangeSize),
-		chroma: ($, { step, rangeSize }) => presetChromaRange($, step, rangeSize),
+		chroma: ($, { step, rangeSize }) =>
+			presetChromaRange($, step, rangeSize, 0.05),
 		name: (step) => defaultRangeItemNames[step] ?? `step-${step}`,
 	});
 }

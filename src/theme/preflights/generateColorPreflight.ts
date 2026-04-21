@@ -1,5 +1,9 @@
-import { ColorEvaluationContext } from '../base/color.js';
-import { createProp, prefixProp } from '../base/properties.js';
+import {
+	ColorEquationTools,
+	ColorEvaluationContext,
+	oklchBuilder,
+} from '../base/color.js';
+import { createProp, prefixProp, PROPS } from '../base/properties.js';
 import {
 	ColorRangeItem,
 	createColorDarkModeRange,
@@ -30,6 +34,8 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 		),
 	);
 
+	const grays = grayRange(config.context);
+
 	return `/* Auto-generated color preflight - do not edit directly */
 
 ${/* Raw light/dark ranges */ ''}
@@ -38,10 +44,10 @@ ${/* Raw light/dark ranges */ ''}
 		.map((item) => prefixKeys(item, '☀️'))
 		.map(formatPropertiesToCss)
 		.join('\n')}
-		${darkContent
-			.map((item) => prefixKeys(item, '🌑'))
-			.map(formatPropertiesToCss)
-			.join('\n')}
+	${darkContent
+		.map((item) => prefixKeys(item, '🌑'))
+		.map(formatPropertiesToCss)
+		.join('\n')}
 
 	@media (prefers-color-scheme: light)${
 		defaultMode === 'light' ? noPreference : ''
@@ -50,6 +56,7 @@ ${/* Raw light/dark ranges */ ''}
 			.map((values) => mapToModeRange(values, '☀️'))
 			.map(formatPropertiesToCss)
 			.join('\n')}
+		${formatPropertiesToCss(grays)}
 	}
 
 	@media (prefers-color-scheme: dark)${
@@ -59,6 +66,7 @@ ${/* Raw light/dark ranges */ ''}
 			.map((values) => mapToModeRange(values, '🌑'))
 			.map(formatPropertiesToCss)
 			.join('\n')}
+		${formatPropertiesToCss(grays)}
 	}
 }
 
@@ -67,16 +75,18 @@ ${/* Raw light/dark ranges */ ''}
 		.map((values) => mapToModeRange(values, '🌑'))
 		.map(formatPropertiesToCss)
 		.join('\n')}
+	${formatPropertiesToCss(grays)}
 }
 .mode-light {
 	${lightContent
 		.map((values) => mapToModeRange(values, '☀️'))
 		.map(formatPropertiesToCss)
 		.join('\n')}
+	${formatPropertiesToCss(grays)}
 }
 
 ${/* Custom properties for each color step */ ''}
-${[...lightContent, ...darkContent]
+${[...lightContent, ...darkContent, grays]
 	.flatMap((item) => Object.keys(item))
 	.flatMap((name) => [
 		colorPropertyDefinition({ name }),
@@ -138,4 +148,76 @@ function colorPropertyDefinition({
 	inherits: ${inherits};
 	initial-value: ${initial};
 }`;
+}
+
+function grayRange(context?: ColorEvaluationContext) {
+	// TODO: standard
+	const sourceColorFamily = PROPS.COLOR('primary');
+
+	// converts to [-1...1] depending on where we sit in the light/dark
+	// spectrum [0, 0.4]
+	function lightness($: ColorEquationTools) {
+		return $.add(
+			$.literal('l'),
+			$.multiply(
+				$.divide(
+					$.subtract($.literal('l'), $.literal('0.2')),
+					$.literal('0.2'),
+				),
+				$.literal('-0.001'),
+			),
+		);
+	}
+	function chroma($: ColorEquationTools) {
+		return $.multiply(
+			$.literal(PROPS.USER.SATURATION.VAR),
+			$.literal(PROPS.LOCAL.SATURATION.VAR),
+			$.literal('0.02'),
+		);
+	}
+
+	return {
+		[PROPS.COLOR('neutral').WASH.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.WASH.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').LIGHTER.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.LIGHTER.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').LIGHT.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.LIGHT.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').DEFAULT.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.DEFAULT.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').DARK.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.DARK.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').DARKER.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.DARKER.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+		[PROPS.COLOR('neutral').INK.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.INK.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
+	};
 }

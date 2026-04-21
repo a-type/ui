@@ -1,9 +1,11 @@
 export const PROP_PREFIX = '--🎨';
 
 export function createProp(name: string, fallback?: string) {
+	const resolvedName = `${PROP_PREFIX}-${name}`;
 	return {
-		NAME: `${PROP_PREFIX}-${name}`,
+		NAME: resolvedName,
 		FALLBACK: fallback,
+		VAR: `var(${resolvedName}${fallback ? `, ${fallback}` : ''})`,
 	};
 }
 

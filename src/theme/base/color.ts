@@ -316,7 +316,7 @@ function cast(value: ComputationResult, unit: '%' | ''): ComputationResult {
 		return {
 			type: 'calc',
 			value: `calc(${printComputationResult(value)} * ${
-				unit === '%' ? '1' : '1'
+				unit === '%' ? '100%' : '1'
 			})`,
 		};
 	}
@@ -400,6 +400,9 @@ export function printComputationResult(result: ComputationResult): string {
 function evaluateLiteral(literal: string): ComputationResult {
 	if (literal.startsWith('var(')) {
 		return { type: 'calc', value: literal };
+	} else if (literal.startsWith('--')) {
+		// TODO: this is a defensive path, and it's used... could it be removed?
+		return { type: 'calc', value: `var(${literal})` };
 	} else if (literal === 'PI') {
 		return { type: 'numeric', value: Math.PI, unit: '' };
 	} else if (literal.endsWith('%')) {
@@ -411,7 +414,7 @@ function evaluateLiteral(literal: string): ComputationResult {
 	} else {
 		const asNumber = Number(literal);
 		if (isNaN(asNumber)) {
-			throw new Error(`Literal value did not evaluate to a number: ${literal}`);
+			return { type: 'calc', value: literal };
 		}
 		return { type: 'numeric', value: asNumber, unit: '' };
 	}
@@ -475,6 +478,7 @@ function computeEquation(
 
 export function oklchBuilder(
 	impl: (tools: ColorEquationTools) => {
+		from?: ColorEquation;
 		l: ColorEquation;
 		c: ColorEquation;
 		h: ColorEquation;
@@ -486,7 +490,10 @@ export function oklchBuilder(
 		const l = computeEquation(equations.l, context);
 		const c = computeEquation(equations.c, context);
 		const h = computeEquation(equations.h, context);
-		return { l, c, h };
+		const from = equations.from
+			? computeEquation(equations.from, context)
+			: undefined;
+		return { l, c, h, from };
 	}
 
 	return {
@@ -498,16 +505,23 @@ export function oklchBuilder(
 			const l = printEquation(equations.l, dynamicContext);
 			const c = printEquation(equations.c, dynamicContext);
 			const h = printEquation(equations.h, dynamicContext);
-			return `oklch(calc(${l}) calc(${c}) calc(${h}))`;
+			const from = equations.from
+				? printEquation(equations.from, dynamicContext)
+				: undefined;
+			return `oklch(${
+				from ? `from ${from} ` : ''
+			}calc(${l}) calc(${c}) calc(${h}))`;
 		},
 		printComputed(context?: ColorEvaluationContext): string {
-			const { l, c, h } = compute({
+			const { l, c, h, from } = compute({
 				appliedProperties: {
 					...selfReferencingPropertyMap,
 					...context?.appliedProperties,
 				},
 			});
-			return `oklch(${printComputationResult(l)} ${printComputationResult(
+			return `oklch(${
+				from ? `from ${printComputationResult(from)} ` : ''
+			}${printComputationResult(l)} ${printComputationResult(
 				c,
 			)} ${printComputationResult(h)})`;
 		},
