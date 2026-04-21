@@ -144,7 +144,7 @@ export function printEquation(
 ): string {
 	switch (equation.type) {
 		case 'literal':
-			return equation.value(context);
+			return equation.value(context).toString();
 		case 'add':
 			return `(${equation.values
 				.map((v) => printEquation(v, context))
@@ -380,6 +380,30 @@ function fnCall(name: string, ...args: ComputationResult[]): ComputationResult {
 					value: Math.max(...argsInOrderAsNumbers),
 					unit: '',
 				};
+			case 'pow':
+				return {
+					type: 'numeric',
+					value: Math.pow(argsInOrderAsNumbers[0], argsInOrderAsNumbers[1]),
+					unit: '',
+				};
+			case 'abs':
+				return {
+					type: 'numeric',
+					value: Math.abs(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
+			case 'exp':
+				return {
+					type: 'numeric',
+					value: Math.exp(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
+			case 'log':
+				return {
+					type: 'numeric',
+					value: Math.log(argsInOrderAsNumbers[0]),
+					unit: '',
+				};
 			default:
 				break;
 		}
@@ -426,7 +450,7 @@ function computeEquation(
 ): ComputationResult {
 	switch (equation.type) {
 		case 'literal':
-			return evaluateLiteral(equation.value(context));
+			return evaluateLiteral(equation.value(context)?.toString() ?? '');
 		case 'add':
 			return equation.values.reduce<ComputationResult>(
 				(sum, v) => add(sum, computeEquation(v, context)),

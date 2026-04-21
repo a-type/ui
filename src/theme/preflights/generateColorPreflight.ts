@@ -163,7 +163,7 @@ function grayRange(context?: ColorEvaluationContext) {
 	// converts to [-1...1] depending on where we sit in the light/dark
 	// spectrum [0, 0.4]
 	function lightness($: ColorEquationTools) {
-		return $.add(
+		const fromL = $.add(
 			$.literal('l'),
 			$.multiply(
 				$.divide(
@@ -173,16 +173,24 @@ function grayRange(context?: ColorEvaluationContext) {
 				$.literal('-0.001'),
 			),
 		);
+		return $.subtract(fromL, $.fn('pow', $.literal('c'), $.literal(1.6)));
 	}
 	function chroma($: ColorEquationTools) {
 		return $.multiply(
+			$.literal('c'),
 			$.literal(PROPS.USER.SATURATION.VAR),
 			$.literal(PROPS.LOCAL.SATURATION.VAR),
-			$.literal('0.02'),
+			$.literal('0.15'),
 		);
 	}
 
 	return {
+		[PROPS.COLOR('neutral').PAPER.NAME]: oklchBuilder(($) => ({
+			from: $.literal(sourceColorFamily.PAPER.NAME),
+			l: lightness($),
+			c: chroma($),
+			h: $.literal('h'),
+		})).printComputed(context),
 		[PROPS.COLOR('neutral').WASH.NAME]: oklchBuilder(($) => ({
 			from: $.literal(sourceColorFamily.WASH.NAME),
 			l: lightness($),

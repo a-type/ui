@@ -77,26 +77,26 @@ const defaultRangeItemNames = [
 	'light',
 	'lighter',
 	'wash',
+	'paper',
 ];
 
-function presetLightnessRange(
-	midpoint: number,
-	highpoint: number,
-	lowpoint: number,
-) {
+function presetLightnessRange({ dir = 1, base = 0.1, scale = 1.2 } = {}) {
 	return function ($: ColorEquationTools, step: number, rangeSize: number) {
-		const halfRange = rangeSize / 2;
-		const normalizedStep = step - halfRange;
-		const greaterThanHalf = normalizedStep > 0;
-		const upperRange = highpoint - midpoint;
-		const lowerRange = midpoint - lowpoint;
-		return $.add(
-			$.literal(midpoint),
-			$.multiply(
-				$.literal(normalizedStep / halfRange),
-				$.literal(greaterThanHalf ? upperRange : lowerRange),
+		const inverseStep = rangeSize - step;
+		const stepToUse = dir > 0 ? step : inverseStep;
+		// inverse cosine curve
+		const curve = $.subtract(
+			$.literal(1),
+			$.divide(
+				$.add(
+					$.fn('cos', $.literal((stepToUse / rangeSize) * (Math.PI * scale))),
+					$.literal(1),
+				),
+				$.literal(2),
 			),
 		);
+
+		return $.add($.literal(base), curve);
 	};
 }
 // chroma: reduced at either end of the range
@@ -109,8 +109,23 @@ function presetChromaRange(
 	return $.add(
 		$.literal(0.1 + lift),
 		$.multiply(
-			$.fn('sin', $.multiply($.literal(step / rangeSize), $.literal('PI'))),
-			$.literal(0.9),
+			$.fn(
+				'pow',
+				$.fn(
+					'sin',
+					$.add(
+						$.multiply(
+							// nudge the chroma upward a bit at the top end / down at the bottom end
+							$.literal(step / rangeSize),
+							$.literal('PI'),
+							$.literal(0.8),
+						),
+						$.literal(0.5),
+					),
+				),
+				$.literal(2),
+			),
+			$.literal(0.7),
 		),
 	);
 }
@@ -118,7 +133,7 @@ function presetChromaRange(
 export function createColorLightModeRange(
 	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'>,
 ) {
-	const lightness = presetLightnessRange(0.8, 1, 0.2);
+	const lightness = presetLightnessRange({ dir: 1, base: 0.4 });
 	return createColorRange({
 		...config,
 		size: defaultRangeItemNames.length,
@@ -131,7 +146,7 @@ export function createColorLightModeRange(
 export function createColorDarkModeRange(
 	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'>,
 ) {
-	const lightness = presetLightnessRange(0.8, 0.25, 1);
+	const lightness = presetLightnessRange({ dir: -1, base: 0.3, scale: 0.8 });
 	return createColorRange({
 		...config,
 		size: defaultRangeItemNames.length,

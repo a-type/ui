@@ -36,6 +36,7 @@ export const PROPS = {
 		SATURATION: createProp('🏠-sat', '1'),
 	},
 	COLOR: (name: string) => ({
+		PAPER: createProp(`${name}-paper`),
 		WASH: createProp(`${name}-wash`),
 		LIGHTER: createProp(`${name}-lighter`),
 		LIGHT: createProp(`${name}-light`),
