@@ -14,12 +14,15 @@ export default meta;
 
 export const Range: Story<{
 	sourceHue: number;
+	saturation?: number;
 }> = {
 	argTypes: {
 		sourceHue: { control: { type: 'number', min: 0, max: 360, step: 1 } },
+		saturation: { control: { type: 'number', min: 0, max: 1, step: 0.05 } },
 	},
 	args: {
 		sourceHue: 91.8,
+		saturation: 0.6,
 	},
 	render(args) {
 		const rangeSteps = (name: string) =>
@@ -38,6 +41,7 @@ export const Range: Story<{
 				<style>
 					{generateColorPreflight({
 						namedHues: { primary: args.sourceHue },
+						saturation: args.saturation,
 					})}
 				</style>
 				<input type="color" className="mb-2xl" />

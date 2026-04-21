@@ -12,8 +12,10 @@ import {
 
 export interface ColorPreflightsConfig {
 	namedHues: Record<string, number>;
-	context?: ColorEvaluationContext;
 	defaultMode?: 'light' | 'dark';
+	saturation?: number;
+
+	context?: ColorEvaluationContext;
 }
 
 const noPreference = `, (prefers-color-scheme: no-preference)`;
@@ -40,6 +42,10 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 
 ${/* Raw light/dark ranges */ ''}
 :root {
+	${PROPS.USER.SATURATION.NAME}: ${
+		config.saturation ?? PROPS.USER.SATURATION.FALLBACK
+	};
+
 	${lightContent
 		.map((item) => prefixKeys(item, '☀️'))
 		.map(formatPropertiesToCss)
