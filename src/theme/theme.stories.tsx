@@ -3,6 +3,7 @@ import { PROPS } from './base/properties.js';
 import {
 	createColorDarkModeRange,
 	createColorLightModeRange,
+	createColorRangeCustom,
 } from './base/ranges.js';
 import { MODE_PROPS } from './modes/modeSchema.js';
 import { rootMode } from './modes/rootMode.js';
@@ -44,6 +45,9 @@ export const Range: Story<{
 					{generateThemeWithModes({
 						namedHues: { primary: args.sourceHue },
 						saturation: args.saturation,
+						modes: {
+							base: rootMode,
+						},
 					})}
 				</style>
 				<input type="color" className="mb-2xl" />
@@ -225,6 +229,19 @@ export const Mode: Story = {
 								},
 							},
 						},
+						customSchemes: {
+							contrast: {
+								tag: '💟',
+								getColorRange: ({ sourceHue, context }) =>
+									createColorRangeCustom({
+										sourceHue,
+										context,
+										lightness: ($, { step, rangeSize }) =>
+											$.literal(step > Math.round(rangeSize / 3) ? '1' : '0'),
+										chroma: ($) => $.literal('0.1'),
+									}),
+							},
+						},
 					})}
 				</style>
 				<ModeComponentExample />
@@ -262,6 +279,9 @@ export const Mode: Story = {
 					<div className="@mode-blue">
 						<ModeComponentExample />
 					</div>
+				</Surface>
+				<Surface className="@scheme-contrast">
+					<ModeComponentExample />
 				</Surface>
 			</Surface>
 		);

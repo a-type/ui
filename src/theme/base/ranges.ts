@@ -69,7 +69,7 @@ export function createColorRange(config: ColorRangeConfig): ColorRangeItem[] {
 		}));
 }
 
-const defaultRangeItemNames = [
+export const defaultRangeItemNames = [
 	'ink',
 	'darker',
 	'dark',
@@ -131,28 +131,48 @@ function presetChromaRange(
 }
 
 export function createColorLightModeRange(
-	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'>,
+	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'> & {
+		base?: number;
+		scale?: number;
+	},
 ) {
-	const lightness = presetLightnessRange({ dir: 1, base: 0.4 });
-	return createColorRange({
+	const lightness = presetLightnessRange({
+		dir: 1,
+		base: config.base ?? 0.4,
+		scale: config.scale ?? 1.2,
+	});
+	return createColorRangeCustom({
 		...config,
-		size: defaultRangeItemNames.length,
 		lightness: ($, { step, rangeSize }) => lightness($, step, rangeSize),
 		chroma: ($, { step, rangeSize }) => presetChromaRange($, step, rangeSize),
-		name: (step) => defaultRangeItemNames[step] ?? `step-${step}`,
 	});
 }
 
 export function createColorDarkModeRange(
-	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'>,
+	config: Omit<ColorRangeConfig, 'lightness' | 'chroma' | 'size' | 'name'> & {
+		base?: number;
+		scale?: number;
+	},
 ) {
-	const lightness = presetLightnessRange({ dir: -1, base: 0.3, scale: 0.8 });
-	return createColorRange({
+	const lightness = presetLightnessRange({
+		dir: -1,
+		base: config.base ?? 0.3,
+		scale: config.scale ?? 0.8,
+	});
+	return createColorRangeCustom({
 		...config,
-		size: defaultRangeItemNames.length,
 		lightness: ($, { step, rangeSize }) => lightness($, step, rangeSize),
 		chroma: ($, { step, rangeSize }) =>
 			presetChromaRange($, step, rangeSize, 0.05),
+	});
+}
+
+export function createColorRangeCustom(
+	config: Omit<ColorRangeConfig, 'size' | 'name'>,
+) {
+	return createColorRange({
+		...config,
+		size: defaultRangeItemNames.length,
 		name: (step) => defaultRangeItemNames[step] ?? `step-${step}`,
 	});
 }

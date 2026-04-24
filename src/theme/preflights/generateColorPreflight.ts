@@ -5,6 +5,7 @@ import {
 } from '../base/color.js';
 import { createProp, prefixProp, PROPS } from '../base/properties.js';
 import {
+	ColorRangeConfig,
 	ColorRangeItem,
 	createColorDarkModeRange,
 	createColorLightModeRange,
@@ -16,10 +17,30 @@ import {
 	modeToCss,
 } from '../modes/modeSchema.js';
 
+interface SchemeDefinition {
+	getColorRange: (
+		config: Pick<ColorRangeConfig, 'sourceHue' | 'context'>,
+	) => ColorRangeItem[];
+	tag: string;
+}
+
+const builtinSchemes: Record<string, SchemeDefinition> = {
+	light: {
+		getColorRange: createColorLightModeRange,
+		tag: '☀️',
+	},
+	dark: {
+		getColorRange: createColorDarkModeRange,
+		tag: '🌑',
+	},
+};
+
 export interface ColorPreflightsConfig {
 	namedHues: Record<string, number>;
-	defaultScheme?: 'light' | 'dark';
+	defaultScheme?: 'light' | 'dark' | (string & {});
 	saturation?: number;
+
+	customSchemes?: Record<string, SchemeDefinition>;
 
 	modes: {
 		base: BaseModeSchema;
@@ -34,81 +55,108 @@ const noPreference = `, (prefers-color-scheme: no-preference)`;
 export function generateThemeWithModes(config: ColorPreflightsConfig) {
 	const defaultMode = config.defaultScheme ?? 'light';
 
-	const lightContent = Object.entries(config.namedHues).map(([name, hue]) =>
-		colorRangeToCss(
-			name,
-			createColorLightModeRange({ sourceHue: hue, context: config.context }),
-		),
-	);
-	const darkContent = Object.entries(config.namedHues).map(([name, hue]) =>
-		colorRangeToCss(
-			name,
-			createColorDarkModeRange({ sourceHue: hue, context: config.context }),
-		),
-	);
+	const schemes = {
+		...builtinSchemes,
+		...config.customSchemes,
+	};
 
 	const grays = grayRange(config.context);
 
-	const lightSchemeCss = `${PROPS.SCHEME.NAME.NAME}: 'light';
-		${lightContent
-			.map((values) => mapToSchemeRange(values, '☀️'))
-			.map(formatPropertiesToCss)
-			.join('\n')}
-		${formatPropertiesToCss(grays)}`;
-	const darkSchemeCss = `${PROPS.SCHEME.NAME.NAME}: 'dark';
-		${darkContent
-			.map((values) => mapToSchemeRange(values, '🌑'))
-			.map(formatPropertiesToCss)
-			.join('\n')}
-		${formatPropertiesToCss(grays)}`;
+	function getSchemeColorRanges(schemeName: string) {
+		const scheme = schemes[schemeName]!;
+		return [
+			...Object.entries(config.namedHues).map(([name, hue]) =>
+				colorRangeToCss(
+					name,
+					scheme.getColorRange({ sourceHue: hue, context: config.context }),
+				),
+			),
+		];
+	}
 
-	return `/* Auto-generated color preflight - do not edit directly */
+	/**
+	 * Each scheme generates a full set of CSS color properties
+	 * which are prefixed with its tag. The application of a scheme
+	 * then sets the "official" version of each property to the
+	 * tagged one when it is applied.
+	 */
+	function getSchemeRootPropertiesCss(schemeName: string) {
+		const scheme = schemes[schemeName]!;
+		const hueRanges = getSchemeColorRanges(schemeName);
+
+		return `
+		${hueRanges
+			.map((range) => prefixKeys(range, scheme.tag))
+			.map(formatPropertiesToCss)
+			.join('\n')}
+		`;
+	}
+
+	function schemeApplicationCss(schemeName: string) {
+		const scheme = schemes[schemeName]!;
+		const ranges = getSchemeColorRanges(schemeName);
+		const rangeProperties = Object.keys(
+			ranges.reduce((acc, range) => ({ ...acc, ...range }), {}),
+		);
+		return `${PROPS.SCHEME.NAME.ASSIGN(schemeName)}
+	${formatPropertiesToCss(grays)}
+	${rangeProperties
+		.map((prop) => `${prop}: var(${prefixProp(prop, scheme.tag)});`)
+		.join('\n')}
+	`;
+	}
+
+	const allColorPropertyNamesWithSchemeTags = Array.from(
+		new Set(
+			Object.keys(schemes).flatMap((schemeName) => {
+				const scheme = schemes[schemeName]!;
+				return getSchemeColorRanges(schemeName)
+					.flatMap((item) => Object.keys(item))
+					.flatMap((name) => [name, prefixProp(name, scheme.tag)]);
+			}),
+		),
+	);
+
+	return `/* Auto-generated CSS - do not edit directly */
 	:root {
 		${PROPS.USER.SATURATION.NAME}: ${
 			config.saturation ?? PROPS.USER.SATURATION.FALLBACK
 		};
 
-	/* Raw light/dark ranges */
-	${lightContent
-		.map((item) => prefixKeys(item, '☀️'))
-		.map(formatPropertiesToCss)
-		.join('\n')}
-	${darkContent
-		.map((item) => prefixKeys(item, '🌑'))
-		.map(formatPropertiesToCss)
-		.join('\n')}
+	/* Raw scheme ranges */
+	${Object.keys(schemes)
+		.map((schemeName) => getSchemeRootPropertiesCss(schemeName))
+		.join('\n\n')}
 
+	/* Dark/Light schemes are assigned to built-in device preferences */
 	@media (prefers-color-scheme: light)${
 		defaultMode === 'light' ? noPreference : ''
 	} {
-		${lightSchemeCss}
+		${schemeApplicationCss('light')}
 	}
 
 	@media (prefers-color-scheme: dark)${
 		defaultMode === 'dark' ? noPreference : ''
 	} {
-		${darkSchemeCss}
+		${schemeApplicationCss('dark')}
 	}
 }
-.\\@scheme-dark {
-	${darkSchemeCss}
-}
-.\\@scheme-light {
-	${lightSchemeCss}
-}
 
-
-.\\@scheme-dark {
-	${PROPS.SCHEME.NAME.ASSIGN('dark')}
-}
-.\\@scheme-light {
-	${PROPS.SCHEME.NAME.ASSIGN('light')}
-}
+/* Scheme class names */
+${Object.keys(schemes)
+	.map(
+		(schemeName) => `.\\@scheme-${schemeName} {
+	${schemeApplicationCss(schemeName)}
+}`,
+	)
+	.join('\n\n')}
 
 ${Object.entries(config.modes)
 	.map(([modeName, modeSchema]) => {
 		return `/* Mode: ${modeName} */
-.\\@mode-${modeName}, .\\@mode-${modeName} .\\@scheme-light, .\\@mode-${modeName} .\\@scheme-dark {
+.\\@mode-${modeName}, ${Object.keys(schemes)
+			.map((schemeName) => `.\\@mode-${modeName} .\\@scheme-${schemeName}`)
+			.join(', ')} {
 	${PROPS.MODE.NAME.ASSIGN(modeName)}
 	${formatPropertiesToCss(modeToCss(modeSchema))}
 }
@@ -117,13 +165,8 @@ ${Object.entries(config.modes)
 	.join('\n\n')}
 
 ${/* Custom properties for each color step */ ''}
-${[...lightContent, ...darkContent, grays]
-	.flatMap((item) => Object.keys(item))
-	.flatMap((name) => [
-		colorPropertyDefinition({ name }),
-		colorPropertyDefinition({ name: prefixProp(name, '☀️') }),
-		colorPropertyDefinition({ name: prefixProp(name, '🌑') }),
-	])
+${allColorPropertyNamesWithSchemeTags
+	.map((name) => colorPropertyDefinition({ name }))
 	.join('\n\n')}
 
 ${MODE_PROPS_LIST.map((PROP) =>
@@ -165,12 +208,6 @@ function formatPropertiesToCss(properties: Record<string, string>): string {
 	return Object.entries(properties)
 		.map(([key, value]) => `${key}: ${value};`)
 		.join('\n');
-}
-
-function mapToSchemeRange(map: Record<string, string>, mode: '🌑' | '☀️') {
-	return Object.fromEntries(
-		Object.entries(map).map(([key]) => [key, `var(${prefixProp(key, mode)})`]),
-	);
 }
 
 function colorPropertyDefinition({
