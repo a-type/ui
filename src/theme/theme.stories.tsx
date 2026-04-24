@@ -6,7 +6,7 @@ import {
 } from './base/ranges.js';
 import { MODE_PROPS } from './modes/modeSchema.js';
 import { rootMode } from './modes/rootMode.js';
-import { generateColorPreflight } from './preflights/generateColorPreflight.js';
+import { generateThemeWithModes } from './preflights/generateColorPreflight.js';
 
 const meta = {
 	title: 'theme',
@@ -41,7 +41,7 @@ export const Range: Story<{
 		return (
 			<div>
 				<style>
-					{generateColorPreflight({
+					{generateThemeWithModes({
 						namedHues: { primary: args.sourceHue },
 						saturation: args.saturation,
 					})}
@@ -196,44 +196,103 @@ function PlotDot({
 export const Mode: Story = {
 	render() {
 		return (
-			<div>
+			<Surface className="@mode-base">
 				<style>
-					{generateColorPreflight({
-						namedHues: { primary: 90, secondary: 210 },
+					{generateThemeWithModes({
+						namedHues: { primary: 90, blue: 210, green: 150 },
 						saturation: 0.5,
-						baseMode: rootMode,
 						modes: {
-							demo: {
+							base: rootMode,
+							blue: {
 								ACTION: {
 									PRIMARY: {
-										BG: 'red',
-										FG: 'white',
+										BG: PROPS.COLOR('blue').DEFAULT.VAR,
+										FG: PROPS.COLOR('blue').INK.VAR,
 									},
 								},
 								CONTROL: {
-									BORDER: 'green',
-									BG: 'blue',
+									BORDER: PROPS.COLOR('blue').DEFAULT.VAR,
+									BG: PROPS.COLOR('blue').WASH.VAR,
+								},
+							},
+							greenButtons: {
+								ACTION: {
+									PRIMARY: {
+										BG: PROPS.COLOR('green').DEFAULT.VAR,
+										FG: PROPS.COLOR('green').INK.VAR,
+										BORDER: PROPS.COLOR('green').DARK.VAR,
+									},
 								},
 							},
 						},
 					})}
 				</style>
 				<ModeComponentExample />
-				<div
-					className="@scheme-dark @mode-base"
+				<Surface className="@mode-blue">
+					<ModeComponentExample />
+					<Surface className="@mode-greenButtons">
+						<ModeComponentExample />
+						<Surface className="@mode-base">
+							<ModeComponentExample />
+							<Surface className="@mode-greenButtons">
+								<ModeComponentExample />
+							</Surface>
+						</Surface>
+					</Surface>
+					<Surface className="@scheme-dark">
+						<ModeComponentExample />
+						<Surface className="@mode-greenButtons">
+							<ModeComponentExample />
+							<Surface className="@mode-base">
+								<ModeComponentExample />
+								<Surface className="@mode-greenButtons">
+									<ModeComponentExample />
+								</Surface>
+							</Surface>
+						</Surface>
+					</Surface>
+				</Surface>
+				<Surface
+					className="@scheme-dark"
 					style={{
 						backgroundColor: PROPS.COLOR('neutral').PAPER.VAR,
 					}}
 				>
 					<ModeComponentExample />
-				</div>
-				<div className="@mode-demo">
-					<ModeComponentExample />
-				</div>
-			</div>
+					<div className="@mode-blue">
+						<ModeComponentExample />
+					</div>
+				</Surface>
+			</Surface>
 		);
 	},
 };
+
+function Surface({
+	children,
+	className = '',
+	style = {},
+}: {
+	children: React.ReactNode;
+	className?: string;
+	style?: React.CSSProperties;
+}) {
+	return (
+		<div
+			className={`p-md ${className}`}
+			style={{ ...style, backgroundColor: PROPS.COLOR('neutral').PAPER.VAR }}
+		>
+			<label
+				style={{
+					color: PROPS.COLOR('neutral').INK.VAR,
+				}}
+			>
+				{className}
+			</label>
+			{children}
+		</div>
+	);
+}
 
 function ModeComponentExample() {
 	return (

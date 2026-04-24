@@ -34,65 +34,6 @@ export interface BaseModeSchema {
 type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> | undefined };
 export type ModeSchema = DeepPartial<BaseModeSchema>;
 
-const emptyMode: BaseModeSchema = {
-	CONTROL: {
-		BG: '',
-		FG: '',
-		BORDER: '',
-	},
-	ACTION: {
-		PRIMARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-		SECONDARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-		ANCILLARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-	},
-	SURFACE: {
-		PRIMARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-		SECONDARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-		ANCILLARY: {
-			BG: '',
-			FG: '',
-			BORDER: '',
-		},
-	},
-	TEXT: {
-		PRIMARY: {
-			SIZE: '',
-			LINE_HEIGHT: '',
-			WEIGHT: '',
-		},
-		SECONDARY: {
-			SIZE: '',
-			LINE_HEIGHT: '',
-			WEIGHT: '',
-		},
-		ANCILLARY: {
-			SIZE: '',
-			LINE_HEIGHT: '',
-			WEIGHT: '',
-		},
-	},
-};
-
 type AsPropertyDefinitions<T extends object> = {
 	[P in keyof T]: T[P] extends string
 		? PropertyDefinition
@@ -101,22 +42,64 @@ type AsPropertyDefinitions<T extends object> = {
 		: never;
 };
 
-function assignProperties(
-	obj: any,
-	parentProp: string = 'Ⓜ️',
-): AsPropertyDefinitions<BaseModeSchema> {
-	for (const key in obj) {
-		const currentProp = parentProp ? `${parentProp}-${key}` : key;
-		if (typeof obj[key] === 'object' && obj[key] !== null) {
-			obj[key] = assignProperties(obj[key], currentProp);
-		} else {
-			obj[key] = createProp(currentProp.toLowerCase().replaceAll('_', '-'));
-		}
-	}
-	return obj;
-}
-
-export const MODE_PROPS = assignProperties(emptyMode);
+export const MODE_PROPS: AsPropertyDefinitions<BaseModeSchema> = {
+	ACTION: {
+		ANCILLARY: {
+			BG: createProp('Ⓜ️-action-ancillary-bg', 'color'),
+			FG: createProp('Ⓜ️-action-ancillary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-action-ancillary-border', 'color'),
+		},
+		PRIMARY: {
+			BG: createProp('Ⓜ️-action-primary-bg', 'color'),
+			FG: createProp('Ⓜ️-action-primary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-action-primary-border', 'color'),
+		},
+		SECONDARY: {
+			BG: createProp('Ⓜ️-action-secondary-bg', 'color'),
+			FG: createProp('Ⓜ️-action-secondary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-action-secondary-border', 'color'),
+		},
+	},
+	CONTROL: {
+		BG: createProp('Ⓜ️-control-bg', 'color'),
+		FG: createProp('Ⓜ️-control-fg', 'color'),
+		BORDER: createProp('Ⓜ️-control-border', 'color'),
+	},
+	SURFACE: {
+		PRIMARY: {
+			BG: createProp('Ⓜ️-surface-primary-bg', 'color'),
+			FG: createProp('Ⓜ️-surface-primary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-surface-primary-border', 'color'),
+		},
+		SECONDARY: {
+			BG: createProp('Ⓜ️-surface-secondary-bg', 'color'),
+			FG: createProp('Ⓜ️-surface-secondary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-surface-secondary-border', 'color'),
+		},
+		ANCILLARY: {
+			BG: createProp('Ⓜ️-surface-ancillary-bg', 'color'),
+			FG: createProp('Ⓜ️-surface-ancillary-fg', 'color'),
+			BORDER: createProp('Ⓜ️-surface-ancillary-border', 'color'),
+		},
+	},
+	TEXT: {
+		PRIMARY: {
+			SIZE: createProp('Ⓜ️-text-primary-size', 'size'),
+			WEIGHT: createProp('Ⓜ️-text-primary-weight', '*'),
+			LINE_HEIGHT: createProp('Ⓜ️-text-primary-line-height', 'size'),
+		},
+		SECONDARY: {
+			SIZE: createProp('Ⓜ️-text-secondary-size', 'size'),
+			WEIGHT: createProp('Ⓜ️-text-secondary-weight', '*'),
+			LINE_HEIGHT: createProp('Ⓜ️-text-secondary-line-height', 'size'),
+		},
+		ANCILLARY: {
+			SIZE: createProp('Ⓜ️-text-ancillary-size', 'size'),
+			WEIGHT: createProp('Ⓜ️-text-ancillary-weight', '*'),
+			LINE_HEIGHT: createProp('Ⓜ️-text-ancillary-line-height', 'size'),
+		},
+	},
+};
 
 function flattenToPropsList(obj: any): PropertyDefinition[] {
 	const propsList: PropertyDefinition[] = [];
@@ -132,8 +115,6 @@ function flattenToPropsList(obj: any): PropertyDefinition[] {
 
 export const MODE_PROPS_LIST: PropertyDefinition[] =
 	flattenToPropsList(MODE_PROPS);
-
-console.log(MODE_PROPS_LIST);
 
 export function modeToCss(mode: ModeSchema): Record<string, string> {
 	return modeToCssDeep(mode);

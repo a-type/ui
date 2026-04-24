@@ -21,8 +21,8 @@ export interface ColorPreflightsConfig {
 	defaultScheme?: 'light' | 'dark';
 	saturation?: number;
 
-	baseMode: BaseModeSchema;
 	modes: {
+		base: BaseModeSchema;
 		[key: string]: ModeSchema;
 	};
 
@@ -31,7 +31,7 @@ export interface ColorPreflightsConfig {
 
 const noPreference = `, (prefers-color-scheme: no-preference)`;
 
-export function generateColorPreflight(config: ColorPreflightsConfig) {
+export function generateThemeWithModes(config: ColorPreflightsConfig) {
 	const defaultMode = config.defaultScheme ?? 'light';
 
 	const lightContent = Object.entries(config.namedHues).map(([name, hue]) =>
@@ -49,6 +49,19 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 
 	const grays = grayRange(config.context);
 
+	const lightSchemeCss = `${PROPS.SCHEME.NAME.NAME}: 'light';
+		${lightContent
+			.map((values) => mapToSchemeRange(values, '☀️'))
+			.map(formatPropertiesToCss)
+			.join('\n')}
+		${formatPropertiesToCss(grays)}`;
+	const darkSchemeCss = `${PROPS.SCHEME.NAME.NAME}: 'dark';
+		${darkContent
+			.map((values) => mapToSchemeRange(values, '🌑'))
+			.map(formatPropertiesToCss)
+			.join('\n')}
+		${formatPropertiesToCss(grays)}`;
+
 	return `/* Auto-generated color preflight - do not edit directly */
 	:root {
 		${PROPS.USER.SATURATION.NAME}: ${
@@ -65,44 +78,23 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 		.map(formatPropertiesToCss)
 		.join('\n')}
 
-	/* Base Mode */
-	${formatPropertiesToCss(modeToCss(config.baseMode))}
-
 	@media (prefers-color-scheme: light)${
 		defaultMode === 'light' ? noPreference : ''
 	} {
-		${PROPS.SCHEME.NAME.NAME}: 'light';
-		${lightContent
-			.map((values) => mapToSchemeRange(values, '☀️'))
-			.map(formatPropertiesToCss)
-			.join('\n')}
-		${formatPropertiesToCss(grays)}
+		${lightSchemeCss}
 	}
 
 	@media (prefers-color-scheme: dark)${
 		defaultMode === 'dark' ? noPreference : ''
 	} {
-		${PROPS.SCHEME.NAME.NAME}: 'dark';
-		${darkContent
-			.map((values) => mapToSchemeRange(values, '🌑'))
-			.map(formatPropertiesToCss)
-			.join('\n')}
-		${formatPropertiesToCss(grays)}
+		${darkSchemeCss}
 	}
 }
-@scope (.\\@scheme-dark) {
-	${darkContent
-		.map((values) => mapToSchemeRange(values, '🌑'))
-		.map(formatPropertiesToCss)
-		.join('\n')}
-	${formatPropertiesToCss(grays)}
+.\\@scheme-dark {
+	${darkSchemeCss}
 }
-@scope (.\\@scheme-light) {
-	${lightContent
-		.map((values) => mapToSchemeRange(values, '☀️'))
-		.map(formatPropertiesToCss)
-		.join('\n')}
-	${formatPropertiesToCss(grays)}
+.\\@scheme-light {
+	${lightSchemeCss}
 }
 
 
@@ -113,15 +105,14 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 	${PROPS.SCHEME.NAME.ASSIGN('light')}
 }
 
-${Object.entries({ base: config.baseMode, ...config.modes })
+${Object.entries(config.modes)
 	.map(([modeName, modeSchema]) => {
 		return `/* Mode: ${modeName} */
-.\\@mode-${modeName} {
+.\\@mode-${modeName}, .\\@mode-${modeName} .\\@scheme-light, .\\@mode-${modeName} .\\@scheme-dark {
 	${PROPS.MODE.NAME.ASSIGN(modeName)}
-}
-@scope (.\\@mode-${modeName}) {
 	${formatPropertiesToCss(modeToCss(modeSchema))}
-}`;
+}
+`;
 	})
 	.join('\n\n')}
 
@@ -136,7 +127,11 @@ ${[...lightContent, ...darkContent, grays]
 	.join('\n\n')}
 
 ${MODE_PROPS_LIST.map((PROP) =>
-	colorPropertyDefinition({ name: PROP.NAME, initial: PROP.FALLBACK }),
+	colorPropertyDefinition({
+		name: PROP.NAME,
+		initial: PROP.FALLBACK,
+		type: PROP.TYPE,
+	}),
 ).join('\n\n')}
 `;
 }
@@ -147,7 +142,7 @@ function colorRangeToCss(
 ): Record<string, string> {
 	return range.reduce(
 		(acc, item) => {
-			const prop = createProp(`${name}-${item.name}`);
+			const prop = createProp(`${name}-${item.name}`, 'color');
 			acc[prop.NAME] = item.css;
 			return acc;
 		},
@@ -182,13 +177,16 @@ function colorPropertyDefinition({
 	name,
 	initial = 'transparent',
 	inherits = true,
+	type = 'color',
 }: {
 	name: string;
 	initial?: string;
 	inherits?: boolean;
+	type?: 'color' | 'size' | '*';
 }) {
+	const typeFormatted = type === '*' ? '*' : `<${type}>`;
 	return `@property ${name} {
-	syntax: '<color>';
+	syntax: '${typeFormatted}';
 	inherits: ${inherits};
 	initial-value: ${initial};
 }`;

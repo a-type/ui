@@ -1,9 +1,14 @@
 export const PROP_PREFIX = '--🎨';
 
-export function createProp(name: string, fallback?: string) {
+export function createProp(
+	name: string,
+	type: 'color' | 'size' | '*',
+	fallback?: string,
+) {
 	const resolvedName = `${PROP_PREFIX}-${name}`;
 	return {
 		NAME: resolvedName,
+		TYPE: type,
 		FALLBACK: fallback,
 		VAR: `var(${resolvedName}${fallback ? `, ${fallback}` : ''})`,
 		ASSIGN: (value: string) => `${resolvedName}: ${value};`,
@@ -27,28 +32,28 @@ export function prefixProp(name: string, prefix: string) {
 
 export const PROPS = {
 	SCHEME: {
-		NAME: createProp('🌗-name', 'light'),
-		BLACK: createProp('🌗-black', '#000000'),
-		WHITE: createProp('🌗-white', '#ffffff'),
+		NAME: createProp('🌗-name', '*', 'light'),
+		BLACK: createProp('🌗-black', 'color', '#000000'),
+		WHITE: createProp('🌗-white', 'color', '#ffffff'),
 	},
 	MODE: {
-		NAME: createProp('Ⓜ️-name'),
+		NAME: createProp('Ⓜ️-name', '*'),
 	},
 	USER: {
-		SATURATION: createProp('🧑-sat', '0.6'),
+		SATURATION: createProp('🧑-sat', 'size', '0.6'),
 	},
 	LOCAL: {
-		SATURATION: createProp('🏠-sat', '1'),
+		SATURATION: createProp('🏠-sat', 'size', '1'),
 	},
 	COLOR: (name: string) => ({
-		PAPER: createProp(`${name}-paper`),
-		WASH: createProp(`${name}-wash`),
-		LIGHTER: createProp(`${name}-lighter`),
-		LIGHT: createProp(`${name}-light`),
-		DEFAULT: createProp(`${name}-DEFAULT`),
-		DARK: createProp(`${name}-dark`),
-		DARKER: createProp(`${name}-darker`),
-		INK: createProp(`${name}-ink`),
+		PAPER: createProp(`${name}-paper`, 'color'),
+		WASH: createProp(`${name}-wash`, 'color'),
+		LIGHTER: createProp(`${name}-lighter`, 'color'),
+		LIGHT: createProp(`${name}-light`, 'color'),
+		DEFAULT: createProp(`${name}-DEFAULT`, 'color'),
+		DARK: createProp(`${name}-dark`, 'color'),
+		DARKER: createProp(`${name}-darker`, 'color'),
+		INK: createProp(`${name}-ink`, 'color'),
 	}),
 };
 
