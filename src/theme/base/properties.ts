@@ -6,10 +6,15 @@ export function createProp(name: string, fallback?: string) {
 		NAME: resolvedName,
 		FALLBACK: fallback,
 		VAR: `var(${resolvedName}${fallback ? `, ${fallback}` : ''})`,
+		ASSIGN: (value: string) => `${resolvedName}: ${value};`,
+		NAMESPACED_NAME: (namespace: string) =>
+			`${PROP_PREFIX}-${namespace}-${name}`,
 	};
 }
 
-function isProp(value: any): value is ReturnType<typeof createProp> {
+export type PropertyDefinition = ReturnType<typeof createProp>;
+
+export function isProp(value: any): value is ReturnType<typeof createProp> {
 	return typeof value === 'object' && value !== null && 'NAME' in value;
 }
 
@@ -21,18 +26,18 @@ export function prefixProp(name: string, prefix: string) {
 }
 
 export const PROPS = {
-	MODE: {
+	SCHEME: {
+		NAME: createProp('🌗-name', 'light'),
 		BLACK: createProp('🌗-black', '#000000'),
 		WHITE: createProp('🌗-white', '#ffffff'),
-		MULT: createProp('🌗-mult', '1'),
-		LIGHTNESS: createProp('🌗-lit-neutral', '50%'),
-		SATURATION: createProp('🌗-sat-neutral', '50%'),
+	},
+	MODE: {
+		NAME: createProp('Ⓜ️-name'),
 	},
 	USER: {
 		SATURATION: createProp('🧑-sat', '0.6'),
 	},
 	LOCAL: {
-		LIGHTNESS_SPREAD: createProp('🏠-lit-spread', '100%'),
 		SATURATION: createProp('🏠-sat', '1'),
 	},
 	COLOR: (name: string) => ({

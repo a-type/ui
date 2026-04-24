@@ -6,9 +6,9 @@ import { PROPS } from './properties.js';
 const demoColor = oklchBuilder(($) => ({
 	l: $.clamp(
 		$.add(
-			$.literal((ctx) => ctx.appliedProperties[PROPS.MODE.LIGHTNESS.NAME]),
+			$.literal((ctx) => ctx.appliedProperties[PROPS.SCHEME.LIGHTNESS.NAME]),
 			$.multiply(
-				$.literal((ctx) => ctx.appliedProperties[PROPS.MODE.MULT.NAME]),
+				$.literal((ctx) => ctx.appliedProperties[PROPS.SCHEME.MULT.NAME]),
 				$.literal(
 					(ctx) => ctx.appliedProperties[PROPS.LOCAL.LIGHTNESS_SPREAD.NAME],
 				),
@@ -22,9 +22,9 @@ const demoColor = oklchBuilder(($) => ({
 			$.literal((ctx) => ctx.appliedProperties[PROPS.LOCAL.SATURATION.NAME]),
 			$.literal((ctx) => ctx.appliedProperties[PROPS.USER.SATURATION.NAME]),
 			$.add(
-				$.literal((ctx) => ctx.appliedProperties[PROPS.MODE.SATURATION.NAME]),
+				$.literal((ctx) => ctx.appliedProperties[PROPS.SCHEME.SATURATION.NAME]),
 				$.multiply(
-					$.literal((ctx) => ctx.appliedProperties[PROPS.MODE.MULT.NAME]),
+					$.literal((ctx) => ctx.appliedProperties[PROPS.SCHEME.MULT.NAME]),
 				),
 			),
 		),
@@ -36,17 +36,17 @@ const demoColor = oklchBuilder(($) => ({
 
 it('prints a dynamic oklch representation of a built equation', () => {
 	expect(demoColor.printDynamic()).toBe(
-		`oklch(calc(clamp(0%, (var(${PROPS.MODE.LIGHTNESS}) + (var(${PROPS.MODE.MULT}) * var(${PROPS.LOCAL.LIGHTNESS_SPREAD}))), 100%)) calc(clamp(0%, (var(${PROPS.LOCAL.SATURATION}) * var(${PROPS.USER.SATURATION}) * (var(${PROPS.MODE.SATURATION}) + (var(${PROPS.MODE.MULT})))), 100%)) calc(210))`,
+		`oklch(calc(clamp(0%, (var(${PROPS.SCHEME.LIGHTNESS}) + (var(${PROPS.SCHEME.MULT}) * var(${PROPS.LOCAL.LIGHTNESS_SPREAD}))), 100%)) calc(clamp(0%, (var(${PROPS.LOCAL.SATURATION}) * var(${PROPS.USER.SATURATION}) * (var(${PROPS.SCHEME.SATURATION}) + (var(${PROPS.SCHEME.MULT})))), 100%)) calc(210))`,
 	);
 });
 
 const fullProperties = {
-	[PROPS.MODE.LIGHTNESS.NAME]: '80%',
-	[PROPS.MODE.MULT.NAME]: '1',
+	[PROPS.SCHEME.LIGHTNESS.NAME]: '80%',
+	[PROPS.SCHEME.MULT.NAME]: '1',
 	[PROPS.LOCAL.LIGHTNESS_SPREAD.NAME]: '1',
 	[PROPS.LOCAL.SATURATION.NAME]: '1',
 	[PROPS.USER.SATURATION.NAME]: '0.5',
-	[PROPS.MODE.SATURATION.NAME]: '50%',
+	[PROPS.SCHEME.SATURATION.NAME]: '50%',
 };
 
 it('computes a full evaluation from supplied property values', () => {
@@ -74,8 +74,8 @@ it('prints a computed oklch color string from supplied property values', () => {
 it('prints a partially resolved oklch color string when some properties are missing', () => {
 	const colorString = demoColor.printComputed({
 		appliedProperties: {
-			[PROPS.MODE.LIGHTNESS.NAME]: '80%',
-			[PROPS.MODE.MULT.NAME]: '1',
+			[PROPS.SCHEME.LIGHTNESS.NAME]: '80%',
+			[PROPS.SCHEME.MULT.NAME]: '1',
 			[PROPS.LOCAL.LIGHTNESS_SPREAD.NAME]: '1',
 			// saturation properties are missing
 		},

@@ -4,6 +4,8 @@ import {
 	createColorDarkModeRange,
 	createColorLightModeRange,
 } from './base/ranges.js';
+import { MODE_PROPS } from './modes/modeSchema.js';
+import { rootMode } from './modes/rootMode.js';
 import { generateColorPreflight } from './preflights/generateColorPreflight.js';
 
 const meta = {
@@ -45,7 +47,7 @@ export const Range: Story<{
 					})}
 				</style>
 				<input type="color" className="mb-2xl" />
-				<div className="mode-light">
+				<div className="light">
 					<div
 						className="flex p-md"
 						style={{
@@ -103,7 +105,7 @@ export const Range: Story<{
 					</div>
 				</div>
 				<div className="divider" />
-				<div className="mode-dark">
+				<div className="dark">
 					<div
 						className="flex p-md"
 						style={{
@@ -188,5 +190,82 @@ function PlotDot({
 				backgroundColor: color,
 			}}
 		/>
+	);
+}
+
+export const Mode: Story = {
+	render() {
+		return (
+			<div>
+				<style>
+					{generateColorPreflight({
+						namedHues: { primary: 90, secondary: 210 },
+						saturation: 0.5,
+						baseMode: rootMode,
+						modes: {
+							demo: {
+								ACTION: {
+									PRIMARY: {
+										BG: 'red',
+										FG: 'white',
+									},
+								},
+								CONTROL: {
+									BORDER: 'green',
+									BG: 'blue',
+								},
+							},
+						},
+					})}
+				</style>
+				<ModeComponentExample />
+				<div
+					className="@scheme-dark @mode-base"
+					style={{
+						backgroundColor: PROPS.COLOR('neutral').PAPER.VAR,
+					}}
+				>
+					<ModeComponentExample />
+				</div>
+				<div className="@mode-demo">
+					<ModeComponentExample />
+				</div>
+			</div>
+		);
+	},
+};
+
+function ModeComponentExample() {
+	return (
+		<div>
+			<input
+				style={{
+					backgroundColor: MODE_PROPS.CONTROL.BG.VAR,
+					color: MODE_PROPS.CONTROL.FG.VAR,
+					borderColor: MODE_PROPS.CONTROL.BORDER.VAR,
+					borderWidth: '1px',
+					borderStyle: 'solid',
+					padding: '0.5em 1em',
+					borderRadius: '4px',
+					fontSize: '1rem',
+					lineHeight: '1.5',
+				}}
+			/>
+			<button
+				style={{
+					backgroundColor: MODE_PROPS.ACTION.PRIMARY.BG.VAR,
+					color: MODE_PROPS.ACTION.PRIMARY.FG.VAR,
+					borderColor: MODE_PROPS.ACTION.PRIMARY.BORDER.VAR,
+					borderWidth: '1px',
+					borderStyle: 'solid',
+					padding: '0.5em 1em',
+					borderRadius: '4px',
+					fontSize: '1rem',
+					lineHeight: '1.5',
+				}}
+			>
+				Button
+			</button>
+		</div>
 	);
 }

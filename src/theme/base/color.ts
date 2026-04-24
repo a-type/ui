@@ -12,7 +12,7 @@ function colorTweak(base: string, level: string, sign: number) {
 	return (
 		`oklch(from ` +
 		base +
-		` calc(l * (1 + ${level} / 30 * ${sign} * var(${PROPS.MODE.MULT}, 1)))` +
+		` calc(l * (1 + ${level} / 30 * ${sign}))` +
 		` calc(c * (1 - (${level} * 0.1 * ${sign} * (1 + (1 - var(${PROPS.USER.SATURATION}, 0))))))` +
 		` h)`
 	);

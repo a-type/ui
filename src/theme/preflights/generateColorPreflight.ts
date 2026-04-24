@@ -9,11 +9,22 @@ import {
 	createColorDarkModeRange,
 	createColorLightModeRange,
 } from '../base/ranges.js';
+import {
+	BaseModeSchema,
+	MODE_PROPS_LIST,
+	ModeSchema,
+	modeToCss,
+} from '../modes/modeSchema.js';
 
 export interface ColorPreflightsConfig {
 	namedHues: Record<string, number>;
-	defaultMode?: 'light' | 'dark';
+	defaultScheme?: 'light' | 'dark';
 	saturation?: number;
+
+	baseMode: BaseModeSchema;
+	modes: {
+		[key: string]: ModeSchema;
+	};
 
 	context?: ColorEvaluationContext;
 }
@@ -21,7 +32,7 @@ export interface ColorPreflightsConfig {
 const noPreference = `, (prefers-color-scheme: no-preference)`;
 
 export function generateColorPreflight(config: ColorPreflightsConfig) {
-	const defaultMode = config.defaultMode ?? 'light';
+	const defaultMode = config.defaultScheme ?? 'light';
 
 	const lightContent = Object.entries(config.namedHues).map(([name, hue]) =>
 		colorRangeToCss(
@@ -39,13 +50,12 @@ export function generateColorPreflight(config: ColorPreflightsConfig) {
 	const grays = grayRange(config.context);
 
 	return `/* Auto-generated color preflight - do not edit directly */
+	:root {
+		${PROPS.USER.SATURATION.NAME}: ${
+			config.saturation ?? PROPS.USER.SATURATION.FALLBACK
+		};
 
-${/* Raw light/dark ranges */ ''}
-:root {
-	${PROPS.USER.SATURATION.NAME}: ${
-		config.saturation ?? PROPS.USER.SATURATION.FALLBACK
-	};
-
+	/* Raw light/dark ranges */
 	${lightContent
 		.map((item) => prefixKeys(item, '☀️'))
 		.map(formatPropertiesToCss)
@@ -55,11 +65,15 @@ ${/* Raw light/dark ranges */ ''}
 		.map(formatPropertiesToCss)
 		.join('\n')}
 
+	/* Base Mode */
+	${formatPropertiesToCss(modeToCss(config.baseMode))}
+
 	@media (prefers-color-scheme: light)${
 		defaultMode === 'light' ? noPreference : ''
 	} {
+		${PROPS.SCHEME.NAME.NAME}: 'light';
 		${lightContent
-			.map((values) => mapToModeRange(values, '☀️'))
+			.map((values) => mapToSchemeRange(values, '☀️'))
 			.map(formatPropertiesToCss)
 			.join('\n')}
 		${formatPropertiesToCss(grays)}
@@ -68,28 +82,48 @@ ${/* Raw light/dark ranges */ ''}
 	@media (prefers-color-scheme: dark)${
 		defaultMode === 'dark' ? noPreference : ''
 	} {
+		${PROPS.SCHEME.NAME.NAME}: 'dark';
 		${darkContent
-			.map((values) => mapToModeRange(values, '🌑'))
+			.map((values) => mapToSchemeRange(values, '🌑'))
 			.map(formatPropertiesToCss)
 			.join('\n')}
 		${formatPropertiesToCss(grays)}
 	}
 }
-
-.mode-dark {
+@scope (.\\@scheme-dark) {
 	${darkContent
-		.map((values) => mapToModeRange(values, '🌑'))
+		.map((values) => mapToSchemeRange(values, '🌑'))
 		.map(formatPropertiesToCss)
 		.join('\n')}
 	${formatPropertiesToCss(grays)}
 }
-.mode-light {
+@scope (.\\@scheme-light) {
 	${lightContent
-		.map((values) => mapToModeRange(values, '☀️'))
+		.map((values) => mapToSchemeRange(values, '☀️'))
 		.map(formatPropertiesToCss)
 		.join('\n')}
 	${formatPropertiesToCss(grays)}
 }
+
+
+.\\@scheme-dark {
+	${PROPS.SCHEME.NAME.ASSIGN('dark')}
+}
+.\\@scheme-light {
+	${PROPS.SCHEME.NAME.ASSIGN('light')}
+}
+
+${Object.entries({ base: config.baseMode, ...config.modes })
+	.map(([modeName, modeSchema]) => {
+		return `/* Mode: ${modeName} */
+.\\@mode-${modeName} {
+	${PROPS.MODE.NAME.ASSIGN(modeName)}
+}
+@scope (.\\@mode-${modeName}) {
+	${formatPropertiesToCss(modeToCss(modeSchema))}
+}`;
+	})
+	.join('\n\n')}
 
 ${/* Custom properties for each color step */ ''}
 ${[...lightContent, ...darkContent, grays]
@@ -100,6 +134,10 @@ ${[...lightContent, ...darkContent, grays]
 		colorPropertyDefinition({ name: prefixProp(name, '🌑') }),
 	])
 	.join('\n\n')}
+
+${MODE_PROPS_LIST.map((PROP) =>
+	colorPropertyDefinition({ name: PROP.NAME, initial: PROP.FALLBACK }),
+).join('\n\n')}
 `;
 }
 
@@ -134,7 +172,7 @@ function formatPropertiesToCss(properties: Record<string, string>): string {
 		.join('\n');
 }
 
-function mapToModeRange(map: Record<string, string>, mode: '🌑' | '☀️') {
+function mapToSchemeRange(map: Record<string, string>, mode: '🌑' | '☀️') {
 	return Object.fromEntries(
 		Object.entries(map).map(([key]) => [key, `var(${prefixProp(key, mode)})`]),
 	);
