@@ -43,21 +43,22 @@ export const modeSchema = createModeSchema({
 	},
 	TEXT: {
 		PRIMARY: {
-			SIZE: 'size',
+			SIZE: 'length',
 			WEIGHT: '*',
 			LINE_HEIGHT: '*',
 		},
 		SECONDARY: {
-			SIZE: 'size',
+			SIZE: 'length',
 			WEIGHT: '*',
 			LINE_HEIGHT: '*',
 		},
 		ANCILLARY: {
-			SIZE: 'size',
+			SIZE: 'length',
 			WEIGHT: '*',
 			LINE_HEIGHT: '*',
 		},
 	},
+	DENSITY: 'number',
 });
 
 export const rootMode = modeSchema.createBase({
@@ -117,6 +118,7 @@ export const rootMode = modeSchema.createBase({
 			LINE_HEIGHT: '1.5',
 		},
 	},
+	DENSITY: 1,
 });
 
 export const altMode = modeSchema.createPartial({
@@ -140,4 +142,8 @@ export const greenButtonsMode = modeSchema.createPartial({
 			BORDER: PROPS.COLOR('green').DARK.VAR,
 		},
 	},
+});
+
+export const denseMode = modeSchema.createPartial({
+	DENSITY: 0.5,
 });

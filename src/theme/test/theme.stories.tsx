@@ -6,7 +6,13 @@ import {
 	createColorRangeCustom,
 } from '../base/ranges.js';
 import { generateThemeWithModes } from '../preflights/generateColorPreflight.js';
-import { altMode, greenButtonsMode, modeSchema, rootMode } from './modes.js';
+import {
+	altMode,
+	denseMode,
+	greenButtonsMode,
+	modeSchema,
+	rootMode,
+} from './modes.js';
 
 const meta = {
 	title: 'theme',
@@ -44,7 +50,6 @@ export const Range: Story<{
 					{generateThemeWithModes({
 						namedHues: { primary: args.sourceHue },
 						saturation: args.saturation,
-						modeSchema: modeSchema,
 						modes: {
 							base: rootMode,
 						},
@@ -58,7 +63,7 @@ export const Range: Story<{
 							backgroundColor: `var(${PROPS.COLOR('neutral').PAPER.NAME})`,
 						}}
 					>
-						{Object.entries(PROPS.COLOR('primary')).map(([name, color], i) => {
+						{Object.entries(PROPS.COLOR('primary')).map(([name, color]) => {
 							const equation = exampleLightRange.find((item) =>
 								color.NAME.endsWith(item.name),
 							)?.equation;
@@ -109,7 +114,7 @@ export const Range: Story<{
 					</div>
 				</div>
 				<div className="divider" />
-				<div className="dark">
+				<div className="@scheme-dark">
 					<div
 						className="flex p-md"
 						style={{
@@ -205,11 +210,11 @@ export const Mode: Story = {
 					{generateThemeWithModes({
 						namedHues: { primary: 90, blue: 210, green: 150 },
 						saturation: 0.5,
-						modeSchema,
 						modes: {
 							base: rootMode,
 							blue: altMode,
 							greenButtons: greenButtonsMode,
+							dense: denseMode,
 						},
 						customSchemes: {
 							contrast: {
@@ -240,9 +245,9 @@ export const Mode: Story = {
 					</Surface>
 					<Surface className="@scheme-dark">
 						<ModeComponentExample />
-						<Surface className="@mode-greenButtons">
+						<Surface className="@mode-greenButtons @mode-dense">
 							<ModeComponentExample />
-							<Surface className="@mode-base">
+							<Surface className="@mode-base @mode-dense">
 								<ModeComponentExample />
 								<Surface className="@mode-greenButtons">
 									<ModeComponentExample />
@@ -306,7 +311,7 @@ function ModeComponentExample() {
 					borderColor: modeSchema.PROPS.CONTROL.BORDER.VAR,
 					borderWidth: '1px',
 					borderStyle: 'solid',
-					padding: '0.5em 1em',
+					padding: `calc(0.5em * ${modeSchema.PROPS.DENSITY.VAR}) calc(1em * ${modeSchema.PROPS.DENSITY.VAR})`,
 					borderRadius: '4px',
 					fontSize: '1rem',
 					lineHeight: '1.5',
@@ -319,7 +324,7 @@ function ModeComponentExample() {
 					borderColor: modeSchema.PROPS.ACTION.PRIMARY.BORDER.VAR,
 					borderWidth: '1px',
 					borderStyle: 'solid',
-					padding: '0.5em 1em',
+					padding: `calc(0.5em * ${modeSchema.PROPS.DENSITY.VAR}) calc(1em * ${modeSchema.PROPS.DENSITY.VAR})`,
 					borderRadius: '4px',
 					fontSize: '1rem',
 					lineHeight: '1.5',

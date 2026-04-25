@@ -13,8 +13,8 @@ import {
 import {
 	DeepPartial,
 	flattenToPropsList,
+	getPropShapeFromMode,
 	ModeOf,
-	ModeSchema,
 	ModeSchemaLevel,
 	modeToCss,
 } from '../modes/modeSchema.js';
@@ -44,7 +44,6 @@ export interface ColorPreflightsConfig<ModeShape extends ModeSchemaLevel> {
 
 	customSchemes?: Record<string, SchemeDefinition>;
 
-	modeSchema: ModeSchema<ModeShape>;
 	modes: {
 		base: ModeOf<ModeShape>;
 		[key: string]: DeepPartial<ModeOf<ModeShape>>;
@@ -122,6 +121,15 @@ export function generateThemeWithModes<ModeShape extends ModeSchemaLevel>(
 		),
 	);
 
+	const allModeProps = Array.from(
+		new Set(
+			Object.values(config.modes).flatMap((mode) => {
+				const shape = getPropShapeFromMode(mode);
+				return flattenToPropsList(shape);
+			}),
+		),
+	);
+
 	return `/* Auto-generated CSS - do not edit directly */
 	:root {
 		${PROPS.USER.SATURATION.NAME}: ${
@@ -163,7 +171,7 @@ ${Object.entries(config.modes)
 			.map((schemeName) => `.\\@mode-${modeName} .\\@scheme-${schemeName}`)
 			.join(', ')} {
 	${PROPS.MODE.NAME.ASSIGN(modeName)}
-	${formatPropertiesToCss(modeToCss(modeValue, config.modeSchema))}
+	${formatPropertiesToCss(modeToCss(modeValue, getPropShapeFromMode(modeValue)))}
 }
 `;
 	})
@@ -174,9 +182,7 @@ ${allColorPropertyNamesWithSchemeTags
 	.map((name) => createProp(name, { type: 'color' }).DEFINITION)
 	.join('\n\n')}
 
-${flattenToPropsList(config.modeSchema.PROPS)
-	.map((PROP) => PROP.DEFINITION)
-	.join('\n\n')}
+${allModeProps.map((PROP) => PROP.DEFINITION).join('\n\n')}
 `;
 }
 

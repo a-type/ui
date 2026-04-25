@@ -46,16 +46,36 @@ function getModeSchemaPropertyAsPropertyDefinition(
 	}
 }
 
+const shapeSymbol = Symbol('modeSchemaShape');
+
+export function getPropShapeFromMode(mode: any): any {
+	return mode[shapeSymbol] || null;
+}
+
+export function attachSchemaToMode(mode: any, schema: any) {
+	Object.defineProperty(mode, shapeSymbol, {
+		value: schema,
+		enumerable: false,
+	});
+}
+
 export function createModeSchema<T extends ModeSchemaLevel>(
 	schema: T,
 	tag = 'Ⓜ️',
 ): ModeSchema<T> {
+	const PROPS = generateModeProperties(schema, tag);
 	return {
 		definition: schema,
 		tag,
-		PROPS: generateModeProperties(schema, tag),
-		createBase: (def: ModeOf<T>) => def,
-		createPartial: (def: DeepPartial<ModeOf<T>>) => def,
+		PROPS,
+		createBase: (def: ModeOf<T>) => {
+			attachSchemaToMode(def, PROPS);
+			return def;
+		},
+		createPartial: (def: DeepPartial<ModeOf<T>>) => {
+			attachSchemaToMode(def, PROPS);
+			return def;
+		},
 	};
 }
 
@@ -63,7 +83,7 @@ export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> | undefined };
 
 export type ModeOf<T extends ModeSchemaLevel> = {
 	[P in keyof T]: T[P] extends ModeSchemaProperty
-		? string
+		? string | number
 		: T[P] extends ModeSchemaLevel
 		? ModeOf<T[P]>
 		: never;
@@ -120,9 +140,9 @@ export function flattenToPropsList(obj: any): PropertyDefinition[] {
 
 export function modeToCss(
 	mode: DeepPartial<ModeOf<any>>,
-	schema: ModeSchema<any>,
+	propShape: AsPropertyDefinitions<any>,
 ): Record<string, string> {
-	return modeToCssDeep(mode, schema.PROPS);
+	return modeToCssDeep(mode, propShape);
 }
 
 function modeToCssDeep(

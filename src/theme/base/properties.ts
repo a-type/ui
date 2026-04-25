@@ -10,7 +10,23 @@ export const PROP_PREFIX = '--🎨';
  * "computed" will not generate a property definition and is assumed
  * to be a complex CSS property value like calc() or other things.
  */
-export type PropertyType = 'color' | 'size' | '*';
+export type PropertyType =
+	| 'angle'
+	| 'color'
+	| 'custom-ident'
+	| 'image'
+	| 'integer'
+	| 'length'
+	| 'length-percentage'
+	| 'number'
+	| 'percentage'
+	| 'resolution'
+	| 'string'
+	| 'time'
+	| 'transform-function'
+	| 'transform-list'
+	| 'url'
+	| '*';
 
 export function createProp(
 	name: string,
@@ -66,10 +82,10 @@ export const PROPS = {
 		NAME: createProp('Ⓜ️-name', { type: '*' }),
 	},
 	USER: {
-		SATURATION: createProp('🧑-sat', { type: 'size', fallback: '0.6' }),
+		SATURATION: createProp('🧑-sat', { type: 'number', fallback: '0.6' }),
 	},
 	LOCAL: {
-		SATURATION: createProp('🏠-sat', { type: 'size', fallback: '1' }),
+		SATURATION: createProp('🏠-sat', { type: 'number', fallback: '1' }),
 	},
 	COLOR: (name: string) => ({
 		PAPER: createProp(`${name}-paper`, { type: 'color' }),
