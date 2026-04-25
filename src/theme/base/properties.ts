@@ -1,11 +1,32 @@
 export const PROP_PREFIX = '--🎨';
 
+/**
+ * Allowed types of properties - specifying one allows defining
+ * a custom property in CSS which enables interpolation in animations
+ * and other optimizations.
+ *
+ * "*" doesn't really do much but does allow any kind of value.
+ *
+ * "computed" will not generate a property definition and is assumed
+ * to be a complex CSS property value like calc() or other things.
+ */
+export type PropertyType = 'color' | 'size' | '*';
+
 export function createProp(
 	name: string,
-	type: 'color' | 'size' | '*',
-	fallback?: string,
+	{
+		type,
+		fallback,
+		inherits = true,
+		noPrefix,
+	}: {
+		type: PropertyType;
+		fallback?: string;
+		inherits?: boolean;
+		noPrefix?: boolean;
+	},
 ) {
-	const resolvedName = `${PROP_PREFIX}-${name}`;
+	const resolvedName = noPrefix ? `--${name}` : `${PROP_PREFIX}-${name}`;
 	return {
 		NAME: resolvedName,
 		TYPE: type,
@@ -14,6 +35,11 @@ export function createProp(
 		ASSIGN: (value: string) => `${resolvedName}: ${value};`,
 		NAMESPACED_NAME: (namespace: string) =>
 			`${PROP_PREFIX}-${namespace}-${name}`,
+		DEFINITION: `@property ${resolvedName} {
+	syntax: '${type === '*' ? '*' : `<${type}>`}';
+	inherits: ${inherits};
+	initial-value: ${fallback ?? 'initial'};
+}`,
 	};
 }
 
@@ -32,28 +58,28 @@ export function prefixProp(name: string, prefix: string) {
 
 export const PROPS = {
 	SCHEME: {
-		NAME: createProp('🌗-name', '*', 'light'),
-		BLACK: createProp('🌗-black', 'color', '#000000'),
-		WHITE: createProp('🌗-white', 'color', '#ffffff'),
+		NAME: createProp('🌗-name', { type: '*', fallback: 'light' }),
+		BLACK: createProp('🌗-black', { type: 'color', fallback: '#000000' }),
+		WHITE: createProp('🌗-white', { type: 'color', fallback: '#ffffff' }),
 	},
 	MODE: {
-		NAME: createProp('Ⓜ️-name', '*'),
+		NAME: createProp('Ⓜ️-name', { type: '*' }),
 	},
 	USER: {
-		SATURATION: createProp('🧑-sat', 'size', '0.6'),
+		SATURATION: createProp('🧑-sat', { type: 'size', fallback: '0.6' }),
 	},
 	LOCAL: {
-		SATURATION: createProp('🏠-sat', 'size', '1'),
+		SATURATION: createProp('🏠-sat', { type: 'size', fallback: '1' }),
 	},
 	COLOR: (name: string) => ({
-		PAPER: createProp(`${name}-paper`, 'color'),
-		WASH: createProp(`${name}-wash`, 'color'),
-		LIGHTER: createProp(`${name}-lighter`, 'color'),
-		LIGHT: createProp(`${name}-light`, 'color'),
-		DEFAULT: createProp(`${name}-DEFAULT`, 'color'),
-		DARK: createProp(`${name}-dark`, 'color'),
-		DARKER: createProp(`${name}-darker`, 'color'),
-		INK: createProp(`${name}-ink`, 'color'),
+		PAPER: createProp(`${name}-paper`, { type: 'color' }),
+		WASH: createProp(`${name}-wash`, { type: 'color' }),
+		LIGHTER: createProp(`${name}-lighter`, { type: 'color' }),
+		LIGHT: createProp(`${name}-light`, { type: 'color' }),
+		DEFAULT: createProp(`${name}-DEFAULT`, { type: 'color' }),
+		DARK: createProp(`${name}-dark`, { type: 'color' }),
+		DARKER: createProp(`${name}-darker`, { type: 'color' }),
+		INK: createProp(`${name}-ink`, { type: 'color' }),
 	}),
 };
 

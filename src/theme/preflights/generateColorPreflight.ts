@@ -171,17 +171,11 @@ ${Object.entries(config.modes)
 
 ${/* Custom properties for each color step */ ''}
 ${allColorPropertyNamesWithSchemeTags
-	.map((name) => colorPropertyDefinition({ name }))
+	.map((name) => createProp(name, { type: 'color' }).DEFINITION)
 	.join('\n\n')}
 
 ${flattenToPropsList(config.modeSchema.PROPS)
-	.map((PROP) =>
-		colorPropertyDefinition({
-			name: PROP.NAME,
-			initial: PROP.FALLBACK,
-			type: PROP.TYPE,
-		}),
-	)
+	.map((PROP) => PROP.DEFINITION)
 	.join('\n\n')}
 `;
 }
@@ -192,7 +186,7 @@ function colorRangeToCss(
 ): Record<string, string> {
 	return range.reduce(
 		(acc, item) => {
-			const prop = createProp(`${name}-${item.name}`, 'color');
+			const prop = createProp(`${name}-${item.name}`, { type: 'color' });
 			acc[prop.NAME] = item.css;
 			return acc;
 		},
@@ -215,25 +209,6 @@ function formatPropertiesToCss(properties: Record<string, string>): string {
 	return Object.entries(properties)
 		.map(([key, value]) => `${key}: ${value};`)
 		.join('\n');
-}
-
-function colorPropertyDefinition({
-	name,
-	initial = 'transparent',
-	inherits = true,
-	type = 'color',
-}: {
-	name: string;
-	initial?: string;
-	inherits?: boolean;
-	type?: 'color' | 'size' | '*';
-}) {
-	const typeFormatted = type === '*' ? '*' : `<${type}>`;
-	return `@property ${name} {
-	syntax: '${typeFormatted}';
-	inherits: ${inherits};
-	initial-value: ${initial};
-}`;
 }
 
 function grayRange(context?: ColorEvaluationContext) {

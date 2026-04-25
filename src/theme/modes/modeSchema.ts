@@ -1,10 +1,15 @@
-import { createProp, isProp, PropertyDefinition } from '../base/properties.js';
+import {
+	createProp,
+	isProp,
+	PropertyDefinition,
+	PropertyType,
+} from '../base/properties.js';
 
-export type PropertyType = 'color' | 'size' | '*';
+export type ModePropertyType = PropertyType;
 export type ModeSchemaProperty =
-	| PropertyType
+	| ModePropertyType
 	| {
-			type: PropertyType;
+			type: ModePropertyType;
 			fallback: string;
 	  };
 
@@ -35,9 +40,9 @@ function getModeSchemaPropertyAsPropertyDefinition(
 	prop: ModeSchemaProperty,
 ): PropertyDefinition {
 	if (typeof prop === 'string') {
-		return createProp(name, prop);
+		return createProp(name, { type: prop });
 	} else {
-		return createProp(name, prop.type, prop.fallback);
+		return createProp(name, { type: prop.type, fallback: prop.fallback });
 	}
 }
 
