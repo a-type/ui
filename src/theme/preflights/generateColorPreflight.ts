@@ -11,9 +11,11 @@ import {
 	createColorLightModeRange,
 } from '../base/ranges.js';
 import {
-	BaseModeSchema,
-	MODE_PROPS_LIST,
+	DeepPartial,
+	flattenToPropsList,
+	ModeOf,
 	ModeSchema,
+	ModeSchemaLevel,
 	modeToCss,
 } from '../modes/modeSchema.js';
 
@@ -35,16 +37,17 @@ const builtinSchemes: Record<string, SchemeDefinition> = {
 	},
 };
 
-export interface ColorPreflightsConfig {
+export interface ColorPreflightsConfig<ModeShape extends ModeSchemaLevel> {
 	namedHues: Record<string, number>;
 	defaultScheme?: 'light' | 'dark' | (string & {});
 	saturation?: number;
 
 	customSchemes?: Record<string, SchemeDefinition>;
 
+	modeSchema: ModeSchema<ModeShape>;
 	modes: {
-		base: BaseModeSchema;
-		[key: string]: ModeSchema;
+		base: ModeOf<ModeShape>;
+		[key: string]: DeepPartial<ModeOf<ModeShape>>;
 	};
 
 	context?: ColorEvaluationContext;
@@ -52,7 +55,9 @@ export interface ColorPreflightsConfig {
 
 const noPreference = `, (prefers-color-scheme: no-preference)`;
 
-export function generateThemeWithModes(config: ColorPreflightsConfig) {
+export function generateThemeWithModes<ModeShape extends ModeSchemaLevel>(
+	config: ColorPreflightsConfig<ModeShape>,
+) {
 	const defaultMode = config.defaultScheme ?? 'light';
 
 	const schemes = {
@@ -152,13 +157,13 @@ ${Object.keys(schemes)
 	.join('\n\n')}
 
 ${Object.entries(config.modes)
-	.map(([modeName, modeSchema]) => {
+	.map(([modeName, modeValue]) => {
 		return `/* Mode: ${modeName} */
 .\\@mode-${modeName}, ${Object.keys(schemes)
 			.map((schemeName) => `.\\@mode-${modeName} .\\@scheme-${schemeName}`)
 			.join(', ')} {
 	${PROPS.MODE.NAME.ASSIGN(modeName)}
-	${formatPropertiesToCss(modeToCss(modeSchema))}
+	${formatPropertiesToCss(modeToCss(modeValue, config.modeSchema))}
 }
 `;
 	})
@@ -169,13 +174,15 @@ ${allColorPropertyNamesWithSchemeTags
 	.map((name) => colorPropertyDefinition({ name }))
 	.join('\n\n')}
 
-${MODE_PROPS_LIST.map((PROP) =>
-	colorPropertyDefinition({
-		name: PROP.NAME,
-		initial: PROP.FALLBACK,
-		type: PROP.TYPE,
-	}),
-).join('\n\n')}
+${flattenToPropsList(config.modeSchema.PROPS)
+	.map((PROP) =>
+		colorPropertyDefinition({
+			name: PROP.NAME,
+			initial: PROP.FALLBACK,
+			type: PROP.TYPE,
+		}),
+	)
+	.join('\n\n')}
 `;
 }
 

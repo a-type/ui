@@ -1,13 +1,12 @@
 import type { Meta, StoryObj as Story } from '@storybook/react';
-import { PROPS } from './base/properties.js';
+import { PROPS } from '../base/properties.js';
 import {
 	createColorDarkModeRange,
 	createColorLightModeRange,
 	createColorRangeCustom,
-} from './base/ranges.js';
-import { MODE_PROPS } from './modes/modeSchema.js';
-import { rootMode } from './modes/rootMode.js';
-import { generateThemeWithModes } from './preflights/generateColorPreflight.js';
+} from '../base/ranges.js';
+import { generateThemeWithModes } from '../preflights/generateColorPreflight.js';
+import { altMode, greenButtonsMode, modeSchema, rootMode } from './modes.js';
 
 const meta = {
 	title: 'theme',
@@ -45,6 +44,7 @@ export const Range: Story<{
 					{generateThemeWithModes({
 						namedHues: { primary: args.sourceHue },
 						saturation: args.saturation,
+						modeSchema: modeSchema,
 						modes: {
 							base: rootMode,
 						},
@@ -205,29 +205,11 @@ export const Mode: Story = {
 					{generateThemeWithModes({
 						namedHues: { primary: 90, blue: 210, green: 150 },
 						saturation: 0.5,
+						modeSchema,
 						modes: {
 							base: rootMode,
-							blue: {
-								ACTION: {
-									PRIMARY: {
-										BG: PROPS.COLOR('blue').DEFAULT.VAR,
-										FG: PROPS.COLOR('blue').INK.VAR,
-									},
-								},
-								CONTROL: {
-									BORDER: PROPS.COLOR('blue').DEFAULT.VAR,
-									BG: PROPS.COLOR('blue').WASH.VAR,
-								},
-							},
-							greenButtons: {
-								ACTION: {
-									PRIMARY: {
-										BG: PROPS.COLOR('green').DEFAULT.VAR,
-										FG: PROPS.COLOR('green').INK.VAR,
-										BORDER: PROPS.COLOR('green').DARK.VAR,
-									},
-								},
-							},
+							blue: altMode,
+							greenButtons: greenButtonsMode,
 						},
 						customSchemes: {
 							contrast: {
@@ -319,9 +301,9 @@ function ModeComponentExample() {
 		<div>
 			<input
 				style={{
-					backgroundColor: MODE_PROPS.CONTROL.BG.VAR,
-					color: MODE_PROPS.CONTROL.FG.VAR,
-					borderColor: MODE_PROPS.CONTROL.BORDER.VAR,
+					backgroundColor: modeSchema.PROPS.CONTROL.BG.VAR,
+					color: modeSchema.PROPS.CONTROL.FG.VAR,
+					borderColor: modeSchema.PROPS.CONTROL.BORDER.VAR,
 					borderWidth: '1px',
 					borderStyle: 'solid',
 					padding: '0.5em 1em',
@@ -332,9 +314,9 @@ function ModeComponentExample() {
 			/>
 			<button
 				style={{
-					backgroundColor: MODE_PROPS.ACTION.PRIMARY.BG.VAR,
-					color: MODE_PROPS.ACTION.PRIMARY.FG.VAR,
-					borderColor: MODE_PROPS.ACTION.PRIMARY.BORDER.VAR,
+					backgroundColor: modeSchema.PROPS.ACTION.PRIMARY.BG.VAR,
+					color: modeSchema.PROPS.ACTION.PRIMARY.FG.VAR,
+					borderColor: modeSchema.PROPS.ACTION.PRIMARY.BORDER.VAR,
 					borderWidth: '1px',
 					borderStyle: 'solid',
 					padding: '0.5em 1em',

@@ -1,107 +1,107 @@
 import { createProp, isProp, PropertyDefinition } from '../base/properties.js';
 
-export interface ColorIntents {
-	BG: string;
-	FG: string;
-	BORDER: string;
+export type PropertyType = 'color' | 'size' | '*';
+export type ModeSchemaProperty =
+	| PropertyType
+	| {
+			type: PropertyType;
+			fallback: string;
+	  };
+
+export type ModeSchemaLevel = {
+	[Key: string]: ModeSchemaProperty | ModeSchemaLevel;
+};
+export type ModeSchema<TSchema extends ModeSchemaLevel = ModeSchemaLevel> = {
+	definition: TSchema;
+	tag: string;
+	PROPS: AsPropertyDefinitions<TSchema>;
+	createBase: (def: ModeOf<TSchema>) => ModeOf<TSchema>;
+	createPartial: (
+		def: DeepPartial<ModeOf<TSchema>>,
+	) => DeepPartial<ModeOf<TSchema>>;
+};
+
+function isModeSchemaProperty(value: any): value is ModeSchemaProperty {
+	return (
+		typeof value === 'string' ||
+		(typeof value === 'object' &&
+			value !== null &&
+			'type' in value &&
+			value.type !== undefined)
+	);
+}
+function getModeSchemaPropertyAsPropertyDefinition(
+	name: string,
+	prop: ModeSchemaProperty,
+): PropertyDefinition {
+	if (typeof prop === 'string') {
+		return createProp(name, prop);
+	} else {
+		return createProp(name, prop.type, prop.fallback);
+	}
 }
 
-export interface FontIntents {
-	SIZE: string;
-	WEIGHT: string;
-	LINE_HEIGHT: string;
-}
-
-export interface BaseModeSchema {
-	CONTROL: ColorIntents;
-	ACTION: {
-		PRIMARY: ColorIntents;
-		SECONDARY: ColorIntents;
-		ANCILLARY: ColorIntents;
-	};
-	SURFACE: {
-		PRIMARY: ColorIntents;
-		SECONDARY: ColorIntents;
-		ANCILLARY: ColorIntents;
-	};
-	TEXT: {
-		PRIMARY: FontIntents;
-		SECONDARY: FontIntents;
-		ANCILLARY: FontIntents;
+export function createModeSchema<T extends ModeSchemaLevel>(
+	schema: T,
+	tag = 'Ⓜ️',
+): ModeSchema<T> {
+	return {
+		definition: schema,
+		tag,
+		PROPS: generateModeProperties(schema, tag),
+		createBase: (def: ModeOf<T>) => def,
+		createPartial: (def: DeepPartial<ModeOf<T>>) => def,
 	};
 }
 
-type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> | undefined };
-export type ModeSchema = DeepPartial<BaseModeSchema>;
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> | undefined };
 
-type AsPropertyDefinitions<T extends object> = {
-	[P in keyof T]: T[P] extends string
-		? PropertyDefinition
-		: T[P] extends object
-		? AsPropertyDefinitions<T[P]>
+export type ModeOf<T extends ModeSchemaLevel> = {
+	[P in keyof T]: T[P] extends ModeSchemaProperty
+		? string
+		: T[P] extends ModeSchemaLevel
+		? ModeOf<T[P]>
 		: never;
 };
 
-export const MODE_PROPS: AsPropertyDefinitions<BaseModeSchema> = {
-	ACTION: {
-		ANCILLARY: {
-			BG: createProp('Ⓜ️-action-ancillary-bg', 'color'),
-			FG: createProp('Ⓜ️-action-ancillary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-action-ancillary-border', 'color'),
-		},
-		PRIMARY: {
-			BG: createProp('Ⓜ️-action-primary-bg', 'color'),
-			FG: createProp('Ⓜ️-action-primary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-action-primary-border', 'color'),
-		},
-		SECONDARY: {
-			BG: createProp('Ⓜ️-action-secondary-bg', 'color'),
-			FG: createProp('Ⓜ️-action-secondary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-action-secondary-border', 'color'),
-		},
-	},
-	CONTROL: {
-		BG: createProp('Ⓜ️-control-bg', 'color'),
-		FG: createProp('Ⓜ️-control-fg', 'color'),
-		BORDER: createProp('Ⓜ️-control-border', 'color'),
-	},
-	SURFACE: {
-		PRIMARY: {
-			BG: createProp('Ⓜ️-surface-primary-bg', 'color'),
-			FG: createProp('Ⓜ️-surface-primary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-surface-primary-border', 'color'),
-		},
-		SECONDARY: {
-			BG: createProp('Ⓜ️-surface-secondary-bg', 'color'),
-			FG: createProp('Ⓜ️-surface-secondary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-surface-secondary-border', 'color'),
-		},
-		ANCILLARY: {
-			BG: createProp('Ⓜ️-surface-ancillary-bg', 'color'),
-			FG: createProp('Ⓜ️-surface-ancillary-fg', 'color'),
-			BORDER: createProp('Ⓜ️-surface-ancillary-border', 'color'),
-		},
-	},
-	TEXT: {
-		PRIMARY: {
-			SIZE: createProp('Ⓜ️-text-primary-size', 'size'),
-			WEIGHT: createProp('Ⓜ️-text-primary-weight', '*'),
-			LINE_HEIGHT: createProp('Ⓜ️-text-primary-line-height', 'size'),
-		},
-		SECONDARY: {
-			SIZE: createProp('Ⓜ️-text-secondary-size', 'size'),
-			WEIGHT: createProp('Ⓜ️-text-secondary-weight', '*'),
-			LINE_HEIGHT: createProp('Ⓜ️-text-secondary-line-height', 'size'),
-		},
-		ANCILLARY: {
-			SIZE: createProp('Ⓜ️-text-ancillary-size', 'size'),
-			WEIGHT: createProp('Ⓜ️-text-ancillary-weight', '*'),
-			LINE_HEIGHT: createProp('Ⓜ️-text-ancillary-line-height', 'size'),
-		},
-	},
-};
+type AsPropertyDefinitions<T> = T extends object
+	? {
+			[P in keyof T]: T[P] extends string
+				? PropertyDefinition
+				: T[P] extends object
+				? AsPropertyDefinitions<T[P]>
+				: never;
+	  }
+	: never;
 
-function flattenToPropsList(obj: any): PropertyDefinition[] {
+export function generateModeProperties<T extends ModeSchemaLevel>(
+	root: T,
+	tag: string,
+): AsPropertyDefinitions<T> {
+	function generatePropsForSchemaLevel(
+		schemaLevel: any,
+		propPrefix: string,
+	): any {
+		const propsLevel: any = {};
+		for (const key in schemaLevel) {
+			const value = schemaLevel[key];
+			const currentPrefix = `${propPrefix}-${key.toLowerCase()}`;
+			if (isModeSchemaProperty(value)) {
+				const propertyDefinition = getModeSchemaPropertyAsPropertyDefinition(
+					currentPrefix,
+					value,
+				);
+				propsLevel[key] = propertyDefinition;
+			} else if (typeof value === 'object' && value !== null) {
+				propsLevel[key] = generatePropsForSchemaLevel(value, currentPrefix);
+			}
+		}
+		return propsLevel;
+	}
+	return generatePropsForSchemaLevel(root, tag);
+}
+
+export function flattenToPropsList(obj: any): PropertyDefinition[] {
 	const propsList: PropertyDefinition[] = [];
 	for (const key in obj) {
 		if (isProp(obj[key])) {
@@ -113,16 +113,16 @@ function flattenToPropsList(obj: any): PropertyDefinition[] {
 	return propsList;
 }
 
-export const MODE_PROPS_LIST: PropertyDefinition[] =
-	flattenToPropsList(MODE_PROPS);
-
-export function modeToCss(mode: ModeSchema): Record<string, string> {
-	return modeToCssDeep(mode);
+export function modeToCss(
+	mode: DeepPartial<ModeOf<any>>,
+	schema: ModeSchema<any>,
+): Record<string, string> {
+	return modeToCssDeep(mode, schema.PROPS);
 }
 
 function modeToCssDeep(
 	mode: any,
-	propStructure: AsPropertyDefinitions<object> = MODE_PROPS,
+	propStructure: AsPropertyDefinitions<object>,
 	cssVars: Record<string, string> = {},
 ): Record<string, string> {
 	for (const [key, value] of Object.entries(mode)) {
@@ -131,7 +131,7 @@ function modeToCssDeep(
 			continue;
 		}
 		if (!isProp(currentProp)) {
-			modeToCssDeep(value as ModeSchema, currentProp, cssVars);
+			modeToCssDeep(value, currentProp, cssVars);
 		} else if (isProp(currentProp)) {
 			cssVars[currentProp.NAME] = value as string;
 		} else {
