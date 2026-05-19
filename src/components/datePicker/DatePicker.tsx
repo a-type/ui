@@ -1,7 +1,6 @@
 import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
 import { clsx } from 'clsx';
 import { ReactNode, useState } from 'react';
-import { PaletteName } from '../../uno/index.js';
 import { Icon } from '../icon/index.js';
 import {
 	CalendarDay,
@@ -50,7 +49,6 @@ function DatePickerMonthControls() {
 
 function DatePickerRoot({
 	className,
-	color,
 	value,
 	onChange,
 	children,
@@ -66,7 +64,6 @@ function DatePickerRoot({
 	return (
 		<div
 			className={clsx(
-				color && `palette-${color}`,
 				'layer-components:(w-[calc(var(--day-size,32px)*7)] flex flex-col items-center justify-center)',
 				className,
 			)}
@@ -89,7 +86,6 @@ export interface DatePickerProps {
 	value: Date | null;
 	onChange: (date: Date | null) => void;
 	className?: string;
-	color?: PaletteName;
 }
 
 function DatePickerDefault(props: DatePickerProps) {

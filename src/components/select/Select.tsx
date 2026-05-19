@@ -11,7 +11,6 @@ import {
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button, ButtonProps } from '../button/Button.js';
 import { getButtonClassName } from '../button/classes.js';
 import { Icon } from '../icon/index.js';
@@ -35,8 +34,8 @@ export const SelectItem = ({
 
 export const SelectItemRoot = withClassName(
 	BaseSelect.Item,
-	'layer-components:(relative h-36px min-h-touch-large flex flex-row select-none items-center pl-35px pr-4 text-md leading-4 color-black)',
-	'[&[data-highlighted]]:(outline-none color-black bg-gray-light) layer-components:[&[data-disabled]]:(pointer-events-none color-gray)',
+	'layer-components:min-h-touch-large layer-components:(relative h-36px flex flex-row select-none items-center pl-35px pr-4 leading-4 color-neutral-ink text-secondary)',
+	'layer-components:[&[data-disabled]]:color-gray [&[data-highlighted]]:(outline-none color-neutral-ink bg-neutral-light) layer-components:[&[data-disabled]]:(pointer-events-none)',
 );
 export const SelectItemIndicatorRoot = withClassName(
 	BaseSelect.ItemIndicator,
@@ -53,7 +52,7 @@ export const SelectGroup = BaseSelect.Group;
 export const SelectRoot = BaseSelect.Root;
 export const selectTriggerClassName = classNames(
 	getButtonClassName({}),
-	'layer-components:([all:unset] inline-flex data-[placeholder]:color-gray-dark)',
+	'layer-components:([all:unset] inline-flex data-[placeholder]:color-neutral-heavy)',
 );
 export const SelectTriggerBase = withClassName(
 	BaseSelect.Trigger,
@@ -73,9 +72,9 @@ export const SelectTrigger = function SelectTrigger({
 	return (
 		<UnstyledSelectTrigger
 			{...props}
-			className="layer-components:(font-normal)"
+			className="layer-components:font-normal"
 			ref={ref}
-			render={render || <Button className="gap-2 font-normal" />}
+			render={render || <Button className="font-normal gap-2" />}
 		>
 			{children || (
 				<>
@@ -90,11 +89,11 @@ export const SelectTrigger = function SelectTrigger({
 export const SelectValue = withClassName(BaseSelect.Value, 'flex flex-row');
 export const SelectGroupLabel = withClassName(
 	BaseSelect.GroupLabel,
-	'select-none px-25px text-xs leading-6 color-black',
+	'select-none px-25px leading-6 color-neutral-ink text-ambient',
 );
 export const SelectSeparator = withClassName(
 	BaseSelect.Separator,
-	'm-1 h-1px bg-gray-light',
+	'm-1 h-1px bg-neutral-light',
 );
 export const SelectIcon = ({
 	ref: forwardedRef,
@@ -124,7 +123,7 @@ export const SelectArrow = ({ className, ...props }: SelectArrowProps) => (
 );
 
 const scrollArrowClass = clsx(
-	'layer-components:(z-1 h-1rem w-full flex cursor-default select-none items-center justify-center rounded-sm text-center text-xs bg-white)',
+	'layer-components:(z-1 h-1rem w-full flex cursor-default select-none items-center justify-center text-center bg-neutral-paper rd-sm text-ambient)',
 	'layer-components:before:(absolute left-0 h-full w-full content-empty)',
 	'layer-components:data-[direction=up]:data-[side=none]:before:(-top-full)',
 	'layer-components:data-[direction=down]:(bottom-0 data-[side=none]:before:-bottom-full)',
@@ -157,65 +156,63 @@ export const SelectContent = ({
 	SelectPositionerProps & { ref?: Ref<HTMLDivElement> }) => {
 	return (
 		<BaseSelect.Portal>
-			<GroupScaleReset>
-				<BaseSelect.Backdrop />
-				<BaseSelect.Positioner
-					side={side}
-					sideOffset={sideOffset}
-					align={align}
-					alignOffset={alignOffset}
-					alignItemWithTrigger={alignItemWithTrigger}
-					disableAnchorTracking={disableAnchorTracking}
-					arrowPadding={arrowPadding}
-					anchor={anchor}
-					collisionAvoidance={collisionAvoidance}
-					collisionBoundary={collisionBoundary}
-					collisionPadding={collisionPadding}
-					sticky={sticky}
-					positionMethod={positionMethod}
-					className={classNames(
-						'layer-components:(z-1 select-none outline-none)',
-						'layer-components:(transform-origin-[--transform-origin])',
+			<BaseSelect.Backdrop />
+			<BaseSelect.Positioner
+				side={side}
+				sideOffset={sideOffset}
+				align={align}
+				alignOffset={alignOffset}
+				alignItemWithTrigger={alignItemWithTrigger}
+				disableAnchorTracking={disableAnchorTracking}
+				arrowPadding={arrowPadding}
+				anchor={anchor}
+				collisionAvoidance={collisionAvoidance}
+				collisionBoundary={collisionBoundary}
+				collisionPadding={collisionPadding}
+				sticky={sticky}
+				positionMethod={positionMethod}
+				className={classNames(
+					'layer-components:(z-1 select-none outline-none)',
+					'layer-components:(transform-origin-[--transform-origin])',
+				)}
+			>
+				<SelectArrow
+					className={clsx(
+						'layer-components:border-black layer-components:(transition transform)',
+						'layer-components:data-[closed]:(opacity-0 scale-0)',
+						'layer-components:data-[open]:(opacity-100 scale-100)',
 					)}
+				/>
+				<BaseSelect.Popup
+					className={classNames(
+						'layer-components:border-black layer-components:(overflow-hidden transition bg-clip-padding shadow-lg bg-neutral-paper border border rd-md border-solid)',
+						'layer-components:transform-origin-[var(--transform-origin)]',
+						'layer-components:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+						'layer-components:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+						'layer-components:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
+						'layer-components:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
+						'layer-components:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
+						'layer-components:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
+						'layer-components:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
+						'layer-components:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
+						'important:motion-reduce:animate-none',
+						'layer-components:data-[side=none]:(min-w-[calc(var(--anchor-width)+2rem)] translate-y-0px)',
+						'layer-components:(max-h-[var(--available-height)] min-w-[var(--anchor-width)])',
+						className,
+					)}
+					style={contentStyle}
+					{...props}
+					ref={forwardedRef}
 				>
-					<SelectArrow
-						className={clsx(
-							'layer-components:(transform transition border-black)',
-							'layer-components:data-[closed]:(scale-0 opacity-0)',
-							'layer-components:data-[open]:(scale-100 opacity-100)',
-						)}
-					/>
-					<BaseSelect.Popup
-						className={classNames(
-							'layer-components:(overflow-hidden border border rounded-md border-solid bg-clip-padding shadow-lg transition bg-white border-black)',
-							'layer-components:transform-origin-[var(--transform-origin)]',
-							'layer-components:data-[starting-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
-							'layer-components:data-[ending-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
-							'layer-components:data-[starting-style]:data-[side=top]:(translate-y--4px opacity-0)',
-							'layer-components:data-[ending-style]:data-[side=top]:(translate-y-0 opacity-0)',
-							'layer-components:data-[starting-style]:data-[side=right]:(translate-x-4px opacity-0)',
-							'layer-components:data-[ending-style]:data-[side=right]:(translate-x-0 opacity-0)',
-							'layer-components:data-[starting-style]:data-[side=left]:(translate-x--4px opacity-0)',
-							'layer-components:data-[ending-style]:data-[side=left]:(translate-x-0 opacity-0)',
-							'important:motion-reduce:animate-none',
-							'layer-components:data-[side=none]:(min-w-[calc(var(--anchor-width)+2rem)] translate-y-0px)',
-							'layer-components:(max-h-[var(--available-height)] min-w-[var(--anchor-width)])',
-							className,
-						)}
-						style={contentStyle}
-						{...props}
-						ref={forwardedRef}
-					>
-						<BaseSelect.ScrollUpArrow className={scrollArrowClass}>
-							<Icon name="chevron" className="rotate-180" />
-						</BaseSelect.ScrollUpArrow>
-						<BaseSelect.List style={viewportStyle}>{children}</BaseSelect.List>
-						<BaseSelect.ScrollDownArrow className={scrollArrowClass}>
-							<Icon name="chevron" />
-						</BaseSelect.ScrollDownArrow>
-					</BaseSelect.Popup>
-				</BaseSelect.Positioner>
-			</GroupScaleReset>
+					<BaseSelect.ScrollUpArrow className={scrollArrowClass}>
+						<Icon name="chevron" className="rotate-180" />
+					</BaseSelect.ScrollUpArrow>
+					<BaseSelect.List style={viewportStyle}>{children}</BaseSelect.List>
+					<BaseSelect.ScrollDownArrow className={scrollArrowClass}>
+						<Icon name="chevron" />
+					</BaseSelect.ScrollDownArrow>
+				</BaseSelect.Popup>
+			</BaseSelect.Positioner>
 		</BaseSelect.Portal>
 	);
 };

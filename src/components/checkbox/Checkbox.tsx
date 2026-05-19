@@ -29,14 +29,15 @@ export function CheckboxRoot({
 		<BaseCheckbox.Root
 			{...props}
 			className={classNames(
-				'layer-components:(relative block h-28px w-28px flex-shrink-0 cursor-pointer border border-default rounded-lg shadow-sm transition-all bg-white)',
-				'layer-components:foc-effect',
+				'layer-components:(relative block h-28px w-28px flex-shrink-0 cursor-pointer transition shadow-sm bg-neutral-paper b border rd-lg)',
+				'layer-components:focus:outline-none',
+				'layer-components:focus-visible:(ring-neutral-ink ring-[2px] ring-offset)',
 				checkedMode === 'faded'
 					? 'layer-components:data-[checked]:(animate-checkbox-fade animate-forwards bg-main)'
 					: 'layer-components:data-[checked]:(bg-main border-main-ink)',
-				'layer-components:[&:hover:not(:disabled)]:(ring-2 bg-lighten-2 ring-bg)',
-				'layer-components:[&:active:not(:disabled)]:(ring-4 bg-darken-1)',
-				'layer-components:[&:disabled]:(bg-transparent border-gray-light shadow-none)',
+				'layer-components:[&:hover:not(:disabled)]:(bg-lighten-2 ring-bg ring-[2px])',
+				'layer-components:[&:active:not(:disabled)]:(bg-darken-1 ring-[4px])',
+				'layer-components:[&:disabled]:(shadow-none bg-transparent border-neutral-light)',
 				className,
 			)}
 		/>
@@ -50,7 +51,10 @@ export function CheckboxIndicator({
 }: CheckboxIndicatorProps) {
 	return (
 		<BaseCheckbox.Indicator
-			className={classNames('absolute center color-black', className)}
+			className={classNames(
+				'absolute left-1/2 top-1/2 color-neutral-ink -translate-1/2',
+				className,
+			)}
 			{...props}
 		>
 			{children ?? <Icon name="check" size={16} />}

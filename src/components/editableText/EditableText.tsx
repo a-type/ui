@@ -105,10 +105,10 @@ export function EditableText({
 			onClick={() => setEditingFinal(true)}
 			className={clsx(
 				inputClassName,
-				'layer-variants:(w-auto inline-flex items-center gap-sm rounded-md px-md text-left font-size-inherit color-inherit bg-transparent border-transparent shadow-none)',
-				'layer-variants:hover:(bg-main-light/80)',
-				'foc-effect',
-				'layer-variants:focus-visible:(bg-main-light/80)',
+				'layer-composed:(w-auto inline-flex items-center text-left shadow-none color-inherit bg-transparent p-control gap-sm border-transparent rd-control font-size-inherit)',
+				'layer-composed:hover:(bg-main-light/80)',
+				'layer-composed:focus:outline-none',
+				'layer-composed:focus-visible:(bg-main-light/80)',
 				'cursor-pointer',
 				className,
 			)}
@@ -116,7 +116,7 @@ export function EditableText({
 			{...rest}
 		>
 			{value}
-			<Icon name="pencil" className="stroke-main-dark opacity-80" />
+			<Icon name="pencil" className="opacity-80 stroke-main-heavy" />
 		</button>
 	);
 }

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { paletteNames } from '../../uno/index.js';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Chip } from './Chip.js';
@@ -7,12 +6,6 @@ import { Chip } from './Chip.js';
 const meta = {
 	title: 'Components/Chip',
 	component: Chip,
-	argTypes: {
-		color: {
-			control: 'select',
-			options: paletteNames,
-		},
-	},
 	args: {
 		children: 'Chip',
 	},
@@ -35,16 +28,16 @@ export const Colors: Story = {
 	render() {
 		return (
 			<div style={{ display: 'flex', gap: '12px' }}>
-				<Chip color="gray">Gray</Chip>
-				<Chip color="primary">Primary</Chip>
-				<Chip color="accent">Accent</Chip>
-				<Chip color="attention">Attention</Chip>
-				<Chip color="success">Success</Chip>
-				<Chip color="lemon">Lemon</Chip>
-				<Chip color="leek">Leek</Chip>
-				<Chip color="tomato">Tomato</Chip>
-				<Chip color="blueberry">Blueberry</Chip>
-				<Chip color="eggplant">Eggplant</Chip>
+				<Chip className="@mode-neutral">Gray</Chip>
+				<Chip>Primary</Chip>
+				<Chip className="@mode-accent">Accent</Chip>
+				<Chip className="@mode-attention">Attention</Chip>
+				<Chip className="@mode-success">Success</Chip>
+				<Chip className="@mode-lemon">Lemon</Chip>
+				<Chip className="@mode-leek">Leek</Chip>
+				<Chip className="@mode-tomato">Tomato</Chip>
+				<Chip className="@mode-blueberry">Blueberry</Chip>
+				<Chip className="@mode-eggplant">Eggplant</Chip>
 			</div>
 		);
 	},

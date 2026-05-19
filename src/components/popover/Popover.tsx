@@ -8,7 +8,6 @@ import { MenuArrowProps } from '@base-ui/react/menu';
 import classNames, { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button, ButtonProps } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import { popupClassName } from '../primitives/menus.js';
@@ -23,8 +22,8 @@ const StyledArrow = withClassName(
 		</PopoverPrimitive.Arrow>
 	),
 	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(scale-0 opacity-0)',
-	'layer-components:data-[open]:(scale-100 opacity-100)',
+	'layer-components:data-[closed]:(opacity-0 scale-0)',
+	'layer-components:data-[open]:(opacity-100 scale-100)',
 );
 
 const StyledClose = ({
@@ -85,51 +84,49 @@ export const PopoverContent = function PopoverContent({
 	}) {
 	return (
 		<PopoverPrimitive.Portal keepMounted={forceMount}>
-			<GroupScaleReset>
-				<PopoverPrimitive.Positioner
-					side={side}
-					sideOffset={sideOffset}
-					align={align}
-					alignOffset={alignOffset}
-					anchor={anchor}
-					disableAnchorTracking={disableAnchorTracking}
-					sticky={sticky}
-					arrowPadding={arrowPadding}
-					collisionAvoidance={collisionAvoidance}
-					collisionBoundary={collisionBoundary}
-					collisionPadding={collisionPadding}
-					positionMethod={positionMethod}
+			<PopoverPrimitive.Positioner
+				side={side}
+				sideOffset={sideOffset}
+				align={align}
+				alignOffset={alignOffset}
+				anchor={anchor}
+				disableAnchorTracking={disableAnchorTracking}
+				sticky={sticky}
+				arrowPadding={arrowPadding}
+				collisionAvoidance={collisionAvoidance}
+				collisionBoundary={collisionBoundary}
+				collisionPadding={collisionPadding}
+				positionMethod={positionMethod}
+			>
+				<StyledContent
+					{...props}
+					ref={ref}
+					className={classNames(
+						{
+							'layer-variants:important:p-0': padding === 'none',
+							'layer-variants:p-md': padding === 'default',
+							'layer-variants:rd-0': radius === 'none',
+							'layer-variants:rd-lg': radius === 'default',
+							'layer-variants:rd-md': radius === 'md',
+						},
+						className,
+					)}
 				>
-					<StyledContent
-						{...props}
-						ref={ref}
-						className={classNames(
-							{
-								'layer-variants:important:p-0': padding === 'none',
-								'layer-variants:p-md': padding === 'default',
-								'layer-variants:rounded-none': radius === 'none',
-								'layer-variants:rounded-lg': radius === 'default',
-								'layer-variants:rounded-md': radius === 'md',
-							},
-							className,
-						)}
-					>
-						{children}
-					</StyledContent>
-				</PopoverPrimitive.Positioner>
-			</GroupScaleReset>
+					{children}
+				</StyledContent>
+			</PopoverPrimitive.Positioner>
 		</PopoverPrimitive.Portal>
 	);
 };
 
 export const PopoverTitle = withClassName(
 	PopoverPrimitive.Title,
-	'layer-components:(m-0 mb-sm text-md font-semibold)',
+	'layer-components:font-semibold layer-components:(m-0 mb-sm text-secondary)',
 );
 
 export const PopoverDescription = withClassName(
 	PopoverPrimitive.Description,
-	'layer-components:(m-0 text-sm text-gray-dark)',
+	'layer-components:(m-0 color-neutral-heavy text-ambient)',
 );
 
 export const Popover = Object.assign(PopoverRoot, {

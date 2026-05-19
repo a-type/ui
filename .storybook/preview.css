@@ -14,3 +14,10 @@ html {
 .sb-main-fullscreen {
 	height: 100dvh;
 }
+
+.sb-main-centered #storybook-root {
+	height: auto;
+	align-items: center;
+	justify-content: center;
+	min-height: 0;
+}

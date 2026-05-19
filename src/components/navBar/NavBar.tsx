@@ -6,11 +6,11 @@ import { withClassName } from '../../hooks.js';
 import { Icon, IconProps } from '../icon/index.js';
 
 export const navBarItemClass = classNames(
-	'layer-components:(relative h-full flex flex-col cursor-pointer select-none items-center justify-center gap-6px whitespace-nowrap rounded-sm border-none px-3 py-1 text-sm transition-colors color-black bg-transparent)',
+	'layer-components:(relative h-full flex flex-col cursor-pointer select-none items-center justify-center gap-6px whitespace-nowrap px-3 py-1 transition-colors color-neutral-ink bg-transparent rd-sm border-none text-ambient)',
 	'layer-components:active:bg-darken-2',
 	'layer-components:hover:(bg-main-light)',
 	'layer-components:foc-effect',
-	'layer-components:[&[data-active=true]]:(color-black color-lighten-2 bg-main-light/50)',
+	'layer-components:[&[data-active=true]]:(color-neutral-ink color-lighten-2 bg-main-light/50)',
 	'layer-responsive:md:(h-auto flex-row-reverse justify-start gap-2 overflow-visible active:bg-darken-2)',
 );
 
@@ -44,13 +44,13 @@ export const NavBarItem = function NavBarItem({
 export const NavBarItemIconWrapper = withClassName(
 	'div',
 	'layer-components:(relative flex)',
-	'layer-components:md:bg-gray-blend layer-components:md:(rounded-lg p-6px)',
+	'layer-components:md:bg-neutral-blend layer-components:md:(p-6px rd-lg)',
 	'layer-variants:md:[*[data-active=true]_&]:bg-[var(--bg)]',
 );
 
 export const NavBarItemText = withClassName(
 	'span',
-	'layer-components:(inline-block overflow-hidden text-ellipsis whitespace-nowrap text-xxs) layer-components:md:(text-md leading-normal)',
+	'layer-components:text-xxs layer-components:(inline-block overflow-hidden text-ellipsis whitespace-nowrap) layer-components:md:(text-secondary leading-normal)',
 );
 
 interface NavBarItemIconProps extends Omit<IconProps, 'name'> {
@@ -82,14 +82,14 @@ export const NavBarItemIcon = function NavBarItemIcon({
 export const NavBarItemPip = withClassName(
 	'div',
 	'palette-attention',
-	'layer-components:(absolute right-6px top-6px h-6px w-6px rounded-lg shadow-sm bg-main)',
+	'layer-components:(absolute right-6px top-6px h-6px w-6px shadow-sm bg-main rd-lg)',
 );
 
 export const NavBarRoot = withClassName(
 	'div',
-	'layer-components:([grid-auto-columns:1fr] [grid-auto-flow:column] z-50 grid h-auto w-full justify-items-center overflow-hidden rounded-none p-1)',
+	'layer-components:([grid-auto-columns:1fr] [grid-auto-flow:column] z-50 grid h-auto w-full justify-items-center overflow-hidden rd-0 p-1)',
 	'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
-	'layer-components:md:(h-min-content flex flex-col items-stretch justify-start gap-2 overflow-x-hidden rounded-none border-none pb-10 bg-transparent border-transparent overflow-y-auto shadow-none)',
+	'layer-components:md:(h-min-content flex flex-col items-stretch justify-start gap-2 overflow-x-hidden rd-0 pb-10 shadow-none bg-transparent border-transparent border-none overflow-y-auto)',
 );
 
 export const NavBar = Object.assign(NavBarRoot, {

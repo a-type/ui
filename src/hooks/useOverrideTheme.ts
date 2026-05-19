@@ -1,14 +1,13 @@
 import { useLayoutEffect } from 'react';
-import { PaletteName } from '../uno/index.js';
 
-export function useOverrideTheme(theme: PaletteName | null | undefined) {
+export function useOverrideRootMode(mode: string | null | undefined) {
 	useLayoutEffect(() => {
-		if (!theme || typeof document === 'undefined') {
+		if (!mode || typeof document === 'undefined') {
 			return;
 		}
-		document.body.classList.add(`theme-${theme}`);
+		document.documentElement.classList.add(`@mode-${mode}`);
 		return () => {
-			document.body.classList.remove(`theme-${theme}`);
+			document.documentElement.classList.remove(`@mode-${mode}`);
 		};
-	}, [theme]);
+	}, [mode]);
 }

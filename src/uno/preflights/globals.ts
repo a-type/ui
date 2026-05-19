@@ -1,4 +1,4 @@
-import { PROPS } from '../logic/properties.js';
+import preset from '../../arbor/arbor.js';
 import { preflight } from './_util.js';
 
 export interface GlobalsPreflightConfig {
@@ -13,11 +13,6 @@ export const globalPreflight = ({
 	preflight({
 		getCSS: () => `
 :root {
-	${PROPS.USER.FONTS.SANS}: "Inter", sans-serif;
-	${PROPS.USER.FONTS.SERIF}: "Domine", serif;
-	${PROPS.USER.FONTS.TITLE}: "Inter", sans-serif;
-	${PROPS.USER.FONTS.DEFAULT}: var(${PROPS.USER.FONTS.SANS}, sans-serif);
-
 	--z-now-playing: 40;
 	--z-nav: 50;
 	${
@@ -31,25 +26,20 @@ export const globalPreflight = ({
 	--z-overdraw: 100000;
 	`
 	}
-
-	${PROPS.BUILT_IN.SHADOW_COLOR}: #000000;
-	${PROPS.BUILT_IN.SHADOW_OPACITY}: 10%;
-
-	${PROPS.UTILS.ARROW_SIZE}: 1rem;
 }
 
 @layer preflightBase {
 	html, body {
 		margin: 0;
 		padding: 0;
-		font-family: var(${PROPS.USER.FONTS.DEFAULT}, sans-serif);
-		font-size: 16px;
+		font-family: Inter, sans-serif;
 		min-height: 100%;
 		--webkit-font-smoothing: antialiased;
 	}
 
 	body {
 		overflow: overlay;
+		background-color: ${preset.modes.base.schema.$tokens.color.main.paper.var}
 	}
 
 	${rootSelector} {

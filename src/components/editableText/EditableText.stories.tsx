@@ -11,6 +11,7 @@ const meta = {
 	},
 	parameters: {
 		controls: { expanded: true },
+		layout: 'centered',
 	},
 } satisfies Meta<typeof EditableText>;
 
@@ -29,6 +30,7 @@ export const Default: Story = {
 				onValueChange={setValue}
 				editing={editable}
 				onEditingChange={setEditable}
+				className="m-auto"
 			/>
 		);
 	},
@@ -45,7 +47,7 @@ export const Title: Story = {
 				onValueChange={setValue}
 				editing={editable}
 				onEditingChange={setEditable}
-				className="text-2xl"
+				className="m-auto text-primary"
 			/>
 		);
 	},

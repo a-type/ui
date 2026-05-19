@@ -17,5 +17,5 @@ export const shortcuts: PresetOptions['shortcuts'] = {
 	unset: '[all:unset]',
 	'bottom-keyboard':
 		'bottom-[var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))]',
-	body: 'min-h-screen bg-wash color-black',
+	body: 'min-h-screen bg-wash color-neutral-ink',
 };

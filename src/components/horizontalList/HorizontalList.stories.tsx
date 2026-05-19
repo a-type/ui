@@ -57,8 +57,8 @@ export const Default: Story = {
 	render: (args) => {
 		const [open, setOpen] = useState(false);
 		return (
-			<div className="h-full min-h-80vh flex flex-col items-center bg-black">
-				<div className="w-400px flex flex-1 flex-col items-stretch bg-white">
+			<div className="h-full min-h-80vh flex flex-col items-center bg-neutral-ink">
+				<div className="w-400px flex flex-1 flex-col items-stretch bg-neutral-paper">
 					<Button
 						toggled={open}
 						onClick={() => setOpen(!open)}
@@ -67,7 +67,7 @@ export const Default: Story = {
 						{open ? 'Close' : 'Open'}
 					</Button>
 					<HorizontalList
-						className="max-h-200px border-t border-t-solid border-t-black"
+						className="border-t-black max-h-200px border-t border-t-solid"
 						openDirection="up"
 						{...args}
 						open={open}
@@ -83,9 +83,9 @@ export const CantOpen: Story = {
 	render: (args) => {
 		const [more, setMore] = useState(false);
 		return (
-			<div className="h-full w-full flex flex-col items-stretch justify-end bg-white">
+			<div className="h-full w-full flex flex-col items-stretch justify-end bg-neutral-paper">
 				<HorizontalList
-					className="max-h-200px border-t border-t-solid border-t-black"
+					className="border-t-black max-h-200px border-t border-t-solid"
 					openDirection="up"
 					{...args}
 				>

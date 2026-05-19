@@ -5,8 +5,6 @@ import { Provider } from '../src/components/provider/Provider.js';
 // @ts-ignore
 import 'virtual:uno.css';
 // @ts-ignore
-import { PROPS } from '../src/uno/index.js';
-// @ts-ignore
 import './preview.css';
 
 const preview: Preview = {
@@ -98,80 +96,25 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
-		tweaks: {
-			description: 'Show tweak pane',
-			defaultValue: false,
-			type: 'boolean',
-			toolbar: {
-				title: 'Tweaks',
-				icon: 'settings',
-				items: [
-					{ value: true, title: 'Show Tweaks' },
-					{ value: false, title: 'Hide Tweaks' },
-				],
-			},
-		},
 	},
 	decorators: [
 		(Story, ctx) => {
 			useEffect(() => {
 				setColorMode(ctx.globals.mode);
-				document.documentElement.classList.add(`theme-${ctx.globals.theme}`);
-				document.documentElement.classList.add(`override-${ctx.globals.mode}`);
+				document.documentElement.classList.add(`@mode-${ctx.globals.theme}`);
+				document.documentElement.classList.add(`@scheme-${ctx.globals.mode}`);
 
 				return () => {
 					document.documentElement.classList.remove(
-						`theme-${ctx.globals.theme}`,
+						`@mode-${ctx.globals.theme}`,
 					);
 					document.documentElement.classList.remove(
-						`override-${ctx.globals.mode}`,
+						`@scheme-${ctx.globals.mode}`,
 					);
 				};
 			}, [ctx.globals.mode, ctx.globals.theme]);
-			useEffect(() => {
-				document.documentElement.style.setProperty(
-					PROPS.USER.SATURATION,
-					`${ctx.globals.saturation / 100}`,
-				);
-				return () => {
-					document.documentElement.style.removeProperty(PROPS.USER.SATURATION);
-				};
-			}, [ctx.globals.saturation]);
-			useEffect(() => {
-				document.documentElement.style.setProperty(
-					PROPS.USER.SPACING_SCALE,
-					`${ctx.globals.spacing}`,
-				);
-				return () => {
-					document.documentElement.style.removeProperty(
-						PROPS.USER.SPACING_SCALE,
-					);
-				};
-			}, [ctx.globals.spacing]);
-			useEffect(() => {
-				document.documentElement.style.setProperty(
-					PROPS.USER.CORNER_SCALE,
-					`${ctx.globals.corners}`,
-				);
-				return () => {
-					document.documentElement.style.removeProperty(
-						PROPS.USER.CORNER_SCALE,
-					);
-				};
-			}, [ctx.globals.corners]);
-			useEffect(() => {
-				document.documentElement.style.setProperty(
-					PROPS.USER.SHADOW_SPREAD,
-					`${ctx.globals.shadows ? 0 : 1}`,
-				);
-				return () => {
-					document.documentElement.style.removeProperty(
-						PROPS.USER.SHADOW_SPREAD,
-					);
-				};
-			}, [ctx.globals.shadows]);
 			return (
-				<Provider tweaks={ctx.globals.tweaks}>
+				<Provider>
 					<Story />
 				</Provider>
 			);

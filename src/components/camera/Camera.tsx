@@ -167,15 +167,15 @@ export function CameraRoot({
 				ref={ref}
 				className={classNames(
 					'override-light',
-					'layer-components:([font-family:inherit] relative min-h-4 min-w-4 overflow-hidden rounded-lg color-white bg-black)',
-					fullscreen && 'fixed inset-0 z-1000 h-full w-full rounded-none',
+					'layer-components:([font-family:inherit] relative min-h-4 min-w-4 overflow-hidden color-neutral-paper bg-neutral-ink rd-lg)',
+					fullscreen && 'fixed inset-0 z-1000 h-full w-full rd-0',
 					className,
 				)}
 				{...rest}
 			>
 				<video
 					ref={videoRef}
-					className="h-full w-full object-cover"
+					className="object-cover h-full w-full"
 					autoPlay
 					muted
 					playsInline
@@ -214,10 +214,10 @@ export function CameraShutterButton({
 
 const StyledShutterButton = withClassName(
 	BaseButton,
-	'layer-components:(absolute bottom-3 left-1/2 h-16 w-16 cursor-pointer border-2 rounded-full border-solid opacity-80 ring-2 bg-white border-black ring-white -translate-x-1/2)',
-	'layer-components:(hover:opacity-100 hover:bg-gray-wash)',
+	'layer-components:ring-2 layer-components:border-black layer-components:ring-white layer-components:(absolute bottom-3 left-1/2 h-16 w-16 cursor-pointer border-2 opacity-80 bg-neutral-paper rd-full border-solid -translate-x-1/2)',
+	'layer-components:(hover:opacity-100 hover:bg-neutral-wash)',
 	'layer-components:focus-visible:bg-lighten-1',
-	'layer-components:(foc-effect focus:opacity-100)',
+	'layer-components:foc-effect layer-components:(focus:opacity-100)',
 	'layer-components:(sm:h-8 sm:w-8)',
 );
 
@@ -251,7 +251,7 @@ export const CameraDeviceSelector = ({
 			<Button
 				emphasis="ghost"
 				className={clsx(
-					'layer-components:(absolute bottom-2 left-2 color-white)',
+					'layer-components:(absolute bottom-2 left-2 color-neutral-paper)',
 					className,
 				)}
 				onClick={swapCamera}
@@ -273,7 +273,7 @@ export const CameraDeviceSelector = ({
 					<Button
 						emphasis="ghost"
 						className={clsx(
-							'layer-components:(absolute bottom-2 left-2 color-white)',
+							'layer-components:(absolute bottom-2 left-2 color-neutral-paper)',
 							className,
 						)}
 					>
@@ -298,7 +298,7 @@ export const CameraFullscreenButton = (props: ButtonProps) => {
 		<Button
 			{...props}
 			emphasis="ghost"
-			className="absolute right-2 top-2 color-white"
+			className="absolute right-2 top-2 color-neutral-paper"
 			onClick={() => setFullscreen(!fullscreen)}
 		>
 			<Icon name={fullscreen ? 'x' : 'maximize'} />

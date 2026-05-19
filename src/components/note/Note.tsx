@@ -1,21 +1,17 @@
 import classNames, { clsx } from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/index.js';
 import { TextArea } from '../textArea/TextArea.js';
 
 export interface NoteProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode;
-	color?: PaletteName;
 }
 
-function NoteRoot({ className, color, children, ...rest }: NoteProps) {
+function NoteRoot({ className, children, ...rest }: NoteProps) {
 	return (
 		<div
 			className={classNames(
-				color && `palette-${color}`,
-				'foc-contained',
-				'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(ring ring-4 bg-lighten-3 ring-main-light)',
+				'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:ring-4 layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(bg-lighten-3 ring-main-light ring)',
 				className,
 			)}
 			{...rest}
@@ -23,8 +19,8 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 			<div className="layer-components:(flex flex-row)">
 				<div
 					className={clsx(
-						'layer-components:(relative flex-1 border border-solid p-sm text-sm italic color-black bg-main-wash bg-darken-1 border-main-dark) layer-variants:border-r-0',
-						'layer-variants:[&_input,&_textarea]:(border-none p-0 bg-transparent ring-none shadow-none)',
+						'layer-components:(relative flex-1 italic color-neutral-ink bg-main-wash bg-darken-1 p-sm border-main-heavy border border-solid text-ambient) layer-variants:border-r-0',
+						'layer-variants:[&_input,&_textarea]:(p-0 shadow-none bg-transparent ring-none border-none)',
 					)}
 				>
 					{children}
@@ -34,16 +30,16 @@ function NoteRoot({ className, color, children, ...rest }: NoteProps) {
 					aria-hidden
 				>
 					{/* folded corner */}
-					<div className="layer-components:(relative h-[20px] w-[20px] flex-[0_0_20px] border-0 border-solid border-main-dark) layer-variants:(border-b border-l)">
+					<div className="layer-components:(relative h-[20px] w-[20px] flex-[0_0_20px] border-0 border-main-heavy border-solid) layer-variants:(border-b border-l)">
 						{/* top corner */}
 						<div
-							className={`layer-components:(box-content h-0 w-0 transform-origin-br translate--7px rotate--45 border-13px border-solid border-transparent border-r-main-wash border-r-darken-1)`}
+							className={`layer-components:(box-content h-0 w-0 border-13px border-transparent border-r-main-wash border-r-darken-1 border-solid transform-origin-br translate--7px rotate--45)`}
 						/>
 						{/* diagonal line */}
-						<div className="layer-components:(absolute left-9px top--3px h-27px w-0.5px transform-origin-cc rotate--45 bg-main-dark)" />
+						<div className="layer-components:(absolute left-9px top--3px h-27px w-0.5px bg-main-heavy transform-origin-cc rotate--45)" />
 					</div>
 					{/* bottom right corner */}
-					<div className="layer-components:(flex-1 border-0 border-solid bg-main-wash bg-darken-1 border-main-dark) layer-variants:(border-b border-r)" />
+					<div className="layer-components:(flex-1 border-0 bg-main-wash bg-darken-1 border-main-heavy border-solid) layer-variants:(border-r border-b)" />
 				</div>
 			</div>
 		</div>

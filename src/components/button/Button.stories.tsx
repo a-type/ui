@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { paletteNames } from '../../uno/index.js';
 import { Avatar } from '../avatar/Avatar.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
@@ -10,12 +9,6 @@ import { ConfirmedButton } from './ConfirmedButton.js';
 const meta = {
 	title: 'Components/Button',
 	component: Button,
-	argTypes: {
-		color: {
-			control: 'select',
-			options: paletteNames,
-		},
-	},
 	parameters: {
 		controls: { expanded: true },
 	},
@@ -65,7 +58,7 @@ export const Default: Story = {
 					<Button {...args} emphasis="ghost">
 						Ghost
 					</Button>
-					<Button {...args} emphasis="contrast">
+					<Button {...args} emphasis="primary" className="@mode-contrast">
 						Contrast
 					</Button>
 				</Box>
@@ -125,8 +118,8 @@ export const ToggledIcon: Story = {
 export const Alignment: Story = {
 	render(args) {
 		return (
-			<div className="col">
-				<div className="row border-default">
+			<div className="flex flex-col">
+				<div className="flex flex-row b b-solid">
 					<Button {...args} size="small">
 						Button
 					</Button>
@@ -134,7 +127,7 @@ export const Alignment: Story = {
 						<Icon name="placeholder" />
 					</Button>
 				</div>
-				<div className="row border-default">
+				<div className="flex flex-row b b-solid">
 					<Button {...args}>Button</Button>
 					<Button {...args}>
 						<Icon name="placeholder" />

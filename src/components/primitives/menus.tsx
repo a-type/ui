@@ -1,44 +1,45 @@
 import clsx from 'clsx';
 
 export const popupClassName = clsx(
-	'layer-primitives:(max-w-90vw min-w-120px border rounded-md shadow-lg transition bg-white border-black)',
+	'layer-primitives:(max-w-90vw min-w-120px transition shadow-lg bg-neutral-paper b-neutral-ink b rd-md)',
 	'layer-primitives:transform-origin-[var(--transform-origin)]',
 	'layer-primitives:(max-h-[--available-height] max-w-[--available-width])',
-	'layer-primitives:foc',
+	'layer-primitives:focus:outline-none',
+	'layer-primitives:focus-visible:(ring-main-ink/50 ring-[2px])',
 
-	'transform-origin-[--transform-origin] will-change-transform',
+	'will-change-transform transform-origin-[--transform-origin]',
 	'important:motion-reduce:transition-none',
-	'layer-primitives:data-[starting-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
-	'layer-primitives:data-[ending-style]:data-[side=bottom]:(translate-y-4px opacity-0)',
-	'layer-primitives:data-[starting-style]:data-[side=top]:(translate-y--4px opacity-0)',
-	'layer-primitives:data-[ending-style]:data-[side=top]:(translate-y-0 opacity-0)',
-	'layer-primitives:data-[starting-style]:data-[side=right]:(translate-x-4px opacity-0)',
-	'layer-primitives:data-[ending-style]:data-[side=right]:(translate-x-0 opacity-0)',
-	'layer-primitives:data-[starting-style]:data-[side=left]:(translate-x--4px opacity-0)',
-	'layer-primitives:data-[ending-style]:data-[side=left]:(translate-x-0 opacity-0)',
+	'layer-primitives:data-[starting-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+	'layer-primitives:data-[ending-style]:data-[side=bottom]:(opacity-0 translate-y-4px)',
+	'layer-primitives:data-[starting-style]:data-[side=top]:(opacity-0 translate-y--4px)',
+	'layer-primitives:data-[ending-style]:data-[side=top]:(opacity-0 translate-y-0)',
+	'layer-primitives:data-[starting-style]:data-[side=right]:(opacity-0 translate-x-4px)',
+	'layer-primitives:data-[ending-style]:data-[side=right]:(opacity-0 translate-x-0)',
+	'layer-primitives:data-[starting-style]:data-[side=left]:(opacity-0 translate-x--4px)',
+	'layer-primitives:data-[ending-style]:data-[side=left]:(opacity-0 translate-x-0)',
 );
 
 export const itemListClassName = clsx(
-	'layer-primitives:(max-h-full min-h-0 overflow-x-clip rounded-inherit overflow-y-auto overflow-unstable)',
+	'layer-primitives:(max-h-full min-h-0 overflow-x-clip rd-inherit overflow-y-auto overflow-unstable)',
 );
 
 export const itemClassName = clsx(
-	'layer-primitives:(relative min-h-touch-large flex cursor-pointer select-none items-center py-sm pl-8 pr-4 text-left text-md leading-4 color-main-ink)',
-	'layer-primitives:[&[data-disabled]]:(pointer-events-none color-gray-dark bg-white)',
+	'layer-primitives:min-h-touch-large layer-primitives:(relative flex cursor-pointer select-none items-center pl-8 pr-4 text-left leading-4 color-main-ink py-sm text-secondary)',
+	'layer-primitives:[&[data-disabled]]:(pointer-events-none color-neutral-heavy bg-neutral-paper)',
 
-	'layer-primitives:hover:(color-black bg-main-light)',
-	'layer-primitives:data-[highlighted]:(color-black bg-main-light)',
+	'layer-primitives:hover:(color-neutral-ink bg-main-light)',
+	'layer-primitives:data-[highlighted]:(color-neutral-ink bg-main-light)',
 
 	'layer-primitives:focus:outline-none',
-	'layer-primitives:focus-visible:(color-black bg-main-light)',
+	'layer-primitives:focus-visible:(color-neutral-ink bg-main-light)',
 );
 
 export const arrowClassName = clsx(
 	'layer-primitives:(arrow)',
-	'layer-primitives:data-[closed]:(scale-0 opacity-0)',
-	'layer-primitives:data-[open]:(scale-100 opacity-100)',
+	'layer-primitives:data-[closed]:(opacity-0 scale-0)',
+	'layer-primitives:data-[open]:(opacity-100 scale-100)',
 );
 
 export const separatorClassName = clsx(
-	'layer-primitives:(m-5px h-1px bg-gray)',
+	'layer-primitives:(m-5px h-1px bg-neutral)',
 );

@@ -35,7 +35,7 @@ export function PageContent({
 				}
 			}
 			gap="md"
-			container="reset"
+			container
 			className={classNames(
 				'[grid-area:content]',
 				'layer-components:flex-1-0-auto layer-components:(mx-auto max-w-full min-w-0)',

@@ -73,7 +73,7 @@ function ToastList() {
 				// ending styles
 				'data-[ending-style]:(opacity-0)',
 				// natural or close button
-				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(scale-90 opacity-50 -translate-y-150%)',
+				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(opacity-50 scale-90 -translate-y-150%)',
 				// swiping down
 				'data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
 				'data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
@@ -95,10 +95,10 @@ function ToastList() {
 				mode === 'dark' ? 'override-light' : 'override-dark',
 			)}
 		>
-			<Toast.Content className="pointer-events-auto max-w-sm flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
+			<Toast.Content className="max-w-sm pointer-events-auto flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
 				<div
 					className={clsx(
-						'layer-components:(relative b-1 rounded-md b-solid py-sm pl-md pr-sm shadow-md color-black bg-main-wash b-black)',
+						'layer-components:b-black layer-components:(relative b-1 shadow-md color-neutral-ink bg-main-wash pl-md pr-sm py-sm rd-md b-solid)',
 						'layer-components:(flex flex-row gap-sm)',
 						'[[data-behind]:not([data-expanded])_&]:(max-h-[--height] bg-darken-2)',
 					)}
@@ -110,7 +110,7 @@ function ToastList() {
 						)}
 					>
 						<div className="flex flex-col gap-xs">
-							<Toast.Title className="m-0 text-sm font-bold leading-tight" />
+							<Toast.Title className="font-bold leading-tight m-0 text-ambient" />
 							<div className="flex gap-sm">
 								{toast.data?.loading ? (
 									<Spinner size={15} className="relative top-2px" />
@@ -127,7 +127,7 @@ function ToastList() {
 										className="relative top-2px"
 									/>
 								) : null}
-								<Toast.Description className="m-0 text-sm" />
+								<Toast.Description className="m-0 text-ambient" />
 							</div>
 						</div>
 						<Toast.Close
@@ -146,7 +146,7 @@ function ToastList() {
 						{toast.data.actions.toReversed().map((action, index: number) => (
 							<Toast.Action
 								key={index}
-								className="text-xs"
+								className="text-ambient"
 								onClick={action.onClick}
 								render={
 									<Button

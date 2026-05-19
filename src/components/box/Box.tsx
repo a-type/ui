@@ -1,11 +1,5 @@
 import clsx from 'clsx';
 import { Ref } from 'react';
-import {
-	GroupScaleLayer,
-	GroupScaleReset,
-	useGroupScaleStyles,
-} from '../../systems/GroupScale.js';
-import { PaletteName } from '../../uno/index.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export type BoxAlignment = 'center' | 'stretch' | 'start' | 'end';
@@ -53,9 +47,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	gap?: BoxSpacingSize | boolean;
 	wrap?: BoxResponsive<boolean>;
 	p?: BoxResponsive<BoxSpacingSize | boolean>;
-	container?: boolean | 'reset';
 	surface?: boolean | 'white';
-	color?: PaletteName;
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
@@ -63,6 +55,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	elevated?: ShadowValue;
 	rounded?: 'sm' | 'md' | 'lg' | 'xl' | boolean;
 	ref?: Ref<HTMLDivElement>;
+	container?: boolean;
 }
 
 export function Box({
@@ -75,8 +68,8 @@ export function Box({
 	p = 'none',
 	d = 'row',
 	direction = d,
+	style,
 	container,
-	style: userStyle,
 	surface,
 	color,
 	border,
@@ -89,11 +82,6 @@ export function Box({
 	ref,
 	...rest
 }: BoxProps) {
-	const style = useGroupScaleStyles(
-		userStyle,
-		container === 'reset' ? 1 : undefined,
-	);
-
 	const items = itemsSolo ?? align?.split(' ')[0];
 	const justify = justifySolo ?? align?.split(' ')[1];
 
@@ -104,7 +92,7 @@ export function Box({
 			style={style}
 			className={clsx(
 				'layer-components:relative layer-components:flex',
-				color && `palette-${color}`,
+				color && `@mode-${color}`,
 				{
 					'layer-components:flex-row': hasDefault(direction, 'row') && !col,
 					'layer-components:flex-col': hasDefault(direction, 'col') || col,
@@ -182,17 +170,17 @@ export function Box({
 					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
 					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
 
-					'layer-components:rounded-sm': rounded === 'sm',
-					'layer-components:rounded-md': rounded === 'md',
-					'layer-components:rounded-lg':
+					'layer-components:rd-xs': rounded === 'sm',
+					'layer-components:rd-sm': rounded === 'md',
+					'layer-components:rd-md':
 						rounded === 'lg' ||
 						rounded === true ||
 						(rounded === undefined && (surface || border)),
-					'layer-components:rounded-xl': rounded === 'xl',
+					'layer-components:rd-lg': rounded === 'xl',
 
-					'layer-components:(color-black bg-white border-gray-dark)':
+					'layer-components:color-neutral-ink layer-components:bg-neutral-paper layer-components:border-neutral-heavy':
 						surface === 'white',
-					'layer-components:(color-main-ink bg-main-wash border-main-dark)':
+					'layer-components:(color-main-ink bg-main-wash border-main-heavy)':
 						surface === true,
 
 					'layer-components:(border border-solid)': border,
@@ -211,19 +199,12 @@ export function Box({
 					'layer-components:shadow-lg': elevated?.includes('lg'),
 					'layer-components:shadow-xl': elevated?.includes('xl'),
 					'layer-components:shadow-inset': elevated?.startsWith('-'),
-					'layer-components:(shadow-up)': elevated?.endsWith('-up'),
+					'layer-components:shadow-up': elevated?.endsWith('-up'),
 				},
 				className,
 			)}
 		/>
 	);
-
-	if (container || p) {
-		if (container === 'reset') {
-			return <GroupScaleReset>{main}</GroupScaleReset>;
-		}
-		return <GroupScaleLayer>{main}</GroupScaleLayer>;
-	}
 
 	return main;
 }

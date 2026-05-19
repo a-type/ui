@@ -2,7 +2,6 @@ import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
 import clsx from 'clsx';
 import { ReactNode, useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/index.js';
 import { Icon } from '../icon/Icon.js';
 import {
 	CalendarDay,
@@ -66,7 +65,6 @@ function DateRangePickerMonthControls() {
 
 function DateRangePickerRoot({
 	children,
-	color,
 	value,
 	onChange,
 	className,
@@ -111,11 +109,7 @@ function DateRangePickerRoot({
 			rangeValue={value}
 			onRangeChange={(range) => onChange(range)}
 			onDisplayChange={onDisplayChange}
-			className={clsx(
-				'layer-components:(flex justify-center)',
-				color && `palette-${color}`,
-				className,
-			)}
+			className={clsx('layer-components:(flex justify-center)', className)}
 			{...rest}
 		>
 			<RangeLayout>{children}</RangeLayout>
@@ -127,7 +121,6 @@ export interface DateRangePickerProps {
 	value: { start: Date | null; end: Date | null };
 	onChange: (value: { start: Date | null; end: Date | null }) => void;
 	className?: string;
-	color?: PaletteName;
 }
 
 function DateRangePickerBase(props: DateRangePickerProps) {

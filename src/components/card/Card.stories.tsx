@@ -31,7 +31,7 @@ type Story = StoryObj<typeof CardRoot>;
 
 export const Default: Story = {
 	render: (args) => (
-		<div className="row items-stretch">
+		<div className="flex flex-row items-stretch gap-md">
 			<CardRoot {...args} className="min-h-20vh">
 				<CardImage
 					render={

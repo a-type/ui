@@ -40,8 +40,8 @@ export const Default: Story = {
 			<PageRoot>
 				<PageContent>
 					<div className="text-center">
-						<h1 className="text-3xl font-bold">Hello, World!</h1>
-						<p className="text-lg">This is a simple page layout.</p>
+						<h1 className="font-bold text-primary">Hello, World!</h1>
+						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<Switch checked={content} onCheckedChange={toggleContent} />
 					{content && (
@@ -98,8 +98,8 @@ export const ManualWidth: Story = {
 			<PageRoot>
 				<PageContent className="max-w-300px">
 					<div className="text-center">
-						<h1 className="text-3xl font-bold">Hello, World!</h1>
-						<p className="text-lg">This is a simple page layout.</p>
+						<h1 className="font-bold text-primary">Hello, World!</h1>
+						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<Card.Grid>
 						{new Array(100).fill(null).map((_, i) => (
@@ -143,8 +143,8 @@ export const WithoutNav: Story = {
 		<PageRoot className="h-full w-full">
 			<PageContent>
 				<div className="text-center">
-					<h1 className="text-3xl font-bold">Hello, World!</h1>
-					<p className="text-lg">This is a simple page layout.</p>
+					<h1 className="font-bold text-primary">Hello, World!</h1>
+					<p className="text-primary">This is a simple page layout.</p>
 					<Card.Grid>
 						{new Array(100).fill(null).map((_, i) => (
 							<Card key={i}>
@@ -182,8 +182,8 @@ export const WithVirtualKeyboard: Story = {
 			<PageRoot className="h-full w-full">
 				<PageContent>
 					<div className="text-center">
-						<h1 className="text-3xl font-bold">Hello, World!</h1>
-						<p className="text-lg">This is a simple page layout.</p>
+						<h1 className="font-bold text-primary">Hello, World!</h1>
+						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<PageNowPlaying keepAboveKeyboard>
 						<Button onClick={() => setKeyboard((v) => !v)}>
@@ -209,7 +209,7 @@ export const WithVirtualKeyboard: Story = {
 						</NavBarItem>
 					</NavBarRoot>
 				</PageNav>
-				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-black" />
+				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-neutral-ink" />
 			</PageRoot>
 		);
 	},

@@ -36,15 +36,15 @@ export const LightboxClose = (props: DialogCloseProps) => (
 
 export const LightboxOverlay = withClassName(
 	Dialog.Backdrop,
-	'layer-components:(fixed inset-0 z-backdrop backdrop-blur-sm bg-black/50)',
-	'transform-gpu !motion-reduce:animate-none',
+	'layer-components:(fixed inset-0 z-backdrop backdrop-blur-sm bg-neutral-ink/50)',
+	'!motion-reduce:animate-none transform-gpu',
 	'layer-components:(animate-fade-in [&[data-state=closed]]:animate-fade-out) animate-duration-200',
 );
 
 export const LightboxContentRoot = withClassName(
 	Dialog.Popup,
-	'layer-components:(fixed z-dialog h-full max-h-full max-w-full w-full flex items-center justify-center border-none bg-none p-lg)',
-	'transform-gpu !motion-reduce:animate-none',
+	'layer-components:(fixed z-dialog h-full max-h-full max-w-full w-full flex items-center justify-center bg-none p-lg border-none)',
+	'!motion-reduce:animate-none transform-gpu',
 	'layer-components:(left-50% top-50% max-h-85vh w-90vw translate-[-50%])',
 	'layer-components:animate-dialog-in',
 	'layer-components:[&[data-state=closed]]:animate-dialog-out',
@@ -84,7 +84,7 @@ function LightboxDefault({
 
 const LightboxImage = withClassName(
 	'img',
-	'max-h-full max-w-full min-h-80px min-w-80px object-contain',
+	'object-contain max-h-full max-w-full min-h-80px min-w-80px',
 );
 
 export const Lightbox = Object.assign(LightboxDefault, {

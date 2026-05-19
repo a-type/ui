@@ -45,7 +45,13 @@ export const CustomStyles: Story = {
 						setValue(v as number);
 					}
 				}}
-				color={value < 0 ? 'attention' : value > 0 ? 'success' : 'primary'}
+				className={
+					value < 0
+						? '@mode-attention'
+						: value > 0
+						? '@mode-success'
+						: '@mode-base'
+				}
 				{...args}
 			>
 				<Slider.Track
@@ -59,7 +65,7 @@ export const CustomStyles: Story = {
 				>
 					<Slider.Indicator />
 					<Slider.Thumb className="h-24px w-24px">
-						<div className="text-lg">
+						<div className="text-primary">
 							{['😭', '😔', '😐', '😊', '😃'][(value as number) + 2]}
 						</div>
 					</Slider.Thumb>

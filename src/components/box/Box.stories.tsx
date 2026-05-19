@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { paletteNames } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
 import { Checkbox } from '../checkbox/Checkbox.js';
 import { Progress } from '../progress/Progress.js';
@@ -52,13 +51,6 @@ const meta = {
 		},
 		container: {
 			type: 'boolean',
-		},
-		color: {
-			type: 'string',
-			options: paletteNames,
-			control: {
-				type: 'select',
-			},
 		},
 		children: {
 			table: {
@@ -132,7 +124,10 @@ function SurfaceContent({ name }: { name: string }) {
 export const Surfaces: Story = {
 	render(args) {
 		return (
-			<div className="grid grid-cols-2 gap-lg bg-wash md:grid-cols-3" {...args}>
+			<div
+				className="grid grid-cols-2 bg-main-wash gap-lg md:grid-cols-3"
+				{...args}
+			>
 				<Box {...args} surface="white" p="lg" col gap>
 					<SurfaceContent name="White" />
 				</Box>
@@ -142,8 +137,8 @@ export const Surfaces: Story = {
 				<Box {...args} surface color="accent" p="lg" col gap>
 					<SurfaceContent name="Accent" />
 				</Box>
-				<Box {...args} surface color="gray" p="lg" col gap>
-					<SurfaceContent name="Gray" />
+				<Box {...args} surface color="neutral" p="lg" col gap>
+					<SurfaceContent name="Neutral" />
 				</Box>
 				<Box {...args} surface color="attention" p="lg" col gap>
 					<SurfaceContent name="Attention" />

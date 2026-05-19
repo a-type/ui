@@ -18,7 +18,7 @@ import { Spinner } from '../spinner/Spinner.js';
 
 export const EmojiPickerRoot = withClassName(
 	Core.Root,
-	'layer-components:(isolate flex flex-col w-fit h-368px gap-sm)',
+	'layer-components:(h-368px w-fit flex flex-col isolate gap-sm)',
 );
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
@@ -31,7 +31,7 @@ export const EmojiPickerViewport = ({
 }: EmojiPickerViewportProps) => (
 	<Box
 		className={clsx(
-			'layer-components:(min-h-0 flex-1 overflow-hidden rounded-md bg-white)',
+			'layer-components:(min-h-0 flex-1 overflow-hidden bg-neutral-paper rd-md)',
 			className,
 		)}
 	>
@@ -51,7 +51,7 @@ export const EmojiPickerEmpty = withClassName(
 	withProps(Core.Empty, {
 		children: <>No emoji found</>,
 	}),
-	'layer-components:(absolute inset-0 flex items-center justify-center bg-inherit color-gray-dark text-xs)',
+	'layer-components:(absolute inset-0 flex items-center justify-center color-neutral-heavy bg-inherit text-ambient)',
 );
 
 export const EmojiPickerCategoryHeader = (
@@ -59,7 +59,7 @@ export const EmojiPickerCategoryHeader = (
 ) => (
 	<div
 		className={clsx(
-			'layer-components:(sticky top-0 px-md py-sm text-xs font-semibold color-gray-dark bg-inherit)',
+			'layer-components:font-semibold layer-components:(sticky top-0 color-neutral-heavy bg-inherit px-md py-sm text-ambient)',
 			props.className,
 		)}
 	>
@@ -68,7 +68,7 @@ export const EmojiPickerCategoryHeader = (
 );
 export const EmojiPickerRow = withClassName(
 	'div',
-	'layer-components:(scroll-my-xs px-xs)',
+	'layer-components:scroll-my-xs layer-components:(px-xs)',
 );
 export const EmojiPickerEmoji = withClassName(
 	(p: Omit<EmojiPickerListEmojiProps, 'color'>) => (
@@ -79,7 +79,7 @@ export const EmojiPickerEmoji = withClassName(
 			toggleMode="color"
 			size="small"
 			aria-label={p.emoji.label}
-			className="p-xs text-lg"
+			className="p-xs text-primary"
 		>
 			<Button.Icon>{p.emoji.emoji}</Button.Icon>
 		</Button>
@@ -130,7 +130,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 					toggleMode="color"
 					size="small"
 					aria-label={`Skin tone ${option}`}
-					className="p-xs text-md"
+					className="p-xs text-secondary"
 					onClick={() => setSkinTone(option.skinTone)}
 				>
 					<Button.Icon>{option.emoji}</Button.Icon>

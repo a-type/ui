@@ -79,10 +79,10 @@ export function Peek({ peekHeight = 120, children, className }: PeekProps) {
 				<button
 					data-state={open ? 'open' : 'closed'}
 					className={classNames(
-						'absolute bottom-0 z-1 h-80px w-full cursor-pointer border-b border-none border-b-solid bg-transparent border-white',
+						'border-white absolute bottom-0 z-1 h-80px w-full cursor-pointer bg-transparent border-b border-none border-b-solid',
 						'animate-fade-in',
-						'focus-visible:(outline-none border-b border-b-solid from-transparent to-primary-wash bg-gradient-to-b border-main',
-						'after:(absolute inset-0 top-auto h-80px flex flex-col items-center justify-end from-transparent to-white bg-gradient-to-b p-3 text-xs content-["-_tap_to_expand_-"] color-gray-dark)',
+						'focus-visible:(outline-none to-primary-wash from-transparent bg-gradient-to-b border-main border-b border-b-solid',
+						'after:to-white after:(absolute inset-0 top-auto h-80px flex flex-col items-center justify-end p-3 content-["-_tap_to_expand_-"] from-transparent bg-gradient-to-b color-neutral-heavy text-ambient)',
 						'after:[&[data-state=open]]:content-["-_tap_to_collapse_-"]',
 					)}
 					onClick={toggle}

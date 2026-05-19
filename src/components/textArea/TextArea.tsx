@@ -76,7 +76,7 @@ function TextAreaInput({
 
 const TextAreaBorder = withClassName(
 	Input.Border,
-	clsx('layer-composed:rounded-lg'),
+	clsx('layer-composed:rd-sm'),
 );
 
 const TextAreaDefault = function TextArea({

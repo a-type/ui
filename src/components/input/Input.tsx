@@ -1,3 +1,4 @@
+import { $systemProps } from '@arbor-css/core';
 import {
 	Input as BaseInput,
 	InputProps as BaseInputProps,
@@ -6,26 +7,24 @@ import clsx from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { inputInfo } from '../../systems/inputs.js';
-import { PROPS } from '../../uno/index.js';
 
 export const inputClassName = clsx(
-	'layer-components:(min-w-60px flex-1 select-auto border-none px-0 py-1.25 text-md font-inherit color-inherit bg-transparent)',
-	'layer-components:placeholder:color-gray-dark',
+	'layer-components:(min-w-60px flex-1 select-auto px-0 color-inherit bg-transparent py-control border-none text-secondary font-inherit)',
+	'layer-components:placeholder:color-neutral-heavy',
 	'layer-components:focus:(outline-none)',
 	'layer-components:focus-visible:(outline-none)',
-	'layer-components:first:(rounded-l-inherit pl-md)',
-	'layer-components:last:(rounded-r-inherit pr-md)',
+	'layer-components:first:(pl-control rd-l-inherit)',
+	'layer-components:last:(pr-control rd-r-inherit)',
 );
 
 const inputBorderClassName = clsx(
-	'layer-components:(min-w-60px flex flex-row items-center gap-xs border-1 border-thin rounded-lg border-solid text-md shadow-sm shadow-inset transition-shadow color-black bg-white border-black)',
+	'layer-components:(min-w-60px flex flex-row items-center shadow-inset transition-shadow shadow-sm color-neutral-ink bg-neutral-paper gap-xs b-neutral-ink b b rd-control b-solid text-secondary)',
 	'layer-components:(w-max-content overflow-clip)',
-	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(bg-transparent border-gray shadow-none placeholder-gray-dark)',
-	'layer-components:foc-contained',
-	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none ring ring-4 bg-lighten-3 ring-main-light)',
-	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:border-black',
+	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:placeholder-neutral-heavy layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(shadow-none bg-transparent border-neutral)',
+	'layer-components:focus-visible:(ring-neutral-ink ring-[4px] ring-inset)',
+	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none bg-lighten-3 ring-main-light ring ring-[4px])',
+	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:border-neutral-ink',
 	'layer-components:[&>.icon]:mx-sm',
 );
 
@@ -36,17 +35,13 @@ function InputBorderImpl({
 	ref?: Ref<HTMLDivElement>;
 }) {
 	return (
-		<GroupScaleReset>
-			<div
-				{...props}
-				style={{
-					[PROPS.LOCALS.CORNER_SCALE]: '1',
-					[PROPS.LOCALS.SPACING_SCALE]: '1',
-					[PROPS.USER.SHADOW_SPREAD]: '0',
-					...style,
-				}}
-			/>
-		</GroupScaleReset>
+		<div
+			{...props}
+			style={{
+				[$systemProps.globals.shadowSpread.name]: '0',
+				...style,
+			}}
+		/>
 	);
 }
 const InputBorder = withClassName(InputBorderImpl, inputBorderClassName);

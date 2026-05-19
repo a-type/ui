@@ -8,6 +8,7 @@ import { Icon } from '../icon/index.js';
 
 export interface AvatarProps extends BaseAvatarProps {
 	className?: string;
+	/** @deprecated */
 	popIn?: boolean;
 	style?: CSSProperties;
 	imageSrc?: string | null;
@@ -18,7 +19,6 @@ export interface AvatarProps extends BaseAvatarProps {
 
 export function Avatar({
 	className,
-	popIn = false,
 	imageSrc,
 	name,
 	crossOrigin,
@@ -29,12 +29,9 @@ export function Avatar({
 	const empty = !name && !imageSrc;
 	return (
 		<BaseAvatar.Root
-			data-pop={popIn}
 			className={classNames(
-				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden border-default rounded-lg bg-white)',
-				popIn &&
-					'layer-variants:animate-pop-in-from-half layer-variants:animate-duration-200 layer-variants:animate-ease-springy',
-				empty && 'layer-components:(border-dashed bg-gray-light)',
+				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden bg-neutral-paper b rd-lg)',
+				empty && 'layer-components:(bg-neutral-light border-dashed)',
 				className,
 			)}
 			style={size ? { width: size, height: size, ...style } : style}
@@ -42,7 +39,7 @@ export function Avatar({
 		>
 			{imageSrc && (
 				<BaseAvatar.Image
-					className="h-full w-full object-cover"
+					className="object-cover h-full w-full"
 					referrerPolicy="no-referrer"
 					src={imageSrc}
 					alt={`${name ?? 'user'}'s profile picture`}

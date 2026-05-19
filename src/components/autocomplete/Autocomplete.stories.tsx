@@ -164,7 +164,7 @@ export const Grouped: Story = {
 						No results found.
 					</GroupedAutocomplete.Empty>
 					<GroupedAutocomplete.Separator />
-					<div className="p-sm text-xs color-gray-dark">
+					<div className="color-neutral-heavy p-sm text-ambient">
 						Select your favorite fruit or berry.
 					</div>
 				</GroupedAutocomplete.Content>

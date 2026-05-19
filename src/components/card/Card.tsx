@@ -7,19 +7,15 @@ import {
 	ReactNode,
 	Ref,
 } from 'react';
-import { withClassName, withProps } from '../../hooks.js';
-import {
-	GroupScaleLayer,
-	useGroupScaleStyles,
-} from '../../systems/GroupScale.js';
+import { withClassName } from '../../hooks.js';
 import { Box } from '../box/Box.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 
 export const CardRoot = withClassName(
-	withProps(Box, { container: 'reset' }),
-	'layer-components:(relative h-max-content flex flex-col overflow-hidden border-thin rounded-lg text-lg shadow-sm color-black bg-wash bg-darken-0.5 border-gray border-darken-3)',
-	'layer-variants:[&[data-borderless=true]]:(border-none shadow-md)',
+	Box,
+	'layer-components:(relative h-max-content flex flex-col overflow-hidden shadow-sm color-neutral-ink bg-neutral-paper border-neutral border-darken-3 b rd-md text-primary)',
+	'layer-variants:[&[data-borderless=true]]:(shadow-md border-none)',
 );
 
 export function CardMain({
@@ -53,27 +49,25 @@ export function CardMain({
 }) {
 	const isInteractive = !nonInteractive && (!!render || !!rest.onClick);
 
-	const scaleStyles = useGroupScaleStyles(style);
-
 	const rootProps = {
 		...rest,
 		className: classNames(
-			'layer-components:(min-h-40px flex flex-1 flex-col items-start gap-1 pb-xs transition bg-transparent)',
-			'layer-components:(relative z-1 rounded-t-md border-none p-0 text-start text-sm text-inherit font-inherit outline-none)',
+			'layer-components:(min-h-40px flex flex-1 flex-col items-start gap-1 transition bg-transparent pb-xs)',
+			'layer-components:(relative z-1 p-0 text-start text-inherit outline-none rd-t-md border-none text-ambient font-inherit)',
 			!!compact && 'layer-variants:(pb-0)',
 			isInteractive &&
 				classNames(
 					'layer-components:cursor-pointer',
-					'layer-components:hover:(color-black bg-black/10)',
-					'layer-components:foc-effect',
-					'layer-components:focus-visible:(ring-inset bg-black/10)',
-					'layer-components:data-[visually-focused]:(ring-inset bg-black/10)',
+					'layer-components:hover:color-neutral-ink layer-components:hover:bg-neutral-ink/10',
+					'layer-components:focus:outline-none',
+					'layer-components:focus-visible:(bg-neutral-ink/10 ring-neutral-ink ring-[2px] ring-inset)',
+					'layer-components:data-[visually-focused]:(bg-neutral-ink/10 ring-inset)',
 					'layer-components:disabled:(cursor-default)',
 					'layer-components:data-[disabled]:(cursor-default)',
 				),
 			className,
 		),
-		style: scaleStyles,
+		style,
 		children,
 	};
 
@@ -90,22 +84,24 @@ export function CardMain({
 		},
 	});
 
-	return <GroupScaleLayer>{root}</GroupScaleLayer>;
+	return root;
 }
 
 export const CardTitle = withClassName(
 	'div',
-	'layer-components:(relative z-1 mx-xs my-xs max-h-80px max-w-full w-auto flex flex-col gap-1 px-sm py-xs)',
-	'layer-components:(border rounded-md border-solid transition-colors bg-white border-gray-dark)',
-	'layer-components:(overflow-hidden text-ellipsis text-md text-inherit font-semibold)',
-	'layer-components:[[data-compact]_&]:(text-sm)',
+	'@mode-dense',
+	'layer-components:(relative z-1 max-h-80px max-w-full w-auto flex flex-col gap-1 px-lg py-sm mx-md my-md)',
+	'layer-components:(transition-colors bg-neutral-paper border-neutral-heavy border rd-md border-solid)',
+	'layer-components:(overflow-hidden text-ellipsis text-inherit text-primary fw-[600])',
+	'layer-components:[[data-compact]_&]:text-ambient',
 );
 
 const CardContentRoot = withClassName(
 	'div',
-	'layer-components:(relative z-1 mx-2 my-0.5 flex flex-col gap-1 border rounded-sm border-solid px-2 py-1 text-xs color-black bg-white/80 border-gray-dark/50)',
-	'layer-variants:[[data-compact]_&]:(my-0 px-sm py-0 text-xs)',
-	'layer-variants:[&[data-unstyled]]:([background:unset] border-none p-0)',
+	'@mode-dense',
+	'layer-components:(relative z-1 mx-2 my-0.5 flex flex-col gap-1 px-2 py-1 color-neutral-ink bg-neutral-paper/80 border-neutral-heavy/50 border rd-sm border-solid text-ambient)',
+	'layer-variants:[[data-compact]_&]:(my-0 py-0 px-sm text-ambient)',
+	'layer-variants:[&[data-unstyled]]:([background:unset] p-0 border-none)',
 );
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
@@ -123,22 +119,23 @@ export function CardContent({ unstyled, ref, ...rest }: CardContentProps) {
 
 export const CardImage = withClassName(
 	SlotDiv,
-	'layer-components:(absolute bottom-0 right-0 top-0 z-0 h-full w-full bg-cover bg-center object-cover)',
+	'layer-components:object-cover layer-components:(absolute bottom-0 right-0 top-0 z-0 h-full w-full bg-cover bg-center)',
 );
 
 export const CardFooter = withClassName(
 	'div',
-	'layer-components:(relative z-1 flex flex-shrink-0 flex-row p-1)',
+	'@mode-dense',
+	'layer-components:(relative z-1 flex flex-shrink-0 flex-row p-md)',
 );
 
 export const CardActions = withClassName(
 	'div',
-	'layer-components:(ml-0 mr-auto flex flex-row items-center gap-2 border rounded-lg border-solid p-0 bg-white/50 border-gray-dark/50)',
+	'layer-components:(ml-0 mr-auto flex flex-row items-center gap-2 p-0 bg-neutral-paper/50 border-neutral-heavy/50 border rd-lg border-solid)',
 );
 
 export const CardMenu = withClassName(
 	'div',
-	'layer-components:(my-auto ml-auto mr-0 flex flex-row items-center gap-1 rounded-lg p-0 py-0.5 bg-white/50)',
+	'layer-components:(my-auto ml-auto mr-0 flex flex-row items-center gap-1 p-0 bg-neutral-paper/50 rd-lg)',
 );
 
 export const cardGridColumns = {

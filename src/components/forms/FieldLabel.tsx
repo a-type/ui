@@ -2,10 +2,10 @@ import { withClassName } from '../../hooks.js';
 
 export const FieldLabel = withClassName(
 	'label',
-	'inline-flex flex-col gap-xs text-sm font-bold color-gray-ink ml-md',
+	'font-bold inline-flex flex-col color-neutral-ink ml-md gap-xs text-ambient',
 );
 
 export const HorizontalFieldLabel = withClassName(
 	'label',
-	'inline-flex flex-row items-center gap-sm text-sm color-gray-ink',
+	'inline-flex flex-row items-center color-neutral-ink gap-sm text-ambient',
 );

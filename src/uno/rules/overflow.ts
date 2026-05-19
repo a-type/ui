@@ -1,12 +1,17 @@
+import { $systemProps } from '@arbor-css/preset';
 import { Rule } from 'unocss';
-import { PROPS } from '../logic/properties.js';
+
+// TODO: move scroll coloration to arbor?
+const foregroundColor = $systemProps.fg.applied.varFallback(
+	$systemProps.scheme.trueHeavy.var,
+);
 
 export const overflowRules: Rule[] = [
 	[
 		'overflow-stable',
 		{
 			'scrollbar-gutter': 'stable',
-			'scrollbar-color': `hsl(from var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED},var(${PROPS.MODE.BLACK}))) h calc(s * 0.2) calc(l * 4)) transparent`,
+			'scrollbar-color': `hsl(from ${foregroundColor} h calc(s * 0.2) calc(l * 4)) transparent`,
 		},
 	],
 	[
@@ -14,7 +19,7 @@ export const overflowRules: Rule[] = [
 		{
 			overflow: 'auto',
 			'scrollbar-gutter': 'stable',
-			'scrollbar-color': `hsl(from var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED},var(${PROPS.MODE.BLACK}))) h calc(s * 0.2) calc(l * 4)) transparent`,
+			'scrollbar-color': `hsl(from ${foregroundColor} h calc(s * 0.2) calc(l * 4)) transparent`,
 		},
 	],
 	[
@@ -22,7 +27,7 @@ export const overflowRules: Rule[] = [
 		{
 			'overflow-y': 'auto',
 			'scrollbar-gutter': 'stable',
-			'scrollbar-color': `hsl(from var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED},var(${PROPS.MODE.BLACK}))) h calc(s * 0.2) calc(l * 4)) transparent`,
+			'scrollbar-color': `hsl(from ${foregroundColor} h calc(s * 0.2) calc(l * 4)) transparent`,
 		},
 	],
 	[
@@ -30,7 +35,7 @@ export const overflowRules: Rule[] = [
 		{
 			'overflow-x': 'auto',
 			'scrollbar-gutter': 'stable',
-			'scrollbar-color': `hsl(from var(${PROPS.COLOR.FINAL},var(${PROPS.COLOR.INHERITED},var(${PROPS.MODE.BLACK}))) h calc(s * 0.2) calc(l * 4)) transparent`,
+			'scrollbar-color': `hsl(from ${foregroundColor} h calc(s * 0.2) calc(l * 4)) transparent`,
 		},
 	],
 	[

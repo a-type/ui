@@ -23,7 +23,7 @@ export const Default: Story = {
 			<>
 				<DropdownMenu.Trigger render={<Button />}>Open</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
-					<DropdownMenu.Item color="attention">
+					<DropdownMenu.Item className="@mode-attention">
 						<DropdownMenu.Label>Item 1</DropdownMenu.Label>
 						<DropdownMenu.ItemRightSlot>
 							<Icon name="flag" />

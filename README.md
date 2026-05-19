@@ -31,7 +31,3 @@ Then, styles from library components should be properly added to your CSS.
 ### Alternative: import full compiled CSS
 
 Rather than configuring your build pipeline to include this library's source files, you can opt to import the entire CSS needed to style it from `@a-type/ui/css`. However, this will be less efficient; when integrating with your build pipeline, components which aren't used won't have CSS included in your final build.
-
-### Customizing theme colors
-
-The color system is computed from two hues, primary and accent. You can define these in CSS using `--dyn-color-primary-source: <int>` and `--dyn-color-accent-source: <int>`. These hue values are in OKLCH space, which isn't the same as HSL.

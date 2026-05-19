@@ -16,7 +16,6 @@ import {
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
 import {
@@ -149,15 +148,10 @@ const AutocompleteEmpty = withClassName(
 
 export interface AutocompleteItemProps extends BaseAutocompleteItemProps {
 	ref?: React.Ref<HTMLDivElement>;
-	color?: PaletteName;
 }
-const AutocompleteItem = ({
-	className,
-	color = 'gray',
-	...props
-}: AutocompleteItemProps) => (
+const AutocompleteItem = ({ className, ...props }: AutocompleteItemProps) => (
 	<BaseAutocomplete.Item
-		className={clsx(color && `palette-${color}`, itemClassName, className)}
+		className={clsx(itemClassName, className)}
 		{...props}
 	/>
 );

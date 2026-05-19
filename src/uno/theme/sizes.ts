@@ -1,4 +1,4 @@
-import { Theme } from '@unocss/preset-mini';
+import { Theme } from '@arbor-css/classes';
 
 export const width: Theme['width'] = {
 	content: '700px',

@@ -1,21 +1,19 @@
 import classNames from 'clsx';
 import { Ref } from 'react';
-import { PaletteName } from '../../uno/index.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 
 export interface ChipProps extends SlotDivProps {
-	color?: PaletteName;
 	ref?: Ref<any>;
 }
 
-export function Chip({ className, color, ...rest }: ChipProps) {
+export function Chip({ className, ...rest }: ChipProps) {
 	return (
 		<SlotDiv
 			className={classNames(
-				color && `palette-${color}`,
-				'layer-composed:(inline-flex flex-row items-center gap-1 whitespace-nowrap text-xs font-normal)',
-				'layer-composed:(border border-light rounded-lg border-solid color-contrast bg-main-wash)',
-				'layer-composed:[&:not(:is(button))]:(px-sm py-xs)',
+				'@mode-denser',
+				'layer-composed:(inline-flex flex-row items-center gap-1 whitespace-nowrap text-ambient leading-[normal])',
+				'layer-composed:(bg-main-wash color-contrast border-neutral-mid border rd-lg border-solid)',
+				'layer-composed:[&:not(:is(button))]:(px-action py-action)',
 				className,
 			)}
 			role={rest.onClick ? 'button' : undefined}

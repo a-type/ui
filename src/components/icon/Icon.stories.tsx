@@ -35,10 +35,10 @@ export const All: Story = {
 				{iconNames.map((name) => (
 					<div
 						key={name}
-						className="flex flex-col items-center justify-center gap-2 border p-4 border-gray-light"
+						className="border-gray-light flex flex-col items-center justify-center gap-2 p-4 border"
 					>
 						<Icon name={name} size={25} />
-						<span className="text-center text-sm">{name}</span>
+						<span className="text-center text-ambient">{name}</span>
 					</div>
 				))}
 			</div>

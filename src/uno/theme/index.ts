@@ -1,27 +1,19 @@
-import { Theme, theme as baseTheme } from '@unocss/preset-wind3';
-import { PreflightConfig } from '../preflights/index.js';
+import { ThemeConfig } from '@arbor-css/classes';
 import { animation, easing } from './animations.js';
-import { borderRadius, lineWidth } from './borders.js';
-import { makeThemeColors } from './colors.js';
-import { boxShadow } from './shadows.js';
 import { height, width } from './sizes.js';
-import { spacing } from './spacing.js';
-import { fontFamily, fontSize } from './typography.js';
 
-export function makeTheme(options: PreflightConfig): Theme {
+export function makeTheme(): ThemeConfig {
 	return {
-		...baseTheme,
-		colors: makeThemeColors(options),
-		fontSize,
-		fontFamily,
-		spacing,
-		borderRadius,
-		lineWidth,
 		width,
 		height,
-		minWidth: width,
-		minHeight: height,
-		boxShadow,
+		breakpoints: {
+			sm: '480px',
+			md: '768px',
+			lg: '1024px',
+			xl: '1280px',
+			'2xl': '1536px',
+		},
+		// @ts-expect-error
 		easing,
 		animation,
 		blur: {

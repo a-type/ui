@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
-import { setColorMode, useColorMode } from './colorMode.js';
+import { useState } from 'react';
+import { $userColorHue, $userColorSaturation } from './arbor/props.js';
 import { ActionBar, ActionButton } from './components/actions/index.js';
 import { Button } from './components/button/index.js';
 import { Card } from './components/card/index.js';
@@ -10,7 +10,6 @@ import {
 	AvatarList,
 	Box,
 	Checkbox,
-	ColorPicker,
 	ContextMenu,
 	DateRangePicker,
 	Dialog,
@@ -33,7 +32,6 @@ import {
 	PageNav,
 	PageRoot,
 	Progress,
-	Provider,
 	Select,
 	Slider,
 	TextSkeleton,
@@ -43,8 +41,6 @@ import {
 import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
-import { useOverrideTheme } from './hooks/useOverrideTheme.js';
-import { PaletteName, PROPS } from './uno/index.js';
 
 const meta = {
 	title: 'Theme Demo',
@@ -68,25 +64,23 @@ export function DemoUI({ className }: { className?: string }) {
 			<PageContent>
 				<div className={clsx('grid grid-cols-2 gap-2')}>
 					<Box gap wrap p>
-						<Button color="primary" emphasis="primary">
-							Primary
-						</Button>
-						<Button color="accent" emphasis="primary">
+						<Button emphasis="primary">Primary</Button>
+						<Button className="@mode-accent" emphasis="primary">
 							Accent
 						</Button>
 						<Button>Default</Button>
-						<Button emphasis="contrast">Contrast</Button>
-						<Button color="attention" emphasis="primary">
+						<Button className="@mode-contrast">Contrast</Button>
+						<Button className="@mode-attention" emphasis="primary">
 							Destructive
 						</Button>
 						<Button emphasis="ghost">Ghost</Button>
-						<Button color="accent" emphasis="ghost">
+						<Button className="@mode-accent" emphasis="ghost">
 							Ghost Accent
 						</Button>
-						<Button size="small" color="attention" emphasis="primary">
+						<Button size="small" className="@mode-attention" emphasis="primary">
 							Destructive Small
 						</Button>
-						<Button size="small" color="attention" emphasis="ghost">
+						<Button size="small" className="@mode-attention" emphasis="ghost">
 							Ghost Destructive Small
 						</Button>
 					</Box>
@@ -349,53 +343,16 @@ export const Nesting: Story = {
 	},
 };
 
-export const Override: Story = {
-	render() {
-		const [theme, setTheme] = useState<PaletteName | null>(null);
-		useOverrideTheme(theme);
-		const colorMode = useColorMode();
-		return (
-			<Provider>
-				<Box d="col" gap>
-					<Box gap p>
-						<ColorPicker value={theme} onChange={setTheme} />
-						<Select
-							value={colorMode}
-							onValueChange={(v) => setColorMode(v as any)}
-						>
-							<Select.Trigger />
-							<Select.Content>
-								<Select.Item value="system">System</Select.Item>
-								<Select.Item value="light">Light</Select.Item>
-								<Select.Item value="dark">Dark</Select.Item>
-							</Select.Content>
-						</Select>
-					</Box>
-					<DemoUI />
-				</Box>
-			</Provider>
-		);
-	},
-};
-
 export const Custom: Story = {
 	render() {
 		const [theme, setTheme] = useState({
-			[PROPS.USER.COLOR.PRIMARY_HUE]: 70,
-			[PROPS.USER.COLOR.ACCENT_HUE]: 290,
-			[PROPS.USER.SATURATION]: 0.5,
-			[PROPS.USER.BORDER_SCALE]: 1.5,
-			[PROPS.USER.SPACING_SCALE]: 1,
-			[PROPS.USER.CORNER_SCALE]: 1,
+			[$userColorHue]: 70,
+			[$userColorSaturation]: 0.5,
 		});
 		const reroll = () => {
 			setTheme({
-				[PROPS.USER.COLOR.PRIMARY_HUE]: Math.floor(Math.random() * 360),
-				[PROPS.USER.COLOR.ACCENT_HUE]: Math.floor(Math.random() * 360),
-				[PROPS.USER.SATURATION]: Math.random(),
-				[PROPS.USER.BORDER_SCALE]: Math.random() * 2,
-				[PROPS.USER.SPACING_SCALE]: Math.random() * 2,
-				[PROPS.USER.CORNER_SCALE]: Math.random() * 1.25,
+				[$userColorHue]: Math.floor(Math.random() * 360),
+				[$userColorSaturation]: Math.random(),
 			});
 		};
 		return (
@@ -403,65 +360,6 @@ export const Custom: Story = {
 				<Button onClick={reroll}>Reroll</Button>
 				<DemoUI className="theme" />
 			</Box>
-		);
-	},
-};
-
-export const Trippy: Story = {
-	render() {
-		const ref = useRef<HTMLDivElement>(null);
-		const values = useRef({
-			primarySource: 0,
-			accentSource: 180,
-			saturation: 0.5,
-			borderScale: 2,
-			spacingScale: 0.5,
-			cornerScale: 0.5,
-		});
-		const dt = 1000;
-		setInterval(() => {
-			const current = ref.current;
-			if (!current) return;
-			values.current.primarySource =
-				(values.current.primarySource + dt / 100) % 360;
-			values.current.accentSource =
-				(values.current.accentSource + dt / 50) % 360;
-			values.current.saturation =
-				0.5 + 0.5 * Math.sin((Date.now() / 100000) * Math.PI * 2);
-			values.current.borderScale =
-				1.5 + 1.5 * Math.sin((Date.now() / 20000) * Math.PI * 2);
-			values.current.spacingScale =
-				1 + Math.sin((Date.now() / 50000) * Math.PI * 2);
-			values.current.cornerScale = 1 + Math.sin(Date.now() / 3000);
-			current.style.setProperty(
-				PROPS.USER.COLOR.PRIMARY_HUE,
-				values.current.primarySource.toString(),
-			);
-			current.style.setProperty(
-				PROPS.USER.COLOR.ACCENT_HUE,
-				values.current.accentSource.toString(),
-			);
-			current.style.setProperty(
-				PROPS.USER.SATURATION,
-				values.current.saturation.toString(),
-			);
-			current.style.setProperty(
-				PROPS.USER.BORDER_SCALE,
-				values.current.borderScale.toString(),
-			);
-			current.style.setProperty(
-				PROPS.USER.SPACING_SCALE,
-				values.current.spacingScale.toString(),
-			);
-			current.style.setProperty(
-				PROPS.USER.CORNER_SCALE,
-				values.current.cornerScale.toString(),
-			);
-		}, dt);
-		return (
-			<div ref={ref}>
-				<DemoUI className="theme" />
-			</div>
 		);
 	},
 };

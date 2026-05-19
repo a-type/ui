@@ -5,7 +5,7 @@ import { withClassName } from '../../hooks/withClassName.js';
 
 const DividerBase = withClassName(
 	BaseSeparator,
-	'w-full h-1px bg-black relative',
+	'relative h-1px w-full bg-neutral-ink',
 );
 
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {

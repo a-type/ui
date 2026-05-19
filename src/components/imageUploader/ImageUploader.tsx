@@ -133,7 +133,7 @@ export function ImageUploaderRoot({
 			value={{ inputId, dragging, draggingOver, value, onChange }}
 		>
 			<div
-				className={classNames('relative rounded-lg', rest.className)}
+				className={classNames('relative rd-lg', rest.className)}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
@@ -208,7 +208,7 @@ function ImageUploaderPrebuilt({
 						onClick={() => setCameraOpen(false)}
 						emphasis="ghost"
 						size="small"
-						className="absolute left-2 top-2 color-white"
+						className="absolute left-2 top-2 color-neutral-paper"
 					>
 						Cancel
 					</Button>
@@ -268,7 +268,7 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 		<Button
 			emphasis="ghost"
 			className={clsx(
-				'layer-variants:(absolute right-2 top-2 z-10 h-32px w-32px cursor-pointer rounded-lg border-none p-2 shadow-sm transition-colors color-black bg-white)',
+				'layer-variants:(absolute right-2 top-2 z-10 h-32px w-32px cursor-pointer p-2 transition-colors shadow-sm color-neutral-ink bg-neutral-paper rd-lg border-none)',
 				className,
 			)}
 			onClick={() => onChange(null)}
@@ -288,7 +288,7 @@ export function ImageUploaderDisplay({
 		<img
 			src={value}
 			className={clsx(
-				'layer-components:(h-full w-full rounded-lg object-cover object-center)',
+				'layer-components:object-cover layer-components:object-center layer-components:(h-full w-full rd-lg)',
 				className,
 			)}
 			{...rest}
@@ -310,7 +310,7 @@ export function ImageUploaderEmptyControls({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-lg bg-gray-light)',
+				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 bg-neutral-light rd-lg)',
 				{
 					'layer-components:bg-darken-2': draggingOver,
 				},

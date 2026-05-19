@@ -169,7 +169,7 @@ export const VirtualKeyboard: Story = {
 						</DialogActions>
 					</DialogContent>
 				</Dialog>
-				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-black" />
+				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-neutral-ink" />
 			</Provider>
 		);
 	},

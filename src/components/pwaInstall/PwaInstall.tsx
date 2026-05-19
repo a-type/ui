@@ -186,7 +186,7 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 								key={index}
 								src={screenshot.src}
 								alt={screenshot.label || `Screenshot ${index + 1}`}
-								className="border border-default rounded-xs"
+								className="border-default border rd-xs"
 							/>
 						}
 					/>

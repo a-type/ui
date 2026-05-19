@@ -1,11 +1,4 @@
-import { useCallback, useEffect, useSyncExternalStore } from 'react';
-import { useResolvedColorMode } from '../colorMode.js';
-import { snapshotColorContext } from '../uno/logic/color.js';
-import {
-	ColorLogicalPalette,
-	ColorLogicalPaletteDefinitions,
-	defaultPalettes,
-} from '../uno/logic/palettes.js';
+import { useCallback } from 'react';
 
 let defaultColor = '#ffffff';
 function getCurrentColor() {
@@ -22,7 +15,7 @@ function changeThemeColor(color: string) {
 		return;
 	}
 	// evaluate css var if necessary
-	if (color.startsWith('var(')) {
+	while (color.startsWith('var(')) {
 		const root = document.documentElement;
 		const cssVar = color.slice(4, -1).trim();
 		color = getComputedStyle(root).getPropertyValue(cssVar);
@@ -40,23 +33,7 @@ function changeThemeColor(color: string) {
 export function useTitleBarColor(
 	color: string | { light: string; dark: string },
 ) {
-	const colorMode = useResolvedColorMode();
-	useEffect(() => {
-		const finalColor =
-			typeof color === 'string'
-				? color
-				: colorMode === 'dark'
-				? color.dark
-				: color.light;
-		const previousColor =
-			document
-				.querySelector('meta[name=theme-color]')
-				?.getAttribute('content') ?? defaultColor;
-		changeThemeColor(finalColor);
-		return () => {
-			changeThemeColor(previousColor);
-		};
-	}, [color, colorMode]);
+	/* TODO: rewrite this */
 }
 
 export function useSetTitleBarColor() {
@@ -66,50 +43,11 @@ export function useSetTitleBarColor() {
 }
 
 export function useThemedTitleBar(
-	paletteOrName:
-		| Exclude<keyof typeof defaultPalettes, 'main'>
-		| ColorLogicalPalette,
-	value: keyof ColorLogicalPaletteDefinitions,
+	paletteOrName: any,
+	value: any,
 	/** If not provided, will inherit from app */
 	mode?: 'light' | 'dark',
 	skip?: boolean,
 ) {
-	const { setColor } = useSetTitleBarColor();
-	// using a variable to rerun the effect instead of subscribing in-effect...
-	// this is an attempt to preserve the cascading behavior in the React tree
-	// if a child calls this hook, so ideally the parent and child should both
-	// re-evaluate but the child should 'win'
-	const visible = useSyncExternalStore(
-		(onStoreChange) => {
-			document.addEventListener('visibilitychange', onStoreChange);
-			return () => {
-				document.removeEventListener('visibilitychange', onStoreChange);
-			};
-		},
-		() => document.visibilityState === 'visible',
-		() => true,
-	);
-
-	useEffect(() => {
-		if (skip) return;
-		const previousColor = getCurrentColor();
-
-		function update() {
-			const palette =
-				typeof paletteOrName === 'string'
-					? defaultPalettes[paletteOrName] ?? defaultPalettes.primary
-					: paletteOrName;
-			console.log('snapshot:', palette.name, value, mode);
-			const context = snapshotColorContext(palette.name, mode);
-			const color = palette.definitions[value].computeOklch(context);
-			setColor(color);
-		}
-		update();
-
-		if (previousColor) {
-			return () => {
-				setColor(previousColor);
-			};
-		}
-	}, [setColor, paletteOrName, value, mode, skip, visible]);
+	/* TODO: rewrite this */
 }

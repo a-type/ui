@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { PaletteName } from '../../uno/index.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
 import { Combobox } from './Combobox.js';
@@ -129,8 +128,8 @@ export const Default: Story = {
 
 interface ItemGroup {
 	category: string;
-	color: PaletteName;
 	items: Item[];
+	color: string; // TODO: restore typechecking of modes
 }
 const groupedItems: ItemGroup[] = [
 	{
@@ -187,7 +186,7 @@ export const Grouped: Story = {
 										<GroupedCombobox.Item
 											key={item.id}
 											value={item}
-											color={group.color}
+											className={`@mode-${group.color}`}
 										>
 											{item.label}
 										</GroupedCombobox.Item>
@@ -206,7 +205,7 @@ export const Grouped: Story = {
 						)}
 					</GroupedCombobox.Empty>
 					<GroupedCombobox.Separator />
-					<div className="p-sm text-xs color-gray-dark">
+					<div className="color-neutral-heavy p-sm text-ambient">
 						Select your favorite fruit or berry.
 						{creatable ? ' Enter creates a new item.' : ''}
 					</div>

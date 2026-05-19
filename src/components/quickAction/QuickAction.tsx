@@ -63,7 +63,7 @@ const QuickActionTrigger = ({
 					emphasis={emphasis}
 					{...composed}
 					className={clsx(
-						'layer-composed:(relative min-h-[2.5rem] min-w-[2.5rem] justify-center rounded-full p-xs)',
+						'layer-composed:(relative min-h-[2.5rem] min-w-[2.5rem] justify-center p-xs rd-full)',
 						className,
 					)}
 					style={{
@@ -109,7 +109,7 @@ const QuickActionContent = ({
 			<Dialog.Popup
 				ref={finalRef}
 				className={clsx(
-					'layer-components:(contain-layout border-1 rounded-md border-solid shadow-lg transition-all transition-ease-out bg-white border-black clip-inset-[-50px]-[-50px]-[-50px]-[-50px])',
+					'layer-components:transition-ease-out layer-components:border-black layer-components:(contain-layout border-1 transition-all shadow-lg bg-neutral-paper rd-md border-solid clip-inset-[-50px]-[-50px]-[-50px]-[-50px])',
 					'layer-components:(fixed bottom-[anchor(bottom)] overflow-clip)',
 					{
 						'[justify-self:anchor-center]': align === 'center',

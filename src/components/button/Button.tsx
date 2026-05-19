@@ -15,9 +15,9 @@ import {
 	useDebugValue,
 	useState,
 } from 'react';
+import preset from '../../arbor/arbor.js';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { PaletteName } from '../../uno/index.js';
 import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
 import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
@@ -29,19 +29,10 @@ import { getButtonClassName } from './classes.js';
 export interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
 		Pick<BaseButtonProps, 'render' | 'focusableWhenDisabled'> {
-	color?: PaletteName;
-	emphasis?:
-		| 'primary'
-		| 'main'
-		| 'default'
-		| 'ghost'
-		| 'contrast'
-		| 'light'
-		| 'unstyled';
+	emphasis?: 'primary' | 'main' | 'default' | 'ghost' | 'light' | 'unstyled';
 	size?: 'default' | 'small' | 'wrapper';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
-	align?: 'start' | 'stretch' | 'end';
 	visuallyDisabled?: boolean;
 	loading?: boolean;
 	visuallyFocused?: boolean;
@@ -53,12 +44,10 @@ export interface ButtonProps
 
 export function ButtonRoot({
 	className,
-	color,
 	emphasis = 'default',
 	size,
 	toggled,
 	toggleMode = 'color-and-indicator',
-	align,
 	visuallyDisabled,
 	visuallyFocused,
 	loading,
@@ -106,13 +95,11 @@ export function ButtonRoot({
 		tabIndex: visuallyDisabled ? -1 : undefined,
 		className: clsx(
 			getButtonClassName({
-				color,
 				emphasis,
 				size,
 				toggleable:
 					toggled !== undefined &&
 					(toggleMode === 'color' || toggleMode === 'color-and-indicator'),
-				align,
 				disableIconMode,
 			}),
 			className,
@@ -172,8 +159,12 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 			className="w-0 transition-width"
 			style={{
 				width: value ? '15px' : 0,
-				marginRight: !value ? '-0.25rem' : 0,
-				marginLeft: !value ? '-0.25rem' : 0,
+				// marginRight: !value
+				// 	? `calc(-1 * ${preset.modes.base.schema.$tokens.spacing.sm.var})`
+				// 	: 0,
+				marginLeft: !value
+					? `calc(-1 * ${preset.modes.base.schema.$tokens.spacing.sm.var})`
+					: 0,
 			}}
 			loading={false}
 		/>

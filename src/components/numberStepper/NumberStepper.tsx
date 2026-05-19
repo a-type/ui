@@ -67,11 +67,11 @@ export function NumberStepper({
 	return (
 		<div
 			className={classNames(
-				'layer-components:(w-min-content flex flex-shrink-0 items-center overflow-hidden border rounded-lg border-solid shadow-sm bg-white border-gray-dark)',
+				'layer-components:(w-min-content flex flex-shrink-0 items-center overflow-hidden shadow-sm bg-control b-control b rd-control b-solid)',
 				disabled &&
-					'layer-variants:(shadow-none bg-transparent border-gray-dark/80)',
+					'layer-variants:(shadow-none bg-transparent b-neutral-heavy/80)',
 				{
-					'layer-variants:(color-black bg-accent-wash)':
+					'@mode-accent layer-variants:(color-main-ink bg-main-wash)':
 						!!highlightChange && value !== 1,
 				},
 				className,

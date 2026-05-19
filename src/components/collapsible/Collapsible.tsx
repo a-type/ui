@@ -18,7 +18,7 @@ const CollapsibleContentBase = withClassName(
 	'start-end:data-[horizontal]:(w-0)',
 	'data-[hidden]:[&:not([hidden="until-found"])]:(hidden)',
 );
-// specifically removing className... it's causing problems?
+
 export const CollapsibleContent = function CollapsibleContent({
 	ref,
 	horizontal,

@@ -10,7 +10,6 @@ import {
 	useState,
 } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/index.js';
 import { Button } from '../button/Button.js';
 import { ButtonProps } from '../button/index.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
@@ -37,7 +36,7 @@ export const comboboxBackdropClassName = clsx(
 
 export const comboboxListClassName = clsx(
 	itemListClassName,
-	'layer-components:(flex flex-col overscroll-contain outline-none overflow-y-auto overflow-unstable)',
+	'layer-components:(flex flex-col outline-none overscroll-contain overflow-y-auto overflow-unstable)',
 	'layer-components:empty:(p-0)',
 );
 
@@ -48,11 +47,11 @@ export const comboboxIconClassName = clsx(
 );
 
 export const comboboxEmptyClassName = clsx(
-	'layer-components:[&:not(:empty)]:(p-sm text-sm color-gray-dark)',
+	'layer-components:[&:not(:empty)]:(color-neutral-heavy p-sm text-ambient)',
 );
 
 export const comboboxGroupClassName = clsx(
-	'layer-components:(flex flex-col gap-xs overflow-hidden p-sm)',
+	'layer-components:(flex flex-col overflow-hidden p-sm gap-xs)',
 );
 
 export const comboboxGroupItemListClassName = clsx(
@@ -60,7 +59,7 @@ export const comboboxGroupItemListClassName = clsx(
 );
 
 export const comboboxGroupLabelClassName = clsx(
-	'layer-components:(w-full px-xs text-xs font-medium uppercase color-gray-dark)',
+	'layer-components:uppercase layer-components:(w-full color-neutral-heavy px-xs text-ambient font-[medium])',
 );
 
 export const comboboxRowClassName = clsx(
@@ -68,7 +67,7 @@ export const comboboxRowClassName = clsx(
 );
 
 export const comboboxGroupItemClassName = clsx(
-	'layer-composed-2:data-[highlighted]:(ring-2 bg-main-wash ring-main)',
+	'layer-composed-2:data-[highlighted]:ring-2 layer-composed-2:data-[highlighted]:(bg-main-wash ring-main-mid)',
 );
 
 export interface ComboboxInputProps
@@ -387,7 +386,7 @@ function ComboboxChips({
 
 const ComboboxChipsList = withClassName(
 	SlotDiv,
-	'layer-components:(flex flex-row flex-wrap gap-xs px-sm py-xs -ml-md)',
+	'layer-components:(flex flex-row flex-wrap px-sm py-xs gap-xs -ml-md)',
 	'layer-components:empty:hidden',
 );
 
@@ -403,7 +402,7 @@ function ComboboxChip({
 		<BaseCombobox.Combobox.Chip
 			render={<Chip color={color} />}
 			className={clsx(
-				'layer-composed-2:(my-auto flex flex-row items-center gap-xs px-sm)',
+				'layer-composed-2:(my-auto flex flex-row items-center px-sm gap-xs)',
 				className,
 			)}
 			{...props}
@@ -504,21 +503,14 @@ const ComboboxEmpty = withClassName(
 
 export interface ComboboxItemProps extends BaseCombobox.ComboboxItemProps {
 	ref?: Ref<HTMLDivElement>;
-	color?: PaletteName;
 }
-function ComboboxItem({
-	className,
-	color = 'gray',
-	children,
-	...props
-}: ComboboxItemProps) {
+function ComboboxItem({ className, children, ...props }: ComboboxItemProps) {
 	return (
 		<BaseCombobox.Combobox.Item
 			{...props}
 			className={clsx(
-				color && `palette-${color}`,
 				itemClassName,
-				'layer-components:data-[selected]:color-gray-dark',
+				'layer-components:data-[selected]:color-neutral-heavy',
 				className,
 			)}
 		>
@@ -586,7 +578,7 @@ function ComboboxGroupItem({
 			{...props}
 			className={clsx(
 				comboboxGroupItemClassName,
-				'layer-components:data-[selected]:color-gray-dark',
+				'layer-components:data-[selected]:color-neutral-heavy',
 				className,
 			)}
 		>

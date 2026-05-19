@@ -10,8 +10,6 @@ import {
 import { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
-import { PaletteName } from '../../uno/index.js';
 import {
 	itemClassName,
 	itemListClassName,
@@ -23,11 +21,7 @@ import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
 
 const StyledContent = withClassName(
 	function DropdownMenuContent(props: MenuPopupProps) {
-		return (
-			<GroupScaleReset>
-				<BaseMenu.Popup {...props} />
-			</GroupScaleReset>
-		);
+		return <BaseMenu.Popup {...props} />;
 	},
 	popupClassName,
 	'layer-components:(min-w-220px)',
@@ -35,21 +29,15 @@ const StyledContent = withClassName(
 
 const StyledItemBase = withClassName(BaseMenu.Item, itemClassName);
 export interface DropdownMenuItemProps extends MenuItemProps {
-	color?: PaletteName;
 	ref?: Ref<HTMLDivElement>;
 }
 const StyledItem = ({
 	ref: forwardedRef,
 	className,
-	color = 'gray',
 	...props
 }: DropdownMenuItemProps) => {
 	return (
-		<StyledItemBase
-			{...props}
-			className={clsx(color && `palette-${color}`, className)}
-			ref={forwardedRef}
-		/>
+		<StyledItemBase {...props} className={clsx(className)} ref={forwardedRef} />
 	);
 };
 const StyledCheckboxItem = withClassName(BaseMenu.CheckboxItem, itemClassName);
@@ -57,12 +45,12 @@ const StyledRadioItem = withClassName(BaseMenu.RadioItem, itemClassName);
 
 const StyledLabel = withClassName(
 	'span',
-	'layer-components:(py-1 pl-3 text-sm font-bold leading-6)',
+	'layer-components:(py-1 pl-3 leading-6 text-secondary)',
 );
 
 const StyledSeparator = withClassName(
 	BaseMenu.Separator,
-	'layer-components:(m-5px h-1px bg-gray)',
+	'layer-components:(m-5px h-1px bg-neutral)',
 );
 
 const StyledItemIndicator = withClassName(
@@ -77,8 +65,8 @@ const StyledArrow = withClassName(
 		</BaseMenu.Arrow>
 	),
 	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(scale-0 opacity-0)',
-	'layer-components:data-[open]:(scale-100 opacity-100)',
+	'layer-components:data-[closed]:(opacity-0 scale-0)',
+	'layer-components:data-[open]:(opacity-100 scale-100)',
 );
 
 const StyledTrigger = withClassName(BaseMenu.Trigger, 'select-none');

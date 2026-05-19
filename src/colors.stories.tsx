@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
+import { $userColorHue } from './arbor/props.js';
 import { Box } from './components/index.js';
-import { PROPS } from './uno/index.js';
-import { snapshotColorContext } from './uno/logic/color.js';
-import { defaultPalettes } from './uno/logic/palettes.js';
 
 const meta = {
 	title: 'System/Colors',
@@ -33,36 +31,36 @@ export const Default: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
+					[$userColorHue]: args.customHue,
 			  }
 			: {};
 
 		const ranges = (
 			<>
-				<Range className="palette-primary" style={style} />
-				<Range className="palette-lemon" />
-				<Range className="palette-leek" />
-				<Range className="palette-tomato" />
-				<Range className="palette-eggplant" />
-				<Range className="palette-blueberry" />
-				<Range className="palette-attention" />
-				<Range className="palette-success" />
+				<Range className="@mode-base" style={style} />
+				<Range className="@mode-lemon" />
+				<Range className="@mode-leek" />
+				<Range className="@mode-tomato" />
+				<Range className="@mode-eggplant" />
+				<Range className="@mode-blueberry" />
+				<Range className="@mode-attention" />
+				<Range className="@mode-success" />
 				<Box className="relative h-100px">
-					<Box grow className="bg-gray-wash" />
-					<Box grow className="bg-gray-light" />
-					<Box grow className="bg-gray" />
-					<Box grow className="bg-gray-dark" />
-					<Box grow className="bg-gray-ink" />
-					<div className="absolute left-0 top-0 text-xs color-white bg-black/50">
+					<Box grow className="bg-neutral-wash" />
+					<Box grow className="bg-neutral-light" />
+					<Box grow className="bg-neutral" />
+					<Box grow className="bg-neutral-heavy" />
+					<Box grow className="bg-neutral-ink" />
+					<div className="absolute left-0 top-0 color-neutral-paper bg-neutral-ink/50 text-ambient">
 						local gray
 					</div>
 				</Box>
-				<Range className="palette-gray" />
-				<Range className="palette-high-contrast" />
+				<Range className="@mode-gray" />
+				<Range className="@mod-high-contrast" />
 				<Box className="h-100px">
-					<Box grow className="bg-black" />
-					<Box grow className="bg-wash" />
-					<Box grow className="bg-white" />
+					<Box grow className="bg-neutral-ink" />
+					<Box grow className="bg-neutral-wash" />
+					<Box grow className="bg-neutral-paper" />
 				</Box>
 			</>
 		);
@@ -71,10 +69,10 @@ export const Default: Story = {
 			<Box col>
 				<input type="color" className="sticky top-0 z-1" />
 				<Box full>
-					<Box d="col" grow p surface>
+					<Box d="col" grow p surface="white">
 						{ranges}
 					</Box>
-					<Box d="col" className="override-dark theme" grow p>
+					<Box d="col" className="@scheme-dark" surface="white" grow p>
 						{ranges}
 					</Box>
 				</Box>
@@ -115,9 +113,9 @@ function Range({ className, style }: { className?: string; style?: any }) {
 			<Swatch className="bg-main-wash" />
 			<Swatch className="bg-main-light" />
 			<Swatch className="bg-main" />
-			<Swatch className="bg-main-dark" />
+			<Swatch className="bg-main-heavy" />
 			<Swatch className="bg-main-ink" />
-			<div className="absolute left-0 top-0 text-xs color-white bg-black/50">
+			<div className="absolute left-0 top-0 color-neutral-paper bg-neutral-ink/50 text-ambient">
 				{className}
 			</div>
 		</Box>
@@ -128,17 +126,17 @@ export const Modifiers: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
+					[$userColorHue]: args.customHue,
 			  }
 			: {};
 		return (
 			<Box col>
-				<ModifierRange className="theme-salt" />
-				<ModifierRange className="theme-lemon" />
-				<ModifierRange className="theme-leek" />
-				<ModifierRange className="theme-tomato" />
-				<ModifierRange className="theme-eggplant" />
-				<ModifierRange className="theme-blueberry" />
+				<ModifierRange className="@mode-salt" />
+				<ModifierRange className="@mode-lemon" />
+				<ModifierRange className="@mode-leek" />
+				<ModifierRange className="@mode-tomato" />
+				<ModifierRange className="@mode-eggplant" />
+				<ModifierRange className="@mode-blueberry" />
 				<ModifierRange style={style} className="theme" />
 			</Box>
 		);
@@ -164,8 +162,8 @@ function ModifierRange({
 			<Swatch className="bg-main bg-darken-1">P-1</Swatch>
 			<Swatch className="bg-main bg-darken-2">P-2</Swatch>
 			{/* <Swatch className="bg-main bg-darken-5">P-5</Swatch> */}
-			<Swatch className="bg-main-dark">D</Swatch>
-			<Swatch className="bg-main-dark bg-darken-2">D-2</Swatch>
+			<Swatch className="bg-main-heavy">D</Swatch>
+			<Swatch className="bg-main-heavy bg-darken-2">D-2</Swatch>
 			<Swatch className="bg-main-ink">I</Swatch>
 		</Box>
 	);
@@ -175,7 +173,7 @@ export const Inheritance: Story = {
 	render(args: any) {
 		const style: any = args.customHue
 			? {
-					[PROPS.USER.COLOR.PRIMARY_HUE]: args.customHue,
+					[$userColorHue]: args.customHue,
 			  }
 			: {};
 		return (
@@ -198,88 +196,64 @@ export const TweakOpacity: Story = {
 		return (
 			<Box color="accent" surface className="h-32" full="width" p gap>
 				<Box
-					className="h-full border ring color-primary-dark/100 bg-primary/100 border-black/100 ring-primary-light/100"
+					className="h-full color-main-heavy/100 bg-main/100 ring-main-light/100 ring b-neutral-ink/100 border"
 					grow
 				>
 					100
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/90 bg-primary/90 border-black/90 ring-primary-light/90"
+					className="h-full color-main-heavy/90 bg-main/90 ring-main-light/90 ring b-neutral-ink/90 border"
 					grow
 				>
 					90
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/80 bg-primary/80 border-black/80 ring-primary-light/80"
+					className="h-full color-main-heavy/80 bg-main/80 ring-main-light/80 ring b-neutral-ink/80 border"
 					grow
 				>
 					80
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/70 bg-primary/70 border-black/70 ring-primary-light/70"
+					className="h-full color-main-heavy/70 bg-main/70 ring-main-light/70 ring b-neutral-ink/70 border"
 					grow
 				>
 					70
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/60 bg-primary/60 border-black/60 ring-primary-light/60"
+					className="h-full color-main-heavy/60 bg-main/60 ring-main-light/60 ring b-neutral-ink/60 border"
 					grow
 				>
 					60
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/50 bg-primary/50 border-black/50 ring-primary-light/50"
+					className="h-full color-main-heavy/50 bg-main/50 ring-main-light/50 ring b-neutral-ink/50 border"
 					grow
 				>
 					50
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/40 bg-primary/40 border-black/40 ring-primary-light/40"
+					className="h-full color-main-heavy/40 bg-main/40 ring-main-light/40 ring b-neutral-ink/40 border"
 					grow
 				>
 					40
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/30 bg-primary/30 border-black/30 ring-primary-light/30"
+					className="h-full color-main-heavy/30 bg-main/30 ring-main-light/30 ring b-neutral-ink/30 border"
 					grow
 				>
 					30
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/20 bg-primary/20 border-black/20 ring-primary-light/20"
+					className="h-full color-main-heavy/20 bg-main/20 ring-main-light/20 ring b-neutral-ink/20 border"
 					grow
 				>
 					20
 				</Box>
 				<Box
-					className="h-full border ring color-primary-dark/10 bg-primary/10 border-black/10 ring-primary-light/10"
+					className="h-full color-main-heavy/10 bg-main/10 ring-main-light/10 ring b-neutral-ink/10 border"
 					grow
 				>
 					10
-				</Box>
-			</Box>
-		);
-	},
-};
-
-export const ComputedColors: Story = {
-	render() {
-		const ctx = snapshotColorContext('primary');
-		const oklchValues = [
-			defaultPalettes.primary.definitions.wash.computeOklch(ctx),
-			defaultPalettes.primary.definitions.light.computeOklch(ctx),
-			defaultPalettes.primary.definitions.default.computeOklch(ctx),
-			defaultPalettes.primary.definitions.dark.computeOklch(ctx),
-			defaultPalettes.primary.definitions.ink.computeOklch(ctx),
-		];
-
-		return (
-			<Box col>
-				<Range className="theme" />
-				<Box className="h-100px">
-					{oklchValues.map((oklch) => (
-						<Swatch style={{ backgroundColor: oklch }}>OK</Swatch>
-					))}
 				</Box>
 			</Box>
 		);

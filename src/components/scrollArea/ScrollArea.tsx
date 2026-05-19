@@ -17,21 +17,22 @@ export const ScrollAreaRoot = withClassName(
 export const StyledScrollAreaViewport = withClassName(
 	BaseScrollArea.Viewport,
 	'layer-components:(h-full min-h-0 outline-none)',
-	'layer-components:foc',
+	'layer-components:focus:outline-none',
+	'layer-components:focus-visible:(ring-neutral-ink ring-[1px])',
 );
 
 export const ScrollAreaVerticalFades = withClassName(
 	'div',
 	'layer-components:([--scroll-area-overflow-y-end:inherit] [--scroll-area-overflow-y-start:inherit] pointer-events-none absolute inset-0)',
-	'layer-components:before:([--scroll-area-overflow-y-start:inherit] absolute left-0 top-0 block h-[min(40px,var(--scroll-area-overflow-y-start,40px))] w-full bg-gradient-from-bg bg-gradient-to-transparent bg-gradient-to-b transition-height content-empty)',
-	'layer-components:after:([--scroll-area-overflow-y-end:inherit] absolute bottom-0 left-0 block h-[min(40px,var(--scroll-area-overflow-y-end,40px))] w-full bg-gradient-from-bg bg-gradient-to-transparent bg-gradient-to-t transition-height content-empty)',
+	'layer-components:before:bg-gradient-from-bg layer-components:before:([--scroll-area-overflow-y-start:inherit] absolute left-0 top-0 block h-[min(40px,var(--scroll-area-overflow-y-start,40px))] w-full transition-height content-empty bg-gradient-to-transparent bg-gradient-to-b)',
+	'layer-components:after:bg-gradient-from-bg layer-components:after:([--scroll-area-overflow-y-end:inherit] absolute bottom-0 left-0 block h-[min(40px,var(--scroll-area-overflow-y-end,40px))] w-full transition-height content-empty bg-gradient-to-transparent bg-gradient-to-t)',
 );
 
 export const ScrollAreaHorizontalFades = withClassName(
 	'div',
 	'layer-components:([--scroll-area-overflow-x-end:inherit] [--scroll-area-overflow-x-start:inherit] pointer-events-none absolute inset-0)',
-	'layer-components:before:([--scroll-area-overflow-x-start:inherit] absolute left-0 top-0 block h-full w-[min(40px,var(--scroll-area-overflow-x-start,40px))] bg-gradient-from-bg bg-gradient-to-transparent bg-gradient-to-r transition-width content-empty)',
-	'layer-components:after:([--scroll-area-overflow-x-end:inherit] absolute right-0 top-0 block h-full w-[min(40px,var(--scroll-area-overflow-x-end,40px))] bg-gradient-from-bg bg-gradient-to-transparent bg-gradient-to-l transition-width content-empty)',
+	'layer-components:before:bg-gradient-from-bg layer-components:before:([--scroll-area-overflow-x-start:inherit] absolute left-0 top-0 block h-full w-[min(40px,var(--scroll-area-overflow-x-start,40px))] transition-width content-empty bg-gradient-to-transparent bg-gradient-to-r)',
+	'layer-components:after:bg-gradient-from-bg layer-components:after:([--scroll-area-overflow-x-end:inherit] absolute right-0 top-0 block h-full w-[min(40px,var(--scroll-area-overflow-x-end,40px))] transition-width content-empty bg-gradient-to-transparent bg-gradient-to-l)',
 );
 
 export const ScrollAreaViewportFades = () => (
@@ -54,12 +55,12 @@ BaseScrollContentWithoutMinWidth.displayName = 'ScrollAreaContent';
 export const ScrollAreaContent = withClassName(
 	BaseScrollContentWithoutMinWidth,
 	'layer-components:(flex flex-col)',
-	'layer-components:[[data-scroll-direction=horizontal]>&,[data-scroll-direction=both]>&]:min-w-min-content',
+	'layer-components:[[data-scroll-direction=horizontal]>&,[data-scroll-direction=both]>&]:min-w-[min-content]',
 );
 
 export const ScrollAreaThumb = withClassName(
 	BaseScrollArea.Thumb,
-	'layer-components:(rounded-inherit bg-fg/25)',
+	'layer-components:(bg-fg/25 rd-[999px])',
 	'layer-components:data-[orientation=horizontal]:(h-full)',
 	'layer-components:data-[orientation=vertical]:(w-full)',
 );
@@ -76,7 +77,7 @@ ComposedScrollbar.displayName = 'ScrollAreaScrollbar';
 
 export const ScrollAreaScrollbar = withClassName(
 	ComposedScrollbar,
-	'layer-components:(pointer-events-none relative m-xxs flex touch-none select-none rounded-full opacity-0)',
+	'layer-components:(pointer-events-none relative m-xxs flex select-none opacity-0 rd-[999px] touch-none)',
 	'layer-components:(transition-[opacity,height,width] bg-fg/5)',
 	'layer-components:data-[hovering]:(pointer-events-auto opacity-100)',
 	'layer-components:data-[scrolling]:(duration-0)',

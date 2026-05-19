@@ -6,7 +6,6 @@ import {
 } from '@base-ui/react/tooltip';
 import classNames from 'clsx';
 import { ReactElement, ReactNode } from 'react';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 
 export type * from '@base-ui/react/tooltip';
@@ -38,46 +37,45 @@ function Content({
 }: TooltipContentProps) {
 	return (
 		<TooltipPrimitive.Portal>
-			<GroupScaleReset>
-				<TooltipPrimitive.Positioner
-					side={side}
-					sideOffset={sideOffset}
-					align={align}
-					alignOffset={alignOffset}
-					anchor={anchor}
-					disableAnchorTracking={disableAnchorTracking}
-					sticky={sticky}
-					arrowPadding={arrowPadding}
-					collisionAvoidance={collisionAvoidance}
-					collisionBoundary={collisionBoundary}
-					collisionPadding={collisionPadding}
-					positionMethod={positionMethod}
+			<TooltipPrimitive.Positioner
+				side={side}
+				sideOffset={sideOffset}
+				align={align}
+				alignOffset={alignOffset}
+				anchor={anchor}
+				disableAnchorTracking={disableAnchorTracking}
+				sticky={sticky}
+				arrowPadding={arrowPadding}
+				collisionAvoidance={collisionAvoidance}
+				collisionBoundary={collisionBoundary}
+				collisionPadding={collisionPadding}
+				positionMethod={positionMethod}
+			>
+				<TooltipPrimitive.Popup
+					render={render}
+					className={classNames(
+						'layer-components:leading-tight layer-components:(relative flex select-none transition shadow-sm px-sm py-xs rd-sm text-ambient)',
+						'layer-components:data-[instant]:transition-none',
+						'layer-components:start-end:opacity-0 layer-components:start-end:scale-95',
+						'layer-components:transform-origin-[var(--transform-origin)]',
+						{
+							'layer-variants:color-neutral-paper layer-variants:bg-neutral-ink':
+								color === 'contrast',
+							'layer-variants:border-gray layer-variants:(color-neutral-ink bg-neutral-paper border)':
+								color === 'white' || color === 'neutral',
+							'layer-variants:bg-attention-ink layer-variants:color-neutral-paper':
+								color === 'attention',
+						},
+						className,
+					)}
+					{...props}
 				>
-					<TooltipPrimitive.Popup
-						render={render}
-						className={classNames(
-							'layer-components:(relative flex select-none rounded-sm px-sm py-xs text-sm leading-tight shadow-sm transition)',
-							'layer-components:data-[instant]:transition-none',
-							'layer-components:start-end:(scale-95 opacity-0)',
-							'layer-components:transform-origin-[var(--transform-origin)]',
-							{
-								'layer-variants:(color-white bg-black)': color === 'contrast',
-								'layer-variants:(border color-black bg-white border-gray)':
-									color === 'white' || color === 'neutral',
-								'layer-variants:(color-white bg-attention-ink)':
-									color === 'attention',
-							},
-							className,
-						)}
-						{...props}
-					>
-						{children}
-						<TooltipPrimitive.Arrow className="layer-components:arrow">
-							<ArrowSvg />
-						</TooltipPrimitive.Arrow>
-					</TooltipPrimitive.Popup>
-				</TooltipPrimitive.Positioner>
-			</GroupScaleReset>
+					{children}
+					<TooltipPrimitive.Arrow className="layer-components:arrow">
+						<ArrowSvg />
+					</TooltipPrimitive.Arrow>
+				</TooltipPrimitive.Popup>
+			</TooltipPrimitive.Positioner>
 		</TooltipPrimitive.Portal>
 	);
 }

@@ -22,7 +22,6 @@ import {
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
-import { GroupScaleReset } from '../../systems/GroupScale.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
@@ -32,32 +31,32 @@ import { selectTriggerClassName } from '../select/index.js';
 
 const StyledOverlay = withClassName(
 	BaseDialog.Backdrop,
-	'layer-components:border-top-1 layer-components:border-top-gray layer-components:border-top-solid layer-components:(fixed inset-0 shadow-[0_30px_60px_0px] shadow-black/20 shadow-inset transition bg-black/15)',
+	'layer-components:(fixed inset-0 shadow-inset transition bg-neutral-ink/15 shadow-[0_30px_60px_0px] shadow-main-ink/20 b-t-neutral b-t b-t-solid)',
 	'layer-components:backdrop-blur-sm',
 	'start-end:opacity-0',
 );
 
 const StyledContent = withClassName(
 	BaseDialog.Popup,
-	'layer-components:(pointer-events-auto fixed flex flex-col items-stretch overflow-hidden border border shadow-xl transition bg-white border-gray-dark)',
-	'layer-components:sm:shadow-down',
+	'layer-components:(pointer-events-auto fixed flex flex-col items-stretch overflow-hidden transition shadow-xl bg-surface-ambient b-neutral-heavy b)',
+	'layer-components:sm:shadow-reverse-off',
 	'transform-gpu',
-	'layer-components:(left-50% top-50% max-h-85vh max-w-450px w-90vw translate-[-50%] border-b-1 rounded-lg)',
+	'layer-components:(left-50% top-50% max-h-85vh max-w-450px w-90vw border-b-1 rd-surface translate-[-50%])',
 
-	'layer-components:start-end:scale-95 layer-components:start-end:opacity-0',
+	'layer-components:start-end:(opacity-0 translate-x-[-50%] translate-y-[-45%] scale-95)',
 );
 const sheetClassNames = clsx(
-	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-none w-screen translate-0 border-b-0 rounded-b-0 rounded-tl-xl rounded-tr-xl pt-lg shadow-up)',
+	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-unset w-[100vw] b-b-0 rd-b-0 shadow-reverse pt-lg rd-tl-xl rd-tr-xl translate-0)',
 	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
 
-	'layer-variants:start-end:lt-sm:(translate-y-full opacity-0)',
+	'layer-variants:start-end:lt-sm:opacity-0 layer-variants:start-end:lt-sm:translate-y-full',
 );
 const sheetClassNameWithOverlayKeyboard = clsx(
 	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',
 	'layer-variants:lt-sm:max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))]',
 );
 const sheetClassNameWithDisplaceKeyboard = clsx(
-	'layer-variants:lt-sm:(bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] max-h-[calc(0.85*var(--viewport-height,100vh))])',
+	'layer-variants:lt-sm:bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] layer-variants:lt-sm:max-h-[calc(0.85*var(--viewport-height,100vh))]',
 );
 
 function sheetCloseGestureLogic(
@@ -187,53 +186,51 @@ export const Content = function Content({
 	return (
 		<BaseDialog.Portal>
 			<StyledOverlay />
-			<GroupScaleReset>
-				<StyledContent
-					data-dialog-content
-					ref={finalRef}
-					{...props}
-					onTouchStart={onTouchStart}
-					onTouchMove={onTouchMove}
-					onTouchEnd={onTouchEnd}
-					onTouchCancel={onTouchEnd}
-					className={clsx(
-						{
-							'layer-variants:md:max-w-800px': width === 'lg',
-							'layer-variants:max-w-600px': width === 'md',
-							'layer-variants:max-w-300px': width === 'sm',
-						},
-						!disableSheet && sheetClassNames,
-						!disableSheet &&
-							virtualKeyboardBehavior === 'overlay' &&
-							sheetClassNameWithOverlayKeyboard,
-						!disableSheet &&
-							virtualKeyboardBehavior === 'displace' &&
-							sheetClassNameWithDisplaceKeyboard,
-						outerClassName || className,
-					)}
+			<StyledContent
+				data-dialog-content
+				ref={finalRef}
+				{...props}
+				onTouchStart={onTouchStart}
+				onTouchMove={onTouchMove}
+				onTouchEnd={onTouchEnd}
+				onTouchCancel={onTouchEnd}
+				className={clsx(
+					{
+						'layer-variants:md:max-w-[800px]': width === 'lg',
+						'layer-variants:max-w-[600px]': width === 'md',
+						'layer-variants:max-w-[300px]': width === 'sm',
+					},
+					!disableSheet && sheetClassNames,
+					!disableSheet &&
+						virtualKeyboardBehavior === 'overlay' &&
+						sheetClassNameWithOverlayKeyboard,
+					!disableSheet &&
+						virtualKeyboardBehavior === 'displace' &&
+						sheetClassNameWithDisplaceKeyboard,
+					outerClassName || className,
+				)}
+			>
+				{!disableDefaultClose && (
+					<DialogDefaultClose showOnMobile={disableSheet} />
+				)}
+				{!disableSheet && <DialogSwipeHandle />}
+				<ScrollArea
+					direction="vertical"
+					className="layer-components:(h-full w-full)"
 				>
-					{!disableDefaultClose && (
-						<DialogDefaultClose showOnMobile={disableSheet} />
-					)}
-					{!disableSheet && <DialogSwipeHandle />}
-					<ScrollArea
-						direction="vertical"
-						className="layer-components:(h-full w-full)"
+					<ScrollArea.Content
+						className={clsx(
+							'layer-components:(flex flex-col p-md gap-md)',
+							innerClassName,
+						)}
+						style={{
+							minWidth: undefined,
+						}}
 					>
-						<ScrollArea.Content
-							className={clsx(
-								'layer-components:(flex flex-col gap-md p-md)',
-								innerClassName,
-							)}
-							style={{
-								minWidth: undefined,
-							}}
-						>
-							{children}
-						</ScrollArea.Content>
-					</ScrollArea>
-				</StyledContent>
-			</GroupScaleReset>
+						{children}
+					</ScrollArea.Content>
+				</ScrollArea>
+			</StyledContent>
 		</BaseDialog.Portal>
 	);
 };
@@ -358,11 +355,11 @@ export function DialogSwipeHandle({
 			ref={finalRef}
 			{...props}
 			className={clsx(
-				'layer-components:(absolute left-50% top-0 w-20% transform-gpu cursor-grab touch-none rounded-lg py-2 sm:hidden -translate-x-1/2)',
+				'layer-components:(absolute left-50% top-0 w-20% cursor-grab py-2 rd-lg transform-gpu touch-none sm:hidden -translate-x-1/2)',
 				className,
 			)}
 		>
-			<div className="layer-components:(h-[4px] w-full rounded-lg bg-gray)" />
+			<div className="layer-components:(h-[4px] w-full bg-neutral rd-lg)" />
 		</div>
 	);
 }
@@ -405,12 +402,12 @@ export const DialogDefaultClose = function DialogDefaultClose({
 
 const StyledTitle = withClassName(
 	BaseDialog.Title,
-	'layer-components:(mb-4 mt-0 text-3xl font-title color-black)',
+	'layer-components:(mb-4 mt-0 color-neutral-ink text-primary text-primary)',
 );
 
 const StyledDescription = withClassName(
 	BaseDialog.Description,
-	'layer-components:(mb-6 mt-3 text-md leading-6 color-gray-dark)',
+	'layer-components:(mb-6 mt-3 leading-6 color-neutral-heavy text-secondary)',
 );
 
 // Exports
@@ -474,7 +471,7 @@ export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
 export const DialogActions = withClassName(
 	'div',
-	'layer-components:([--global-shadow-spread:1] sticky bottom-md z-100 mt-md flex flex-wrap items-center self-end justify-end gap-sm rounded-lg pb-1px shadow-md shadow-white bg-white shadow-up)',
+	'layer-components:([--global-shadow-spread:1] sticky bottom-md z-100 flex flex-wrap items-center self-end justify-end pb-1px shadow-md shadow-reverse bg-neutral-paper shadow-neutral-paper mt-md gap-sm rd-lg)',
 );
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
@@ -502,8 +499,8 @@ export const DialogSelectList = withClassName(
 
 export const DialogSelectItemRoot = withClassName(
 	BaseRadio.Root,
-	'layer-components:(w-full flex cursor-pointer items-center gap-3 border-1 rounded-lg border-none border-solid px-4 py-3 text-left font-normal transition-all color-black bg-gray-light border-bg)',
-	'layer-components:[&[data-state=checked]]:(color-main-ink bg-main-wash border-color)',
+	'layer-components:(w-full flex cursor-pointer items-center gap-3 border-1 px-4 py-3 text-left transition-all color-neutral-ink bg-neutral-light border-bg rd-lg border-solid border-none leading-normal)',
+	'layer-components:[&[data-state=checked]]:(color-main-ink bg-main-wash b-fg)',
 );
 
 export const DialogSelectItem = function DialogSelectItem({

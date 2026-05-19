@@ -2,7 +2,6 @@ import { Slider as BaseSlider, SliderRootProps } from '@base-ui/react/slider';
 import clsx from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
-import { PaletteName } from '../../uno/index.js';
 
 export const SliderRoot = withClassName(
 	BaseSlider.Root,
@@ -11,41 +10,32 @@ export const SliderRoot = withClassName(
 
 export const SliderControl = withClassName(
 	BaseSlider.Control,
-	'layer-components:(relative h-30px w-full flex translate-z-0 touch-none select-none items-center)',
+	'layer-components:(relative h-30px w-full flex select-none items-center translate-z-0 touch-none)',
 	'layer-variants:[&[data-orientation=vertical]]:(h-full w-30px flex-col)',
 );
 export const SliderTrack = withClassName(
 	BaseSlider.Track,
-	'layer-components:(relative h-7px grow select-none rounded-lg ring-1 transition-colors bg-transparent ring-black)',
+	'layer-components:ring-black layer-components:ring-1 layer-components:(relative h-7px grow select-none transition-colors bg-transparent rd-lg)',
 	'layer-variants:[&[data-orientation=vertical]]:(h-full w-7px flex-1)',
 );
 export const SliderRange = withClassName(
 	BaseSlider.Indicator,
-	'layer-components:(rounded-lg transition-colors bg-main)',
-	'layer-variants:[&[data-orientation=vertical]]:(bg-main)',
+	'layer-components:(transition-colors bg-main rd-lg)',
+	'layer-variants:[&[data-orientation=vertical]]:bg-main',
 );
 export const SliderThumb = withClassName(
 	BaseSlider.Thumb,
-	'layer-components:(h-5 w-5 flex cursor-pointer touch-none items-center justify-center rounded-lg leading-none shadow-sm ring-2 transition-color bg-white ring-black)',
+	'layer-components:ring-black layer-components:ring-2 layer-components:(h-5 w-5 flex cursor-pointer items-center justify-center transition-color shadow-sm bg-neutral-paper rd-lg leading-none touch-none)',
 	'layer-components:hover:(shadow-md)',
-	'layer-components:active:(shadow-lg ring-4 ring-opacity-50 bg-main-light ring-main-dark)',
+	'layer-components:active:ring-4 layer-components:active:ring-opacity-50 layer-components:active:(shadow-lg bg-main-light ring-main-heavy)',
 	'layer-components:focus-visible:(shadow-lg bg-main-light)',
-	'foc-lg',
 	'layer-components:focus:(outline-none)',
 	'layer-components:disabled:(opacity-50)',
 );
 
-export const SliderBase = ({
-	children,
-	color,
-	className,
-	...props
-}: SliderProps) => {
+export const SliderBase = ({ children, className, ...props }: SliderProps) => {
 	return (
-		<SliderRoot
-			{...props}
-			className={clsx(color && `palette-${color}`, className)}
-		>
+		<SliderRoot {...props} className={clsx(className)}>
 			<SliderControl>{children}</SliderControl>
 		</SliderRoot>
 	);
@@ -71,7 +61,6 @@ export const SliderUi = ({
 );
 
 export interface SliderProps extends SliderRootProps {
-	color?: PaletteName;
 	ref?: Ref<HTMLDivElement>;
 }
 
