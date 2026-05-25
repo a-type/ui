@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
 import { $userColorHue } from './arbor/props.js';

@@ -1,29 +1,14 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import UnoCSS from 'unocss/vite';
 
 const config: StorybookConfig = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-	addons: [
-		'@storybook/addon-links',
-		'@storybook/addon-essentials',
-		'@storybook/addon-interactions',
-	],
+	addons: [],
+
 	framework: {
 		name: '@storybook/react-vite',
 		options: {},
 	},
-	docs: {
-		autodocs: 'tag',
-	},
-	viteFinal: async (config) => {
-		config.plugins = config.plugins || [];
-		config.plugins.push(
-			UnoCSS({
-				inspector: true,
-			}),
-		);
-		return config;
-	},
+
 	staticDirs: ['../storybook-public'],
 };
 export default config;

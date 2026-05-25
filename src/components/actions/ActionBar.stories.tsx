@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
 import { ActionBar } from './ActionBar.js';

@@ -24,7 +24,7 @@ import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
-import { getButtonClassName } from './classes.js';
+import cls from './Button.module.css';
 
 export interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
@@ -93,15 +93,11 @@ export function ButtonRoot({
 		'data-icon-count': iconChildCount > 0 ? iconChildCount : undefined,
 		'data-dropdown-trigger': isDropdownTrigger ? true : undefined,
 		tabIndex: visuallyDisabled ? -1 : undefined,
+		'data-toggleable': toggled !== undefined,
+		'data-disable-icon-mode': disableIconMode,
+		'data-emphasis': emphasis,
 		className: clsx(
-			getButtonClassName({
-				emphasis,
-				size,
-				toggleable:
-					toggled !== undefined &&
-					(toggleMode === 'color' || toggleMode === 'color-and-indicator'),
-				disableIconMode,
-			}),
+			emphasis === 'unstyled' ? cls['Button--unstyled'] : cls['Button'],
 			className,
 		),
 	};

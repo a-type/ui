@@ -1,53 +1,54 @@
-import { createArborPreset } from '@arbor-css/core';
+import { createArbor } from '@arbor-css/core';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
-const preset = createArborPreset({
-	colors: {
-		ranges: {
-			lemon: {
-				hue: 90.8,
+const preset = createArbor({})
+	.preset({
+		colors: {
+			ranges: {
+				lemon: {
+					hue: 90.8,
+				},
+				leek: {
+					hue: 165.88,
+				},
+				tomato: {
+					hue: 10.51,
+				},
+				blueberry: {
+					hue: 248.14,
+				},
+				eggplant: {
+					hue: 280.21,
+				},
+				attention: {
+					hue: 30,
+				},
+				success: {
+					hue: 140,
+				},
+				user: {
+					hue: `var(${$userColorHue}, 200)`,
+					saturation: `var(${$userColorSaturation}, 100%)`,
+				},
 			},
-			leek: {
-				hue: 165.88,
-			},
-			tomato: {
-				hue: 10.51,
-			},
-			blueberry: {
-				hue: 248.14,
-			},
-			eggplant: {
-				hue: 280.21,
-			},
-			attention: {
-				hue: 30,
-			},
-			success: {
-				hue: 140,
-			},
-			user: {
-				hue: `var(${$userColorHue}, 200)`,
-				saturation: `var(${$userColorSaturation}, 100%)`,
+			mainColor: 'lemon',
+		},
+		typography: {
+			minSize: '12px',
+		},
+		globals: {
+			roundness: 0.75,
+			baseSpacingSize: '8px',
+			baseFontSize: '16px',
+			defaultShadowColor: 'rgba(0, 0, 0, 0.05)',
+			saturation: 0.5,
+		},
+		baseMode: {
+			action: {
+				roundness: 99,
 			},
 		},
-		mainColor: 'lemon',
-	},
-	typography: {
-		minSize: '12px',
-	},
-	globals: {
-		roundness: 0.75,
-		baseSpacingSize: '8px',
-		baseFontSize: '16px',
-		defaultShadowColor: 'rgba(0, 0, 0, 0.05)',
-		saturation: 0.5,
-	},
-	baseMode: {
-		action: {
-			roundness: 99,
-		},
-	},
-})
+	})
 	.withMode('accent', (preset) => ({
 		color: {
 			main: preset.primitives.$tokens.colors.leek,

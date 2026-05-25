@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import clsx from 'clsx';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';

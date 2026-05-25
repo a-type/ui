@@ -1,11 +1,11 @@
-import type { Preview } from '@storybook/react';
+// @ts-ignore
+import '../src/css/main.css';
+import './preview.css';
+
+import type { Preview } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
-// @ts-ignore
-import 'virtual:uno.css';
-// @ts-ignore
-import './preview.css';
 
 const preview: Preview = {
 	parameters: {

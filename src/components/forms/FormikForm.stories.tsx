@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CheckboxField } from './CheckboxField.js';
 import { EmojiField } from './EmojiField.js';
 import { FormikForm } from './FormikForm.js';

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CalendarDayValue } from 'calendar-blocks';
 import { useEffect, useState } from 'react';
 import { Spinner } from '../spinner/Spinner.js';

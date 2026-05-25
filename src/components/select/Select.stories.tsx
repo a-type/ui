@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './Select.js';

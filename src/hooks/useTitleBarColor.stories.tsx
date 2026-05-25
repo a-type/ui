@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 import { Box, Button, Dialog, Icon, Provider } from '../components/index.js';
 import { useThemedTitleBar, useTitleBarColor } from './useTitleBarColor.js';

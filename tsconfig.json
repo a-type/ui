@@ -14,13 +14,13 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
 		"outDir": "./dist/esm",
 		"rootDir": "./src",
 		"jsx": "react-jsx",
-		"types": ["dom-chromium-installation-events", "web-app-manifest"]
+		"types": ["dom-chromium-installation-events", "web-app-manifest"],
+		"plugins": [{ "name": "typescript-plugin-css-modules" }]
 	},
 	"include": ["src"]
 }

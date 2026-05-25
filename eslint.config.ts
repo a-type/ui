@@ -1,5 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+
 import js from '@eslint/js';
-import unocss from '@unocss/eslint-config/flat';
 import pluginReact from 'eslint-plugin-react';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
@@ -19,7 +20,6 @@ export default defineConfig([
 	},
 	tseslint.configs.recommended,
 	pluginReact.configs.flat['jsx-runtime'],
-	unocss as any,
 
 	{
 		rules: {
@@ -44,12 +44,6 @@ export default defineConfig([
 				},
 			],
 			'@typescript-eslint/ban-ts-comment': 'off',
-			'unocss/order': [
-				'error',
-				{
-					unoFunctions: ['clsx', 'classNames', 'css', 'withClassName'],
-				},
-			],
 		},
 	},
 	{
