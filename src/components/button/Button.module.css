@@ -1,128 +1,136 @@
-.Button {
-	@layer base {
-		user-select: none;
-		appearance: none;
-		cursor: pointer;
-		transition: all 0.2s ease;
+.root {
+	user-select: none;
+	appearance: none;
+	cursor: pointer;
+	transition: all 0.2s ease;
 
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: var(--m-spacing-sm);
-		align-self: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-sm);
+	align-self: center;
 
-		position: relative;
-		overflow: visible;
-		white-space: nowrap;
+	position: relative;
+	overflow: visible;
+	white-space: nowrap;
 
-		font-size: var(--m-text-secondary-size);
-		line-height: 1;
-		font-family: inherit;
+	font-size: var(--m-text-secondary-size);
+	line-height: 1;
+	font-family: inherit;
 
-		@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
+	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
 
-		@apply --mx-border(var(--mx-fg-ref));
-		border-width: var(--m-borderWidth-md);
-		border-style: solid;
-		border-radius: var(--m-action-borderRadius);
+	@apply --mx-border(var(--mx-fg-ref));
+	border-width: var(--m-borderWidth-md);
+	border-style: solid;
+	border-radius: var(--m-action-borderRadius);
 
-		@apply --mx-shadow;
-		--mx-shadow-shadow: var(--m-shadow-sm-compiled);
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
 
-		padding: var(--m-action-padding);
-	}
+	padding: var(--m-action-padding);
 
-	@layer variants {
-		&[data-emphasis='primary'] {
-			@apply --mx-bg(var(--m-color-main));
-		}
-		&[data-emphasis='light'] {
-			@apply --mx-bg(var(--m-color-main-light));
-			--mx-bg-ref: --fn-desaturate-color(var(--mx-bg-applied), 2);
-		}
-		&[data-emphasis='default'] {
-			@apply --mx-bg(var(--m-color-neutral-paper));
-		}
-		&[data-emphasis='ghost'] {
-			--mx-shadow-shadow: none;
-			@apply --mx-border(transparent);
-			@apply --mx-fg(var(--m-color-main-ink));
-			@apply --mx-bg(transparent);
-			&[aria-pressed='true'] {
-				@apply --mx-bg(var(--m-action-ambient-color-bg));
-			}
-		}
-
-		&[data-has-icon='true'][data-has-label='false']:not(
-				[data-disable-icon-mode='true']
-			):not([data-size='wrapper']) {
-			padding: var(--m-spacing-md);
-
-			&[data-size='small'] {
-				padding: var(--m-spacing-sm);
-			}
-
-			&:not([aria-pressed='true']) {
-				aspect-ratio: 1/1;
-				align-items: center;
-				justify-content: center;
-			}
-		}
-
-		&[data-size='small'] {
-			min-height: 30px;
-		}
-		&[data-size='wrapper'] {
-			padding: 0;
-			width: fit-content;
-		}
-	}
-
-	@layer states.base {
+	&[data-emphasis='primary'] {
+		@apply --mx-bg(var(--m-action-primary-color-bg));
 		&:hover {
-			@apply --mx-bg(var(--m-color-main));
-			--mx-bg-ref: --fn-lighten-color(var(--mx-bg-applied), 2);
-			--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+			@apply --mx-bg-lighten(2);
 		}
 		&:active {
-			--mx-bg-ref: --fn-darken-color(var(--mx-bg-applied), 1);
-			--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 6px);
+			@apply --mx-bg-lighten(4);
 		}
+	}
+	&[data-emphasis='light'] {
+		/* A variant of primary color, but a bit lighter */
+		@apply --mx-bg(var(--m-color-main-light));
+	}
+	&[data-emphasis='default'] {
+		@apply --mx-bg(var(--m-action-secondary-color-bg));
+	}
+	&[data-emphasis='ghost'] {
+		@apply --mx-border(var(--m-action-ambient-color-border));
+		@apply --mx-bg(var(--m-action-ambient-color-bg));
+		@apply --mx-fg(var(--m-action-ambient-color-fg));
+		--mx-shadow-shadow: 0 0 0 0 transparent;
+
+		&:hover,
 		&:focus {
-			outline: none;
-		}
-		&:focus-visible {
-			--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 4px);
-		}
-		&:disabled,
-		&[data-disabled='true'] {
-			cursor: default;
-			box-shadow: none;
-			--mx-bg-ref: --fn-desaturate-color(var(--mx-bg-applied), 3);
+			--mx-bg-applied: inherit;
 		}
 
-		/* Always turn off background for toggleable buttons that aren't pressed */
-		&[data-toggleable='true'][aria-pressed='false']:not(:hover) {
-			@apply --mx-bg(transparent);
+		&[aria-pressed='true'] {
+			@apply --mx-bg(var(--m-color-main-light));
 		}
+	}
+
+	&[data-has-icon='true'][data-has-label='false']:not(
+			[data-disable-icon-mode='true']
+		):not([data-size='wrapper']) {
+		padding: var(--m-spacing-md);
+
+		&[data-size='small'] {
+			padding: var(--m-spacing-sm);
+		}
+
+		&:not([aria-pressed='true']) {
+			aspect-ratio: 1/1;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	&[data-size='small'] {
+		min-height: 28px;
+	}
+	&[data-size='wrapper'] {
+		padding: 0;
+		width: fit-content;
+	}
+
+	&:hover {
+		@apply --mx-bg-darken(2);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+	}
+	&:active {
+		@apply --mx-bg-darken(4);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 6px);
+	}
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		@apply --mx-bg-lighten(2);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+	&:disabled,
+	&[data-disabled='true'] {
+		cursor: default;
+		box-shadow: none;
+		@apply --mx-bg-desaturate(8);
+		--mx-fg-ref: --fn-fade(var(--m-color-neutral-ink), 65%);
+	}
+
+	/* Always turn off background for toggleable buttons that aren't pressed */
+	&[data-toggleable='true'][aria-pressed='false']:not(:hover) {
+		@apply --mx-bg(transparent);
 	}
 }
 
-.Button--unstyled {
-	@layer base {
-		@apply --mx-bg(transparent);
-		margin: 0;
-		padding: 0;
-		appearance: none;
-		border: none;
-		cursor: pointer;
+.unstyled {
+	@apply --mx-bg(transparent);
+	margin: 0;
+	padding: 0;
+	appearance: none;
+	border: none;
+	cursor: pointer;
+	&:focus {
+		outline: none;
 	}
-	@layer base.states {
-		&:focus {
-			outline: none;
-		}
-		&:focus-visible {
-			box-shadow: 0 0 0 4px var(--m-color-main-ink);
-		}
+	&:focus-visible {
+		box-shadow: 0 0 0 4px var(--m-color-main-ink);
 	}
+}
+
+.icon {
+	display: flex;
+	flex-shrink: 0;
 }

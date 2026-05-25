@@ -5,6 +5,7 @@ import {
 import classNames from 'clsx';
 import { CSSProperties, HTMLProps } from 'react';
 import { Icon } from '../icon/index.js';
+import cls from './Avatar.module.css';
 
 export interface AvatarProps extends BaseAvatarProps {
 	className?: string;
@@ -30,16 +31,18 @@ export function Avatar({
 	return (
 		<BaseAvatar.Root
 			className={classNames(
+				cls.root,
 				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden bg-neutral-paper b rd-lg)',
 				empty && 'layer-components:(bg-neutral-light border-dashed)',
 				className,
 			)}
+			data-empty={empty}
 			style={size ? { width: size, height: size, ...style } : style}
 			{...rest}
 		>
 			{imageSrc && (
 				<BaseAvatar.Image
-					className="object-cover h-full w-full"
+					className={cls.image}
 					referrerPolicy="no-referrer"
 					src={imageSrc}
 					alt={`${name ?? 'user'}'s profile picture`}
@@ -48,7 +51,7 @@ export function Avatar({
 			)}
 			{name && (
 				<BaseAvatar.Fallback
-					className="text-size-[calc(0.5px*var(--avatar-size,24px))]"
+					className={cls.fallback}
 					style={{ '--avatar-size': size } as any}
 				>
 					{name.charAt(0).toUpperCase()}

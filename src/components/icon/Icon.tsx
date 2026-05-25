@@ -2,6 +2,7 @@ import { useRender, UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames from 'clsx';
 import { Spinner } from '../spinner/Spinner.js';
 import { IconName } from './generated/iconNames.js';
+import cls from './Icon.module.css';
 import { useIconLoading } from './IconLoadingContext.js';
 
 export interface IconProps
@@ -32,11 +33,7 @@ export const Icon = function Icon({
 		defaultTagName: 'svg',
 		ref,
 		props: {
-			className: classNames(
-				'icon',
-				'flex-shrink-0 layer-components:fill-none',
-				className,
-			),
+			className: classNames('icon', cls.root, className),
 			width: size,
 			height: size,
 			children: <use xlinkHref={`#icon-${name}`} />,
@@ -54,7 +51,7 @@ export const Icon = function Icon({
 		return (
 			<Spinner
 				size={size}
-				className={classNames('icon inline-block flex-shrink-0', className)}
+				className={classNames('icon', cls.spinner, className)}
 			/>
 		);
 	}

@@ -1,7 +1,7 @@
 /* inline-arbor-base */
 
 /* default layers */
-@layer reset, arbor, base, variants, states.base, states.variants, utilities;
+@layer reset, arbor, base, variants, states.base, states.variants, util;
 
 #root,
 #main,
@@ -31,7 +31,7 @@
 
 	body {
 		overflow: overlay;
-		background-color: var(--x-color-main-paper);
+		@apply --mx-bg(var(--m-color-main-paper));
 	}
 
 	a {

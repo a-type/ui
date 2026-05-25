@@ -29,7 +29,7 @@ import cls from './Button.module.css';
 export interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
 		Pick<BaseButtonProps, 'render' | 'focusableWhenDisabled'> {
-	emphasis?: 'primary' | 'main' | 'default' | 'ghost' | 'light' | 'unstyled';
+	emphasis?: 'primary' | 'default' | 'ghost' | 'light' | 'unstyled';
 	size?: 'default' | 'small' | 'wrapper';
 	toggled?: boolean;
 	toggleMode?: 'color-and-indicator' | 'color' | 'indicator' | 'state-only';
@@ -97,7 +97,8 @@ export function ButtonRoot({
 		'data-disable-icon-mode': disableIconMode,
 		'data-emphasis': emphasis,
 		className: clsx(
-			emphasis === 'unstyled' ? cls['Button--unstyled'] : cls['Button'],
+			emphasis === 'unstyled' ? cls.unstyled : cls.root,
+			size === 'small' ? '@mode-dense' : '',
 			className,
 		),
 	};
@@ -168,7 +169,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName(SlotDiv, 'icon flex flex-shrink-0');
+export const ButtonIcon = withClassName(SlotDiv, 'icon', cls.icon);
 ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {

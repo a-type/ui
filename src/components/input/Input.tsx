@@ -1,4 +1,3 @@
-import { $systemProps } from '@arbor-css/core';
 import {
 	Input as BaseInput,
 	InputProps as BaseInputProps,
@@ -28,23 +27,7 @@ const inputBorderClassName = clsx(
 	'layer-components:[&>.icon]:mx-sm',
 );
 
-function InputBorderImpl({
-	style,
-	...props
-}: React.HTMLAttributes<HTMLDivElement> & {
-	ref?: Ref<HTMLDivElement>;
-}) {
-	return (
-		<div
-			{...props}
-			style={{
-				[$systemProps.globals.shadowSpread.name]: '0',
-				...style,
-			}}
-		/>
-	);
-}
-const InputBorder = withClassName(InputBorderImpl, inputBorderClassName);
+const InputBorder = withClassName('div', inputBorderClassName);
 
 const InnerInput = function InnerInput({
 	autoSelect,

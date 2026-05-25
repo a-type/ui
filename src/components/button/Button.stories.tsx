@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Avatar } from '../avatar/Avatar.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
-import { Button } from './Button.js';
+import { Button, ButtonProps } from './Button.js';
 import { ConfirmedButton } from './ConfirmedButton.js';
 
 const meta = {
@@ -30,18 +30,24 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
 	render: (args) => {
 		return (
-			<Box col gap>
+			<Box col gap wrap full="width">
 				<Box gap items="center">
 					<Button {...args} />
 					<Button {...args}>
 						<Icon name="placeholder" />
 						{args.children}
 					</Button>
+					<Button {...args} disabled>
+						Disabled
+					</Button>
 					<Button {...args} size="small" />
 					<Button {...args} size="wrapper">
 						<Button.Icon render={<Avatar name="A" />} />
 					</Button>
 					<Button {...args}>
+						<Icon name="placeholder" />
+					</Button>
+					<Button {...args} size="small">
 						<Icon name="placeholder" />
 					</Button>
 				</Box>
@@ -61,6 +67,67 @@ export const Default: Story = {
 					<Button {...args} emphasis="primary" className="@mode-contrast">
 						Contrast
 					</Button>
+				</Box>
+			</Box>
+		);
+	},
+};
+
+function ButtonStack({ emphasis }: { emphasis: ButtonProps['emphasis'] }) {
+	return (
+		<Box col gap>
+			<Button emphasis={emphasis}>Button</Button>
+			<Button emphasis={emphasis}>
+				<Icon name="placeholder" />
+				Icon
+			</Button>
+			<Button emphasis={emphasis} disabled>
+				Disabled
+			</Button>
+			<Button emphasis={emphasis} size="small">
+				Small
+			</Button>
+			<Button emphasis={emphasis} size="wrapper">
+				<Button.Icon
+					render={<Avatar imageSrc="https://i.pravatar.cc/300" name="Avatar" />}
+				/>
+			</Button>
+			<Button emphasis={emphasis}>
+				<Icon name="placeholder" />
+			</Button>
+			<Button emphasis={emphasis} size="small">
+				<Icon name="placeholder" />
+			</Button>
+		</Box>
+	);
+}
+export const AllButtons: Story = {
+	render() {
+		return (
+			<Box col gap>
+				<Box gap justify="between">
+					{['primary', 'light', 'default', 'ghost'].map((emphasis) => (
+						<ButtonStack
+							key={emphasis}
+							emphasis={emphasis as ButtonProps['emphasis']}
+						/>
+					))}
+				</Box>
+				<Box gap surface justify="between" className="@mode-success">
+					{['primary', 'light', 'default', 'ghost'].map((emphasis) => (
+						<ButtonStack
+							key={emphasis}
+							emphasis={emphasis as ButtonProps['emphasis']}
+						/>
+					))}
+				</Box>
+				<Box gap surface justify="between" className="@mode-attention">
+					{['primary', 'light', 'default', 'ghost'].map((emphasis) => (
+						<ButtonStack
+							key={emphasis}
+							emphasis={emphasis as ButtonProps['emphasis']}
+						/>
+					))}
 				</Box>
 			</Box>
 		);

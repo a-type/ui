@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Ref } from 'react';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
+import cls from './Box.module.css';
 
 export type BoxAlignment = 'center' | 'stretch' | 'start' | 'end';
 export type BoxJustification =
@@ -12,24 +13,6 @@ export type BoxJustification =
 	| 'around'
 	| 'end';
 export type BoxSpacingSize = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type BoxResponsive<T> =
-	| T
-	| {
-			default?: T;
-			sm?: T;
-			md?: T;
-			lg?: T;
-	  };
-
-function isResponsive<T>(
-	value: BoxResponsive<T>,
-): value is { sm?: T; md?: T; lg?: T } {
-	return typeof value === 'object';
-}
-
-function hasDefault<T>(value: BoxResponsive<T>, val: T) {
-	return value === val || (isResponsive(value) && value.default === val);
-}
 
 type ShadowSize = 'sm' | 'md' | 'lg' | 'xl';
 type MaybeMinus = '' | '-';
@@ -38,15 +21,15 @@ type ShadowValue = `${MaybeMinus}${ShadowSize}${MaybeUp}`;
 
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
-	direction?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
-	d?: BoxResponsive<'row' | 'col' | 'row-reverse' | 'col-reverse'>;
+	direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
+	d?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
 	col?: boolean;
 	items?: BoxAlignment;
 	justify?: BoxJustification;
 	layout?: `${BoxAlignment} ${BoxJustification}`;
 	gap?: BoxSpacingSize | boolean;
-	wrap?: BoxResponsive<boolean>;
-	p?: BoxResponsive<BoxSpacingSize | boolean>;
+	wrap?: boolean;
+	p?: BoxSpacingSize | boolean;
 	surface?: boolean | 'white';
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
@@ -66,7 +49,8 @@ export function Box({
 	gap = 'none',
 	wrap,
 	p = 'none',
-	d = 'row',
+	col,
+	d = col ? 'col' : 'row',
 	direction = d,
 	style,
 	container,
@@ -75,7 +59,6 @@ export function Box({
 	border,
 	full,
 	overflow,
-	col,
 	grow,
 	elevated,
 	rounded,
@@ -84,6 +67,7 @@ export function Box({
 }: BoxProps) {
 	const items = itemsSolo ?? align?.split(' ')[0];
 	const justify = justifySolo ?? align?.split(' ')[1];
+	const [inset, elevation, up] = parseElevated(elevated);
 
 	const main = (
 		<SlotDiv
@@ -93,118 +77,46 @@ export function Box({
 			className={clsx(
 				'layer-components:relative layer-components:flex',
 				color && `@mode-${color}`,
-				{
-					'layer-components:flex-row': hasDefault(direction, 'row') && !col,
-					'layer-components:flex-col': hasDefault(direction, 'col') || col,
-					'layer-components:flex-row-reverse': hasDefault(
-						direction,
-						'row-reverse',
-					),
-					'layer-components:flex-col-reverse': hasDefault(
-						direction,
-						'col-reverse',
-					),
-					'layer-components:sm:flex-row':
-						isResponsive(direction) && direction.sm === 'row',
-					'layer-components:sm:flex-col':
-						isResponsive(direction) && direction.sm === 'col',
-					'layer-components:sm:flex-row-reverse':
-						isResponsive(direction) && direction.sm === 'row-reverse',
-					'layer-components:sm:flex-col-reverse':
-						isResponsive(direction) && direction.sm === 'col-reverse',
-					'layer-components:md:flex-row':
-						isResponsive(direction) && direction.md === 'row',
-					'layer-components:md:flex-col':
-						isResponsive(direction) && direction.md === 'col',
-					'layer-components:md:flex-row-reverse':
-						isResponsive(direction) && direction.md === 'row-reverse',
-					'layer-components:md:flex-col-reverse':
-						isResponsive(direction) && direction.md === 'col-reverse',
-					'layer-components:lg:flex-row':
-						isResponsive(direction) && direction.lg === 'row',
-					'layer-components:lg:flex-col':
-						isResponsive(direction) && direction.lg === 'col',
-					'layer-components:lg:flex-row-reverse':
-						isResponsive(direction) && direction.lg === 'row-reverse',
-					'layer-components:lg:flex-col-reverse':
-						isResponsive(direction) && direction.lg === 'col-reverse',
-					'layer-components:flex-wrap': hasDefault(wrap, true),
-					'layer-components:sm:flex-wrap': isResponsive(wrap) && wrap.sm,
-					'layer-components:md:flex-wrap': isResponsive(wrap) && wrap.md,
-					'layer-components:lg:flex-wrap': isResponsive(wrap) && wrap.lg,
-					'layer-components:gap-xs': gap === 'xs',
-					'layer-components:gap-sm': gap === 'sm',
-					'layer-components:gap-md': gap === 'md' || gap === true,
-					'layer-components:gap-lg': gap === 'lg',
-					'layer-components:gap-xl': gap === 'xl',
-					'layer-components:items-center': items === 'center',
-					'layer-components:items-stretch': items === 'stretch',
-					'layer-components:items-start': items === 'start',
-					'layer-components:items-end': items === 'end',
-					'layer-components:justify-center': justify === 'center',
-					'layer-components:[justify-content:safe_center]':
-						justify === 'safe-center',
-					'layer-components:justify-stretch': justify === 'stretch',
-					'layer-components:justify-start': justify === 'start',
-					'layer-components:justify-end': justify === 'end',
-					'layer-components:justify-between': justify === 'between',
-					'layer-components:justify-around': justify === 'around',
-					'layer-components:p-xs': hasDefault(p, 'xs'),
-					'layer-components:p-sm': hasDefault(p, 'sm'),
-					'layer-components:p-md': hasDefault(p, 'md') || hasDefault(p, true),
-					'layer-components:p-lg': hasDefault(p, 'lg'),
-					'layer-components:p-xl': hasDefault(p, 'xl'),
-					'layer-components:sm:p-xs': isResponsive(p) && p.sm === 'xs',
-					'layer-components:sm:p-sm': isResponsive(p) && p.sm === 'sm',
-					'layer-components:sm:p-md': isResponsive(p) && p.sm === 'md',
-					'layer-components:sm:p-lg': isResponsive(p) && p.sm === 'lg',
-					'layer-components:sm:p-xl': isResponsive(p) && p.sm === 'xl',
-					'layer-components:md:p-xs': isResponsive(p) && p.md === 'xs',
-					'layer-components:md:p-sm': isResponsive(p) && p.md === 'sm',
-					'layer-components:md:p-md': isResponsive(p) && p.md === 'md',
-					'layer-components:md:p-lg': isResponsive(p) && p.md === 'lg',
-					'layer-components:md:p-xl': isResponsive(p) && p.md === 'xl',
-					'layer-components:lg:p-xs': isResponsive(p) && p.lg === 'xs',
-					'layer-components:lg:p-sm': isResponsive(p) && p.lg === 'sm',
-					'layer-components:lg:p-md': isResponsive(p) && p.lg === 'md',
-					'layer-components:lg:p-lg': isResponsive(p) && p.lg === 'lg',
-					'layer-components:lg:p-xl': isResponsive(p) && p.lg === 'xl',
-
-					'layer-components:rd-xs': rounded === 'sm',
-					'layer-components:rd-sm': rounded === 'md',
-					'layer-components:rd-md':
-						rounded === 'lg' ||
-						rounded === true ||
-						(rounded === undefined && (surface || border)),
-					'layer-components:rd-lg': rounded === 'xl',
-
-					'layer-components:color-neutral-ink layer-components:bg-neutral-paper layer-components:border-neutral-heavy':
-						surface === 'white',
-					'layer-components:(color-main-ink bg-main-wash border-main-heavy)':
-						surface === true,
-
-					'layer-components:(border border-solid)': border,
-					'layer-components:w-full': full === true || full === 'width',
-					'layer-components:h-full': full === true || full === 'height',
-					'layer-components:overflow-hidden': overflow === 'hidden',
-					'layer-components:overflow-auto': overflow === 'auto',
-					'layer-components:(overflow-y-hidden overflow-x-auto)':
-						overflow === 'auto-x',
-					'layer-components:(overflow-x-hidden overflow-y-auto)':
-						overflow === 'auto-y',
-					'layer-components:flex-grow': grow,
-					'layer-components:@container': container === true,
-					'layer-components:shadow-sm': elevated?.includes('sm'),
-					'layer-components:shadow-md': elevated?.includes('md'),
-					'layer-components:shadow-lg': elevated?.includes('lg'),
-					'layer-components:shadow-xl': elevated?.includes('xl'),
-					'layer-components:shadow-inset': elevated?.startsWith('-'),
-					'layer-components:shadow-up': elevated?.endsWith('-up'),
-				},
+				cls.root,
 				className,
 			)}
+			data-direction={direction}
+			data-gap={gap}
+			data-items={items}
+			data-justify={justify}
+			data-wrap={wrap}
+			data-p={p}
+			data-rounded={rounded}
+			data-surface={surface}
+			data-border={border}
+			data-full={full}
+			data-overflow={overflow}
+			data-grow={grow}
+			data-elevated={elevation}
+			data-shadow-up={up}
+			data-shadow-inset={inset}
+			data-container={container}
 		/>
 	);
 
 	return main;
+}
+
+function parseElevated(elevated?: ShadowValue) {
+	if (!elevated) return [false, false, false] as const;
+
+	const match = elevated.match(/^(-)?(sm|md|lg|xl)(-up)?$/);
+	if (!match) {
+		console.warn(
+			`Invalid elevated value: ${elevated}. Expected format: "[-]size[-up]", where size is one of "sm", "md", "lg", "xl".`,
+		);
+		return [false, false, false] as const;
+	}
+
+	const [, minus, size, up] = match;
+	const inset = minus === '-';
+	const elevation = size as ShadowSize;
+	const isUp = up === '-up';
+
+	return [inset, elevation, isUp] as const;
 }

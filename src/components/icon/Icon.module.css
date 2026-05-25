@@ -1,0 +1,9 @@
+.root {
+	fill: none;
+	flex-shrink: 0;
+}
+
+.spinner {
+	display: inline-block;
+	flex-shrink: 0;
+}

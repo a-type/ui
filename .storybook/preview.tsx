@@ -7,6 +7,11 @@ import { useEffect } from 'react';
 import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
 
+import { connect } from '@arbor-css/core/runtime';
+import preset from '../src/arbor/arbor.js';
+
+connect(preset);
+
 const preview: Preview = {
 	parameters: {
 		actions: { argTypesRegex: '^on[A-Z].*' },
@@ -116,6 +121,7 @@ const preview: Preview = {
 			return (
 				<Provider>
 					<Story />
+					<arbor-globals-editor />
 				</Provider>
 			);
 		},
