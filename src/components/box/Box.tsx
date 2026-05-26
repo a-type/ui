@@ -30,7 +30,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	gap?: BoxSpacingSize | boolean;
 	wrap?: boolean;
 	p?: BoxSpacingSize | boolean;
-	surface?: boolean | 'white';
+	surface?: boolean | 'ambient' | 'secondary' | 'primary';
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
 	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
@@ -61,7 +61,7 @@ export function Box({
 	overflow,
 	grow,
 	elevated,
-	rounded,
+	rounded = !!surface,
 	ref,
 	...rest
 }: BoxProps) {

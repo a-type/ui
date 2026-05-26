@@ -2,7 +2,7 @@ import {
 	Button as BaseButton,
 	ButtonProps as BaseButtonProps,
 } from '@base-ui/react/button';
-import classNames, { clsx } from 'clsx';
+import { clsx } from 'clsx';
 import {
 	MouseEvent,
 	ReactNode,
@@ -14,9 +14,11 @@ import {
 	useState,
 } from 'react';
 import { withClassName } from '../../hooks.js';
+import { Box } from '../box/Box.js';
 import { Button, ButtonProps } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 import { Select, SelectContent, SelectItem } from '../select/index.js';
+import cls from './Camera.module.css';
 
 const CameraContext = createContext<{
 	triggerCapture: () => void;
@@ -163,25 +165,28 @@ export function CameraRoot({
 				fullscreen,
 			}}
 		>
-			<div
-				ref={ref}
-				className={classNames(
-					'override-light',
-					'layer-components:([font-family:inherit] relative min-h-4 min-w-4 overflow-hidden color-neutral-paper bg-neutral-ink rd-lg)',
-					fullscreen && 'fixed inset-0 z-1000 h-full w-full rd-0',
+			<Box
+				surface="ambient"
+				rounded="lg"
+				overflow="hidden"
+				className={clsx(
+					'@scheme-dark',
+					cls.root,
+					fullscreen && cls.fullscreen,
 					className,
 				)}
 				{...rest}
+				ref={ref}
 			>
 				<video
 					ref={videoRef}
-					className="object-cover h-full w-full"
+					className={cls.video}
 					autoPlay
 					muted
 					playsInline
 				></video>
 				{children}
-			</div>
+			</Box>
 		</CameraContext.Provider>
 	);
 }
@@ -212,14 +217,7 @@ export function CameraShutterButton({
 	);
 }
 
-const StyledShutterButton = withClassName(
-	BaseButton,
-	'layer-components:ring-2 layer-components:border-black layer-components:ring-white layer-components:(absolute bottom-3 left-1/2 h-16 w-16 cursor-pointer border-2 opacity-80 bg-neutral-paper rd-full border-solid -translate-x-1/2)',
-	'layer-components:(hover:opacity-100 hover:bg-neutral-wash)',
-	'layer-components:focus-visible:bg-lighten-1',
-	'layer-components:foc-effect layer-components:(focus:opacity-100)',
-	'layer-components:(sm:h-8 sm:w-8)',
-);
+const StyledShutterButton = withClassName(BaseButton, cls.shutterButton);
 
 export interface CameraDeviceSelectorProps {
 	className?: string;
@@ -250,10 +248,7 @@ export const CameraDeviceSelector = ({
 		return (
 			<Button
 				emphasis="ghost"
-				className={clsx(
-					'layer-components:(absolute bottom-2 left-2 color-neutral-paper)',
-					className,
-				)}
+				className={clsx(cls.swapButton, className)}
 				onClick={swapCamera}
 				{...props}
 			>
@@ -270,13 +265,7 @@ export const CameraDeviceSelector = ({
 		>
 			<Select.Trigger
 				render={
-					<Button
-						emphasis="ghost"
-						className={clsx(
-							'layer-components:(absolute bottom-2 left-2 color-neutral-paper)',
-							className,
-						)}
-					>
+					<Button emphasis="ghost" className={clsx(cls.swapButton, className)}>
 						<Icon name="refresh" />
 					</Button>
 				}
@@ -298,7 +287,7 @@ export const CameraFullscreenButton = (props: ButtonProps) => {
 		<Button
 			{...props}
 			emphasis="ghost"
-			className="absolute right-2 top-2 color-neutral-paper"
+			className={clsx(cls.fullscreenButton, props.className)}
 			onClick={() => setFullscreen(!fullscreen)}
 		>
 			<Icon name={fullscreen ? 'x' : 'maximize'} />

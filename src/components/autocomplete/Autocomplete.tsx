@@ -19,26 +19,17 @@ import { withClassName } from '../../hooks.js';
 import { Button } from '../button/Button.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
 import {
-	comboboxBackdropClassName,
 	ComboboxComposedInput,
-	comboboxEmptyClassName,
-	comboboxGroupClassName,
-	comboboxGroupItemClassName,
-	comboboxGroupItemListClassName,
-	comboboxGroupLabelClassName,
-	comboboxIconClassName,
 	ComboboxInputProps,
-	comboboxListClassName,
-	comboboxPopupClassName,
-	comboboxRowClassName,
 	ComboboxValueContext,
 } from '../combobox/Combobox.js';
+import cls from '../combobox/Combobox.module.css';
 import { Icon } from '../icon/Icon.js';
 import {
-	arrowClassName,
-	itemClassName,
-	separatorClassName,
-} from '../primitives/menus.js';
+	arrow as arrowClassName,
+	item as itemClassName,
+	separator as separatorClassName,
+} from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 
@@ -84,23 +75,17 @@ const AutocompleteInput = ({
 
 export const AutocompleteIcon = withClassName(
 	({ className, ...props }: BaseAutocompleteIconProps) => (
-		<BaseAutocomplete.Icon
-			{...props}
-			className={clsx(comboboxIconClassName, className)}
-		>
+		<BaseAutocomplete.Icon {...props} className={clsx(cls.icon, className)}>
 			<Icon name="chevron" />
 		</BaseAutocomplete.Icon>
 	),
 );
 
-const AutocompletePopup = withClassName(
-	BaseAutocomplete.Popup,
-	comboboxPopupClassName,
-);
+const AutocompletePopup = withClassName(BaseAutocomplete.Popup, cls.popup);
 
 const AutocompleteBackdrop = withClassName(
 	BaseAutocomplete.Backdrop,
-	comboboxBackdropClassName,
+	cls.backdrop,
 );
 
 const AutocompleteArrow = ({ className, ...props }: AutocompleteArrowProps) => (
@@ -136,15 +121,9 @@ const AutocompleteContent = ({
 	);
 };
 
-const AutocompleteList = withClassName(
-	BaseAutocomplete.List,
-	comboboxListClassName,
-);
+const AutocompleteList = withClassName(BaseAutocomplete.List, cls.list);
 
-const AutocompleteEmpty = withClassName(
-	BaseAutocomplete.Empty,
-	comboboxEmptyClassName,
-);
+const AutocompleteEmpty = withClassName(BaseAutocomplete.Empty, cls.empty);
 
 export interface AutocompleteItemProps extends BaseAutocompleteItemProps {
 	ref?: React.Ref<HTMLDivElement>;
@@ -160,26 +139,20 @@ const AutocompleteGroup = ({
 	...props
 }: BaseAutocompleteGroupProps & { ref?: React.Ref<HTMLDivElement> }) => {
 	return (
-		<BaseAutocomplete.Group
-			{...props}
-			className={clsx(comboboxGroupClassName, className)}
-		/>
+		<BaseAutocomplete.Group {...props} className={clsx(cls.group, className)} />
 	);
 };
 
-const AutocompleteGroupItemList = withClassName(
-	SlotDiv,
-	comboboxGroupItemListClassName,
-);
+const AutocompleteGroupItemList = withClassName(SlotDiv, cls.groupItem);
 
 const AutocompleteGroupLabel = withClassName(
 	BaseAutocomplete.GroupLabel,
-	comboboxGroupLabelClassName,
+	cls.groupLabel,
 );
 
 const AutocompleteRow: React.FC<BaseAutocompleteRowProps> = withClassName(
 	BaseAutocomplete.Row,
-	comboboxRowClassName,
+	cls.row,
 );
 
 const AutocompleteSeparator = withClassName(
@@ -203,7 +176,7 @@ function AutocompleteGroupItem({
 		<BaseAutocomplete.Item
 			render={replace ?? <Button render={<Chip render={render} />} />}
 			{...props}
-			className={clsx(comboboxGroupItemClassName, className)}
+			className={clsx(cls.groupItem, className)}
 		/>
 	);
 }

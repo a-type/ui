@@ -21,9 +21,9 @@
 	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
 
 	@apply --mx-border(var(--mx-fg-ref));
-	border-width: var(--m-borderWidth-md);
+	border-width: var(--m-lineWidth-md);
 	border-style: solid;
-	border-radius: var(--m-action-borderRadius);
+	border-radius: var(--m-action-radius);
 
 	@apply --mx-shadow;
 	--mx-shadow-shadow: var(--m-shadow-sm);

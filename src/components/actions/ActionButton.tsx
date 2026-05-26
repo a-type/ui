@@ -1,9 +1,8 @@
-'use client';
-
 import classNames from 'clsx';
 import { useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../button/Button.js';
 import { CollapsibleContent, CollapsibleRoot } from '../collapsible/index.js';
+import cls from './ActionButton.module.css';
 
 export type ActionButtonProps = ButtonProps & {
 	visible?: boolean;
@@ -42,10 +41,7 @@ export function ActionButton({
 				<Button
 					size="small"
 					disableIconMode
-					className={classNames(
-						'layer-variants:(m-2 mx-1 font-normal)',
-						className,
-					)}
+					className={classNames(cls.root, className)}
 					{...rest}
 				>
 					{children}

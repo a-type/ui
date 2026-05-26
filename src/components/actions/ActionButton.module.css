@@ -1,0 +1,4 @@
+.root {
+	margin: var(--m-spacing-sm) var(--m-spacing-xs);
+	font-weight: normal;
+}

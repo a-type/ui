@@ -1,0 +1,65 @@
+.fullscreen {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+}
+
+.root {
+	min-width: 48px;
+	min-height: 48px;
+}
+
+.video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.shutterButton {
+	position: absolute;
+	bottom: var(--m-spacing-md);
+	left: 50%;
+	width: calc(48px / var(--m-density));
+	height: calc(48px / var(--m-density));
+	cursor: pointer;
+	transform: translateX(-50%);
+	opacity: 80%;
+	transition: all var(--m-duration) var(--m-easing);
+
+	@apply --mx-shadow;
+	--mx-shadow-ring: --fn-ring(var(--m-action-secondary-color-bg), 2px);
+	@apply --mx-bg(var(--m-action-secondary-color-bg));
+	@apply --mx-fg(color-contrast(var(--mx-bg-ref)));
+	@apply --mx-border(var(--mx-fg-ref));
+	border-width: var(--m-lineWidth);
+	border-radius: 999px;
+
+	&:hover {
+		opacity: 100%;
+		@apply --mx-bg-darken(2);
+	}
+
+	&:focus {
+		outline: none;
+		opacity: 100%;
+	}
+	&:focus-visible {
+		@apply --mx-bg-lighten(1);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 4px);
+	}
+}
+
+.swapButton {
+	position: absolute;
+	bottom: var(--m-spacing-xs);
+	left: var(--m-spacing-xs);
+}
+
+.fullscreenButton {
+	position: absolute;
+	top: var(--m-spacing-xs);
+	right: var(--m-spacing-xs);
+}

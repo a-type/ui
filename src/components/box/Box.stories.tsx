@@ -128,25 +128,42 @@ export const Surfaces: Story = {
 				className="grid grid-cols-2 bg-main-wash gap-lg md:grid-cols-3"
 				{...args}
 			>
-				<Box {...args} surface="white" p="lg" col gap>
-					<SurfaceContent name="White" />
+				<Box {...args} surface="ambient" p="lg" col gap>
+					<SurfaceContent name="Ambient" />
 				</Box>
-				<Box {...args} surface color="primary" p="lg" col gap>
+				<Box
+					{...args}
+					surface="primary"
+					className="@mode-primary"
+					p="lg"
+					col
+					gap
+				>
 					<SurfaceContent name="Primary" />
 				</Box>
-				<Box {...args} surface color="accent" p="lg" col gap>
+				<Box
+					{...args}
+					surface="secondary"
+					className="@mode-primary"
+					p="lg"
+					col
+					gap
+				>
+					<SurfaceContent name="Secondary" />
+				</Box>
+				<Box {...args} surface className="@mode-accent" p="lg" col gap>
 					<SurfaceContent name="Accent" />
 				</Box>
-				<Box {...args} surface color="neutral" p="lg" col gap>
+				<Box {...args} surface className="@mode-neutral" p="lg" col gap>
 					<SurfaceContent name="Neutral" />
 				</Box>
-				<Box {...args} surface color="attention" p="lg" col gap>
+				<Box {...args} surface className="@mode-attention" p="lg" col gap>
 					<SurfaceContent name="Attention" />
 				</Box>
-				<Box {...args} surface color="success" p="lg" col gap>
+				<Box {...args} surface className="@mode-success" p="lg" col gap>
 					<SurfaceContent name="Success" />
 				</Box>
-				<Box {...args} surface color="high-contrast" p="lg" col gap>
+				<Box {...args} surface className="@scheme-highContrast" p="lg" col gap>
 					<SurfaceContent name="High Contrast" />
 				</Box>
 			</div>

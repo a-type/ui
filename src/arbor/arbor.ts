@@ -1,7 +1,17 @@
 import { createArbor } from '@arbor-css/core';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
-const preset = createArbor({})
+const arbor = createArbor({});
+
+// const mixins = {
+// 	arrow: arbor.context.createMixin('arrow', {
+// 		definition: (css, _) => ({
+// 			fill: css`${arbor.context.$systemTokens.}`
+// 		})
+// 	})
+// };
+
+const preset = arbor
 	.preset({
 		colors: {
 			ranges: {
