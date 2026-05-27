@@ -48,6 +48,7 @@
 		"test": "vitest",
 		"test:unit": "vitest --project=unit",
 		"test:snapshots": "pnpm build && vitest --project=snapshots",
+		"test:arbor": "arbor validate ./src/**/*.css",
 		"typecheck": "tsc --noEmit",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
 		"lint": "eslint **/*.{ts,tsx} --fix",
@@ -60,8 +61,8 @@
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.9",
-		"@arbor-css/core": "^0.0.70",
-		"@arbor-css/postcss": "^0.0.70",
+		"@arbor-css/core": "^0.0.74",
+		"@arbor-css/postcss": "^0.0.74",
 		"@base-ui/react": "^1.4.1",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
@@ -113,15 +114,6 @@
 		"typescript-plugin-css-modules": "^5.2.0",
 		"vitest": "^4.0.18",
 		"vitest-browser-react": "^2.0.4"
-	},
-	"pnpm": {
-		"ignoredBuiltDependencies": [
-			"esbuild"
-		],
-		"onlyBuiltDependencies": [
-			"@parcel/watcher",
-			"esbuild"
-		]
 	},
 	"lint-staged": {
 		"**/*.{ts,tsx}": [

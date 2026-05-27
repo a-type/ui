@@ -1,7 +1,7 @@
-import React from 'react';
+import { ComponentType } from 'react';
 
 export const withProps = <T extends object>(
-	Component: React.ComponentType<T>,
+	Component: ComponentType<T>,
 	extras: Partial<T>,
 ) => {
 	return (props: T) => {
@@ -13,7 +13,7 @@ type OptionalKeys<T> = {
 	[K in keyof T]-?: undefined extends T[K] ? K : never;
 }[keyof T];
 export const withoutProps = <T extends object, P extends OptionalKeys<T>>(
-	Component: React.ComponentType<T>,
+	Component: ComponentType<T>,
 	_remove: P[],
 ) => {
 	return (props: Omit<T, P>) => {

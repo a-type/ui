@@ -8,9 +8,9 @@
 	@apply --mx-shadow;
 	--mx-shadow-shadow: var(--m-shadow-lg);
 
-	@apply --mx-bg(var(--m-surface-ambient-color-bg));
-	@apply --mx-fg(var(--m-surface-ambient-color-fg));
-	@apply --mx-border(var(--m-surface-ambient-color-border));
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+	@apply --mx-fg(var(--m-surface-ambient-fg));
+	@apply --mx-border(var(--m-surface-ambient-border));
 
 	border-radius: var(--m-radius);
 	border-width: var(--m-lineWidth);
@@ -109,8 +109,8 @@
 }
 
 .arrow {
-	@apply --mx-fill(var(--mx-bg-ref, var(--_-system-scheme-true-light)));
-	@apply --mx-stroke(var(--mx-border-ref, var(--_-system-scheme-true-heavy)));
+	@apply --mx-fill(var(--mx-bg-ref, var(--_scheme-true-light)));
+	@apply --mx-stroke(var(--mx-border-ref, var(--_scheme-true-heavy)));
 	width: 24px;
 	height: 12px;
 	position: relative;

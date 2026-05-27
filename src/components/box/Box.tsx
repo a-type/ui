@@ -39,6 +39,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	rounded?: 'sm' | 'md' | 'lg' | 'xl' | boolean;
 	ref?: Ref<HTMLDivElement>;
 	container?: boolean;
+	glass?: boolean;
 }
 
 export function Box({
@@ -46,11 +47,11 @@ export function Box({
 	items: itemsSolo,
 	justify: justifySolo,
 	layout: align,
-	gap = 'none',
+	gap,
 	wrap,
-	p = 'none',
+	p,
 	col,
-	d = col ? 'col' : 'row',
+	d = col ? 'col' : undefined,
 	direction = d,
 	style,
 	container,
@@ -61,7 +62,8 @@ export function Box({
 	overflow,
 	grow,
 	elevated,
-	rounded = !!surface,
+	rounded = surface ? true : undefined,
+	glass,
 	ref,
 	...rest
 }: BoxProps) {
@@ -96,6 +98,7 @@ export function Box({
 			data-shadow-up={up}
 			data-shadow-inset={inset}
 			data-container={container}
+			data-glass={glass}
 		/>
 	);
 

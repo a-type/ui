@@ -1,0 +1,74 @@
+@keyframes checkbox-fade {
+	from {
+		background-color: var(--mx-bg-ref);
+		opacity: 1;
+	}
+	to {
+		background-color: transparent;
+		opacity: 0.9;
+		border-color: transparent;
+		box-shadow: none;
+	}
+}
+
+.root {
+	position: relative;
+	display: block;
+	flex-shrink: 0;
+
+	--size: 28px;
+	height: var(--size);
+	width: var(--size);
+
+	cursor: pointer;
+
+	transition: var(--m-duration) var(--m-easing);
+
+	@apply --mx-shadow;
+	@apply --mx-bg(var(--m-control-bg));
+	@apply --mx-border(var(--m-control-border));
+	border-radius: var(--m-control-radius);
+	border-width: var(--m-lineWidth-md);
+
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+
+	&:hover:not(:disabled) {
+		@apply --mx-bg-lighten(2);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
+	}
+
+	&:active:not(:disabled) {
+		@apply --mx-bg-darken(1);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
+	}
+
+	&:disabled {
+		box-shadow: none;
+		@apply --mx-bg(transparent);
+		@apply --mx-border(var(--m-color-neutral-light));
+	}
+
+	&[data-checked] {
+		@apply --mx-bg(var(--m-color-main));
+		@apply --mx-border(var(--m-color-main-ink));
+
+		&[data-checked-mode='faded'] {
+			animation-name: checkbox-fade;
+			animation-duration: 5s;
+			animation-fill-mode: forwards;
+		}
+	}
+}
+
+.indicator {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--m-color-main-ink);
+}

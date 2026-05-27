@@ -30,8 +30,8 @@
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-ring: --fn-ring(var(--m-action-secondary-color-bg), 2px);
-	@apply --mx-bg(var(--m-action-secondary-color-bg));
+	--mx-shadow-ring: --fn-ring(var(--m-action-secondary-bg), 2px);
+	@apply --mx-bg(var(--m-action-secondary-bg));
 	@apply --mx-fg(color-contrast(var(--mx-bg-ref)));
 	@apply --mx-border(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth);

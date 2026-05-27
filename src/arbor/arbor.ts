@@ -13,7 +13,7 @@ const arbor = createArbor({});
 
 const preset = arbor
 	.preset({
-		colors: {
+		color: {
 			ranges: {
 				lemon: {
 					hue: 90.8,
@@ -46,7 +46,7 @@ const preset = arbor
 		typography: {
 			minSize: '12px',
 		},
-		globals: {
+		global: {
 			roundness: 0.75,
 			baseSpacingSize: '8px',
 			baseFontSize: '16px',
@@ -61,17 +61,17 @@ const preset = arbor
 	})
 	.withMode('accent', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.leek,
+			main: preset.primitives.$tokens.color.leek,
 		},
 	}))
 	.withMode('success', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.success,
+			main: preset.primitives.$tokens.color.success,
 		},
 	}))
 	.withMode('attention', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.attention,
+			main: preset.primitives.$tokens.color.attention,
 		},
 	}))
 	.withMode('neutral', (preset) => ({
@@ -81,27 +81,27 @@ const preset = arbor
 	}))
 	.withMode('lemon', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.lemon,
+			main: preset.primitives.$tokens.color.lemon,
 		},
 	}))
 	.withMode('leek', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.leek,
+			main: preset.primitives.$tokens.color.leek,
 		},
 	}))
 	.withMode('tomato', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.tomato,
+			main: preset.primitives.$tokens.color.tomato,
 		},
 	}))
 	.withMode('eggplant', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.eggplant,
+			main: preset.primitives.$tokens.color.eggplant,
 		},
 	}))
 	.withMode('blueberry', (preset) => ({
 		color: {
-			main: preset.primitives.$tokens.colors.blueberry,
+			main: preset.primitives.$tokens.color.blueberry,
 		},
 	}))
 	.withMode('dense', () => ({
@@ -134,4 +134,4 @@ const preset = arbor
 
 export default preset;
 
-export type ColorRangeName = keyof typeof preset.primitives.$tokens.colors;
+export type ColorRangeName = keyof typeof preset.primitives.$tokens.color;

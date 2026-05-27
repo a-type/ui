@@ -22,7 +22,6 @@
 
 	@apply --mx-border(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth-md);
-	border-style: solid;
 	border-radius: var(--m-action-radius);
 
 	@apply --mx-shadow;
@@ -31,7 +30,7 @@
 	padding: var(--m-action-padding);
 
 	&[data-emphasis='primary'] {
-		@apply --mx-bg(var(--m-action-primary-color-bg));
+		@apply --mx-bg(var(--m-action-primary-bg));
 		&:hover {
 			@apply --mx-bg-lighten(2);
 		}
@@ -44,12 +43,12 @@
 		@apply --mx-bg(var(--m-color-main-light));
 	}
 	&[data-emphasis='default'] {
-		@apply --mx-bg(var(--m-action-secondary-color-bg));
+		@apply --mx-bg(var(--m-action-secondary-bg));
 	}
 	&[data-emphasis='ghost'] {
-		@apply --mx-border(var(--m-action-ambient-color-border));
-		@apply --mx-bg(var(--m-action-ambient-color-bg));
-		@apply --mx-fg(var(--m-action-ambient-color-fg));
+		@apply --mx-border(var(--m-action-ambient-border));
+		@apply --mx-bg(var(--m-action-ambient-bg));
+		@apply --mx-fg(var(--m-action-ambient-fg));
 		--mx-shadow-shadow: 0 0 0 0 transparent;
 
 		&:hover,
