@@ -1,29 +1,152 @@
 .backdrop {
+	position: fixed;
+	inset: 0;
 }
 
-.empty {
+.empty:not(:empty) {
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	padding: var(--m-spacing-sm);
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	font-weight: var(--m-text-ambient-weight);
 }
 
 .group {
+	display: flex;
+	flex-direction: column;
+	overflow: clip;
+	padding: var(--m-spacing-sm);
+	gap: var(--m-spacing-xs);
 }
 
 .groupItem {
+	@apply --mx-bg(var(--m-surface-secondary-bg));
+	@apply --mx-shadow;
+	--mx-shadow-ring: --fn-ring(var(--m-color-main-mid), 2px);
+}
+
+.groupItemList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--m-spacing-xs);
 }
 
 .groupLabel {
+	text-transform: uppercase;
+	width: 100%;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	padding-inline: var(--m-spacing-xs);
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	font-weight: var(--m-text-ambient-weight);
 }
 
 .icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	transition: transform var(--m-duration) var(--m-easing);
+
+	&[data-open] {
+		transform: rotate(180deg);
+	}
 }
 
-.input {
+.chips {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+	padding-inline-start: var(--m-spacing-md);
+}
+
+.chipsList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--m-spacing-xs);
+	padding-inline: var(--m-spacing-sm);
+	margin-inline-start: calc(-1 * var(--m-spacing-md));
+
+	&:empty {
+		display: none;
+	}
+}
+
+.chipInput {
+	min-width: 3ch;
+	flex-grow: 1;
+	padding-inline-start: 0px;
+}
+
+.chipInputWrapper {
+	max-width: 100%;
+	min-width: 12ch;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+}
+
+.chip {
+	margin-block: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-inline: var(--m-spacing-sm);
+	gap: var(--m-spacing-xs);
+}
+
+.chipRemove {
+	min-height: 0;
+	min-width: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+.item[data-selected] {
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.itemIndicator {
+	margin-inline-start: auto;
+	height: 10px;
+	width: 10px;
 }
 
 .list {
+	display: flex;
+	flex-direction: column;
+	outline: none;
+	overscroll-behavior: contain;
+	overflow-y: auto;
+	overflow-x: clip;
+
+	&:empty {
+		padding: 0;
+	}
 }
 
 .popup {
+	width: var(--anchor-width);
+	display: flex;
+	flex-direction: column;
 }
 
 .row {
+	display: flex;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+}
+
+.multiValue {
+	max-width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--m-spacing-xs);
 }

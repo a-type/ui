@@ -9,7 +9,8 @@ import {
 	useState,
 } from 'react';
 import { Icon } from '../icon/index.js';
-import { Input, inputClassName } from '../input/index.js';
+import { Input } from '../input/index.js';
+import inputCls from '../input/Input.module.css';
 
 export interface EditableTextProps {
 	value: string;
@@ -104,7 +105,7 @@ export function EditableText({
 		<button
 			onClick={() => setEditingFinal(true)}
 			className={clsx(
-				inputClassName,
+				inputCls.input,
 				'layer-composed:(w-auto inline-flex items-center text-left shadow-none color-inherit bg-transparent p-control gap-sm border-transparent rd-control font-size-inherit)',
 				'layer-composed:hover:(bg-main-light/80)',
 				'layer-composed:focus:outline-none',

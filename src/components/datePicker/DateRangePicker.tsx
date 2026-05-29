@@ -1,6 +1,6 @@
 import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
 import clsx from 'clsx';
-import { ReactNode, useCallback, useState } from 'react';
+import { CSSProperties, ReactNode, useCallback, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Icon } from '../icon/Icon.js';
 import {
@@ -121,6 +121,7 @@ export interface DateRangePickerProps {
 	value: { start: Date | null; end: Date | null };
 	onChange: (value: { start: Date | null; end: Date | null }) => void;
 	className?: string;
+	style?: CSSProperties;
 }
 
 function DateRangePickerBase(props: DateRangePickerProps) {

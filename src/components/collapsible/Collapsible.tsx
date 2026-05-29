@@ -1,4 +1,3 @@
-'use client';
 import {
 	Collapsible as BaseCollapsible,
 	CollapsiblePanelProps,
@@ -6,18 +5,10 @@ import {
 } from '@base-ui/react/collapsible';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
+import cls from './Collapsible.module.css';
 
 export const CollapsibleRoot = BaseCollapsible.Root;
-const CollapsibleContentBase = withClassName(
-	BaseCollapsible.Panel,
-	'overflow-hidden transition-all',
-	'data-[horizontal]:w-[--collapsible-panel-width] data-[vertical]:h-[--collapsible-panel-height]',
-	'data-[both]:(h-[--collapsible-panel-height] w-[--collapsible-panel-width])',
-	'start-end:data-[vertical]:(h-0)',
-	'start-end:data-[both]:(h-0 w-0)',
-	'start-end:data-[horizontal]:(w-0)',
-	'data-[hidden]:[&:not([hidden="until-found"])]:(hidden)',
-);
+const CollapsibleContentBase = withClassName(BaseCollapsible.Panel, cls.root);
 
 export const CollapsibleContent = function CollapsibleContent({
 	ref,
@@ -57,11 +48,7 @@ export const CollapsibleSimple = ({
 	</CollapsibleRoot>
 );
 
-export const CollapsibleIcon = withClassName(
-	'span',
-	'layer-components:transition-transform',
-	'layer-components:[[data-panel-open]_&]:rotate-180',
-);
+export const CollapsibleIcon = withClassName('span', cls.icon);
 
 export const Collapsible = Object.assign(CollapsibleRoot, {
 	Content: CollapsibleContent,

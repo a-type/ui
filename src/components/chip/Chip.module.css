@@ -1,0 +1,22 @@
+.root {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+	white-space: nowrap;
+
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
+	@apply --mx-border(var(--m-color-main-heavy));
+
+	border-width: var(--m-lineWidth-sm);
+	border-radius: var(--m-action-radius);
+
+	font-size: var(--m-text-ambient-size);
+	line-height: normal;
+	font-weight: var(--m-text-ambient-weight);
+	font-family: var(--m-text-ambient-font);
+
+	&:not(:is(button)) {
+		padding: var(--m-action-padding);
+	}
+}

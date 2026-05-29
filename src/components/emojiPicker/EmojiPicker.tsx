@@ -13,7 +13,7 @@ import { useLocalStorage } from '../../hooks/useStorage.js';
 import { Box, BoxProps } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
-import { inputClassName } from '../input/Input.js';
+import inputCls from '../input/Input.module.css';
 import { Spinner } from '../spinner/Spinner.js';
 
 export const EmojiPickerRoot = withClassName(
@@ -23,7 +23,7 @@ export const EmojiPickerRoot = withClassName(
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
 	'layer-components:(z-10 min-w-80px)',
-	inputClassName,
+	inputCls.input,
 );
 export const EmojiPickerViewport = ({
 	className,

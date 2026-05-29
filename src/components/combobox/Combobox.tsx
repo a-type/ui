@@ -18,57 +18,11 @@ import { Input, InputProps } from '../input/Input.js';
 import {
 	arrowClassName,
 	itemClassName,
-	itemListClassName,
-	popupClassName,
 	separatorClassName,
 } from '../primitives/menus.js';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
-
-export const comboboxPopupClassName = clsx(
-	popupClassName,
-	'layer-components:(w-[--anchor-width] flex flex-col)',
-);
-
-export const comboboxBackdropClassName = clsx(
-	'layer-components:(fixed inset-0)',
-);
-
-export const comboboxListClassName = clsx(
-	itemListClassName,
-	'layer-components:(flex flex-col outline-none overscroll-contain overflow-y-auto overflow-unstable)',
-	'layer-components:empty:(p-0)',
-);
-
-export const comboboxIconClassName = clsx(
-	'icon',
-	'layer-components:(flex shrink-0 items-center justify-center transition-transform)',
-	'layer-components:data-[open]:(rotate-180)',
-);
-
-export const comboboxEmptyClassName = clsx(
-	'layer-components:[&:not(:empty)]:(color-neutral-heavy p-sm text-ambient)',
-);
-
-export const comboboxGroupClassName = clsx(
-	'layer-components:(flex flex-col overflow-hidden p-sm gap-xs)',
-);
-
-export const comboboxGroupItemListClassName = clsx(
-	'layer-components:(flex flex-row flex-wrap gap-xs)',
-);
-
-export const comboboxGroupLabelClassName = clsx(
-	'layer-components:uppercase layer-components:(w-full color-neutral-heavy px-xs text-ambient font-[medium])',
-);
-
-export const comboboxRowClassName = clsx(
-	'layer-components:(flex items-center gap-xs)',
-);
-
-export const comboboxGroupItemClassName = clsx(
-	'layer-composed-2:data-[highlighted]:ring-2 layer-composed-2:data-[highlighted]:(bg-main-wash ring-main-mid)',
-);
+import cls from './Combobox.module.css';
 
 export interface ComboboxInputProps
 	extends Omit<BaseCombobox.ComboboxInputProps, 'className' | 'render'> {
@@ -111,20 +65,12 @@ export function ComboboxComposedInput({
 
 	if (isInChips) {
 		return (
-			<div
-				className={clsx(
-					'layer-components:(max-w-full min-w-12ch flex flex-1 flex-row items-center gap-xs)',
-					className,
-				)}
-			>
+			<div className={clsx(cls.chipInputWrapper, className)}>
 				<BaseCombobox.Combobox.Input
 					render={<Input.Input />}
 					autoComplete="off"
 					ref={ref}
-					className={clsx(
-						'layer-components:(min-w-3ch flex-1)',
-						'layer-composed:pl-0',
-					)}
+					className={clsx(cls.chipInput)}
 					minLength={3}
 					{...props}
 				/>
@@ -372,11 +318,7 @@ function ComboboxChips({
 		<ComboboxChipsContext.Provider value={true}>
 			<BaseCombobox.Combobox.Chips
 				ref={anchorRef || undefined}
-				className={clsx(
-					'layer-components:(flex flex-row items-center gap-xs)',
-					'layer-composed:pl-md',
-					className,
-				)}
+				className={clsx(cls.chips, className)}
 				render={<Input.Border />}
 				{...props}
 			/>
@@ -384,11 +326,7 @@ function ComboboxChips({
 	);
 }
 
-const ComboboxChipsList = withClassName(
-	SlotDiv,
-	'layer-components:(flex flex-row flex-wrap px-sm py-xs gap-xs -ml-md)',
-	'layer-components:empty:hidden',
-);
+const ComboboxChipsList = withClassName(SlotDiv, cls.chipsList);
 
 function ComboboxChip({
 	className,
@@ -401,20 +339,13 @@ function ComboboxChip({
 	return (
 		<BaseCombobox.Combobox.Chip
 			render={<Chip color={color} />}
-			className={clsx(
-				'layer-composed-2:(my-auto flex flex-row items-center px-sm gap-xs)',
-				className,
-			)}
+			className={clsx(cls.chip, className)}
 			{...props}
 		>
 			{children}
 			<BaseCombobox.Combobox.ChipRemove
 				render={
-					<Button
-						size="small"
-						emphasis="ghost"
-						className="min-h-0 min-w-0 p-0 leading-1"
-					>
+					<Button size="small" emphasis="ghost" className={cls.chipRemove}>
 						<Icon name="x" size={10} />
 					</Button>
 				}
@@ -427,21 +358,18 @@ function ComboboxIcon({ className, ...props }: BaseCombobox.ComboboxIconProps) {
 	return (
 		<BaseCombobox.Combobox.Icon
 			{...props}
-			className={clsx(comboboxIconClassName, className)}
+			className={clsx(cls.icon, className)}
 		>
 			<Icon name="chevron" />
 		</BaseCombobox.Combobox.Icon>
 	);
 }
 
-const ComboboxPopup = withClassName(
-	BaseCombobox.Combobox.Popup,
-	comboboxPopupClassName,
-);
+const ComboboxPopup = withClassName(BaseCombobox.Combobox.Popup, cls.popup);
 
 const ComboboxBackdrop = withClassName(
 	BaseCombobox.Combobox.Backdrop,
-	comboboxBackdropClassName,
+	cls.backdrop,
 );
 
 function ComboboxArrow({
@@ -490,16 +418,13 @@ function ComboboxContent({
 function ComboboxList({ className, ...props }: BaseCombobox.ComboboxListProps) {
 	return (
 		<BaseCombobox.Combobox.List
-			className={clsx(comboboxListClassName, className)}
+			className={clsx(cls.list, className)}
 			{...props}
 		/>
 	);
 }
 
-const ComboboxEmpty = withClassName(
-	BaseCombobox.Combobox.Empty,
-	comboboxEmptyClassName,
-);
+const ComboboxEmpty = withClassName(BaseCombobox.Combobox.Empty, cls.empty);
 
 export interface ComboboxItemProps extends BaseCombobox.ComboboxItemProps {
 	ref?: Ref<HTMLDivElement>;
@@ -508,11 +433,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxItemProps) {
 	return (
 		<BaseCombobox.Combobox.Item
 			{...props}
-			className={clsx(
-				itemClassName,
-				'layer-components:data-[selected]:color-neutral-heavy',
-				className,
-			)}
+			className={clsx(itemClassName, cls.item, className)}
 		>
 			{children}
 			<ComboboxItemIndicator />
@@ -527,28 +448,19 @@ const ComboboxItemIndicator = withClassName(
 			render={({ children: _, ...rest }) => <Icon name="check" {...rest} />}
 		/>
 	),
-	'layer-components:(ml-auto)',
+	cls.itemIndicator,
 );
 
-const ComboboxGroup = withClassName(
-	BaseCombobox.Combobox.Group,
-	comboboxGroupClassName,
-);
+const ComboboxGroup = withClassName(BaseCombobox.Combobox.Group, cls.group);
 
-const ComboboxGroupItemList = withClassName(
-	SlotDiv,
-	comboboxGroupItemListClassName,
-);
+const ComboboxGroupItemList = withClassName(SlotDiv, cls.groupItemList);
 
 const ComboboxGroupLabel = withClassName(
 	BaseCombobox.Combobox.GroupLabel,
-	comboboxGroupLabelClassName,
+	cls.groupLabel,
 );
 
-const ComboboxRow = withClassName(
-	BaseCombobox.Combobox.Row,
-	comboboxRowClassName,
-);
+const ComboboxRow = withClassName(BaseCombobox.Combobox.Row, cls.row);
 
 const ComboboxSeparator = withClassName(
 	BaseCombobox.Combobox.Separator,
@@ -576,14 +488,10 @@ function ComboboxGroupItem({
 				replace ?? <Button render={<Chip render={render} color={color} />} />
 			}
 			{...props}
-			className={clsx(
-				comboboxGroupItemClassName,
-				'layer-components:data-[selected]:color-neutral-heavy',
-				className,
-			)}
+			className={clsx(cls.groupItem, cls.item, className)}
 		>
 			{children}
-			<ComboboxItemIndicator className="layer-components:(h-10px w-10px)" />
+			<ComboboxItemIndicator className={cls.itemIndicator} />
 		</BaseCombobox.Combobox.Item>
 	);
 }
@@ -597,10 +505,7 @@ function ComboboxMultiValue({
 	...props
 }: ComboboxMultiValueProps) {
 	return (
-		<SlotDiv
-			className={clsx('max-w-full flex flex-row flex-wrap gap-xs', className)}
-			{...props}
-		>
+		<SlotDiv className={clsx(cls.multiValue, className)} {...props}>
 			<BaseCombobox.Combobox.Value>{children}</BaseCombobox.Combobox.Value>
 		</SlotDiv>
 	);

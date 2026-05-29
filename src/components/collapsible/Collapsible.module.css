@@ -1,0 +1,36 @@
+.root {
+	overflow: clip;
+	transition: all var(--m-duration) var(--m-easing);
+
+	&[data-horizontal],
+	&[data-both] {
+		width: var(--collapsible-panel-width);
+	}
+	&[data-vertical],
+	&[data-both] {
+		height: var(--collapsible-panel-height);
+	}
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		&[data-vertical],
+		&[data-both] {
+			height: 0;
+		}
+		&[data-horizontal],
+		&[data-both] {
+			width: 0;
+		}
+	}
+
+	&[data-hidden]:not([hidden='until-found']) {
+		display: none;
+	}
+}
+
+.icon {
+	transition: transform var(--m-duration) var(--m-easing);
+	[data-panel-open] & {
+		transform: rotate(180deg);
+	}
+}

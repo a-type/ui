@@ -7,27 +7,9 @@ import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { inputInfo } from '../../systems/inputs.js';
+import cls from './Input.module.css';
 
-export const inputClassName = clsx(
-	'layer-components:(min-w-60px flex-1 select-auto px-0 color-inherit bg-transparent py-control border-none text-secondary font-inherit)',
-	'layer-components:placeholder:color-neutral-heavy',
-	'layer-components:focus:(outline-none)',
-	'layer-components:focus-visible:(outline-none)',
-	'layer-components:first:(pl-control rd-l-inherit)',
-	'layer-components:last:(pr-control rd-r-inherit)',
-);
-
-const inputBorderClassName = clsx(
-	'layer-components:(min-w-60px flex flex-row items-center shadow-inset transition-shadow shadow-sm color-neutral-ink bg-neutral-paper gap-xs b-neutral-ink b b rd-control b-solid text-secondary)',
-	'layer-components:(w-max-content overflow-clip)',
-	'layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:placeholder-neutral-heavy layer-components:[&:has(input:disabled),&:has(textarea:disabled)]:(shadow-none bg-transparent border-neutral)',
-	'layer-components:focus-visible:(ring-neutral-ink ring-[4px] ring-inset)',
-	'layer-variants:[&:has(input:focus[data-focus-clicked]),&:has(textarea:focus[data-focus-clicked])]:(outline-none bg-lighten-3 ring-main-light ring ring-[4px])',
-	'layer-components:[&:has(input:hover),&:has(textarea:hover)]:border-neutral-ink',
-	'layer-components:[&>.icon]:mx-sm',
-);
-
-const InputBorder = withClassName('div', inputBorderClassName);
+const InputBorder = withClassName('div', cls.inputBorder);
 
 const InnerInput = function InnerInput({
 	autoSelect,
@@ -68,7 +50,7 @@ const InnerInput = function InnerInput({
 			onFocus={handleFocus}
 			onValueChange={onValueChange}
 			onBlur={handleBlur}
-			className={clsx(inputClassName, className)}
+			className={clsx(cls.input, className)}
 			{...props}
 		/>
 	);

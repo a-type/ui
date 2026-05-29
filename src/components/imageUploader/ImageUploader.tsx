@@ -1,6 +1,7 @@
 import classNames, { clsx } from 'clsx';
 import {
 	createContext,
+	CSSProperties,
 	ImgHTMLAttributes,
 	ReactNode,
 	useCallback,
@@ -22,6 +23,7 @@ export interface ImageUploaderProps {
 	value: string | null;
 	onChange: (value: File | null) => void;
 	className?: string;
+	style?: CSSProperties;
 	maxDimension?: number;
 	children?: ReactNode;
 }

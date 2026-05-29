@@ -43,6 +43,7 @@ export const Icon = function Icon({
 			size,
 			name,
 			loading,
+			icon: true,
 		},
 		render,
 	});
@@ -51,6 +52,7 @@ export const Icon = function Icon({
 		return (
 			<Spinner
 				size={size}
+				data-icon
 				className={classNames('icon', cls.spinner, className)}
 			/>
 		);

@@ -42,6 +42,8 @@ import { Input } from './components/input/index.js';
 import { Tabs } from './components/tabs/tabs.js';
 import { TextArea } from './components/textArea/index.js';
 
+import cls from './theme.stories.module.css';
+
 const meta = {
 	title: 'Theme Demo',
 	argTypes: {},
@@ -62,7 +64,7 @@ export function DemoUI({ className }: { className?: string }) {
 	return (
 		<PageRoot data-testid="demo" className={clsx('flex-1', className)}>
 			<PageContent>
-				<div className={clsx('grid grid-cols-2 gap-2')}>
+				<div className={cls.grid}>
 					<Box gap wrap p>
 						<Button emphasis="primary">Primary</Button>
 						<Button className="@mode-accent" emphasis="primary">
@@ -101,7 +103,7 @@ export function DemoUI({ className }: { className?: string }) {
 						d="col"
 						gap
 						p
-						className="max-h-200px"
+						style={{ maxHeight: 200 }}
 						overflow="auto-y"
 					>
 						<H1>Heading 1</H1>
@@ -229,7 +231,7 @@ export function DemoUI({ className }: { className?: string }) {
 						</Dialog.Content>
 					</Dialog>
 					<DateRangePicker
-						className="grid-col-span-2"
+						style={{ gridColumn: 'span 2' }}
 						value={{
 							start: new Date(),
 							end: nextWeek,
@@ -250,7 +252,7 @@ export function DemoUI({ className }: { className?: string }) {
 						color="accent"
 						p
 						d="col"
-						className="max-h-200px"
+						style={{ maxHeight: 200 }}
 						overflow="auto-y"
 					>
 						<H2>Accent surface</H2>
@@ -293,7 +295,11 @@ export function DemoUI({ className }: { className?: string }) {
 							<Button size="small">Six</Button>
 						</HorizontalList>
 					</Box>
-					<ImageUploader className="h-200px" value={null} onChange={() => {}} />
+					<ImageUploader
+						style={{ height: 200 }}
+						value={null}
+						onChange={() => {}}
+					/>
 				</div>
 			</PageContent>
 			<PageNav>
@@ -337,7 +343,7 @@ export const Nesting: Story = {
 				<Box d="row" gap surface color="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
-				<DemoUI className="palette-eggplant override-dark flex-1" />
+				<DemoUI className="@mode-eggplant override-dark flex-1" />
 			</Box>
 		);
 	},

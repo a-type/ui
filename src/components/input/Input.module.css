@@ -1,0 +1,92 @@
+.input {
+	display: flex;
+	flex-grow: 1;
+	user-select: auto;
+	padding: var(--m-control-padding-block) 0px;
+	min-width: 60px;
+
+	@apply --mx-fg(inherit);
+	@apply --mx-bg(transparent);
+	border: none;
+
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+
+	&::placeholder {
+		@apply --mx-fg(var(--m-color-neutral-heavy));
+	}
+
+	/* Focus visuals handled by wrapper */
+	&:focus,
+	&:focus-visible {
+		outline: none;
+	}
+
+	&:first-child {
+		padding-left: var(--m-control-padding-inline);
+		border-top-left-radius: inherit;
+		border-bottom-left-radius: inherit;
+	}
+	&:last-child {
+		padding-right: var(--m-control-padding-inline);
+		border-top-right-radius: inherit;
+		border-bottom-right-radius: inherit;
+	}
+}
+
+.inputBorder {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+	width: max-content;
+	overflow: clip;
+
+	transition: box-shadow var(--m-duration) var(--m-easing);
+
+	@apply -mx-shadow;
+	--mx-shadow-shadow: inset var(--m-shadow-sm);
+
+	@apply --mx-fg(var(--m-control-fg));
+	@apply --mx-bg(var(--m-control-bg));
+	@apply --mx-border(var(--m-control-border));
+	border-radius: var(--m-control-radius);
+
+	font-size: var(--m-text-secondary-size);
+	line-height: var(--m-text-secondary-lineHeight);
+	font-weight: var(--m-text-secondary-weight);
+
+	&:has(input:disabled),
+	&:has(textarea:disabled) {
+		--mx-shadow-shadow: 0 0 0 0 transparent;
+		@apply --mx-bg(transparent);
+		@apply --mx-border-lighten(2);
+
+		& input:placeholder,
+		& textarea::placeholder {
+			@apply --mx-fg-lighten(2);
+		}
+	}
+
+	&:has(input:focus-visible),
+	&:has(textarea:focus-visible) {
+		@apply --mx-bg-lighten(3);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 4px);
+	}
+	&:has(input[data-focus-clicked]:focus),
+	&:has(textarea[data-focus-clicked]:focus) {
+		@apply --mx-bg-lighten(3);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-light), 4px);
+	}
+
+	&:has(input:hover:not(:disabled):not(:focus)),
+	&:has(textarea:hover:not(:disabled):not(:focus)) {
+		@apply --mx-bg-lighten(2);
+		@apply --mx-border-darken(2);
+	}
+
+	& > [data-icon] {
+		margin-inline: var(--m-spacing-sm);
+	}
+}

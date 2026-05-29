@@ -109,38 +109,7 @@
 }
 
 .arrow {
-	@apply --mx-fill(var(--mx-bg-ref, var(--_scheme-true-light)));
-	@apply --mx-stroke(var(--mx-border-ref, var(--_scheme-true-heavy)));
-	width: 24px;
-	height: 12px;
-	position: relative;
-	z-index: 0;
-
-	transform: translate(0, 0) rotate(var(--angle, 0deg)) scale(var(--scale, 1));
-	&[data-closed] {
-		opacity: 0;
-		--scale: 0;
-	}
-	&[data-open] {
-		opacity: 1;
-		--scale: 1;
-	}
-
-	&[data-side='top'] {
-		bottom: calc(-1 * 24px / 2 + 1px);
-	}
-	&[data-side='bottom'] {
-		top: calc(-1 * 24px / 2);
-		--angle: 180deg;
-	}
-	&[data-side='left'] {
-		right: calc(-1 * 24px * 3 / 4);
-		--angle: -90deg;
-	}
-	&[data-side='right'] {
-		left: calc(-1 * 24px * 3 / 4);
-		--angle: 90deg;
-	}
+	@apply --mx-arrow;
 }
 
 .separator {
