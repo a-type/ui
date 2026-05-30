@@ -104,7 +104,7 @@ abstract class MasonryLayout implements Layout {
 			child.style.setProperty('top', `${y}px`);
 			child.style.setProperty('z-index', index.toString());
 			requestAnimationFrame(() => {
-				child.classList.add('transition-all');
+				child.style.setProperty('transition', 'transform 0.3s, top 0.3s');
 			});
 			for (let i = 0; i < itemTrackSpan; i++) {
 				tracks[trackIndex + i] = y + child.offsetHeight + gap;

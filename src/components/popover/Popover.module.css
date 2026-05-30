@@ -1,0 +1,24 @@
+.close {
+	position: absolute;
+	right: var(--m-spacing-sm);
+	top: var(--m-spacing-sm);
+}
+
+.popup {
+	padding: var(--m-spacing-md);
+}
+
+.title {
+	font-weight: 500;
+	margin: 0;
+	margin-block-end: var(--m-spacing-sm);
+	font-size: var(--m-text-secondary-size);
+	line-height: var(--m-text-secondary-lineHeight);
+}
+
+.description {
+	margin: 0;
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

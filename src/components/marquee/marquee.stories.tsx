@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Marquee>;
 export const Default: Story = {
 	render(params) {
 		return (
-			<Marquee {...params}>
+			<Marquee style={{ height: 200 }} {...params}>
 				<Marquee.Item>
 					<img src="https://resources.biscuits.club/images/pashka.jpg" />
 				</Marquee.Item>

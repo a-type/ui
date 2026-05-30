@@ -2,7 +2,6 @@
 	min-width: 120px;
 	max-width: var(--available-width, 95vw);
 	max-height: var(--available-height);
-	overflow: clip;
 
 	transition: all var(--m-duration) var(--m-easing);
 

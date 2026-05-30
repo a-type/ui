@@ -3,6 +3,7 @@ import classNames from 'clsx';
 import { ReactNode } from 'react';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
+import cls from './NumberStepper.module.css';
 
 export interface NumberStepperProps {
 	value: number;
@@ -16,6 +17,7 @@ export interface NumberStepperProps {
 	min?: number;
 	max?: number;
 	id?: string;
+	defaultValue?: number;
 }
 
 export function NumberStepper({
@@ -29,6 +31,7 @@ export function NumberStepper({
 	disabled,
 	min,
 	max,
+	defaultValue,
 	...rest
 }: NumberStepperProps) {
 	const index = steps?.indexOf(value) ?? 0;
@@ -64,18 +67,19 @@ export function NumberStepper({
 		(steps ? index > 0 : true) &&
 		(min === undefined || value > min);
 
+	const highlighted = highlightChange && value !== (defaultValue ?? 0);
+
 	return (
 		<div
 			className={classNames(
-				'layer-components:(w-min-content flex flex-shrink-0 items-center overflow-hidden shadow-sm bg-control b-control b rd-control b-solid)',
-				disabled &&
-					'layer-variants:(shadow-none bg-transparent b-neutral-heavy/80)',
+				cls.root,
 				{
-					'@mode-accent layer-variants:(color-main-ink bg-main-wash)':
-						!!highlightChange && value !== 1,
+					'@mode-accent': highlighted,
 				},
 				className,
 			)}
+			data-disabled={disabled ? true : undefined}
+			data-emphasis={highlighted ? 'primary' : 'secondary'}
 			{...rest}
 		>
 			<Button
@@ -86,7 +90,7 @@ export function NumberStepper({
 			>
 				<Icon name="minus" />
 			</Button>
-			<div className="w-80px text-center">{renderValue(value)}</div>
+			<div className={cls.value}>{renderValue(value)}</div>
 			<Button
 				emphasis="ghost"
 				onClick={increment}

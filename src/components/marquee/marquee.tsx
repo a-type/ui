@@ -1,15 +1,19 @@
 import { clsx } from 'clsx';
-import { Children, ReactNode, useEffect, useState } from 'react';
+import { Children, ComponentProps, useEffect, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
+import cls from './marquee.module.css';
 
-export interface MarqueeProps {
-	className?: string;
-	children?: ReactNode;
+export interface MarqueeProps extends ComponentProps<'div'> {
 	timeout?: number;
 }
 
-export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
+export function Marquee({
+	className,
+	children,
+	timeout = 5000,
+	...rest
+}: MarqueeProps) {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const offset = `${currentIndex * -100}%`;
 
@@ -24,14 +28,9 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 	}, [currentIndex, childCount, timeout]);
 
 	return (
-		<div
-			className={clsx(
-				'layer-components:(relative h-full w-full overflow-hidden)',
-				className,
-			)}
-		>
+		<div className={clsx(cls.root, className)} {...rest}>
 			<div
-				className="layer-components:(absolute left-0 top-0 h-full w-full flex flex-row overflow-visible transition-transform duration-300)"
+				className={clsx(cls.inner)}
 				style={{ transform: `translateX(${offset})` }}
 			>
 				{children}
@@ -40,9 +39,6 @@ export function Marquee({ className, children, timeout = 5000 }: MarqueeProps) {
 	);
 }
 
-const MarqueeItem = withClassName(
-	SlotDiv,
-	'layer-components:(h-full w-full flex-shrink-0 object-cover)',
-);
+const MarqueeItem = withClassName(SlotDiv, cls.item);
 
 Marquee.Item = MarqueeItem;

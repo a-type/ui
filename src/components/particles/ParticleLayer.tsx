@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ParticlesProvider } from './ParticleContext.js';
+import cls from './ParticleLayer.module.css';
 import { Particles } from './particlesState.js';
 
 export function ParticleLayer({
@@ -24,12 +25,7 @@ export function ParticleLayer({
 		return null;
 	}
 
-	const canvas = (
-		<canvas
-			ref={particles.setCanvas}
-			className="pointer-events-none fixed inset-0 z-[1000000] h-full w-full"
-		/>
-	);
+	const canvas = <canvas ref={particles.setCanvas} className={cls.canvas} />;
 
 	const ssr = typeof document === 'undefined';
 

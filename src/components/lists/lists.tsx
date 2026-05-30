@@ -1,20 +1,15 @@
 import { withClassName } from '../../hooks.js';
+import cls from './lists.module.css';
 
-const OlBase = withClassName(
-	'ol',
-	'list-decimal list-inside m-0 p-0 flex flex-col gap-sm',
-);
-const OlItem = withClassName('li', 'ml-sm');
+const OlBase = withClassName('ol', cls.ol);
+const OlItem = withClassName('li');
 
 export const Ol = Object.assign(OlBase, {
 	Item: OlItem,
 });
 
-const UlBase = withClassName(
-	'ul',
-	'list-disc list-inside m-0 p-0 flex flex-col gap-sm',
-);
-const UlItem = withClassName('li', 'ml-sm');
+const UlBase = withClassName('ul', cls.ul);
+const UlItem = withClassName('li');
 
 export const Ul = Object.assign(UlBase, {
 	Item: UlItem,

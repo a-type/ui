@@ -12,6 +12,7 @@ import { Button, ButtonProps } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
+import cls from './Popover.module.css';
 
 const StyledContent = withClassName(PopoverPrimitive.Popup, menuCls.popup);
 
@@ -36,10 +37,7 @@ const StyledClose = ({
 			<Button
 				emphasis="ghost"
 				size="small"
-				className={clsx(
-					!inline && 'layer-composed:(absolute right-sm top-sm)',
-					className,
-				)}
+				className={clsx(!inline && cls.close, className)}
 				{...props}
 			/>
 		}
@@ -58,8 +56,6 @@ export const PopoverContent = function PopoverContent({
 	children,
 	forceMount,
 	className,
-	radius = 'default',
-	padding = 'default',
 	align,
 	alignOffset,
 	side,
@@ -75,8 +71,6 @@ export const PopoverContent = function PopoverContent({
 	...props
 }: PopoverPopupProps &
 	PopoverPositionerProps & {
-		radius?: 'none' | 'default' | 'md';
-		padding?: 'none' | 'default';
 		forceMount?: boolean;
 		ref?: Ref<HTMLDivElement>;
 	}) {
@@ -99,16 +93,7 @@ export const PopoverContent = function PopoverContent({
 				<StyledContent
 					{...props}
 					ref={ref}
-					className={classNames(
-						{
-							'layer-variants:important:p-0': padding === 'none',
-							'layer-variants:p-md': padding === 'default',
-							'layer-variants:rd-0': radius === 'none',
-							'layer-variants:rd-lg': radius === 'default',
-							'layer-variants:rd-md': radius === 'md',
-						},
-						className,
-					)}
+					className={classNames(cls.popup, className)}
 				>
 					{children}
 				</StyledContent>
@@ -117,14 +102,11 @@ export const PopoverContent = function PopoverContent({
 	);
 };
 
-export const PopoverTitle = withClassName(
-	PopoverPrimitive.Title,
-	'layer-components:font-semibold layer-components:(m-0 mb-sm text-secondary)',
-);
+export const PopoverTitle = withClassName(PopoverPrimitive.Title, cls.title);
 
 export const PopoverDescription = withClassName(
 	PopoverPrimitive.Description,
-	'layer-components:(m-0 color-neutral-heavy text-ambient)',
+	cls.description,
 );
 
 export const Popover = Object.assign(PopoverRoot, {

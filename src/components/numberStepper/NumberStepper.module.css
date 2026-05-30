@@ -1,0 +1,32 @@
+.root {
+	width: min-content;
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	overflow: clip;
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
+
+	@apply --mx-bg(var(--m-control-bg));
+	@apply --mx-fg(var(--m-control-fg));
+	@apply --mx-border(var(--m-control-border));
+	border-radius: var(--m-control-radius);
+
+	&:disabled,
+	&[data-disabled='true'] {
+		--mx-shadow-shadow: 0 0 0 0 transparent;
+		@apply --mx-bg(transparent);
+		@apply --mx-border-lighten(2);
+		@apply --mx-fg-lighten(2);
+	}
+
+	&[data-emphasis='primary'] {
+		@apply --mx-bg(var(--m-color-main-wash));
+		@apply --mx-fg(var(--m-color-main-ink));
+	}
+}
+
+.value {
+	width: 80px;
+	text-align: center;
+}
