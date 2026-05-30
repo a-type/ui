@@ -11,6 +11,7 @@ import {
 import { Icon } from '../icon/index.js';
 import { Input } from '../input/index.js';
 import inputCls from '../input/Input.module.css';
+import cls from './EditableText.module.css';
 
 export interface EditableTextProps {
 	value: string;
@@ -89,10 +90,7 @@ export function EditableText({
 				value={value}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				className={clsx(
-					'layer-variants:[&_input]:font-size-inherit',
-					className,
-				)}
+				className={clsx(cls.input, className)}
 				id={id}
 				autoSelect={autoSelect}
 				onKeyDown={handleKeyDown}
@@ -104,20 +102,12 @@ export function EditableText({
 	return (
 		<button
 			onClick={() => setEditingFinal(true)}
-			className={clsx(
-				inputCls.input,
-				'layer-composed:(w-auto inline-flex items-center text-left shadow-none color-inherit bg-transparent p-control gap-sm border-transparent rd-control font-size-inherit)',
-				'layer-composed:hover:(bg-main-light/80)',
-				'layer-composed:focus:outline-none',
-				'layer-composed:focus-visible:(bg-main-light/80)',
-				'cursor-pointer',
-				className,
-			)}
+			className={clsx(inputCls.input, cls.button, className)}
 			id={id}
 			{...rest}
 		>
 			{value}
-			<Icon name="pencil" className="opacity-80 stroke-main-heavy" />
+			<Icon name="pencil" className={cls.icon} />
 		</button>
 	);
 }

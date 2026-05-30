@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import { useField, useFormikContext } from 'formik';
 import {
@@ -16,6 +14,7 @@ import useMergedRef from '../../hooks/useMergedRef.js';
 import { Input, InputProps } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
 import { FieldLabel } from './FieldLabel.js';
+import cls from './TextField.module.css';
 
 export type TextFieldProps = {
 	name: string;
@@ -69,7 +68,7 @@ export const TextField = function TextField({
 				{...rest}
 				id={id}
 				autoFocus={autoFocus}
-				className={clsx('layer-composed:w-full', inputClassName)}
+				className={clsx(cls.input, inputClassName)}
 				ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
 			/>
 		</FieldRoot>
@@ -128,7 +127,4 @@ export function TextAreaField({
 	);
 }
 
-export const FieldRoot = withClassName(
-	'div',
-	'layer-components:(flex flex-col items-stretch self-stretch gap-xs)',
-);
+export const FieldRoot = withClassName('div', cls.root);

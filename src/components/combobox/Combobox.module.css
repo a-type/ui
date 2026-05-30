@@ -20,9 +20,10 @@
 }
 
 .groupItem {
-	@apply --mx-bg(var(--m-surface-secondary-bg));
 	@apply --mx-shadow;
-	--mx-shadow-ring: --fn-ring(var(--m-color-main-mid), 2px);
+	&[data-highlighted] {
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-mid), 2px);
+	}
 }
 
 .groupItemList {
@@ -106,6 +107,8 @@
 	min-width: 0;
 	padding: 0;
 	line-height: 1;
+	margin-block: calc(-1 * var(--m-spacing-xs));
+	margin-inline-end: calc(-1 * var(--m-spacing-sm));
 }
 
 .item[data-selected] {
@@ -149,4 +152,11 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: var(--m-spacing-xs);
+}
+
+.clearAndCaret {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	margin-right: calc(-1 * var(--m-control-padding-inline));
 }

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Box } from '../box/Box.js';
 import { Icon } from './Icon.js';
 import { iconNames } from './generated/iconNames.js';
 
@@ -31,15 +32,32 @@ export const Default: Story = {
 export const All: Story = {
 	render() {
 		return (
-			<div className="grid grid-cols-6 gap-xs">
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(6, 1fr)',
+					gap: 'var(--m-spacing-xs)',
+				}}
+			>
 				{iconNames.map((name) => (
-					<div
+					<Box
+						surface="ambient"
+						col
+						p="sm"
+						layout="center center"
+						border
 						key={name}
-						className="border-gray-light flex flex-col items-center justify-center gap-2 p-4 border"
 					>
 						<Icon name={name} size={25} />
-						<span className="text-center text-ambient">{name}</span>
-					</div>
+						<span
+							style={{
+								textAlign: 'center',
+								fontSize: 'var(--m-text-ambient-size)',
+							}}
+						>
+							{name}
+						</span>
+					</Box>
 				))}
 			</div>
 		);

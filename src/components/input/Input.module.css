@@ -23,7 +23,7 @@
 		outline: none;
 	}
 
-	&:first-child {
+	/* &:first-child {
 		padding-left: var(--m-control-padding-inline);
 		border-top-left-radius: inherit;
 		border-bottom-left-radius: inherit;
@@ -32,7 +32,7 @@
 		padding-right: var(--m-control-padding-inline);
 		border-top-right-radius: inherit;
 		border-bottom-right-radius: inherit;
-	}
+	} */
 }
 
 .inputBorder {
@@ -88,5 +88,13 @@
 
 	& > [data-icon] {
 		margin-inline: var(--m-spacing-sm);
+	}
+
+	padding-inline: var(--m-control-padding-inline);
+	& > [data-input-border-flush]:first-child {
+		margin-left: calc(-1 * var(--m-control-padding-inline));
+	}
+	& > [data-input-border-flush]:last-child {
+		margin-right: calc(-1 * var(--m-control-padding-inline));
 	}
 }

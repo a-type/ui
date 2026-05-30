@@ -10,11 +10,7 @@ import {
 import { clsx } from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
-import {
-	itemClassName,
-	itemListClassName,
-	popupClassName,
-} from '../primitives/menus.js';
+import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
@@ -23,11 +19,11 @@ const StyledContent = withClassName(
 	function DropdownMenuContent(props: MenuPopupProps) {
 		return <BaseMenu.Popup {...props} />;
 	},
-	popupClassName,
+	menuCls.popup,
 	'layer-components:(min-w-220px)',
 );
 
-const StyledItemBase = withClassName(BaseMenu.Item, itemClassName);
+const StyledItemBase = withClassName(BaseMenu.Item, menuCls.item);
 export interface DropdownMenuItemProps extends MenuItemProps {
 	ref?: Ref<HTMLDivElement>;
 }
@@ -40,8 +36,8 @@ const StyledItem = ({
 		<StyledItemBase {...props} className={clsx(className)} ref={forwardedRef} />
 	);
 };
-const StyledCheckboxItem = withClassName(BaseMenu.CheckboxItem, itemClassName);
-const StyledRadioItem = withClassName(BaseMenu.RadioItem, itemClassName);
+const StyledCheckboxItem = withClassName(BaseMenu.CheckboxItem, menuCls.item);
+const StyledRadioItem = withClassName(BaseMenu.RadioItem, menuCls.item);
 
 const StyledLabel = withClassName(
 	'span',
@@ -134,7 +130,7 @@ export const DropdownMenuContent = ({
 				positionMethod={positionMethod}
 			>
 				<StyledContent {...props}>
-					<div className={itemListClassName}>{children}</div>
+					<div className={menuCls.itemList}>{children}</div>
 					<StyledArrow />
 				</StyledContent>
 			</BaseMenu.Positioner>

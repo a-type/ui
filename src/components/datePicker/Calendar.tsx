@@ -3,7 +3,7 @@ import {
 	CalendarDays,
 	CalendarDaysProps,
 } from 'calendar-blocks';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Button } from '../button/index.js';
 
 export const MonthRow = withClassName(

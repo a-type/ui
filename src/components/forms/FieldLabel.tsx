@@ -1,11 +1,9 @@
 import { withClassName } from '../../hooks.js';
+import cls from './FieldLabel.module.css';
 
-export const FieldLabel = withClassName(
-	'label',
-	'font-bold inline-flex flex-col color-neutral-ink ml-md gap-xs text-ambient',
-);
+export const FieldLabel = withClassName('label', cls.fieldLabel);
 
 export const HorizontalFieldLabel = withClassName(
 	'label',
-	'inline-flex flex-row items-center color-neutral-ink gap-sm text-ambient',
+	cls.horizontalFieldLabel,
 );

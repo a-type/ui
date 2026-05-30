@@ -15,11 +15,7 @@ import { ButtonProps } from '../button/index.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
 import { Icon } from '../icon/Icon.js';
 import { Input, InputProps } from '../input/Input.js';
-import {
-	arrowClassName,
-	itemClassName,
-	separatorClassName,
-} from '../primitives/menus.js';
+import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 import cls from './Combobox.module.css';
@@ -57,7 +53,7 @@ export function ComboboxComposedInput({
 	const isInChips = useContext(ComboboxChipsContext);
 
 	const clearAndCaret = ((!disableClear && hasValue) || !disableCaret) && (
-		<div className="flex flex-shrink-0 items-center">
+		<div className={cls.clearAndCaret}>
 			{!disableClear && hasValue && <ComboboxClear />}
 			{!disableCaret && <ComboboxTrigger open={open} />}
 		</div>
@@ -344,8 +340,9 @@ function ComboboxChip({
 		>
 			{children}
 			<BaseCombobox.Combobox.ChipRemove
+				className="@mode-denser"
 				render={
-					<Button size="small" emphasis="ghost" className={cls.chipRemove}>
+					<Button emphasis="ghost" className={cls.chipRemove}>
 						<Icon name="x" size={10} />
 					</Button>
 				}
@@ -359,13 +356,18 @@ function ComboboxIcon({ className, ...props }: BaseCombobox.ComboboxIconProps) {
 		<BaseCombobox.Combobox.Icon
 			{...props}
 			className={clsx(cls.icon, className)}
+			data-icon
 		>
 			<Icon name="chevron" />
 		</BaseCombobox.Combobox.Icon>
 	);
 }
 
-const ComboboxPopup = withClassName(BaseCombobox.Combobox.Popup, cls.popup);
+const ComboboxPopup = withClassName(
+	BaseCombobox.Combobox.Popup,
+	menuCls.popup,
+	cls.popup,
+);
 
 const ComboboxBackdrop = withClassName(
 	BaseCombobox.Combobox.Backdrop,
@@ -379,7 +381,7 @@ function ComboboxArrow({
 	return (
 		<BaseCombobox.Combobox.Arrow
 			{...props}
-			className={clsx(arrowClassName, className)}
+			className={clsx(menuCls.arrow, className)}
 		>
 			<ArrowSvg />
 		</BaseCombobox.Combobox.Arrow>
@@ -433,7 +435,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxItemProps) {
 	return (
 		<BaseCombobox.Combobox.Item
 			{...props}
-			className={clsx(itemClassName, cls.item, className)}
+			className={clsx(menuCls.item, cls.item, className)}
 		>
 			{children}
 			<ComboboxItemIndicator />
@@ -464,7 +466,7 @@ const ComboboxRow = withClassName(BaseCombobox.Combobox.Row, cls.row);
 
 const ComboboxSeparator = withClassName(
 	BaseCombobox.Combobox.Separator,
-	separatorClassName,
+	menuCls.separator,
 );
 
 export interface ComboboxGroupItemProps
@@ -485,7 +487,12 @@ function ComboboxGroupItem({
 	return (
 		<BaseCombobox.Combobox.Item
 			render={
-				replace ?? <Button render={<Chip render={render} color={color} />} />
+				replace ?? (
+					<Button
+						emphasis="light"
+						render={<Chip render={render} color={color} />}
+					/>
+				)
 			}
 			{...props}
 			className={clsx(cls.groupItem, cls.item, className)}

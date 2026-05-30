@@ -2,6 +2,7 @@
 	min-width: 120px;
 	max-width: var(--available-width, 95vw);
 	max-height: var(--available-height);
+	overflow: clip;
 
 	transition: all var(--m-duration) var(--m-easing);
 
@@ -12,9 +13,11 @@
 	@apply --mx-fg(var(--m-surface-ambient-fg));
 	@apply --mx-border(var(--m-surface-ambient-border));
 
-	border-radius: var(--m-radius);
+	border-radius: var(--m-surface-radius);
 	border-width: var(--m-lineWidth);
 	border-style: solid;
+
+	padding: var(--m-spacing-xs);
 
 	transform-origin: var(--transform-origin);
 	will-change: transform;
@@ -97,7 +100,7 @@
 	&:hover,
 	&[data-highlighted],
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-color-neutral-light));
 	}
 
 	&:focus {
@@ -105,6 +108,22 @@
 	}
 	&:focus-visible {
 		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+
+	border-radius: var(--m-radius-xs);
+	&:first-child {
+		border-top-left-radius: calc(var(--m-surface-radius) - var(--m-spacing-xs));
+		border-top-right-radius: calc(
+			var(--m-surface-radius) - var(--m-spacing-xs)
+		);
+	}
+	&:last-child {
+		border-bottom-left-radius: calc(
+			var(--m-surface-radius) - var(--m-spacing-xs)
+		);
+		border-bottom-right-radius: calc(
+			var(--m-surface-radius) - var(--m-spacing-xs)
+		);
 	}
 }
 

@@ -4,18 +4,8 @@ import {
 } from '@base-ui/react/button';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
-import {
-	ButtonHTMLAttributes,
-	Children,
-	Fragment,
-	memo,
-	ReactNode,
-	Ref,
-	useCallback,
-	useDebugValue,
-	useState,
-} from 'react';
-import preset from '../../arbor/arbor.js';
+import { ButtonHTMLAttributes, memo, Ref } from 'react';
+import { useIconOnlyDataAttributes } from '../../behaviors/iconOnly.js';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
@@ -64,33 +54,26 @@ export function ButtonRoot({
 		'type' in props && props.type === 'submit' && isFormSubmitting;
 	const isLoading = loading || isSubmitLoading;
 
-	const childArray = childArrayWithoutFragments(children);
-	const iconChildCount = childArray.filter(isIconChild).length;
-	const hasLabelChild = childArray.length > iconChildCount;
-
-	useDebugValue(
-		`Children introspection: Icons: ${iconChildCount}, Label: ${hasLabelChild}, Total: ${childArray.length}`,
-	);
+	const iconOnlyTools = useIconOnlyDataAttributes(children);
 
 	const isDropdownTriggerFromContext = useIsDropdownTrigger();
 	const isDropdownTrigger =
 		!disableDropdownTriggerIcon &&
-		hasLabelChild &&
+		iconOnlyTools.info.hasIconOnly &&
 		isDropdownTriggerFromContext;
 
-	const finalRef = useMergedRef(useAnnotateWithChildParts(), ref);
+	const finalRef = useMergedRef(ref, iconOnlyTools.ref);
 
 	const buttonProps = {
 		ref: finalRef,
+		...iconOnlyTools.props,
 		...props,
 		disabled: disabled || isLoading,
+		'data-input-border-flush': true,
 		'data-disabled': visuallyDisabled,
 		'data-focus-visible': visuallyFocused ? true : undefined,
 		'data-size': size,
 		'data-loading': isLoading,
-		'data-has-label': hasLabelChild,
-		'data-has-icon': iconChildCount > 0,
-		'data-icon-count': iconChildCount > 0 ? iconChildCount : undefined,
 		'data-dropdown-trigger': isDropdownTrigger ? true : undefined,
 		tabIndex: visuallyDisabled ? -1 : undefined,
 		'data-toggleable': toggled !== undefined,
@@ -153,16 +136,8 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 		<Icon
 			aria-hidden
 			name="check"
-			className="w-0 transition-width"
-			style={{
-				width: value ? '15px' : 0,
-				// marginRight: !value
-				// 	? `calc(-1 * ${preset.modes.base.schema.$tokens.spacing.sm.var})`
-				// 	: 0,
-				marginLeft: !value
-					? `calc(-1 * ${preset.modes.base.schema.$tokens.spacing.sm.var})`
-					: 0,
-			}}
+			className={cls.toggleIndicator}
+			data-open={!!value}
 			loading={false}
 		/>
 	);
@@ -176,91 +151,3 @@ export const Button = Object.assign(ButtonRoot, {
 	ToggleIndicator: ButtonToggleIndicator,
 	Icon: ButtonIcon,
 });
-
-function useAnnotateWithChildParts() {
-	const mutationObserver = useState(() => {
-		if (typeof window === 'undefined') return null!;
-		return new MutationObserver((entries) => {
-			applyPartAttributes(entries[0].target as HTMLButtonElement);
-		});
-	})[0];
-
-	const ref = useCallback(
-		(node: HTMLButtonElement | null) => {
-			if (node && mutationObserver) {
-				mutationObserver.disconnect();
-				mutationObserver.observe(node, { childList: true, subtree: true });
-				applyPartAttributes(node);
-			} else if (mutationObserver) {
-				mutationObserver.disconnect();
-			}
-		},
-		[mutationObserver],
-	);
-
-	return ref;
-}
-
-function applyPartAttributes(button: HTMLButtonElement) {
-	// each child node that's not an icon counts as a label
-	const registry = {
-		icon: 0,
-		label: 0,
-	};
-	const iconNodes: (HTMLElement | SVGElement)[] = [];
-	button.childNodes.forEach((child) => {
-		if (!(child instanceof HTMLElement || child instanceof SVGElement)) return;
-		if (child.style.display === 'none' || child.style.width === '0') return; // skip hidden elements
-		if (
-			(child instanceof HTMLElement || child instanceof SVGElement) &&
-			child.classList.contains('icon')
-		) {
-			registry.icon++;
-			iconNodes.push(child);
-		} else if (child.hasAttribute('data-default-loader')) {
-			// skip default loader
-		} else {
-			registry.label++;
-		}
-	});
-	if (button.textContent) {
-		const iconText = iconNodes.map((n) => n.textContent).join('');
-		const labelText = button.textContent.replace(iconText, '').trim();
-		if (labelText.length > 0) registry.label++;
-	}
-	button.setAttribute('data-has-icon', String(registry.icon > 0));
-	button.setAttribute('data-has-label', String(registry.label > 0));
-	button.setAttribute('data-icon-count', String(registry.icon));
-}
-
-function isIconChild(child: ReactNode): boolean {
-	if (typeof child !== 'object' || child === null) return false;
-	if ('type' in child) {
-		const type = child.type;
-		if (
-			type === ButtonIcon ||
-			type === 'ButtonIcon' ||
-			(type as any).displayName === 'ButtonIcon'
-		)
-			return true;
-		if (
-			type === Icon ||
-			type === 'Icon' ||
-			(type as any).displayName === 'Icon'
-		)
-			return true;
-	}
-	return false;
-}
-
-function childArrayWithoutFragments(children: ReactNode): ReactNode[] {
-	const topArray = Children.toArray(children);
-	return topArray.flatMap((child) => {
-		if (typeof child === 'object' && child !== null && 'type' in child) {
-			if ((child as any).type === Fragment) {
-				return childArrayWithoutFragments((child as any).props.children);
-			}
-		}
-		return [child];
-	});
-}

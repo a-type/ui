@@ -1,0 +1,27 @@
+.typography {
+	@apply --mx-fg(inherit);
+
+	&[data-emphasis='primary'] {
+		font-size: var(--m-text-primary-size);
+		line-height: var(--m-text-primary-lineHeight);
+		font-weight: var(--m-text-primary-weight);
+	}
+
+	&[data-emphasis='secondary'] {
+		font-size: var(--m-text-secondary-size);
+		line-height: var(--m-text-secondary-lineHeight);
+		font-weight: var(--m-text-secondary-weight);
+	}
+
+	&[data-emphasis='ambient'] {
+		font-size: var(--m-text-ambient-size);
+		line-height: var(--m-text-ambient-lineHeight);
+		font-weight: var(--m-text-ambient-weight);
+	}
+}
+
+@layer components {
+	.removeMargin {
+		margin-block: 0;
+	}
+}

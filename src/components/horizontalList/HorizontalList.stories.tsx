@@ -43,6 +43,7 @@ const meta = {
 				</Button>
 			</>
 		),
+		onCanOpenChange: () => {},
 	},
 	parameters: {
 		controls: { expanded: true },
@@ -57,17 +58,43 @@ export const Default: Story = {
 	render: (args) => {
 		const [open, setOpen] = useState(false);
 		return (
-			<div className="h-full min-h-80vh flex flex-col items-center bg-neutral-ink">
-				<div className="w-400px flex flex-1 flex-col items-stretch bg-neutral-paper">
+			<div
+				style={{
+					height: '100%',
+					minHeight: '80vh',
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					backgroundColor: 'var(--m-color-neutral-ink)',
+				}}
+			>
+				<div
+					style={{
+						width: 400,
+						display: 'flex',
+						flexDirection: 'column',
+						flex: 1,
+						alignItems: 'stretch',
+						backgroundColor: 'var(--m-color-neutral-paper)',
+					}}
+				>
 					<Button
 						toggled={open}
 						onClick={() => setOpen(!open)}
-						className="mb-1 mr-1 mt-auto self-end"
+						style={{
+							marginBottom: '0.25rem',
+							marginRight: '0.25rem',
+							marginTop: 'auto',
+							alignSelf: 'flex-end',
+						}}
 					>
 						{open ? 'Close' : 'Open'}
 					</Button>
 					<HorizontalList
-						className="border-t-black max-h-200px border-t border-t-solid"
+						style={{
+							borderTop: '1px solid var(--m-color-neutral)',
+							maxHeight: 200,
+						}}
 						openDirection="up"
 						{...args}
 						open={open}
@@ -83,9 +110,22 @@ export const CantOpen: Story = {
 	render: (args) => {
 		const [more, setMore] = useState(false);
 		return (
-			<div className="h-full w-full flex flex-col items-stretch justify-end bg-neutral-paper">
+			<div
+				style={{
+					width: '100%',
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'stretch',
+					justifyContent: 'flex-end',
+					backgroundColor: 'var(--m-color-neutral-paper)',
+				}}
+			>
 				<HorizontalList
-					className="border-t-black max-h-200px border-t border-t-solid"
+					style={{
+						maxHeight: 200,
+						borderTop: '1px solid var(--m-color-neutral)',
+					}}
 					openDirection="up"
 					{...args}
 				>
@@ -113,7 +153,14 @@ export const CantOpen: Story = {
 					)}
 					<Button
 						color="primary"
-						className="sticky bottom-2 right-2 ml-auto flex-shrink-0 shadow-sm"
+						style={{
+							position: 'sticky',
+							bottom: 8,
+							right: 8,
+							marginLeft: 'auto',
+							flexShrink: 0,
+							boxShadow: 'var(--m-shadow-sm)',
+						}}
 					>
 						<Icon name="plus" />
 					</Button>

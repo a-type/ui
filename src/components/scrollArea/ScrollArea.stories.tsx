@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import clsx from 'clsx';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Input } from '../input/Input.js';
@@ -33,10 +32,10 @@ export const Default: Story = {
 				style={{ height: '200px', width: '400px' }}
 			>
 				<ScrollArea.Content
-					className={clsx(
-						direction === 'horizontal' && 'w-10000px',
-						direction === 'both' && 'w-800px',
-					)}
+					style={{
+						width: direction === 'horizontal' ? '10000px' : undefined,
+						height: direction === 'both' ? '10000px' : undefined,
+					}}
 				>
 					<Content />
 				</ScrollArea.Content>
@@ -48,7 +47,7 @@ export const Default: Story = {
 export const ConstraintTest: Story = {
 	render({ direction }) {
 		return (
-			<ScrollArea direction={direction} className="h-300px w-300px">
+			<ScrollArea direction={direction} style={{ height: 300, width: 300 }}>
 				<ScrollArea.Content>
 					<Box gap>
 						<Input placeholder="Test input" />

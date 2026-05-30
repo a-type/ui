@@ -121,7 +121,7 @@ const preview: Preview = {
 			return (
 				<Provider>
 					<Story />
-					<arbor-globals-editor />
+					{/* <arbor-globals-editor /> */}
 				</Provider>
 			);
 		},

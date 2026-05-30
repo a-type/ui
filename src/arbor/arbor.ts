@@ -54,6 +54,9 @@ const preset = definePreset({
 		action: {
 			roundness: 99,
 		},
+		control: {
+			roundness: 2,
+		},
 	}),
 	modeSchema: {},
 	mixins: (create, $) => ({
@@ -153,6 +156,8 @@ preset.bundleMode('blueberry', {
 		main: preset.$.primitives.color.blueberry,
 	},
 });
+
+// density and size
 preset.bundleMode('dense', {
 	density: 1.25,
 });
@@ -162,6 +167,22 @@ preset.bundleMode('denser', {
 preset.bundleMode('density-reset', {
 	density: 1,
 });
+
+preset.bundleMode('heading', {
+	text: {
+		primary: preset.$.primitives.typography['4xl'],
+		secondary: preset.$.primitives.typography['3xl'],
+		ambient: preset.$.primitives.typography['xl'],
+	},
+});
+preset.bundleMode('hero', {
+	text: {
+		primary: preset.$.primitives.typography['6xl'],
+		secondary: preset.$.primitives.typography['5xl'],
+		ambient: preset.$.primitives.typography['4xl'],
+	},
+});
+
 preset.bundleMode('contrast', {
 	action: {
 		primary: {

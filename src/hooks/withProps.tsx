@@ -1,3 +1,4 @@
+import { mergeProps } from '@base-ui/react';
 import { ComponentType } from 'react';
 
 export const withProps = <T extends object>(
@@ -5,7 +6,7 @@ export const withProps = <T extends object>(
 	extras: Partial<T>,
 ) => {
 	return (props: T) => {
-		return <Component {...props} {...extras} />;
+		return <Component {...(mergeProps<any>(props, extras) as any)} />;
 	};
 };
 

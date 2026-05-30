@@ -4,6 +4,7 @@ import { Button } from '../button/index.js';
 import { CollapsibleSimple } from '../collapsible/Collapsible.js';
 import { Icon } from '../icon/index.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
+import cls from './HorizontalList.module.css';
 
 export interface HorizontalListProps {
 	open?: boolean;
@@ -14,6 +15,7 @@ export interface HorizontalListProps {
 	onCanOpenChange?: (canOpen: boolean) => void;
 	openDirection?: 'up' | 'down';
 	disableInternalOpenToggle?: boolean;
+	style?: React.CSSProperties;
 }
 
 export function HorizontalList({
@@ -46,8 +48,8 @@ export function HorizontalList({
 		(canOpen: boolean) => {
 			if (canOpen !== lastCanOpenChangeEmitted.current) {
 				lastCanOpenChangeEmitted.current = canOpen;
-				onCanOpenChange?.(canOpen);
 				setInternalCanOpen(canOpen);
+				onCanOpenChange?.(canOpen);
 			}
 		},
 		[onCanOpenChange],
@@ -84,7 +86,7 @@ export function HorizontalList({
 					emitCanOpenChange(true);
 				});
 		} else {
-			content.style.setProperty('width', `auto`);
+			content.style.setProperty('width', `max-content`);
 			content.style.setProperty('flex-wrap', 'nowrap');
 			// force measure to get new height
 			const contentHeight = content.offsetHeight;
@@ -138,45 +140,30 @@ export function HorizontalList({
 
 	return (
 		<ScrollArea.Root
-			className={clsx(
-				'layer-components:(w-full flex flex-col)',
-				'layer-components:max-h-300px',
-				className,
-			)}
+			className={clsx(cls.root, className)}
 			data-state={open ? 'open' : 'closed'}
 			{...rest}
 		>
 			<ScrollArea.Viewport ref={containerRef}>
-				<div
-					className={clsx(
-						'layer-components:(gap-2 px-3 pb-4 pt-3)',
-						'w-max-content flex flex-shrink-0 flex-row items-center gap-2',
-						contentClassName,
-					)}
-					ref={contentRef}
-				>
+				<div className={clsx(cls.content, contentClassName)} ref={contentRef}>
 					<CollapsibleSimple
 						horizontal
 						open={internalCanOpen && !disableInternalOpenToggle}
 						data-can-open={internalCanOpen}
 						data-disabled={disableInternalOpenToggle ? '' : undefined}
+						className={cls.toggleButtonWrapper}
 					>
 						<Button
 							onClick={toggleOpen}
 							emphasis="ghost"
-							className={clsx(
-								'layer-variants:(sticky left-0 top-2 z-1 flex-shrink-0)',
-								'layer-variants:ring-inset',
-								!open &&
-									'layer-variants:(h-full b-r-neutral b-r rd-l-sm rd-r-none b-r-solid)',
-							)}
+							className={clsx(cls.toggleButton)}
+							data-open={open}
+							aria-label={open ? 'Collapse list' : 'Expand list'}
 						>
 							<Icon
 								name="chevron"
-								className={clsx(
-									'transition-transform',
-									chevronFlip && 'rotate-180',
-								)}
+								className={clsx(cls.chevronIcon)}
+								data-flip={chevronFlip}
 							/>
 						</Button>
 					</CollapsibleSimple>

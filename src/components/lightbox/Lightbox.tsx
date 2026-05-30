@@ -7,20 +7,17 @@ import { ReactElement, ReactNode } from 'react';
 import { withClassName } from '../../hooks.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
+import cls from './Lightbox.module.css';
 
 export interface LightboxProps {
 	children?: ReactNode;
 }
 
 export const LightboxRoot = Dialog.Root;
-export const LightboxTrigger = withClassName(
-	Dialog.Trigger,
-	'layer-components:cursor-pointer',
-	'foc-effect',
-);
+export const LightboxTrigger = withClassName(Dialog.Trigger, cls.trigger);
 export const LightboxPortal = Dialog.Portal;
 export const LightboxTitle = () => (
-	<Dialog.Title className="sr-only">Lightbox</Dialog.Title>
+	<Dialog.Title className={cls.title}>Lightbox</Dialog.Title>
 );
 export const LightboxClose = (props: DialogCloseProps) => (
 	<Dialog.Close
@@ -30,41 +27,24 @@ export const LightboxClose = (props: DialogCloseProps) => (
 				<Icon name="x" />
 			</Button>
 		}
-		className="absolute right-md top-md"
+		className={cls.close}
 	/>
 );
 
-export const LightboxOverlay = withClassName(
-	Dialog.Backdrop,
-	'layer-components:(fixed inset-0 z-backdrop backdrop-blur-sm bg-neutral-ink/50)',
-	'!motion-reduce:animate-none transform-gpu',
-	'layer-components:(animate-fade-in [&[data-state=closed]]:animate-fade-out) animate-duration-200',
-);
+export const LightboxOverlay = withClassName(Dialog.Backdrop, cls.overlay);
 
-export const LightboxContentRoot = withClassName(
-	Dialog.Popup,
-	'layer-components:(fixed z-dialog h-full max-h-full max-w-full w-full flex items-center justify-center bg-none p-lg border-none)',
-	'!motion-reduce:animate-none transform-gpu',
-	'layer-components:(left-50% top-50% max-h-85vh w-90vw translate-[-50%])',
-	'layer-components:animate-dialog-in',
-	'layer-components:[&[data-state=closed]]:animate-dialog-out',
-	'!pointer-events-none',
-);
+export const LightboxContentRoot = withClassName(Dialog.Popup, cls.contentRoot);
 export const LightboxContent = (props: DialogPopupProps) => {
 	return (
 		<LightboxContentRoot {...props}>
 			<LightboxTitle />
-			<LightboxClose className="pointer-events-auto" />
+			<LightboxClose className={cls.pointerEventsAuto} />
 			<LightboxContentInner>{props.children}</LightboxContentInner>
 		</LightboxContentRoot>
 	);
 };
 
-const LightboxContentInner = withClassName(
-	'div',
-	'layer-components:(max-h-full max-w-full flex flex-col items-center justify-center overflow-hidden)',
-	'layer-components:pointer-events-none layer-components:[&>*]:pointer-events-auto',
-);
+const LightboxContentInner = withClassName('div', cls.contentInner);
 
 function LightboxDefault({
 	children,
@@ -82,10 +62,7 @@ function LightboxDefault({
 	);
 }
 
-const LightboxImage = withClassName(
-	'img',
-	'object-contain max-h-full max-w-full min-h-80px min-w-80px',
-);
+const LightboxImage = withClassName('img', cls.image);
 
 export const Lightbox = Object.assign(LightboxDefault, {
 	Overlay: LightboxOverlay,

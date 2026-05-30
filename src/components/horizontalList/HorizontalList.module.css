@@ -1,0 +1,50 @@
+.root {
+	width: 100%;
+	max-height: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+.viewport {
+	display: flex;
+	flex-direction: row;
+}
+
+.content {
+	width: max-content;
+	display: flex;
+	flex-shrink: 0;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-sm);
+	padding: var(--m-spacing-sm) var(--m-spacing-sm) var(--m-spacing-md)
+		var(--m-spacing-sm);
+}
+
+.toggleButton {
+	&[data-open='false'] {
+		height: 100%;
+		border-inline-end: var(--m-lineWidth) solid var(--m-color-neutral);
+		border-top-left-radius: var(--m-radius-sm);
+		border-bottom-left-radius: var(--m-radius-sm);
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.toggleButtonWrapper {
+	position: sticky;
+	left: 0;
+	height: 100%;
+	top: var(--m-spacing-sm);
+	z-index: 1;
+	flex-shrink: 0;
+	@apply --mx-bg(inherit);
+}
+
+.chevronIcon {
+	transition: transform var(--m-duration) var(--m-easing);
+	&[data-flip='true'] {
+		transform: rotate(180deg);
+	}
+}

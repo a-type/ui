@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { useField } from 'formik';
 import { useState } from 'react';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
@@ -7,6 +6,7 @@ import { Button, ButtonProps } from '../button/Button.js';
 import { EmojiPicker } from '../emojiPicker/EmojiPicker.js';
 import { Icon } from '../icon/Icon.js';
 import { Popover } from '../popover/Popover.js';
+import cls from './EmojiField.module.css';
 import { HorizontalFieldLabel } from './FieldLabel.js';
 
 export type EmojiFieldProps = Omit<ButtonProps, 'className'> & {
@@ -32,14 +32,8 @@ export function EmojiField({
 			<Popover open={open} onOpenChange={setOpen}>
 				<Popover.Trigger
 					render={
-						<Button
-							id={id}
-							aria-label="Select emoji"
-							size="small"
-							className={clsx('p-0 transition-color', className)}
-							{...rest}
-						>
-							<Button.Icon className="h-touch w-touch flex items-center justify-center text-[19px]">
+						<Button id={id} aria-label="Select emoji" size="wrapper" {...rest}>
+							<Button.Icon className={cls.triggerIcon}>
 								{props.value || <Icon name="smile" />}
 							</Button.Icon>
 						</Button>

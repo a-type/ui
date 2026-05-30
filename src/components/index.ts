@@ -36,7 +36,6 @@ export * from './numberStepper/index.js';
 export * from './particles/index.js';
 export * from './peek/index.js';
 export * from './popover/index.js';
-export * from './primitives/menus.js';
 export * from './progress/Progress.js';
 export * from './provider/Provider.js';
 export * from './pwaInstall/index.js';

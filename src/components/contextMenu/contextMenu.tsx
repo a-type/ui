@@ -4,6 +4,7 @@ import {
 } from '@base-ui/react/context-menu';
 import classNames from 'clsx';
 import { withClassName } from '../../hooks/withClassName.js';
+import menuCls from '../primitives/menus.module.css';
 
 export const ContextMenuRoot = BaseContextMenu.Root;
 
@@ -20,12 +21,8 @@ export const ContextMenuContent = function Content({
 			<BaseContextMenu.Positioner alignOffset={-10}>
 				<BaseContextMenu.Popup
 					className={classNames(
-						'layer-components:(z-menu min-w-120px overflow-hidden shadow-md bg-surface-ambient border-neutral-heavy border rd-surface)',
-						'layer-components:transform-origin-[var(--transform-origin)]',
-						'start-end:(op-0 scale-95)',
-						'layer-components:(overflow-y-auto overflow-unstable)',
-						'important:motion-reduce:transition-none',
-						'layer-components:(max-h-[--available-height] max-w-[--available-width])',
+						menuCls.popup,
+
 						className,
 					)}
 					onClick={(ev) => {
@@ -42,15 +39,13 @@ export const ContextMenuContent = function Content({
 
 export const ContextMenuArrow = withClassName(
 	BaseContextMenu.Arrow,
-	'layer-components:arrow',
+	menuCls.arrow,
 );
 
 export const ContextMenuItem = withClassName(
 	BaseContextMenu.Item,
-	'palette-gray',
-	'layer-components:min-h-touch-large layer-components:(relative flex cursor-pointer select-none items-center overflow-hidden px-2 pl-25px outline-none py-sm)',
-	'layer-components:[&[data-highlighted=true]]:bg-main-light layer-components:hover:bg-main-light',
-	'layer-components:disabled:cursor-default) layer-components:[&[data-disabled=true]]:(cursor-default opacity-50) layer-components:disabled:(opacity-50)',
+	'@mode-gray',
+	menuCls.item,
 );
 
 export const ContextMenuTrigger = withClassName(BaseContextMenu.Trigger, '');

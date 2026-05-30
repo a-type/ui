@@ -1,0 +1,4 @@
+.iconWrapper {
+	display: inline-block;
+	flex-shrink: 0;
+}

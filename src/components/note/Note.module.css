@@ -1,0 +1,114 @@
+.root {
+	@apply --mx-shadow;
+
+	&:has(input:focus[data-focus-clicked]),
+	&:has(textarea:focus[data-focus-clicked]) {
+		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg-lighten(3);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-light), 4px);
+	}
+
+	&:has(input:focus-visible),
+	&:has(textarea:focus-visible) {
+		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg-lighten(3);
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+}
+
+.layout {
+	display: flex;
+	flex-direction: row;
+}
+
+.content {
+	position: relative;
+	flex: 1;
+	padding: var(--m-spacing-sm);
+
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	font-weight: var(--m-text-ambient-weight);
+	font-style: italic;
+
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-bg-darken(1);
+	@apply --mx-border(var(--m-color-main-heavy));
+	border-right-width: 0;
+
+	& input,
+	& textarea {
+		padding: 0;
+		box-shadow: none;
+		background: transparent;
+		outline: none;
+		border: none;
+	}
+}
+
+.fold {
+	display: flex;
+	flex: 0 0 20px;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: stretch;
+}
+
+.foldTop {
+	position: relative;
+	height: 20px;
+	width: 20px;
+	flex: 0 0 20px;
+
+	@apply --mx-border(var(--m-color-main-heavy));
+	border-bottom-width: var(--m-lineWidth-md);
+	border-left-width: var(--m-lineWidth-md);
+	border-top-width: 0;
+	border-right-width: 0;
+}
+
+.topCorner {
+	box-sizing: content-box;
+	height: 0;
+	width: 0;
+	top: 0;
+	right: 0;
+	transform-origin: right bottom;
+
+	@apply --mx-border(var(--m-color-main-wash));
+	@apply --mx-border-darken(1);
+	border-width: 9.5px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: var(--mx-border-ref);
+	border-left-color: var(--mx-border-ref);
+}
+
+.diagonal {
+	position: absolute;
+	left: 9px;
+	top: -3px;
+	height: 27px;
+	width: 0.5px;
+	transform-origin: center center;
+	transform: rotate(-45deg);
+
+	@apply --mx-bg(var(--m-color-main-heavy));
+}
+
+.foldBottom {
+	flex: 1;
+	@apply --mx-border(var(--m-color-main-heavy));
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-bg-darken(1);
+	border-right-width: var(--m-lineWidth-md);
+	border-bottom-width: var(--m-lineWidth-md);
+	border-left-width: 0;
+	border-top-width: 0;
+}
+
+.input {
+	width: 100%;
+	padding: 0;
+}

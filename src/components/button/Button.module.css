@@ -17,8 +17,9 @@
 	font-size: var(--m-text-secondary-size);
 	line-height: 1;
 	font-family: inherit;
+	font-weight: 400;
 
-	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
+	@apply --mx-fg(contrast-color(var(--mx-bg-contrast, var(--mx-bg-ref))));
 
 	@apply --mx-border(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth-md);
@@ -50,6 +51,8 @@
 		@apply --mx-bg(var(--m-action-ambient-bg));
 		@apply --mx-fg(var(--m-action-ambient-fg));
 		--mx-shadow-shadow: 0 0 0 0 transparent;
+
+		font-weight: 600;
 
 		&:hover,
 		&:focus {
@@ -111,6 +114,7 @@
 	/* Always turn off background for toggleable buttons that aren't pressed */
 	&[data-toggleable='true'][aria-pressed='false']:not(:hover) {
 		@apply --mx-bg(transparent);
+		--mx-bg-contrast: var(--_-system-schemeTrueLight);
 	}
 }
 
@@ -132,4 +136,16 @@
 .icon {
 	display: flex;
 	flex-shrink: 0;
+}
+
+.toggleIndicator {
+	width: 0;
+	transition: width var(--m-duration) var(--m-easing);
+
+	&[data-open='true'] {
+		width: 15px;
+	}
+	&[data-open='false'] {
+		margin-left: calc(-1 * var(--m-spacing-sm));
+	}
 }

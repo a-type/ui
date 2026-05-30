@@ -10,10 +10,10 @@ import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { Button, ButtonProps } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
-import { popupClassName } from '../primitives/menus.js';
+import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 
-const StyledContent = withClassName(PopoverPrimitive.Popup, popupClassName);
+const StyledContent = withClassName(PopoverPrimitive.Popup, menuCls.popup);
 
 const StyledArrow = withClassName(
 	(props: MenuArrowProps) => (
@@ -21,9 +21,7 @@ const StyledArrow = withClassName(
 			<ArrowSvg />
 		</PopoverPrimitive.Arrow>
 	),
-	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(opacity-0 scale-0)',
-	'layer-components:data-[open]:(opacity-100 scale-100)',
+	menuCls.arrow,
 );
 
 const StyledClose = ({

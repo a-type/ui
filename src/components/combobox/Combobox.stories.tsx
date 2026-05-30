@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
+import { Text } from '../typography/typography.js';
 import { Combobox } from './Combobox.js';
 
 interface Args {
@@ -173,7 +174,7 @@ export const Grouped: Story = {
 						: undefined
 				}
 			>
-				<GroupedCombobox.Input />
+				<GroupedCombobox.Input placeholder="Select an item..." />
 				<GroupedCombobox.Content arrow={arrow}>
 					<GroupedCombobox.List>
 						{(group) => (
@@ -205,10 +206,12 @@ export const Grouped: Story = {
 						)}
 					</GroupedCombobox.Empty>
 					<GroupedCombobox.Separator />
-					<div className="color-neutral-heavy p-sm text-ambient">
-						Select your favorite fruit or berry.
-						{creatable ? ' Enter creates a new item.' : ''}
-					</div>
+					<Box p="xs">
+						<Text emphasis="ambient">
+							Select your favorite fruit or berry.
+							{creatable ? ' Enter creates a new item.' : ''}
+						</Text>
+					</Box>
 				</GroupedCombobox.Content>
 			</GroupedCombobox>
 		);
@@ -231,12 +234,19 @@ export const NotPopover: Story = {
 						: undefined
 				}
 			>
-				<Box border p surface="white" col>
-					<GroupedCombobox.Input disableCaret className="w-full" disableClear>
+				<Box border p surface="ambient" col items="stretch">
+					<GroupedCombobox.Input
+						style={{ width: '100%' }}
+						disableCaret
+						disableClear
+					>
 						<GroupedCombobox.CreateButton
 							size="small"
 							emphasis="primary"
-							className="aspect-1 h-full"
+							style={{
+								aspectRatio: '1',
+								height: '100%',
+							}}
 						>
 							<Icon name="plus" />
 						</GroupedCombobox.CreateButton>
@@ -277,7 +287,7 @@ export const MultiSelect: Story = {
 				highlightItemOnHover={highlightItemOnHover}
 				showCreatableItem={creatable}
 			>
-				<ExampleCombobox.Chips className="w-300px">
+				<ExampleCombobox.Chips style={{ width: 300 }}>
 					<ExampleCombobox.MultiValue>
 						{(items) => (
 							<>

@@ -6,6 +6,7 @@ import {
 	NumberStepperProps,
 } from '../numberStepper/NumberStepper.js';
 import { FieldLabel } from './FieldLabel.js';
+import cls from './NumberStepperField.module.css';
 
 export interface NumberStepperFieldProps
 	extends Omit<NumberStepperProps, 'value' | 'onChange'> {
@@ -42,7 +43,4 @@ export function NumberStepperField({
 	);
 }
 
-const FieldRoot = withClassName(
-	'div',
-	'layer-components:(flex flex-col gap-2)',
-);
+const FieldRoot = withClassName('div', cls.root);

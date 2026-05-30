@@ -15,61 +15,43 @@ import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import inputCls from '../input/Input.module.css';
 import { Spinner } from '../spinner/Spinner.js';
+import cls from './EmojiPicker.module.css';
 
-export const EmojiPickerRoot = withClassName(
-	Core.Root,
-	'layer-components:(h-368px w-fit flex flex-col isolate gap-sm)',
-);
+export const EmojiPickerRoot = withClassName(Core.Root, cls.root);
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
-	'layer-components:(z-10 min-w-80px)',
+	cls.search,
 	inputCls.input,
 );
 export const EmojiPickerViewport = ({
 	className,
 	...props
 }: EmojiPickerViewportProps) => (
-	<Box
-		className={clsx(
-			'layer-components:(min-h-0 flex-1 overflow-hidden bg-neutral-paper rd-md)',
-			className,
-		)}
-	>
-		<Core.Viewport
-			className="layer-components:(relative outline-hidden)"
-			{...props}
-		/>
+	<Box className={clsx(cls.viewport, className)}>
+		<Core.Viewport className={cls.viewportInner} {...props} />
 	</Box>
 );
 export const EmojiPickerLoading = withClassName(
 	withProps(Core.Loading, {
 		children: <Spinner />,
 	}),
-	'layer-components:(absolute inset-0 flex items-center justify-center bg-inherit)',
+	cls.loading,
 );
 export const EmojiPickerEmpty = withClassName(
 	withProps(Core.Empty, {
 		children: <>No emoji found</>,
 	}),
-	'layer-components:(absolute inset-0 flex items-center justify-center color-neutral-heavy bg-inherit text-ambient)',
+	cls.empty,
 );
 
 export const EmojiPickerCategoryHeader = (
 	props: EmojiPickerListCategoryHeaderProps,
 ) => (
-	<div
-		className={clsx(
-			'layer-components:font-semibold layer-components:(sticky top-0 color-neutral-heavy bg-inherit px-md py-sm text-ambient)',
-			props.className,
-		)}
-	>
+	<div className={clsx(cls.categoryHeader, props.className)}>
 		{props.category.label}
 	</div>
 );
-export const EmojiPickerRow = withClassName(
-	'div',
-	'layer-components:scroll-my-xs layer-components:(px-xs)',
-);
+export const EmojiPickerRow = withClassName('div', cls.row);
 export const EmojiPickerEmoji = withClassName(
 	(p: Omit<EmojiPickerListEmojiProps, 'color'>) => (
 		<Button
@@ -79,12 +61,11 @@ export const EmojiPickerEmoji = withClassName(
 			toggleMode="color"
 			size="small"
 			aria-label={p.emoji.label}
-			className="p-xs text-primary"
 		>
 			<Button.Icon>{p.emoji.emoji}</Button.Icon>
 		</Button>
 	),
-	'',
+	cls.emoji,
 );
 
 const defaultListComponents = {
@@ -99,7 +80,7 @@ export const EmojiPickerList = ({
 }: EmojiPickerListProps) => {
 	return (
 		<Core.List
-			className={clsx('layer-components:(select-none pb-md)', className)}
+			className={clsx(cls.list, className)}
 			components={
 				components
 					? {
@@ -130,7 +111,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 					toggleMode="color"
 					size="small"
 					aria-label={`Skin tone ${option}`}
-					className="p-xs text-secondary"
+					className={cls.skinToneButton}
 					onClick={() => setSkinTone(option.skinTone)}
 				>
 					<Button.Icon>{option.emoji}</Button.Icon>
@@ -171,7 +152,7 @@ const EmojiPickerPrefab = ({
 				<EmojiPickerLoading />
 				<EmojiPickerEmpty />
 			</EmojiPickerViewport>
-			<EmojiPickerSkinToneSelector className="mr-auto" />
+			<EmojiPickerSkinToneSelector className={cls.skinToneSelector} />
 		</EmojiPickerRoot>
 	);
 };
