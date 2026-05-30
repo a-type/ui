@@ -54,7 +54,7 @@ export const Default: Story = {
 						</Card.Grid>
 					)}
 					<PageNowPlaying>
-						<Box surface="white" elevated="lg" full p>
+						<Box surface="ambient" elevated="lg" full p>
 							Now playing
 						</Box>
 					</PageNowPlaying>
@@ -74,7 +74,7 @@ export const Default: Story = {
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
 						</NavBarItem>
-						<NavBarItem color="gray" active={true}>
+						<NavBarItem color="neutral" active={true}>
 							<NavBarItemIconWrapper>
 								<NavBarItemIcon
 									render={(_, { size }) => (
@@ -124,7 +124,7 @@ export const ManualWidth: Story = {
 							<NavBarItemText>Item 2</NavBarItemText>
 							<NavBarItemPip />
 						</NavBarItem>
-						<NavBarItem color="gray" active={true}>
+						<NavBarItem color="neutral" active={true}>
 							<NavBarItemIconWrapper>
 								<NavBarItemIcon name="book" />
 							</NavBarItemIconWrapper>
@@ -154,7 +154,7 @@ export const WithoutNav: Story = {
 					</Card.Grid>
 				</div>
 				<PageNowPlaying>
-					<Box full elevated="lg" p surface="white">
+					<Box full elevated="lg" p surface="ambient">
 						Now playing
 					</Box>
 				</PageNowPlaying>

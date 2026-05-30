@@ -18,6 +18,7 @@ import {
 	CameraShutterButton,
 } from '../camera/index.js';
 import { Icon } from '../icon/index.js';
+import cls from './ImageUploader.module.css';
 
 export interface ImageUploaderProps {
 	value: string | null;
@@ -135,7 +136,7 @@ export function ImageUploaderRoot({
 			value={{ inputId, dragging, draggingOver, value, onChange }}
 		>
 			<div
-				className={classNames('relative rd-lg', rest.className)}
+				className={classNames('@mode-neutral', cls.root, rest.className)}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
@@ -148,7 +149,7 @@ export function ImageUploaderRoot({
 					accept="image/*"
 					onChange={onFileChange}
 					onClick={onFileClick}
-					className="pointer-events-none absolute inset-0 op-0"
+					className={cls.input}
 					id={inputId}
 				/>
 				{children}
@@ -195,7 +196,7 @@ function ImageUploaderPrebuilt({
 			</ImageUploaderEmptyControls>
 			{!props.value && cameraOpen && (
 				<CameraRoot
-					className="absolute z-1 h-full w-full"
+					className={cls.cameraRoot}
 					format="image/png"
 					onCapture={(file) => {
 						props.onChange(file);
@@ -210,7 +211,7 @@ function ImageUploaderPrebuilt({
 						onClick={() => setCameraOpen(false)}
 						emphasis="ghost"
 						size="small"
-						className="absolute left-2 top-2 color-neutral-paper"
+						className={cls.cameraCancelButton}
 					>
 						Cancel
 					</Button>
@@ -269,10 +270,7 @@ export function ImageUploaderRemoveButton({ className, ...rest }: ButtonProps) {
 	return (
 		<Button
 			emphasis="ghost"
-			className={clsx(
-				'layer-variants:(absolute right-2 top-2 z-10 h-32px w-32px cursor-pointer p-2 transition-colors shadow-sm color-neutral-ink bg-neutral-paper rd-lg border-none)',
-				className,
-			)}
+			className={clsx(cls.removeButton, className)}
 			onClick={() => onChange(null)}
 			{...rest}
 		>
@@ -287,14 +285,7 @@ export function ImageUploaderDisplay({
 }: ImgHTMLAttributes<HTMLImageElement>) {
 	const { value } = useUploaderContext();
 	return value ? (
-		<img
-			src={value}
-			className={clsx(
-				'layer-components:object-cover layer-components:object-center layer-components:(h-full w-full rd-lg)',
-				className,
-			)}
-			{...rest}
-		/>
+		<img src={value} className={clsx(cls.imagePreview, className)} {...rest} />
 	) : null;
 }
 
@@ -311,13 +302,8 @@ export function ImageUploaderEmptyControls({
 
 	return (
 		<div
-			className={classNames(
-				'layer-components:(absolute inset-0 flex flex-col items-center justify-center gap-3 bg-neutral-light rd-lg)',
-				{
-					'layer-components:bg-darken-2': draggingOver,
-				},
-				className,
-			)}
+			className={classNames(cls.emptyControls, className)}
+			data-dragging-over={draggingOver}
 		>
 			{children}
 		</div>

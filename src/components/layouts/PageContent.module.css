@@ -1,0 +1,25 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: start;
+	flex: 1 0 auto;
+	width: 100%;
+	anchor-name: --page-content;
+
+	gap: var(--m-spacing-md);
+
+	padding: var(--m-spacing-md);
+	@media (min-width: 768px) {
+		padding: var(--m-spacing-lg);
+	}
+
+	margin-inline: auto;
+	max-width: 100%;
+	min-width: 0;
+
+	container-type: inline-size;
+	container-name: --page-content;
+
+	grid-area: content;
+}

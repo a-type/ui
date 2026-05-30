@@ -1,0 +1,136 @@
+.root {
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-auto-flow: column;
+	height: auto;
+	justify-items: center;
+	overflow: clip;
+	border-radius: 0;
+	padding: var(--m-spacing-xs);
+	z-index: 50;
+	padding-bottom: calc(0.25rem + env(safe-area-inset-bottom, 0px));
+
+	@media (min-width: 768px) {
+		height: min-content;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: start;
+		gap: var(--m-spacing-sm);
+		overflow-x: clip;
+		overflow-y: auto;
+		border-radius: 0;
+		padding-bottom: var(--m-spacing-xl);
+		box-shadow: none;
+		@apply --mx-bg(transparent);
+		border: none;
+	}
+}
+
+.item {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	user-select: none;
+	align-items: center;
+	justify-content: center;
+	gap: var(--m-spacing-xs);
+	white-space: nowrap;
+	padding: var(--m-spacing-sm) var(--m-spacing-md);
+	transition: all var(--m-duration) var(--m-easing);
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-bg(transparent);
+	border-radius: var(--m-radius-xs);
+	border: none;
+	font-size: var(--m-text-ambient-size);
+	line-height: 1;
+	font-weight: var(--m-text-ambient-weight);
+	@apply --mx-shadow;
+
+	&:active {
+		@apply --mx-bg-darken(2);
+	}
+
+	&:hover {
+		@apply --mx-bg(var(--m-action-primary-bg));
+		@apply --mx-bg-fade(50%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+
+	&[data-active='true'] {
+		@apply --mx-bg(var(--m-action-primary-bg));
+		@apply --mx-fg(var(--m-action-primary-fg));
+		@apply --mx-bg-lighten(4);
+	}
+
+	@media (min-width: 768px) {
+		height: auto;
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: end;
+		gap: var(--m-spacing-sm);
+		overflow: visible;
+		font-size: var(--m-text-secondary-size);
+		&:active {
+			@apply --mx-bg-darken(2);
+		}
+	}
+}
+
+.itemIconWrapper {
+	position: relative;
+	display: flex;
+
+	@media (min-width: 768px) {
+		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg-fade(50%);
+		padding: var(--m-spacing-sm);
+		border-radius: var(--m-action-radius);
+
+		[data-active='true'] & {
+			@apply --mx-bg(inherit);
+		}
+	}
+}
+
+.itemText {
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	font-size: inherit;
+	line-height: 1;
+	font-weight: inherit;
+	display: inline-block;
+	overflow: clip;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.icon {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	@apply --mx-fg(inherit);
+
+	[data-active='true'] & {
+		@apply --mx-fill(var(--m-color-main));
+	}
+}
+
+.pip {
+	position: absolute;
+	top: var(--m-spacing-xs);
+	right: var(--m-spacing-xs);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: var(--m-color-main);
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
+}

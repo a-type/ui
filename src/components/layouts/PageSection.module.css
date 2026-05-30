@@ -1,0 +1,19 @@
+.root {
+	max-width: 80vw;
+	width: 100%;
+	padding: var(--m-spacing-md);
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+	border-radius: var(--m-radius-lg);
+	@apply --mx-border(var(--m-surface-ambient-border))
+
+	@media (min-width: 768px) {
+		min-width: 0;
+	}
+}
+
+.grid {
+	display: grid;
+	gap: var(--m-spacing-md);
+	align-items: start;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

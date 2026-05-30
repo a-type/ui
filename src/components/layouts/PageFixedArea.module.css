@@ -1,0 +1,11 @@
+.root {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-nav);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--m-spacing-sm);
+	@apply --mx-bg(inherit);
+}

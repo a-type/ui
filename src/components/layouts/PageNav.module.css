@@ -1,0 +1,31 @@
+.root {
+	grid-area: nav;
+	position: sticky;
+	bottom: 0;
+	z-index: var(--z-nav);
+
+	padding-block-end: calc(0.25rem + env(safe-area-inset-bottom, 0px));
+
+	@apply --mx-bg(inherit);
+
+	&::before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: var(--m-spacing-md);
+		right: var(--m-spacing-md);
+		height: 1px;
+		@apply --mx-bg(var(--m-color-neutral-heavy));
+		@media (min-width: 768px) {
+			display: none;
+		}
+	}
+
+	@media (min-width: 768px) {
+		bottom: auto;
+		left: auto;
+		right: auto;
+		top: var(--m-spacing-lg);
+		height: auto;
+	}
+}

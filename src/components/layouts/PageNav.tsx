@@ -2,6 +2,7 @@ import classNames from 'clsx';
 import { HTMLAttributes, useRef } from 'react';
 import { useBoundsCssVars } from '../../hooks.js';
 import { HideWhileKeyboardOpen } from '../utility/HideWhileKeyboardOpen.js';
+import cls from './PageNav.module.css';
 
 export function PageNav({
 	className,
@@ -22,12 +23,7 @@ export function PageNav({
 	return (
 		<HideWhileKeyboardOpen
 			{...props}
-			className={classNames(
-				'layer-components:([grid-area:nav] sticky bottom-0 z-[var(--z-nav)] bg-inherit pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))])',
-				'layer-components:before:(absolute inset-x-4 top-0 h-px content-[""] bg-neutral-heavy/80)',
-				'layer-components:md:([grid-area:nav] sticky bottom-auto left-auto right-auto top-lg h-auto) layer-components:md:before:(hidden)',
-				className,
-			)}
+			className={classNames(cls.root, className)}
 			ref={ref}
 		>
 			{children}
