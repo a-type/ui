@@ -13,6 +13,7 @@ import { withClassName } from '../../hooks/withClassName.js';
 import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
+import cls from './DropdownMenu.module.css';
 import { DropdownTriggerProvider } from './DropdownTriggerContext.js';
 
 const StyledContent = withClassName(
@@ -20,7 +21,7 @@ const StyledContent = withClassName(
 		return <BaseMenu.Popup {...props} />;
 	},
 	menuCls.popup,
-	'layer-components:(min-w-220px)',
+	cls.content,
 );
 
 const StyledItemBase = withClassName(BaseMenu.Item, menuCls.item);
@@ -39,19 +40,13 @@ const StyledItem = ({
 const StyledCheckboxItem = withClassName(BaseMenu.CheckboxItem, menuCls.item);
 const StyledRadioItem = withClassName(BaseMenu.RadioItem, menuCls.item);
 
-const StyledLabel = withClassName(
-	'span',
-	'layer-components:(py-1 pl-3 leading-6 text-secondary)',
-);
+const StyledLabel = withClassName('span', menuCls.itemText);
 
-const StyledSeparator = withClassName(
-	BaseMenu.Separator,
-	'layer-components:(m-5px h-1px bg-neutral)',
-);
+const StyledSeparator = withClassName(BaseMenu.Separator, menuCls.separator);
 
 const StyledItemIndicator = withClassName(
 	BaseMenu.CheckboxItemIndicator,
-	'layer-components:(absolute left-0 w-25px inline-flex items-center justify-center)',
+	menuCls.itemIndicator,
 );
 
 const StyledArrow = withClassName(
@@ -60,12 +55,10 @@ const StyledArrow = withClassName(
 			<ArrowSvg />
 		</BaseMenu.Arrow>
 	),
-	'layer-components:(arrow)',
-	'layer-components:data-[closed]:(opacity-0 scale-0)',
-	'layer-components:data-[open]:(opacity-100 scale-100)',
+	menuCls.arrow,
 );
 
-const StyledTrigger = withClassName(BaseMenu.Trigger, 'select-none');
+const StyledTrigger = withClassName(BaseMenu.Trigger, menuCls.trigger);
 
 const StyledPortal = BaseMenu.Portal;
 
@@ -89,7 +82,7 @@ export function DropdownMenuTrigger({ ...props }: MenuTriggerProps) {
 }
 export const DropdownMenuTriggerIcon = withClassName(
 	SlotDiv,
-	'layer-components:transition-transform layer-components:[[data-popup-open]>&]:rotate-180',
+	menuCls.triggerIcon,
 );
 
 export const DropdownMenuContent = ({
@@ -138,7 +131,10 @@ export const DropdownMenuContent = ({
 	);
 };
 
-export const DropdownMenuItemRightSlot = withClassName('div', 'ml-auto pl-md');
+export const DropdownMenuItemRightSlot = withClassName(
+	'div',
+	menuCls.itemRightSlot,
+);
 
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
 	Content: DropdownMenuContent,

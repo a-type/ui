@@ -6,14 +6,16 @@ import {
 } from '@base-ui/react/tooltip';
 import classNames from 'clsx';
 import { ReactElement, ReactNode } from 'react';
+import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
+import cls from './Tooltip.module.css';
 
 export type * from '@base-ui/react/tooltip';
 
 export interface TooltipContentProps
 	extends TooltipPopupProps,
 		Omit<TooltipPositionerProps, 'className' | 'style' | 'render'> {
-	color?: 'contrast' | 'white' | 'neutral' | 'attention';
+	color?: 'contrast' | 'neutral' | 'attention';
 }
 
 function Content({
@@ -52,26 +54,20 @@ function Content({
 				positionMethod={positionMethod}
 			>
 				<TooltipPrimitive.Popup
+					data-color={color}
 					render={render}
 					className={classNames(
-						'layer-components:leading-tight layer-components:(relative flex select-none transition shadow-sm px-sm py-xs rd-sm text-ambient)',
-						'layer-components:data-[instant]:transition-none',
-						'layer-components:start-end:opacity-0 layer-components:start-end:scale-95',
-						'layer-components:transform-origin-[var(--transform-origin)]',
+						cls.popup,
+						'@mode-dense',
 						{
-							'layer-variants:color-neutral-paper layer-variants:bg-neutral-ink':
-								color === 'contrast',
-							'layer-variants:border-gray layer-variants:(color-neutral-ink bg-neutral-paper border)':
-								color === 'white' || color === 'neutral',
-							'layer-variants:bg-attention-ink layer-variants:color-neutral-paper':
-								color === 'attention',
+							'@mode-attention': color === 'attention',
 						},
 						className,
 					)}
 					{...props}
 				>
 					{children}
-					<TooltipPrimitive.Arrow className="layer-components:arrow">
+					<TooltipPrimitive.Arrow className={menuCls.arrow}>
 						<ArrowSvg />
 					</TooltipPrimitive.Arrow>
 				</TooltipPrimitive.Popup>

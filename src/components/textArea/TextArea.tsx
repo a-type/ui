@@ -1,8 +1,9 @@
-import classNames, { clsx } from 'clsx';
+import classNames from 'clsx';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { Input, InputProps } from '../input/Input.js';
+import cls from './TextArea.module.css';
 
 export interface TextAreaProps extends InputProps {
 	className?: string;
@@ -59,25 +60,15 @@ function TextAreaInput({
 		<Input.Input
 			render={<textarea rows={autoSize ? 1 : rows} />}
 			ref={finalRef}
-			className={classNames(
-				'layer-composed:([font-family:inherit] overflow-hidden color-inherit)',
-				'layer-composed:py-md',
-				{
-					'layer-variants:[resize:vertical]': !autoSize,
-					'layer-variants:resize-none': autoSize,
-				},
-				className,
-			)}
+			className={classNames(cls.input, className)}
+			data-auto-size={autoSize}
 			onValueChange={handleValueChange}
 			{...rest}
 		/>
 	);
 }
 
-const TextAreaBorder = withClassName(
-	Input.Border,
-	clsx('layer-composed:rd-sm'),
-);
+const TextAreaBorder = withClassName(Input.Border);
 
 const TextAreaDefault = function TextArea({
 	className,

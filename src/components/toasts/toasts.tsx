@@ -10,6 +10,7 @@ import { useResolvedColorMode } from '../../colorMode.js';
 import { Button, ButtonProps } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { Spinner } from '../spinner/Spinner.js';
+import cls from './toasts.module.css';
 
 export const manager = Toast.createToastManager();
 
@@ -30,7 +31,7 @@ export const DefaultToastProvider = ({
 export function Toaster() {
 	return (
 		<Toast.Portal>
-			<Toast.Viewport className="pointer-events-none overflow-clip">
+			<Toast.Viewport className={cls.toaster}>
 				<ToastList />
 			</Toast.Viewport>
 		</Toast.Portal>
@@ -49,89 +50,34 @@ function ToastList() {
 			toast={toast}
 			swipeDirection={['up', 'right', 'left']}
 			className={clsx(
-				// variable setup
-				'[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))]',
-				'[--height:var(--toast-frontmost-height,var(--toast-height))] [--shrink:calc(1-var(--scale))]',
-				'[--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]',
-				// basic positioning
-				'fixed left-0 left-auto top-xs z-[calc(100000-var(--toast-index))] mr-0 w-full origin-top',
-				'h-[--height]',
-				'flex flex-col items-center gap-xs',
-				// other properties
-				'pointer-events-none select-none',
-				// animation and interaction
-				'translate-x-[--toast-swipe-movement-x] translate-y-[calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height)))] scale-[var(--scale)]',
-				'[transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
-				// ::after
-				'after:(absolute left-0 top-full h-[calc(var(--gap)+1px)] w-full content-empty)',
-				// starting style
-				'data-[starting-style]:(-translate-y-150%)',
-				// limited
-				'data-[limited]:opacity-0',
-				//expanded
-				'data-[expanded]:(h-[--toast-height] translate-x-[--toast-swipe-movement-x] translate-y-[--offset-y] scale-100)',
-				// ending styles
-				'data-[ending-style]:(opacity-0)',
-				// natural or close button
-				'[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:(opacity-50 scale-90 -translate-y-150%)',
-				// swiping down
-				'data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
-				'data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:(translate-y-[calc(var(--toast-swipe-movement-y)+150%)])',
-				// swiping left
-				'data-[ending-style]:data-[swipe-direction=left]:(translate-x-[calc(var(--toast-swipe-movement-x)-150%)] translate-y-[var(--offset-y)])',
-				'data-[expanded]:data-[ending-style]:data-[swipe-direction=left]:(translate-x-[calc(var(--toast-swipe-movement-x)-150%)] translate-y-[var(--offset-y)])',
-				// swiping right
-				'data-[ending-style]:data-[swipe-direction=right]:(translate-x-[calc(var(--toast-swipe-movement-x)+150%)] translate-y-[var(--offset-y)])',
-				'data-[expanded]:data-[ending-style]:data-[swipe-direction=right]:(translate-x-[calc(var(--toast-swipe-movement-x)+150%)] translate-y-[var(--offset-y)])',
-				// swiping up
-				'data-[ending-style]:data-[swipe-direction=up]:(translate-y-[calc(var(--toast-swipe-movement-y)-150%)])',
-				'data-[expanded]:data-[ending-style]:data-[swipe-direction=up]:(translate-y-[calc(var(--toast-swipe-movement-y)-150%)])',
+				cls.toast,
 				// themeing
+				mode === 'dark' ? '@scheme-light' : '@scheme-dark',
 				{
-					'palette-success': toast.type === 'success',
-					'palette-attention': toast.type === 'error',
-					'palette-info': toast.type === 'blank',
+					'@mode-success': toast.type === 'success',
+					'@mode-attention': toast.type === 'error',
 				},
-				mode === 'dark' ? 'override-light' : 'override-dark',
+				'@mode-dense',
 			)}
 		>
-			<Toast.Content className="max-w-sm pointer-events-auto flex flex-col gap-2px [&[data-behind]:not([data-expanded])]:pointer-events-none">
-				<div
-					className={clsx(
-						'layer-components:b-black layer-components:(relative b-1 shadow-md color-neutral-ink bg-main-wash pl-md pr-sm py-sm rd-md b-solid)',
-						'layer-components:(flex flex-row gap-sm)',
-						'[[data-behind]:not([data-expanded])_&]:(max-h-[--height] bg-darken-2)',
-					)}
-				>
-					<div
-						className={clsx(
-							'flex flex-row items-center gap-xs',
-							'[transition-duration:250ms] transition-opacity [[data-behind]:not([data-expanded])_&]:(opacity-0) [[data-expanded]_&]:(opacity-100)',
-						)}
-					>
-						<div className="flex flex-col gap-xs">
-							<Toast.Title className="font-bold leading-tight m-0 text-ambient" />
-							<div className="flex gap-sm">
+			<Toast.Content className={cls.toastContent}>
+				<div className={clsx(cls.toastMain)}>
+					<div className={clsx(cls.toastMainBody)}>
+						<div className={cls.toastMainBodyContent}>
+							<Toast.Title className={toast.title} />
+							<div className={cls.toastDescriptionRow}>
 								{toast.data?.loading ? (
-									<Spinner size={15} className="relative top-2px" />
+									<Spinner size={15} className={cls.icon} />
 								) : toast.type === 'success' ? (
-									<Icon
-										name="check"
-										color="success"
-										className="relative top-2px"
-									/>
+									<Icon name="check" color="success" className={cls.icon} />
 								) : toast.type === 'error' ? (
-									<Icon
-										name="warning"
-										color="attention"
-										className="relative top-2px"
-									/>
+									<Icon name="warning" color="attention" className={cls.icon} />
 								) : null}
-								<Toast.Description className="m-0 text-ambient" />
+								<Toast.Description className={cls.toastDescription} />
 							</div>
 						</div>
 						<Toast.Close
-							className="mb-auto [[data-behind]:not([data-expanded])_&]:(invisible)"
+							className={cls.toastClose}
 							aria-label="Close"
 							render={
 								<Button size="small" emphasis="ghost">
@@ -142,11 +88,10 @@ function ToastList() {
 					</div>
 				</div>
 				{toast.data?.actions && (
-					<div className="ml-auto flex items-center gap-xxs transition-opacity [[data-behind]:not([data-expanded])_&]:(opacity-0)">
+					<div className={cls.toastActions}>
 						{toast.data.actions.toReversed().map((action, index: number) => (
 							<Toast.Action
 								key={index}
-								className="text-ambient"
 								onClick={action.onClick}
 								render={
 									<Button

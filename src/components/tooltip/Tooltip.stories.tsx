@@ -9,7 +9,7 @@ const meta: Meta = {
 	argTypes: {
 		color: {
 			control: 'select',
-			options: ['contrast', 'white', 'neutral', 'attention'],
+			options: ['contrast', 'neutral', 'attention'],
 		},
 	},
 	parameters: {
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
 	render: (args) => (
-		<Tooltip open {...args}>
+		<Tooltip {...args}>
 			<Button>Hover me</Button>
 		</Tooltip>
 	),
@@ -51,7 +51,7 @@ export const Color: Story = {
 		</Tooltip>
 	),
 	args: {
-		color: 'white',
+		color: 'neutral',
 	},
 };
 

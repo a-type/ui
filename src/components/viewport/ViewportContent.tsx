@@ -9,6 +9,7 @@ import {
 } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import cls from './ViewportContent.module.css';
 import { ViewportState } from './ViewportState.js';
 
 export interface ViewportContentProps
@@ -89,10 +90,7 @@ export function ViewportContent({
 	return (
 		<motion.div
 			{...rest}
-			className={clsx(
-				'layer-components:(absolute transform-origin-center touch-none select-none overflow-visible overscroll-none)',
-				className,
-			)}
+			className={clsx(cls.root, className)}
 			ref={finalRef}
 			style={{ transform }}
 			onDragStartCapture={preventDefault}

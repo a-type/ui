@@ -51,8 +51,8 @@
 	@apply --mx-shadow;
 	@apply --mx-bg(transparent);
 
-	border-top-left-radius: var(--m-radius-md);
-	border-top-right-radius: var(--m-radius-md);
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
 	border-width: 0;
 
 	&[data-interactive] {

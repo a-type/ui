@@ -7,10 +7,10 @@ import { useEffect } from 'react';
 import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
 
-import { connect } from '@arbor-css/core/runtime';
-import preset from '../src/arbor/arbor.js';
+// import { connect } from '@arbor-css/core/runtime';
+// import preset from '../src/arbor/arbor.js';
 
-connect(preset);
+// connect(preset);
 
 const preview: Preview = {
 	parameters: {

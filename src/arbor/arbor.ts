@@ -55,7 +55,7 @@ const preset = definePreset({
 			roundness: 99,
 		},
 		control: {
-			roundness: 2,
+			roundness: 1.25,
 		},
 	}),
 	modeSchema: {},

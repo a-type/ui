@@ -1,0 +1,77 @@
+.root {
+	all: unset;
+	position: relative;
+	height: 20px;
+	width: 42px;
+	display: flex;
+	flex-shrink: 0;
+	cursor: pointer;
+	appearance: none;
+	padding: 3px;
+
+	transition: all var(--m-duration) var(--m-easing);
+
+	@apply --mx-shadow;
+	--mx-shadow-shadow: inset var(--m-shadow-sm);
+
+	@apply --mx-bg(var(--m-control-bg));
+	@apply --mx-border(var(--m-control-border));
+	border-radius: var(--m-radius-lg);
+
+	&[data-checked] {
+		@apply --mx-bg(var(--m-color-main));
+	}
+
+	&:hover:not(:disabled) {
+		@apply --mx-bg-lighten(2);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
+	}
+
+	&:active:not(:disabled) {
+		@apply --mx-bg-darken(1);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:focus-visible {
+		--mx-shadow-ring: --fn-ring(var(--m-color-neutral-ink), 2px);
+	}
+}
+
+.thumb {
+	display: block;
+	aspect-ratio: 1/1;
+	height: 100%;
+	transition: transform var(--m-duration) var(--m-easing);
+	will-change: transform;
+
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
+
+	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-border(var(--m-control-border));
+	border-radius: var(--m-radius-lg);
+
+	position: relative;
+
+	&[data-checked] {
+		transform: translateX(22px);
+	}
+
+	&[data-checked]::before {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		content: '✓';
+		color: var(--m-color-main-ink);
+		font-size: var(--m-text-ambient-size);
+	}
+}

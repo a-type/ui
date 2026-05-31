@@ -1,0 +1,44 @@
+.root {
+	min-height: 32px;
+	min-width: 32px;
+}
+
+.positioner {
+	contain: strict;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	touch-action: none;
+	user-select: none;
+	overflow: clip;
+
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		@apply --mx-shadow;
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 1px);
+	}
+}
+
+.controlContent {
+	position: absolute;
+
+	&[data-position='top-left'] {
+		top: var(--m-spacing-sm);
+		left: var(--m-spacing-sm);
+	}
+	&[data-position='top-right'] {
+		top: var(--m-spacing-sm);
+		right: var(--m-spacing-sm);
+	}
+	&[data-position='bottom-left'] {
+		bottom: var(--m-spacing-sm);
+		left: var(--m-spacing-sm);
+	}
+	&[data-position='bottom-right'] {
+		bottom: var(--m-spacing-sm);
+		right: var(--m-spacing-sm);
+	}
+}

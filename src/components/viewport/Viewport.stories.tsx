@@ -29,7 +29,13 @@ const CenterButton = () => {
 export const Default: Story = {
 	render(args) {
 		return (
-			<Viewport className="h-600px w-full" {...args}>
+			<Viewport
+				style={{
+					height: 600,
+					width: '100%',
+				}}
+				{...args}
+			>
 				<img src="https://resources.biscuits.club/images/pashka.jpg" />
 				<Viewport.Control>
 					<Viewport.ZoomControls />
@@ -46,7 +52,10 @@ export const HighZoomLevel: Story = {
 	render(args) {
 		return (
 			<Viewport
-				className="h-600px w-full"
+				style={{
+					height: 600,
+					width: '100%',
+				}}
 				defaultZoom={100}
 				maxZoom={1000}
 				minZoom={10}

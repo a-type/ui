@@ -1,5 +1,6 @@
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
+import cls from './Spinner.module.css';
 
 const CIRCLE_SIZE = 44;
 
@@ -12,7 +13,7 @@ export interface SpinnerProps
 export const Spinner = function Spinner({
 	ref,
 	size = 40,
-	thickness = 7.2,
+	thickness = 3.2,
 	className,
 	style,
 	...props
@@ -24,20 +25,17 @@ export const Spinner = function Spinner({
 			ref={ref}
 			role="progressbar"
 			{...props}
-			className={classNames(
-				'inline-block flex-shrink-0 transform-origin-[50%_50%] animate-spin animate-duration-1400 animate-ease-linear animate-iteration-infinite color-inherit',
-				className,
-			)}
+			className={classNames(cls.root, className)}
 			style={{ width: size, height: size, ...style }}
 		>
 			<svg
-				className="block"
+				className={cls.svg}
 				viewBox={`${CIRCLE_SIZE / 2} ${
 					CIRCLE_SIZE / 2
 				} ${CIRCLE_SIZE} ${CIRCLE_SIZE}`}
 			>
 				<circle
-					className="[stroke-dasharray:80_200] [stroke-dashoffset:0] animate-spinner-stroke animate-duration-1400 animate-ease-in-out animate-iteration-infinite stroke-current"
+					className={cls.circle}
 					cx={CIRCLE_SIZE}
 					cy={CIRCLE_SIZE}
 					r={(CIRCLE_SIZE - thickness) / 2}
@@ -56,10 +54,7 @@ export const FullScreenSpinner = function FullScreenSpinner({
 	ref?: React.Ref<HTMLDivElement>;
 }) {
 	return (
-		<div
-			ref={ref}
-			className="w-full flex flex-1 flex-row items-center self-stretch justify-center gap-4"
-		>
+		<div ref={ref} className={cls.fullScreen}>
 			<Spinner {...props} />
 		</div>
 	);

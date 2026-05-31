@@ -59,7 +59,7 @@ export function ButtonRoot({
 	const isDropdownTriggerFromContext = useIsDropdownTrigger();
 	const isDropdownTrigger =
 		!disableDropdownTriggerIcon &&
-		iconOnlyTools.info.hasIconOnly &&
+		!iconOnlyTools.info.hasIconOnly &&
 		isDropdownTriggerFromContext;
 
 	const finalRef = useMergedRef(ref, iconOnlyTools.ref);

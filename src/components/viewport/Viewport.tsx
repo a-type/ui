@@ -18,6 +18,7 @@ import {
 	useViewportGestureControls,
 	ViewportGestureControlOptions,
 } from './useViewportGestures.js';
+import cls from './Viewport.module.css';
 import { ViewportContent } from './ViewportContent.js';
 import { ViewportProvider } from './ViewportContext.js';
 import { PositionOrPercentage, ViewportState } from './ViewportState.js';
@@ -111,16 +112,12 @@ export function ViewportRoot({
 		<ViewportProvider value={viewport}>
 			<ViewportControlContext.Provider value={controlsRoot}>
 				<Box
-					className={clsx('min-h-32px min-w-32px', className)}
+					className={clsx(cls.root, className)}
 					style={style}
 					ref={controlsRef}
 				>
 					<div
-						className={clsx(
-							'contain-strict relative h-full w-full flex-1 touch-none select-none overflow-hidden',
-							'foc',
-							className,
-						)}
+						className={clsx(cls.positioner, className)}
 						{...gestureProps}
 						{...keyboardProps}
 						tabIndex={0}
@@ -152,16 +149,7 @@ export function ViewportControlContent({
 
 	return createPortal(
 		<Box
-			className={clsx(
-				'layer-variants:(absolute)',
-				{
-					'layer-components:(left-sm top-sm)': position === 'top-left',
-					'layer-components:(right-sm top-sm)': position === 'top-right',
-					'layer-components:(bottom-sm left-sm)': position === 'bottom-left',
-					'layer-components:(bottom-sm right-sm)': position === 'bottom-right',
-				},
-				className,
-			)}
+			className={clsx(cls.controlContent, className)}
 			surface
 			border
 			elevated="md"

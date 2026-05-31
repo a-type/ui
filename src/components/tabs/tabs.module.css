@@ -1,0 +1,143 @@
+.styledList {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: var(--m-spacing-xs);
+}
+
+.trigger {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: var(--m-spacing-xs);
+	padding: var(--m-action-padding);
+
+	cursor: pointer;
+	user-select: none;
+	transition: all var(--m-duration) var(--m-easing);
+
+	text-align: center;
+	white-space: nowrap;
+
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	font-size: var(--m-text-secondary-size);
+	font-weight: var(--m-text-secondary-weight);
+	line-height: 1;
+	font-family: inherit;
+
+	min-height: 30px;
+	min-width: 100px;
+	flex-shrink: 0;
+
+	background: transparent;
+	border: var(--m-lineWidth-sm) solid transparent;
+	border-radius: var(--m-radius-lg);
+
+	&[aria-selected='false']:hover {
+		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg-darken(1);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:focus-visible {
+		@apply --mx-bg-darken(1);
+		@apply --mx-border(var(--m-color-neutral-ink));
+		outline: none;
+	}
+
+	&[data-active] {
+		cursor: default;
+	}
+}
+
+.indicator {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 0;
+	display: block;
+	height: 100%;
+	width: var(--active-tab-width);
+	transition-property: transform, width, color;
+	transition-duration: 300ms;
+	transition-timing-function: ease-out;
+	transform: translateX(
+			calc(
+				var(--active-tab-left, 0px) + var(--scroll-area-overflow-x-start, 0px)
+			)
+		)
+		translateY(-50%);
+
+	@apply --mx-bg(var(--m-color-main-light));
+	@apply --mx-border(var(--m-color-neutral-heavy));
+	border-radius: var(--m-radius-lg);
+	border-width: var(--m-lineWidth-sm);
+}
+
+.content {
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		outline: none;
+		--mx-shadow-ring: --fn-ring(var(--m-color-neutral-ink), 2px);
+	}
+}
+
+.list {
+	max-width: 100%;
+	width: max-content;
+	overflow: clip;
+
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
+	@apply --mx-bg(var(--m-color-neutral-paper));
+
+	border: var(--m-lineWidth-sm) solid;
+	@apply --mx-border(var(--mx-fg-ref));
+	border-radius: var(--m-radius-xl);
+}
+
+.moreLeftIcon {
+	pointer-events: none;
+	position: absolute;
+	left: var(--m-spacing-xs);
+	top: 50%;
+	z-index: 10;
+	height: 16px;
+	width: 16px;
+	transform: translateY(-50%) rotate(90deg);
+
+	--scroll-area-overflow-x-start: inherit;
+	opacity: calc(
+		round(min(1, calc(var(--scroll-area-overflow-x-start, 0px) / 10px)))
+	);
+
+	@apply --mx-fg(--fn-fade(var(--m-color-neutral-heavy), 50%));
+}
+
+.moreRightIcon {
+	pointer-events: none;
+	position: absolute;
+	right: var(--m-spacing-xs);
+	top: 50%;
+	z-index: 10;
+	height: 16px;
+	width: 16px;
+	transform: translateY(-50%) rotate(-90deg);
+
+	--scroll-area-overflow-x-end: inherit;
+	opacity: calc(
+		round(min(1, calc(var(--scroll-area-overflow-x-end, 0px) / 10px)))
+	);
+
+	@apply --mx-fg(--fn-fade(var(--m-color-neutral-heavy), 50%));
+}

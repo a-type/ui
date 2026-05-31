@@ -1,0 +1,10 @@
+.input {
+	font-family: inherit;
+	overflow: clip;
+	@apply --mx-fg(inherit);
+
+	resize: vertical;
+	&[data-auto-size='true'] {
+		resize: none;
+	}
+}

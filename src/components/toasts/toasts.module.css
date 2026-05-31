@@ -1,0 +1,208 @@
+.toaster {
+	pointer-events: none;
+	overflow: clip;
+}
+
+.toast {
+	--gap: 0.75rem;
+	--peek: 0.75rem;
+	--scale: calc(max(0, 1 - var(--toast-index) * 0.1));
+	--height: var(--toast-frontmost-height, var(--toast-height));
+	--shrink: calc(1 - var(--scale));
+	--offset-y: calc(
+		var(--toast-offset-y) + calc(var(--toast-index) * var(--gap)) +
+			var(--toast-swipe-movement-y)
+	);
+
+	/* basic positioning */
+	position: fixed;
+	left: auto;
+	top: var(--m-spacing-xs);
+	z-index: calc(100000 - var(--toast-index));
+	margin-right: 0;
+	width: 100%;
+	transform-origin: top;
+	/* all toasts copy height of frontmost */
+	height: var(--height);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+
+	/* styling happens in content element */
+
+	/* misc */
+	pointer-events: none;
+	user-select: none;
+
+	/* animation and interaction */
+	transform: translateX(var(--toast-swipe-movement-x))
+		translateY(
+			calc(var(--toast-swipe-movement-y) + var(--toast-index) * var(--peek)) +
+				(var(--shrink) * var(--height))
+		)
+		scale(var(--scale));
+	transition:
+		transform var(--m-duration) var(--m-easing),
+		opacity var(--m-duration) var(--m-easing),
+		height var(--m-duration-fast) var(--m-easing);
+
+	&::after {
+		position: absolute;
+		content: '';
+		left: 0;
+		top: 100%;
+		height: calc(var(--gap) + 1px);
+		width: 100%;
+	}
+
+	&[data-limited] {
+		opacity: 0;
+	}
+	&[data-expanded] {
+		height: var(--toast-height);
+		transform: translateX(var(--toast-swipe-movement-x))
+			translateY(var(--offset-y)) scale(1);
+	}
+
+	&[data-starting-style] {
+		transform: translateY(-150%);
+	}
+	&[data-ending-style] {
+		opacity: 0;
+
+		&[data-swipe-direction='up'] {
+			transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+		}
+		&[data-swipe-direction='down'] {
+			transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+		}
+		&[data-swipe-direction='left'] {
+			transform: translateX(calc(var(--toast-swipe-movement-x) - 150%))
+				translateY(var(--offset-y));
+		}
+		&[data-swipe-direction='right'] {
+			transform: translateX(calc(var(--toast-swipe-movement-x) + 150%))
+				translateY(var(--offset-y));
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+	&:focus-visible {
+		box-shadow: --fn-ring(var(--m-color-main-ink), 2px);
+	}
+}
+
+.toastContent {
+	max-width: 400px;
+	pointer-events: auto;
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-sm);
+
+	&[data-behind]:not([data-expanded]) {
+		pointer-events: none;
+	}
+}
+
+.toastMain {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+
+	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-md);
+	@apply --mx-border(var(--m-surface-secondary-border));
+	@apply --mx-fg(var(--m-surface-secondary-fg));
+	@apply --mx-bg(var(--m-surface-secondary-bg));
+
+	padding-inline-start: var(--m-spacing-md);
+	padding-inline-end: var(--m-spacing-sm);
+	padding-block: var(--m-spacing-sm);
+	gap: var(--m-spacing-sm);
+
+	border-radius: var(--m-surface-radius);
+
+	[data-behind]:not([data-expanded]) & {
+		max-height: var(--height);
+		@apply --mx-bg-darken(2);
+	}
+}
+
+.toastMainBody {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+	@apply --mx-fg(inherit);
+
+	transition: opacity var(--m-duration) var(--m-easing);
+
+	/* Hide content when not in front */
+	[data-behind]:not([data-expanded]) & {
+		opacity: 0;
+	}
+
+	[data-expanded] & {
+		opacity: 1;
+	}
+}
+
+.toastMainBodyContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-xs);
+	@apply --mx-fg(inherit);
+}
+
+.toastTitle {
+	@apply --mx-fg(inherit);
+	font-size: var(--m-text-ambient-size);
+	font-weight: 600;
+	line-height: 1;
+}
+
+.toastDescriptionRow {
+	display: flex;
+	gap: var(--m-spacing-sm);
+}
+
+.icon {
+	position: relative;
+	top: 2px;
+}
+
+.toastDescription {
+	margin: 0;
+	@apply --mx-fg(inherit);
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	font-weight: var(--m-text-ambient-weight);
+}
+
+.toastClose {
+	margin-block-end: auto;
+
+	[data-behind]:not([data-expanded]) & {
+		visibility: hidden;
+	}
+}
+
+.toastActions {
+	margin-inline-start: auto;
+	display: flex;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	font-weight: var(--m-text-ambient-weight);
+
+	transition: opacity var(--m-duration) var(--m-easing);
+
+	[data-behind]:not([data-expanded]) & {
+		opacity: 0;
+	}
+}

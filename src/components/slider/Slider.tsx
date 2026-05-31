@@ -2,36 +2,14 @@ import { Slider as BaseSlider, SliderRootProps } from '@base-ui/react/slider';
 import clsx from 'clsx';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks.js';
+import cls from './Slider.module.css';
 
-export const SliderRoot = withClassName(
-	BaseSlider.Root,
-	'layer-components:w-full',
-);
+export const SliderRoot = withClassName(BaseSlider.Root, cls.root);
 
-export const SliderControl = withClassName(
-	BaseSlider.Control,
-	'layer-components:(relative h-30px w-full flex select-none items-center translate-z-0 touch-none)',
-	'layer-variants:[&[data-orientation=vertical]]:(h-full w-30px flex-col)',
-);
-export const SliderTrack = withClassName(
-	BaseSlider.Track,
-	'layer-components:ring-black layer-components:ring-1 layer-components:(relative h-7px grow select-none transition-colors bg-transparent rd-lg)',
-	'layer-variants:[&[data-orientation=vertical]]:(h-full w-7px flex-1)',
-);
-export const SliderRange = withClassName(
-	BaseSlider.Indicator,
-	'layer-components:(transition-colors bg-main rd-lg)',
-	'layer-variants:[&[data-orientation=vertical]]:bg-main',
-);
-export const SliderThumb = withClassName(
-	BaseSlider.Thumb,
-	'layer-components:ring-black layer-components:ring-2 layer-components:(h-5 w-5 flex cursor-pointer items-center justify-center transition-color shadow-sm bg-neutral-paper rd-lg leading-none touch-none)',
-	'layer-components:hover:(shadow-md)',
-	'layer-components:active:ring-4 layer-components:active:ring-opacity-50 layer-components:active:(shadow-lg bg-main-light ring-main-heavy)',
-	'layer-components:focus-visible:(shadow-lg bg-main-light)',
-	'layer-components:focus:(outline-none)',
-	'layer-components:disabled:(opacity-50)',
-);
+export const SliderControl = withClassName(BaseSlider.Control, cls.control);
+export const SliderTrack = withClassName(BaseSlider.Track, cls.track);
+export const SliderRange = withClassName(BaseSlider.Indicator, cls.range);
+export const SliderThumb = withClassName(BaseSlider.Thumb, cls.thumb);
 
 export const SliderBase = ({ children, className, ...props }: SliderProps) => {
 	return (

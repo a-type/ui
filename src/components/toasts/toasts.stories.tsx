@@ -35,7 +35,8 @@ export const Default: Story = {
 					Show Default Toast
 				</Button>
 				<Button
-					color="success"
+					className="@mode-success"
+					emphasis="light"
 					onClick={() => {
 						toast.success('This is a success toast!', {
 							duration: 20_000,
@@ -45,7 +46,8 @@ export const Default: Story = {
 					Show Success Toast
 				</Button>
 				<Button
-					color="attention"
+					className="@mode-attention"
+					emphasis="light"
 					onClick={() => {
 						toast.error('This is an error toast!', {
 							duration: 20_000,

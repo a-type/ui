@@ -1,0 +1,55 @@
+.root {
+	width: fit-content;
+	display: inline-flex;
+	gap: var(--m-spacing-sm);
+	border-radius: var(--m-radius-lg);
+
+	@apply --mx-bg(--fn-fade(var(--m-color-main-light), 20%));
+}
+
+.item {
+	display: flex;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap;
+	transition: all var(--m-duration) var(--m-easing);
+
+	@apply --mx-fg(var(--m-color-neutral-ink));
+
+	padding: var(--m-action-padding);
+
+	@apply --mx-border(transparent);
+	border-radius: var(--m-radius-lg);
+
+	&[data-pressed] {
+		@apply --mx-shadow;
+		--mx-shadow-shadow: var(--m-shadow-sm);
+		@apply --mx-bg(var(--m-color-main));
+		@apply --mx-border(var(--m-color-neutral-ink));
+	}
+
+	&:not([data-pressed]) {
+		@apply --mx-bg(--fn-fade(var(--m-color-neutral), 30%));
+	}
+
+	&:hover:not([data-pressed]) {
+		@apply --mx-bg-lighten(2);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
+		@apply --mx-border(--fn-fade(var(--m-color-main-ink), 20%));
+	}
+
+	&:active:not([data-pressed]) {
+		@apply --mx-bg-lighten(1);
+		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+		@apply --mx-border(--fn-fade(var(--m-color-main-ink), 30%));
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:focus-visible {
+		--mx-shadow-ring: --fn-ring(var(--m-color-neutral-ink), 2px);
+	}
+}
