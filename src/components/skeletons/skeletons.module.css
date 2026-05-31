@@ -1,0 +1,33 @@
+@keyframes skeleton {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+}
+
+.textSkeleton {
+	background-size: 400%, 400%;
+	display: inline-block;
+	height: 100%;
+	max-width: 100%;
+	border-radius: var(--m-radius-md);
+	width: 100%;
+	flex-shrink: 0;
+	opacity: 20%;
+
+	animation-name: skeleton;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: var(--m-easing);
+	animation-direction: alternate;
+	animation-play-state: running;
+
+	background-image: linear-gradient(
+		to right,
+		transparent 0%,
+		var(--mx-fg-ref, var(--m-color-main-ink)) 50%,
+		transparent 100%
+	);
+}

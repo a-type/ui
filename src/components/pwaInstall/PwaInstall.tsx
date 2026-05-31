@@ -20,6 +20,7 @@ import {
 	SafariPlusSquareIcon,
 	SafariShareIcon,
 } from './PlatformIcons.js';
+import cls from './PwaInstall.module.css';
 import { pwaInstallerState } from './state.js';
 import {
 	triggerDeferredInstall,
@@ -54,8 +55,8 @@ export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 				rest.onOpenChange?.(isOpen, ev);
 			}}
 		>
-			<Dialog.Content className="flex flex-col gap-xs" id="pwa-install-dialog">
-				<Dialog.Title className="flex flex-row items-center gap-md">
+			<Dialog.Content className={cls.dialogContent} id="pwa-install-dialog">
+				<Dialog.Title className={cls.dialogTitle}>
 					{primaryIcon && (
 						<img
 							src={primaryIcon.src}
@@ -65,7 +66,7 @@ export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 								manifest?.name ??
 								'App Icon'
 							}
-							className="inline-block h-1em w-1em rounded"
+							className={cls.appIcon}
 						/>
 					)}
 					Install {manifest?.short_name ?? manifest?.name ?? 'App'}
@@ -92,7 +93,7 @@ export function PwaInstall({ manifestPath, ...rest }: PwaInstall) {
 							access and more features.
 						</Dialog.Description>
 						{manifest?.description && (
-							<P className="mb-sm">{manifest.description}</P>
+							<P className={cls.appDescription}>{manifest.description}</P>
 						)}
 						<ManifestImageGallery manifestPath={manifestPath} />
 						<Dialog.Actions>
@@ -176,7 +177,7 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 	}
 
 	return (
-		<Box overflow="auto-x" p="sm" gap className="h-240px">
+		<Box overflow="auto-x" p="sm" gap style={{ height: 240 }}>
 			{manifest.screenshots?.map((screenshot, index) => (
 				<Lightbox.Root key={screenshot.src}>
 					<Lightbox.Trigger
@@ -191,8 +192,8 @@ function ManifestImageGallery({ manifestPath }: { manifestPath?: string }) {
 						}
 					/>
 					<Lightbox.Portal>
-						<Lightbox.Overlay className="z-10000" />
-						<Lightbox.Content className="z-10001">
+						<Lightbox.Overlay style={{ zIndex: 10000 }} />
+						<Lightbox.Content style={{ zIndex: 10001 }}>
 							<Lightbox.Image
 								src={screenshot.src}
 								alt={screenshot.label || `Screenshot ${index + 1}`}

@@ -1,0 +1,189 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	@apply --mx-shadow;
+	/* --mx-shadow-shadow: inset 0 30px 60px 0px
+		--fn-fade(var(--m-color-main-ink), 20%); */
+	@apply --mx-bg(var(--m-color-neutral-ink));
+	@apply --mx-bg-fade(15%);
+	border-top: var(--m-lineWidth) solid var(--m-color-neutral);
+	transition: all var(--m-duration) var(--m-easing);
+	backdrop-filter: blur(4px);
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+	}
+}
+
+.content {
+	pointer-events: auto;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	overflow: clip;
+	transition: all var(--m-duration) var(--m-easing);
+	--shadow-dir: 1;
+	@apply --mx-shadow;
+	--mx-shadow-shadow: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-xl-y))
+		var(--m-shadow-xl-blur) var(--m-shadow-xl-spread) var(--m-shadow-xl-color);
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+	@apply --mx-border(var(--m-color-neutral-heavy));
+
+	left: 50%;
+	top: 50%;
+	max-height: 85vh;
+	max-width: 450px;
+	width: 90vw;
+	border-radius: var(--m-surface-radius);
+	transform: translate3d(-50%, -50%, 0);
+	will-change: transform, opacity;
+
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: translate3d(-50%, -45%, 0) scale(0.95);
+	}
+
+	&:not([data-disable-sheet='true']) {
+		@media (max-width: 600px) {
+			--shadow-dir: -1;
+			top: auto;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			max-width: unset;
+			height: min-content;
+			width: 100vw;
+			border-radius: var(--m-surface-radius) var(--m-surface-radius) 0 0;
+			border-bottom-width: 0;
+			transform: translate(0, 0);
+			padding-bottom: env(safe-area-inset-bottom);
+			padding-top: var(--m-spacing-lg);
+
+			&[data-starting-style],
+			&[data-ending-style] {
+				opacity: 0;
+				transform: translate3d(0, 100%, 0) scale(0.98);
+			}
+
+			&[data-width='lg'] {
+				max-width: 800px;
+			}
+			&[data-width='md'] {
+				max-width: 600px;
+			}
+			&[data-width='sm'] {
+				max-width: 300px;
+			}
+
+			&[data-keyboard-behavior='overlay'] {
+				bottom: calc(
+					var(--mock-virtual-keyboard-height, env(keyboard-inset-height, 0px)) +
+						var(--gesture-y, 0px)
+				);
+				max-height: calc(
+					95vh -
+						var(--mock-virtual-keyboard-height, env(keyboard-inset-height, 0px))
+				);
+			}
+			&[data-keyboard-behavior='displace'] {
+				bottom: calc(
+					var(--viewport-bottom-offset, 0px) + var(--gesture-y, 0px)
+				);
+				max-height: calc(0.85 * var(--viewport-height, 100vh));
+			}
+		}
+	}
+}
+
+.contentScrollArea {
+	width: 100%;
+	height: 100%;
+}
+
+.contentScrollAreaContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-md);
+	padding: var(--m-surface-padding);
+}
+
+.swipeHandle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%) scale(1);
+	width: 20%;
+	cursor: grab;
+	will-change: transform;
+	touch-action: none;
+	padding-block: var(--m-spacing-sm);
+	z-index: 1;
+
+	@media (min-width: 600px) {
+		display: none;
+	}
+}
+.swipeHandleBar {
+	height: 4px;
+	width: 100%;
+	@apply --mx-bg(var(--m-color-neutral));
+	border-radius: var(--m-radius-lg);
+}
+
+.close {
+	position: absolute;
+	right: var(--m-spacing-sm);
+	top: var(--m-spacing-sm);
+	z-index: 101;
+	display: flex;
+
+	&[data-show-on-mobile='false'] {
+		@media (max-width: 600px) {
+			display: none;
+		}
+	}
+}
+
+.title {
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	font-size: var(--m-text-primary-size);
+	font-weight: var(--m-text-primary-weight);
+	line-height: var(--m-text-primary-lineHeight);
+	margin-block-end: var(--m-spacing-md);
+	margin-block-start: 0;
+}
+
+.description {
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	font-size: var(--m-text-ambient-size);
+	line-height: var(--m-text-ambient-lineHeight);
+	margin: 0;
+	margin-block-end: var(--m-spacing-md);
+	margin-block-start: var(--m-spacing-sm);
+}
+
+.actions {
+	position: sticky;
+	bottom: var(--m-spacing-md);
+	z-index: 100;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: end;
+	align-self: end;
+	padding-bottom: 1px;
+	@apply --mx-shadow;
+	/* override blur in case user turned it off */
+	--mx-shadow-shadow: 0 calc(-1 * var(--m-shadow-md-y)) 16px
+		var(--m-shadow-md-spread) var(--m-color-neutral-paper);
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+	@apply --mx-bg-fade(50%);
+	margin-block-start: var(--m-spacing-md);
+	gap: var(--m-spacing-sm);
+	border-radius: var(--m-surface-radius);
+}

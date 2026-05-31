@@ -59,59 +59,6 @@ const preset = definePreset({
 		},
 	}),
 	modeSchema: {},
-	mixins: (create, $) => ({
-		arrow: create('arrow', {
-			definition: (css, { tokens }) => ({
-				// TODO: fix typing
-				[tokens.size.name as unknown as '']: css`18px`,
-				fill: css`
-					${[$.mixins.bg.ref, $.system.meta.scheme.trueLight]}
-				`,
-				stroke: css`
-					${[$.mixins.fg.ref, $.system.meta.scheme.trueHeavy]}
-				`,
-				width: css`
-					${tokens.size}
-				`,
-				height: css`calc(${tokens.size} / 2)`,
-				position: 'relative',
-				'z-index': 0,
-				transform:
-					'translate(0, 0) rotate(var(--angle, 0deg)) scale(var(--scale, 1))',
-				transition:
-					'opacity var(--m-duration) var(--m-easing), transform var(--m-duration) var(--m-easing)',
-
-				'&[data-side="top"]': {
-					'--angle': '0deg',
-					bottom: css`calc(-1 * ${tokens.size} / 2 + 1px)`,
-				},
-				'&[data-side="right"]': {
-					'--angle': '90deg',
-					left: css`calc(-1 * ${tokens.size} * 0.75)`,
-				},
-				'&[data-side="bottom"]': {
-					'--angle': '180deg',
-					top: css`calc(-1 * ${tokens.size} / 2)`,
-				},
-				'&[data-side="left"]': {
-					'--angle': '270deg',
-					left: css`calc(-1 * ${tokens.size} * 0.75)`,
-				},
-
-				'&[data-open]': {
-					opacity: 1,
-					'--scale': 1,
-				},
-				'&[data-closed]': {
-					opacity: 0,
-					'--scale': 0,
-				},
-			}),
-			contributeTokens: {
-				size: 'size',
-			},
-		}),
-	}),
 });
 
 preset.bundleMode('accent', {

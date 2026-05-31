@@ -1,0 +1,23 @@
+.dialogContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-xs);
+}
+
+.dialogTitle {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-md);
+}
+
+.appIcon {
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	border-radius: var(--m-radius);
+}
+
+.appDescription {
+	margin-bottom: var(--m-spacing-sm);
+}

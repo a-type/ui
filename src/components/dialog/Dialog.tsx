@@ -25,39 +25,15 @@ import { withClassName } from '../../hooks/withClassName.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
+import menuCls from '../primitives/menus.module.css';
 import { useConfig } from '../provider/Provider.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import { selectTriggerClassName } from '../select/index.js';
+import cls from './Dialog.module.css';
 
-const StyledOverlay = withClassName(
-	BaseDialog.Backdrop,
-	'layer-components:(fixed inset-0 shadow-inset transition bg-neutral-ink/15 shadow-[0_30px_60px_0px] shadow-main-ink/20 b-t-neutral b-t b-t-solid)',
-	'layer-components:backdrop-blur-sm',
-	'start-end:opacity-0',
-);
+const StyledOverlay = withClassName(BaseDialog.Backdrop, cls.overlay);
 
-const StyledContent = withClassName(
-	BaseDialog.Popup,
-	'layer-components:(pointer-events-auto fixed flex flex-col items-stretch overflow-hidden transition shadow-xl bg-surface-ambient b-neutral-heavy b)',
-	'layer-components:sm:shadow-reverse-off',
-	'transform-gpu',
-	'layer-components:(left-50% top-50% max-h-85vh max-w-450px w-90vw border-b-1 rd-surface translate-[-50%])',
-
-	'layer-components:start-end:(opacity-0 translate-x-[-50%] translate-y-[-45%] scale-95)',
-);
-const sheetClassNames = clsx(
-	'layer-variants:lt-sm:(left-0 right-0 top-auto h-min-content max-w-unset w-[100vw] b-b-0 rd-b-0 shadow-reverse pt-lg rd-tl-xl rd-tr-xl translate-0)',
-	'layer-variants:lt-sm:pb-[calc(env(safe-area-inset-bottom,0px))]',
-
-	'layer-variants:start-end:lt-sm:opacity-0 layer-variants:start-end:lt-sm:translate-y-full',
-);
-const sheetClassNameWithOverlayKeyboard = clsx(
-	'layer-variants:lt-sm:bottom-[calc(var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px))+var(--gesture-y,0px))]',
-	'layer-variants:lt-sm:max-h-[calc(95vh-var(--mock-virtual-keyboard-height,env(keyboard-inset-height,0px)))]',
-);
-const sheetClassNameWithDisplaceKeyboard = clsx(
-	'layer-variants:lt-sm:bottom-[calc(var(--viewport-bottom-offset,0px)+var(--gesture-y,0px))] layer-variants:lt-sm:max-h-[calc(0.85*var(--viewport-height,100vh))]',
-);
+const StyledContent = withClassName(BaseDialog.Popup, cls.content);
 
 function sheetCloseGestureLogic(
 	swipeY: number,
@@ -194,35 +170,18 @@ export const Content = function Content({
 				onTouchMove={onTouchMove}
 				onTouchEnd={onTouchEnd}
 				onTouchCancel={onTouchEnd}
-				className={clsx(
-					{
-						'layer-variants:md:max-w-[800px]': width === 'lg',
-						'layer-variants:max-w-[600px]': width === 'md',
-						'layer-variants:max-w-[300px]': width === 'sm',
-					},
-					!disableSheet && sheetClassNames,
-					!disableSheet &&
-						virtualKeyboardBehavior === 'overlay' &&
-						sheetClassNameWithOverlayKeyboard,
-					!disableSheet &&
-						virtualKeyboardBehavior === 'displace' &&
-						sheetClassNameWithDisplaceKeyboard,
-					outerClassName || className,
-				)}
+				data-disable-sheet={disableSheet ? 'true' : undefined}
+				data-keyboard-behavior={virtualKeyboardBehavior}
+				data-width={width}
+				className={clsx(outerClassName || className)}
 			>
 				{!disableDefaultClose && (
 					<DialogDefaultClose showOnMobile={disableSheet} />
 				)}
 				{!disableSheet && <DialogSwipeHandle />}
-				<ScrollArea
-					direction="vertical"
-					className="layer-components:(h-full w-full)"
-				>
+				<ScrollArea direction="vertical" className={cls.contentScrollArea}>
 					<ScrollArea.Content
-						className={clsx(
-							'layer-components:(flex flex-col p-md gap-md)',
-							innerClassName,
-						)}
+						className={clsx(cls.contentScrollAreaContent, innerClassName)}
 						style={{
 							minWidth: undefined,
 						}}
@@ -351,15 +310,8 @@ export function DialogSwipeHandle({
 	);
 	const finalRef = useMergedRef(ref, innerRef);
 	return (
-		<div
-			ref={finalRef}
-			{...props}
-			className={clsx(
-				'layer-components:(absolute left-50% top-0 w-20% cursor-grab py-2 rd-lg transform-gpu touch-none sm:hidden -translate-x-1/2)',
-				className,
-			)}
-		>
-			<div className="layer-components:(h-[4px] w-full bg-neutral rd-lg)" />
+		<div ref={finalRef} {...props} className={clsx(cls.swipeHandle, className)}>
+			<div className={cls.swipeHandleBar} />
 		</div>
 	);
 }
@@ -385,11 +337,8 @@ export const DialogDefaultClose = function DialogDefaultClose({
 }) {
 	return (
 		<DialogClose
-			className={clsx(
-				'absolute right-sm top-sm z-101',
-				showOnMobile ? 'flex' : 'hidden sm:flex',
-				className,
-			)}
+			className={clsx(cls.close, className)}
+			data-show-on-mobile={showOnMobile}
 			aria-label="Close dialog"
 			ref={ref}
 			{...props}
@@ -400,14 +349,11 @@ export const DialogDefaultClose = function DialogDefaultClose({
 	);
 };
 
-const StyledTitle = withClassName(
-	BaseDialog.Title,
-	'layer-components:(mb-4 mt-0 color-neutral-ink text-primary text-primary)',
-);
+const StyledTitle = withClassName(BaseDialog.Title, cls.title);
 
 const StyledDescription = withClassName(
 	BaseDialog.Description,
-	'layer-components:(mb-6 mt-3 leading-6 color-neutral-heavy text-secondary)',
+	cls.description,
 );
 
 // Exports
@@ -469,10 +415,7 @@ export const DialogClose = function DialogClose({
 
 export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
-export const DialogActions = withClassName(
-	'div',
-	'layer-components:([--global-shadow-spread:1] sticky bottom-md z-100 flex flex-wrap items-center self-end justify-end pb-1px shadow-md shadow-reverse bg-neutral-paper shadow-neutral-paper mt-md gap-sm rd-lg)',
-);
+export const DialogActions = withClassName('div', cls.actions);
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
 	children,
@@ -492,16 +435,9 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 	);
 };
 
-export const DialogSelectList = withClassName(
-	BaseRadioGroup,
-	'layer-components:(flex flex-col gap-2 p-2 overflow-y-auto)',
-);
+export const DialogSelectList = withClassName(BaseRadioGroup, menuCls.itemList);
 
-export const DialogSelectItemRoot = withClassName(
-	BaseRadio.Root,
-	'layer-components:(w-full flex cursor-pointer items-center gap-3 border-1 px-4 py-3 text-left transition-all color-neutral-ink bg-neutral-light border-bg rd-lg border-solid border-none leading-normal)',
-	'layer-components:[&[data-state=checked]]:(color-main-ink bg-main-wash b-fg)',
-);
+export const DialogSelectItemRoot = withClassName(BaseRadio.Root, menuCls.item);
 
 export const DialogSelectItem = function DialogSelectItem({
 	children,
@@ -511,10 +447,8 @@ export const DialogSelectItem = function DialogSelectItem({
 }) {
 	return (
 		<DialogSelectItemRoot {...props}>
-			<span className="min-h-18px flex-1 flex-row items-center gap-md">
-				{children}
-			</span>
-			<BaseRadio.Indicator className="flex-0-0-auto">
+			<span className={menuCls.itemText}>{children}</span>
+			<BaseRadio.Indicator className={menuCls.itemIndicator}>
 				<Icon name="check" />
 			</BaseRadio.Indicator>
 		</DialogSelectItemRoot>
