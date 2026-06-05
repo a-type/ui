@@ -30,7 +30,7 @@ export const Default: Story = {
 				onValueChange={setValue}
 				editing={editable}
 				onEditingChange={setEditable}
-				className="m-auto"
+				style={{ margin: 'auto' }}
 			/>
 		);
 	},
@@ -47,7 +47,8 @@ export const Title: Story = {
 				onValueChange={setValue}
 				editing={editable}
 				onEditingChange={setEditable}
-				className="m-auto text-primary"
+				className="text-primary"
+				style={{ margin: 'auto' }}
 			/>
 		);
 	},

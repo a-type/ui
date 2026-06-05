@@ -86,7 +86,7 @@ export const Default: Story = {
 			>
 				<ExampleAutocomplete.Input
 					icon={<Icon name="food" />}
-					className="w-[200px]"
+					style={{ width: 200 }}
 				/>
 				<ExampleAutocomplete.Content arrow={arrow}>
 					<ExampleAutocomplete.List>
@@ -164,7 +164,10 @@ export const Grouped: Story = {
 						No results found.
 					</GroupedAutocomplete.Empty>
 					<GroupedAutocomplete.Separator />
-					<div className="color-neutral-heavy p-sm text-ambient">
+					<div
+						className="color-neutral-heavy text-ambient"
+						style={{ padding: 'var(--m-spacing-sm)' }}
+					>
 						Select your favorite fruit or berry.
 					</div>
 				</GroupedAutocomplete.Content>
@@ -188,10 +191,14 @@ export const NotPopover: Story = {
 				<Box border p surface="white" col>
 					<GroupedAutocomplete.Input
 						disableCaret
-						className="w-full"
+						style={{ width: '100%' }}
 						disableClear
 					>
-						<Button size="small" emphasis="primary" className="aspect-1 h-full">
+						<Button
+							size="small"
+							emphasis="primary"
+							style={{ aspectRatio: '1', height: '100%' }}
+						>
 							<Icon name="plus" />
 						</Button>
 					</GroupedAutocomplete.Input>

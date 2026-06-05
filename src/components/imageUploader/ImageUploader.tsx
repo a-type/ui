@@ -143,6 +143,7 @@ export function ImageUploaderRoot({
 				onDrop={onDrop}
 				onDragStart={onDragStart}
 				onDragEnd={onDragEnd}
+				{...rest}
 			>
 				<input
 					type="file"

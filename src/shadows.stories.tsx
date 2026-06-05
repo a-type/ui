@@ -1,16 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import clsx from 'clsx';
 import { Box } from './components/index.js';
 
 const meta = {
 	title: 'System/Shadows',
-	argTypes: {
-		opacity: {
-			control: { type: 'range', min: 0, max: 1, step: 0.1 },
-			defaultValue: 0.1,
-			description: 'Opacity modifier',
-		},
-	},
 	args: {
 		opacity: 0.1,
 	},
@@ -23,28 +15,15 @@ export default meta;
 
 type Story = StoryObj<Meta>;
 
-const opacityClasses = [
-	'shadow-op-0',
-	'shadow-op-10',
-	'shadow-op-20',
-	'shadow-op-30',
-	'shadow-op-40',
-	'shadow-op-50',
-	'shadow-op-60',
-	'shadow-op-70',
-	'shadow-op-80',
-	'shadow-op-90',
-	'shadow-op-100',
-];
-
 export const Default: Story = {
 	render(args) {
 		return (
 			<div
-				className={clsx(
-					'grid grid-cols-4 gap-xl',
-					opacityClasses[args.opacity * 10],
-				)}
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(4, 1fr)',
+					gap: 'var(--m-spacing-xl)',
+				}}
 			>
 				<Box surface border p elevated="sm">
 					Small Shadow

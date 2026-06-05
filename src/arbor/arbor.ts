@@ -63,18 +63,18 @@ const preset = definePreset({
 
 preset.bundleMode('accent', {
 	color: {
-		main: preset.$.primitives.color.leek,
+		main: preset.$.mode.primitive.color.leek,
 	},
 });
 preset.bundleMode('success', {
 	color: {
-		main: preset.$.primitives.color.success,
+		main: preset.$.mode.primitive.color.success,
 	},
 });
 
 preset.bundleMode('attention', {
 	color: {
-		main: preset.$.primitives.color.attention,
+		main: preset.$.mode.primitive.color.attention,
 	},
 });
 preset.bundleMode('neutral', {
@@ -84,53 +84,64 @@ preset.bundleMode('neutral', {
 });
 preset.bundleMode('lemon', {
 	color: {
-		main: preset.$.primitives.color.lemon,
+		main: preset.$.mode.primitive.color.lemon,
 	},
 });
 preset.bundleMode('leek', {
 	color: {
-		main: preset.$.primitives.color.leek,
+		main: preset.$.mode.primitive.color.leek,
 	},
 });
 preset.bundleMode('tomato', {
 	color: {
-		main: preset.$.primitives.color.tomato,
+		main: preset.$.mode.primitive.color.tomato,
 	},
 });
 preset.bundleMode('eggplant', {
 	color: {
-		main: preset.$.primitives.color.eggplant,
+		main: preset.$.mode.primitive.color.eggplant,
 	},
 });
 preset.bundleMode('blueberry', {
 	color: {
-		main: preset.$.primitives.color.blueberry,
+		main: preset.$.mode.primitive.color.blueberry,
+	},
+});
+preset.bundleMode('user', {
+	color: {
+		main: preset.$.mode.primitive.color.user,
 	},
 });
 
 // density and size
 preset.bundleMode('dense', {
-	density: 1.25,
+	scalar: {
+		density: 1.25,
+	},
 });
 preset.bundleMode('denser', {
-	density: 1.5,
+	scalar: {
+		density: 1.5,
+	},
 });
 preset.bundleMode('density-reset', {
-	density: 1,
+	scalar: {
+		density: 1,
+	},
 });
 
 preset.bundleMode('heading', {
 	text: {
-		primary: preset.$.primitives.typography['4xl'],
-		secondary: preset.$.primitives.typography['3xl'],
-		ambient: preset.$.primitives.typography['xl'],
+		primary: preset.$.mode.primitive.typography['4xl'],
+		secondary: preset.$.mode.primitive.typography['3xl'],
+		ambient: preset.$.mode.primitive.typography['xl'],
 	},
 });
 preset.bundleMode('hero', {
 	text: {
-		primary: preset.$.primitives.typography['6xl'],
-		secondary: preset.$.primitives.typography['5xl'],
-		ambient: preset.$.primitives.typography['4xl'],
+		primary: preset.$.mode.primitive.typography['6xl'],
+		secondary: preset.$.mode.primitive.typography['5xl'],
+		ambient: preset.$.mode.primitive.typography['4xl'],
 	},
 });
 
@@ -151,4 +162,4 @@ preset.bundleMode('contrast', {
 
 export default preset;
 
-export type ColorRangeName = keyof typeof preset.$.primitives.color;
+export type ColorRangeName = keyof typeof preset.$.mode.primitive.color;

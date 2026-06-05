@@ -68,7 +68,7 @@ function TextAreaInput({
 	);
 }
 
-const TextAreaBorder = withClassName(Input.Border);
+const TextAreaBorder = withClassName(Input.Border, cls.border);
 
 const TextAreaDefault = function TextArea({
 	className,

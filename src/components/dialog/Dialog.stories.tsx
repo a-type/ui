@@ -32,9 +32,9 @@ type Story = StoryObj<typeof Dialog>;
 
 function DummyContent() {
 	return (
-		<div className="col">
+		<div style={{ display: 'flex', flexDirection: 'column' }}>
 			<H1>Some content</H1>
-			<div className="max-h-20vh overflow-y-auto">
+			<div style={{ maxHeight: '20vh', overflowY: 'auto' }}>
 				<P>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
 					porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget
@@ -127,7 +127,7 @@ export const Positioned: Story = {
 			<ParticleLayer noPortal>
 				<DialogTrigger render={<Button />}>Open</DialogTrigger>
 				<DummyContent />
-				<DialogContent className="bottom-0px top-auto">
+				<DialogContent style={{ bottom: 0, top: 'auto' }}>
 					<DialogTitle>Hello world</DialogTitle>
 					<DialogActions>
 						<DialogClose />
@@ -169,7 +169,18 @@ export const VirtualKeyboard: Story = {
 						</DialogActions>
 					</DialogContent>
 				</Dialog>
-				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-neutral-ink" />
+				<div
+					className="bg-neutral-ink"
+					style={{
+						position: 'fixed',
+						bottom: 0,
+						left: 0,
+						right: 0,
+						height: 'var(--mock-virtual-keyboard-height,0)',
+						width: '100%',
+						transition: 'height var(--m-duration) var(--m-easing)',
+					}}
+				/>
 			</Provider>
 		);
 	},

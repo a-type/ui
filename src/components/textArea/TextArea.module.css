@@ -8,3 +8,7 @@
 		resize: none;
 	}
 }
+
+.border {
+	padding-block-end: var(--m-spacing-sm);
+}

@@ -36,12 +36,12 @@ export function ActionButton({
 	}
 
 	return (
-		<CollapsibleRoot open={!visible ? false : render}>
-			<CollapsibleContent data-horizontal>
+		<CollapsibleRoot className={cls.root} open={!visible ? false : render}>
+			<CollapsibleContent data-horizontal className={cls.collapse}>
 				<Button
 					size="small"
 					disableIconMode
-					className={classNames(cls.root, className)}
+					className={classNames(cls.button, className)}
 					{...rest}
 				>
 					{children}

@@ -21,7 +21,14 @@ export const Default: Story = {
 				<Marquee.Item>
 					<img src="https://resources.biscuits.club/images/pashka.jpg" />
 				</Marquee.Item>
-				<Marquee.Item className="bg-primary-wash flex items-center justify-center color-main-heavy text-primary">
+				<Marquee.Item
+					className="bg-primary-wash color-main-heavy text-primary"
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
 					Hello, world
 				</Marquee.Item>
 				<Marquee.Item

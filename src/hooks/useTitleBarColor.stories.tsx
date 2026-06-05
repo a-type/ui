@@ -19,7 +19,12 @@ export const Default: Story = {
 	render() {
 		return (
 			<Provider>
-				<Box col border surface className="aspect-[9/16] overflow-hidden">
+				<Box
+					col
+					border
+					surface
+					style={{ aspectRatio: '9/16', overflow: 'hidden' }}
+				>
 					<MockTitleBar />
 					<Box p="md">
 						<p>

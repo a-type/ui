@@ -50,7 +50,7 @@ export const Sides: Story = {
 			justify="center"
 			full
 			p="xl"
-			className="mt-200px"
+			style={{ marginTop: 200 }}
 		>
 			<DropdownMenu open={args.open}>
 				<DropdownMenu.Trigger render={<Button />}>Top</DropdownMenu.Trigger>

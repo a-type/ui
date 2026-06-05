@@ -1,5 +1,4 @@
 #storybook-root {
-	height: 100%;
 	isolation: isolate;
 	display: flex;
 	flex-direction: column;

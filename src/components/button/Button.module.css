@@ -17,9 +17,7 @@
 	font-size: var(--m-text-secondary-size);
 	line-height: 1;
 	font-family: inherit;
-	font-weight: 400;
-
-	@apply --mx-fg(contrast-color(var(--mx-bg-contrast, var(--mx-bg-ref))));
+	font-weight: 500;
 
 	@apply --mx-border(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth-md);
@@ -32,6 +30,7 @@
 
 	&[data-emphasis='primary'] {
 		@apply --mx-bg(var(--m-action-primary-bg));
+		@apply --mx-fg(var(--m-action-primary-fg));
 		&:hover {
 			@apply --mx-bg-lighten(2);
 		}
@@ -42,9 +41,11 @@
 	&[data-emphasis='light'] {
 		/* A variant of primary color, but a bit lighter */
 		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-fg(var(--m-color-main-ink));
 	}
 	&[data-emphasis='default'] {
 		@apply --mx-bg(var(--m-action-secondary-bg));
+		@apply --mx-fg(var(--m-action-secondary-fg));
 	}
 	&[data-emphasis='ghost'] {
 		@apply --mx-border(var(--m-action-ambient-border));

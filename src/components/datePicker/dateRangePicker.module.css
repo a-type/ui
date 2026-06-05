@@ -1,0 +1,38 @@
+.root {
+	display: flex;
+	justify-content: center;
+}
+
+.rangeLayout {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'prevMonth leftMonth nextMonth'
+		'leftGrid leftGrid leftGrid';
+	grid-template-rows: auto 1fr;
+	gap: var(--m-spacing-sm);
+
+	@media (min-width: 640px) {
+		grid-template-columns: auto 1fr 1fr auto;
+		grid-template-areas:
+			'prevMonth leftMonth rightMonth nextMonth'
+			'leftGrid leftGrid rightGrid rightGrid';
+	}
+}
+
+/* Elements only visible at sm+ breakpoint */
+.smOnly {
+	display: none;
+
+	@media (min-width: 640px) {
+		display: block;
+	}
+}
+
+.smOnlyGrid {
+	display: none;
+
+	@media (min-width: 640px) {
+		display: grid;
+	}
+}

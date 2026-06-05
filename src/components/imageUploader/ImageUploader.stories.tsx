@@ -13,7 +13,7 @@ const meta = {
 		controls: { expanded: true },
 	},
 	args: {
-		className: 'w-64 h-64',
+		style: { width: 256, height: 256 },
 	},
 } satisfies Meta<typeof ImageUploader>;
 
@@ -34,7 +34,7 @@ function ImageUploaderDemo() {
 				file ? setValue(URL.createObjectURL(file)) : setValue(null)
 			}
 			value={value}
-			className="h-64 w-64"
+			style={{ width: 256, height: 256 }}
 		/>
 	);
 }

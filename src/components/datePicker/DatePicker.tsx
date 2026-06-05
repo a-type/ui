@@ -10,6 +10,7 @@ import {
 	MonthLabel,
 	MonthRow,
 } from './Calendar.js';
+import styles from './datePicker.module.css';
 
 function DatePickerMonthControls() {
 	const { setDisplayInfo, month, year } = useCalendarContext();
@@ -62,13 +63,7 @@ function DatePickerRoot({
 	}));
 
 	return (
-		<div
-			className={clsx(
-				'layer-components:(w-[calc(var(--day-size,32px)*7)] flex flex-col items-center justify-center)',
-				className,
-			)}
-			{...rest}
-		>
+		<div className={clsx(styles.root, className)} {...rest}>
 			<Calendar
 				displayMonth={month}
 				displayYear={year}

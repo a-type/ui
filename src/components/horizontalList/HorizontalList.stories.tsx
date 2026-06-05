@@ -37,7 +37,14 @@ const meta = {
 				<Button size="small">Twenty four</Button>
 				<Button
 					emphasis="primary"
-					className="sticky bottom-2 right-2 ml-auto flex-shrink-0 shadow-sm"
+					style={{
+						position: 'sticky',
+						bottom: 8,
+						right: 8,
+						marginLeft: 'auto',
+						flexShrink: 0,
+						boxShadow: 'var(--m-shadow-sm)',
+					}}
 				>
 					<Icon name="plus" />
 				</Button>

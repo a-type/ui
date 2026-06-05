@@ -1,7 +1,6 @@
 import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
 import clsx from 'clsx';
 import { CSSProperties, ReactNode, useCallback, useState } from 'react';
-import { withClassName } from '../../hooks.js';
 import { Icon } from '../icon/Icon.js';
 import {
 	CalendarDay,
@@ -10,13 +9,7 @@ import {
 	MonthButton,
 	MonthLabel,
 } from './Calendar.js';
-
-const RangeLayout = withClassName(
-	'div',
-	'layer-components:(grid grid-cols-[auto_1fr_auto] grid-areas-[prevMonth_leftMonth_nextMonth]-[leftGrid_leftGrid_leftGrid])',
-	'layer-components:(grid-rows-[auto_1fr] gap-2)',
-	'sm:grid-cols-[auto_1fr_1fr_auto] layer-components:sm:grid-areas-[prevMonth_leftMonth_rightMonth_nextMonth]-[leftGrid_leftGrid_rightGrid_rightGrid]',
-);
+import styles from './dateRangePicker.module.css';
 
 function DateRangePickerMonthControls() {
 	const { setDisplayInfo, month, year } = useCalendarContext();
@@ -33,7 +26,7 @@ function DateRangePickerMonthControls() {
 		<>
 			<MonthButton
 				emphasis="ghost"
-				className="[grid-area:prevMonth]"
+				style={{ gridArea: 'prevMonth' }}
 				onClick={() =>
 					setDisplayInfo({
 						month: month - 1,
@@ -43,13 +36,13 @@ function DateRangePickerMonthControls() {
 			>
 				<Icon name="arrowLeft" />
 			</MonthButton>
-			<MonthLabel className="[grid-area:leftMonth]">{monthLabel}</MonthLabel>
-			<MonthLabel className="[grid-area:rightMonth] !hidden !sm:block">
+			<MonthLabel style={{ gridArea: 'leftMonth' }}>{monthLabel}</MonthLabel>
+			<MonthLabel style={{ gridArea: 'rightMonth' }} className={styles.smOnly}>
 				{nextMonthLabel}
 			</MonthLabel>
 			<MonthButton
 				emphasis="ghost"
-				className="[grid-area:nextMonth]"
+				style={{ gridArea: 'nextMonth' }}
 				onClick={() =>
 					setDisplayInfo({
 						month: month + 1,
@@ -79,21 +72,10 @@ function DateRangePickerRoot({
 
 	const onDisplayChange = useCallback(
 		({ month: newMonth, year: newYear }: { month: number; year: number }) => {
-			/**
-			 * Important UX consideration:
-			 *
-			 * since we are displaying 2 months at once, we don't
-			 * always want to change our view if the user's cursor
-			 * date moves from one month to another. Specifically,
-			 * if they move from the first visible month to the
-			 * second visible month, we don't need to change the view,
-			 * since they are still within the visible range.
-			 * So, we write logic to ignore that case!
-			 */
+			// Ignore movement from the first to the second visible month
 			if (newMonth === month + 1 && newYear === year) {
-				return; // ignore movement from the first to the second frame
+				return;
 			}
-
 			setDisplay({
 				month: newMonth,
 				year: newYear,
@@ -109,10 +91,10 @@ function DateRangePickerRoot({
 			rangeValue={value}
 			onRangeChange={(range) => onChange(range)}
 			onDisplayChange={onDisplayChange}
-			className={clsx('layer-components:(flex justify-center)', className)}
+			className={clsx(styles.root, className)}
 			{...rest}
 		>
-			<RangeLayout>{children}</RangeLayout>
+			<div className={styles.rangeLayout}>{children}</div>
 		</Calendar>
 	);
 }
@@ -128,11 +110,12 @@ function DateRangePickerBase(props: DateRangePickerProps) {
 	return (
 		<DateRangePickerRoot {...props}>
 			<DateRangePickerMonthControls />
-			<CalendarGrid className="[grid-area:leftGrid]">
+			<CalendarGrid style={{ gridArea: 'leftGrid' }}>
 				{(value) => <CalendarDay value={value} key={value.key} />}
 			</CalendarGrid>
 			<CalendarGrid
-				className="[grid-area:rightGrid] !hidden !sm:grid"
+				style={{ gridArea: 'rightGrid' }}
+				className={styles.smOnlyGrid}
 				monthOffset={1}
 			>
 				{(value) => <CalendarDay value={value} key={value.key} />}
@@ -143,7 +126,9 @@ function DateRangePickerBase(props: DateRangePickerProps) {
 
 export const DateRangePicker = Object.assign(DateRangePickerBase, {
 	Root: DateRangePickerRoot,
-	RangeLayout,
+	RangeLayout: ({ children }: { children?: ReactNode }) => (
+		<div className={styles.rangeLayout}>{children}</div>
+	),
 	DayLabels,
 	CalendarDay,
 	Calendar,

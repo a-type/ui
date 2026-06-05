@@ -22,8 +22,8 @@
 	position: absolute;
 	bottom: var(--m-spacing-md);
 	left: 50%;
-	width: calc(48px / var(--m-density));
-	height: calc(48px / var(--m-density));
+	width: calc(48px / var(--m-scalar-density));
+	height: calc(48px / var(--m-scalar-density));
 	cursor: pointer;
 	transform: translateX(-50%);
 	opacity: 80%;

@@ -8,11 +8,10 @@
 	@apply --mx-shadow;
 	--mx-shadow-shadow: var(--m-shadow-sm);
 
-	@apply --mx-bg(var(--m-surface-ambient-bg));
+	@apply --mx-bg(--fn-darken-color(--fn-saturate-color(var(--m-surface-ambient-bg), 2), 0.5));
 	@apply --mx-fg(var(--m-surface-ambient-fg));
 	@apply --mx-border(var(--m-surface-ambient-border));
-	border-width: var(--m-lineWidth-md);
-	border-style: solid;
+	@apply --mx-border-fade(50%);
 	border-radius: var(--m-surface-radius);
 
 	font-size: var(--m-text-secondary-size);
@@ -156,7 +155,7 @@
 	@apply --mx-border(var(--m-surface-ambient-border));
 	border-width: var(--m-lineWidth-sm);
 	border-style: solid;
-	border-radius: var(--m-surface-radius);
+	border-radius: var(--m-action-radius);
 }
 
 .menu {

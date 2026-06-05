@@ -27,13 +27,28 @@ export const Default: Story = {
 		return (
 			<PageRoot id="root">
 				<PageContent>
-					<div className="h-screen flex flex-col">
-						<div className="flex flex-grow flex-col items-center justify-center p-lg">
+					<div
+						style={{
+							height: '100vh',
+							display: 'flex',
+							flexDirection: 'column',
+						}}
+					>
+						<div
+							className="flex-grow"
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
+								padding: 'var(--m-spacing-lg)',
+							}}
+						>
 							Focus the inputs below to see how the virtual keyboard behavior
 							works.
 						</div>
-						<Input className="w-full" />
-						<TextArea className="w-full" />
+						<Input style={{ width: '100%' }} />
+						<TextArea style={{ width: '100%' }} />
 					</div>
 					<PageNowPlaying keepAboveKeyboard>
 						<Input placeholder="now playing" />

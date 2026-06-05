@@ -100,13 +100,13 @@ export const Default: Story = {
 			>
 				<ExampleCombobox.Input
 					icon={<Icon name="food" />}
-					className="w-[200px]"
+					style={{ width: 200 }}
 				>
 					{creatable && (
 						<ExampleCombobox.CreateButton
 							size="small"
 							emphasis="primary"
-							className="aspect-1 h-full"
+							style={{ aspectRatio: '1', height: '100%' }}
 						>
 							<Icon name="plus" />
 						</ExampleCombobox.CreateButton>

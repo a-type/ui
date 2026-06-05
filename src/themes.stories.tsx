@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import clsx from 'clsx';
 import { useState } from 'react';
 import { $userColorHue, $userColorSaturation } from './arbor/props.js';
 import { ActionBar, ActionButton } from './components/actions/index.js';
@@ -14,10 +13,9 @@ import {
 	DateRangePicker,
 	Dialog,
 	DropdownMenu,
-	H1,
 	H2,
 	H3,
-	H4,
+	Heading,
 	HorizontalList,
 	ImageUploader,
 	NavBarItem,
@@ -62,7 +60,7 @@ export function DemoUI({ className }: { className?: string }) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot data-testid="demo" className={clsx('flex-1', className)}>
+		<PageRoot data-testid="demo" className={className}>
 			<PageContent>
 				<div className={cls.grid}>
 					<Box gap wrap p>
@@ -106,10 +104,9 @@ export function DemoUI({ className }: { className?: string }) {
 						style={{ maxHeight: 200 }}
 						overflow="auto-y"
 					>
-						<H1>Heading 1</H1>
-						<H2>Heading 2</H2>
-						<H3>Heading 3</H3>
-						<H4>Heading 4</H4>
+						<Heading emphasis="primary">Heading 1</Heading>
+						<Heading emphasis="secondary">Heading 2</Heading>
+						<Heading emphasis="ambient">Heading 3</Heading>
 						<P>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
 							eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -184,7 +181,10 @@ export function DemoUI({ className }: { className?: string }) {
 						</ContextMenu.Content>
 					</ContextMenu>
 					<DropdownMenu>
-						<DropdownMenu.Trigger render={<Button />} className="m-auto">
+						<DropdownMenu.Trigger
+							render={<Button />}
+							style={{ margin: 'auto' }}
+						>
 							Dropdown
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
@@ -238,25 +238,24 @@ export function DemoUI({ className }: { className?: string }) {
 						}}
 						onChange={() => {}}
 					/>
-					<Progress value={50} className="m-auto" />
+					<Progress value={50} style={{ margin: 'auto' }} />
 					<Slider defaultValue={50} min={0} max={100} />
-					<Box surface color="primary" p gap d="col">
-						<H1>Primary surface</H1>
-						<H2>Primary surface</H2>
-						<H3>Primary surface</H3>
+					<Box surface="primary" p gap d="col">
+						<Heading emphasis="primary">Primary surface</Heading>
+						<Heading emphasis="secondary">Primary surface</Heading>
+						<Heading emphasis="ambient">Primary surface</Heading>
 						<div>Primary surface</div>
 						<Button emphasis="ghost">Ghost</Button>
 					</Box>
 					<Box
-						surface
+						surface="primary"
 						color="accent"
 						p
 						d="col"
 						style={{ maxHeight: 200 }}
 						overflow="auto-y"
 					>
-						<H2>Accent surface</H2>
-						<H3>Accent surface</H3>
+						<Heading emphasis="primary">Accent surface</Heading>
 						<P>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
 							eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -273,8 +272,11 @@ export function DemoUI({ className }: { className?: string }) {
 						<TextSkeleton maxLength={10} />
 						Accent surface
 					</Box>
-					<Box surface p d="col">
-						Default surface
+					<Box surface="secondary" p d="col">
+						Secondary surface
+					</Box>
+					<Box surface="ambient" p d="col">
+						Ambient surface
 					</Box>
 					<Box surface color="attention" p d="col">
 						<H2>Attention surface</H2>
@@ -293,6 +295,11 @@ export function DemoUI({ className }: { className?: string }) {
 							<Button size="small">Four</Button>
 							<Button size="small">Five</Button>
 							<Button size="small">Six</Button>
+							<Button size="small">Seven</Button>
+							<Button size="small">Eight</Button>
+							<Button size="small">Nine</Button>
+							<Button size="small">Ten</Button>
+							<Button size="small">Eleven</Button>
 						</HorizontalList>
 					</Box>
 					<ImageUploader
@@ -317,13 +324,13 @@ export function DemoUI({ className }: { className?: string }) {
 						<NavBarItemText>Item 2</NavBarItemText>
 						<NavBarItemPip />
 					</NavBarItem>
-					<NavBarItem color="gray">
+					<NavBarItem color="neutral">
 						<NavBarItemIconWrapper>
 							<NavBarItemIcon render={<Icon name="book" />} />
 						</NavBarItemIconWrapper>
 						<NavBarItemText>Neutral</NavBarItemText>
 					</NavBarItem>
-					<NavBarItem color="gray" active>
+					<NavBarItem color="neutral" active>
 						<NavBarItemIconWrapper>
 							<NavBarItemIcon render={<Icon name="book" />} />
 						</NavBarItemIconWrapper>
@@ -340,10 +347,10 @@ export const Nesting: Story = {
 	render() {
 		return (
 			<Box d="col" p gap>
-				<Box d="row" gap surface color="primary">
+				<Box d="row" gap surface="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
-				<DemoUI className="@mode-eggplant override-dark flex-1" />
+				<DemoUI className="@mode-eggplant override-dark" style={{ flex: 1 }} />
 			</Box>
 		);
 	},
@@ -362,9 +369,9 @@ export const Custom: Story = {
 			});
 		};
 		return (
-			<Box d="col" gap items="start" style={theme as any}>
+			<Box d="col" full gap items="stretch" style={theme as any}>
 				<Button onClick={reroll}>Reroll</Button>
-				<DemoUI className="theme" />
+				<DemoUI className="@mode-user" />
 			</Box>
 		);
 	},

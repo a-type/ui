@@ -58,7 +58,6 @@ export const Color: Story = {
 export const Customized: Story = {
 	render: (args) => (
 		<Tooltip
-			className="bg-attention"
 			open
 			{...args}
 			content={

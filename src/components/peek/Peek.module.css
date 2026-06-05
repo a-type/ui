@@ -36,7 +36,7 @@
 		}
 		&[data-state='open'] {
 			animation-name: peekOpen;
-			animation-duration: var(--m-duration-slow);
+			animation-duration: var(--m-duration-long);
 		}
 	}
 }

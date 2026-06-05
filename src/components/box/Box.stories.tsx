@@ -112,12 +112,12 @@ function SurfaceContent({ name }: { name: string }) {
 				<Checkbox checked />
 				<Switch checked />
 			</Box>
-			<Progress value={50} className="w-full" />
+			<Progress value={50} style={{ width: '100%' }} />
 			<ToggleGroup defaultValue={['one']}>
 				<ToggleGroup.Item value="one">One</ToggleGroup.Item>
 				<ToggleGroup.Item value="two">Two</ToggleGroup.Item>
 			</ToggleGroup>
-			<Slider defaultValue={[30]} className="w-full" />
+			<Slider defaultValue={[30]} style={{ width: '100%' }} />
 		</>
 	);
 }
@@ -125,7 +125,12 @@ export const Surfaces: Story = {
 	render(args) {
 		return (
 			<div
-				className="grid grid-cols-2 bg-main-wash gap-lg md:grid-cols-3"
+				className="bg-main-wash"
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(2, 1fr)',
+					gap: 'var(--m-spacing-lg)',
+				}}
 				{...args}
 			>
 				<Box {...args} surface="ambient" p="lg" col gap>

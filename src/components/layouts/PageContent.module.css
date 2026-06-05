@@ -3,7 +3,6 @@
 	flex-direction: column;
 	align-items: stretch;
 	justify-content: start;
-	flex: 1 0 auto;
 	width: 100%;
 	anchor-name: --page-content;
 

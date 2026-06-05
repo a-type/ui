@@ -185,8 +185,15 @@ export const ToggledIcon: Story = {
 export const Alignment: Story = {
 	render(args) {
 		return (
-			<div className="flex flex-col">
-				<div className="flex flex-row b b-solid">
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						borderStyle: 'solid',
+						borderWidth: 1,
+					}}
+				>
 					<Button {...args} size="small">
 						Button
 					</Button>
@@ -194,7 +201,14 @@ export const Alignment: Story = {
 						<Icon name="placeholder" />
 					</Button>
 				</div>
-				<div className="flex flex-row b b-solid">
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						borderStyle: 'solid',
+						borderWidth: 1,
+					}}
+				>
 					<Button {...args}>Button</Button>
 					<Button {...args}>
 						<Icon name="placeholder" />

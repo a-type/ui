@@ -45,7 +45,7 @@
 	transition:
 		transform var(--m-duration) var(--m-easing),
 		opacity var(--m-duration) var(--m-easing),
-		height var(--m-duration-fast) var(--m-easing);
+		height var(--m-duration-short) var(--m-easing);
 
 	&::after {
 		position: absolute;

@@ -137,8 +137,23 @@
 		&[data-overflow='scroll'] {
 			overflow: scroll;
 		}
+		&[data-overflow='auto'] {
+			overflow: auto;
+		}
+		&[data-overflow='clip'] {
+			overflow: clip;
+		}
+		&[data-overflow='auto-y'] {
+			overflow-y: auto;
+			overflow-x: clip;
+		}
+		&[data-overflow='auto-x'] {
+			overflow-x: auto;
+			overflow-y: clip;
+		}
 
-		&[data-surface='ambient'] {
+		&[data-surface='ambient'],
+		&[data-surface='true'] {
 			@apply --mx-bg(var(--m-surface-ambient-bg));
 			@apply --mx-fg(var(--m-surface-ambient-fg));
 			&[data-border='true'] {
@@ -146,8 +161,7 @@
 				border-width: var(--m-lineWidth-sm);
 			}
 		}
-		&[data-surface='secondary'],
-		&[data-surface='true'] {
+		&[data-surface='secondary'] {
 			@apply --mx-bg(var(--m-surface-secondary-bg));
 			@apply --mx-fg(var(--m-surface-secondary-fg));
 			&[data-border='true'] {

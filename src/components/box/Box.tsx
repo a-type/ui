@@ -33,7 +33,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	surface?: boolean | 'ambient' | 'secondary' | 'primary';
 	border?: boolean;
 	full?: boolean | 'width' | 'height';
-	overflow?: 'hidden' | 'auto' | 'auto-x' | 'auto-y';
+	overflow?: 'hidden' | 'clip' | 'auto' | 'auto-x' | 'auto-y';
 	grow?: boolean;
 	elevated?: ShadowValue;
 	rounded?: 'sm' | 'md' | 'lg' | 'xl' | boolean;

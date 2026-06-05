@@ -15,7 +15,7 @@
 	@apply --mx-bg(var(--m-color-main));
 
 	&[data-complete] {
-		@apply --mx-bg(var(--p-color-success));
+		@apply --mx-bg(var(--m-primitive-color-success));
 	}
 }
 

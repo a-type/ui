@@ -73,7 +73,7 @@ const ActionContent = () => (
 				)}
 			</GroupedAutocomplete.List>
 			<GroupedAutocomplete.Empty>No results found.</GroupedAutocomplete.Empty>
-			<GroupedAutocomplete.Input disableCaret className="w-full" />
+			<GroupedAutocomplete.Input disableCaret style={{ width: '100%' }} />
 		</Box>
 	</GroupedAutocomplete>
 );
@@ -84,17 +84,18 @@ export const Default: Story = {
 			<PageRoot>
 				<PageContent>
 					<PageNowPlaying
-						className={clsx('flex flex-col', {
+						className={clsx({
 							'items-center': args.align === 'center',
 							'items-start': args.align === 'start',
 							'items-end': args.align === 'end',
 						})}
+						style={{ display: 'flex', flexDirection: 'column' }}
 					>
 						<QuickAction {...args}>
 							<QuickAction.Trigger>
 								<Icon name="plus" />
 							</QuickAction.Trigger>
-							<QuickAction.Content className="w-95vw" align={args.align}>
+							<QuickAction.Content style={{ width: '95vw' }} align={args.align}>
 								<ActionContent />
 							</QuickAction.Content>
 						</QuickAction>

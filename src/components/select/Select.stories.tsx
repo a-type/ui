@@ -22,7 +22,7 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {
 	render(args) {
 		return (
-			<Box full layout="center center" className="min-h-200px">
+			<Box full layout="center center" style={{ minHeight: 200 }}>
 				<Select {...args}>
 					<SelectTrigger />
 					<SelectContent>
@@ -41,7 +41,7 @@ export const Default: Story = {
 export const LongListWithItemLabels: Story = {
 	render({ defaultValue: _, value: __, ...args }) {
 		return (
-			<Box full layout="center center" className="min-h-200px">
+			<Box full layout="center center" style={{ minHeight: 200 }}>
 				<Select
 					{...args}
 					defaultValue={0}
@@ -67,7 +67,7 @@ export const LongListWithItemLabels: Story = {
 export const CompareSelectAndButton: Story = {
 	render(args) {
 		return (
-			<div className="row">
+			<div style={{ display: 'flex', flexDirection: 'row' }}>
 				<Select {...args}>
 					<SelectTrigger />
 					<SelectContent>

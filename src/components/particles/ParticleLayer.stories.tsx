@@ -20,7 +20,17 @@ type Story = StoryObj<typeof ParticleLayer>;
 export const Default: Story = {
 	render() {
 		return (
-			<div className="relative h-[100vh] w-full flex flex-col items-center justify-center">
+			<div
+				style={{
+					position: 'relative',
+					height: '100vh',
+					width: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+			>
 				<ExplodeButton />
 			</div>
 		);
@@ -54,12 +64,20 @@ export const HiddenTest: Story = {
 		return (
 			<>
 				<div
-					className="relative w-full flex flex-col items-center justify-center p-10"
-					style={{ visibility: hide ? 'hidden' : 'visible' }}
+					style={{
+						position: 'relative',
+						width: '100%',
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+						padding: '2.5rem',
+						visibility: hide ? 'hidden' : 'visible',
+					}}
 				>
 					<Icon name="placeholder" ref={targetRef} />
 				</div>
-				<div className="row">
+				<div style={{ display: 'flex', flexDirection: 'row' }}>
 					<Button
 						onClick={() => {
 							particles?.addParticles(

@@ -39,8 +39,10 @@ export const Default: Story = {
 		return (
 			<PageRoot>
 				<PageContent>
-					<div className="text-center">
-						<h1 className="font-bold text-primary">Hello, World!</h1>
+					<div style={{ textAlign: 'center' }}>
+						<h1 className="text-primary" style={{ fontWeight: 'bold' }}>
+							Hello, World!
+						</h1>
 						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<Switch checked={content} onCheckedChange={toggleContent} />
@@ -96,9 +98,11 @@ export const ManualWidth: Story = {
 	render: () => {
 		return (
 			<PageRoot>
-				<PageContent className="max-w-300px">
-					<div className="text-center">
-						<h1 className="font-bold text-primary">Hello, World!</h1>
+				<PageContent style={{ maxWidth: 300 }}>
+					<div style={{ textAlign: 'center' }}>
+						<h1 className="text-primary" style={{ fontWeight: 'bold' }}>
+							Hello, World!
+						</h1>
 						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<Card.Grid>
@@ -140,10 +144,12 @@ export const ManualWidth: Story = {
 
 export const WithoutNav: Story = {
 	render: () => (
-		<PageRoot className="h-full w-full">
+		<PageRoot style={{ height: '100%', width: '100%' }}>
 			<PageContent>
-				<div className="text-center">
-					<h1 className="font-bold text-primary">Hello, World!</h1>
+				<div style={{ textAlign: 'center' }}>
+					<h1 className="text-primary" style={{ fontWeight: 'bold' }}>
+						Hello, World!
+					</h1>
 					<p className="text-primary">This is a simple page layout.</p>
 					<Card.Grid>
 						{new Array(100).fill(null).map((_, i) => (
@@ -179,10 +185,12 @@ export const WithVirtualKeyboard: Story = {
 		}, [keyboard]);
 
 		return (
-			<PageRoot className="h-full w-full">
+			<PageRoot style={{ height: '100%', width: '100%' }}>
 				<PageContent>
-					<div className="text-center">
-						<h1 className="font-bold text-primary">Hello, World!</h1>
+					<div style={{ textAlign: 'center' }}>
+						<h1 className="text-primary" style={{ fontWeight: 'bold' }}>
+							Hello, World!
+						</h1>
 						<p className="text-primary">This is a simple page layout.</p>
 					</div>
 					<PageNowPlaying keepAboveKeyboard>
@@ -209,7 +217,18 @@ export const WithVirtualKeyboard: Story = {
 						</NavBarItem>
 					</NavBarRoot>
 				</PageNav>
-				<div className="fixed bottom-0 left-0 right-0 h-[var(--mock-virtual-keyboard-height,0)] w-full transition-height bg-neutral-ink" />
+				<div
+					className="bg-neutral-ink"
+					style={{
+						position: 'fixed',
+						bottom: 0,
+						left: 0,
+						right: 0,
+						height: 'var(--mock-virtual-keyboard-height,0)',
+						width: '100%',
+						transition: 'height var(--m-duration) var(--m-easing)',
+					}}
+				/>
 			</PageRoot>
 		);
 	},

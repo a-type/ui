@@ -3,6 +3,7 @@ import { UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames, { clsx } from 'clsx';
 import { ReactElement, ReactNode, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { Icon, IconProps } from '../icon/index.js';
 import cls from './NavBar.module.css';
 
@@ -23,10 +24,16 @@ export const NavBarItem = function NavBarItem({
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
+	const mobile = useMediaQuery('(max-width: 600px)');
 	return (
 		<Button
 			ref={ref}
-			className={classNames(cls.item, `@mode-${color}`, className)}
+			className={classNames(
+				cls.item,
+				mobile && `@mode-dense`,
+				`@mode-${color}`,
+				className,
+			)}
 			data-active={active}
 			{...rest}
 		/>

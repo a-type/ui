@@ -31,8 +31,15 @@ type Story = StoryObj<typeof CardRoot>;
 
 export const Default: Story = {
 	render: (args) => (
-		<div className="flex flex-row items-stretch gap-md">
-			<CardRoot {...args} className="min-h-20vh">
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'stretch',
+				gap: 'var(--m-spacing-md)',
+			}}
+		>
+			<CardRoot {...args} style={{ minHeight: '20vh' }}>
 				<CardImage
 					render={
 						<img src="https://resources.biscuits.club/images/pashka.jpg" />
@@ -59,7 +66,7 @@ export const Default: Story = {
 					</CardMenu>
 				</CardFooter>
 			</CardRoot>
-			<CardRoot {...args} className="max-w-300px">
+			<CardRoot {...args} style={{ maxWidth: 300 }}>
 				<CardMain onClick={() => alert('clicked')}>
 					<CardTitle>
 						Card Title which is very long and would normally wrap
@@ -262,8 +269,15 @@ export const VisuallyFocused: Story = {
 export const CardsInBox: Story = {
 	render() {
 		return (
-			<div className="w-full flex flex-row gap-lg">
-				<div className="flex-1">
+			<div
+				style={{
+					width: '100%',
+					display: 'flex',
+					flexDirection: 'row',
+					gap: 'var(--m-spacing-lg)',
+				}}
+			>
+				<div style={{ flex: 1 }}>
 					<CardRoot>
 						<CardMain onClick={() => {}}>
 							<CardTitle>Card Title</CardTitle>

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { ReactNode, createContext, useContext } from 'react';
 import { Avatar, AvatarProps } from './Avatar.js';
 
@@ -11,6 +10,7 @@ export function AvatarListRoot({
 	count,
 	size = 24,
 	className,
+	...rest
 }: {
 	children: ReactNode;
 	count: number;
@@ -22,11 +22,15 @@ export function AvatarListRoot({
 	return (
 		<AvatarListContext.Provider value={{ size }}>
 			<div
-				className={clsx(
-					'layer-components:(relative flex-basis-auto)',
-					className,
-				)}
-				style={{ width, minWidth: width, height: size }}
+				className={className}
+				style={{
+					position: 'relative',
+					flexBasis: 'auto',
+					width,
+					minWidth: width,
+					height: size,
+				}}
+				{...rest}
 			>
 				{children}
 			</div>
@@ -46,8 +50,9 @@ export function AvatarListItemRoot({
 	const { size } = useContext(AvatarListContext);
 	return (
 		<div
-			className={clsx('layer-components:absolute', className)}
+			className={className}
 			style={{
+				position: 'absolute',
 				left: index === 0 ? 0 : index * ((size * 2) / 3),
 				zIndex: index,
 				top: 0,

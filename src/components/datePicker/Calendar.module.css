@@ -1,0 +1,155 @@
+.monthRow {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.monthLabel {
+	min-width: 0;
+	align-self: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: center;
+	font-size: var(--m-text-ambient-size);
+	font-weight: bold;
+}
+
+.monthButton {
+	align-self: center;
+}
+
+.calendarGridRoot {
+	display: grid;
+	grid-template-columns: repeat(7, var(--day-size, 32px));
+	grid-auto-rows: var(--day-size, 32px);
+	overflow: hidden;
+	padding: var(--m-spacing-sm);
+	border-radius: var(--m-radius-sm);
+}
+
+.dayLabel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--m-text-ambient-size);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.calendarDay {
+	position: relative;
+	margin-bottom: -1px;
+	margin-right: -1px;
+
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-border(transparent);
+
+	display: flex;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	transition: all var(--m-duration) var(--m-easing);
+
+	@apply --mx-shadow;
+
+	&[data-highlighted] {
+		z-index: 1;
+		outline: none;
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-heavy), 2px);
+	}
+
+	&[data-selected] {
+		z-index: 2;
+		@apply --mx-bg(var(--m-color-main));
+		border-radius: var(--m-radius-sm);
+	}
+
+	&[data-in-range] {
+		z-index: 1;
+		border-radius: 0;
+		@apply --mx-bg(var(--m-color-main-light));
+	}
+
+	&[data-range-end] {
+		z-index: 1;
+		@apply --mx-bg(var(--m-color-main));
+		border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
+	}
+
+	&[data-range-start] {
+		z-index: 1;
+		@apply --mx-bg(var(--m-color-main));
+		/* tl tr br bl */
+		border-radius: var(--m-radius-sm) 0 0 var(--m-radius-sm);
+	}
+
+	&[data-disabled='true'] {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	/* Today indicator dot */
+	&[data-today]::before {
+		content: '';
+		position: absolute;
+		left: 1px;
+		top: 1px;
+		width: 6px;
+		height: 6px;
+		background-color: var(--m-primitive-color-attention);
+		border-radius: var(--m-radius-lg);
+		border: 1px solid var(--m-color-neutral-ink);
+	}
+
+	/* Calendar grid edge borders */
+	&[data-top-edge] {
+		border-top-color: var(--m-color-neutral);
+	}
+	&[data-bottom-edge] {
+		border-bottom-color: var(--m-color-neutral);
+	}
+	&[data-first-column] {
+		border-left-color: var(--m-color-neutral);
+	}
+	&[data-last-column] {
+		border-right-color: var(--m-color-neutral);
+	}
+	&[data-day-first] {
+		border-left-color: var(--m-color-neutral);
+		border-top-left-radius: var(--m-radius-sm);
+	}
+	&[data-day-last] {
+		border-right-color: var(--m-color-neutral);
+		border-bottom-right-radius: var(--m-radius-sm);
+	}
+	&[data-first-column][data-bottom-edge] {
+		border-bottom-left-radius: var(--m-radius-sm);
+	}
+	&[data-last-column][data-bottom-edge] {
+		border-bottom-right-radius: var(--m-radius-sm);
+	}
+	&[data-first-column][data-top-edge] {
+		border-top-left-radius: var(--m-radius-sm);
+	}
+	&[data-last-column][data-top-edge] {
+		border-top-right-radius: var(--m-radius-sm);
+	}
+
+	&[data-different-month] {
+		visibility: hidden;
+	}
+
+	&:hover {
+		z-index: 100;
+		outline: none;
+		--mx-shadow-ring: --fn-ring(var(--m-color-main-heavy), 2px);
+	}
+
+	&:active {
+		@apply --mx-bg(var(--m-color-main-light));
+		border-radius: var(--m-radius-sm);
+	}
+}
