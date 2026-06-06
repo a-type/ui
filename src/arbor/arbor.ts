@@ -1,64 +1,89 @@
 import { definePreset } from '@arbor-css/core';
-import { presetArbor } from '@arbor-css/core/preset-arbor';
+import { compileSingleColor, presetArbor } from '@arbor-css/core/preset-arbor';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
-const base = presetArbor({
-	color: {
-		ranges: {
-			lemon: {
-				hue: 90.8,
-			},
-			leek: {
-				hue: 165.88,
-			},
-			tomato: {
-				hue: 10.51,
-			},
-			blueberry: {
-				hue: 248.14,
-			},
-			eggplant: {
-				hue: 280.21,
-			},
-			attention: {
-				hue: 30,
-			},
-			success: {
-				hue: 140,
-			},
-			user: {
-				hue: `var(${$userColorHue}, 200)`,
-				saturation: `var(${$userColorSaturation}, 100%)`,
-			},
+const colorConfig = {
+	ranges: {
+		lemon: {
+			hue: 86,
 		},
-		mainColor: 'lemon',
+		leek: {
+			hue: 165.88,
+		},
+		tomato: {
+			hue: 10.51,
+		},
+		blueberry: {
+			hue: 248.14,
+		},
+		eggplant: {
+			hue: 280.21,
+		},
+		attention: {
+			hue: 30,
+		},
+		success: {
+			hue: 140,
+		},
+		user: {
+			hue: 0,
+		},
 	},
+	mainColor: 'lemon',
+};
+
+const base = presetArbor({
+	color: colorConfig,
 	typography: {
 		minSize: '12px',
+	},
+	globals: {
+		baseFontSize: '16px',
+		baseSpacingSize: '8px',
+		roundness: 0.75,
+		saturation: 0.5,
+		defaultShadowColor: 'rgba(0, 0, 0, 0.05)',
 	},
 });
 
 const preset = definePreset({
 	name: 'a-type',
 	extends: [base],
-	config: {
-		globals: {
-			roundness: 0.75,
-			baseSpacingSize: '8px',
-			baseFontSize: '16px',
-			defaultShadowColor: 'rgba(0, 0, 0, 0.05)',
-			saturation: 0.5,
-		},
-	},
-	baseMode: () => ({
+	baseMode: ($) => ({
 		action: {
 			roundness: 99,
 		},
 		control: {
 			roundness: 1.25,
 		},
+		user: {
+			hue: 0,
+			saturation: 1,
+		},
+		primitive: {
+			color: {
+				user: compileSingleColor(
+					{
+						hue: $.mode.user.hue,
+						saturation: $.mode.user.saturation,
+					},
+					$.mode.global,
+				),
+			},
+		},
 	}),
-	modeSchema: {},
+	modeSchema: {
+		user: {
+			hue: {
+				purpose: 'other',
+				description: 'A user-input hue value',
+			},
+			saturation: {
+				purpose: 'scalar',
+				description: 'A user-input saturation value between 0 and 1',
+			},
+		},
+	},
 });
 
 preset.bundleMode('accent', {
@@ -108,6 +133,10 @@ preset.bundleMode('blueberry', {
 	},
 });
 preset.bundleMode('user', {
+	user: {
+		hue: `var(${$userColorHue}, 200)`,
+		saturation: `var(${$userColorSaturation}, 0.5)`,
+	},
 	color: {
 		main: preset.$.mode.primitive.color.user,
 	},
@@ -115,17 +144,17 @@ preset.bundleMode('user', {
 
 // density and size
 preset.bundleMode('dense', {
-	scalar: {
+	global: {
 		density: 1.25,
 	},
 });
 preset.bundleMode('denser', {
-	scalar: {
+	global: {
 		density: 1.5,
 	},
 });
 preset.bundleMode('density-reset', {
-	scalar: {
+	global: {
 		density: 1,
 	},
 });

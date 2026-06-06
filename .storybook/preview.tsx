@@ -107,14 +107,14 @@ const preview: Preview = {
 			useEffect(() => {
 				setColorMode(ctx.globals.mode);
 				document.documentElement.classList.add(`@mode-${ctx.globals.theme}`);
-				document.documentElement.classList.add(`@scheme-${ctx.globals.mode}`);
+				document.documentElement.classList.add(`@mode-${ctx.globals.mode}`);
 
 				return () => {
 					document.documentElement.classList.remove(
 						`@mode-${ctx.globals.theme}`,
 					);
 					document.documentElement.classList.remove(
-						`@scheme-${ctx.globals.mode}`,
+						`@mode-${ctx.globals.mode}`,
 					);
 				};
 			}, [ctx.globals.mode, ctx.globals.theme]);

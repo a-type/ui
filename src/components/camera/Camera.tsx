@@ -170,7 +170,7 @@ export function CameraRoot({
 				rounded="lg"
 				overflow="hidden"
 				className={clsx(
-					'@scheme-dark',
+					'@mode-dark',
 					cls.root,
 					fullscreen && cls.fullscreen,
 					className,

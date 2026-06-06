@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
-import { $userColorHue } from './arbor/props.js';
+import { $userColorHue, $userColorSaturation } from './arbor/props.js';
 import cls from './colors.module.css';
 import { Box } from './components/index.js';
 
@@ -33,12 +33,14 @@ export const Default: Story = {
 		const style: any = args.customHue
 			? {
 					[$userColorHue]: args.customHue,
+					[$userColorSaturation]: '1',
 			  }
 			: {};
 
 		const ranges = (
 			<>
-				<Range className="@mode-base" style={style} />
+				<Range className="@mode-base" />
+				<Range className="@mode-user" style={style} />
 				<Range className="@mode-lemon" />
 				<Range className="@mode-leek" />
 				<Range className="@mode-tomato" />
@@ -47,7 +49,6 @@ export const Default: Story = {
 				<Range className="@mode-attention" />
 				<Range className="@mode-success" />
 				<Range className="@mode-neutral" />
-				<Range className="@mode-contrast" />
 				<Box className="h-100px">
 					<Box grow className={cls.bgNeutralInk} />
 					<Box grow className={cls.bgNeutralWash} />
@@ -60,10 +61,10 @@ export const Default: Story = {
 			<Box col>
 				<input type="color" className="sticky top-0 z-1" />
 				<Box full>
-					<Box d="col" grow p surface="white">
+					<Box d="col" grow p surface="ambient">
 						{ranges}
 					</Box>
-					<Box d="col" className="@scheme-dark" surface="white" grow p>
+					<Box d="col" className="@mode-dark" surface="ambient" grow p>
 						{ranges}
 					</Box>
 				</Box>

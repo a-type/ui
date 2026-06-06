@@ -168,9 +168,6 @@ export const Surfaces: Story = {
 				<Box {...args} surface className="@mode-success" p="lg" col gap>
 					<SurfaceContent name="Success" />
 				</Box>
-				<Box {...args} surface className="@scheme-highContrast" p="lg" col gap>
-					<SurfaceContent name="High Contrast" />
-				</Box>
 			</div>
 		);
 	},

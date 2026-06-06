@@ -52,7 +52,7 @@ function ToastList() {
 			className={clsx(
 				cls.toast,
 				// themeing
-				mode === 'dark' ? '@scheme-light' : '@scheme-dark',
+				'@mode-inverted',
 				{
 					'@mode-success': toast.type === 'success',
 					'@mode-attention': toast.type === 'error',

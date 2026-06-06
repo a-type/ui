@@ -160,8 +160,8 @@
 
 .arrow {
 	--size: 18px;
-	@apply --mx-fill(var(--mx-bg-ref, var(--_-system-schemeTrueLight)));
-	@apply --mx-stroke(var(--mx-border-ref, var(--mx-fg-ref, var(--_system-schemeTrueHeavy))));
+	@apply --mx-fill(var(--mx-bg-ref, var(--m-global-trueLightColor)));
+	@apply --mx-stroke(var(--mx-border-ref, var(--mx-fg-ref, var(--m-global-trueHeavyColor))));
 	stroke-width: var(--m-lineWidth);
 	width: var(--size);
 	height: calc(var(--size) / 2);

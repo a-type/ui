@@ -50,7 +50,7 @@
 	@apply --mx-shadow;
 
 	&:active {
-		@apply --mx-bg-darken(2);
+		@apply --mx-bg-darken(1);
 	}
 
 	&:hover {
@@ -68,7 +68,7 @@
 	&[data-active='true'] {
 		@apply --mx-bg(var(--m-action-primary-bg));
 		@apply --mx-fg(var(--m-action-primary-fg));
-		@apply --mx-bg-lighten(4);
+		@apply --mx-bg-lighten(2);
 	}
 
 	@media (min-width: 768px) {
@@ -80,7 +80,7 @@
 		overflow: visible;
 		font-size: var(--m-text-secondary-size);
 		&:active {
-			@apply --mx-bg-darken(2);
+			@apply --mx-bg-darken(1);
 		}
 	}
 }

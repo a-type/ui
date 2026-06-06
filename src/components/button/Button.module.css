@@ -32,10 +32,10 @@
 		@apply --mx-bg(var(--m-action-primary-bg));
 		@apply --mx-fg(var(--m-action-primary-fg));
 		&:hover {
-			@apply --mx-bg-lighten(2);
+			@apply --mx-bg-lighten(1);
 		}
 		&:active {
-			@apply --mx-bg-lighten(4);
+			@apply --mx-bg-lighten(2);
 		}
 	}
 	&[data-emphasis='light'] {
@@ -90,18 +90,18 @@
 	}
 
 	&:hover {
-		@apply --mx-bg-darken(2);
+		@apply --mx-bg-darken(1);
 		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 	&:active {
-		@apply --mx-bg-darken(4);
+		@apply --mx-bg-darken(2);
 		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 6px);
 	}
 	&:focus {
 		outline: none;
 	}
 	&:focus-visible {
-		@apply --mx-bg-lighten(2);
+		@apply --mx-bg-lighten(1);
 		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
 	}
 	&:disabled,
@@ -115,7 +115,7 @@
 	/* Always turn off background for toggleable buttons that aren't pressed */
 	&[data-toggleable='true'][aria-pressed='false']:not(:hover) {
 		@apply --mx-bg(transparent);
-		--mx-bg-contrast: var(--_-system-schemeTrueLight);
+		--mx-bg-contrast: var(--m-global-trueLightColor);
 	}
 }
 
