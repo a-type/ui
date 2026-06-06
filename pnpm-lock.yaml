@@ -12,11 +12,11 @@ importers:
         specifier: ^1.1.9
         version: 1.1.9
       '@arbor-css/core':
-        specifier: ^0.0.98
-        version: 0.0.98
+        specifier: ^0.0.101
+        version: 0.0.101
       '@arbor-css/postcss':
-        specifier: ^0.0.98
-        version: 0.0.98(@arbor-css/core@0.0.98)
+        specifier: ^0.0.101
+        version: 0.0.101(@arbor-css/core@0.0.101)
       '@base-ui/react':
         specifier: ^1.4.1
         version: 1.4.1(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -183,35 +183,35 @@ packages:
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
-  '@arbor-css/calc@0.0.98':
-    resolution: {integrity: sha512-RgF3EcjVgh8aQo+0TFrifvg0csb6kO+MmjAeuXlyUB+EYn/5zinBSVMBPsmraXU0J8a+Vj3lsplyOKm5436Tzw==}
+  '@arbor-css/calc@0.0.101':
+    resolution: {integrity: sha512-YBZ8U/8gR9i4gBRQPZ1S+iv52lVoQrHchzACZ2wJXxIXrTbPk4f9yUbpPWO/emmDv0sHB0eSn748OHx8x4/RWw==}
 
-  '@arbor-css/core@0.0.98':
-    resolution: {integrity: sha512-uPT94PS1iK5FgB474RKs3JkgOxFdYiEliESf55BaKx/f70EyWKvEQ1NgUegJAmtBRnC90UfgGfRaZxEZRX3dhA==}
+  '@arbor-css/core@0.0.101':
+    resolution: {integrity: sha512-AZEKrkQe5DuCChKLLWh3WoDHqYu5xuzgoi7BmW+x8IF79N3OJvSQI9jBv1XV3v6eVPvKy+zHxl+12H6n4sF7fA==}
     hasBin: true
 
-  '@arbor-css/functions@0.0.98':
-    resolution: {integrity: sha512-+UbNwnX911e2jS/BCCYI5pCny906XlkU2Hs+7yBhizeUmXWOitv/62VOsLye6RifIJ49pvqvoDU7j/9IOG4q9g==}
+  '@arbor-css/functions@0.0.101':
+    resolution: {integrity: sha512-1cgKNsSh/Cy77pU+AfJTaZMKvbZZSD8W89ymT1u0sZga+k1Dfnlq03nWVrKS4/K3BMgGeTE4AI977BC4cqUtJA==}
 
-  '@arbor-css/globals@0.0.98':
-    resolution: {integrity: sha512-H/gxzQw5Sytg7hqoGERvDdJuAm9n4xr812dH7Cmh9o8nGmuORLW8HF1ol0KgeQUO2ciJXw1pJ9U6CqIsxRcQ7w==}
+  '@arbor-css/globals@0.0.101':
+    resolution: {integrity: sha512-FsFASaIQGo3pmIQdjlLHL7KAMYEEwWjqtPzgW5j5s6Jy25cp5xel4kOpqckOxzPh7WEImAtntU610HRpdtabhA==}
 
-  '@arbor-css/modes@0.0.98':
-    resolution: {integrity: sha512-QainPeMwAzqWPP/Vf0QS3R//fqRFPAjMCxZbVkO4l+M00SAW3bMgO2s7/qeZSHHapF9toO3dMURBKH9UEHokjQ==}
+  '@arbor-css/modes@0.0.101':
+    resolution: {integrity: sha512-R5GKQo9uAdZjbNZ9jfQ0cedLuVKXGOp/cVnGB3eU/ht4/BB2HobayqPlEDGR7xKddsNB1pCm86otF0OmrJXxgw==}
 
-  '@arbor-css/postcss@0.0.98':
-    resolution: {integrity: sha512-qRjwWlcnOGTB4zANiQ3NPkOZnB8AeGYG89ifdqrxqiYyDHXtXPQOwnT74yJ49aPnFj+YPybeVQgYxknIOoWL+A==}
+  '@arbor-css/postcss@0.0.101':
+    resolution: {integrity: sha512-rTU9YUipEGbmviElsQc6lkDVU2Ayqi/78TOYs2jKxjoGBzKQHOAJ9dDGbGlN7WMgXks0ZUsYyWnBTotc1uVrhQ==}
     peerDependencies:
       '@arbor-css/core': '*'
 
-  '@arbor-css/preset@0.0.98':
-    resolution: {integrity: sha512-koQJqRkVD04M66A7XRgmcfsLww5LRZR90s3eZPqsTunbglOt/tmi2LnAVfAJ60ymfPxaQEsVRZyHo2edhDloEQ==}
+  '@arbor-css/preset@0.0.101':
+    resolution: {integrity: sha512-7B6DhaPyQShQUPQNMWCM4D/0BuHoTMJ+Z3aeJZQj+KkbISoEo6VX+edYyj2gQi5luwx/TlYTpaqYibkseOgc4w==}
 
-  '@arbor-css/tokens@0.0.98':
-    resolution: {integrity: sha512-GOvNceUCT0lhrkG6Ulz9vM1vMcOfUd3Tw46jS5SLOHwISGFSr2spSYyLA6T/VJ+RKPSc7ly2pcD7AN+VEuNqpQ==}
+  '@arbor-css/tokens@0.0.101':
+    resolution: {integrity: sha512-Iw9IgiBzqg6b+ROkMgupN95Wt8Y8itaa/j3Ym/3HDEi5+Dfx4FSpIqOdrJZNMbaLqUd6iaEIry/VaIwr6c5UvQ==}
 
-  '@arbor-css/util@0.0.98':
-    resolution: {integrity: sha512-UEfm8FG7wz6xUT6Wvl52nbq20BJQ4NLQFnn++PHpgeEqXfKm3Q02eO9+vP2E2rSGnRcyDNBo766BSmVBjFwmwg==}
+  '@arbor-css/util@0.0.101':
+    resolution: {integrity: sha512-1og0Twt2gsRpeCjy9H2iu9tIek0F9v0srCJlyvMAyDQQ+u8s/DVSUYDJ+GsQxDCYRoFKGB4iJux19asuJf4vGg==}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -3779,62 +3779,62 @@ snapshots:
       package-manager-detector: 1.5.0
       tinyexec: 1.0.2
 
-  '@arbor-css/calc@0.0.98':
+  '@arbor-css/calc@0.0.101':
     dependencies:
-      '@arbor-css/tokens': 0.0.98
+      '@arbor-css/tokens': 0.0.101
 
-  '@arbor-css/core@0.0.98':
+  '@arbor-css/core@0.0.101':
     dependencies:
-      '@arbor-css/calc': 0.0.98
-      '@arbor-css/functions': 0.0.98
-      '@arbor-css/globals': 0.0.98
-      '@arbor-css/modes': 0.0.98
-      '@arbor-css/preset': 0.0.98
-      '@arbor-css/tokens': 0.0.98
-      '@arbor-css/util': 0.0.98
+      '@arbor-css/calc': 0.0.101
+      '@arbor-css/functions': 0.0.101
+      '@arbor-css/globals': 0.0.101
+      '@arbor-css/modes': 0.0.101
+      '@arbor-css/preset': 0.0.101
+      '@arbor-css/tokens': 0.0.101
+      '@arbor-css/util': 0.0.101
       jiti: 2.6.1
       lil-gui: 0.21.0
       yargs: 18.0.0
 
-  '@arbor-css/functions@0.0.98':
+  '@arbor-css/functions@0.0.101':
     dependencies:
-      '@arbor-css/calc': 0.0.98
-      '@arbor-css/tokens': 0.0.98
+      '@arbor-css/calc': 0.0.101
+      '@arbor-css/tokens': 0.0.101
 
-  '@arbor-css/globals@0.0.98':
+  '@arbor-css/globals@0.0.101':
     dependencies:
-      '@arbor-css/functions': 0.0.98
-      '@arbor-css/tokens': 0.0.98
+      '@arbor-css/functions': 0.0.101
+      '@arbor-css/tokens': 0.0.101
 
-  '@arbor-css/modes@0.0.98':
+  '@arbor-css/modes@0.0.101':
     dependencies:
-      '@arbor-css/calc': 0.0.98
-      '@arbor-css/globals': 0.0.98
-      '@arbor-css/tokens': 0.0.98
-      '@arbor-css/util': 0.0.98
+      '@arbor-css/calc': 0.0.101
+      '@arbor-css/globals': 0.0.101
+      '@arbor-css/tokens': 0.0.101
+      '@arbor-css/util': 0.0.101
 
-  '@arbor-css/postcss@0.0.98(@arbor-css/core@0.0.98)':
+  '@arbor-css/postcss@0.0.101(@arbor-css/core@0.0.101)':
     dependencies:
-      '@arbor-css/calc': 0.0.98
-      '@arbor-css/core': 0.0.98
-      '@arbor-css/functions': 0.0.98
-      '@arbor-css/globals': 0.0.98
-      '@arbor-css/tokens': 0.0.98
+      '@arbor-css/calc': 0.0.101
+      '@arbor-css/core': 0.0.101
+      '@arbor-css/functions': 0.0.101
+      '@arbor-css/globals': 0.0.101
+      '@arbor-css/tokens': 0.0.101
       jiti: 2.6.1
       postcss: 8.5.15
 
-  '@arbor-css/preset@0.0.98':
+  '@arbor-css/preset@0.0.101':
     dependencies:
-      '@arbor-css/calc': 0.0.98
-      '@arbor-css/functions': 0.0.98
-      '@arbor-css/globals': 0.0.98
-      '@arbor-css/modes': 0.0.98
-      '@arbor-css/tokens': 0.0.98
-      '@arbor-css/util': 0.0.98
+      '@arbor-css/calc': 0.0.101
+      '@arbor-css/functions': 0.0.101
+      '@arbor-css/globals': 0.0.101
+      '@arbor-css/modes': 0.0.101
+      '@arbor-css/tokens': 0.0.101
+      '@arbor-css/util': 0.0.101
 
-  '@arbor-css/tokens@0.0.98': {}
+  '@arbor-css/tokens@0.0.101': {}
 
-  '@arbor-css/util@0.0.98': {}
+  '@arbor-css/util@0.0.101': {}
 
   '@babel/code-frame@7.27.1':
     dependencies:

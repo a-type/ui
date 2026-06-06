@@ -29,6 +29,8 @@
 	line-height: 1;
 	font-family: inherit;
 
+	@apply --mx-shadow;
+
 	min-height: 30px;
 	min-width: 100px;
 	flex-shrink: 0;
@@ -39,7 +41,6 @@
 
 	&[aria-selected='false']:hover {
 		@apply --mx-bg(var(--m-color-neutral-light));
-		@apply --mx-bg-darken(1);
 		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
@@ -48,8 +49,8 @@
 	}
 
 	&:focus-visible {
-		@apply --mx-bg-darken(1);
-		@apply --mx-border(var(--m-color-neutral-ink));
+		@apply --mx-bg(var(--m-color-neutral-light));
+		--mx-shadow-ring: --fn-focus-ring();
 		outline: none;
 	}
 
@@ -83,12 +84,13 @@
 }
 
 .content {
+	@apply --mx-shadow;
 	&:focus {
 		outline: none;
 	}
 	&:focus-visible {
 		outline: none;
-		--mx-shadow-ring: --fn-ring(var(--m-color-neutral-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 }
 

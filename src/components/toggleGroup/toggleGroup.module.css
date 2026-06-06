@@ -50,6 +50,6 @@
 	}
 
 	&:focus-visible {
-		--mx-shadow-ring: --fn-ring(var(--m-color-neutral-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 }

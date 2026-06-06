@@ -20,12 +20,12 @@
 			"require": "./dist/cjs/index.js",
 			"default": "./dist/cjs/index.js"
 		},
-		"./uno-preset": {
-			"types": "./dist/esm/uno/uno.preset.d.ts",
-			"import": "./dist/esm/uno/uno.preset.js",
-			"node": "./dist/esm/uno/uno.preset.js",
-			"require": "./dist/cjs/uno/uno.preset.js",
-			"default": "./dist/cjs/uno/uno.preset.js"
+		"./arbor": {
+			"types": "./dist/esm/arbor/arbor.d.ts",
+			"import": "./dist/esm/arbor/arbor.js",
+			"node": "./dist/esm/arbor/arbor.js",
+			"require": "./dist/cjs/arbor/arbor.js",
+			"default": "./dist/cjs/arbor/arbor.js"
 		},
 		"./main.css": {
 			"import": "./dist/css/main.css",
@@ -61,8 +61,8 @@
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.9",
-		"@arbor-css/core": "^0.0.98",
-		"@arbor-css/postcss": "^0.0.98",
+		"@arbor-css/core": "^0.0.101",
+		"@arbor-css/postcss": "^0.0.101",
 		"@base-ui/react": "^1.4.1",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",

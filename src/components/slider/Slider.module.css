@@ -90,7 +90,7 @@
 	&:focus-visible {
 		@apply --mx-bg(var(--m-color-main-light));
 		--mx-shadow-shadow: var(--m-shadow-lg);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 
 	&:disabled {

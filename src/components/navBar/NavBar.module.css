@@ -36,9 +36,9 @@
 	user-select: none;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-spacing-sm);
 	white-space: nowrap;
-	padding: var(--m-spacing-sm) var(--m-spacing-md);
+	padding: var(--m-spacing-md) var(--m-spacing-lg);
 	transition: all var(--m-duration) var(--m-easing);
 	@apply --mx-fg(var(--m-color-neutral-ink));
 	@apply --mx-bg(transparent);
@@ -62,7 +62,7 @@
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 
 	&[data-active='true'] {
@@ -76,7 +76,8 @@
 		display: flex;
 		flex-direction: row-reverse;
 		justify-content: end;
-		gap: var(--m-spacing-sm);
+		gap: var(--m-spacing-md);
+		padding: var(--m-action-padding);
 		overflow: visible;
 		font-size: var(--m-text-secondary-size);
 		&:active {
@@ -103,7 +104,7 @@
 
 .itemText {
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	font-size: inherit;
+	font-size: var(--m-text-ambient-size);
 	line-height: 1;
 	font-weight: inherit;
 	display: inline-block;
@@ -125,8 +126,8 @@
 
 .pip {
 	position: absolute;
-	top: var(--m-spacing-xs);
-	right: var(--m-spacing-xs);
+	top: var(--m-spacing-sm);
+	right: var(--m-spacing-sm);
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;

@@ -54,6 +54,7 @@
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
+	--mx-shadow-shadow: var(--m-shadow-sm);
 
 	&[data-highlighted] {
 		z-index: 1;
@@ -71,19 +72,7 @@
 		z-index: 1;
 		border-radius: 0;
 		@apply --mx-bg(var(--m-color-main-light));
-	}
-
-	&[data-range-end] {
-		z-index: 1;
-		@apply --mx-bg(var(--m-color-main));
-		border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
-	}
-
-	&[data-range-start] {
-		z-index: 1;
-		@apply --mx-bg(var(--m-color-main));
-		/* tl tr br bl */
-		border-radius: var(--m-radius-sm) 0 0 var(--m-radius-sm);
+		--mx-shadow-shadow: 0 0 0 0 transparent;
 	}
 
 	&[data-disabled='true'] {
@@ -107,15 +96,23 @@
 	/* Calendar grid edge borders */
 	&[data-top-edge] {
 		border-top-color: var(--m-color-neutral);
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
 	&[data-bottom-edge] {
 		border-bottom-color: var(--m-color-neutral);
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 	&[data-first-column] {
 		border-left-color: var(--m-color-neutral);
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
 	}
 	&[data-last-column] {
 		border-right-color: var(--m-color-neutral);
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 	&[data-day-first] {
 		border-left-color: var(--m-color-neutral);
@@ -124,6 +121,7 @@
 	&[data-day-last] {
 		border-right-color: var(--m-color-neutral);
 		border-bottom-right-radius: var(--m-radius-sm);
+		border-top-right-radius: 0;
 	}
 	&[data-first-column][data-bottom-edge] {
 		border-bottom-left-radius: var(--m-radius-sm);
@@ -136,6 +134,20 @@
 	}
 	&[data-last-column][data-top-edge] {
 		border-top-right-radius: var(--m-radius-sm);
+	}
+
+	&[data-range-end] {
+		z-index: 1;
+		@apply --mx-bg(var(--m-color-main));
+		border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
+		--mx-shadow-shadow: 0 0 0 0 transparent;
+	}
+
+	&[data-range-start] {
+		z-index: 1;
+		@apply --mx-bg(var(--m-color-main));
+		/* tl tr br bl */
+		border-radius: var(--m-radius-sm) 0 0 var(--m-radius-sm);
 	}
 
 	&[data-different-month] {

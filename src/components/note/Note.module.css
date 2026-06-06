@@ -12,7 +12,7 @@
 	&:has(textarea:focus-visible) {
 		@apply --mx-bg(var(--m-color-main-light));
 		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 }
 

@@ -45,7 +45,7 @@
 
 	transition: box-shadow var(--m-duration) var(--m-easing);
 
-	@apply -mx-shadow;
+	@apply --mx-shadow;
 	--mx-shadow-shadow: inset var(--m-shadow-sm);
 
 	@apply --mx-fg(var(--m-control-fg));
@@ -69,13 +69,13 @@
 		}
 	}
 
-	&:has(input:focus-visible),
-	&:has(textarea:focus-visible) {
+	&:has(input:focus-visible[data-focus-clicked='false']),
+	&:has(textarea:focus-visible[data-focus-clicked='false']) {
 		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 4px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
-	&:has(input[data-focus-clicked]:focus),
-	&:has(textarea[data-focus-clicked]:focus) {
+	&:has(input:focus),
+	&:has(textarea:focus) {
 		@apply --mx-bg-lighten(3);
 		--mx-shadow-ring: --fn-ring(var(--m-color-main-light), 4px);
 	}

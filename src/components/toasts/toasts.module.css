@@ -91,7 +91,7 @@
 		outline: none;
 	}
 	&:focus-visible {
-		box-shadow: --fn-ring(var(--m-color-main-ink), 2px);
+		box-shadow: --fn-focus-ring();
 	}
 }
 

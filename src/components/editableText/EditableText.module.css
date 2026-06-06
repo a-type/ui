@@ -33,7 +33,7 @@
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 2px);
+		--mx-shadow-ring: --fn-focus-ring();
 	}
 }
 

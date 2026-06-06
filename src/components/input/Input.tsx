@@ -32,6 +32,8 @@ const InnerInput = function InnerInput({
 			Date.now() - inputInfo.lastPointerDown < 200
 		) {
 			ev.currentTarget.setAttribute('data-focus-clicked', 'true');
+		} else {
+			ev.currentTarget.setAttribute('data-focus-clicked', 'false');
 		}
 		onFocus?.(ev);
 	};

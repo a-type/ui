@@ -30,7 +30,7 @@ export const NavBarItem = function NavBarItem({
 			ref={ref}
 			className={classNames(
 				cls.item,
-				mobile && `@mode-dense`,
+				mobile && `@mode-denser`,
 				`@mode-${color}`,
 				className,
 			)}

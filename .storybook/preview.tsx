@@ -2,15 +2,15 @@
 import '../src/css/main.css';
 import './preview.css';
 
+import { connect } from '@arbor-css/core/runtime';
 import type { Preview } from '@storybook/react-vite';
 import { useEffect } from 'react';
+import createPreset from '../src/arbor/arbor.js';
 import { setColorMode } from '../src/colorMode.js';
 import { Provider } from '../src/components/provider/Provider.js';
 
-// import { connect } from '@arbor-css/core/runtime';
-// import preset from '../src/arbor/arbor.js';
-
-// connect(preset);
+const preset = createPreset();
+connect(preset);
 
 const preview: Preview = {
 	parameters: {
@@ -32,15 +32,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Theme',
 				icon: 'paintbrush',
-				items: [
-					'lemon',
-					'eggplant',
-					'leek',
-					'tomato',
-					'blueberry',
-					'gray',
-					'high-contrast',
-				],
+				items: ['lemon', 'eggplant', 'leek', 'tomato', 'blueberry', 'neutral'],
 				dynamicTitle: true,
 			},
 		},
@@ -56,12 +48,12 @@ const preview: Preview = {
 		},
 		saturation: {
 			description: 'Color saturation',
-			defaultValue: '50',
+			defaultValue: '1',
 			type: 'number',
 			toolbar: {
 				title: 'Saturation',
 				icon: 'contrast',
-				items: ['0', '10', '25', '50', '75', '100'],
+				items: ['0', '0.125', '0.25', '0.5', '1', '1.25', '1.5'],
 				dynamicTitle: true,
 			},
 		},
@@ -72,7 +64,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Spacing',
 				icon: 'ruler',
-				items: ['0', '0.25', '0.5', '0.75', '1', '1.5', '2'],
+				items: ['0', '0.25', '0.5', '1', '1.25', '1.5', '2'],
 				dynamicTitle: true,
 			},
 		},
@@ -87,16 +79,26 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
+		lineWidth: {
+			description: 'Line width scale',
+			defaultValue: '1',
+			type: 'number',
+			toolbar: {
+				title: 'Line width',
+				icon: 'box',
+				items: ['0', '0.25', '0.5', '1', '1.5', '2'],
+				dynamicTitle: true,
+			},
+		},
 		shadows: {
 			description: 'Hard shadows',
-			defaultValue: true,
-			type: 'boolean',
+			defaultValue: 'hard',
 			toolbar: {
 				title: 'Shadows',
 				icon: 'bottombar',
 				items: [
-					{ value: false, title: 'Soft' },
-					{ value: true, title: 'Hard' },
+					{ value: 'soft', title: 'Soft' },
+					{ value: 'hard', title: 'Hard' },
 				],
 				dynamicTitle: true,
 			},
@@ -109,6 +111,31 @@ const preview: Preview = {
 				document.documentElement.classList.add(`@mode-${ctx.globals.theme}`);
 				document.documentElement.classList.add(`@mode-${ctx.globals.mode}`);
 
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.saturation.name,
+					`${ctx.globals.saturation * 0.5}`,
+				);
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.baseSpacingSize.name,
+					`${ctx.globals.spacing / 2}rem`,
+				);
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.roundness.name,
+					`${ctx.globals.corners}`,
+				);
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.shadowBlur.name,
+					ctx.globals.shadows === 'hard' ? '0' : '0.5',
+				);
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.shadowSpread.name,
+					ctx.globals.shadows === 'hard' ? '1.5' : '1',
+				);
+				document.documentElement.style.setProperty(
+					preset.$.mode.global.lineWidth.name,
+					`${ctx.globals.lineWidth}`,
+				);
+
 				return () => {
 					document.documentElement.classList.remove(
 						`@mode-${ctx.globals.theme}`,
@@ -116,8 +143,34 @@ const preview: Preview = {
 					document.documentElement.classList.remove(
 						`@mode-${ctx.globals.mode}`,
 					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.user.saturation.name,
+					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.global.baseSpacingSize.name,
+					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.global.roundness.name,
+					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.global.shadowBlur.name,
+					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.global.shadowSpread.name,
+					);
+					document.documentElement.style.removeProperty(
+						preset.$.mode.global.lineWidth.name,
+					);
 				};
-			}, [ctx.globals.mode, ctx.globals.theme]);
+			}, [
+				ctx.globals.mode,
+				ctx.globals.theme,
+				ctx.globals.saturation,
+				ctx.globals.spacing,
+				ctx.globals.corners,
+				ctx.globals.shadows,
+				ctx.globals.lineWidth,
+			]);
 			return (
 				<Provider>
 					<Story />
