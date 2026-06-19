@@ -6,7 +6,7 @@
 
 	@apply --mx-bg(var(--m-color-main-wash));
 	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
-	@apply --mx-border(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-color-main-heavy));
 
 	border-width: var(--m-lineWidth-sm);
 	border-radius: var(--m-action-radius);

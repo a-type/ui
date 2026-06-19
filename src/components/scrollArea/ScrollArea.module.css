@@ -15,7 +15,7 @@
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 1px);
+		--mx-ring-value: --fn-ring(var(--m-color-main-ink), 1px);
 	}
 }
 
@@ -117,7 +117,7 @@
 
 .thumb {
 	@apply --mx-bg(var(--mx-fg-ref));
-	@apply --mx-bg-fade(25%);
+	@apply --mx-bg-faded(25%);
 	border-radius: 9999px;
 
 	&[data-orientation='vertical'] {
@@ -143,7 +143,7 @@
 		width var(--m-duration) var(--m-easing);
 
 	@apply --mx-bg(var(--mx-fg-ref));
-	@apply --mx-bg-fade(5%);
+	@apply --mx-bg-faded(5%);
 
 	&[data-hovering] {
 		pointer-events: auto;

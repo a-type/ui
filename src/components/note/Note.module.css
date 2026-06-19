@@ -4,15 +4,15 @@
 	&:has(input:focus[data-focus-clicked]),
 	&:has(textarea:focus[data-focus-clicked]) {
 		@apply --mx-bg(var(--m-color-main-light));
-		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-light), 4px);
+		@apply --mx-bg-lighter(3);
+		--mx-ring-value: --fn-ring(var(--m-color-main-light), 4px);
 	}
 
 	&:has(input:focus-visible),
 	&:has(textarea:focus-visible) {
 		@apply --mx-bg(var(--m-color-main-light));
-		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-focus-ring();
+		@apply --mx-bg-lighter(3);
+		--mx-ring-value: --fn-focus-ring();
 	}
 }
 
@@ -33,8 +33,8 @@
 
 	@apply --mx-fg(var(--m-color-neutral-ink));
 	@apply --mx-bg(var(--m-color-main-wash));
-	@apply --mx-bg-darken(1);
-	@apply --mx-border(var(--m-color-main-heavy));
+	@apply --mx-bg-heavier(1);
+	@apply --mx-borderColor(var(--m-color-main-heavy));
 	border-right-width: 0;
 
 	& input,
@@ -61,7 +61,7 @@
 	width: 20px;
 	flex: 0 0 20px;
 
-	@apply --mx-border(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-color-main-heavy));
 	border-bottom-width: var(--m-lineWidth-md);
 	border-left-width: var(--m-lineWidth-md);
 	border-top-width: 0;
@@ -76,13 +76,13 @@
 	right: 0;
 	transform-origin: right bottom;
 
-	@apply --mx-border(var(--m-color-main-wash));
-	@apply --mx-border-darken(1);
+	@apply --mx-borderColor(var(--m-color-main-wash));
+	@apply --mx-borderColor-heavier(1);
 	border-width: 9.5px;
 	border-style: solid;
 	border-color: transparent;
-	border-bottom-color: var(--mx-border-ref);
-	border-left-color: var(--mx-border-ref);
+	border-bottom-color: var(--mx-borderColor-ref);
+	border-left-color: var(--mx-borderColor-ref);
 }
 
 .diagonal {
@@ -99,9 +99,9 @@
 
 .foldBottom {
 	flex: 1;
-	@apply --mx-border(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-color-main-heavy));
 	@apply --mx-bg(var(--m-color-main-wash));
-	@apply --mx-bg-darken(1);
+	@apply --mx-bg-heavier(1);
 	border-right-width: var(--m-lineWidth-md);
 	border-bottom-width: var(--m-lineWidth-md);
 	border-left-width: 0;

@@ -4,7 +4,7 @@
 	gap: var(--m-spacing-sm);
 	border-radius: var(--m-radius-lg);
 
-	@apply --mx-bg(--fn-fade(var(--m-color-main-light), 20%));
+	@apply --mx-bg(--fn-color-faded(var(--m-color-main-light), 20%));
 }
 
 .item {
@@ -19,30 +19,30 @@
 
 	padding: var(--m-action-padding);
 
-	@apply --mx-border(transparent);
+	@apply --mx-borderColor(transparent);
 	border-radius: var(--m-radius-lg);
 
 	&[data-pressed] {
 		@apply --mx-shadow;
-		--mx-shadow-shadow: var(--m-shadow-sm);
+		--mx-shadow-value: var(--m-shadow-sm);
 		@apply --mx-bg(var(--m-color-main));
-		@apply --mx-border(var(--m-color-neutral-ink));
+		@apply --mx-borderColor(var(--m-color-neutral-ink));
 	}
 
 	&:not([data-pressed]) {
-		@apply --mx-bg(--fn-fade(var(--m-color-neutral), 30%));
+		@apply --mx-bg(--fn-color-faded(var(--m-color-neutral), 30%));
 	}
 
 	&:hover:not([data-pressed]) {
-		@apply --mx-bg-lighten(2);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
-		@apply --mx-border(--fn-fade(var(--m-color-main-ink), 20%));
+		@apply --mx-bg-lighter(2);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 2px);
+		@apply --mx-borderColor(--fn-color-faded(var(--m-color-main-ink), 20%));
 	}
 
 	&:active:not([data-pressed]) {
-		@apply --mx-bg-lighten(1);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
-		@apply --mx-border(--fn-fade(var(--m-color-main-ink), 30%));
+		@apply --mx-bg-lighter(1);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
+		@apply --mx-borderColor(--fn-color-faded(var(--m-color-main-ink), 30%));
 	}
 
 	&:focus {
@@ -50,6 +50,6 @@
 	}
 
 	&:focus-visible {
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 	}
 }

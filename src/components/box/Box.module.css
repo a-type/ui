@@ -84,11 +84,11 @@
 		&[data-p='sm'] {
 			padding: var(--m-spacing-sm);
 		}
-		&[data-p='md'],
-		&[data-p='true'] {
+		&[data-p='md'] {
 			padding: var(--m-spacing-md);
 		}
-		&[data-p='lg'] {
+		&[data-p='lg'],
+		&[data-p='true'] {
 			padding: var(--m-spacing-lg);
 		}
 		&[data-p='xl'] {
@@ -152,35 +152,36 @@
 			overflow-y: clip;
 		}
 
+		&[data-border='true'] {
+			@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
+		}
+
 		&[data-surface='ambient'],
 		&[data-surface='true'] {
 			@apply --mx-bg(var(--m-surface-ambient-bg));
 			@apply --mx-fg(var(--m-surface-ambient-fg));
 			&[data-border='true'] {
-				@apply --mx-border(var(--m-surface-ambient-border));
-				border-width: var(--m-lineWidth-sm);
+				@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
 			}
 		}
 		&[data-surface='secondary'] {
 			@apply --mx-bg(var(--m-surface-secondary-bg));
 			@apply --mx-fg(var(--m-surface-secondary-fg));
 			&[data-border='true'] {
-				@apply --mx-border(var(--m-surface-secondary-border));
-				border-width: var(--m-lineWidth-sm);
+				@apply --mx-borderColor(var(--m-surface-secondary-borderColor));
 			}
 		}
 		&[data-surface='primary'] {
 			@apply --mx-bg(var(--m-surface-primary-bg));
 			@apply --mx-fg(var(--m-surface-primary-fg));
 			&[data-border='true'] {
-				@apply --mx-border(var(--m-surface-primary-border));
-				border-width: var(--m-lineWidth-sm);
+				@apply --mx-borderColor(var(--m-surface-primary-borderColor));
 			}
 		}
 
 		&[data-glass='true'] {
-			@apply --mx-bg-fade(80%);
-			@apply --mx-border-fade(80%);
+			@apply --mx-bg-faded(80%);
+			@apply --mx-borderColor-faded(80%);
 		}
 
 		&[data-grow='true'] {
@@ -191,7 +192,7 @@
 		}
 
 		@apply --mx-shadow;
-		--mx-shadow-shadow: var(--shadow-inset) var(--shadow-x, 0)
+		--mx-shadow-value: var(--shadow-inset) var(--shadow-x, 0)
 			calc(var(--shadow-y, 0) * var(--shadow-invert, 1)) var(--shadow-blur, 0)
 			var(--shadow-spread, 0) var(--shadow-color, transparent);
 		--shadow-inset: ;

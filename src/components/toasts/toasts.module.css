@@ -4,8 +4,8 @@
 }
 
 .toast {
-	--gap: 0.75rem;
-	--peek: 0.75rem;
+	--gap: var(--m-spacing-sm);
+	--peek: var(--m-spacing-sm);
 	--scale: calc(max(0, 1 - var(--toast-index) * 0.1));
 	--height: var(--toast-frontmost-height, var(--toast-height));
 	--shrink: calc(1 - var(--scale));
@@ -112,22 +112,17 @@
 	display: flex;
 	flex-direction: row;
 
-	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-md);
-	@apply --mx-border(var(--m-surface-secondary-border));
-	@apply --mx-fg(var(--m-surface-secondary-fg));
-	@apply --mx-bg(var(--m-surface-secondary-bg));
+	@apply --mx-shadow(var(--m-shadow-md));
+	@apply --mx-surface-secondary;
 
 	padding-inline-start: var(--m-spacing-md);
 	padding-inline-end: var(--m-spacing-sm);
 	padding-block: var(--m-spacing-sm);
 	gap: var(--m-spacing-sm);
 
-	border-radius: var(--m-surface-radius);
-
 	[data-behind]:not([data-expanded]) & {
 		max-height: var(--height);
-		@apply --mx-bg-darken(2);
+		@apply --mx-bg-heavier(2);
 	}
 }
 
@@ -159,9 +154,9 @@
 
 .toastTitle {
 	@apply --mx-fg(inherit);
-	font-size: var(--m-text-ambient-size);
-	font-weight: 600;
-	line-height: 1;
+	@apply --mx-text-secondary;
+	font-weight: var(--m-primitive-typography-weight-bold);
+	margin: 0;
 }
 
 .toastDescriptionRow {
@@ -171,15 +166,13 @@
 
 .icon {
 	position: relative;
-	top: 2px;
+	top: 4px;
 }
 
 .toastDescription {
 	margin: 0;
 	@apply --mx-fg(inherit);
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	font-weight: var(--m-text-ambient-weight);
+	@apply --mx-text-ambient;
 }
 
 .toastClose {

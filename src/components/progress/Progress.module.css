@@ -6,6 +6,7 @@
 	row-gap: var(--m-spacing-xs);
 	column-gap: var(--m-spacing-md);
 	align-items: center;
+	box-sizing: border-box;
 }
 
 .indicator {
@@ -26,10 +27,11 @@
 	overflow: clip;
 	grid-column-start: 1;
 	grid-column-end: 3;
+	box-sizing: border-box;
 
 	border-radius: var(--m-radius-lg);
 	@apply --mx-bg(var(--m-color-neutral-paper));
-	@apply --mx-border(var(--m-color-neutral-ink));
+	@apply --mx-borderColor(var(--m-color-neutral-ink));
 }
 
 .label {

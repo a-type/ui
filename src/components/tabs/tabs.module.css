@@ -41,7 +41,7 @@
 
 	&[aria-selected='false']:hover {
 		@apply --mx-bg(var(--m-color-neutral-light));
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
 	&:focus {
@@ -50,7 +50,7 @@
 
 	&:focus-visible {
 		@apply --mx-bg(var(--m-color-neutral-light));
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 		outline: none;
 	}
 
@@ -68,8 +68,8 @@
 	height: 100%;
 	width: var(--active-tab-width);
 	transition-property: transform, width, color;
-	transition-duration: 300ms;
-	transition-timing-function: ease-out;
+	transition-duration: var(--m-duration);
+	transition-timing-function: var(--m-easing);
 	transform: translateX(
 			calc(
 				var(--active-tab-left, 0px) + var(--scroll-area-overflow-x-start, 0px)
@@ -77,10 +77,7 @@
 		)
 		translateY(-50%);
 
-	@apply --mx-bg(var(--m-color-main-light));
-	@apply --mx-border(var(--m-color-neutral-heavy));
-	border-radius: var(--m-radius-lg);
-	border-width: var(--m-lineWidth-sm);
+	@apply --mx-action-light;
 }
 
 .content {
@@ -90,7 +87,7 @@
 	}
 	&:focus-visible {
 		outline: none;
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 	}
 }
 
@@ -99,12 +96,9 @@
 	width: max-content;
 	overflow: clip;
 
-	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
-	@apply --mx-bg(var(--m-color-neutral-paper));
-
-	border: var(--m-lineWidth-sm) solid;
-	@apply --mx-border(var(--mx-fg-ref));
+	@apply --mx-shadow(var(--m-shadow-sm));
+	@apply --mx-surface-ambient;
+	padding: 0;
 	border-radius: var(--m-radius-xl);
 }
 
@@ -123,7 +117,7 @@
 		round(min(1, calc(var(--scroll-area-overflow-x-start, 0px) / 10px)))
 	);
 
-	@apply --mx-fg(--fn-fade(var(--m-color-neutral-heavy), 50%));
+	@apply --mx-fg(--fn-color-faded(var(--m-color-neutral-heavy), 50%));
 }
 
 .moreRightIcon {
@@ -141,5 +135,5 @@
 		round(min(1, calc(var(--scroll-area-overflow-x-end, 0px) / 10px)))
 	);
 
-	@apply --mx-fg(--fn-fade(var(--m-color-neutral-heavy), 50%));
+	@apply --mx-fg(--fn-color-faded(var(--m-color-neutral-heavy), 50%));
 }

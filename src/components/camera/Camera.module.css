@@ -22,24 +22,24 @@
 	position: absolute;
 	bottom: var(--m-spacing-md);
 	left: 50%;
-	width: calc(48px / var(--m-global-density));
-	height: calc(48px / var(--m-global-density));
+	width: calc(48px / var(--m-global-spacing-density));
+	height: calc(48px / var(--m-global-spacing-density));
 	cursor: pointer;
 	transform: translateX(-50%);
 	opacity: 80%;
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-ring: --fn-ring(var(--m-action-secondary-bg), 2px);
+	--mx-ring-value: --fn-ring(var(--m-action-secondary-bg), 2px);
 	@apply --mx-bg(var(--m-action-secondary-bg));
 	@apply --mx-fg(color-contrast(var(--mx-bg-ref)));
-	@apply --mx-border(var(--mx-fg-ref));
+	@apply --mx-borderColor(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth);
 	border-radius: 999px;
 
 	&:hover {
 		opacity: 100%;
-		@apply --mx-bg-darken(2);
+		@apply --mx-bg-heavier(2);
 	}
 
 	&:focus {
@@ -47,8 +47,8 @@
 		opacity: 100%;
 	}
 	&:focus-visible {
-		@apply --mx-bg-lighten(1);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-ink), 4px);
+		@apply --mx-bg-lighter(1);
+		--mx-ring-value: --fn-ring(var(--m-color-main-ink), 4px);
 	}
 }
 

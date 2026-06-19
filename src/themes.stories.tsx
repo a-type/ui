@@ -69,7 +69,7 @@ export function DemoUI({ className }: { className?: string }) {
 							Accent
 						</Button>
 						<Button>Default</Button>
-						<Button className="@mode-contrast">Contrast</Button>
+						<Button className="@mode-inverted">Contrast</Button>
 						<Button className="@mode-attention" emphasis="primary">
 							Destructive
 						</Button>

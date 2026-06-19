@@ -49,7 +49,7 @@ export const Default: Story = {};
 export const OnBackground: Story = {
 	render: (args) => {
 		return (
-			<Box color="accent" surface overflow="hidden">
+			<Box color="accent" surface="primary" overflow="hidden">
 				<ActionBar {...args} />
 			</Box>
 		);

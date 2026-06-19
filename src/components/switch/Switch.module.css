@@ -12,10 +12,10 @@
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: inset var(--m-shadow-sm);
+	--mx-shadow-value: inset var(--m-shadow-sm);
 
 	@apply --mx-bg(var(--m-control-bg));
-	@apply --mx-border(var(--m-control-border));
+	@apply --mx-borderColor(var(--m-control-border));
 	border-radius: var(--m-radius-lg);
 
 	&[data-checked] {
@@ -23,13 +23,13 @@
 	}
 
 	&:hover:not(:disabled) {
-		@apply --mx-bg-lighten(2);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 2px);
+		@apply --mx-bg-lighter(2);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 2px);
 	}
 
 	&:active:not(:disabled) {
-		@apply --mx-bg-darken(1);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+		@apply --mx-bg-heavier(1);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
 	&:focus {
@@ -37,7 +37,7 @@
 	}
 
 	&:focus-visible {
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 	}
 }
 
@@ -49,10 +49,10 @@
 	will-change: transform;
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
+	--mx-shadow-value: var(--m-shadow-sm);
 
 	@apply --mx-bg(var(--m-color-neutral-paper));
-	@apply --mx-border(var(--m-control-border));
+	@apply --mx-borderColor(var(--m-control-border));
 	border-radius: var(--m-radius-lg);
 
 	position: relative;

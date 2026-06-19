@@ -1,4 +1,4 @@
-import { definePreset } from '@arbor-css/core';
+import { css, definePreset } from '@arbor-css/core';
 import {
 	ArborPresetConfig,
 	compileSingleColor,
@@ -57,22 +57,27 @@ export function presetAtype<
 				...config?.color?.ranges,
 			},
 			mainColor: config?.color?.mainColor || defaultColors.mainColor,
+			globalSaturation: 0.5,
 		},
 		typography: {
-			minSize: '10px',
+			defaultFontSize: '16px',
+			minFontSize: '12px',
 			minWeight: 200,
 			maxWeight: 600,
-			weightStep: 15,
+			weightStep: 100,
 			baseWeight: 400,
+			lineHeightStep: 0.125,
+			minLineHeight: 1,
 			...config?.typography,
 		},
-		globals: {
-			baseFontSize: '16px',
-			baseSpacingSize: '8px',
-			roundness: 0.75,
-			saturation: 0.5,
-			defaultShadowColor: 'rgba(0, 0, 0, 0.05)',
-			...config?.globals,
+		spacing: {
+			baseSize: '8px',
+		},
+		shape: {
+			roundness: 1,
+		},
+		shadow: {
+			defaultColor: 'rgba(0, 0, 0, 0.05)',
 		},
 	});
 
@@ -84,10 +89,34 @@ export function presetAtype<
 				accent: $.mode.primitive.color.leek,
 			},
 			action: {
-				roundness: config?.roundActions ? 99 : undefined,
+				roundness: config?.roundActions === false ? undefined : 99,
+
+				light: {
+					bg: $.mode.color.main.light,
+					fg: $.mode.global.trueHeavyColor,
+					border: css`
+						${$.mode.action.light.borderWidth} ${$.mode.action.light
+							.borderStyle} ${$.mode.action.light.borderColor}
+					`,
+					borderColor: $.mixins.fg.ref,
+					borderStyle: 'solid',
+					borderWidth: '1px',
+				},
+				primary: {
+					borderColor: $.mixins.fg.ref,
+				},
+				secondary: {
+					borderColor: $.mixins.fg.ref,
+				},
 			},
 			control: {
-				roundness: config?.roundControls ? 1.25 : undefined,
+				roundness: config?.roundControls ? 1.5 : undefined,
+				padding: {
+					block: $.mode.spacing.sm,
+				},
+			},
+			surface: {
+				roundness: 1,
 			},
 			user: {
 				hue: 0,
@@ -119,12 +148,95 @@ export function presetAtype<
 					description: 'A user-input saturation value between 0 and 1',
 				},
 			},
+			action: {
+				light: base.modeSchema.action.primary,
+			},
+		},
+		mixins: (create, $) => {
+			return {
+				actionLight: create('action-light', {
+					definition: (css) => css`
+						${base.mixins.bg.apply({ '--color': $.mode.action.light.bg })}
+						${base.mixins.fg.apply({ '--color': $.mode.action.light.fg })}
+						${base.mixins.borderColor.apply({
+							'--color': $.mode.action.light.borderColor,
+						})}
+						border-width: ${$.mode.action.light.borderWidth};
+						border-style: ${$.mode.action.light.borderStyle};
+						border-radius: ${$.mode.action.radius};
+						padding: ${$.mode.action.padding.$root};
+					`,
+				}),
+				hover: create('hover', {
+					definition: (css) => css`
+						&:hover {
+							${base.mixins.bgHeavier.apply({ '--step': 1 })}
+							${base.mixins.ring.apply({
+								'--ring': base.functions.ring.compute({
+									'--color': $.mixins.bg.ref,
+									'--size': '4px',
+								}),
+							})}
+
+							&[data-emphasis="primary"] {
+								${base.mixins.bgLighter.apply({ '--step': 1 })}
+							}
+						}
+					`,
+				}),
+				focus: create('focus', {
+					definition: (css) => css`
+						&:focus {
+							outline: none;
+						}
+						&:focus-visible,
+						&[data-focus-visible='true'] {
+							${base.mixins.bgLighter.apply({ '--step': 1 })}
+							${base.mixins.ring.apply({
+								'--ring': base.functions.ring.compute({
+									'--color': $.mode.color.main.heavy,
+									'--size': '2px',
+								}),
+							})}
+
+							&[data-emphasis="primary"] {
+								${base.mixins.bgLighter.apply({ '--step': 2 })}
+							}
+						}
+					`,
+				}),
+				active: create('active', {
+					definition: (css) => css`
+						&:active {
+							${base.mixins.bgHeavier.apply({ '--step': 2 })}
+
+							&[data-emphasis="primary"] {
+								${base.mixins.bgLighter.apply({ '--step': 2 })}
+							}
+						}
+					`,
+				}),
+				disabled: create('disabled', {
+					definition: (css) => css`
+						&&:disabled,
+						&&[data-disabled='true'] {
+							cursor: default;
+							box-shadow: none;
+							${base.mixins.bgDesaturated.apply({ '--step': 8 })}
+							${base.mixins.fgFaded.apply({
+								'--opacity': 0.65,
+								'--source': $.mode.color.neutral.ink,
+							})}
+						}
+					`,
+				}),
+			};
 		},
 		functions: (create, $) => ({
 			focusRing: create('focus-ring', {
 				parameters: [
 					{
-						name: 'width',
+						name: '--width',
 						fallback: '2px',
 					},
 				],
@@ -186,17 +298,26 @@ export function presetAtype<
 	// density and size
 	preset.bundleMode('dense', {
 		global: {
-			density: 1.25,
+			spacing: {
+				density: 1.25,
+			},
 		},
 	});
 	preset.bundleMode('denser', {
 		global: {
-			density: 1.5,
+			spacing: {
+				density: 1.5,
+			},
+			typography: {
+				minFontSize: '10px',
+			},
 		},
 	});
 	preset.bundleMode('density-reset', {
 		global: {
-			density: 1,
+			spacing: {
+				density: 1,
+			},
 		},
 	});
 
@@ -212,21 +333,6 @@ export function presetAtype<
 			primary: preset.$.mode.primitive.typography['6xl'],
 			secondary: preset.$.mode.primitive.typography['5xl'],
 			ambient: preset.$.mode.primitive.typography['4xl'],
-		},
-	});
-
-	preset.bundleMode('contrast', {
-		action: {
-			primary: {
-				bg: preset.$.mode.color.neutral.ink,
-				fg: preset.$.mode.color.neutral.paper,
-			},
-		},
-		surface: {
-			primary: {
-				bg: preset.$.mode.color.neutral.ink,
-				fg: preset.$.mode.color.neutral.paper,
-			},
 		},
 	});
 

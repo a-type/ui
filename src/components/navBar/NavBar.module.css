@@ -6,9 +6,9 @@
 	justify-items: center;
 	overflow: clip;
 	border-radius: 0;
-	padding: var(--m-spacing-xs);
+	padding: var(--m-spacing-sm);
 	z-index: 50;
-	padding-bottom: calc(0.25rem + env(safe-area-inset-bottom, 0px));
+	padding-bottom: calc(var(--m-spacing-sm) + env(safe-area-inset-bottom, 0px));
 
 	@media (min-width: 768px) {
 		height: min-content;
@@ -38,11 +38,11 @@
 	justify-content: center;
 	gap: var(--m-spacing-sm);
 	white-space: nowrap;
-	padding: var(--m-spacing-md) var(--m-spacing-lg);
+	padding: var(--m-action-padding);
 	transition: all var(--m-duration) var(--m-easing);
 	@apply --mx-fg(var(--m-color-neutral-ink));
 	@apply --mx-bg(transparent);
-	border-radius: var(--m-radius-xs);
+	border-radius: var(--m-radius-sm);
 	border: none;
 	font-size: var(--m-text-ambient-size);
 	line-height: 1;
@@ -50,25 +50,24 @@
 	@apply --mx-shadow;
 
 	&:active {
-		@apply --mx-bg-darken(1);
+		@apply --mx-bg-heavier(1);
 	}
 
 	&:hover {
-		@apply --mx-bg(var(--m-action-primary-bg));
-		@apply --mx-bg-fade(50%);
+		@apply --mx-bg(var(--m-action-light-bg));
+		@apply --mx-bg-faded(50%);
 	}
 
 	&:focus {
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 	}
 
 	&[data-active='true'] {
-		@apply --mx-bg(var(--m-action-primary-bg));
-		@apply --mx-fg(var(--m-action-primary-fg));
-		@apply --mx-bg-lighten(2);
+		@apply --mx-bg(var(--m-action-light-bg));
+		@apply --mx-fg(var(--m-action-light-fg));
 	}
 
 	@media (min-width: 768px) {
@@ -81,7 +80,7 @@
 		overflow: visible;
 		font-size: var(--m-text-secondary-size);
 		&:active {
-			@apply --mx-bg-darken(1);
+			@apply --mx-bg-heavier(1);
 		}
 	}
 }
@@ -92,7 +91,7 @@
 
 	@media (min-width: 768px) {
 		@apply --mx-bg(var(--m-color-neutral-light));
-		@apply --mx-bg-fade(50%);
+		@apply --mx-bg-faded(50%);
 		padding: var(--m-spacing-sm);
 		border-radius: var(--m-action-radius);
 
@@ -133,5 +132,5 @@
 	border-radius: 50%;
 	background-color: var(--m-color-main);
 	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
+	--mx-shadow-value: var(--m-shadow-sm);
 }

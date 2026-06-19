@@ -5,21 +5,20 @@
 	flex-direction: column;
 	overflow: clip;
 
-	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
-
-	@apply --mx-bg(--fn-darken-color(--fn-saturate-color(var(--m-surface-ambient-bg), 2), 0.5));
-	@apply --mx-fg(var(--m-surface-ambient-fg));
-	@apply --mx-border(var(--m-surface-ambient-border));
-	@apply --mx-border-fade(50%);
+	@apply --mx-shadow(var(--m-shadow-sm));
+	@apply --mx-surface-ambient;
+	@apply --mx-borderColor-faded(50%);
+	border-width: var(--m-lineWidth-sm);
 	border-radius: var(--m-surface-radius);
 
 	font-size: var(--m-text-secondary-size);
 	line-height: var(--m-text-secondary-lineHeight);
 	font-weight: var(--m-text-secondary-weight);
 
+	padding: 0;
+
 	&[data-borderless='true'] {
-		--mx-shadow-shadow: var(--m-shadow-md);
+		--mx-shadow-value: var(--m-shadow-md);
 		border-width: 0;
 	}
 }
@@ -39,8 +38,9 @@
 	line-height: var(--m-text-ambient-lineHeight);
 	font-weight: var(--m-text-ambient-weight);
 
-	padding: 0;
+	padding: var(--m-spacing-md);
 	padding-bottom: var(--m-spacing-xs);
+	gap: var(--m-spacing-sm);
 	&[data-compact='true'] {
 		padding-bottom: 0;
 	}
@@ -60,7 +60,7 @@
 		&:hover,
 		&:focus-visible {
 			@apply --mx-fg(var(--m-color-neutral-ink));
-			@apply --mx-bg(--fn-fade(var(--m-color-neutral-ink), 10%));
+			@apply --mx-bg(--fn-color-faded(var(--m-color-neutral-ink), 10%));
 		}
 
 		&:focus {
@@ -68,7 +68,7 @@
 		}
 		&:focus-visible,
 		&[data-visually-focused] {
-			--mx-shadow-ring: inset 0 0 0 2px var(--m-color-neutral-ink);
+			--mx-ring-value: inset 0 0 0 2px var(--m-color-neutral-ink);
 		}
 
 		&:disabled,
@@ -80,8 +80,6 @@
 
 .title {
 	z-index: 1;
-
-	margin: var(--m-spacing-md);
 	padding: var(--m-spacing-xs) var(--m-spacing-md);
 
 	font-size: var(--m-text-primary-size);
@@ -95,16 +93,17 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: clip;
+	max-width: 100%;
+	display: block;
 }
 
 .content {
 	z-index: 1;
 
-	margin: var(--m-spacing-xs) var(--m-spacing-sm);
-	padding: var(--m-spacing-xs) var(--m-spacing-md);
+	padding: var(--m-spacing-sm) var(--m-spacing-md);
 
 	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
+	line-height: 1;
 	font-weight: var(--m-text-ambient-weight);
 
 	[data-compact] & {
@@ -151,10 +150,9 @@
 	margin: auto auto auto 0px;
 	padding: 0;
 
-	@apply --mx-bg(--fn-fade(var(--m-surface-ambient-bg), 50%));
-	@apply --mx-border(var(--m-surface-ambient-border));
-	border-width: var(--m-lineWidth-sm);
-	border-style: solid;
+	@apply --mx-bg(--fn-color-faded(var(--m-surface-ambient-bg), 50%));
+	/* @apply --mx-borderColor(var(--m-surface-ambient-borderColor));
+	border-width: var(--m-lineWidth-sm); */
 	border-radius: var(--m-action-radius);
 }
 
@@ -169,9 +167,8 @@
 
 	gap: var(--m-spacing-xs);
 
-	@apply --mx-bg(--fn-fade(var(--m-surface-ambient-bg), 50%));
-	@apply --mx-border(var(--m-surface-ambient-border));
+	@apply --mx-bg(--fn-color-faded(var(--m-surface-ambient-bg), 50%));
+	@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
 	border-width: var(--m-lineWidth-sm);
-	border-style: solid;
 	border-radius: var(--m-surface-radius);
 }

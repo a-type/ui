@@ -74,7 +74,7 @@ const ExampleAutocomplete = Autocomplete.create<Item>();
 
 export const Default: Story = {
 	render({ arrow, autoHighlight, keepHighlight, highlightItemOnHover }) {
-		const [value, setValue] = useState<string | undefined>(undefined);
+		const [value, setValue] = useState<string>('');
 		return (
 			<ExampleAutocomplete
 				value={value}
@@ -164,12 +164,9 @@ export const Grouped: Story = {
 						No results found.
 					</GroupedAutocomplete.Empty>
 					<GroupedAutocomplete.Separator />
-					<div
-						className="color-neutral-heavy text-ambient"
-						style={{ padding: 'var(--m-spacing-sm)' }}
-					>
+					<GroupedAutocomplete.Details>
 						Select your favorite fruit or berry.
-					</div>
+					</GroupedAutocomplete.Details>
 				</GroupedAutocomplete.Content>
 			</GroupedAutocomplete>
 		);
@@ -188,7 +185,7 @@ export const NotPopover: Story = {
 				keepHighlight={keepHighlight}
 				highlightItemOnHover={highlightItemOnHover}
 			>
-				<Box border p surface="white" col>
+				<Box border p surface="ambient" col>
 					<GroupedAutocomplete.Input
 						disableCaret
 						style={{ width: '100%' }}

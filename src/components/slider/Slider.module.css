@@ -30,9 +30,8 @@
 	box-sizing: border-box;
 
 	@apply --mx-bg(transparent);
-	@apply --mx-border(var(--m-color-neutral-ink));
-	border-width: var(--m-lineWidth-sm);
 	border-radius: var(--m-radius-lg);
+	@apply --mx-ring(--fn-ring(var(--m-color-neutral-ink), 1px));
 
 	&[data-orientation='vertical'] {
 		height: 100%;
@@ -46,7 +45,6 @@
 	transition: background-color var(--m-duration) var(--m-easing);
 	@apply --mx-bg(var(--m-color-main));
 	border-radius: var(--m-radius-lg);
-	height: 100%;
 }
 
 .thumb {
@@ -65,22 +63,22 @@
 		box-shadow var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
+	--mx-shadow-value: var(--m-shadow-sm);
 
-	@apply --mx-border(var(--m-color-neutral-ink));
-	border-width: var(--m-lineWidth-lg);
+	@apply --mx-borderColor(var(--m-color-neutral-ink));
+	border-width: var(--m-lineWidth-md);
 
 	@apply --mx-bg(var(--m-control-bg));
 	border-radius: var(--m-control-radius);
 
 	&:hover {
-		--mx-shadow-shadow: var(--m-shadow-md);
+		--mx-shadow-value: var(--m-shadow-md);
 	}
 
 	&:active {
 		@apply --mx-bg(var(--m-color-main-light));
-		--mx-shadow-shadow: var(--m-shadow-lg);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
+		--mx-shadow-value: var(--m-shadow-lg);
+		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
 	&:focus {
@@ -89,8 +87,8 @@
 
 	&:focus-visible {
 		@apply --mx-bg(var(--m-color-main-light));
-		--mx-shadow-shadow: var(--m-shadow-lg);
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-shadow-value: var(--m-shadow-lg);
+		--mx-ring-value: --fn-focus-ring();
 	}
 
 	&:disabled {

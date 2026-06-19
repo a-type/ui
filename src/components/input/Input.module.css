@@ -46,11 +46,11 @@
 	transition: box-shadow var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: inset var(--m-shadow-sm);
+	--mx-shadow-value: inset var(--m-shadow-sm);
 
 	@apply --mx-fg(var(--m-control-fg));
 	@apply --mx-bg(var(--m-control-bg));
-	@apply --mx-border(var(--m-control-border));
+	@apply --mx-borderColor(var(--m-control-borderColor));
 	border-radius: var(--m-control-radius);
 
 	font-size: var(--m-text-secondary-size);
@@ -59,31 +59,31 @@
 
 	&:has(input:disabled),
 	&:has(textarea:disabled) {
-		--mx-shadow-shadow: 0 0 0 0 transparent;
+		--mx-shadow-value: 0 0 0 0 transparent;
 		@apply --mx-bg(transparent);
-		@apply --mx-border-lighten(2);
+		@apply --mx-borderColor-lighter(2);
 
 		& input:placeholder,
 		& textarea::placeholder {
-			@apply --mx-fg-lighten(2);
+			@apply --mx-fg-lighter(2);
 		}
 	}
 
 	&:has(input:focus-visible[data-focus-clicked='false']),
 	&:has(textarea:focus-visible[data-focus-clicked='false']) {
-		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-focus-ring();
+		@apply --mx-bg-lighter(3);
+		--mx-ring-value: --fn-focus-ring();
 	}
 	&:has(input:focus),
 	&:has(textarea:focus) {
-		@apply --mx-bg-lighten(3);
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-light), 4px);
+		@apply --mx-bg-lighter(3);
+		--mx-ring-value: --fn-ring(var(--m-color-main-light), 4px);
 	}
 
 	&:has(input:hover:not(:disabled):not(:focus)),
 	&:has(textarea:hover:not(:disabled):not(:focus)) {
-		@apply --mx-bg-lighten(2);
-		@apply --mx-border-darken(2);
+		@apply --mx-bg-lighter(2);
+		@apply --mx-borderColor-heavier(2);
 	}
 
 	& > [data-icon] {

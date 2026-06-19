@@ -6,7 +6,6 @@ import {
 } from '@base-ui/react/toast';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import { useResolvedColorMode } from '../../colorMode.js';
 import { Button, ButtonProps } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { Spinner } from '../spinner/Spinner.js';
@@ -40,8 +39,6 @@ export function Toaster() {
 
 function ToastList() {
 	const { toasts: untypedToasts } = Toast.useToastManager();
-	const mode = useResolvedColorMode();
-
 	const toasts = untypedToasts as Array<ToastObject<CustomToastData>>;
 
 	return toasts.map((toast) => (
@@ -61,10 +58,12 @@ function ToastList() {
 			)}
 		>
 			<Toast.Content className={cls.toastContent}>
-				<div className={clsx(cls.toastMain)}>
-					<div className={clsx(cls.toastMainBody)}>
+				<div className={cls.toastMain}>
+					<div className={cls.toastMainBody}>
 						<div className={cls.toastMainBodyContent}>
-							<Toast.Title className={toast.title} />
+							<Toast.Title className={cls.toastTitle}>
+								{toast.title}
+							</Toast.Title>
 							<div className={cls.toastDescriptionRow}>
 								{toast.data?.loading ? (
 									<Spinner size={15} className={cls.icon} />

@@ -62,6 +62,6 @@
 	border-radius: inherit;
 
 	&[dragging-over='true'] {
-		@apply --mx-bg-darken(2);
+		@apply --mx-bg-heavier(2);
 	}
 }

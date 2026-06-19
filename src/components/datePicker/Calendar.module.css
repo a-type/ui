@@ -45,7 +45,7 @@
 
 	@apply --mx-fg(var(--m-color-neutral-ink));
 	@apply --mx-bg(var(--m-color-neutral-paper));
-	@apply --mx-border(transparent);
+	@apply --mx-borderColor(transparent);
 
 	display: flex;
 	cursor: pointer;
@@ -54,12 +54,12 @@
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
+	--mx-shadow-value: var(--m-shadow-sm);
 
 	&[data-highlighted] {
 		z-index: 1;
 		outline: none;
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-heavy), 2px);
+		--mx-ring-value: --fn-ring(var(--m-color-main-heavy), 2px);
 	}
 
 	&[data-selected] {
@@ -72,7 +72,7 @@
 		z-index: 1;
 		border-radius: 0;
 		@apply --mx-bg(var(--m-color-main-light));
-		--mx-shadow-shadow: 0 0 0 0 transparent;
+		--mx-shadow-value: 0 0 0 0 transparent;
 	}
 
 	&[data-disabled='true'] {
@@ -140,7 +140,7 @@
 		z-index: 1;
 		@apply --mx-bg(var(--m-color-main));
 		border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
-		--mx-shadow-shadow: 0 0 0 0 transparent;
+		--mx-shadow-value: 0 0 0 0 transparent;
 	}
 
 	&[data-range-start] {
@@ -157,7 +157,7 @@
 	&:hover {
 		z-index: 100;
 		outline: none;
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-heavy), 2px);
+		--mx-ring-value: --fn-ring(var(--m-color-main-heavy), 2px);
 	}
 
 	&:active {

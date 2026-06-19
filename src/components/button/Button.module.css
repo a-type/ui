@@ -2,7 +2,7 @@
 	user-select: none;
 	appearance: none;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: all var(--m-duration) var(--m-easing);
 
 	display: flex;
 	flex-direction: row;
@@ -14,52 +14,43 @@
 	overflow: visible;
 	white-space: nowrap;
 
+	@apply --mx-action-secondary;
+
 	font-size: var(--m-text-secondary-size);
 	line-height: 1;
 	font-family: inherit;
 	font-weight: 500;
 
-	@apply --mx-border(var(--mx-fg-ref));
-	border-width: var(--m-lineWidth-md);
-	border-radius: var(--m-action-radius);
-
-	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
-
-	padding: var(--m-action-padding);
+	@apply --mx-shadow(var(--m-shadow-sm));
+	@apply --mx-ring;
 
 	&[data-emphasis='primary'] {
-		@apply --mx-bg(var(--m-action-primary-bg));
-		@apply --mx-fg(var(--m-action-primary-fg));
-		&:hover {
-			@apply --mx-bg-lighten(1);
-		}
-		&:active {
-			@apply --mx-bg-lighten(2);
-		}
+		@apply --mx-action-primary;
 	}
 	&[data-emphasis='light'] {
-		/* A variant of primary color, but a bit lighter */
-		@apply --mx-bg(var(--m-color-main-light));
-		@apply --mx-fg(var(--m-color-main-ink));
+		@apply --mx-action-light;
 	}
 	&[data-emphasis='default'] {
-		@apply --mx-bg(var(--m-action-secondary-bg));
-		@apply --mx-fg(var(--m-action-secondary-fg));
+		@apply --mx-action-secondary;
 	}
 	&[data-emphasis='ghost'] {
-		@apply --mx-border(var(--m-action-ambient-border));
-		@apply --mx-bg(var(--m-action-ambient-bg));
-		@apply --mx-fg(var(--m-action-ambient-fg));
-		--mx-shadow-shadow: 0 0 0 0 transparent;
+		@apply --mx-action-ambient;
+		--mx-ring-value: 0 0 0 0 transparent;
+		--mx-shadow-value: 0 0 0 0 transparent;
 
 		font-weight: 600;
 
 		&:hover,
 		&:focus {
 			--mx-bg-applied: inherit;
+			--mx-bg-ref: --fn-color-heavier(
+				color-mix(var(--mx-bg-applied), var(--m-color-main-light) 10%),
+				1
+			);
 		}
-
+	}
+	&[data-emphasis='ghost'],
+	&[data-emphasis='default'] {
 		&[aria-pressed='true'] {
 			@apply --mx-bg(var(--m-color-main-light));
 		}
@@ -89,28 +80,10 @@
 		width: fit-content;
 	}
 
-	&:hover {
-		@apply --mx-bg-darken(1);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 4px);
-	}
-	&:active {
-		@apply --mx-bg-darken(2);
-		--mx-shadow-ring: --fn-ring(var(--mx-bg-ref), 6px);
-	}
-	&:focus {
-		outline: none;
-	}
-	&:focus-visible {
-		@apply --mx-bg-lighten(1);
-		--mx-shadow-ring: --fn-focus-ring();
-	}
-	&:disabled,
-	&[data-disabled='true'] {
-		cursor: default;
-		box-shadow: none;
-		@apply --mx-bg-desaturate(8);
-		--mx-fg-ref: --fn-fade(var(--m-color-neutral-ink), 65%);
-	}
+	@apply --mx-hover;
+	@apply --mx-active;
+	@apply --mx-focus;
+	@apply --mx-disabled;
 
 	/* Always turn off background for toggleable buttons that aren't pressed */
 	&[data-toggleable='true'][aria-pressed='false']:not(:hover) {

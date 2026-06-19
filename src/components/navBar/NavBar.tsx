@@ -24,7 +24,7 @@ export const NavBarItem = function NavBarItem({
 }: NavBarItemProps & {
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
-	const mobile = useMediaQuery('(max-width: 600px)');
+	const mobile = useMediaQuery('(max-width: 768px)');
 	return (
 		<Button
 			ref={ref}

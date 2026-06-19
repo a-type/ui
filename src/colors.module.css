@@ -30,7 +30,7 @@
 	top: 0;
 	@apply --mx-fg(var(--m-color-neutral));
 	@apply --mx-bg(var(--m-color-neutral-ink));
-	@apply --mx-bg-fade(50%);
+	@apply --mx-bg-faded(50%);
 	font-size: var(--m-text-ambient-size);
 	line-height: var(--m-text-ambient-lineHeight);
 	font-weight: var(--m-text-ambient-weight);
@@ -39,14 +39,14 @@
 }
 
 .bgLighten1 {
-	@apply --mx-bg-lighten(1);
+	@apply --mx-bg-lighter(1);
 }
 .bgLighten2 {
-	@apply --mx-bg-lighten(2);
+	@apply --mx-bg-lighter(2);
 }
 .bgDarken1 {
-	@apply --mx-bg-darken(1);
+	@apply --mx-bg-heavier(1);
 }
 .bgDarken2 {
-	@apply --mx-bg-darken(2);
+	@apply --mx-bg-heavier(2);
 }

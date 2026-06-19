@@ -25,11 +25,7 @@ import {
 } from '../combobox/Combobox.js';
 import cls from '../combobox/Combobox.module.css';
 import { Icon } from '../icon/Icon.js';
-import {
-	arrow as arrowClassName,
-	item as itemClassName,
-	separator as separatorClassName,
-} from '../primitives/menus.module.css';
+import menuCls from '../primitives/menus.module.css';
 import { ArrowSvg } from '../utility/ArrowSvg.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 
@@ -89,10 +85,7 @@ const AutocompleteBackdrop = withClassName(
 );
 
 const AutocompleteArrow = ({ className, ...props }: AutocompleteArrowProps) => (
-	<BaseAutocomplete.Arrow
-		{...props}
-		className={clsx(arrowClassName, className)}
-	>
+	<BaseAutocomplete.Arrow {...props} className={clsx(menuCls.arrow, className)}>
 		<ArrowSvg />
 	</BaseAutocomplete.Arrow>
 );
@@ -112,7 +105,7 @@ const AutocompleteContent = ({
 		<BaseAutocomplete.Portal>
 			<AutocompleteBackdrop />
 			<BaseAutocomplete.Positioner sideOffset={8} {...positioner}>
-				<AutocompletePopup {...props}>
+				<AutocompletePopup className={menuCls.popup} {...props}>
 					{arrow && <AutocompleteArrow />}
 					{children}
 				</AutocompletePopup>
@@ -129,10 +122,7 @@ export interface AutocompleteItemProps extends BaseAutocompleteItemProps {
 	ref?: React.Ref<HTMLDivElement>;
 }
 const AutocompleteItem = ({ className, ...props }: AutocompleteItemProps) => (
-	<BaseAutocomplete.Item
-		className={clsx(itemClassName, className)}
-		{...props}
-	/>
+	<BaseAutocomplete.Item className={clsx(menuCls.item, className)} {...props} />
 );
 const AutocompleteGroup = ({
 	className,
@@ -143,7 +133,7 @@ const AutocompleteGroup = ({
 	);
 };
 
-const AutocompleteGroupItemList = withClassName(SlotDiv, cls.groupItem);
+const AutocompleteGroupItemList = withClassName(SlotDiv, cls.groupItemList);
 
 const AutocompleteGroupLabel = withClassName(
 	BaseAutocomplete.GroupLabel,
@@ -157,8 +147,10 @@ const AutocompleteRow: React.FC<BaseAutocompleteRowProps> = withClassName(
 
 const AutocompleteSeparator = withClassName(
 	BaseAutocomplete.Separator,
-	separatorClassName,
+	menuCls.separator,
 );
+
+const AutocompleteDetails = withClassName('div', cls.details);
 
 export interface AutocompleteGroupItemProps
 	extends Omit<BaseAutocompleteItemProps, 'render'> {
@@ -211,6 +203,7 @@ const baseSubComponents = {
 	Row: AutocompleteRow,
 	Separator: AutocompleteSeparator,
 	Clear: AutocompleteClear,
+	Details: AutocompleteDetails,
 
 	Positioner: BaseAutocomplete.Positioner,
 	Portal: BaseAutocomplete.Portal,

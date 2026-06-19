@@ -48,7 +48,7 @@
 	height: 80px;
 	width: 100%;
 	cursor: pointer;
-	@apply --mx-border(var(--mx-fg-ref));
+	@apply --mx-borderColor(var(--mx-fg-ref));
 	border-width: 0px;
 	border-bottom-width: var(--m-lineWidth-sm);
 

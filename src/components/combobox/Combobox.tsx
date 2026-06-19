@@ -2,6 +2,7 @@ import * as BaseCombobox from '@base-ui/react/combobox';
 import clsx from 'clsx';
 import {
 	createContext,
+	CSSProperties,
 	ReactNode,
 	Ref,
 	RefObject,
@@ -21,13 +22,17 @@ import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 import cls from './Combobox.module.css';
 
 export interface ComboboxInputProps
-	extends Omit<BaseCombobox.ComboboxInputProps, 'className' | 'render'> {
+	extends Omit<
+		BaseCombobox.ComboboxInputProps,
+		'className' | 'style' | 'render'
+	> {
 	ref?: React.Ref<HTMLInputElement>;
 	icon?: ReactNode;
 	disableCaret?: boolean;
 	disableClear?: boolean;
 	children?: ReactNode;
 	className?: string;
+	style?: CSSProperties;
 }
 
 export function ComboboxComposedInput({
@@ -38,10 +43,11 @@ export function ComboboxComposedInput({
 	children,
 	disableCaret,
 	disableClear,
+	style,
 	...props
 }: ComboboxInputProps & {
 	className?: string;
-	ref?: React.Ref<HTMLInputElement>;
+	ref?: React.Ref<HTMLDivElement>;
 	open: boolean;
 	disableCaret?: boolean;
 	disableClear?: boolean;
@@ -61,11 +67,14 @@ export function ComboboxComposedInput({
 
 	if (isInChips) {
 		return (
-			<div className={clsx(cls.chipInputWrapper, className)}>
+			<div
+				ref={ref}
+				className={clsx(cls.chipInputWrapper, className)}
+				style={style}
+			>
 				<BaseCombobox.Combobox.Input
 					render={<Input.Input />}
 					autoComplete="off"
-					ref={ref}
 					className={clsx(cls.chipInput)}
 					minLength={3}
 					{...props}
@@ -77,7 +86,7 @@ export function ComboboxComposedInput({
 	}
 
 	return (
-		<Input.Border ref={ref} className={className}>
+		<Input.Border ref={ref} className={className} style={style}>
 			{icon}
 			<BaseCombobox.Combobox.Input
 				render={<Input.Input />}

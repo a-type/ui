@@ -72,11 +72,10 @@ export function CardMain({
 export const CardTitle = withClassName(
 	withProps(Box, {
 		surface: 'ambient',
-		border: true,
 		gap: 'sm',
 		col: true,
+		rounded: 'sm',
 	}),
-	'@mode-dense',
 	cls.title,
 );
 
@@ -84,9 +83,9 @@ const CardContentRoot = withClassName(
 	withProps(Box, {
 		surface: 'ambient',
 		glass: true,
-		border: true,
 		col: true,
 		gap: 'sm',
+		rounded: 'sm',
 	}),
 	'@mode-dense',
 	cls.content,

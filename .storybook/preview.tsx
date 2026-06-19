@@ -112,27 +112,27 @@ const preview: Preview = {
 				document.documentElement.classList.add(`@mode-${ctx.globals.mode}`);
 
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.saturation.name,
+					preset.$.mode.global.color.saturation.name,
 					`${ctx.globals.saturation * 0.5}`,
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.baseSpacingSize.name,
+					preset.$.mode.global.spacing.baseSize.name,
 					`${ctx.globals.spacing / 2}rem`,
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.roundness.name,
+					preset.$.mode.global.shape.roundness.name,
 					`${ctx.globals.corners}`,
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.shadowBlur.name,
+					preset.$.mode.global.shadow.blur.name,
 					ctx.globals.shadows === 'hard' ? '0' : '0.5',
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.shadowSpread.name,
+					preset.$.mode.global.shadow.spread.name,
 					ctx.globals.shadows === 'hard' ? '1.5' : '1',
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.lineWidth.name,
+					preset.$.mode.global.shape.lineWidth.name,
 					`${ctx.globals.lineWidth}`,
 				);
 
@@ -144,22 +144,22 @@ const preview: Preview = {
 						`@mode-${ctx.globals.mode}`,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.user.saturation.name,
+						preset.$.mode.global.color.saturation.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.baseSpacingSize.name,
+						preset.$.mode.global.spacing.baseSize.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.roundness.name,
+						preset.$.mode.global.shape.roundness.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.shadowBlur.name,
+						preset.$.mode.global.shadow.blur.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.shadowSpread.name,
+						preset.$.mode.global.shadow.spread.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.lineWidth.name,
+						preset.$.mode.global.shape.lineWidth.name,
 					);
 				};
 			}, [

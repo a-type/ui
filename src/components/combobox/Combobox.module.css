@@ -22,7 +22,7 @@
 .groupItem {
 	@apply --mx-shadow;
 	&[data-highlighted] {
-		--mx-shadow-ring: --fn-ring(var(--m-color-main-mid), 2px);
+		--mx-ring-value: --fn-ring(var(--m-color-main-mid), 2px);
 	}
 }
 
@@ -159,4 +159,10 @@
 	flex-shrink: 0;
 	align-items: center;
 	margin-right: calc(-1 * var(--m-control-padding-inline));
+}
+
+.details {
+	@apply --mx-text-ambient;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	padding: var(--m-spacing-sm);
 }

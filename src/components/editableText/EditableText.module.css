@@ -13,11 +13,11 @@
 	cursor: pointer;
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: none;
+	--mx-shadow-value: none;
 
 	@apply --mx-fg(inherit);
 	@apply --mx-bg(transparent);
-	@apply --mx-border(transparent);
+	@apply --mx-borderColor(transparent);
 
 	padding: var(--m-control-padding);
 	gap: var(--m-spacing-sm);
@@ -26,14 +26,14 @@
 	&:hover,
 	&:focus-visible {
 		@apply --mx-bg(var(--m-color-neutral-light));
-		@apply --mx-bg-fade(80%);
+		@apply --mx-bg-faded(80%);
 	}
 
 	&:focus {
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 	}
 }
 

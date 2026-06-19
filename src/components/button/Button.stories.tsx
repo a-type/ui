@@ -64,7 +64,7 @@ export const Default: Story = {
 					<Button {...args} emphasis="ghost">
 						Ghost
 					</Button>
-					<Button {...args} emphasis="primary" className="@mode-contrast">
+					<Button {...args} emphasis="primary" className="@mode-inverted">
 						Contrast
 					</Button>
 				</Box>

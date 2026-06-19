@@ -15,7 +15,7 @@
 	transform-origin: var(--transform-origin);
 
 	@apply --mx-shadow;
-	--mx-shadow-shadow: var(--m-shadow-sm);
+	--mx-shadow-value: var(--m-shadow-sm);
 
 	&[data-color='contrast'] {
 		@apply --mx-fg(var(--m-color-neutral-paper));
@@ -26,7 +26,7 @@
 	&[data-color='neutral'] {
 		@apply --mx-fg(var(--m-color-neutral-ink));
 		@apply --mx-bg(var(--m-color-neutral-paper));
-		@apply --mx-border(var(--m-color-neutral));
+		@apply --mx-borderColor(var(--m-color-neutral));
 		border-style: solid;
 		border-width: var(--m-lineWidth-sm);
 	}

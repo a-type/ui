@@ -4,7 +4,7 @@
 	padding: var(--m-spacing-md);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	border-radius: var(--m-radius-lg);
-	@apply --mx-border(var(--m-surface-ambient-border))
+	@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
 
 	@media (min-width: 768px) {
 		min-width: 0;

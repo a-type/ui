@@ -7,7 +7,7 @@
 
 	&:focus-visible {
 		@apply --mx-shadow;
-		--mx-shadow-ring: --fn-focus-ring();
+		--mx-ring-value: --fn-focus-ring();
 		border-radius: var(--m-action-radius);
 	}
 }
@@ -38,7 +38,7 @@
 	transition: opacity 0.2s ease;
 
 	@apply --mx-bg(var(--m-color-neutral-ink));
-	@apply --mx-bg-fade(50%);
+	@apply --mx-bg-faded(50%);
 
 	&[data-state='closed'] {
 		opacity: 0;
