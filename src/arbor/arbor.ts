@@ -41,6 +41,7 @@ export type DefaultColorRangeName = keyof typeof defaultColors.ranges;
 export type ATypeConfig<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
 > = ArborPresetConfig<TColors> & {
+	mainColor?: TColors;
 	roundActions?: boolean;
 	roundControls?: boolean;
 };
@@ -56,7 +57,10 @@ export function presetAtype<
 				...defaultColors.ranges,
 				...config?.color?.ranges,
 			},
-			mainColor: config?.color?.mainColor || defaultColors.mainColor,
+			mainColor:
+				config?.mainColor ||
+				config?.color?.mainColor ||
+				defaultColors.mainColor,
 			globalSaturation: 0.5,
 		},
 		typography: {
