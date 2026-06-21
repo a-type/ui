@@ -52,6 +52,7 @@ export function presetAtype<
 	const base = presetArbor({
 		...config,
 		color: {
+			globalSaturation: 0.5,
 			...config?.color,
 			ranges: {
 				...defaultColors.ranges,
@@ -61,7 +62,6 @@ export function presetAtype<
 				config?.mainColor ||
 				config?.color?.mainColor ||
 				defaultColors.mainColor,
-			globalSaturation: 0.5,
 		},
 		typography: {
 			defaultFontSize: '16px',
@@ -76,12 +76,15 @@ export function presetAtype<
 		},
 		spacing: {
 			baseSize: '8px',
+			...config?.spacing,
 		},
 		shape: {
 			roundness: 1,
+			...config?.shape,
 		},
 		shadow: {
 			defaultColor: 'rgba(0, 0, 0, 0.05)',
+			...config?.shadow,
 		},
 	});
 
