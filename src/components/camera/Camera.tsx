@@ -38,6 +38,7 @@ const CameraContext = createContext<{
 
 export interface CameraRootProps {
 	className?: string;
+	style?: React.CSSProperties;
 	onCapture?: (data: File) => void;
 	children?: ReactNode;
 	format?: 'image/png' | 'image/jpeg';

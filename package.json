@@ -14,18 +14,16 @@
 	],
 	"exports": {
 		".": {
-			"types": "./dist/esm/index.d.ts",
-			"import": "./dist/esm/index.js",
-			"node": "./dist/esm/index.js",
-			"require": "./dist/cjs/index.js",
-			"default": "./dist/cjs/index.js"
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"default": "./dist/index.js"
 		},
 		"./arbor": {
-			"types": "./dist/esm/arbor/arbor.d.ts",
-			"import": "./dist/esm/arbor/arbor.js",
-			"node": "./dist/esm/arbor/arbor.js",
-			"require": "./dist/cjs/arbor/arbor.js",
-			"default": "./dist/cjs/arbor/arbor.js"
+			"types": "./dist/arbor/arbor.d.ts",
+			"import": "./dist/arbor/arbor.js",
+			"node": "./dist/arbor/arbor.js",
+			"default": "./dist/arbor/arbor.js"
 		},
 		"./main.css": {
 			"import": "./dist/css/main.css",
@@ -36,9 +34,9 @@
 	},
 	"scripts": {
 		"build:transpile": "tsc",
-		"build:prefix": "node ./scripts/addUnoInclude.js",
-		"build:process": "unocss --write-transformed -o ./dist/css/main.css -m -c uno.config.js \"./dist/**/*.js\"",
-		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:process",
+		"build:copy": "node --experimental-strip-types ./scripts/copy.ts",
+		"build:arbor": "arbor build -o ./dist/css/arbor.css",
+		"build": "pnpm run build:transpile && pnpm run build:copy && pnpm run build:arbor",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
 		"storybook": "storybook dev -p 6006",
@@ -61,8 +59,8 @@
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.9",
-		"@arbor-css/core": "^0.0.122",
-		"@arbor-css/postcss": "^0.0.122",
+		"@arbor-css/core": "^0.0.126",
+		"@arbor-css/postcss": "^0.0.126",
 		"@base-ui/react": "^1.4.1",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
@@ -81,6 +79,7 @@
 		"@storybook/react-vite": "10.4.0",
 		"@testing-library/react": "^16.3.2",
 		"@types/dom-chromium-installation-events": "^101.0.4",
+		"@types/node": "^24.13.2",
 		"@types/pluralize": "^0.0.33",
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",

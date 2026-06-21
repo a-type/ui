@@ -56,11 +56,17 @@ export default meta;
 
 type Story = StoryObj;
 
-export function DemoUI({ className }: { className?: string }) {
+export function DemoUI({
+	className,
+	style,
+}: {
+	className?: string;
+	style?: React.CSSProperties;
+}) {
 	const nextWeek = new Date();
 	nextWeek.setDate(nextWeek.getDate() + 7);
 	return (
-		<PageRoot data-testid="demo" className={className}>
+		<PageRoot data-testid="demo" className={className} style={style}>
 			<PageContent>
 				<div className={cls.grid}>
 					<Box gap wrap p>

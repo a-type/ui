@@ -3,6 +3,8 @@ import { render } from './__tests__/render.js';
 import { Default } from './colors.stories.js';
 
 it('colors match snapshot', async () => {
-	const result = render(Default.render?.({}, {} as any));
+	const result = render(
+		Default.render?.({}, {} as any) ?? <div>Failed to render</div>,
+	);
 	await expect(result.baseElement).toMatchScreenshot('snapshot');
 });

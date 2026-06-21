@@ -16,7 +16,7 @@
 		"resolveJsonModule": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
-		"outDir": "./dist/esm",
+		"outDir": "./dist",
 		"rootDir": "./src",
 		"jsx": "react-jsx",
 		"types": ["dom-chromium-installation-events", "web-app-manifest"],
