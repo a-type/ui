@@ -29,6 +29,7 @@ export default defineConfig({
 					setupFiles: ['src/__tests__/setup.ts'],
 					include: ['src/**/*.snapshots.tsx'],
 					browser: {
+						api: 6331,
 						enabled: true,
 						headless: true,
 						ui: false,

@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react';
 import clsx from 'clsx';
-import { withProps } from '../../hooks.js';
 import { withClassName } from '../../hooks/withClassName.js';
+import { withProps } from '../../hooks/withProps.js';
 import cls from './typography.module.css';
 
 export interface TypographyProps extends useRender.ComponentProps<'span'> {

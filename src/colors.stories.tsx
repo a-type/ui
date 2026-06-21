@@ -39,7 +39,6 @@ export const Default: Story = {
 
 		const ranges = (
 			<>
-				<Range className="@mode-base" />
 				<Range className="@mode-user" style={style} />
 				<Range className="@mode-lemon" />
 				<Range className="@mode-leek" />
