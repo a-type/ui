@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           run_install: true
-          version: 10.4.0
+          version: 11.3.0
 # prepublish will do the build.
