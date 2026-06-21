@@ -1,10 +1,9 @@
 import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
-import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-	plugins: [react(), UnoCSS()],
+	plugins: [react()],
 	test: {
 		projects: [
 			{

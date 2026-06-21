@@ -54,13 +54,12 @@
 	},
 	"peerDependencies": {
 		"react": "^19",
-		"react-dom": "^19",
-		"unocss": "^66"
+		"react-dom": "^19"
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.9",
-		"@arbor-css/core": "^0.0.126",
-		"@arbor-css/postcss": "^0.0.126",
+		"@arbor-css/core": "^0.0.127",
+		"@arbor-css/postcss": "^0.0.127",
 		"@base-ui/react": "^1.4.1",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
