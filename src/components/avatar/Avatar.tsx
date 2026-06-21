@@ -28,16 +28,12 @@ export function Avatar({
 	...rest
 }: AvatarProps) {
 	const empty = !name && !imageSrc;
+	const sizeStyle = { '--avatar-size': size } as CSSProperties;
 	return (
 		<BaseAvatar.Root
-			className={classNames(
-				cls.root,
-				'layer-components:(relative aspect-1 w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden bg-neutral-paper b rd-lg)',
-				empty && 'layer-components:(bg-neutral-light border-dashed)',
-				className,
-			)}
+			className={classNames(cls.root, className)}
 			data-empty={empty}
-			style={size ? { width: size, height: size, ...style } : style}
+			style={size ? { ...sizeStyle, ...style } : style}
 			{...rest}
 		>
 			{imageSrc && (
@@ -50,10 +46,7 @@ export function Avatar({
 				/>
 			)}
 			{name && (
-				<BaseAvatar.Fallback
-					className={cls.fallback}
-					style={{ '--avatar-size': size } as any}
-				>
+				<BaseAvatar.Fallback className={cls.fallback}>
 					{name.charAt(0).toUpperCase()}
 				</BaseAvatar.Fallback>
 			)}

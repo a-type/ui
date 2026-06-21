@@ -40,8 +40,8 @@
 
 .calendarDay {
 	position: relative;
-	margin-bottom: -1px;
-	margin-right: -1px;
+	margin-bottom: --fn-literal(-1px);
+	margin-right: --fn-literal(-1px);
 
 	@apply --mx-fg(var(--m-color-neutral-ink));
 	@apply --mx-bg(var(--m-color-neutral-paper));
@@ -84,11 +84,11 @@
 	&[data-today]::before {
 		content: '';
 		position: absolute;
-		left: 1px;
-		top: 1px;
-		width: 6px;
-		height: 6px;
-		background-color: var(--m-primitive-color-attention);
+		left: --fn-literal(1px);
+		top: --fn-literal(1px);
+		width: --fn-literal(6px);
+		height: --fn-literal(6px);
+		background-color: var(--m-color-palette-attention);
 		border-radius: var(--m-radius-lg);
 		border: 1px solid var(--m-color-neutral-ink);
 	}

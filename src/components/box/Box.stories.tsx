@@ -82,33 +82,13 @@ export const Default: Story = {
 	},
 };
 
-export const NestedContainers: Story = {
-	render(args) {
-		return (
-			<Box {...args} p gap container surface color="accent" direction="col">
-				<Box {...args} p gap container surface items="center" color="primary">
-					<Button>Button</Button>
-					<Button>Button</Button>
-					<Box {...args} p gap surface color="attention">
-						<Button>Button</Button>
-						<Button>Button</Button>
-					</Box>
-				</Box>
-				<Box {...args} p gap surface color="gray">
-					<Button>Button</Button>
-					<Button>Button</Button>
-				</Box>
-			</Box>
-		);
-	},
-};
-
 function SurfaceContent({ name }: { name: string }) {
 	return (
 		<>
 			<div>{name} Surface</div>
 			<Box gap layout="center start">
 				<Button emphasis="primary">Primary</Button>
+				<Button emphasis="ghost">Ghost</Button>
 				<Checkbox checked />
 				<Switch checked />
 			</Box>

@@ -52,7 +52,7 @@
 		content: '';
 		left: 0;
 		top: 100%;
-		height: calc(var(--gap) + 1px);
+		height: --fn-literal(calc(var(--gap) + 1px));
 		width: 100%;
 	}
 
@@ -155,7 +155,7 @@
 .toastTitle {
 	@apply --mx-fg(inherit);
 	@apply --mx-text-secondary;
-	font-weight: var(--m-primitive-typography-weight-bold);
+	font-weight: var(--m-typography-weight-bold);
 	margin: 0;
 }
 
@@ -166,7 +166,7 @@
 
 .icon {
 	position: relative;
-	top: 4px;
+	top: --fn-literal(4px);
 }
 
 .toastDescription {

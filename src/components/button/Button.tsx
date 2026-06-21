@@ -5,7 +5,10 @@ import {
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import { ButtonHTMLAttributes, memo, Ref } from 'react';
-import { useIconOnlyDataAttributes } from '../../behaviors/iconOnly.js';
+import {
+	IconWrapper,
+	useIconOnlyDataAttributes,
+} from '../../behaviors/iconOnly.js';
 import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
@@ -13,7 +16,6 @@ import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js'
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';
 import { Icon } from '../icon/index.js';
 import { Spinner } from '../spinner/index.js';
-import { SlotDiv } from '../utility/SlotDiv.js';
 import cls from './Button.module.css';
 
 export interface ButtonProps
@@ -27,6 +29,7 @@ export interface ButtonProps
 	loading?: boolean;
 	visuallyFocused?: boolean;
 	disableIconMode?: boolean;
+	forceIconMode?: boolean;
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
 	disableDefaultLoadingIndicator?: boolean;
@@ -44,6 +47,7 @@ export function ButtonRoot({
 	children,
 	disabled,
 	disableIconMode,
+	forceIconMode,
 	disableDropdownTriggerIcon,
 	disableDefaultLoadingIndicator,
 	ref,
@@ -78,6 +82,7 @@ export function ButtonRoot({
 		tabIndex: visuallyDisabled ? -1 : undefined,
 		'data-toggleable': toggled !== undefined,
 		'data-disable-icon-mode': disableIconMode,
+		'data-force-icon-mode': forceIconMode,
 		'data-emphasis': emphasis,
 		className: clsx(
 			emphasis === 'unstyled' ? cls.unstyled : cls.root,
@@ -144,7 +149,7 @@ export const ButtonToggleIndicator = memo(function ToggleIndicator({
 });
 
 // allows custom icons to trigger icon button behavior
-export const ButtonIcon = withClassName(SlotDiv, 'icon', cls.icon);
+export const ButtonIcon = withClassName(IconWrapper, 'icon', cls.icon);
 ButtonIcon.displayName = 'ButtonIcon';
 
 export const Button = Object.assign(ButtonRoot, {

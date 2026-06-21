@@ -102,7 +102,8 @@ abstract class MasonryLayout implements Layout {
 			child.style.setProperty('width', `${width}%`);
 			child.style.setProperty('left', `${x}%`);
 			child.style.setProperty('top', `${y}px`);
-			child.style.setProperty('z-index', index.toString());
+			// wrap z-index after some items to avoid getting too high
+			child.style.setProperty('z-index', (index % 30).toString());
 			requestAnimationFrame(() => {
 				child.style.setProperty('transition', 'transform 0.3s, top 0.3s');
 			});

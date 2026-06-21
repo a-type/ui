@@ -87,7 +87,7 @@ function ToastList() {
 					</div>
 				</div>
 				{toast.data?.actions && (
-					<div className={cls.toastActions}>
+					<div className={clsx('@mode-denser', cls.toastActions)}>
 						{toast.data.actions.toReversed().map((action, index: number) => (
 							<Toast.Action
 								key={index}

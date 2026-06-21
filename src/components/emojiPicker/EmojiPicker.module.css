@@ -1,15 +1,16 @@
 .root {
-	height: 368px;
+	height: --fn-literal(368px);
 	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	isolation: isolate;
 	gap: var(--m-spacing-sm);
+	@apply --mx-bg(var(--m-surface-ambient-bg));
 }
 
 .search {
 	z-index: 10;
-	min-width: 80px;
+	min-width: --fn-literal(80px);
 	width: 100%;
 }
 
@@ -65,7 +66,7 @@
 
 .emoji {
 	padding: var(--m-spacing-xs);
-	font-size: 20px;
+	font-size: --fn-literal(20px);
 }
 
 .list {
@@ -75,7 +76,7 @@
 
 .skinToneButton {
 	padding: var(--m-spacing-xs);
-	font-size: 20px;
+	font-size: --fn-literal(20px);
 }
 
 .skinToneSelector {

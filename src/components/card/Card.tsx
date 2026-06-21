@@ -61,7 +61,7 @@ export function CardMain({
 		state: {
 			interactive: !!isInteractive,
 			compact: !!compact,
-			focusVisible: !!visuallyFocused,
+			'focus-visible': !!visuallyFocused,
 			disabled: !!visuallyDisabled,
 		},
 	});

@@ -23,7 +23,7 @@ export function SwitchField({
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Box gap="sm" className={className}>
+		<Box gap="md" className={className}>
 			<Switch
 				{...props}
 				checked={props.checked}

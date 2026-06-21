@@ -28,7 +28,7 @@ export function EmojiField({
 	const id = useIdOrGenerated(providedId);
 	const [open, setOpen] = useState(false);
 	return (
-		<Box gap="sm" className={className}>
+		<Box gap="md" className={className}>
 			<Popover open={open} onOpenChange={setOpen}>
 				<Popover.Trigger
 					render={

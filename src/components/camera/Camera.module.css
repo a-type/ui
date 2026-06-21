@@ -8,8 +8,8 @@
 }
 
 .root {
-	min-width: 48px;
-	min-height: 48px;
+	min-width: --fn-literal(48px);
+	min-height: --fn-literal(48px);
 }
 
 .video {
@@ -35,7 +35,7 @@
 	@apply --mx-fg(color-contrast(var(--mx-bg-ref)));
 	@apply --mx-borderColor(var(--mx-fg-ref));
 	border-width: var(--m-lineWidth);
-	border-radius: 999px;
+	border-radius: var(--m-action-radius);
 
 	&:hover {
 		opacity: 100%;

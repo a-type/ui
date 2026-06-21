@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { Heading } from '../typography/typography.js';
 import { EditableText } from './EditableText.js';
 
 const meta = {
@@ -41,15 +42,16 @@ export const Title: Story = {
 		const [value, setValue] = useState(args.value);
 		const [editable, setEditable] = useState(false);
 		return (
-			<EditableText
-				{...args}
-				value={value}
-				onValueChange={setValue}
-				editing={editable}
-				onEditingChange={setEditable}
-				className="text-primary"
-				style={{ margin: 'auto' }}
-			/>
+			<Heading>
+				<EditableText
+					{...args}
+					value={value}
+					onValueChange={setValue}
+					editing={editable}
+					onEditingChange={setEditable}
+					style={{ margin: 'auto' }}
+				/>
+			</Heading>
 		);
 	},
 };

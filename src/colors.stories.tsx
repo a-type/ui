@@ -145,15 +145,15 @@ function ModifierRange({
 			<Swatch className={cls.bgWash}>W</Swatch>
 			<Swatch className={clsx(cls.bgLight, cls.bgLighten2)}>L+2</Swatch>
 			<Swatch className={cls.bgLight}>L</Swatch>
-			{/* <Swatch className="bg-main bg-lighten-5">P+5</Swatch> */}
+			<Swatch className={cls.bgBetweenMidLight}>B/W</Swatch>
 			<Swatch className={clsx(cls.bgMid, cls.bgLighten2)}>P+2</Swatch>
 			<Swatch className={clsx(cls.bgMid, cls.bgLighten1)}>P+1</Swatch>
 			<Swatch className={cls.bgMid}>P</Swatch>
 			<Swatch className={clsx(cls.bgMid, cls.bgDarken1)}>P-1</Swatch>
 			<Swatch className={clsx(cls.bgMid, cls.bgDarken2)}>P-2</Swatch>
-			{/* <Swatch className="bg-main bg-darken-5">P-5</Swatch> */}
-			<Swatch className={cls.bgHeavy}>D</Swatch>
-			<Swatch className={clsx(cls.bgHeavy, cls.bgDarken2)}>D-2</Swatch>
+			<Swatch className={cls.bgBetweenMidHeavy}>B/H</Swatch>
+			<Swatch className={cls.bgHeavy}>H</Swatch>
+			<Swatch className={clsx(cls.bgHeavy, cls.bgDarken2)}>H-2</Swatch>
 			<Swatch className={cls.bgInk}>I</Swatch>
 		</Box>
 	);

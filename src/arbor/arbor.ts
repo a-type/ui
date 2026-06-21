@@ -86,7 +86,7 @@ export function presetAtype<
 		extends: [base],
 		baseMode: ($) => ({
 			color: {
-				accent: $.mode.primitive.color.leek,
+				accent: $.mode.color.palette.leek,
 			},
 			action: {
 				roundness: config?.roundActions === false ? undefined : 99,
@@ -253,12 +253,12 @@ export function presetAtype<
 	});
 	preset.bundleMode('success', {
 		color: {
-			main: preset.$.mode.primitive.color.success,
+			main: preset.$.mode.color.palette.success,
 		},
 	});
 	preset.bundleMode('attention', {
 		color: {
-			main: preset.$.mode.primitive.color.attention,
+			main: preset.$.mode.color.palette.attention,
 		},
 	});
 	preset.bundleMode('neutral', {
@@ -272,7 +272,7 @@ export function presetAtype<
 			saturation: `var(${$userColorSaturation}, 1)`,
 		},
 		color: {
-			main: preset.$.mode.primitive.color.user,
+			main: preset.$.mode.color.palette.user,
 		},
 	});
 
@@ -285,12 +285,10 @@ export function presetAtype<
 	for (const colorName of allColorNames) {
 		preset.bundleMode(colorName, {
 			color: {
-				main: preset.$.mode.primitive.color[colorName],
+				main: preset.$.mode.color.palette[colorName],
 				// avoid assigning leek to both main and accent
 				accent:
-					colorName === 'leek'
-						? preset.$.mode.primitive.color.lemon
-						: undefined,
+					colorName === 'leek' ? preset.$.mode.color.palette.lemon : undefined,
 			},
 		});
 	}
@@ -301,6 +299,9 @@ export function presetAtype<
 			spacing: {
 				density: 1.25,
 			},
+			typography: {
+				size: 0.825,
+			},
 		},
 	});
 	preset.bundleMode('denser', {
@@ -310,6 +311,7 @@ export function presetAtype<
 			},
 			typography: {
 				minFontSize: '10px',
+				size: 0.75,
 			},
 		},
 	});
@@ -322,17 +324,21 @@ export function presetAtype<
 	});
 
 	preset.bundleMode('heading', {
-		text: {
-			primary: preset.$.mode.primitive.typography['4xl'],
-			secondary: preset.$.mode.primitive.typography['3xl'],
-			ambient: preset.$.mode.primitive.typography['xl'],
+		global: {
+			typography: {
+				size: 1.5,
+			},
 		},
 	});
 	preset.bundleMode('hero', {
-		text: {
-			primary: preset.$.mode.primitive.typography['6xl'],
-			secondary: preset.$.mode.primitive.typography['5xl'],
-			ambient: preset.$.mode.primitive.typography['4xl'],
+		global: {
+			typography: {
+				size: 3,
+				fontSizeScaleBase: 1.5,
+			},
+			spacing: {
+				density: 0.5,
+			},
 		},
 	});
 

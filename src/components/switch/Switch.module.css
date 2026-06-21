@@ -1,13 +1,13 @@
 .root {
 	all: unset;
 	position: relative;
-	height: 20px;
-	width: 42px;
+	height: --fn-literal(20px);
+	width: --fn-literal(42px);
 	display: flex;
 	flex-shrink: 0;
 	cursor: pointer;
 	appearance: none;
-	padding: 3px;
+	padding: --fn-literal(3px);
 
 	transition: all var(--m-duration) var(--m-easing);
 
@@ -22,23 +22,10 @@
 		@apply --mx-bg(var(--m-color-main));
 	}
 
-	&:hover:not(:disabled) {
-		@apply --mx-bg-lighter(2);
-		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 2px);
-	}
-
-	&:active:not(:disabled) {
-		@apply --mx-bg-heavier(1);
-		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
-	}
-
-	&:focus {
-		outline: none;
-	}
-
-	&:focus-visible {
-		--mx-ring-value: --fn-focus-ring();
-	}
+	@apply --mx-hover;
+	@apply --mx-active;
+	@apply --mx-focus;
+	@apply --mx-disabled;
 }
 
 .thumb {
@@ -48,8 +35,7 @@
 	transition: transform var(--m-duration) var(--m-easing);
 	will-change: transform;
 
-	@apply --mx-shadow;
-	--mx-shadow-value: var(--m-shadow-sm);
+	@apply --mx-shadow(var(--m-shadow-sm));
 
 	@apply --mx-bg(var(--m-color-neutral-paper));
 	@apply --mx-borderColor(var(--m-control-border));

@@ -13,6 +13,7 @@ import {
 	ValueMonitor,
 } from '../../systems/ValueMonitor.js';
 import { Button, ButtonProps } from '../button/Button.js';
+import cls from './QuickAction.module.css';
 
 const QuickActionIdContext = createContext<string>('qab');
 
@@ -62,10 +63,7 @@ const QuickActionTrigger = ({
 					color={props.color}
 					emphasis={emphasis}
 					{...composed}
-					className={clsx(
-						'layer-composed:(relative min-h-[2.5rem] min-w-[2.5rem] justify-center p-xs rd-full)',
-						className,
-					)}
+					className={clsx(cls.trigger, className)}
 					style={{
 						// @ts-ignore
 						anchorName: `--${layoutId}`,
@@ -108,25 +106,8 @@ const QuickActionContent = ({
 		<Dialog.Portal>
 			<Dialog.Popup
 				ref={finalRef}
-				className={clsx(
-					'layer-components:transition-ease-out layer-components:border-black layer-components:(contain-layout border-1 transition-all shadow-lg bg-neutral-paper rd-md border-solid clip-inset-[-50px]-[-50px]-[-50px]-[-50px])',
-					'layer-components:(fixed bottom-[anchor(bottom)] overflow-clip)',
-					{
-						'[justify-self:anchor-center]': align === 'center',
-						'left-[anchor(left)]': align === 'start',
-						'right-[anchor(right)]': align === 'end',
-					},
-					{
-						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[calc((100%_-_var(--trigger-width))/2)]-[0]-[calc((100%_-_var(--trigger-width))/2)]-[round]-[200px]':
-							align === 'center',
-						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[calc(100%_-_var(--trigger-width))]-[0]-[0]-[round]-[200px]':
-							align === 'start',
-						'start-end:clip-inset-[calc(100%_-_var(--trigger-height))]-[0]-[0]-[calc(100%_-_var(--trigger-width))]-[round]-[200px]':
-							align === 'end',
-					},
-					'data-[ending-style]:opacity-0',
-					className,
-				)}
+				className={clsx(cls.popup, className)}
+				data-align={align}
 				style={
 					{
 						positionAnchor: `--${layoutId}`,

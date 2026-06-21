@@ -111,9 +111,6 @@
 		&[data-rounded='lg'] {
 			border-radius: var(--m-radius-lg);
 		}
-		&[data-rounded='xl'] {
-			border-radius: var(--m-radius-xl);
-		}
 
 		&[data-w='auto'] {
 			width: auto;

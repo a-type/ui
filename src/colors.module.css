@@ -50,3 +50,10 @@
 .bgDarken2 {
 	@apply --mx-bg-heavier(2);
 }
+
+.bgBetweenMidLight {
+	@apply --mx-bg(--fn-color-between(var(--m-color-main), var(--m-color-main-light)));
+}
+.bgBetweenMidHeavy {
+	@apply --mx-bg(--fn-color-between(var(--m-color-main), var(--m-color-main-heavy)));
+}

@@ -23,7 +23,7 @@ export function CheckboxField({
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Box gap="sm" items="center" className={className}>
+		<Box gap="md" className={className}>
 			<Checkbox
 				{...props}
 				checked={props.checked}

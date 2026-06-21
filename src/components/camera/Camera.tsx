@@ -167,7 +167,7 @@ export function CameraRoot({
 		>
 			<Box
 				surface="ambient"
-				rounded="lg"
+				rounded="md"
 				overflow="hidden"
 				className={clsx(
 					'@mode-dark',
@@ -217,7 +217,11 @@ export function CameraShutterButton({
 	);
 }
 
-const StyledShutterButton = withClassName(BaseButton, cls.shutterButton);
+const StyledShutterButton = withClassName(
+	BaseButton,
+	'@mode-light',
+	cls.shutterButton,
+);
 
 export interface CameraDeviceSelectorProps {
 	className?: string;

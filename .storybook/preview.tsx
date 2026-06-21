@@ -64,7 +64,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Spacing',
 				icon: 'ruler',
-				items: ['0', '0.25', '0.5', '1', '1.25', '1.5', '2'],
+				items: ['0', '0.5', '0.75', '1', '1.25', '1.5'],
 				dynamicTitle: true,
 			},
 		},
@@ -75,7 +75,7 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Corners',
 				icon: 'grow',
-				items: ['0', '0.25', '0.5', '1', '1.5', '2', '3'],
+				items: ['0', '0.5', '0.75', '1', '1.125', '1.25', '1.5'],
 				dynamicTitle: true,
 			},
 		},

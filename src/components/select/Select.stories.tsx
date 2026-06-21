@@ -38,6 +38,25 @@ export const Default: Story = {
 	},
 };
 
+export const Empty: Story = {
+	render(args) {
+		return (
+			<Box full layout="center center" style={{ minHeight: 200 }}>
+				<Select value={null}>
+					<SelectTrigger placeholder="Select an option" />
+					<SelectContent>
+						{['One', 'Two', 'Three'].map((item) => (
+							<SelectItem key={item} value={item}>
+								{item}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+			</Box>
+		);
+	},
+};
+
 export const LongListWithItemLabels: Story = {
 	render({ defaultValue: _, value: __, ...args }) {
 		return (

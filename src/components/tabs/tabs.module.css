@@ -99,7 +99,7 @@
 	@apply --mx-shadow(var(--m-shadow-sm));
 	@apply --mx-surface-ambient;
 	padding: 0;
-	border-radius: var(--m-radius-xl);
+	border-radius: var(--m-radius-lg);
 }
 
 .moreLeftIcon {
@@ -108,8 +108,8 @@
 	left: var(--m-spacing-xs);
 	top: 50%;
 	z-index: 10;
-	height: 16px;
-	width: 16px;
+	height: --fn-literal(16px);
+	width: --fn-literal(16px);
 	transform: translateY(-50%) rotate(90deg);
 
 	--scroll-area-overflow-x-start: inherit;
@@ -126,8 +126,8 @@
 	right: var(--m-spacing-xs);
 	top: 50%;
 	z-index: 10;
-	height: 16px;
-	width: 16px;
+	height: --fn-literal(16px);
+	width: --fn-literal(16px);
 	transform: translateY(-50%) rotate(-90deg);
 
 	--scroll-area-overflow-x-end: inherit;

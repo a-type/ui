@@ -17,7 +17,11 @@ import inputCls from '../input/Input.module.css';
 import { Spinner } from '../spinner/Spinner.js';
 import cls from './EmojiPicker.module.css';
 
-export const EmojiPickerRoot = withClassName(Core.Root, cls.root);
+export const EmojiPickerRoot = withClassName(
+	Core.Root,
+	'@mode-dense',
+	cls.root,
+);
 export const EmojiPickerSearch = withClassName(
 	Core.Search,
 	cls.search,
@@ -61,6 +65,7 @@ export const EmojiPickerEmoji = withClassName(
 			toggleMode="color"
 			size="small"
 			aria-label={p.emoji.label}
+			forceIconMode
 		>
 			<Button.Icon>{p.emoji.emoji}</Button.Icon>
 		</Button>
@@ -97,12 +102,15 @@ export const useEmojiSkinTone = () =>
 	useLocalStorage<SkinTone | undefined>('emoji-skin-tone', undefined, false);
 
 export type SkinTone = ReturnType<typeof useSkinTone>[0];
-export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
+export const EmojiPickerSkinToneSelector = ({
+	className,
+	...props
+}: BoxProps) => {
 	const [_, __, options] = useSkinTone();
 	const [skinTone, setSkinTone] = useEmojiSkinTone();
 
 	return (
-		<Box d="row" gap {...props}>
+		<Box d="row" gap className={className} {...props}>
 			{options.map((option) => (
 				<Button
 					key={option.skinTone}
@@ -113,6 +121,7 @@ export const EmojiPickerSkinToneSelector = (props: BoxProps) => {
 					aria-label={`Skin tone ${option}`}
 					className={cls.skinToneButton}
 					onClick={() => setSkinTone(option.skinTone)}
+					forceIconMode
 				>
 					<Button.Icon>{option.emoji}</Button.Icon>
 				</Button>

@@ -1,10 +1,6 @@
 .button {
 	font-weight: normal;
 }
-
-.root {
-}
-
 .collapse {
 	padding: var(--m-spacing-sm);
 }

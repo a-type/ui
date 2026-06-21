@@ -5,6 +5,7 @@
 	justify-content: start;
 	width: 100%;
 	anchor-name: --page-content;
+	flex: 1;
 
 	gap: var(--m-spacing-md);
 

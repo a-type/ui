@@ -1,16 +1,13 @@
 .typography {
 	@apply --mx-fg(inherit);
+	font-size: var(--m-text-secondary-size);
+	line-height: var(--m-text-secondary-lineHeight);
+	font-weight: var(--m-text-secondary-weight);
 
 	&[data-emphasis='primary'] {
 		font-size: var(--m-text-primary-size);
 		line-height: var(--m-text-primary-lineHeight);
 		font-weight: var(--m-text-primary-weight);
-	}
-
-	&[data-emphasis='secondary'] {
-		font-size: var(--m-text-secondary-size);
-		line-height: var(--m-text-secondary-lineHeight);
-		font-weight: var(--m-text-secondary-weight);
 	}
 
 	&[data-emphasis='ambient'] {

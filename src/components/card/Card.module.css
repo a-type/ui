@@ -26,7 +26,7 @@
 .main {
 	position: relative;
 	z-index: 1;
-	min-height: 40px;
+	min-height: --fn-literal(40px);
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -58,7 +58,8 @@
 		cursor: pointer;
 
 		&:hover,
-		&:focus-visible {
+		&:focus-visible,
+		&[data-focus-visible] {
 			@apply --mx-fg(var(--m-color-neutral-ink));
 			@apply --mx-bg(--fn-color-faded(var(--m-color-neutral-ink), 10%));
 		}
@@ -67,8 +68,8 @@
 			outline: none;
 		}
 		&:focus-visible,
-		&[data-visually-focused] {
-			--mx-ring-value: inset 0 0 0 2px var(--m-color-neutral-ink);
+		&[data-focus-visible] {
+			@apply --mx-ring(inset 0 0 0 2px var(--m-color-neutral-ink));
 		}
 
 		&:disabled,
@@ -147,7 +148,7 @@
 	gap: var(--m-spacing-sm);
 	align-items: center;
 
-	margin: auto auto auto 0px;
+	margin: auto auto auto --fn-literal(0px);
 	padding: 0;
 
 	@apply --mx-bg(--fn-color-faded(var(--m-surface-ambient-bg), 50%));
@@ -170,5 +171,5 @@
 	@apply --mx-bg(--fn-color-faded(var(--m-surface-ambient-bg), 50%));
 	@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
 	border-width: var(--m-lineWidth-sm);
-	border-radius: var(--m-surface-radius);
+	border-radius: var(--m-action-radius);
 }

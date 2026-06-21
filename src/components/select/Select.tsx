@@ -60,15 +60,21 @@ export const SelectTrigger = function SelectTrigger({
 	ref,
 	children,
 	render,
+	placeholder,
 	...props
 }: SelectTriggerProps & {
 	ref?: React.Ref<HTMLButtonElement>;
+	placeholder?: string;
 }) {
 	return (
-		<UnstyledSelectTrigger {...props} ref={ref} render={render || <Button />}>
+		<UnstyledSelectTrigger
+			{...props}
+			ref={ref}
+			render={render || <Button className={cls.trigger} />}
+		>
 			{children || (
 				<>
-					<SelectValue />
+					<SelectValue placeholder={placeholder} />
 					<SelectIcon />
 				</>
 			)}

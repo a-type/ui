@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import {
 	ChangeEvent,
+	CSSProperties,
 	FocusEvent,
 	KeyboardEvent,
 	useCallback,
@@ -19,6 +20,7 @@ export interface EditableTextProps {
 	editing?: boolean;
 	onEditingChange?: (editing: boolean) => void;
 	className?: string;
+	style?: CSSProperties;
 	id?: string;
 	autoSelect?: boolean;
 	autoFocus?: boolean;

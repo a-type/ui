@@ -6,11 +6,13 @@ import cls from './ActionButton.module.css';
 
 export type ActionButtonProps = ButtonProps & {
 	visible?: boolean;
+	rootClassName?: string;
 };
 
 export function ActionButton({
 	children,
 	className,
+	rootClassName,
 	visible = true,
 	...rest
 }: ActionButtonProps) {
@@ -36,7 +38,7 @@ export function ActionButton({
 	}
 
 	return (
-		<CollapsibleRoot className={cls.root} open={!visible ? false : render}>
+		<CollapsibleRoot className={rootClassName} open={!visible ? false : render}>
 			<CollapsibleContent data-horizontal className={cls.collapse}>
 				<Button
 					size="small"
