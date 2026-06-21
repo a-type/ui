@@ -14,6 +14,21 @@
 			"problemMatcher": [],
 			"label": "npm: icons",
 			"detail": "node ./scripts/generateIcons.js"
+		},
+		{
+			"type": "npm",
+			"script": "bump",
+			"problemMatcher": [],
+			"label": "Bump Version",
+			"detail": "pnpm run typecheck && bumpp",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": true
+			}
 		}
 	]
 }
