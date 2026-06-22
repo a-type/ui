@@ -324,10 +324,24 @@ export function presetAtype<
 			},
 		},
 	});
-	preset.bundleMode('density-reset', {
+	preset.bundleMode('normal', {
 		global: {
 			spacing: {
 				density: 1,
+			},
+			typography: {
+				size: 1,
+				minFontSize: '12px',
+			},
+		},
+	});
+	preset.bundleMode('loose', {
+		global: {
+			spacing: {
+				density: 0.75,
+			},
+			typography: {
+				size: 1.125,
 			},
 		},
 	});
