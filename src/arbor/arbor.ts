@@ -72,10 +72,12 @@ export function presetAtype<
 			baseWeight: 400,
 			lineHeightStep: 0.125,
 			minLineHeight: 1,
+			roundToPixel: true,
 			...config?.typography,
 		},
 		spacing: {
 			baseSize: '8px',
+			roundToPixel: true,
 			...config?.spacing,
 		},
 		shape: {
@@ -340,8 +342,8 @@ export function presetAtype<
 	preset.bundleMode('hero', {
 		global: {
 			typography: {
-				size: 3,
-				fontSizeScaleBase: 1.5,
+				size: 2,
+				fontSizeScaleBase: 2,
 			},
 			spacing: {
 				density: 0.5,

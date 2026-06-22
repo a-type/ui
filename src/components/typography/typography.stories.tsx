@@ -72,6 +72,51 @@ export const Default: Story = {
 					first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from
 					a line in section 1.10.32.
 				</Text>
+
+				<hr />
+
+				<Text emphasis="secondary" italic underline strikethrough>
+					Text Secondary: Contrary to popular belief, Lorem Ipsum is not simply
+					random text. It has roots in a piece of classical Latin literature
+					from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
+					professor at Hampden-Sydney College in Virginia, looked up one of the
+					more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+					going through the cites of the word in classical literature,
+					discovered the undoubtable source.
+				</Text>
+			</Box>
+		);
+	},
+};
+
+export const Modes: Story = {
+	argTypes: {
+		mode: {
+			control: 'select',
+			options: ['hero', 'heading', 'normal'],
+		},
+	},
+	args: {
+		mode: 'normal',
+	},
+	render({ mode }: any) {
+		return (
+			<Box col gap className={`@mode-${mode}`}>
+				<Text emphasis="primary">
+					Text Primary: Contrary to popular belief, Lorem Ipsum is not simply
+					random text. It has roots in a piece of classical Latin literature
+					from 45 BC, making it over 2000 years old.
+				</Text>
+				<Text emphasis="secondary">
+					Text Secondary: Contrary to popular belief, Lorem Ipsum is not simply
+					random text. It has roots in a piece of classical Latin literature
+					from 45 BC, making it over 2000 years old.
+				</Text>
+				<Text emphasis="ambient">
+					Text Ambient: Contrary to popular belief, Lorem Ipsum is not simply
+					random text. It has roots in a piece of classical Latin literature
+					from 45 BC, making it over 2000 years old.
+				</Text>
 			</Box>
 		);
 	},

@@ -15,6 +15,16 @@
 		line-height: var(--m-text-ambient-lineHeight);
 		font-weight: var(--m-text-ambient-weight);
 	}
+
+	&[data-italic] {
+		font-style: italic;
+	}
+	&[data-underline] {
+		text-decoration: underline;
+	}
+	&[data-strikethrough] {
+		text-decoration: line-through;
+	}
 }
 
 @layer components {

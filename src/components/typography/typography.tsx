@@ -6,10 +6,16 @@ import cls from './typography.module.css';
 
 export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	emphasis?: 'primary' | 'secondary' | 'ambient';
+	italic?: boolean;
+	underline?: boolean;
+	strikethrough?: boolean;
 }
 
 export function Text({
 	emphasis,
+	italic,
+	underline,
+	strikethrough,
 	render,
 	className,
 	...rest
@@ -23,6 +29,9 @@ export function Text({
 		},
 		state: {
 			emphasis,
+			italic: italic ? true : undefined,
+			underline: underline ? true : undefined,
+			strikethrough: strikethrough ? true : undefined,
 		},
 	});
 }
