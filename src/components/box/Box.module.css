@@ -112,16 +112,18 @@
 			border-radius: var(--m-radius-lg);
 		}
 
-		&[data-w='auto'] {
-			width: auto;
-		}
 		&[data-w='full'] {
 			width: 100%;
 		}
-		&[data-h='auto'] {
-			height: auto;
-		}
 		&[data-h='full'] {
+			height: 100%;
+		}
+		&[data-full='width'],
+		&[data-full='true'] {
+			width: 100%;
+		}
+		&[data-full='height'],
+		&[data-full='true'] {
 			height: 100%;
 		}
 
