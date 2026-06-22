@@ -236,3 +236,39 @@
 		}
 	}
 }
+
+@property --shadow-color {
+	syntax: '<color>';
+	inherits: false;
+	initial-value: transparent;
+}
+
+@property --shadow-x {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --shadow-y {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --shadow-blur {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --shadow-spread {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
+
+@property --shadow-inset {
+	syntax: 'inset';
+	inherits: false;
+	initial-value:;
+}
