@@ -33,6 +33,7 @@ export const iconNames = [
 	'upload',
 	'download',
 	'undo',
+	'redo',
 	'grabby',
 	'copy',
 	'maximize',

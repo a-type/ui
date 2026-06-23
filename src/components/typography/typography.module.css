@@ -25,6 +25,12 @@
 	&[data-strikethrough] {
 		text-decoration: line-through;
 	}
+	&[data-bold] {
+		font-weight: var(--m-typography-weight-bold);
+	}
+	&[data-thin] {
+		font-weight: var(--m-typography-weight-thin);
+	}
 }
 
 @layer components {

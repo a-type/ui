@@ -9,6 +9,8 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	italic?: boolean;
 	underline?: boolean;
 	strikethrough?: boolean;
+	bold?: boolean;
+	thin?: boolean;
 }
 
 export function Text({
@@ -18,6 +20,8 @@ export function Text({
 	strikethrough,
 	render,
 	className,
+	bold,
+	thin,
 	...rest
 }: TypographyProps) {
 	return useRender({
@@ -32,6 +36,8 @@ export function Text({
 			italic: italic ? true : undefined,
 			underline: underline ? true : undefined,
 			strikethrough: strikethrough ? true : undefined,
+			bold: bold ? true : undefined,
+			thin: thin ? true : undefined,
 		},
 	});
 }
