@@ -33,11 +33,16 @@ export interface ButtonProps
 	ref?: Ref<HTMLButtonElement>;
 	disableDropdownTriggerIcon?: boolean;
 	disableDefaultLoadingIndicator?: boolean;
+	/**
+	 * Shortcuts for @mode-* classes.
+	 */
+	color?: 'primary' | 'accent' | 'success' | 'attention';
 }
 
 export function ButtonRoot({
 	className,
 	emphasis = 'default',
+	color,
 	size,
 	toggled,
 	toggleMode = 'color-and-indicator',
@@ -87,6 +92,7 @@ export function ButtonRoot({
 		className: clsx(
 			emphasis === 'unstyled' ? cls.unstyled : cls.root,
 			size === 'small' ? '@mode-dense' : '',
+			color ? `@mode-${color}` : '',
 			className,
 		),
 	};

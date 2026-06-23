@@ -255,6 +255,11 @@ export function presetAtype<
 		}),
 	});
 
+	preset.bundleMode('primary', {
+		color: {
+			main: preset.$.mode.color.palette[config?.mainColor ?? 'lemon'] as any,
+		},
+	});
 	preset.bundleMode('accent', {
 		color: {
 			main: preset.$.mode.color.accent,
