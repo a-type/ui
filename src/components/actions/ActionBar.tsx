@@ -1,5 +1,5 @@
 import classNames from 'clsx';
-import { ReactNode, Suspense } from 'react';
+import { CSSProperties, ReactNode, Suspense } from 'react';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import cls from './ActionBar.module.css';
 
@@ -8,6 +8,7 @@ export interface ActionBarProps {
 	className?: string;
 	wrap?: boolean;
 	disableShadow?: boolean;
+	style?: CSSProperties;
 }
 
 export function ActionBar({
