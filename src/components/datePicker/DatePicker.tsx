@@ -1,6 +1,6 @@
 import { Calendar, CalendarDays, useCalendarContext } from 'calendar-blocks';
 import { clsx } from 'clsx';
-import { ReactNode, useState } from 'react';
+import { CSSProperties, ReactNode, useState } from 'react';
 import { Icon } from '../icon/index.js';
 import {
 	CalendarDay,
@@ -81,6 +81,7 @@ export interface DatePickerProps {
 	value: Date | null;
 	onChange: (date: Date | null) => void;
 	className?: string;
+	style?: CSSProperties;
 }
 
 function DatePickerDefault(props: DatePickerProps) {
