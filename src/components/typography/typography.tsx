@@ -81,3 +81,9 @@ export const H5 = withProps(Heading, {
 	render: <h5 />,
 	emphasis: 'ambient',
 });
+
+export const TextLink = withProps(Text, {
+	render: <a />,
+	bold: true,
+	underline: true,
+});
