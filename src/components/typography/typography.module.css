@@ -31,6 +31,12 @@
 	&[data-thin] {
 		font-weight: var(--m-typography-weight-thin);
 	}
+	&[data-truncate] {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		max-width: 100%;
+	}
 }
 
 @layer components {

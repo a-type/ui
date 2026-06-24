@@ -11,6 +11,7 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	strikethrough?: boolean;
 	bold?: boolean;
 	thin?: boolean;
+	truncate?: boolean;
 }
 
 export function Text({
@@ -22,6 +23,7 @@ export function Text({
 	className,
 	bold,
 	thin,
+	truncate,
 	...rest
 }: TypographyProps) {
 	return useRender({
@@ -38,6 +40,7 @@ export function Text({
 			strikethrough: strikethrough ? true : undefined,
 			bold: bold ? true : undefined,
 			thin: thin ? true : undefined,
+			truncate: truncate ? true : undefined,
 		},
 	});
 }
