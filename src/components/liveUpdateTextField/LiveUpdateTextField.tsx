@@ -2,6 +2,7 @@
 
 import { debounce } from '@a-type/utils';
 import {
+	CSSProperties,
 	FocusEvent,
 	KeyboardEventHandler,
 	MouseEventHandler,
@@ -21,6 +22,7 @@ export type LiveUpdateTextFieldProps = {
 	onChange: (value: string) => void;
 	textArea?: boolean;
 	className?: string;
+	style?: CSSProperties;
 	onFocus?: (ev: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	onBlur?: (ev: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	autoComplete?: InputProps['autoComplete'];
