@@ -249,6 +249,7 @@ export interface MasonryProps {
 	className?: string;
 	columns?: number | ((containerWidth: number) => number);
 	gap?: number;
+	style?: CSSProperties;
 }
 
 const initialStyle: CSSProperties = {
@@ -263,6 +264,7 @@ export function Masonry({
 	children,
 	columns = 3,
 	gap = 16,
+	style,
 }: MasonryProps) {
 	const [layout] = useState<Layout>(() => {
 		if (typeof window === 'undefined') {
@@ -283,7 +285,7 @@ export function Masonry({
 	return (
 		<div
 			ref={ref}
-			style={initialStyle}
+			style={style ? { ...initialStyle, ...style } : initialStyle}
 			className={clsx('layer-components:z-0', className)}
 		>
 			{children}
