@@ -88,6 +88,95 @@ export function presetAtype<
 			defaultColor: 'rgba(0, 0, 0, 0.05)',
 			...config?.shadow,
 		},
+		keyframes: {
+			fadeInUp: (css, $) => css`
+				from {
+					opacity: 0;
+					transform: translateY(${$.mode.space.sm});
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			`,
+			fadeInLeft: (css, $) => css`
+				from {
+					opacity: 0;
+					transform: translateX(-${$.mode.space.sm});
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			`,
+			fadeInRight: (css, $) => css`
+				from {
+					opacity: 0;
+					transform: translateX(${$.mode.space.sm});
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			`,
+			fadeOutUp: (css, $) => css`
+				from {
+					opacity: 1;
+					transform: translateY(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateY(-${$.mode.space.sm});
+				}
+			`,
+			fadeOutLeft: (css, $) => css`
+				from {
+					opacity: 1;
+					transform: translateX(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateX(-${$.mode.space.sm});
+				}
+			`,
+			fadeOutRight: (css, $) => css`
+				from {
+					opacity: 1;
+					transform: translateX(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateX(${$.mode.space.sm});
+				}
+			`,
+			fadeOutDown: (css, $) => css`
+				from {
+					opacity: 1;
+					transform: translateY(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateY(${$.mode.space.sm});
+				}
+			`,
+			fadeOut: (css) => css`
+				from {
+					opacity: 1;
+				}
+				to {
+					opacity: 0;
+				}
+			`,
+			fadeIn: (css) => css`
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			`,
+			...config?.keyframes,
+		},
 	});
 
 	const preset = definePreset({
