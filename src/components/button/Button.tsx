@@ -91,6 +91,7 @@ export function ButtonRoot({
 		'data-emphasis': emphasis,
 		className: clsx(
 			emphasis === 'unstyled' ? cls.unstyled : cls.root,
+			emphasis === 'ghost' && '@mode-bold',
 			size === 'small' ? '@mode-dense' : '',
 			color ? `@mode-${color}` : '',
 			className,

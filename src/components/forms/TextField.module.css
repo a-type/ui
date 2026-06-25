@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: stretch;
 	align-self: stretch;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 }
 
 .input {

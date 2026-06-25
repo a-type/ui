@@ -4,8 +4,8 @@
 }
 
 .toast {
-	--gap: var(--m-spacing-sm);
-	--peek: var(--m-spacing-sm);
+	--gap: var(--m-space-sm);
+	--peek: var(--m-space-sm);
 	--scale: calc(max(0, 1 - var(--toast-index) * 0.1));
 	--height: var(--toast-frontmost-height, var(--toast-height));
 	--shrink: calc(1 - var(--scale));
@@ -17,7 +17,7 @@
 	/* basic positioning */
 	position: fixed;
 	left: auto;
-	top: var(--m-spacing-xs);
+	top: var(--m-space-xs);
 	z-index: calc(100000 - var(--toast-index));
 	margin-right: 0;
 	width: 100%;
@@ -27,7 +27,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 
 	/* styling happens in content element */
 
@@ -100,7 +100,7 @@
 	pointer-events: auto;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 
 	&[data-behind]:not([data-expanded]) {
 		pointer-events: none;
@@ -115,10 +115,10 @@
 	@apply --mx-shadow(var(--m-shadow-md));
 	@apply --mx-surface-secondary;
 
-	padding-inline-start: var(--m-spacing-md);
-	padding-inline-end: var(--m-spacing-sm);
-	padding-block: var(--m-spacing-sm);
-	gap: var(--m-spacing-sm);
+	padding-inline-start: var(--m-space-md);
+	padding-inline-end: var(--m-space-sm);
+	padding-block: var(--m-space-sm);
+	gap: var(--m-space-sm);
 
 	[data-behind]:not([data-expanded]) & {
 		max-height: var(--height);
@@ -130,7 +130,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 	@apply --mx-fg(inherit);
 
 	transition: opacity var(--m-duration) var(--m-easing);
@@ -148,20 +148,20 @@
 .toastMainBodyContent {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 	@apply --mx-fg(inherit);
 }
 
 .toastTitle {
 	@apply --mx-fg(inherit);
-	@apply --mx-text-secondary;
-	font-weight: var(--m-typography-weight-bold);
+	@apply --mx-prose-secondary;
+	font-weight: var(--m-text-weight-bold);
 	margin: 0;
 }
 
 .toastDescriptionRow {
 	display: flex;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }
 
 .icon {
@@ -172,7 +172,7 @@
 .toastDescription {
 	margin: 0;
 	@apply --mx-fg(inherit);
-	@apply --mx-text-ambient;
+	@apply --mx-prose-ambient;
 }
 
 .toastClose {
@@ -187,11 +187,11 @@
 	margin-inline-start: auto;
 	display: flex;
 	align-items: center;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	font-weight: var(--m-text-ambient-weight);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	font-weight: var(--m-prose-ambient-weight);
 
 	transition: opacity var(--m-duration) var(--m-easing);
 

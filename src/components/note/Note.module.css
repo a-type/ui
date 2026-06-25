@@ -24,11 +24,11 @@
 .content {
 	position: relative;
 	flex: 1;
-	padding: var(--m-spacing-sm);
+	padding: var(--m-space-sm);
 
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	font-weight: var(--m-text-ambient-weight);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	font-weight: var(--m-prose-ambient-weight);
 	font-style: italic;
 
 	@apply --mx-fg(var(--m-color-neutral-ink));

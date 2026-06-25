@@ -13,7 +13,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	text-align: center;
-	font-size: var(--m-text-ambient-size);
+	font-size: var(--m-prose-ambient-size);
 	font-weight: bold;
 }
 
@@ -26,7 +26,7 @@
 	grid-template-columns: repeat(7, var(--day-size, 32px));
 	grid-auto-rows: var(--day-size, 32px);
 	overflow: hidden;
-	padding: var(--m-spacing-sm);
+	padding: var(--m-space-sm);
 	border-radius: var(--m-radius-sm);
 }
 
@@ -34,7 +34,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: var(--m-text-ambient-size);
+	font-size: var(--m-prose-ambient-size);
 	@apply --mx-fg(var(--m-color-neutral-heavy));
 }
 

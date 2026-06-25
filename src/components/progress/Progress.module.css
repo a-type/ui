@@ -3,8 +3,8 @@
 
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	row-gap: var(--m-spacing-xs);
-	column-gap: var(--m-spacing-md);
+	row-gap: var(--m-space-xs);
+	column-gap: var(--m-space-md);
 	align-items: center;
 	box-sizing: border-box;
 }
@@ -38,9 +38,9 @@
 	grid-column-start: 1;
 	grid-row-start: 1;
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	font-weight: var(--m-text-ambient-weight);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	font-weight: var(--m-prose-ambient-weight);
 }
 
 .value {
@@ -48,7 +48,7 @@
 	grid-row-start: 1;
 	justify-self: end;
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: 500;
 }

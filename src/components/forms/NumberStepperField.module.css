@@ -1,5 +1,5 @@
 .root {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 }

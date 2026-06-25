@@ -41,7 +41,7 @@ export const Default: Story = {
 								flexDirection: 'column',
 								alignItems: 'center',
 								justifyContent: 'center',
-								padding: 'var(--m-spacing-lg)',
+								padding: 'var(--m-space-lg)',
 							}}
 						>
 							Focus the inputs below to see how the virtual keyboard behavior

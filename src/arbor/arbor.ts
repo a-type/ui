@@ -75,13 +75,13 @@ export function presetAtype<
 			roundToPixel: true,
 			...config?.typography,
 		},
-		spacing: {
+		space: {
 			baseSize: '8px',
 			roundToPixel: true,
-			...config?.spacing,
+			...config?.space,
 		},
 		shape: {
-			roundness: 1,
+			roundness: 1.5,
 			...config?.shape,
 		},
 		shadow: {
@@ -119,9 +119,9 @@ export function presetAtype<
 				},
 			},
 			control: {
-				roundness: config?.roundControls ? 1.5 : undefined,
+				roundness: config?.roundControls ? 2 : undefined,
 				padding: {
-					block: $.mode.spacing.sm,
+					block: $.mode.space.sm,
 				},
 			},
 			surface: {
@@ -310,7 +310,7 @@ export function presetAtype<
 	// density and size
 	preset.bundleMode('dense', {
 		global: {
-			spacing: {
+			space: {
 				density: 1.25,
 			},
 			typography: {
@@ -320,7 +320,7 @@ export function presetAtype<
 	});
 	preset.bundleMode('denser', {
 		global: {
-			spacing: {
+			space: {
 				density: 1.5,
 			},
 			typography: {
@@ -331,7 +331,7 @@ export function presetAtype<
 	});
 	preset.bundleMode('normal', {
 		global: {
-			spacing: {
+			space: {
 				density: 1,
 			},
 			typography: {
@@ -342,7 +342,7 @@ export function presetAtype<
 	});
 	preset.bundleMode('loose', {
 		global: {
-			spacing: {
+			space: {
 				density: 0.75,
 			},
 			typography: {
@@ -364,8 +364,17 @@ export function presetAtype<
 				size: 2,
 				fontSizeScaleBase: 2,
 			},
-			spacing: {
+			space: {
 				density: 0.5,
+			},
+		},
+	});
+	preset.bundleMode('bold', {
+		global: {
+			typography: {
+				minWeight: 300,
+				maxWeight: 800,
+				baseWeight: 500,
 			},
 		},
 	});

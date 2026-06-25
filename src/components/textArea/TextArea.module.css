@@ -10,5 +10,5 @@
 }
 
 .border {
-	padding-block-end: var(--m-spacing-sm);
+	padding-block-end: var(--m-space-sm);
 }

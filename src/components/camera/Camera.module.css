@@ -20,10 +20,10 @@
 
 .shutterButton {
 	position: absolute;
-	bottom: var(--m-spacing-md);
+	bottom: var(--m-space-md);
 	left: 50%;
-	width: calc(48px / var(--m-global-spacing-density));
-	height: calc(48px / var(--m-global-spacing-density));
+	width: calc(48px / var(--m-global-space-density));
+	height: calc(48px / var(--m-global-space-density));
 	cursor: pointer;
 	transform: translateX(-50%);
 	opacity: 80%;
@@ -54,12 +54,12 @@
 
 .swapButton {
 	position: absolute;
-	bottom: var(--m-spacing-xs);
-	left: var(--m-spacing-xs);
+	bottom: var(--m-space-xs);
+	left: var(--m-space-xs);
 }
 
 .fullscreenButton {
 	position: absolute;
-	top: var(--m-spacing-xs);
-	right: var(--m-spacing-xs);
+	top: var(--m-space-xs);
+	right: var(--m-space-xs);
 }

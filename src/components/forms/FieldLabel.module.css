@@ -2,10 +2,10 @@
 	display: inline-flex;
 	flex-direction: column;
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	margin-inline-start: var(--m-spacing-md);
-	gap: var(--m-spacing-xs);
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
+	margin-inline-start: var(--m-space-md);
+	gap: var(--m-space-xs);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: bold;
 }
 
@@ -13,8 +13,8 @@
 	display: inline-flex;
 	flex-direction: row;
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	gap: var(--m-spacing-sm);
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	margin-block-start: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	margin-block-start: var(--m-space-sm);
 }

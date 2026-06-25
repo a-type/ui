@@ -31,10 +31,10 @@
 	@apply --mx-fg(var(--m-color-neutral));
 	@apply --mx-bg(var(--m-color-neutral-ink));
 	@apply --mx-bg-faded(50%);
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
-	font-weight: var(--m-text-ambient-weight);
-	padding: var(--m-spacing-xs);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	font-weight: var(--m-prose-ambient-weight);
+	padding: var(--m-space-xs);
 	border-radius: var(--m-radius-sm);
 }
 

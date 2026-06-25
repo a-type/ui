@@ -6,7 +6,7 @@
 	padding: var(--m-surface-padding);
 	border-radius: var(--m-surface-radius);
 
-	font-size: var(--m-text-ambient-size);
+	font-size: var(--m-prose-ambient-size);
 
 	transition:
 		opacity 0.2s ease,

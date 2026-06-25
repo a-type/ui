@@ -60,7 +60,7 @@
 			border-bottom-width: 0;
 			transform: translate(0, 0);
 			padding-bottom: env(safe-area-inset-bottom);
-			padding-top: var(--m-spacing-lg);
+			padding-top: var(--m-space-lg);
 
 			&[data-starting-style],
 			&[data-ending-style] {
@@ -106,7 +106,7 @@
 .contentScrollAreaContent {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 	padding: var(--m-surface-padding);
 }
 
@@ -120,7 +120,7 @@
 	cursor: grab;
 	will-change: transform;
 	touch-action: none;
-	padding-block: var(--m-spacing-sm);
+	padding-block: var(--m-space-sm);
 	z-index: 1;
 
 	@media (min-width: 600px) {
@@ -136,8 +136,8 @@
 
 .close {
 	position: absolute;
-	right: var(--m-spacing-sm);
-	top: var(--m-spacing-sm);
+	right: var(--m-space-sm);
+	top: var(--m-space-sm);
 	z-index: 101;
 	display: flex;
 
@@ -150,24 +150,24 @@
 
 .title {
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	font-size: var(--m-text-primary-size);
-	font-weight: var(--m-text-primary-weight);
-	line-height: var(--m-text-primary-lineHeight);
-	margin-block-end: var(--m-spacing-xs);
+	font-size: var(--m-prose-primary-size);
+	font-weight: var(--m-prose-primary-weight);
+	line-height: var(--m-prose-primary-lineHeight);
+	margin-block-end: var(--m-space-xs);
 	margin-block-start: 0;
 }
 
 .description {
 	@apply --mx-fg(var(--m-color-neutral-heavy));
-	font-size: var(--m-text-ambient-size);
-	line-height: var(--m-text-ambient-lineHeight);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
 	margin: 0;
-	margin-block-end: var(--m-spacing-xs);
+	margin-block-end: var(--m-space-xs);
 }
 
 .actions {
 	position: sticky;
-	bottom: var(--m-spacing-md);
+	bottom: var(--m-space-md);
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
@@ -182,7 +182,7 @@
 		var(--m-shadow-md-spread) var(--m-color-neutral-paper);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-bg-faded(50%);
-	margin-block-start: var(--m-spacing-md);
-	gap: var(--m-spacing-sm);
+	margin-block-start: var(--m-space-md);
+	gap: var(--m-space-sm);
 	border-radius: var(--m-surface-radius);
 }

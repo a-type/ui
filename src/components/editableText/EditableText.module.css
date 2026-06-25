@@ -20,7 +20,7 @@
 	@apply --mx-borderColor(transparent);
 
 	padding: var(--m-control-padding);
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 	border-radius: var(--m-control-radius);
 
 	&:hover,

@@ -36,7 +36,7 @@ export const All: Story = {
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(6, 1fr)',
-					gap: 'var(--m-spacing-xs)',
+					gap: 'var(--m-space-xs)',
 				}}
 			>
 				{iconNames.map((name) => (
@@ -52,7 +52,7 @@ export const All: Story = {
 						<span
 							style={{
 								textAlign: 'center',
-								fontSize: 'var(--m-text-ambient-size)',
+								fontSize: 'var(--m-prose-ambient-size)',
 							}}
 						>
 							{name}

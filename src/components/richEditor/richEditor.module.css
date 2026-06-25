@@ -1,5 +1,5 @@
 .root {
-	@apply --mx-text-secondary;
+	@apply --mx-prose-secondary;
 	width: 100%;
 
 	& .ProseMirror {
@@ -16,36 +16,36 @@
 	}
 
 	& h1 {
-		@apply --mx-text-primary;
+		@apply --mx-prose-primary;
 		&:not(:first-child) {
-			margin-top: var(--m-spacing-xl);
+			margin-top: var(--m-space-xl);
 		}
 	}
 	& h2 {
-		@apply --mx-text-secondary;
-		font-weight: var(--m-text-primary-weight);
+		@apply --mx-prose-secondary;
+		font-weight: var(--m-prose-primary-weight);
 		&:not(:first-child) {
-			margin-top: var(--m-spacing-lg);
+			margin-top: var(--m-space-lg);
 		}
 	}
 	& h3 {
-		@apply --mx-text-ambient;
-		font-weight: var(--m-text-primary-weight);
+		@apply --mx-prose-ambient;
+		font-weight: var(--m-prose-primary-weight);
 		text-transform: uppercase;
 		&:not(:first-child) {
-			margin-top: var(--m-spacing-md);
+			margin-top: var(--m-space-md);
 		}
 	}
 	& h4 {
-		@apply --mx-text-ambient;
-		font-weight: var(--m-text-primary-weight);
+		@apply --mx-prose-ambient;
+		font-weight: var(--m-prose-primary-weight);
 		&:not(:first-child) {
-			margin-top: var(--m-spacing-md);
+			margin-top: var(--m-space-md);
 		}
 	}
 	& p {
-		@apply --mx-text-secondary;
-		margin-bottom: var(--m-spacing-md);
+		@apply --mx-prose-secondary;
+		margin-bottom: var(--m-space-md);
 	}
 	& a {
 		text-decoration: underline;
@@ -56,11 +56,11 @@
 	}
 	& blockquote {
 		border-left: 4px solid var(--m-color-neutral-heavy);
-		padding-left: var(--m-spacing-md);
+		padding-left: var(--m-space-md);
 		font-style: italic;
-		margin-block: var(--m-spacing-md);
-		margin-inline-start: var(--m-spacing-md);
-		padding-inline: var(--m-spacing-md);
+		margin-block: var(--m-space-md);
+		margin-inline-start: var(--m-space-md);
+		padding-inline: var(--m-space-md);
 		@apply --mx-bg(var(--m-color-neutral-wash));
 	}
 	& ul {
@@ -71,17 +71,17 @@
 	}
 	& ul,
 	& ol {
-		padding-inline-start: var(--m-spacing-lg);
-		margin-block: var(--m-spacing-md);
+		padding-inline-start: var(--m-space-lg);
+		margin-block: var(--m-space-md);
 	}
 	& li {
-		margin-block-end: var(--m-spacing-xs);
+		margin-block-end: var(--m-space-xs);
 	}
 	& mark {
 		@apply --mx-bg(var(--m-color-main-wash));
 	}
 	& strong {
-		font-weight: var(--m-typography-weight-bold);
+		font-weight: var(--m-text-weight-bold);
 	}
 	& em {
 		font-style: italic;
@@ -89,7 +89,7 @@
 	& hr {
 		border: none;
 		border-top: var(--m-lineWidth) solid var(--m-color-neutral-heavy);
-		margin-block: var(--m-spacing-lg);
+		margin-block: var(--m-space-lg);
 	}
 }
 

@@ -1,7 +1,7 @@
 .root {
 	max-width: 80vw;
 	width: 100%;
-	padding: var(--m-spacing-md);
+	padding: var(--m-space-md);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	border-radius: var(--m-radius-lg);
 	@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
@@ -13,7 +13,7 @@
 
 .grid {
 	display: grid;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 	align-items: start;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }

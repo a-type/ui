@@ -1,7 +1,7 @@
 .root {
 	width: fit-content;
 	display: inline-flex;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 	border-radius: var(--m-radius-lg);
 
 	@apply --mx-bg(--fn-color-faded(var(--m-color-main-light), 20%));

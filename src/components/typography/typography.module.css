@@ -1,19 +1,19 @@
 .typography {
 	@apply --mx-fg(inherit);
-	font-size: var(--m-text-secondary-size);
-	line-height: var(--m-text-secondary-lineHeight);
-	font-weight: var(--m-text-secondary-weight);
+	font-size: var(--m-prose-secondary-size);
+	line-height: var(--m-prose-secondary-lineHeight);
+	font-weight: var(--m-prose-secondary-weight);
 
 	&[data-emphasis='primary'] {
-		font-size: var(--m-text-primary-size);
-		line-height: var(--m-text-primary-lineHeight);
-		font-weight: var(--m-text-primary-weight);
+		font-size: var(--m-prose-primary-size);
+		line-height: var(--m-prose-primary-lineHeight);
+		font-weight: var(--m-prose-primary-weight);
 	}
 
 	&[data-emphasis='ambient'] {
-		font-size: var(--m-text-ambient-size);
-		line-height: var(--m-text-ambient-lineHeight);
-		font-weight: var(--m-text-ambient-weight);
+		font-size: var(--m-prose-ambient-size);
+		line-height: var(--m-prose-ambient-lineHeight);
+		font-weight: var(--m-prose-ambient-weight);
 	}
 
 	&[data-italic] {
@@ -26,10 +26,10 @@
 		text-decoration: line-through;
 	}
 	&[data-bold] {
-		font-weight: var(--m-typography-weight-bold);
+		font-weight: var(--m-text-weight-bold);
 	}
 	&[data-thin] {
-		font-weight: var(--m-typography-weight-thin);
+		font-weight: var(--m-text-weight-thin);
 	}
 	&[data-truncate] {
 		overflow: hidden;

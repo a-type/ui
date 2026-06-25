@@ -76,10 +76,10 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: end;
-		padding: var(--m-spacing-sm);
-		font-size: var(--m-text-ambient-size);
-		line-height: var(--m-text-ambient-lineHeight);
-		font-weight: var(--m-text-ambient-weight);
+		padding: var(--m-space-sm);
+		font-size: var(--m-prose-ambient-size);
+		line-height: var(--m-prose-ambient-lineHeight);
+		font-weight: var(--m-prose-ambient-weight);
 		@apply --mx-fg(var(--m-color-neutral-heavy));
 	}
 	&[data-state='open'] {

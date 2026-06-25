@@ -57,7 +57,7 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
-		spacing: {
+		space: {
 			description: 'Spacing scale',
 			defaultValue: '1',
 			type: 'number',
@@ -116,12 +116,12 @@ const preview: Preview = {
 					`${ctx.globals.saturation * 0.5}`,
 				);
 				document.documentElement.style.setProperty(
-					preset.$.mode.global.spacing.baseSize.name,
-					`${ctx.globals.spacing / 2}rem`,
+					preset.$.mode.global.space.baseSize.name,
+					`${ctx.globals.space / 2}rem`,
 				);
 				document.documentElement.style.setProperty(
 					preset.$.mode.global.shape.roundness.name,
-					`${ctx.globals.corners}`,
+					`${ctx.globals.corners * 1.5}`,
 				);
 				document.documentElement.style.setProperty(
 					preset.$.mode.global.shadow.blur.name,
@@ -147,7 +147,7 @@ const preview: Preview = {
 						preset.$.mode.global.color.saturation.name,
 					);
 					document.documentElement.style.removeProperty(
-						preset.$.mode.global.spacing.baseSize.name,
+						preset.$.mode.global.space.baseSize.name,
 					);
 					document.documentElement.style.removeProperty(
 						preset.$.mode.global.shape.roundness.name,
@@ -166,7 +166,7 @@ const preview: Preview = {
 				ctx.globals.mode,
 				ctx.globals.theme,
 				ctx.globals.saturation,
-				ctx.globals.spacing,
+				ctx.globals.space,
 				ctx.globals.corners,
 				ctx.globals.shadows,
 				ctx.globals.lineWidth,

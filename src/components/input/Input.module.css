@@ -39,7 +39,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 	width: max-content;
 	overflow: clip;
 
@@ -53,9 +53,9 @@
 	@apply --mx-borderColor(var(--m-control-borderColor));
 	border-radius: var(--m-control-radius);
 
-	font-size: var(--m-text-secondary-size);
-	line-height: var(--m-text-secondary-lineHeight);
-	font-weight: var(--m-text-secondary-weight);
+	font-size: var(--m-prose-secondary-size);
+	line-height: var(--m-prose-secondary-lineHeight);
+	font-weight: var(--m-prose-secondary-weight);
 
 	&:has(input:disabled),
 	&:has(textarea:disabled) {
@@ -87,7 +87,7 @@
 	}
 
 	& > [data-icon] {
-		margin-inline: var(--m-spacing-sm);
+		margin-inline: var(--m-space-sm);
 	}
 
 	padding-inline: var(--m-control-padding-inline);

@@ -22,7 +22,7 @@ export const Default: Story = {
 				<Popover.Trigger render={<Button color="primary" size="small" />}>
 					Open Popover
 				</Popover.Trigger>
-				<Popover.Content style={{ padding: 'var(--m-spacing-md)' }}>
+				<Popover.Content style={{ padding: 'var(--m-space-md)' }}>
 					<Popover.Arrow />
 					<Popover.Title>Hello</Popover.Title>
 					<Popover.Description>This is a popover content.</Popover.Description>

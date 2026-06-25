@@ -1,7 +1,7 @@
 .trigger {
 	display: inline-flex;
 	font-weight: normal;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 
 	&[data-placeholder] {
 		color: var(--m-color-neutral-heavy);
@@ -14,7 +14,7 @@
 }
 
 .groupLabel {
-	padding-inline: var(--m-spacing-lg);
+	padding-inline: var(--m-space-lg);
 }
 
 .icon {

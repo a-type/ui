@@ -6,9 +6,9 @@
 	justify-items: center;
 	overflow: clip;
 	border-radius: 0;
-	padding: var(--m-spacing-sm);
+	padding: var(--m-space-sm);
 	z-index: 50;
-	padding-bottom: calc(var(--m-spacing-sm) + env(safe-area-inset-bottom, 0px));
+	padding-bottom: calc(var(--m-space-sm) + env(safe-area-inset-bottom, 0px));
 
 	@media (min-width: 768px) {
 		height: min-content;
@@ -16,11 +16,11 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: start;
-		gap: var(--m-spacing-sm);
+		gap: var(--m-space-sm);
 		overflow-x: clip;
 		overflow-y: auto;
 		border-radius: 0;
-		padding-bottom: var(--m-spacing-xl);
+		padding-bottom: var(--m-space-xl);
 		box-shadow: none;
 		@apply --mx-bg(transparent);
 		border: none;
@@ -36,7 +36,7 @@
 	user-select: none;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 	white-space: nowrap;
 	padding: var(--m-action-padding);
 	transition: all var(--m-duration) var(--m-easing);
@@ -44,9 +44,9 @@
 	@apply --mx-bg(transparent);
 	border-radius: var(--m-radius-sm);
 	border: none;
-	font-size: var(--m-text-ambient-size);
+	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
-	font-weight: var(--m-text-ambient-weight);
+	font-weight: var(--m-prose-ambient-weight);
 	@apply --mx-shadow;
 
 	&:active {
@@ -76,10 +76,10 @@
 		flex-direction: row-reverse;
 		justify-content: end;
 		align-items: center;
-		gap: var(--m-spacing-md);
+		gap: var(--m-space-md);
 		padding: var(--m-action-padding);
 		overflow: visible;
-		font-size: var(--m-text-secondary-size);
+		font-size: var(--m-prose-secondary-size);
 		&:active {
 			@apply --mx-bg-heavier(1);
 		}
@@ -93,7 +93,7 @@
 	@media (min-width: 768px) {
 		@apply --mx-bg(var(--m-color-neutral-light));
 		@apply --mx-bg-faded(50%);
-		padding: var(--m-spacing-sm);
+		padding: var(--m-space-sm);
 		border-radius: var(--m-action-radius);
 
 		[data-active='true'] & {
@@ -104,7 +104,7 @@
 
 .itemText {
 	@apply --mx-fg(var(--m-color-neutral-ink));
-	font-size: var(--m-text-ambient-size);
+	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
 	font-weight: inherit;
 	display: inline-block;
@@ -126,8 +126,8 @@
 
 .pip {
 	position: absolute;
-	top: var(--m-spacing-sm);
-	right: var(--m-spacing-sm);
+	top: var(--m-space-sm);
+	right: var(--m-space-sm);
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;

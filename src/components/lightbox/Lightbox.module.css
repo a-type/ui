@@ -26,8 +26,8 @@
 
 .close {
 	position: absolute;
-	right: var(--m-spacing-md);
-	top: var(--m-spacing-md);
+	right: var(--m-space-md);
+	top: var(--m-space-md);
 }
 
 .overlay {
@@ -60,7 +60,7 @@
 	width: 90vw;
 	max-width: 100%;
 
-	padding: var(--m-spacing-lg);
+	padding: var(--m-space-lg);
 	border: none;
 	background: none;
 	pointer-events: none;
