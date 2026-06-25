@@ -37,6 +37,9 @@
 		white-space: nowrap;
 		max-width: 100%;
 	}
+	&[data-dim] {
+		@apply --mx-fg(var(--m-color-neutral-heavy));
+	}
 }
 
 @layer components {

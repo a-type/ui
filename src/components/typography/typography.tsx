@@ -12,6 +12,7 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	bold?: boolean;
 	thin?: boolean;
 	truncate?: boolean;
+	dim?: boolean;
 }
 
 export function Text({
@@ -24,6 +25,7 @@ export function Text({
 	bold,
 	thin,
 	truncate,
+	dim,
 	...rest
 }: TypographyProps) {
 	return useRender({
@@ -41,6 +43,7 @@ export function Text({
 			bold: bold ? true : undefined,
 			thin: thin ? true : undefined,
 			truncate: truncate ? true : undefined,
+			dim: dim ? true : undefined,
 		},
 	});
 }
