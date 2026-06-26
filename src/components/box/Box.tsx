@@ -40,6 +40,7 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	ref?: Ref<HTMLDivElement>;
 	container?: boolean;
 	glass?: boolean;
+	self?: 'auto' | 'start' | 'end' | 'center' | 'stretch';
 }
 
 export function Box({
@@ -64,6 +65,7 @@ export function Box({
 	elevated,
 	rounded = surface ? true : undefined,
 	glass,
+	self,
 	ref,
 	...rest
 }: BoxProps) {
@@ -99,6 +101,7 @@ export function Box({
 			data-shadow-inset={inset}
 			data-container={container}
 			data-glass={glass}
+			data-self={self}
 		/>
 	);
 

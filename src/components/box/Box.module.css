@@ -74,6 +74,21 @@
 		&[data-justify='evenly'] {
 			justify-content: space-evenly;
 		}
+		&[data-self='auto'] {
+			align-self: auto;
+		}
+		&[data-self='start'] {
+			align-self: flex-start;
+		}
+		&[data-self='center'] {
+			align-self: center;
+		}
+		&[data-self='end'] {
+			align-self: flex-end;
+		}
+		&[data-self='stretch'] {
+			align-self: stretch;
+		}
 
 		&[data-p='none'] {
 			padding: 0;
