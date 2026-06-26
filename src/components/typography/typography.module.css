@@ -40,6 +40,19 @@
 	&[data-dim] {
 		@apply --mx-fg(var(--m-color-neutral-heavy));
 	}
+
+	&[data-color='neutral'] {
+		@apply --mx-fg(var(--m-color-neutral-ink));
+	}
+	&[data-color='main'] {
+		@apply --mx-fg(var(--m-color-main-heavy));
+	}
+	&[data-color='attention'] {
+		@apply --mx-fg(var(--m-color-palette-attention-heavy));
+	}
+	&[data-color='success'] {
+		@apply --mx-fg(var(--m-color-palette-success-heavy));
+	}
 }
 
 @layer components {
