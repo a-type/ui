@@ -164,3 +164,16 @@
 		display: block;
 	}
 }
+
+/* Visually hidden */
+.sr-only {
+	position: absolute;
+	width: --fn-literal(1px);
+	height: --fn-literal(1px);
+	padding: 0;
+	margin: --fn-literal(-1px);
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
