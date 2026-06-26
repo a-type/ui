@@ -126,3 +126,41 @@
 .p-xl {
 	padding: var(--m-space-xl);
 }
+
+/* Responsive */
+.lt-sm {
+	display: block;
+	@media (max-width: 640px) {
+		display: none;
+	}
+}
+.gt-sm {
+	display: none;
+	@media (min-width: 640px) {
+		display: block;
+	}
+}
+.lt-md {
+	display: block;
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+.gt-md {
+	display: none;
+	@media (min-width: 768px) {
+		display: block;
+	}
+}
+.lt-lg {
+	display: block;
+	@media (max-width: 1024px) {
+		display: none;
+	}
+}
+.gt-lg {
+	display: none;
+	@media (min-width: 1024px) {
+		display: block;
+	}
+}
