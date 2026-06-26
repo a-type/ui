@@ -36,3 +36,15 @@ export const UnorderedList: Story = {
 		);
 	},
 };
+
+export const NoMarkers: Story = {
+	render(args) {
+		return (
+			<Ul {...args} unstyled>
+				<Ul.Item>First item</Ul.Item>
+				<Ul.Item>Second item</Ul.Item>
+				<Ul.Item>Third item</Ul.Item>
+			</Ul>
+		);
+	},
+};

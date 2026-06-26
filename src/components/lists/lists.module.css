@@ -10,6 +10,14 @@
 	& > li {
 		margin-left: var(--m-space-sm);
 	}
+
+	&[data-unstyled] {
+		list-style: none;
+		gap: 0;
+		& > li {
+			margin-left: 0;
+		}
+	}
 }
 
 .ol {
