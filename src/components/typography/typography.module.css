@@ -31,6 +31,12 @@
 	&[data-thin] {
 		font-weight: var(--m-text-weight-thin);
 	}
+	&[data-normal] {
+		font-weight: var(--m-text-weight-normal);
+	}
+	&[data-uppercase] {
+		text-transform: uppercase;
+	}
 	&[data-truncate] {
 		overflow: hidden;
 		text-overflow: ellipsis;
