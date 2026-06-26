@@ -36,7 +36,9 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	overflow?: 'hidden' | 'clip' | 'auto' | 'auto-x' | 'auto-y';
 	grow?: boolean;
 	elevated?: ShadowValue;
+	/** @deprecated - use round */
 	rounded?: 'xs' | 'sm' | 'md' | 'lg' | boolean;
+	round?: 'xs' | 'sm' | 'md' | 'lg' | boolean;
 	ref?: Ref<HTMLDivElement>;
 	container?: boolean;
 	glass?: boolean;
@@ -64,6 +66,7 @@ export function Box({
 	grow,
 	elevated,
 	rounded = surface ? true : undefined,
+	round = rounded,
 	glass,
 	self,
 	ref,
@@ -90,7 +93,7 @@ export function Box({
 			data-justify={justify}
 			data-wrap={wrap}
 			data-p={p}
-			data-rounded={rounded}
+			data-rounded={round}
 			data-surface={surface}
 			data-border={border}
 			data-full={full}
