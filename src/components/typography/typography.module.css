@@ -43,6 +43,9 @@
 		white-space: nowrap;
 		max-width: 100%;
 	}
+	&[data-wrap] {
+		text-wrap: wrap;
+	}
 	&[data-dim] {
 		@apply --mx-fg(var(--m-color-neutral-heavy));
 	}

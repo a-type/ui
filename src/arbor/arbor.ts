@@ -40,7 +40,7 @@ export type DefaultColorRangeName = keyof typeof defaultColors.ranges;
 
 export type ATypeConfig<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
-> = ArborPresetConfig<TColors> & {
+> = Partial<ArborPresetConfig<TColors>> & {
 	mainColor?: TColors;
 	roundActions?: boolean;
 	roundControls?: boolean;
