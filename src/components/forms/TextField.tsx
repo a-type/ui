@@ -3,17 +3,17 @@ import { useField, useFormikContext } from 'formik';
 import {
 	InputHTMLAttributes,
 	KeyboardEvent,
+	ReactNode,
 	Ref,
 	useCallback,
 	useEffect,
 	useRef,
 } from 'react';
-import { withClassName } from '../../hooks.js';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { Input, InputProps } from '../input/Input.js';
 import { TextArea, TextAreaProps } from '../textArea/TextArea.js';
-import { FieldLabel } from './FieldLabel.js';
+import { Field } from './Field.js';
 import cls from './TextField.module.css';
 
 export type TextFieldProps = {
@@ -24,6 +24,7 @@ export type TextFieldProps = {
 	inputRef?: Ref<HTMLInputElement>;
 	inputClassName?: string;
 	ref?: Ref<HTMLDivElement>;
+	description?: ReactNode;
 } & Omit<InputProps, 'ref'>;
 
 const emptyRef = (() => {}) as any;
@@ -41,6 +42,7 @@ export const TextField = function TextField({
 	onBlur,
 	id: providedId,
 	inputClassName,
+	description,
 	...rest
 }: TextFieldProps) {
 	const [props] = useField({
@@ -61,17 +63,27 @@ export const TextField = function TextField({
 	}, [autoFocusDelay]);
 
 	return (
-		<FieldRoot className={className} ref={ref}>
-			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
-			<Input
-				{...props}
-				{...rest}
-				id={id}
-				autoFocus={autoFocus}
-				className={clsx(cls.input, inputClassName)}
-				ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
+		<Field className={className} stretch ref={ref}>
+			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+			<Field.Control
+				render={
+					<Input
+						{...props}
+						{...rest}
+						id={id}
+						autoFocus={autoFocus}
+						className={clsx(cls.input, inputClassName)}
+						ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
+						aria-describedby={description ? `${id}-description` : undefined}
+					/>
+				}
 			/>
-		</FieldRoot>
+			{description && (
+				<Field.Description id={`${id}-description`}>
+					{description}
+				</Field.Description>
+			)}
+		</Field>
 	);
 };
 
@@ -85,7 +97,9 @@ export type TextAreaFieldProps = {
 	inputRef?: Ref<HTMLTextAreaElement>;
 	submitOnEnter?: boolean;
 	textAreaClassName?: string;
-} & TextAreaProps;
+	description?: ReactNode;
+	ref?: Ref<HTMLDivElement>;
+} & Omit<TextAreaProps, 'ref'>;
 
 export function TextAreaField({
 	name,
@@ -96,6 +110,8 @@ export function TextAreaField({
 	submitOnEnter,
 	id: providedId,
 	textAreaClassName,
+	description,
+	ref,
 	...rest
 }: TextAreaFieldProps) {
 	const [props] = useField(name);
@@ -113,18 +129,26 @@ export function TextAreaField({
 	const id = useIdOrGenerated(providedId);
 
 	return (
-		<FieldRoot className={className}>
-			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
-			<TextArea
-				ref={inputRef as any}
-				{...props}
-				{...rest}
-				className={clsx('layer-composed:w-full', textAreaClassName)}
-				id={id}
-				onKeyDown={onKeyDownInner}
+		<Field stretch className={className} ref={ref}>
+			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+			<Field.Control
+				render={
+					<TextArea
+						ref={inputRef as any}
+						{...props}
+						{...rest}
+						className={clsx(cls.input, textAreaClassName)}
+						id={id}
+						onKeyDown={onKeyDownInner}
+						aria-describedby={description ? `${id}-description` : undefined}
+					/>
+				}
 			/>
-		</FieldRoot>
+			{description && (
+				<Field.Description id={`${id}-description`}>
+					{description}
+				</Field.Description>
+			)}
+		</Field>
 	);
 }
-
-export const FieldRoot = withClassName('div', cls.root);

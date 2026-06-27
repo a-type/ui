@@ -1,8 +1,8 @@
 import { useField } from 'formik';
+import { ReactNode } from 'react';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
-import { Box } from '../box/Box.js';
 import { Checkbox } from '../checkbox/index.js';
-import { HorizontalFieldLabel } from './FieldLabel.js';
+import { Field } from './Field.js';
 
 export interface CheckboxFieldProps {
 	name: string;
@@ -10,6 +10,7 @@ export interface CheckboxFieldProps {
 	required?: boolean;
 	className?: string;
 	id?: string;
+	description?: ReactNode;
 }
 
 export function CheckboxField({
@@ -18,24 +19,31 @@ export function CheckboxField({
 	className,
 	required,
 	id: providedId,
+	description,
 	...rest
 }: CheckboxFieldProps) {
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Box gap="md" className={className}>
-			<Checkbox
-				{...props}
-				checked={props.checked}
-				onCheckedChange={(v) => {
-					tools.setValue(!!v);
-				}}
-				id={id}
-				{...rest}
-			/>
-			{label && (
-				<HorizontalFieldLabel htmlFor={id}>{label}</HorizontalFieldLabel>
+		<Field horizontal className={className}>
+			<Field.Control>
+				<Checkbox
+					{...props}
+					checked={props.checked}
+					onCheckedChange={(v) => {
+						tools.setValue(!!v);
+					}}
+					id={id}
+					aria-describedby={description ? `${id}-description` : undefined}
+					{...rest}
+				/>
+			</Field.Control>
+			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+			{description && (
+				<Field.Description id={`${id}-description`}>
+					{description}
+				</Field.Description>
 			)}
-		</Box>
+		</Field>
 	);
 }

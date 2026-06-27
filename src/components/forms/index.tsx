@@ -1,5 +1,5 @@
 export * from './CheckboxField.js';
-export * from './FieldLabel.js';
+export * from './Field.js';
 export * from './Form.js';
 export * from './FormikForm.js';
 export * from './hooks.js';

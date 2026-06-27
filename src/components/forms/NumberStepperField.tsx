@@ -1,12 +1,11 @@
 import { useField } from 'formik';
-import { withClassName } from '../../hooks.js';
+import { ReactNode } from 'react';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import {
 	NumberStepper,
 	NumberStepperProps,
 } from '../numberStepper/NumberStepper.js';
-import { FieldLabel } from './FieldLabel.js';
-import cls from './NumberStepperField.module.css';
+import { Field } from './Field.js';
 
 export interface NumberStepperFieldProps
 	extends Omit<NumberStepperProps, 'value' | 'onChange'> {
@@ -15,6 +14,7 @@ export interface NumberStepperFieldProps
 	className?: string;
 	id?: string;
 	onChange?: (value: number) => void;
+	description?: ReactNode;
 }
 
 export function NumberStepperField({
@@ -23,24 +23,31 @@ export function NumberStepperField({
 	className,
 	id: providedId,
 	onChange,
+	description,
 	...rest
 }: NumberStepperFieldProps) {
 	const [_, field, tools] = useField({ name });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<FieldRoot className={className}>
-			{label && <FieldLabel htmlFor={id}>{label}</FieldLabel>}
-			<NumberStepper
-				value={field.value}
-				onChange={(v) => {
-					tools.setValue(v);
-					onChange?.(v);
-				}}
-				id={id}
-				{...rest}
-			/>
-		</FieldRoot>
+		<Field className={className} horizontal>
+			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+			<Field.Control>
+				<NumberStepper
+					value={field.value}
+					onChange={(v) => {
+						tools.setValue(v);
+						onChange?.(v);
+					}}
+					id={id}
+					aria-describedby={description ? `${id}-description` : undefined}
+					{...rest}
+				/>
+			</Field.Control>
+			{description && (
+				<Field.Description id={`${id}-description`}>
+					{description}
+				</Field.Description>
+			)}
+		</Field>
 	);
 }
-
-const FieldRoot = withClassName('div', cls.root);

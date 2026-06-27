@@ -47,19 +47,39 @@ export const Default: Story = {
 					label="Email"
 					placeholder="you@example.com"
 				/>
-				<TextField name="password" type="password" label="Password" />
-				<NumberStepperField name="age" label="Age" min={13} max={100} />
-				<CheckboxField name="tos" label="I agree" />
-				<SwitchField name="newsletter" label="Subscribe to newsletter" />
+				<TextField
+					name="password"
+					type="password"
+					label="Password"
+					description="Make it a good one"
+				/>
+				<NumberStepperField
+					name="age"
+					label="Age"
+					min={13}
+					max={100}
+					description="You can mail your government ID to us, don't worry, we're the good guys"
+				/>
+				<CheckboxField
+					name="tos"
+					label="I agree"
+					description="To what? Not telling."
+				/>
+				<SwitchField
+					name="newsletter"
+					label="Subscribe to newsletter"
+					description="Don't worry, we don't bother you much"
+				/>
 				<ToggleGroupField
 					type="single"
 					name="plan"
 					label="Select your plan"
 					required
+					description="Please do the expensive one!!!"
 				>
 					<ToggleGroupField.Item value="basic">Basic</ToggleGroupField.Item>
 					<ToggleGroupField.Item value="pro">Pro</ToggleGroupField.Item>
-					<ToggleGroupField.Item value="enterprise">
+					<ToggleGroupField.Item value="enterprise" className="@mode-accent">
 						Enterprise
 					</ToggleGroupField.Item>
 				</ToggleGroupField>

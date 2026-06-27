@@ -1,0 +1,51 @@
+.root {
+	display: grid;
+	grid-template-areas: 'label' 'control' 'description';
+	justify-content: start;
+
+	&[data-horizontal] {
+		flex-direction: row;
+		align-items: center;
+		grid-template-areas: 'control label' 'description description';
+		grid-template-columns: auto 1fr;
+	}
+
+	&[data-stretch] {
+		align-self: stretch;
+		justify-content: stretch;
+	}
+}
+
+.control {
+	grid-area: control;
+}
+:where(.control) {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--m-space-sm);
+}
+
+.label {
+	grid-area: label;
+	@apply --mx-prose-ambient;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	font-weight: var(--m-text-weight-bold);
+	margin-bottom: var(--m-space-xs);
+	margin-left: calc(var(--m-global-shape-roundness) * var(--m-space-md));
+
+	[data-horizontal] & {
+		@apply --mx-fg(var(--m-color-neutral-ink));
+		font-weight: var(--m-text-weight-normal);
+		margin-block-start: --fn-literal(5px);
+	}
+}
+
+.description {
+	grid-area: description;
+	@apply --mx-prose-ambient;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	font-style: italic;
+	margin-top: var(--m-space-sm);
+	margin-left: calc(var(--m-global-shape-roundness) * var(--m-space-md));
+}

@@ -1,8 +1,8 @@
 import { useField } from 'formik';
+import { ReactNode } from 'react';
 import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
-import { Box } from '../box/Box.js';
 import { Switch } from '../switch/Switch.js';
-import { HorizontalFieldLabel } from './FieldLabel.js';
+import { Field } from './Field.js';
 
 export interface SwitchFieldProps {
 	name: string;
@@ -10,6 +10,7 @@ export interface SwitchFieldProps {
 	required?: boolean;
 	className?: string;
 	id?: string;
+	description?: ReactNode;
 }
 
 export function SwitchField({
@@ -18,24 +19,31 @@ export function SwitchField({
 	className,
 	required,
 	id: providedId,
+	description,
 	...rest
 }: SwitchFieldProps) {
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Box gap="md" className={className}>
-			<Switch
-				{...props}
-				checked={props.checked}
-				onCheckedChange={(v) => {
-					tools.setValue(!!v);
-				}}
-				id={id}
-				{...rest}
-			/>
-			{label && (
-				<HorizontalFieldLabel htmlFor={id}>{label}</HorizontalFieldLabel>
+		<Field horizontal className={className}>
+			<Field.Control>
+				<Switch
+					{...props}
+					checked={props.checked}
+					onCheckedChange={(v) => {
+						tools.setValue(!!v);
+					}}
+					id={id}
+					aria-describedby={description ? `${id}-description` : undefined}
+					{...rest}
+				/>
+			</Field.Control>
+			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+			{description && (
+				<Field.Description id={`${id}-description`}>
+					{description}
+				</Field.Description>
 			)}
-		</Box>
+		</Field>
 	);
 }
