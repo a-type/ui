@@ -20,9 +20,9 @@
 }
 
 .groupItem {
-	@apply --mx-shadow;
+	@apply --mx-ring;
 	&[data-highlighted] {
-		--mx-ring-value: --fn-ring(var(--m-color-main-mid), 2px);
+		@apply --mx-ring(--fn-ring(var(--m-color-main-mid), 2px));
 	}
 }
 
@@ -112,13 +112,15 @@
 }
 
 .item[data-selected] {
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-color-main-ink));
+	@apply --mx-bg-heavier(1);
 }
 
 .itemIndicator {
 	margin-inline-start: auto;
-	height: 10px;
-	width: 10px;
+	height: --fn-literal(10px);
+	width: --fn-literal(10px);
+	stroke-width: var(--m-lineWidth-lg);
 }
 
 .list {

@@ -1,7 +1,7 @@
 .root {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-space-md);
 	white-space: nowrap;
 
 	@apply --mx-bg(var(--m-color-neutral-paper));
