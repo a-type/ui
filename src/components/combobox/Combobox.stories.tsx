@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
-import { Text } from '../typography/typography.js';
 import { Combobox } from './Combobox.js';
 
 interface Args {
@@ -206,12 +205,10 @@ export const Grouped: Story = {
 						)}
 					</GroupedCombobox.Empty>
 					<GroupedCombobox.Separator />
-					<Box p="xs">
-						<Text emphasis="ambient">
-							Select your favorite fruit or berry.
-							{creatable ? ' Enter creates a new item.' : ''}
-						</Text>
-					</Box>
+					<Combobox.Details>
+						Select your favorite fruit or berry.
+						{creatable ? ' Enter creates a new item.' : ''}
+					</Combobox.Details>
 				</GroupedCombobox.Content>
 			</GroupedCombobox>
 		);

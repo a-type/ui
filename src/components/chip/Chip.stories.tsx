@@ -8,6 +8,7 @@ const meta = {
 	component: Chip,
 	args: {
 		children: 'Chip',
+		emphasis: 'default',
 	},
 	parameters: {
 		controls: { expanded: true },

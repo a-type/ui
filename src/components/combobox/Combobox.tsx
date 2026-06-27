@@ -484,12 +484,14 @@ export interface ComboboxGroupItemProps
 	replace?: BaseCombobox.ComboboxItemProps['render'];
 	render?: ChipProps['render'];
 	color?: ChipProps['color'];
+	emphasis?: ChipProps['emphasis'];
 }
 function ComboboxGroupItem({
 	className,
 	replace,
 	render,
 	color = 'gray',
+	emphasis = 'default',
 	children,
 	...props
 }: ComboboxGroupItemProps) {
@@ -498,8 +500,7 @@ function ComboboxGroupItem({
 			render={
 				replace ?? (
 					<Button
-						emphasis="light"
-						render={<Chip render={render} color={color} />}
+						render={<Chip render={render} color={color} emphasis={emphasis} />}
 					/>
 				)
 			}
@@ -542,6 +543,8 @@ function ComboboxClear({ children, ...props }: ComboboxClearProps) {
 	);
 }
 
+const Details = withClassName(SlotDiv, cls.details);
+
 const baseSubComponents = {
 	useFilter: BaseCombobox.Combobox.useFilter,
 
@@ -578,6 +581,7 @@ const baseSubComponents = {
 	GroupItem: ComboboxGroupItem,
 
 	Unstyled: BaseCombobox.Combobox,
+	Details,
 };
 
 function createCombobox<TItem>() {
