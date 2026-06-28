@@ -29,25 +29,21 @@ export function NumberStepperField({
 	const [_, field, tools] = useField({ name });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Field className={className} horizontal>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
-			<Field.Control>
-				<NumberStepper
-					value={field.value}
-					onChange={(v) => {
-						tools.setValue(v);
-						onChange?.(v);
-					}}
-					id={id}
-					aria-describedby={description ? `${id}-description` : undefined}
-					{...rest}
-				/>
-			</Field.Control>
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+		<Field className={className} id={id}>
+			{label && <Field.Label>{label}</Field.Label>}
+			<Field.Control
+				render={
+					<NumberStepper
+						value={field.value}
+						onChange={(v) => {
+							tools.setValue(v);
+							onChange?.(v);
+						}}
+						{...rest}
+					/>
+				}
+			/>
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 }

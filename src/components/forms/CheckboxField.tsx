@@ -25,25 +25,21 @@ export function CheckboxField({
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Field horizontal className={className}>
-			<Field.Control>
-				<Checkbox
-					{...props}
-					checked={props.checked}
-					onCheckedChange={(v) => {
-						tools.setValue(!!v);
-					}}
-					id={id}
-					aria-describedby={description ? `${id}-description` : undefined}
-					{...rest}
-				/>
-			</Field.Control>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+		<Field horizontal className={className} id={id}>
+			<Field.Control
+				render={
+					<Checkbox
+						{...props}
+						checked={props.checked}
+						onCheckedChange={(v) => {
+							tools.setValue(!!v);
+						}}
+						{...rest}
+					/>
+				}
+			/>
+			{label && <Field.Label>{label}</Field.Label>}
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 }

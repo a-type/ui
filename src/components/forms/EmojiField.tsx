@@ -29,54 +29,43 @@ export function EmojiField({
 	const id = useIdOrGenerated(providedId);
 	const [open, setOpen] = useState(false);
 	return (
-		<Field horizontal className={className}>
-			<Field.Control>
-				<Popover open={open} onOpenChange={setOpen}>
-					<input
-						type="hidden"
-						{...props}
-						id={id}
-						aria-describedby={description ? `${id}-description` : undefined}
-					/>
-					<Popover.Trigger
-						render={
-							<Button
-								id={`${id}-trigger`}
-								aria-label="Select emoji"
-								size="wrapper"
-								{...rest}
-							>
-								<Button.Icon className={cls.triggerIcon}>
-									{props.value || <Icon name="smile" />}
-								</Button.Icon>
-							</Button>
+		<Field horizontal className={className} id={id}>
+			<Popover open={open} onOpenChange={setOpen}>
+				<Field.Control render={<input type="hidden" {...props} />} />
+				<Popover.Trigger
+					render={
+						<Button
+							id={`${id}-trigger`}
+							aria-label="Select emoji"
+							size="wrapper"
+							{...rest}
+						>
+							<Button.Icon className={cls.triggerIcon}>
+								{props.value || <Icon name="smile" />}
+							</Button.Icon>
+						</Button>
+					}
+				/>
+				<Popover.Content>
+					<EmojiPicker
+						onValueChange={(v) => {
+							tools.setValue(v);
+							setOpen(false);
+						}}
+						onClear={
+							required
+								? undefined
+								: () => {
+										tools.setValue('');
+										setOpen(false);
+								  }
 						}
+						id={id}
 					/>
-					<Popover.Content>
-						<EmojiPicker
-							onValueChange={(v) => {
-								tools.setValue(v);
-								setOpen(false);
-							}}
-							onClear={
-								required
-									? undefined
-									: () => {
-											tools.setValue('');
-											setOpen(false);
-									  }
-							}
-							id={id}
-						/>
-					</Popover.Content>
-				</Popover>
-			</Field.Control>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+				</Popover.Content>
+			</Popover>
+			{label && <Field.Label>{label}</Field.Label>}
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 }

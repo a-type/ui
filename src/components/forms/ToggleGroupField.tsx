@@ -1,5 +1,6 @@
 import { useField } from 'formik';
 import { ReactNode } from 'react';
+import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import { ToggleGroup, ToggleGroupProps } from '../toggleGroup/toggleGroup.js';
 import { Field } from './Field.js';
 
@@ -22,36 +23,33 @@ function ToggleGroupFieldDefault({
 	type = 'single',
 	multiple,
 	description,
-	id,
+	id: providedId,
 	...props
 }: ToggleGroupFieldProps<string>) {
+	const id = useIdOrGenerated(providedId);
 	const [fieldProps, _, tools] = useField({ name, required, ...props });
 
 	return (
-		<Field>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
-			<Field.Control>
-				<ToggleGroup
-					{...fieldProps}
-					onValueChange={(v) => {
-						if (multiple || type === 'multiple') {
-							tools.setValue(v);
-						} else {
-							tools.setValue(v[0]);
-						}
-					}}
-					multiple={multiple || type === 'multiple'}
-					{...props}
-					id={id}
-					className={className}
-					aria-describedby={description ? `${id}-description` : undefined}
-				/>
-			</Field.Control>
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+		<Field id={id}>
+			{label && <Field.Label>{label}</Field.Label>}
+			<Field.Control
+				render={
+					<ToggleGroup
+						{...fieldProps}
+						onValueChange={(v) => {
+							if (multiple || type === 'multiple') {
+								tools.setValue(v);
+							} else {
+								tools.setValue(v[0]);
+							}
+						}}
+						multiple={multiple || type === 'multiple'}
+						{...props}
+						className={className}
+					/>
+				}
+			/>
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 }

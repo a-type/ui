@@ -63,26 +63,20 @@ export const TextField = function TextField({
 	}, [autoFocusDelay]);
 
 	return (
-		<Field className={className} stretch ref={ref}>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+		<Field className={className} stretch ref={ref} id={id}>
+			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
 					<Input
 						{...props}
 						{...rest}
-						id={id}
 						autoFocus={autoFocus}
 						className={clsx(cls.input, inputClassName)}
 						ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
-						aria-describedby={description ? `${id}-description` : undefined}
 					/>
 				}
 			/>
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 };
@@ -129,8 +123,8 @@ export function TextAreaField({
 	const id = useIdOrGenerated(providedId);
 
 	return (
-		<Field stretch className={className} ref={ref}>
-			{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+		<Field stretch className={className} ref={ref} id={id}>
+			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
 					<TextArea
@@ -138,17 +132,11 @@ export function TextAreaField({
 						{...props}
 						{...rest}
 						className={clsx(cls.input, textAreaClassName)}
-						id={id}
 						onKeyDown={onKeyDownInner}
-						aria-describedby={description ? `${id}-description` : undefined}
 					/>
 				}
 			/>
-			{description && (
-				<Field.Description id={`${id}-description`}>
-					{description}
-				</Field.Description>
-			)}
+			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
 	);
 }

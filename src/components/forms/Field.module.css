@@ -8,6 +8,10 @@
 		align-items: center;
 		grid-template-areas: 'control label' 'description description';
 		grid-template-columns: auto 1fr;
+		&[data-reverse] {
+			grid-template-areas: 'label control' 'description description';
+			grid-template-columns: auto 1fr;
+		}
 	}
 
 	&[data-stretch] {
@@ -18,12 +22,12 @@
 
 .control {
 	grid-area: control;
-}
-:where(.control) {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--m-space-sm);
+
+	[data-stretch] & {
+		align-self: stretch;
+		justify-content: stretch;
+		width: 100%;
+	}
 }
 
 .label {
@@ -38,6 +42,13 @@
 		@apply --mx-fg(var(--m-color-neutral-ink));
 		font-weight: var(--m-text-weight-normal);
 		margin-block-start: --fn-literal(5px);
+
+		[data-reverse] & {
+			margin-inline-start: 0;
+			margin-inline-end: calc(
+				var(--m-global-shape-roundness) * var(--m-space-md)
+			);
+		}
 	}
 }
 
