@@ -68,7 +68,6 @@ export function presetAtype<
 			minFontSize: '12px',
 			minWeight: 200,
 			maxWeight: 600,
-			weightStep: 100,
 			baseWeight: 400,
 			lineHeightStep: 0.125,
 			minLineHeight: 1,
@@ -461,9 +460,12 @@ export function presetAtype<
 	preset.bundleMode('bold', {
 		global: {
 			typography: {
-				minWeight: 300,
+				minWeight: 200,
 				maxWeight: 800,
-				baseWeight: 500,
+				baseWeight: 450,
+			},
+			shape: {
+				lineWidth: 2,
 			},
 		},
 	});

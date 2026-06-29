@@ -41,9 +41,6 @@
 	padding: var(--m-space-md);
 	padding-bottom: var(--m-space-xs);
 	gap: var(--m-space-sm);
-	&[data-compact='true'] {
-		padding-bottom: 0;
-	}
 
 	transition: all var(--m-duration) var(--m-easing);
 
@@ -83,13 +80,7 @@
 	z-index: 1;
 	padding: var(--m-space-xs) var(--m-space-md);
 
-	font-size: var(--m-prose-primary-size);
-	line-height: var(--m-prose-primary-lineHeight);
-	font-weight: var(--m-prose-primary-weight);
-
-	[data-compact] & {
-		font-size: var(--m-prose-ambient-size);
-	}
+	@apply --mx-prose-primary;
 
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -106,11 +97,6 @@
 	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
 	font-weight: var(--m-prose-ambient-weight);
-
-	[data-compact] & {
-		padding: 0 var(--m-space-xs);
-		margin: 0 var(--m-space-sm);
-	}
 
 	&[data-unstyled] {
 		background-color: unset;

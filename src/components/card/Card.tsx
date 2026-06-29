@@ -15,9 +15,12 @@ import cls from './Card.module.css';
 
 export const CardRoot = withClassName(withProps(Box, { col: true }), cls.root);
 
+export type CardSize = 'sm' | 'md' | 'lg';
+
 export function CardMain({
 	className,
 	compact,
+	size = compact ? 'sm' : 'md',
 	nonInteractive,
 	ref,
 	style,
@@ -36,7 +39,9 @@ export function CardMain({
 	className?: string;
 	onClick?: (ev: MouseEvent) => void;
 	children?: ReactNode;
+	/** @deprecated use size=sm */
 	compact?: boolean;
+	size?: CardSize;
 	/** forces non-interactive version */
 	nonInteractive?: boolean;
 	visuallyFocused?: boolean;
@@ -48,7 +53,15 @@ export function CardMain({
 
 	const rootProps = {
 		...rest,
-		className: classNames(cls.main, className),
+		className: classNames(
+			cls.main,
+			{
+				'@mode-normal': size === 'lg',
+				'@mode-dense': size === 'md',
+				'@mode-denser': size === 'sm',
+			},
+			className,
+		),
 		style,
 		children,
 	};
@@ -60,9 +73,9 @@ export function CardMain({
 		render,
 		state: {
 			interactive: !!isInteractive,
-			compact: !!compact,
 			'focus-visible': !!visuallyFocused,
 			disabled: !!visuallyDisabled,
+			size,
 		},
 	});
 
@@ -74,9 +87,10 @@ export const CardTitle = withClassName(
 		surface: 'ambient',
 		gap: 'sm',
 		col: true,
-		rounded: 'sm',
+		rounded: 'md',
 	}),
 	cls.title,
+	'@mode-bold',
 );
 
 const CardContentRoot = withClassName(
