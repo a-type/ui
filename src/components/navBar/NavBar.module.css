@@ -90,6 +90,12 @@
 	position: relative;
 	display: flex;
 
+	& img,
+	& svg {
+		width: --fn-literal(15px);
+		height: --fn-literal(15px);
+	}
+
 	@media (min-width: 768px) {
 		@apply --mx-bg(var(--m-color-neutral-light));
 		@apply --mx-bg-faded(50%);

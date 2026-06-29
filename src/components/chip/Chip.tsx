@@ -8,13 +8,13 @@ export interface ChipProps extends SlotDivProps {
 	emphasis?: 'default' | 'primary' | 'ambient';
 }
 
-export function Chip({ className, ...rest }: ChipProps) {
+export function Chip({ className, emphasis, ...rest }: ChipProps) {
 	return (
 		<SlotDiv
-			className={classNames('@mode-dense', cls.root, className)}
+			className={classNames(cls.root, className)}
 			role={rest.onClick ? 'button' : undefined}
-			data-emphasis={rest.emphasis ?? 'default'}
 			{...rest}
+			data-emphasis={emphasis ?? 'default'}
 		/>
 	);
 }

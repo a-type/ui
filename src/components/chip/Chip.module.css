@@ -16,8 +16,8 @@
 	font-weight: var(--m-prose-ambient-weight);
 	font-family: var(--m-prose-ambient-font);
 
-	&:not(:is(button)) {
-		padding: var(--m-action-padding);
+	&& {
+		padding: var(--m-space-sm) var(--m-space-md);
 	}
 
 	&[data-emphasis='primary'] {

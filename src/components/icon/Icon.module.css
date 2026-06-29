@@ -2,7 +2,7 @@
 	fill: none;
 	flex-shrink: 0;
 
-	--size: calc(round(16px / var(--m-global-space-density), 1px));
+	--size: 1em;
 	width: var(--size);
 	height: var(--size);
 }

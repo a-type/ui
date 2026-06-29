@@ -76,7 +76,6 @@ export function ButtonRoot({
 	const buttonProps = {
 		ref: finalRef,
 		...iconOnlyTools.props,
-		...props,
 		disabled: disabled || isLoading,
 		'data-input-border-flush': true,
 		'data-disabled': visuallyDisabled,
@@ -96,6 +95,7 @@ export function ButtonRoot({
 			color ? `@mode-${color}` : '',
 			className,
 		),
+		...props,
 	};
 	// set state when toggleable
 	if (toggled !== undefined) {
