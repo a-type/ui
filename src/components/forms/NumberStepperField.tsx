@@ -26,22 +26,25 @@ export function NumberStepperField({
 	description,
 	...rest
 }: NumberStepperFieldProps) {
-	const [_, field, tools] = useField({ name });
+	const [props, field, tools] = useField({ name });
 	const id = useIdOrGenerated(providedId);
 	return (
 		<Field className={className} id={id}>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
-				render={
-					<NumberStepper
-						value={field.value}
-						onChange={(v) => {
-							tools.setValue(v);
-							onChange?.(v);
-						}}
-						{...rest}
-					/>
-				}
+				render={(composed) => (
+					<>
+						<input type="hidden" {...props} {...composed} />
+						<NumberStepper
+							value={field.value}
+							onChange={(v) => {
+								tools.setValue(v);
+								onChange?.(v);
+							}}
+							{...rest}
+						/>
+					</>
+				)}
 			/>
 			{description && <Field.Description>{description}</Field.Description>}
 		</Field>
