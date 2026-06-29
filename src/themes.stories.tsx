@@ -9,6 +9,7 @@ import {
 	AvatarList,
 	Box,
 	Checkbox,
+	Chip,
 	ContextMenu,
 	DateRangePicker,
 	Dialog,
@@ -125,6 +126,11 @@ export function DemoUI({
 							<Card.Main onClick={() => {}}>
 								<Card.Title>Card Title</Card.Title>
 								<Card.Content>Card Content</Card.Content>
+								<Card.Content unstyled>
+									<Chip>
+										<Icon name="clock" /> 2 hrs
+									</Chip>
+								</Card.Content>
 							</Card.Main>
 							<Card.Footer>
 								<Card.Actions>
@@ -139,6 +145,11 @@ export function DemoUI({
 							<Card.Main compact onClick={() => {}}>
 								<Card.Title>Card Title</Card.Title>
 								<Card.Content>Card Content</Card.Content>
+								<Card.Content unstyled>
+									<Chip>
+										<Icon name="clock" /> 2 hrs
+									</Chip>
+								</Card.Content>
 							</Card.Main>
 							<Card.Footer>
 								<Card.Actions>

@@ -1,5 +1,6 @@
 import { useRender, UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames from 'clsx';
+import { CSSProperties } from 'react';
 import { Spinner } from '../spinner/Spinner.js';
 import { IconName } from './generated/iconNames.js';
 import cls from './Icon.module.css';
@@ -8,7 +9,7 @@ import { useIconLoading } from './IconLoadingContext.js';
 export interface IconProps
 	extends UseRenderComponentProps<
 		'svg',
-		{ size: number; name: IconName; loading: boolean }
+		{ size?: number; name: IconName; loading: boolean }
 	> {
 	name: IconName;
 	size?: number;
@@ -18,10 +19,11 @@ export interface IconProps
 export const Icon = function Icon({
 	ref,
 	name,
-	size = 15,
+	size,
 	className,
 	loading: loadingProp,
 	render,
+	style,
 	...rest
 }: IconProps & {
 	ref?: React.Ref<SVGSVGElement>;
@@ -34,8 +36,10 @@ export const Icon = function Icon({
 		ref,
 		props: {
 			className: classNames('icon', cls.root, className),
-			width: size,
-			height: size,
+			style: {
+				...style,
+				'--size': size ? `${size}px` : undefined,
+			},
 			children: <use xlinkHref={`#icon-${name}`} />,
 			...rest,
 		},
@@ -53,7 +57,14 @@ export const Icon = function Icon({
 			<Spinner
 				size={size}
 				data-icon
+				style={
+					{
+						...style,
+						'--size': size,
+					} as CSSProperties
+				}
 				className={classNames('icon', cls.spinner, className)}
+				{...(rest as any)}
 			/>
 		);
 	}

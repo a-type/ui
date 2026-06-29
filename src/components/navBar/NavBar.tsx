@@ -40,7 +40,11 @@ export const NavBarItem = function NavBarItem({
 	);
 };
 
-export const NavBarItemIconWrapper = withClassName('div', cls.itemIconWrapper);
+export const NavBarItemIconWrapper = withClassName(
+	'div',
+	'@mode-dense',
+	cls.itemIconWrapper,
+);
 
 export const NavBarItemText = withClassName('span', cls.itemText);
 
