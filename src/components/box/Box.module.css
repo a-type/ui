@@ -3,17 +3,15 @@
 		display: flex;
 		position: relative;
 
-		&[data-direction='row'] {
-			flex-direction: row;
-		}
-		&[data-direction='col'] {
-			flex-direction: column;
-		}
-		&[data-direction='row-reverse'] {
+		flex-direction: row;
+		&[data-reverse] {
 			flex-direction: row-reverse;
 		}
-		&[data-direction='col-reverse'] {
-			flex-direction: column-reverse;
+		&[data-col] {
+			flex-direction: column;
+			&[data-reverse] {
+				flex-direction: column-reverse;
+			}
 		}
 
 		&[data-wrap='wrap'],
@@ -197,12 +195,16 @@
 			@apply --mx-bg-faded(80%);
 			@apply --mx-borderColor-faded(80%);
 		}
+		&[data-dim='true'] {
+			@apply --mx-fg-lighter(2.5);
+		}
 
 		&[data-grow='true'] {
 			flex-grow: 1;
 		}
 		&[data-shrink='true'] {
 			flex-shrink: 1;
+			min-width: 0;
 		}
 
 		@apply --mx-shadow;

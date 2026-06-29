@@ -105,7 +105,7 @@ export function DemoUI({
 					</Box>
 					<Box
 						layout="start safe-center"
-						d="col"
+						col
 						gap
 						p
 						style={{ maxHeight: 200 }}
@@ -121,7 +121,7 @@ export function DemoUI({
 						<TextSkeleton maxLength={30} />
 						<TextSkeleton maxLength={10} />
 					</Box>
-					<Box d="col" gap>
+					<Box col gap>
 						<Card>
 							<Card.Main onClick={() => {}}>
 								<Card.Title>Card Title</Card.Title>
@@ -257,7 +257,7 @@ export function DemoUI({
 					/>
 					<Progress value={50} style={{ margin: 'auto' }} />
 					<Slider defaultValue={50} min={0} max={100} />
-					<Box surface="primary" p gap d="col">
+					<Box surface="primary" p gap col>
 						<Heading emphasis="primary">Primary surface</Heading>
 						<Heading emphasis="secondary">Primary surface</Heading>
 						<Heading emphasis="ambient">Primary surface</Heading>
@@ -268,7 +268,7 @@ export function DemoUI({
 						surface="primary"
 						color="accent"
 						p
-						d="col"
+						col
 						style={{ maxHeight: 200 }}
 						overflow="auto-y"
 					>
@@ -289,13 +289,13 @@ export function DemoUI({
 						<TextSkeleton maxLength={10} />
 						Accent surface
 					</Box>
-					<Box surface="secondary" p d="col">
+					<Box surface="secondary" p col>
 						Secondary surface
 					</Box>
-					<Box surface="ambient" p d="col">
+					<Box surface="ambient" p col>
 						Ambient surface
 					</Box>
-					<Box surface color="attention" p d="col">
+					<Box surface color="attention" p col>
 						<H2>Attention surface</H2>
 						<H3>Attention surface</H3>
 						Attention surface
@@ -363,7 +363,7 @@ export function DemoUI({
 export const Nesting: Story = {
 	render() {
 		return (
-			<Box d="col" p gap>
+			<Box col p gap>
 				<Box d="row" gap surface="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
@@ -386,7 +386,7 @@ export const Custom: Story = {
 			});
 		};
 		return (
-			<Box d="col" full gap items="stretch" style={theme as any}>
+			<Box col full gap items="stretch" style={theme as any}>
 				<Button onClick={reroll}>Reroll</Button>
 				<DemoUI className="@mode-user" />
 			</Box>

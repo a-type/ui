@@ -5,6 +5,7 @@ import { Progress } from '../progress/Progress.js';
 import { Slider } from '../slider/Slider.js';
 import { Switch } from '../switch/Switch.js';
 import { ToggleGroup } from '../toggleGroup/toggleGroup.js';
+import { Text } from '../typography/typography.js';
 import { Box } from './Box.js';
 
 const meta = {
@@ -149,6 +150,21 @@ export const Surfaces: Story = {
 					<SurfaceContent name="Success" />
 				</Box>
 			</div>
+		);
+	},
+};
+
+export const DimComparison: Story = {
+	render(args) {
+		return (
+			<Box gap>
+				<Box surface="ambient" dim>
+					Dimmed box
+				</Box>
+				<Box surface="ambient">
+					<Text dim>Dimmed text</Text>
+				</Box>
+			</Box>
 		);
 	},
 };

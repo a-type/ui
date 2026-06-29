@@ -50,7 +50,7 @@
 		text-wrap: wrap;
 	}
 	&[data-dim] {
-		@apply --mx-fg(var(--m-color-neutral-heavy));
+		@apply --mx-fg-lighter(2.5);
 	}
 
 	&[data-color='neutral'] {

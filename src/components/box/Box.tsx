@@ -21,27 +21,84 @@ type ShadowValue = `${MaybeMinus}${ShadowSize}${MaybeUp}`;
 
 export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	className?: string;
-	direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
-	d?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
+	/**
+	 * Apply flex-direction: column - default is row
+	 */
 	col?: boolean;
+	/**
+	 * Reverse flex direction
+	 */
+	reverse?: boolean;
+	/**
+	 * Adjust align-items
+	 */
 	items?: BoxAlignment;
+	/**
+	 * Adjust justify-content
+	 */
 	justify?: BoxJustification;
-	layout?: `${BoxAlignment} ${BoxJustification}`;
+	/**
+	 * Apply both align-items and justify-content together
+	 */
+	layout?:
+		| `${BoxAlignment} ${BoxJustification}`
+		| `${BoxAlignment & BoxJustification}`;
+	/**
+	 * Adjust gap
+	 */
 	gap?: BoxSpacingSize | boolean;
+	/**
+	 * Add flex-wrap
+	 */
 	wrap?: boolean;
+	/**
+	 * Adjust padding
+	 */
 	p?: BoxSpacingSize | boolean;
+	/**
+	 * Apply surface intents
+	 */
 	surface?: boolean | 'ambient' | 'secondary' | 'primary';
+	/**
+	 * Add a default border
+	 */
 	border?: boolean;
+	/**
+	 * Add 100% w/h
+	 */
 	full?: boolean | 'width' | 'height';
+	/**
+	 * Control overflow / scroll
+	 */
 	overflow?: 'hidden' | 'clip' | 'auto' | 'auto-x' | 'auto-y';
+	/**
+	 * Apply flex-grow
+	 */
 	grow?: boolean;
+	/**
+	 * Apply flex-shrink and min-width
+	 */
+	shrink?: boolean;
+	/**
+	 * Add shadow
+	 */
 	elevated?: ShadowValue;
 	/** @deprecated - use round */
 	rounded?: 'xs' | 'sm' | 'md' | 'lg' | boolean;
+	/**
+	 * Adust border radius
+	 */
 	round?: 'xs' | 'sm' | 'md' | 'lg' | boolean;
 	ref?: Ref<HTMLDivElement>;
 	container?: boolean;
+	/**
+	 * Adds transparency
+	 */
 	glass?: boolean;
+	/**
+	 * Applies a gray foreground color
+	 */
+	dim?: boolean;
 	self?: 'auto' | 'start' | 'end' | 'center' | 'stretch';
 }
 
@@ -49,13 +106,12 @@ export function Box({
 	className,
 	items: itemsSolo,
 	justify: justifySolo,
-	layout: align,
+	layout,
 	gap,
 	wrap,
 	p,
 	col,
-	d = col ? 'col' : undefined,
-	direction = d,
+	reverse,
 	style,
 	container,
 	surface,
@@ -64,16 +120,18 @@ export function Box({
 	full,
 	overflow,
 	grow,
+	shrink,
 	elevated,
 	rounded = surface ? true : undefined,
 	round = rounded,
 	glass,
+	dim,
 	self,
 	ref,
 	...rest
 }: BoxProps) {
-	const items = itemsSolo ?? align?.split(' ')[0];
-	const justify = justifySolo ?? align?.split(' ')[1];
+	const items = itemsSolo ?? layout?.split(' ')[0];
+	const justify = justifySolo ?? layout?.split(' ')[1] ?? layout;
 	const [inset, elevation, up] = parseElevated(elevated);
 
 	const main = (
@@ -81,13 +139,9 @@ export function Box({
 			ref={ref}
 			{...rest}
 			style={style}
-			className={clsx(
-				'layer-components:relative layer-components:flex',
-				color && `@mode-${color}`,
-				cls.root,
-				className,
-			)}
-			data-direction={direction}
+			className={clsx(color && `@mode-${color}`, cls.root, className)}
+			data-col={col ? '' : undefined}
+			data-reverse={reverse ? '' : undefined}
 			data-gap={gap}
 			data-items={items}
 			data-justify={justify}
@@ -99,12 +153,14 @@ export function Box({
 			data-full={full}
 			data-overflow={overflow}
 			data-grow={grow}
+			data-shrink={shrink}
 			data-elevated={elevation}
 			data-shadow-up={up}
 			data-shadow-inset={inset}
 			data-container={container}
 			data-glass={glass}
 			data-self={self}
+			data-dim={dim}
 		/>
 	);
 

@@ -61,7 +61,7 @@ export const Customized: Story = {
 			open
 			{...args}
 			content={
-				<Box d="col" p>
+				<Box col p>
 					Some content
 				</Box>
 			}

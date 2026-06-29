@@ -20,7 +20,7 @@ export const Default: Story = {
 	render(args) {
 		return (
 			<Peek {...args}>
-				<Box d="col">
+				<Box col>
 					<P>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
 						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

@@ -60,10 +60,10 @@ export const Default: Story = {
 			<Box col>
 				<input type="color" className="sticky top-0 z-1" />
 				<Box full>
-					<Box d="col" grow p surface="ambient">
+					<Box col grow p surface="ambient">
 						{ranges}
 					</Box>
-					<Box d="col" className="@mode-dark" surface="ambient" grow p>
+					<Box col className="@mode-dark" surface="ambient" grow p>
 						{ranges}
 					</Box>
 				</Box>
@@ -120,7 +120,7 @@ export const Modifiers: Story = {
 			: {};
 		return (
 			<Box col>
-				<ModifierRange className="@mode-salt" />
+				<ModifierRange className="@mode-neutral" />
 				<ModifierRange className="@mode-lemon" />
 				<ModifierRange className="@mode-leek" />
 				<ModifierRange className="@mode-tomato" />
