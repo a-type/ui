@@ -3,7 +3,7 @@ import {
 	InputProps as BaseInputProps,
 } from '@base-ui/react/input';
 import clsx from 'clsx';
-import { Ref } from 'react';
+import { CSSProperties, Ref } from 'react';
 import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { inputInfo } from '../../systems/inputs.js';
@@ -58,7 +58,8 @@ const InnerInput = function InnerInput({
 	);
 };
 
-export interface InputProps extends Omit<BaseInputProps, 'className'> {
+export interface InputProps
+	extends Omit<BaseInputProps, 'className' | 'style'> {
 	autoSelect?: boolean;
 	/** Shuffle between random placeholders */
 	placeholders?: string[];
@@ -68,6 +69,7 @@ export interface InputProps extends Omit<BaseInputProps, 'className'> {
 	endAccessory?: React.ReactNode;
 	className?: string;
 	ref?: Ref<HTMLInputElement>;
+	style?: CSSProperties;
 }
 
 const InputDefault = function InputDefault({
@@ -75,10 +77,11 @@ const InputDefault = function InputDefault({
 	borderRef,
 	startAccessory,
 	endAccessory,
+	style,
 	...props
 }: InputProps) {
 	return (
-		<InputBorder ref={borderRef} className={className}>
+		<InputBorder ref={borderRef} className={className} style={style}>
 			{startAccessory}
 			<InnerInput {...props} />
 			{endAccessory}
