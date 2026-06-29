@@ -266,17 +266,19 @@ export function presetAtype<
 				}),
 				hover: create('hover', {
 					definition: (css) => css`
-						&:hover {
-							${base.mixins.bgHeavier.apply({ '--step': 1 })}
-							${base.mixins.ring.apply({
-								'--ring': base.functions.ring.compute({
-									'--color': $.mixins.bg.ref,
-									'--size': '4px',
-								}),
-							})}
+						@media (hover: hover) and (pointer: fine) {
+							&:hover {
+								${base.mixins.bgHeavier.apply({ '--step': 1 })}
+								${base.mixins.ring.apply({
+									'--ring': base.functions.ring.compute({
+										'--color': $.mixins.bg.ref,
+										'--size': '4px',
+									}),
+								})}
 
-							&[data-emphasis="primary"] {
-								${base.mixins.bgLighter.apply({ '--step': 1 })}
+								&[data-emphasis="primary"] {
+									${base.mixins.bgLighter.apply({ '--step': 1 })}
+								}
 							}
 						}
 					`,
