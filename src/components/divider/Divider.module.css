@@ -7,8 +7,4 @@
 	&[data-padded] {
 		margin-block: var(--m-space-md);
 	}
-	&[data-compensate] {
-		left: calc(var(--m-space-md) * var(--m-space-sm));
-		width: calc(100% - var(--m-space-md) * var(--m-space-sm) * 2);
-	}
 }

@@ -20,9 +20,12 @@ export const Divider = function Divider({
 	return (
 		<BaseSeparator
 			ref={ref}
+			style={{
+				left: compensate ? `calc(${compensate} * 0.25rem)` : undefined,
+				width: compensate ? `calc(100% - ${compensate} * 0.5rem)` : undefined,
+			}}
 			{...props}
 			data-padded={padded ? '' : undefined}
-			data-compensate={compensate}
 			className={clsx(cls.root, className)}
 		/>
 	);
