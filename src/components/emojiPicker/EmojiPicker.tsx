@@ -110,7 +110,7 @@ export const EmojiPickerSkinToneSelector = ({
 	const [skinTone, setSkinTone] = useEmojiSkinTone();
 
 	return (
-		<Box d="row" gap className={className} {...props}>
+		<Box gap className={className} {...props}>
 			{options.map((option) => (
 				<Button
 					key={option.skinTone}

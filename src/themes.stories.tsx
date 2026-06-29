@@ -94,7 +94,7 @@ export function DemoUI({
 					<Box gap wrap p items="start">
 						<Input placeholder="Placeholder" />
 						<TextArea placeholder="Placeholder" />
-						<Box d="row" gap items="center">
+						<Box gap items="center">
 							<Checkbox defaultChecked />
 							<span>Checkbox</span>
 						</Box>
@@ -364,7 +364,7 @@ export const Nesting: Story = {
 	render() {
 		return (
 			<Box col p gap>
-				<Box d="row" gap surface="primary">
+				<Box gap surface="primary">
 					<Button color="primary">Root theme</Button>
 				</Box>
 				<DemoUI className="@mode-eggplant override-dark" style={{ flex: 1 }} />
