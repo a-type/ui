@@ -14,6 +14,7 @@ export interface IconProps
 	name: IconName;
 	size?: number;
 	loading?: boolean;
+	filled?: boolean;
 }
 
 export const Icon = function Icon({
@@ -24,6 +25,7 @@ export const Icon = function Icon({
 	loading: loadingProp,
 	render,
 	style,
+	filled,
 	...rest
 }: IconProps & {
 	ref?: React.Ref<SVGSVGElement>;
@@ -48,6 +50,7 @@ export const Icon = function Icon({
 			name,
 			loading,
 			icon: true,
+			filled,
 		},
 		render,
 	});

@@ -5,6 +5,10 @@
 	--size: 1em;
 	width: var(--size);
 	height: var(--size);
+
+	&[data-filled='true'] {
+		fill: var(--m-color-main);
+	}
 }
 
 .spinner {
