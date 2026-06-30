@@ -58,7 +58,7 @@ export const Icon = function Icon({
 	if (loading) {
 		return (
 			<Spinner
-				size={size}
+				size={size ?? null}
 				data-icon
 				style={
 					{

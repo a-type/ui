@@ -112,10 +112,7 @@ export function ButtonRoot({
 							initial={{ width: 0, marginLeft: '-0.5rem' }}
 							animate={{ width: 'auto', marginLeft: 0 }}
 							exit={{ width: 0, marginLeft: '-0.5rem' }}
-							className={clsx(
-								'my-auto inline-block flex flex-shrink-0 overflow-hidden',
-								'[[data-has-icon=true]_&]:hidden',
-							)}
+							className={cls.defaultSpinner}
 							data-default-loader
 						>
 							<Spinner size={15} className="inline-block h-1em w-1em" />

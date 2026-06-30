@@ -14,4 +14,7 @@
 .spinner {
 	display: inline-block;
 	flex-shrink: 0;
+	--size: 1em;
+	width: var(--size);
+	height: var(--size);
 }

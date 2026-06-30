@@ -117,3 +117,14 @@
 		margin-left: calc(-1 * var(--m-space-sm));
 	}
 }
+
+.defaultSpinner {
+	margin-block: auto;
+	display: flex;
+	flex-shrink: 0;
+	overflow: clip;
+
+	[data-has-icon='true'] & {
+		display: none;
+	}
+}

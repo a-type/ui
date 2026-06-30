@@ -114,6 +114,10 @@ function applyPartAttributesAndAuditLabelUsage(rootElement: HTMLElement) {
 			) {
 				registry.icon++;
 			}
+			// Text skeletons count as text content
+			if (child.dataset.skeleton === 'text') {
+				registry.label++;
+			}
 		}
 	});
 	if (rootElement.textContent) {

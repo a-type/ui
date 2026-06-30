@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Avatar } from '../avatar/Avatar.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/index.js';
+import { TextSkeleton } from '../skeletons/skeletons.js';
 import { Button, ButtonProps } from './Button.js';
 import { ConfirmedButton } from './ConfirmedButton.js';
 
@@ -251,6 +252,19 @@ export const FragmentTest: Story = {
 					<>
 						<Icon name="placeholder" />
 					</>
+				</Button>
+			</Box>
+		);
+	},
+};
+
+export const SkeletonTest: Story = {
+	render(args) {
+		return (
+			<Box gap items="center">
+				<Button {...args}>
+					<TextSkeleton maxLength={10} />
+					<Icon name="placeholder" />
 				</Button>
 			</Box>
 		);

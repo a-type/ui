@@ -6,7 +6,7 @@ const CIRCLE_SIZE = 44;
 
 export interface SpinnerProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
-	size?: number;
+	size?: number | null;
 	thickness?: number;
 }
 
@@ -26,7 +26,7 @@ export const Spinner = function Spinner({
 			role="progressbar"
 			{...props}
 			className={classNames(cls.root, className)}
-			style={{ width: size, height: size, ...style }}
+			style={size ? { width: size, height: size, ...style } : style}
 		>
 			<svg
 				className={cls.svg}

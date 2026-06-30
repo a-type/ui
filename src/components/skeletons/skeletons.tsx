@@ -20,6 +20,7 @@ export const TextSkeleton = ({
 				width: `${length}ch`,
 				height: '1.2em',
 			}}
+			data-skeleton="text"
 		/>
 	);
 };
