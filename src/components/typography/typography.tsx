@@ -1,5 +1,6 @@
 import { useRender } from '@base-ui/react';
 import clsx from 'clsx';
+import { ComponentProps } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import { withProps } from '../../hooks/withProps.js';
 import cls from './typography.module.css';
@@ -97,8 +98,6 @@ export const H5 = withProps(Heading, {
 	emphasis: 'ambient',
 });
 
-export const TextLink = withProps(Text, {
-	render: <a />,
-	bold: true,
-	underline: true,
-});
+export function TextLink(props: TypographyProps & ComponentProps<'a'>) {
+	return <Text bold underline render={<a />} {...props} />;
+}
