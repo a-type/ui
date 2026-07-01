@@ -9,7 +9,6 @@
 	align-items: center;
 	justify-content: start;
 	gap: var(--m-space-sm);
-	align-self: center;
 
 	position: relative;
 	overflow: visible;
