@@ -39,6 +39,7 @@ export function ImageUploaderRoot({
 	onChange: handleChange,
 	maxDimension,
 	children,
+	className,
 	...rest
 }: ImageUploaderProps) {
 	const inputId = useId();
@@ -136,7 +137,7 @@ export function ImageUploaderRoot({
 			value={{ inputId, dragging, draggingOver, value, onChange }}
 		>
 			<div
-				className={classNames('@mode-neutral', cls.root, rest.className)}
+				className={classNames('@mode-neutral', cls.root, className)}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
