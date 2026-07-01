@@ -6,7 +6,7 @@
 	width: var(--size);
 	height: var(--size);
 
-	&[data-filled='true'] {
+	&[data-filled] {
 		fill: var(--m-color-main);
 	}
 }
