@@ -39,5 +39,6 @@
 
 .icon {
 	opacity: 80%;
+	font-size: 1rem;
 	@apply --mx-stroke(var(--m-color-main-heavy));
 }

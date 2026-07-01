@@ -71,8 +71,8 @@ export function EditableText({
 
 	useEffect(() => {
 		if (editingFinal && inputRef.current) {
-			// -10... roughly estimated based on default font.
-			inputRef.current.size = Math.max(1, value.length - 5);
+			// roughly estimated based on default font.
+			inputRef.current.size = Math.max(1, value.length - 6);
 			inputRef.current.focus();
 		}
 	}, [editingFinal, inputRef]);

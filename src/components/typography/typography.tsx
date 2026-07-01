@@ -58,7 +58,10 @@ export function Text({
 	});
 }
 
-export const Heading = withClassName(Text, '@mode-heading');
+export const Heading = withClassName(
+	withProps(Text, { emphasis: 'secondary' }),
+	'@mode-heading',
+);
 export const HeroText = withClassName(Text, '@mode-hero');
 export const P = withProps(Text, { render: <p /> });
 
