@@ -35,8 +35,7 @@
 	"scripts": {
 		"build:transpile": "tsc",
 		"build:copy": "node --experimental-strip-types ./scripts/copy.ts",
-		"build:arbor": "arbor build -o ./dist/css/arbor.css",
-		"build": "pnpm run build:transpile && pnpm run build:copy && pnpm run build:arbor",
+		"build": "pnpm run build:transpile && pnpm run build:copy",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
 		"storybook": "storybook dev -p 6006",
