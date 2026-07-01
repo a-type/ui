@@ -23,6 +23,7 @@ export * from './forms/index.js';
 export * from './horizontalList/HorizontalList.js';
 export * from './icon/index.js';
 export * from './imageUploader/index.js';
+export * from './img/Img.js';
 export * from './infiniteLoadTrigger/InfiniteLoadTrigger.js';
 export * from './input/index.js';
 export * from './layouts/index.js';
