@@ -37,6 +37,8 @@ export interface ButtonProps
 	 * Shortcuts for @mode-* classes.
 	 */
 	color?: 'primary' | 'accent' | 'success' | 'attention';
+	full?: 'width' | 'height' | boolean;
+	align?: 'start' | 'center' | 'end';
 }
 
 export function ButtonRoot({
@@ -55,6 +57,8 @@ export function ButtonRoot({
 	forceIconMode,
 	disableDropdownTriggerIcon,
 	disableDefaultLoadingIndicator,
+	full,
+	align,
 	ref,
 	...props
 }: ButtonProps) {
@@ -88,6 +92,8 @@ export function ButtonRoot({
 		'data-disable-icon-mode': disableIconMode,
 		'data-force-icon-mode': forceIconMode,
 		'data-emphasis': emphasis,
+		'data-full': full === true ? 'both' : full,
+		'data-align': align,
 		className: clsx(
 			emphasis === 'unstyled' ? cls.unstyled : cls.root,
 			emphasis === 'ghost' && '@mode-bold',

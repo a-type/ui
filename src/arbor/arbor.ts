@@ -186,7 +186,7 @@ export function presetAtype<
 				accent: $.mode.color.palette.leek,
 			},
 			action: {
-				roundness: config?.roundActions === false ? undefined : 99,
+				roundness: config?.roundActions === false ? undefined : 2,
 
 				light: {
 					bg: $.mode.color.main.light,

@@ -270,3 +270,27 @@ export const SkeletonTest: Story = {
 		);
 	},
 };
+
+export const FullSizeTest: Story = {
+	render(args) {
+		return (
+			<Box col gap full="width">
+				<Button {...args} full="width">
+					<Icon name="placeholder" />
+					Full Width
+				</Button>
+				<div style={{ width: '100%', aspectRatio: 1 }}>
+					<Button {...args} full="height">
+						<Icon name="placeholder" />
+						Full Height
+					</Button>
+				</div>
+				<div style={{ width: '100%', aspectRatio: 1 }}>
+					<Button {...args} full>
+						Full Both
+					</Button>
+				</div>
+			</Box>
+		);
+	},
+};

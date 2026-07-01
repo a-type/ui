@@ -7,6 +7,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: start;
 	gap: var(--m-space-sm);
 	align-self: center;
 
@@ -72,6 +73,24 @@
 	&[data-size='wrapper'] {
 		padding: 0;
 		width: fit-content;
+	}
+	&[data-full='width'],
+	&[data-full='both'] {
+		width: 100%;
+	}
+	&[data-full='height'],
+	&[data-full='both'] {
+		height: 100%;
+	}
+
+	&[data-align='start'] {
+		align-self: start;
+	}
+	&[data-align='center'] {
+		align-self: center;
+	}
+	&[data-align='end'] {
+		align-self: end;
 	}
 
 	@apply --mx-hover;
