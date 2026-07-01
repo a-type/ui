@@ -1,4 +1,6 @@
+import clsx from 'clsx';
 import { ComponentProps } from 'react';
+import cls from './Img.module.css';
 
 export interface ImgProps extends ComponentProps<'img'> {
 	full?: 'width' | 'height' | boolean;
@@ -6,8 +8,14 @@ export interface ImgProps extends ComponentProps<'img'> {
 	position?: 'top' | 'bottom' | 'left' | 'right' | 'center';
 }
 
-export function Img({ full, fit, position, ...props }: ImgProps) {
+export function Img({ full, fit, position, className, ...props }: ImgProps) {
 	return (
-		<img data-full={full} data-fit={fit} data-position={position} {...props} />
+		<img
+			className={clsx(cls.root, className)}
+			data-full={full}
+			data-fit={fit}
+			data-position={position}
+			{...props}
+		/>
 	);
 }
