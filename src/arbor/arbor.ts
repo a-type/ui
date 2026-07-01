@@ -444,7 +444,8 @@ export function presetAtype<
 	preset.bundleMode('heading', {
 		global: {
 			typography: {
-				size: 1.5,
+				size: 1.25,
+				baseWeight: 500,
 			},
 		},
 	});

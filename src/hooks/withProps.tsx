@@ -3,10 +3,10 @@ import { ComponentType } from 'react';
 
 export const withProps = <T extends object>(
 	Component: ComponentType<T>,
-	extras: Partial<T>,
+	presetProps: Partial<T>,
 ) => {
 	return (props: T) => {
-		return <Component {...(mergeProps<any>(props, extras) as any)} />;
+		return <Component {...(mergeProps<any>(presetProps, props) as any)} />;
 	};
 };
 
