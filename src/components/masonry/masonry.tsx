@@ -253,6 +253,8 @@ export interface MasonryProps {
 }
 
 const initialStyle: CSSProperties = {
+	zIndex: 0,
+	width: '100%',
 	height: 0,
 	position: 'relative',
 	overflow: 'hidden',
@@ -286,7 +288,7 @@ export function Masonry({
 		<div
 			ref={ref}
 			style={style ? { ...initialStyle, ...style } : initialStyle}
-			className={clsx('layer-components:z-0', className)}
+			className={clsx(className)}
 		>
 			{children}
 		</div>
