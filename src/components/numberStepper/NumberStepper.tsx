@@ -1,6 +1,6 @@
 import { fractionToText } from '@a-type/utils';
 import classNames from 'clsx';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import cls from './NumberStepper.module.css';
@@ -18,6 +18,7 @@ export interface NumberStepperProps {
 	max?: number;
 	id?: string;
 	defaultValue?: number;
+	style?: CSSProperties;
 }
 
 export function NumberStepper({
