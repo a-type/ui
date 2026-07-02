@@ -7,22 +7,55 @@ import {
 	ReactNode,
 	Ref,
 } from 'react';
-import { withClassName, withProps } from '../../hooks.js';
-import { Box } from '../box/Box.js';
+import { withClassName } from '../../hooks.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
+import { Text } from '../typography/typography.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import cls from './Card.module.css';
 
-export const CardRoot = withClassName(withProps(Box, { col: true }), cls.root);
+export interface CardRootProps extends HTMLAttributes<HTMLDivElement> {
+	size?: CardSize;
+	emphasis?: 'ambient' | 'secondary' | 'primary';
+	render?: UseRenderRenderProp<{
+		emphasis?: 'ambient' | 'secondary' | 'primary';
+		size?: CardSize;
+	}>;
+}
+
+export function CardRoot({
+	emphasis = 'ambient',
+	size,
+	className,
+	...rest
+}: CardRootProps) {
+	return useRender({
+		defaultTagName: 'div',
+		props: {
+			...rest,
+			className: classNames(
+				cls.root,
+				{
+					'@mode-normal': size === 'lg',
+					'@mode-dense': size === 'md',
+					'@mode-denser': size === 'sm',
+				},
+				className,
+			),
+		},
+		state: {
+			emphasis,
+			size,
+		},
+	});
+}
 
 export type CardSize = 'sm' | 'md' | 'lg';
 
 export function CardMain({
 	className,
-	compact,
-	size = compact ? 'sm' : 'md',
 	nonInteractive,
 	ref,
+	size,
 	style,
 	children,
 	visuallyDisabled,
@@ -39,8 +72,7 @@ export function CardMain({
 	className?: string;
 	onClick?: (ev: MouseEvent) => void;
 	children?: ReactNode;
-	/** @deprecated use size=sm */
-	compact?: boolean;
+	/** @deprecated set on Card */
 	size?: CardSize;
 	/** forces non-interactive version */
 	nonInteractive?: boolean;
@@ -82,28 +114,9 @@ export function CardMain({
 	return root;
 }
 
-export const CardTitle = withClassName(
-	withProps(Box, {
-		surface: 'ambient',
-		gap: 'sm',
-		col: true,
-		rounded: 'md',
-	}),
-	cls.title,
-	'@mode-bold',
-);
+export const CardTitle = withClassName(Text, cls.title, '@mode-bold');
 
-const CardContentRoot = withClassName(
-	withProps(Box, {
-		surface: 'ambient',
-		glass: true,
-		col: true,
-		gap: 'sm',
-		rounded: 'sm',
-	}),
-	'@mode-dense',
-	cls.content,
-);
+const CardContentRoot = withClassName('div', '@mode-dense', cls.content);
 export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 	unstyled?: boolean;
 	ref?: Ref<HTMLDivElement>;

@@ -19,7 +19,18 @@ import {
 const meta = {
 	title: 'Components/Card',
 	component: CardRoot,
-	argTypes: {},
+	argTypes: {
+		emphasis: {
+			type: 'string',
+			control: { type: 'inline-radio' },
+			options: ['ambient', 'secondary', 'primary'],
+		},
+		size: {
+			type: 'string',
+			control: { type: 'inline-radio' },
+			options: ['sm', 'md', 'lg'],
+		},
+	},
 	parameters: {
 		controls: { expanded: true },
 	},

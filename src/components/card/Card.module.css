@@ -6,9 +6,6 @@
 	overflow: clip;
 
 	@apply --mx-shadow(var(--m-shadow-sm));
-	@apply --mx-surface-ambient;
-	@apply --mx-bg-heavier(0.1);
-	@apply --mx-borderColor-faded(50%);
 	border-width: var(--m-lineWidth-sm);
 	border-radius: var(--m-surface-radius);
 
@@ -18,9 +15,21 @@
 
 	padding: 0;
 
-	&[data-borderless='true'] {
-		--mx-shadow-value: var(--m-shadow-md);
-		border-width: 0;
+	&[data-emphasis='ambient'] {
+		@apply --mx-surface-ambient;
+		padding: 0;
+		@apply --mx-bg-heavier(0.2);
+		@apply --mx-borderColor-faded(50%);
+	}
+	&[data-emphasis='secondary'] {
+		@apply --mx-surface-secondary;
+		padding: 0;
+		@apply --mx-borderColor-faded(50%);
+	}
+	&[data-emphasis='primary'] {
+		@apply --mx-surface-primary;
+		padding: 0;
+		@apply --mx-borderColor-faded(50%);
 	}
 }
 
@@ -46,7 +55,8 @@
 	transition: all var(--m-duration) var(--m-easing);
 
 	@apply --mx-shadow;
-	@apply --mx-bg(transparent);
+	/* Purposefully don't use mixin, allow children to inherit from card root */
+	background-color: transparent;
 
 	border-top-left-radius: inherit;
 	border-top-right-radius: inherit;
@@ -59,7 +69,7 @@
 		&:focus-visible,
 		&[data-focus-visible] {
 			@apply --mx-fg(var(--m-color-neutral-ink));
-			@apply --mx-bg(--fn-color-faded(var(--m-color-neutral-ink), 10%));
+			background-color: --fn-color-faded(var(--m-color-neutral-ink), 10%);
 		}
 
 		&:focus {
@@ -88,16 +98,27 @@
 	overflow: clip;
 	max-width: 100%;
 	display: block;
+	border-radius: var(--m-radius-md);
+
+	@apply --mx-bg(inherit);
 }
 
 .content {
 	z-index: 1;
+	display: flex;
+	flex-direction: row;
+	gap: var(--m-space-sm);
+	align-items: center;
+	border-radius: var(--m-radius-sm);
 
 	padding: var(--m-space-sm) var(--m-space-md);
 
 	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
 	font-weight: var(--m-prose-ambient-weight);
+
+	@apply --mx-bg(inherit);
+	@apply --mx-bg-faded(70%);
 
 	&[data-unstyled] {
 		background-color: unset;
