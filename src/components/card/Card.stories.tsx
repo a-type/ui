@@ -100,8 +100,8 @@ export const Default: Story = {
 
 export const Compact: Story = {
 	render: () => (
-		<CardRoot>
-			<CardMain compact>
+		<CardRoot size="sm">
+			<CardMain>
 				<CardTitle>Card Title</CardTitle>
 				<CardContent>Other stuff</CardContent>
 				<CardContent>More things, if you want.</CardContent>

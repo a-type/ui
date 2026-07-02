@@ -141,8 +141,8 @@ export function DemoUI({
 								</Card.Actions>
 							</Card.Footer>
 						</Card>
-						<Card>
-							<Card.Main compact onClick={() => {}}>
+						<Card size="sm">
+							<Card.Main onClick={() => {}}>
 								<Card.Title>Card Title</Card.Title>
 								<Card.Content>Card Content</Card.Content>
 								<Card.Content unstyled>
