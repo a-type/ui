@@ -18,7 +18,7 @@
 	&[data-emphasis='ambient'] {
 		@apply --mx-surface-ambient;
 		padding: 0;
-		@apply --mx-bg-heavier(0.2);
+		@apply --mx-bg(--fn-color-heavier(var(--m-surface-ambient-bg), 0.2));
 		@apply --mx-borderColor-faded(50%);
 	}
 	&[data-emphasis='secondary'] {
