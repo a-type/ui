@@ -174,6 +174,14 @@ export function presetAtype<
 					opacity: 1;
 				}
 			`,
+			spin: (css) => css`
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			`,
 			...config?.keyframes,
 		},
 	});
