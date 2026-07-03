@@ -38,7 +38,7 @@
 	"scripts": {
 		"build:transpile": "tsc --build tsconfig.json",
 		"build:copy": "node --experimental-strip-types ./scripts/copy.ts",
-		"build:css": "postcss ./dist/**/*.css --replace --config scripts --verbose",
+		"build:css": "node --experimental-strip-types ./scripts/postcss.ts",
 		"build": "pnpm run build:transpile && pnpm run build:copy && pnpm run build:css",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
@@ -103,6 +103,7 @@
 		"husky": "^9.1.7",
 		"jiti": "^2.6.1",
 		"lint-staged": "^16.2.7",
+		"postcss": "^8.5.16",
 		"postcss-assign-layer": "^0.4.0",
 		"postcss-cli": "^11.0.1",
 		"prettier": "^3.0.3",
