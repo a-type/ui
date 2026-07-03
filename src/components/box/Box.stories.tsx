@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../button/Button.js';
 import { Checkbox } from '../checkbox/Checkbox.js';
+import { Icon } from '../icon/Icon.js';
 import { Progress } from '../progress/Progress.js';
 import { Slider } from '../slider/Slider.js';
 import { Switch } from '../switch/Switch.js';
@@ -158,8 +159,20 @@ export const DimComparison: Story = {
 	render(args) {
 		return (
 			<Box gap>
+				<Box dim>
+					Dimmed non-surface
+					<Text>Text</Text>
+					<Icon name="placeholder" />
+				</Box>
 				<Box surface="ambient" dim>
 					Dimmed box
+					<Text>Text</Text>
+					<Icon name="placeholder" />
+				</Box>
+				<Box surface="primary" dim>
+					Dimmed box
+					<Text>Text</Text>
+					<Icon name="placeholder" />
 				</Box>
 				<Box surface="ambient">
 					<Text dim>Dimmed text</Text>

@@ -195,6 +195,10 @@
 			@apply --mx-bg-faded(80%);
 			@apply --mx-borderColor-faded(80%);
 		}
+		/* reduce specificity so surface styles override */
+		&:where([data-dim='true']) {
+			@apply --mx-fg(var(--m-color-neutral-ink));
+		}
 		&[data-dim='true'] {
 			@apply --mx-fg-lighter(2.5);
 		}

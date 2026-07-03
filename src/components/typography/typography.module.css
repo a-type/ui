@@ -49,7 +49,8 @@
 	&[data-wrap] {
 		text-wrap: wrap;
 	}
-	&[data-dim] {
+	&[data-dim],
+	:where([data-dim='true']) & {
 		@apply --mx-fg-lighter(2.5);
 	}
 
