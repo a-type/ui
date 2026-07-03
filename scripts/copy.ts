@@ -23,7 +23,7 @@ async function copyFiles() {
 	}
 }
 
-copyFiles().catch((error) => {
+await copyFiles().catch((error) => {
 	console.error('Error copying files:', error);
 	process.exit(1);
 });
