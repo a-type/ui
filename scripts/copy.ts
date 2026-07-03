@@ -11,7 +11,7 @@ const distDir = join(process.cwd(), 'dist');
 
 async function copyFiles() {
 	for await (const file of glob('src/**/*', {
-		exclude: ['**/*.ts', '**/*.tsx', '**/*.css'],
+		exclude: ['**/*.ts', '**/*.tsx'],
 		withFileTypes: true,
 	})) {
 		if (file.isFile()) {
