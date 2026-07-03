@@ -8,11 +8,12 @@ import { Popover } from '../popover/Popover.js';
 import cls from './EmojiField.module.css';
 import { Field } from './Field.js';
 
-export type EmojiFieldProps = Omit<ButtonProps, 'className'> & {
+export type EmojiFieldProps = Omit<ButtonProps, 'className' | 'style'> & {
 	name: string;
 	label?: string;
 	required?: string;
 	className?: string;
+	style?: React.CSSProperties;
 	description?: ReactNode;
 };
 
@@ -23,13 +24,14 @@ export function EmojiField({
 	required,
 	id: providedId,
 	description,
+	style,
 	...rest
 }: EmojiFieldProps) {
 	const [props, _, tools] = useField({ name });
 	const id = useIdOrGenerated(providedId);
 	const [open, setOpen] = useState(false);
 	return (
-		<Field horizontal className={className} id={id}>
+		<Field horizontal className={className} style={style} id={id}>
 			<Popover open={open} onOpenChange={setOpen}>
 				<Field.Control render={<input type="hidden" {...props} />} />
 				<Popover.Trigger

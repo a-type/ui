@@ -9,6 +9,7 @@ export interface CheckboxFieldProps {
 	label?: string;
 	required?: boolean;
 	className?: string;
+	style?: React.CSSProperties;
 	id?: string;
 	description?: ReactNode;
 }
@@ -17,6 +18,7 @@ export function CheckboxField({
 	name,
 	label,
 	className,
+	style,
 	required,
 	id: providedId,
 	description,
@@ -25,7 +27,7 @@ export function CheckboxField({
 	const [props, _, tools] = useField({ name, required, type: 'checkbox' });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Field horizontal className={className} id={id}>
+		<Field horizontal className={className} style={style} id={id}>
 			<Field.Control
 				render={
 					<Checkbox

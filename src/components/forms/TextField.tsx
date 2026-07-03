@@ -34,6 +34,7 @@ export const TextField = function TextField({
 	name,
 	label,
 	className,
+	style,
 	autoFocusDelay,
 	autoFocus,
 	inputRef,
@@ -63,7 +64,7 @@ export const TextField = function TextField({
 	}, [autoFocusDelay]);
 
 	return (
-		<Field className={className} stretch ref={ref} id={id}>
+		<Field className={className} style={style} stretch ref={ref} id={id}>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
@@ -99,6 +100,7 @@ export function TextAreaField({
 	name,
 	label,
 	className,
+	style,
 	inputRef,
 	onKeyDown,
 	submitOnEnter,
@@ -123,7 +125,7 @@ export function TextAreaField({
 	const id = useIdOrGenerated(providedId);
 
 	return (
-		<Field stretch className={className} ref={ref} id={id}>
+		<Field stretch className={className} style={style} ref={ref} id={id}>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={

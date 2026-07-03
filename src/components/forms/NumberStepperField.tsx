@@ -8,10 +8,14 @@ import {
 import { Field } from './Field.js';
 
 export interface NumberStepperFieldProps
-	extends Omit<NumberStepperProps, 'value' | 'onChange'> {
+	extends Omit<
+		NumberStepperProps,
+		'value' | 'onChange' | 'className' | 'style'
+	> {
 	name: string;
 	label?: string;
 	className?: string;
+	style?: React.CSSProperties;
 	id?: string;
 	onChange?: (value: number) => void;
 	description?: ReactNode;
@@ -21,6 +25,7 @@ export function NumberStepperField({
 	name,
 	label,
 	className,
+	style,
 	id: providedId,
 	onChange,
 	description,
@@ -29,7 +34,7 @@ export function NumberStepperField({
 	const [props, field, tools] = useField({ name });
 	const id = useIdOrGenerated(providedId);
 	return (
-		<Field className={className} id={id}>
+		<Field className={className} style={style} id={id}>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={(composed) => (

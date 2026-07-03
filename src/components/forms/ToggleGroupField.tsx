@@ -4,22 +4,26 @@ import { useIdOrGenerated } from '../../hooks/useIdOrGenerated.js';
 import { ToggleGroup, ToggleGroupProps } from '../toggleGroup/toggleGroup.js';
 import { Field } from './Field.js';
 
-export type ToggleGroupFieldProps<Value extends string> =
-	ToggleGroupProps<Value> & {
-		name: string;
-		label?: string;
-		required?: boolean;
-		className?: string;
-		id?: string;
-		type?: 'single' | 'multiple';
-		description?: ReactNode;
-	};
+export type ToggleGroupFieldProps<Value extends string> = Omit<
+	ToggleGroupProps<Value>,
+	'style' | 'className'
+> & {
+	name: string;
+	label?: string;
+	required?: boolean;
+	className?: string;
+	style?: React.CSSProperties;
+	id?: string;
+	type?: 'single' | 'multiple';
+	description?: ReactNode;
+};
 
 function ToggleGroupFieldDefault({
 	name,
 	label,
 	required,
 	className,
+	style,
 	type = 'single',
 	multiple,
 	description,
@@ -30,7 +34,7 @@ function ToggleGroupFieldDefault({
 	const [fieldProps, _, tools] = useField({ name, required, ...props });
 
 	return (
-		<Field id={id}>
+		<Field id={id} className={className} style={style}>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
@@ -45,7 +49,6 @@ function ToggleGroupFieldDefault({
 						}}
 						multiple={multiple || type === 'multiple'}
 						{...props}
-						className={className}
 					/>
 				}
 			/>
