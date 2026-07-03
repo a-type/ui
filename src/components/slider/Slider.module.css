@@ -1,6 +1,10 @@
 .root {
 	width: 100%;
 	box-sizing: border-box;
+	&[data-orientation='vertical'] {
+		width: max-content;
+		height: 100%;
+	}
 }
 
 .control {
