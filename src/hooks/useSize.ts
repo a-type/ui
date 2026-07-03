@@ -3,6 +3,11 @@ import { RefObject, useEffect, useMemo, useRef } from 'react';
 import { useStableCallback } from './useStableCallback.js';
 interface ResizeObserverEntry {
 	target: Element;
+	contentRect: DOMRectReadOnly;
+	borderBoxSize?: ReadonlyArray<{
+		inlineSize: number;
+		blockSize: number;
+	}>;
 }
 type ResizeObserverCallback = (entries: ResizeObserverEntry[]) => void;
 export declare class ResizeObserver {
@@ -26,9 +31,13 @@ export function useSize<E extends HTMLElement>(
 		}
 		const resizeObserver = new ResizeObserver((entries) => {
 			entries.forEach((entry) => {
+				const width =
+					entry.borderBoxSize?.[0]?.inlineSize ?? entry.contentRect.width;
+				const height =
+					entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
 				cb({
-					width: entry.target.clientWidth,
-					height: entry.target.clientHeight,
+					width,
+					height,
 				});
 			});
 		});
