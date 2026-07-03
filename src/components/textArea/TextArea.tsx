@@ -72,12 +72,13 @@ const TextAreaBorder = withClassName(Input.Border, cls.border);
 
 const TextAreaDefault = function TextArea({
 	className,
+	style,
 	...rest
 }: TextAreaProps & {
 	ref?: React.Ref<any>;
 }) {
 	return (
-		<TextAreaBorder className={className}>
+		<TextAreaBorder className={className} style={style}>
 			<TextAreaInput {...rest} />
 		</TextAreaBorder>
 	);
