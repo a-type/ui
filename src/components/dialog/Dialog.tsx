@@ -22,6 +22,7 @@ import {
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
+import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/index.js';
@@ -415,7 +416,7 @@ export const DialogClose = function DialogClose({
 
 export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
 
-export const DialogActions = withClassName('div', cls.actions);
+export const DialogActions = withClassName(Box, cls.actions);
 
 export const DialogSelectTrigger = function DialogSelectTrigger({
 	children,
