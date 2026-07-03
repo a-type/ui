@@ -19,6 +19,7 @@ async function copyFiles() {
 			const dest = join(distDir, relative(srcDir, src));
 			await mkdir(dirname(dest), { recursive: true });
 			await copyFile(src, dest);
+			console.log(`Copied ${src} to ${dest}`);
 		}
 	}
 }
