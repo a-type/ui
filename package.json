@@ -36,7 +36,7 @@
 		"build:transpile": "tsc --build tsconfig.json",
 		"build:copy": "node --experimental-strip-types ./scripts/copy.ts",
 		"build:css": "postcss ./src/**/*.css --dir ./dist --base ./src --config scripts",
-		"build": "pnpm run build:copy && pnpm run build:css && pnpm run build:transpile",
+		"build": "pnpm run build:transpile && pnpm run build:copy && pnpm run build:css",
 		"prepublish": "pnpm run build",
 		"icons": "node ./scripts/generateIcons.js",
 		"storybook": "storybook dev -p 6006",
