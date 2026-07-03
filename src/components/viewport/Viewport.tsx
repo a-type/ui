@@ -153,6 +153,7 @@ export function ViewportControlContent({
 			surface
 			border
 			elevated="md"
+			data-position={position}
 			{...props}
 		>
 			{children}
