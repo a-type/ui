@@ -26,12 +26,12 @@ export function AvatarListRoot({
 			<div
 				className={className}
 				style={{
+					...style,
 					position: 'relative',
 					flexBasis: 'auto',
 					width,
 					minWidth: width,
 					height: size,
-					...style,
 				}}
 				{...rest}
 			>
@@ -45,16 +45,19 @@ export function AvatarListItemRoot({
 	index,
 	children,
 	className,
+	style,
 }: {
 	index: number;
 	children: ReactNode;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	const { size } = useContext(AvatarListContext);
 	return (
 		<div
 			className={className}
 			style={{
+				...style,
 				position: 'absolute',
 				left: index === 0 ? 0 : index * ((size * 2) / 3),
 				zIndex: index,
