@@ -10,27 +10,35 @@ const defaultColors = {
 	ranges: {
 		lemon: {
 			hue: 86,
+			neutralSaturation: 0.2,
 		},
 		leek: {
 			hue: 165.88,
+			neutralSaturation: 0.2,
 		},
 		tomato: {
 			hue: 10.51,
+			neutralSaturation: 0.2,
 		},
 		blueberry: {
 			hue: 248.14,
+			neutralSaturation: 0.2,
 		},
 		eggplant: {
 			hue: 280.21,
+			neutralSaturation: 0.2,
 		},
 		attention: {
 			hue: 30,
+			neutralSaturation: 0.2,
 		},
 		success: {
 			hue: 140,
+			neutralSaturation: 0.2,
 		},
 		user: {
 			hue: 0,
+			neutralSaturation: 0.2,
 		},
 	},
 	mainColor: 'lemon',

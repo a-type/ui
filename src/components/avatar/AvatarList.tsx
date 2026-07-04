@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext } from 'react';
+import { CSSProperties, ReactNode, createContext, useContext } from 'react';
 import { Avatar, AvatarProps } from './Avatar.js';
 
 const AvatarListContext = createContext<{ size: number }>({
@@ -10,12 +10,14 @@ export function AvatarListRoot({
 	count,
 	size = 24,
 	className,
+	style,
 	...rest
 }: {
 	children: ReactNode;
 	count: number;
 	size?: number;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	const width = count > 0 ? size + (count - 1) * ((size * 2) / 3) : 0;
 
@@ -29,6 +31,7 @@ export function AvatarListRoot({
 					width,
 					minWidth: width,
 					height: size,
+					...style,
 				}}
 				{...rest}
 			>
