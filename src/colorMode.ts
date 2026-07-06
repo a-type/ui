@@ -14,9 +14,9 @@ const updateMode = () => {
 	if (typeof window === 'undefined') return;
 
 	const mode = window.localStorage.getItem('colorMode');
-	document.documentElement.classList.remove('override-light', 'override-dark');
+	document.documentElement.classList.remove('@mode-light', '@mode-dark');
 	if (mode) {
-		document.documentElement.classList.add('override-' + mode);
+		document.documentElement.classList.add('@mode-' + mode);
 	}
 
 	// determine final mode, even if it's system
