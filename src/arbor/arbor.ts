@@ -37,8 +37,8 @@ const defaultColors = {
 			neutralSaturation: 0.2,
 		},
 		user: {
-			hue: 0,
-			neutralSaturation: 0.2,
+			hue: $userColorHue,
+			neutralSaturation: $userColorSaturation,
 		},
 	},
 	mainColor: 'lemon',
