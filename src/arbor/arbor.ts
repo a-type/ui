@@ -50,6 +50,8 @@ export type ATypeConfig<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
 > = Partial<ArborPresetConfig<TColors>> & {
 	mainColor?: TColors;
+	defaultAccentColor?: TColors;
+	fallbackAccentColor?: TColors;
 	roundActions?: boolean;
 	roundControls?: boolean;
 };
@@ -57,6 +59,8 @@ export type ATypeConfig<
 export function presetAtype<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
 >(config?: ATypeConfig<TColors>) {
+	const defaultAccent = config?.defaultAccentColor || 'leek';
+	const fallbackAccent = config?.fallbackAccentColor || 'lemon';
 	const base = presetArbor({
 		...config,
 		color: {
@@ -199,7 +203,7 @@ export function presetAtype<
 		extends: [base],
 		baseMode: ($) => ({
 			color: {
-				accent: $.mode.color.palette.leek,
+				accent: $.mode.color.palette[defaultAccent],
 			},
 			action: {
 				roundness: config?.roundActions === false ? undefined : 2,
@@ -407,8 +411,9 @@ export function presetAtype<
 			color: {
 				main: preset.$.mode.color.palette[colorName],
 				// avoid assigning leek to both main and accent
-				accent:
-					colorName === 'leek' ? preset.$.mode.color.palette.lemon : undefined,
+				accent: (colorName === defaultAccent
+					? preset.$.mode.color.palette[fallbackAccent]
+					: preset.$.mode.color.palette[defaultAccent]) as any,
 			},
 		});
 	}
