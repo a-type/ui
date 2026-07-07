@@ -17,6 +17,7 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	truncate?: boolean;
 	dim?: boolean;
 	color?: 'neutral' | 'main' | 'attention' | 'success';
+	wrap?: boolean;
 }
 
 export function Text({
@@ -33,6 +34,7 @@ export function Text({
 	color,
 	normal,
 	uppercase,
+	wrap,
 	...rest
 }: TypographyProps) {
 	return useRender({
@@ -54,6 +56,7 @@ export function Text({
 			color: color ? color : undefined,
 			normal: normal ? true : undefined,
 			uppercase: uppercase ? true : undefined,
+			wrap,
 		},
 	});
 }
