@@ -69,6 +69,16 @@
 	&[data-color='success'] {
 		@apply --mx-fg(var(--m-color-palette-success-heavy));
 	}
+
+	&[data-align='start'] {
+		text-align: start;
+	}
+	&[data-align='center'] {
+		text-align: center;
+	}
+	&[data-align='end'] {
+		text-align: end;
+	}
 }
 
 @layer components {

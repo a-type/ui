@@ -18,6 +18,7 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	dim?: boolean;
 	color?: 'neutral' | 'main' | 'attention' | 'success';
 	wrap?: boolean;
+	align?: 'start' | 'center' | 'end';
 }
 
 export function Text({
@@ -35,6 +36,7 @@ export function Text({
 	normal,
 	uppercase,
 	wrap,
+	align,
 	...rest
 }: TypographyProps) {
 	return useRender({
@@ -57,6 +59,7 @@ export function Text({
 			normal: normal ? true : undefined,
 			uppercase: uppercase ? true : undefined,
 			wrap,
+			align,
 		},
 	});
 }
