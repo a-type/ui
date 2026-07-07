@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
+import { useResolvedColorMode } from '../colorMode.js';
 
 let defaultColor = '#ffffff';
 function getCurrentColor() {
@@ -33,7 +34,23 @@ function changeThemeColor(color: string) {
 export function useTitleBarColor(
 	color: string | { light: string; dark: string },
 ) {
-	/* TODO: rewrite this */
+	const colorMode = useResolvedColorMode();
+	useEffect(() => {
+		const finalColor =
+			typeof color === 'string'
+				? color
+				: colorMode === 'dark'
+				? color.dark
+				: color.light;
+		const previousColor =
+			document
+				.querySelector('meta[name=theme-color]')
+				?.getAttribute('content') ?? defaultColor;
+		changeThemeColor(finalColor);
+		return () => {
+			changeThemeColor(previousColor);
+		};
+	}, [color, colorMode]);
 }
 
 export function useSetTitleBarColor() {
@@ -42,12 +59,58 @@ export function useSetTitleBarColor() {
 	return { setColor, resetColor };
 }
 
-export function useThemedTitleBar(
-	paletteOrName: any,
-	value: any,
-	/** If not provided, will inherit from app */
-	mode?: 'light' | 'dark',
-	skip?: boolean,
-) {
-	/* TODO: rewrite this */
+export function useThemedTitleBar(colorToken: string, skip?: boolean) {
+	const { setColor } = useSetTitleBarColor();
+	// using a variable to rerun the effect instead of subscribing in-effect...
+	// this is an attempt to preserve the cascading behavior in the React tree
+	// if a child calls this hook, so ideally the parent and child should both
+	// re-evaluate but the child should 'win'
+	const visible = useSyncExternalStore(
+		(onStoreChange) => {
+			document.addEventListener('visibilitychange', onStoreChange);
+			return () => {
+				document.removeEventListener('visibilitychange', onStoreChange);
+			};
+		},
+		() => document.visibilityState === 'visible',
+		() => true,
+	);
+
+	const mode = useResolvedColorMode();
+
+	useEffect(() => {
+		if (skip) return;
+		const previousColor = getCurrentColor();
+
+		async function update() {
+			try {
+				const { resolveRuntimeValue } = await import('@arbor-css/core/runtime');
+				const color = await resolveRuntimeValue(colorToken, {
+					tokenPurpose: 'color',
+				});
+				if (color) {
+					setColor(extractLightDark(color, mode));
+				}
+			} catch (e) {
+				console.error('Error updating title bar color:', e);
+			}
+		}
+		update();
+
+		if (previousColor) {
+			return () => {
+				setColor(previousColor);
+			};
+		}
+	}, [setColor, colorToken, skip, visible, mode]);
+}
+
+function extractLightDark(colorValue: string, mode: string): string {
+	if (colorValue.startsWith('light-dark(')) {
+		const colors = colorValue.slice(11, -1).split(',');
+		if (colors.length === 2) {
+			return mode === 'light' ? colors[0].trim() : colors[1].trim();
+		}
+	}
+	return colorValue;
 }
