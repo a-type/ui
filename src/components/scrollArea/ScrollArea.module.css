@@ -118,7 +118,7 @@
 .thumb {
 	@apply --mx-bg(var(--mx-fg-ref));
 	@apply --mx-bg-faded(25%);
-	border-radius: 9999px;
+	border-radius: var(--m-radius-full);
 
 	&[data-orientation='vertical'] {
 		width: 100%;
@@ -135,7 +135,7 @@
 	display: flex;
 	user-select: none;
 	opacity: 0;
-	border-radius: 9999px;
+	border-radius: var(--m-radius-full);
 	touch-action: none;
 	transition:
 		opacity,
