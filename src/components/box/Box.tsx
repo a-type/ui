@@ -104,6 +104,10 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	 */
 	dim?: boolean;
 	self?: 'auto' | 'start' | 'end' | 'center' | 'stretch';
+	/**
+	 * Use margin to center self in flex
+	 */
+	m?: 'auto' | 'y-auto' | 'x-auto';
 }
 
 export function Box({
@@ -132,6 +136,7 @@ export function Box({
 	dim,
 	self,
 	squish,
+	m,
 	ref,
 	...rest
 }: BoxProps) {
@@ -167,6 +172,7 @@ export function Box({
 			data-self={self}
 			data-dim={dim}
 			data-squish={squish}
+			data-m={m}
 		/>
 	);
 

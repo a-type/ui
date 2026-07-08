@@ -147,6 +147,16 @@
 			height: 100%;
 		}
 
+		&[data-m='auto'] {
+			margin: auto;
+		}
+		&[data-m='y-auto'] {
+			margin-block: auto;
+		}
+		&[data-m='x-auto'] {
+			margin-inline: auto;
+		}
+
 		&[data-overflow='visible'] {
 			overflow: visible;
 		}
