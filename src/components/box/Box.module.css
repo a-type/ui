@@ -310,3 +310,9 @@
 	inherits: false;
 	initial-value:;
 }
+
+@property --padding {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0;
+}
