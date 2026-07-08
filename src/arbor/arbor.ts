@@ -37,8 +37,8 @@ const defaultColors = {
 			neutralSaturation: 0.2,
 		},
 		user: {
-			hue: $userColorHue,
-			neutralSaturation: $userColorSaturation,
+			hue: `var(${$userColorHue})`,
+			neutralSaturation: `var(${$userColorSaturation})`,
 		},
 	},
 	mainColor: 'lemon',
@@ -204,6 +204,15 @@ export function presetAtype<
 		baseMode: ($) => ({
 			color: {
 				accent: $.mode.color.palette[defaultAccent],
+				palette: {
+					user: compileSingleColor(
+						{
+							hue: $.mode.user.hue,
+							saturation: $.mode.user.saturation,
+						},
+						$.mode.global,
+					),
+				},
 			},
 			action: {
 				roundness: config?.roundActions === false ? undefined : 2,
