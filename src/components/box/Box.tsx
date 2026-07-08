@@ -56,6 +56,10 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	 */
 	p?: BoxSpacingSize | boolean;
 	/**
+	 * Reduce padding in one axis by one level
+	 */
+	squish?: 'vertical' | 'horizontal';
+	/**
 	 * Apply surface intents
 	 */
 	surface?: boolean | 'ambient' | 'secondary' | 'primary';
@@ -127,6 +131,7 @@ export function Box({
 	glass,
 	dim,
 	self,
+	squish,
 	ref,
 	...rest
 }: BoxProps) {
@@ -161,6 +166,7 @@ export function Box({
 			data-glass={glass}
 			data-self={self}
 			data-dim={dim}
+			data-squish={squish}
 		/>
 	);
 

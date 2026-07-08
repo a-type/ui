@@ -89,23 +89,30 @@
 		}
 
 		&[data-p='none'] {
-			padding: 0;
+			--padding: 0;
 		}
 		&[data-p='xs'] {
-			padding: var(--m-space-xs);
+			--padding: var(--m-space-xs);
 		}
 		&[data-p='sm'] {
-			padding: var(--m-space-sm);
+			--padding: var(--m-space-sm);
 		}
 		&[data-p='md'] {
-			padding: var(--m-space-md);
+			--padding: var(--m-space-md);
 		}
 		&[data-p='lg'],
 		&[data-p='true'] {
-			padding: var(--m-space-lg);
+			--padding: var(--m-space-lg);
 		}
 		&[data-p='xl'] {
-			padding: var(--m-space-xl);
+			--padding: var(--m-space-xl);
+		}
+		padding: var(--padding, 0);
+		&[data-squish='vertical'] {
+			padding-block: calc(var(--padding, 0) / 2);
+		}
+		&[data-squish='horizontal'] {
+			padding-inline: calc(var(--padding, 0) / 2);
 		}
 
 		&[data-rounded='none'] {

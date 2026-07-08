@@ -54,6 +54,33 @@ const meta = {
 		container: {
 			type: 'boolean',
 		},
+		p: {
+			type: 'string',
+			options: ['none', 'xs', 'sm', 'md', 'lg', 'xl'],
+			control: {
+				type: 'select',
+			},
+		},
+		gap: {
+			type: 'string',
+			options: ['none', 'xs', 'sm', 'md', 'lg', 'xl'],
+			control: {
+				type: 'select',
+			},
+		},
+		col: {
+			type: 'boolean',
+		},
+		reverse: {
+			type: 'boolean',
+		},
+		squish: {
+			type: 'string',
+			options: ['horizontal', 'vertical'],
+			control: {
+				type: 'select',
+			},
+		},
 		children: {
 			table: {
 				disable: true,
