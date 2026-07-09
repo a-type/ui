@@ -223,9 +223,15 @@
 		&[data-grow='true'] {
 			flex-grow: 1;
 		}
+		&[data-grow='false'] {
+			flex-grow: 0;
+		}
 		&[data-shrink='true'] {
 			flex-shrink: 1;
 			min-width: 0;
+		}
+		&[data-shrink='false'] {
+			flex-shrink: 0;
 		}
 
 		@apply --mx-shadow;
