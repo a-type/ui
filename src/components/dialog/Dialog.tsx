@@ -467,6 +467,7 @@ export const Dialog = Object.assign(DialogRoot, {
 	SelectList: DialogSelectList,
 	SelectItem: DialogSelectItem,
 	Unstyled: BaseDialog as DialogParts,
+	createHandle: BaseDialog.createHandle,
 });
 
 export type DialogParts = typeof BaseDialog;

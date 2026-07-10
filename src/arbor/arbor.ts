@@ -226,7 +226,7 @@ export function presetAtype<
 					`,
 					borderColor: $.mixins.fg.ref,
 					borderStyle: 'solid',
-					borderWidth: '1px',
+					borderWidth: $.mode.lineWidth.$root,
 				},
 				primary: {
 					borderColor: $.mixins.fg.ref,
