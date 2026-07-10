@@ -20,7 +20,7 @@ import cls from './Button.module.css';
 
 export interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
-		Pick<BaseButtonProps, 'render' | 'focusableWhenDisabled'> {
+		Pick<BaseButtonProps, 'render' | 'focusableWhenDisabled' | 'nativeButton'> {
 	emphasis?: 'primary' | 'default' | 'ghost' | 'light' | 'unstyled';
 	size?: 'default' | 'small' | 'wrapper';
 	toggled?: boolean;
