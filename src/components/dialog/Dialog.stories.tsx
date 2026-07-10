@@ -17,7 +17,7 @@ import {
 	DialogTrigger,
 } from './Dialog.js';
 
-const meta = {
+const meta: any = {
 	title: 'Components/Dialog',
 	component: Dialog,
 	argTypes: {},
