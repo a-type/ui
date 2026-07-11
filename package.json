@@ -56,13 +56,12 @@
 		"prepare": "husky"
 	},
 	"peerDependencies": {
+		"@arbor-css/core": "^0.0.141",
 		"react": "^19",
 		"react-dom": "^19"
 	},
 	"dependencies": {
 		"@a-type/utils": "^1.1.9",
-		"@arbor-css/core": "^0.0.140",
-		"@arbor-css/postcss": "^0.0.140",
 		"@base-ui/react": "^1.4.1",
 		"@use-gesture/react": "^10.3.1",
 		"browser-image-resizer": "^2.4.1",
@@ -76,6 +75,8 @@
 		"valtio": "^2.1.4"
 	},
 	"devDependencies": {
+		"@arbor-css/core": "^0.0.141",
+		"@arbor-css/postcss": "^0.0.141",
 		"@eslint/js": "^9.39.2",
 		"@storybook/addon-links": "10.4.0",
 		"@storybook/react-vite": "10.4.0",
