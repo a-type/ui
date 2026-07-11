@@ -1,7 +1,7 @@
 @import './arbor.css';
 
 /* default layers */
-@layer reset, arbor;
+@layer reset, arbor, components, utils;
 
 #root,
 #main,
