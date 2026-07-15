@@ -33,7 +33,7 @@ arbor tokens list
 arbor tokens list --filter mode
 
 # get detailed information about a specific token
-arbor token info --m-color-main-ink
+arbor token info --m-tint-ink
 ```
 
 You can also list available functions and mixins with their parameters and descriptions.

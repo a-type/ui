@@ -6,6 +6,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 	@apply --mx-bg(inherit);
 }

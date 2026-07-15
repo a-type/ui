@@ -98,6 +98,6 @@ function MockTitleBar() {
 }
 
 function Overrider() {
-	useThemedTitleBar('--m-color-accent-light');
+	useThemedTitleBar('--m-accent-light');
 	return null;
 }

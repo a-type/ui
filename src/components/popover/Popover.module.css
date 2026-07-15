@@ -1,17 +1,17 @@
 .close {
 	position: absolute;
-	right: var(--m-space-sm);
-	top: var(--m-space-sm);
+	right: var(--m-sp-sm);
+	top: var(--m-sp-sm);
 }
 
 .popup {
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 }
 
 .title {
 	font-weight: 500;
 	margin: 0;
-	margin-block-end: var(--m-space-sm);
+	margin-block-end: var(--m-sp-sm);
 	font-size: var(--m-prose-secondary-size);
 	line-height: var(--m-prose-secondary-lineHeight);
 }
@@ -20,5 +20,5 @@
 	margin: 0;
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }

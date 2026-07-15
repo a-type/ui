@@ -38,7 +38,7 @@ export function Provider({
 			? virtualKeyboardBehavior
 			: 'displace';
 	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
-	useThemedTitleBar('--m-color-main-paper', disableTitleBarColor);
+	useThemedTitleBar('--m-tint-paper', disableTitleBarColor);
 	const otherStuff = (
 		<>
 			<IconSpritesheet />

@@ -138,7 +138,7 @@ export const Surfaces: Story = {
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(2, 1fr)',
-					gap: 'var(--m-space-lg)',
+					gap: 'var(--m-sp-lg)',
 				}}
 				{...args}
 			>

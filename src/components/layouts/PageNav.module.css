@@ -12,10 +12,10 @@
 		position: absolute;
 		content: '';
 		top: 0;
-		left: var(--m-space-md);
-		right: var(--m-space-md);
+		left: var(--m-sp-md);
+		right: var(--m-sp-md);
 		height: 1px;
-		@apply --mx-bg(var(--m-color-neutral-heavy));
+		@apply --mx-bg(var(--m-gray-heavy));
 		@media (min-width: 768px) {
 			display: none;
 		}
@@ -25,7 +25,7 @@
 		bottom: auto;
 		left: auto;
 		right: auto;
-		top: var(--m-space-lg);
+		top: var(--m-sp-lg);
 		height: auto;
 	}
 }

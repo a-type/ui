@@ -3,7 +3,7 @@ import {
 	ArborPresetConfig,
 	compileSingleColor,
 	presetArbor,
-} from '@arbor-css/core/preset-arbor';
+} from '@arbor-css/core/preset-v2';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
 const defaultColors = {
@@ -103,7 +103,7 @@ export function presetAtype<
 			fadeInUp: (css, $) => css`
 				from {
 					opacity: 0;
-					transform: translateY(${$.mode.space.sm});
+					transform: translateY(${$.mode.sp.sm});
 				}
 				to {
 					opacity: 1;
@@ -113,7 +113,7 @@ export function presetAtype<
 			fadeInLeft: (css, $) => css`
 				from {
 					opacity: 0;
-					transform: translateX(-${$.mode.space.sm});
+					transform: translateX(-${$.mode.sp.sm});
 				}
 				to {
 					opacity: 1;
@@ -123,7 +123,7 @@ export function presetAtype<
 			fadeInRight: (css, $) => css`
 				from {
 					opacity: 0;
-					transform: translateX(${$.mode.space.sm});
+					transform: translateX(${$.mode.sp.sm});
 				}
 				to {
 					opacity: 1;
@@ -137,7 +137,7 @@ export function presetAtype<
 				}
 				to {
 					opacity: 0;
-					transform: translateY(-${$.mode.space.sm});
+					transform: translateY(-${$.mode.sp.sm});
 				}
 			`,
 			fadeOutLeft: (css, $) => css`
@@ -147,7 +147,7 @@ export function presetAtype<
 				}
 				to {
 					opacity: 0;
-					transform: translateX(-${$.mode.space.sm});
+					transform: translateX(-${$.mode.sp.sm});
 				}
 			`,
 			fadeOutRight: (css, $) => css`
@@ -157,7 +157,7 @@ export function presetAtype<
 				}
 				to {
 					opacity: 0;
-					transform: translateX(${$.mode.space.sm});
+					transform: translateX(${$.mode.sp.sm});
 				}
 			`,
 			fadeOutDown: (css, $) => css`
@@ -167,7 +167,7 @@ export function presetAtype<
 				}
 				to {
 					opacity: 0;
-					transform: translateY(${$.mode.space.sm});
+					transform: translateY(${$.mode.sp.sm});
 				}
 			`,
 			fadeOut: (css) => css`
@@ -202,31 +202,31 @@ export function presetAtype<
 		name: 'a-type',
 		extends: [base],
 		baseMode: ($) => ({
+			accent: $.mode.color[defaultAccent],
 			color: {
-				accent: $.mode.color.palette[defaultAccent],
-				palette: {
-					user: compileSingleColor(
-						{
-							hue: $.mode.user.hue,
-							saturation: $.mode.user.saturation,
-						},
-						$.mode.global,
-					),
-				},
+				user: compileSingleColor(
+					{
+						hue: $.mode.user.hue,
+						saturation: $.mode.user.saturation,
+					},
+					$.mode.global,
+				),
 			},
 			action: {
 				roundness: config?.roundActions === false ? undefined : 2,
 
 				light: {
-					bg: $.mode.color.main.light,
+					bg: $.mode.tint.light,
 					fg: $.mode.global.trueHeavyColor,
-					border: css`
-						${$.mode.action.light.borderWidth} ${$.mode.action.light
-							.borderStyle} ${$.mode.action.light.borderColor}
-					`,
-					borderColor: $.mixins.fg.ref,
-					borderStyle: 'solid',
-					borderWidth: $.mode.lineWidth.$root,
+					b: {
+						$root: css`
+							${$.mode.action.light.b.width} ${$.mode.action.light.b.style} ${$
+								.mode.action.light.b.color}
+						`,
+						width: $.mode.lw.$root,
+						color: $.mixins.fg.ref,
+						style: 'solid',
+					},
 				},
 				primary: {
 					borderColor: $.mixins.fg.ref,
@@ -236,13 +236,17 @@ export function presetAtype<
 				},
 			},
 			control: {
-				roundness: config?.roundControls ? 2 : undefined,
-				padding: {
-					block: $.mode.space.sm,
+				config: {
+					roundness: config?.roundControls ? 2 : undefined,
+				},
+				p: {
+					block: $.mode.sp.sm,
 				},
 			},
 			surface: {
-				roundness: 1,
+				config: {
+					roundness: 1,
+				},
 			},
 			user: {
 				hue: 0,
@@ -261,9 +265,7 @@ export function presetAtype<
 			},
 		}),
 		modeSchema: {
-			color: {
-				accent: base.modeSchema.color.main,
-			},
+			accent: base.modeSchema.tint,
 			user: {
 				hue: {
 					purpose: 'other',
@@ -285,12 +287,12 @@ export function presetAtype<
 						${base.mixins.bg.apply({ '--color': $.mode.action.light.bg })}
 						${base.mixins.fg.apply({ '--color': $.mode.action.light.fg })}
 						${base.mixins.borderColor.apply({
-							'--color': $.mode.action.light.borderColor,
+							'--color': $.mode.action.light.b.color,
 						})}
-						border-width: ${$.mode.action.light.borderWidth};
-						border-style: ${$.mode.action.light.borderStyle};
-						border-radius: ${$.mode.action.radius};
-						padding: ${$.mode.action.padding.$root};
+						border-width: ${$.mode.action.light.b.width};
+						border-style: ${$.mode.action.light.b.style};
+						border-radius: ${$.mode.action.rd};
+						padding: ${$.mode.action.p.$root};
 					`,
 				}),
 				hover: create('hover', {
@@ -322,7 +324,7 @@ export function presetAtype<
 							${base.mixins.bgLighter.apply({ '--step': 1 })}
 							${base.mixins.ring.apply({
 								'--ring': base.functions.ring.compute({
-									'--color': $.mode.color.main.heavy,
+									'--color': $.mode.tint.heavy,
 									'--size': '2px',
 								}),
 							})}
@@ -353,7 +355,7 @@ export function presetAtype<
 							${base.mixins.bgDesaturated.apply({ '--step': 8 })}
 							${base.mixins.fgFaded.apply({
 								'--opacity': 0.65,
-								'--source': $.mode.color.neutral.ink,
+								'--source': $.mode.gray.ink,
 							})}
 						}
 					`,
@@ -368,45 +370,32 @@ export function presetAtype<
 						fallback: '2px',
 					},
 				],
-				definition: (css, width) =>
-					css`0 0 0 ${width} ${$.mode.color.main.heavy}`,
+				definition: (css, width) => css`0 0 0 ${width} ${$.mode.tint.heavy}`,
 			}),
 		}),
 	});
 
 	preset.bundleMode('primary', {
-		color: {
-			main: preset.$.mode.color.palette[config?.mainColor ?? 'lemon'] as any,
-		},
+		tint: preset.$.mode.color[config?.mainColor ?? 'lemon'] as any,
 	});
 	preset.bundleMode('accent', {
-		color: {
-			main: preset.$.mode.color.accent,
-		},
+		tint: preset.$.mode.accent,
 	});
 	preset.bundleMode('success', {
-		color: {
-			main: preset.$.mode.color.palette.success,
-		},
+		tint: preset.$.mode.color.success,
 	});
 	preset.bundleMode('attention', {
-		color: {
-			main: preset.$.mode.color.palette.attention,
-		},
+		tint: preset.$.mode.color.attention,
 	});
 	preset.bundleMode('neutral', {
-		color: {
-			main: preset.$.mode.color.neutral,
-		},
+		tint: preset.$.mode.gray,
 	});
 	preset.bundleMode('user', {
 		user: {
 			hue: `var(${$userColorHue}, 200)`,
 			saturation: `var(${$userColorSaturation}, 1)`,
 		},
-		color: {
-			main: preset.$.mode.color.palette.user,
-		},
+		tint: preset.$.mode.color.user,
 	});
 
 	const allColorNames = new Set<DefaultColorRangeName>([
@@ -417,13 +406,11 @@ export function presetAtype<
 	]);
 	for (const colorName of allColorNames) {
 		preset.bundleMode(colorName, {
-			color: {
-				main: preset.$.mode.color.palette[colorName],
-				// avoid assigning leek to both main and accent
-				accent: (colorName === defaultAccent
-					? preset.$.mode.color.palette[fallbackAccent]
-					: preset.$.mode.color.palette[defaultAccent]) as any,
-			},
+			tint: preset.$.mode.color[colorName],
+			// avoid assigning leek to both main and accent
+			accent: (colorName === defaultAccent
+				? preset.$.mode.color[fallbackAccent]
+				: preset.$.mode.color[defaultAccent]) as any,
 		});
 	}
 

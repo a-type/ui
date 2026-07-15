@@ -22,13 +22,13 @@
 
 	cursor: pointer;
 
-	transition: var(--m-duration) var(--m-easing);
+	transition: var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow;
 	@apply --mx-bg(var(--m-control-bg));
-	@apply --mx-borderColor(var(--m-control-borderColor));
-	border-radius: var(--m-control-radius);
-	border-width: var(--m-lineWidth-md);
+	@apply --mx-borderColor(var(--m-control-b-color));
+	border-radius: var(--m-control-rd);
+	border-width: var(--m-lw-md);
 
 	&:focus {
 		outline: none;
@@ -50,12 +50,12 @@
 	&:disabled {
 		box-shadow: none;
 		@apply --mx-bg(transparent);
-		@apply --mx-borderColor(var(--m-color-neutral-light));
+		@apply --mx-borderColor(var(--m-gray-light));
 	}
 
 	&[data-checked] {
-		@apply --mx-bg(var(--m-color-main));
-		@apply --mx-borderColor(var(--m-color-main-ink));
+		@apply --mx-bg(var(--m-tint));
+		@apply --mx-borderColor(var(--m-tint-ink));
 
 		&[data-checked-mode='faded'] {
 			animation-name: checkbox-fade;
@@ -70,5 +70,5 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: var(--m-color-main-ink);
+	color: var(--m-tint-ink);
 }

@@ -5,7 +5,7 @@
 	max-width: var(--available-width, 95vw);
 	max-height: var(--available-height);
 
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow(var(--m-shadow-lg));
 	@apply --mx-surface-ambient;
@@ -19,13 +19,13 @@
 	}
 	&:focus-visible {
 		@apply --mx-ring(--fn-ring(
-			--fn-color-faded(var(--m-color-main-ink), 50%),
+			--fn-color-faded(var(--m-tint-ink), 50%),
 			2px
 		));
 	}
 
 	@media (forced-colors: active) {
-		border-color: var(--m-color-main-ink);
+		border-color: var(--m-tint-ink);
 	}
 	@media (prefers-reduced-motion: reduce) {
 		transition: none;
@@ -61,9 +61,9 @@
 	min-height: 0px;
 	overflow-x: clip;
 	overflow-y: auto;
-	scroll-padding-block: var(--m-space-md);
+	scroll-padding-block: var(--m-sp-md);
 	position: relative;
-	padding: var(--m-space-xs);
+	padding: var(--m-sp-xs);
 
 	border-radius: inherit;
 }
@@ -76,9 +76,9 @@
 	cursor: pointer;
 	user-select: none;
 
-	padding: var(--m-action-padding);
-	padding-left: var(--m-space-lg);
-	gap: var(--m-space-sm);
+	padding: var(--m-action-p);
+	padding-left: var(--m-sp-lg);
+	gap: var(--m-sp-sm);
 
 	text-align: left;
 	font-size: var(--m-prose-secondary-size);
@@ -91,15 +91,15 @@
 	&[data-disabled],
 	&:disabled {
 		pointer-events: none;
-		@apply --mx-fg(var(--m-color-neutral-heavy));
-		@apply --mx-bg(var(--m-color-neutral-paper));
+		@apply --mx-fg(var(--m-gray-heavy));
+		@apply --mx-bg(var(--m-gray-paper));
 	}
 
 	&:hover,
 	&[data-highlighted],
 	&[data-state='checked'],
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 	}
 
 	&:focus {
@@ -109,18 +109,14 @@
 		--mx-ring-value: --fn-focus-ring();
 	}
 
-	border-radius: var(--m-radius-xs);
+	border-radius: var(--m-rd-xs);
 	&:first-child {
-		border-top-left-radius: calc(var(--m-surface-radius) - var(--m-space-xs));
-		border-top-right-radius: calc(var(--m-surface-radius) - var(--m-space-xs));
+		border-top-left-radius: calc(var(--m-surface-rd) - var(--m-sp-xs));
+		border-top-right-radius: calc(var(--m-surface-rd) - var(--m-sp-xs));
 	}
 	&:last-child {
-		border-bottom-left-radius: calc(
-			var(--m-surface-radius) - var(--m-space-xs)
-		);
-		border-bottom-right-radius: calc(
-			var(--m-surface-radius) - var(--m-space-xs)
-		);
+		border-bottom-left-radius: calc(var(--m-surface-rd) - var(--m-sp-xs));
+		border-bottom-right-radius: calc(var(--m-surface-rd) - var(--m-sp-xs));
 	}
 }
 
@@ -129,8 +125,8 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-sm);
-	scroll-padding-block: var(--m-space-md);
+	gap: var(--m-sp-sm);
+	scroll-padding-block: var(--m-sp-md);
 }
 
 .itemIndicator {
@@ -142,26 +138,26 @@
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	right: calc(-1 * var(--m-space-xs));
+	right: calc(-1 * var(--m-sp-xs));
 }
 
 .itemRightSlot {
 	margin-inline-start: auto;
-	padding-inline-start: var(--m-space-sm);
+	padding-inline-start: var(--m-sp-sm);
 }
 
 .arrow {
 	--size: 18px;
 	@apply --mx-fill(var(--mx-bg-ref, var(--m-global-trueLightColor)));
 	@apply --mx-stroke(var(--mx-borderColor-ref, var(--mx-fg-ref, var(--m-global-trueHeavyColor))));
-	stroke-width: var(--m-lineWidth);
+	stroke-width: var(--m-lw);
 	width: var(--size);
 	height: calc(var(--size) / 2);
 	position: relative;
 	--angle: 0deg;
 	--scale: 1;
 	transform: translate(0, 0) rotate(var(--angle, 0deg)) scale(var(--scale, 1));
-	transition: opacity var(--m-duration) var(--m-easing);
+	transition: opacity var(--m-dur) var(--m-ease);
 
 	&[data-side='top'] {
 		--angle: 0deg;
@@ -191,14 +187,14 @@
 }
 
 .separator {
-	margin: var(--m-space-xs);
-	height: var(--m-lineWidth-sm);
-	@apply --mx-bg(var(--m-color-neutral));
+	margin: var(--m-sp-xs);
+	height: var(--m-lw-sm);
+	@apply --mx-bg(var(--m-gray));
 }
 
 .groupLabel {
 	user-select: none;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: var(--m-prose-ambient-weight);
@@ -208,8 +204,8 @@
 	box-sizing: border-box;
 	z-index: 1;
 	height: 1rem;
-	left: var(--m-space-md);
-	right: var(--m-space-md);
+	left: var(--m-sp-md);
+	right: var(--m-sp-md);
 	cursor: default;
 	user-select: none;
 	align-items: center;
@@ -253,7 +249,7 @@
 }
 
 .triggerIcon {
-	transition: transform var(--m-duration) var(--m-easing);
+	transition: transform var(--m-dur) var(--m-ease);
 	margin-inline-start: auto;
 	[data-open] > &,
 	[data-popup-open] > & {

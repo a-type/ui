@@ -28,7 +28,7 @@
 
 	body {
 		overflow: overlay;
-		@apply --mx-bg(var(--m-color-main-paper));
+		@apply --mx-bg(var(--m-tint-paper));
 	}
 
 	a {

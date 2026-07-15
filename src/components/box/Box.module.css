@@ -26,20 +26,20 @@
 			gap: 0;
 		}
 		&[data-gap='xs'] {
-			gap: var(--m-space-xs);
+			gap: var(--m-sp-xs);
 		}
 		&[data-gap='sm'] {
-			gap: var(--m-space-sm);
+			gap: var(--m-sp-sm);
 		}
 		&[data-gap='md'],
 		&[data-gap='true'] {
-			gap: var(--m-space-md);
+			gap: var(--m-sp-md);
 		}
 		&[data-gap='lg'] {
-			gap: var(--m-space-lg);
+			gap: var(--m-sp-lg);
 		}
 		&[data-gap='xl'] {
-			gap: var(--m-space-xl);
+			gap: var(--m-sp-xl);
 		}
 
 		&[data-items='start'] {
@@ -92,20 +92,20 @@
 			--padding: 0;
 		}
 		&[data-p='xs'] {
-			--padding: var(--m-space-xs);
+			--padding: var(--m-sp-xs);
 		}
 		&[data-p='sm'] {
-			--padding: var(--m-space-sm);
+			--padding: var(--m-sp-sm);
 		}
 		&[data-p='md'] {
-			--padding: var(--m-space-md);
+			--padding: var(--m-sp-md);
 		}
 		&[data-p='lg'],
 		&[data-p='true'] {
-			--padding: var(--m-space-lg);
+			--padding: var(--m-sp-lg);
 		}
 		&[data-p='xl'] {
-			--padding: var(--m-space-xl);
+			--padding: var(--m-sp-xl);
 		}
 		padding: var(--padding, 0);
 		&[data-squish='vertical'] {
@@ -119,17 +119,17 @@
 			border-radius: 0;
 		}
 		&[data-rounded='xs'] {
-			border-radius: var(--m-radius-xs);
+			border-radius: var(--m-rd-xs);
 		}
 		&[data-rounded='sm'] {
-			border-radius: var(--m-radius-sm);
+			border-radius: var(--m-rd-sm);
 		}
 		&[data-rounded='md'],
 		&[data-rounded='true'] {
-			border-radius: var(--m-radius-md);
+			border-radius: var(--m-rd-md);
 		}
 		&[data-rounded='lg'] {
-			border-radius: var(--m-radius-lg);
+			border-radius: var(--m-rd-lg);
 		}
 
 		&[data-w='full'] {
@@ -182,7 +182,7 @@
 		}
 
 		&[data-border='true'] {
-			@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
+			@apply --mx-borderColor(var(--m-surface-ambient-b-color));
 		}
 
 		&[data-surface='ambient'],
@@ -190,21 +190,21 @@
 			@apply --mx-bg(var(--m-surface-ambient-bg));
 			@apply --mx-fg(var(--m-surface-ambient-fg));
 			&[data-border='true'] {
-				@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
+				@apply --mx-borderColor(var(--m-surface-ambient-b-color));
 			}
 		}
 		&[data-surface='secondary'] {
 			@apply --mx-bg(var(--m-surface-secondary-bg));
 			@apply --mx-fg(var(--m-surface-secondary-fg));
 			&[data-border='true'] {
-				@apply --mx-borderColor(var(--m-surface-secondary-borderColor));
+				@apply --mx-borderColor(var(--m-surface-secondary-b-color));
 			}
 		}
 		&[data-surface='primary'] {
 			@apply --mx-bg(var(--m-surface-primary-bg));
 			@apply --mx-fg(var(--m-surface-primary-fg));
 			&[data-border='true'] {
-				@apply --mx-borderColor(var(--m-surface-primary-borderColor));
+				@apply --mx-borderColor(var(--m-surface-primary-b-color));
 			}
 		}
 
@@ -214,7 +214,7 @@
 		}
 		/* reduce specificity so surface styles override */
 		&:where([data-dim='true']) {
-			@apply --mx-fg(var(--m-color-neutral-ink));
+			@apply --mx-fg(var(--m-gray-ink));
 		}
 		&[data-dim='true'] {
 			@apply --mx-fg-lighter(2.5);

@@ -3,13 +3,13 @@
 	list-style-position: inside;
 	margin: 0;
 	padding: 0;
-	padding-inline-start: var(--m-space-lg);
+	padding-inline-start: var(--m-sp-lg);
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 
 	& > li {
-		margin-left: var(--m-space-sm);
+		margin-left: var(--m-sp-sm);
 	}
 
 	&[data-unstyled] {

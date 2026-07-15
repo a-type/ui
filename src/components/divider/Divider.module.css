@@ -2,9 +2,9 @@
 	position: relative;
 	height: --fn-literal(1px);
 	width: 100%;
-	@apply --mx-bg(var(--m-color-neutral-ink));
+	@apply --mx-bg(var(--m-gray-ink));
 
 	&[data-padded] {
-		margin-block: var(--m-space-md);
+		margin-block: var(--m-sp-md);
 	}
 }

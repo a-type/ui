@@ -3,20 +3,20 @@
 
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	row-gap: var(--m-space-xs);
-	column-gap: var(--m-space-md);
+	row-gap: var(--m-sp-xs);
+	column-gap: var(--m-sp-md);
 	align-items: center;
 	box-sizing: border-box;
 }
 
 .indicator {
 	width: 100%;
-	transition: transform var(--m-duration) var(--m-easing);
-	border-radius: var(--m-radius);
-	@apply --mx-bg(var(--m-color-main));
+	transition: transform var(--m-dur) var(--m-ease);
+	border-radius: var(--m-rd);
+	@apply --mx-bg(var(--m-tint));
 
 	&[data-complete] {
-		@apply --mx-bg(var(--m-color-palette-success));
+		@apply --mx-bg(var(--m-color-success));
 	}
 }
 
@@ -29,15 +29,15 @@
 	grid-column-end: 3;
 	box-sizing: border-box;
 
-	border-radius: var(--m-radius-lg);
-	@apply --mx-bg(var(--m-color-neutral-paper));
-	@apply --mx-borderColor(var(--m-color-neutral-ink));
+	border-radius: var(--m-rd-lg);
+	@apply --mx-bg(var(--m-gray-paper));
+	@apply --mx-borderColor(var(--m-gray-ink));
 }
 
 .label {
 	grid-column-start: 1;
 	grid-row-start: 1;
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: var(--m-prose-ambient-weight);
@@ -47,7 +47,7 @@
 	grid-column-start: 2;
 	grid-row-start: 1;
 	justify-self: end;
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: 500;

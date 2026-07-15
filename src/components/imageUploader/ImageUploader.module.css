@@ -1,6 +1,6 @@
 .root {
 	position: relative;
-	border-radius: var(--m-surface-radius);
+	border-radius: var(--m-surface-rd);
 }
 
 .input {
@@ -19,24 +19,24 @@
 
 .cameraCancelButton {
 	position: absolute;
-	top: var(--m-space-sm);
-	left: var(--m-space-sm);
-	@apply --mx-fg(var(--m-color-neutral-paper));
+	top: var(--m-sp-sm);
+	left: var(--m-sp-sm);
+	@apply --mx-fg(var(--m-gray-paper));
 }
 
 .removeButton {
 	position: absolute;
-	top: var(--m-space-sm);
-	right: var(--m-space-sm);
+	top: var(--m-sp-sm);
+	right: var(--m-sp-sm);
 	z-index: 10;
 	height: 32px;
 	width: 32px;
 	cursor: pointer;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-fg(var(--m-surface-ambient-fg));
 	@apply --mx-shadow;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 	border: none;
 }
 
@@ -56,7 +56,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 	@apply --mx-bg(var(--m-surface-primary-bg));
 	@apply --mx-fg(var(--m-surface-primary-fg));
 	border-radius: inherit;

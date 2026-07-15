@@ -1,10 +1,10 @@
 .root {
 	max-width: 80vw;
 	width: 100%;
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
-	border-radius: var(--m-radius-lg);
-	@apply --mx-borderColor(var(--m-surface-ambient-borderColor));
+	border-radius: var(--m-rd-lg);
+	@apply --mx-borderColor(var(--m-surface-ambient-b-color));
 
 	@media (min-width: 768px) {
 		min-width: 0;
@@ -13,7 +13,7 @@
 
 .grid {
 	display: grid;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 	align-items: start;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }

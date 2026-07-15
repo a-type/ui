@@ -16,17 +16,16 @@
 	flex-shrink: 0;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-sm);
-	padding: var(--m-space-sm) var(--m-space-sm) var(--m-space-md)
-		var(--m-space-sm);
+	gap: var(--m-sp-sm);
+	padding: var(--m-sp-sm) var(--m-sp-sm) var(--m-sp-md) var(--m-sp-sm);
 }
 
 .toggleButton {
 	&[data-open='false'] {
 		height: 100%;
-		border-inline-end: var(--m-lineWidth) solid var(--m-color-neutral);
-		border-top-left-radius: var(--m-radius-sm);
-		border-bottom-left-radius: var(--m-radius-sm);
+		border-inline-end: var(--m-lw) solid var(--m-gray);
+		border-top-left-radius: var(--m-rd-sm);
+		border-bottom-left-radius: var(--m-rd-sm);
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -36,14 +35,14 @@
 	position: sticky;
 	left: 0;
 	height: 100%;
-	top: var(--m-space-sm);
+	top: var(--m-sp-sm);
 	z-index: 1;
 	flex-shrink: 0;
 	@apply --mx-bg(inherit);
 }
 
 .chevronIcon {
-	transition: transform var(--m-duration) var(--m-easing);
+	transition: transform var(--m-dur) var(--m-ease);
 	&[data-flip='true'] {
 		transform: rotate(180deg);
 	}

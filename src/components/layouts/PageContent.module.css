@@ -7,11 +7,11 @@
 	anchor-name: --page-content;
 	flex: 1;
 
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 	@media (min-width: 768px) {
-		padding: var(--m-space-lg);
+		padding: var(--m-sp-lg);
 	}
 
 	margin-inline: auto;

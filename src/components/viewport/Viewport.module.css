@@ -18,7 +18,7 @@
 	}
 	&:focus-visible {
 		@apply --mx-shadow;
-		--mx-ring-value: --fn-ring(var(--m-color-main-ink), 1px);
+		--mx-ring-value: --fn-ring(var(--m-tint-ink), 1px);
 	}
 }
 
@@ -26,19 +26,19 @@
 	position: absolute;
 
 	&[data-position='top-left'] {
-		top: var(--m-space-sm);
-		left: var(--m-space-sm);
+		top: var(--m-sp-sm);
+		left: var(--m-sp-sm);
 	}
 	&[data-position='top-right'] {
-		top: var(--m-space-sm);
-		right: var(--m-space-sm);
+		top: var(--m-sp-sm);
+		right: var(--m-sp-sm);
 	}
 	&[data-position='bottom-left'] {
-		bottom: var(--m-space-sm);
-		left: var(--m-space-sm);
+		bottom: var(--m-sp-sm);
+		left: var(--m-sp-sm);
 	}
 	&[data-position='bottom-right'] {
-		bottom: var(--m-space-sm);
-		right: var(--m-space-sm);
+		bottom: var(--m-sp-sm);
+		right: var(--m-sp-sm);
 	}
 }

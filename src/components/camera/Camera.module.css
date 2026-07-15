@@ -20,22 +20,22 @@
 
 .shutterButton {
 	position: absolute;
-	bottom: var(--m-space-md);
+	bottom: var(--m-sp-md);
 	left: 50%;
 	width: calc(48px / var(--m-global-space-density));
 	height: calc(48px / var(--m-global-space-density));
 	cursor: pointer;
 	transform: translateX(-50%);
 	opacity: 80%;
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow;
 	--mx-ring-value: --fn-ring(var(--m-action-secondary-bg), 2px);
 	@apply --mx-bg(var(--m-action-secondary-bg));
 	@apply --mx-fg(color-contrast(var(--mx-bg-ref)));
 	@apply --mx-borderColor(var(--mx-fg-ref));
-	border-width: var(--m-lineWidth);
-	border-radius: var(--m-action-radius);
+	border-width: var(--m-lw);
+	border-radius: var(--m-action-rd);
 
 	&:hover {
 		opacity: 100%;
@@ -48,18 +48,18 @@
 	}
 	&:focus-visible {
 		@apply --mx-bg-lighter(1);
-		--mx-ring-value: --fn-ring(var(--m-color-main-ink), 4px);
+		--mx-ring-value: --fn-ring(var(--m-tint-ink), 4px);
 	}
 }
 
 .swapButton {
 	position: absolute;
-	bottom: var(--m-space-xs);
-	left: var(--m-space-xs);
+	bottom: var(--m-sp-xs);
+	left: var(--m-sp-xs);
 }
 
 .fullscreenButton {
 	position: absolute;
-	top: var(--m-space-xs);
-	right: var(--m-space-xs);
+	top: var(--m-sp-xs);
+	right: var(--m-sp-xs);
 }

@@ -2,9 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 
 	position: fixed;
 	position-anchor: --page-content;
@@ -14,9 +14,9 @@
 	bottom: --fn-literal(var(--nav-height, env(safe-area-inset-bottom, 0px)));
 
 	@media (min-width: 768px) {
-		bottom: var(--m-space-md);
+		bottom: var(--m-sp-md);
 		align-items: center;
-		transition: bottom var(--m-duration) var(--m-easing);
+		transition: bottom var(--m-dur) var(--m-ease);
 	}
 
 	&[data-disable-portal='true'] {

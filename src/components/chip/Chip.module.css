@@ -1,15 +1,15 @@
 .root {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 	white-space: nowrap;
 
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-bg(var(--m-gray-paper));
 	@apply --mx-fg(contrast-color(var(--mx-bg-ref)));
-	@apply --mx-borderColor(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-tint-heavy));
 
-	border-width: var(--m-lineWidth-sm);
-	border-radius: var(--m-action-radius);
+	border-width: var(--m-lw-sm);
+	border-radius: var(--m-action-rd);
 
 	font-size: var(--m-prose-ambient-size);
 	line-height: normal;
@@ -17,16 +17,16 @@
 	font-family: var(--m-prose-ambient-font);
 
 	&& {
-		padding: var(--m-space-sm) var(--m-space-md);
+		padding: var(--m-sp-sm) var(--m-sp-md);
 	}
 
 	&[data-emphasis='primary'] {
-		@apply --mx-bg(var(--m-color-main-wash));
-		@apply --mx-borderColor(var(--m-color-main-heavy));
+		@apply --mx-bg(var(--m-tint-wash));
+		@apply --mx-borderColor(var(--m-tint-heavy));
 	}
 	&[data-emphasis='ambient'] {
 		@apply --mx-bg(transparent);
 		@apply --mx-borderColor(transparent);
-		@apply --mx-fg(var(--m-color-neutral-ink));
+		@apply --mx-fg(var(--m-gray-ink));
 	}
 }

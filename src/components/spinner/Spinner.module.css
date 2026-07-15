@@ -50,5 +50,5 @@
 	align-items: center;
 	align-self: stretch;
 	justify-content: center;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 }

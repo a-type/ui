@@ -1,41 +1,41 @@
 .bgWash {
-	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-bg(var(--m-tint-wash));
 }
 .bgLight {
-	@apply --mx-bg(var(--m-color-main-light));
+	@apply --mx-bg(var(--m-tint-light));
 }
 .bgMid {
-	@apply --mx-bg(var(--m-color-main));
+	@apply --mx-bg(var(--m-tint));
 }
 .bgHeavy {
-	@apply --mx-bg(var(--m-color-main-heavy));
+	@apply --mx-bg(var(--m-tint-heavy));
 }
 .bgInk {
-	@apply --mx-bg(var(--m-color-main-ink));
+	@apply --mx-bg(var(--m-tint-ink));
 }
 
 .bgNeutralInk {
-	@apply --mx-bg(var(--m-color-neutral-ink));
+	@apply --mx-bg(var(--m-gray-ink));
 }
 .bgNeutralPaper {
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-bg(var(--m-gray-paper));
 }
 .bgNeutralWash {
-	@apply --mx-bg(var(--m-color-neutral-wash));
+	@apply --mx-bg(var(--m-gray-wash));
 }
 
 .rangeLabel {
 	position: absolute;
 	left: 0;
 	top: 0;
-	@apply --mx-fg(var(--m-color-neutral));
-	@apply --mx-bg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray));
+	@apply --mx-bg(var(--m-gray-ink));
 	@apply --mx-bg-faded(50%);
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: var(--m-prose-ambient-weight);
-	padding: var(--m-space-xs);
-	border-radius: var(--m-radius-sm);
+	padding: var(--m-sp-xs);
+	border-radius: var(--m-rd-sm);
 }
 
 .bgLighten1 {
@@ -52,8 +52,8 @@
 }
 
 .bgBetweenMidLight {
-	@apply --mx-bg(--fn-color-between(var(--m-color-main), var(--m-color-main-light)));
+	@apply --mx-bg(--fn-color-between(var(--m-tint), var(--m-tint-light)));
 }
 .bgBetweenMidHeavy {
-	@apply --mx-bg(--fn-color-between(var(--m-color-main), var(--m-color-main-heavy)));
+	@apply --mx-bg(--fn-color-between(var(--m-tint), var(--m-tint-heavy)));
 }

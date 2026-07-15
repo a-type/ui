@@ -3,11 +3,11 @@
 	inset: 0;
 	@apply --mx-shadow;
 	/* --mx-shadow-value: inset 0 30px 60px 0px
-		--fn-color-faded(var(--m-color-main-ink), 20%); */
-	@apply --mx-bg(var(--m-color-neutral-ink));
+		--fn-color-faded(var(--m-tint-ink), 20%); */
+	@apply --mx-bg(var(--m-gray-ink));
 	@apply --mx-bg-faded(5%);
-	border-top: var(--m-lineWidth) solid var(--m-color-neutral);
-	transition: all var(--m-duration) var(--m-easing);
+	border-top: var(--m-lw) solid var(--m-gray);
+	transition: all var(--m-dur) var(--m-ease);
 	backdrop-filter: blur(2px);
 
 	&[data-starting-style],
@@ -23,20 +23,20 @@
 	flex-direction: column;
 	align-items: stretch;
 	overflow: clip;
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 	--shadow-dir: 1;
 	@apply --mx-shadow;
 	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-xl-y))
 		var(--m-shadow-xl-blur) var(--m-shadow-xl-spread) var(--m-shadow-xl-color);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 
 	left: 50%;
 	top: 50%;
 	max-height: 85vh;
 	max-width: 450px;
 	width: 90vw;
-	border-radius: var(--m-surface-radius);
+	border-radius: var(--m-surface-rd);
 	transform: translate3d(-50%, -50%, 0);
 	will-change: transform, opacity;
 
@@ -56,11 +56,11 @@
 			max-width: unset;
 			height: min-content;
 			width: 100vw;
-			border-radius: var(--m-surface-radius) var(--m-surface-radius) 0 0;
+			border-radius: var(--m-surface-rd) var(--m-surface-rd) 0 0;
 			border-bottom-width: 0;
 			transform: translate(0, 0);
 			padding-bottom: env(safe-area-inset-bottom);
-			padding-top: var(--m-space-lg);
+			padding-top: var(--m-sp-lg);
 
 			&[data-starting-style],
 			&[data-ending-style] {
@@ -106,8 +106,8 @@
 .contentScrollAreaContent {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-md);
-	padding: var(--m-surface-padding);
+	gap: var(--m-sp-md);
+	padding: var(--m-surface-p);
 }
 
 .swipeHandle {
@@ -120,7 +120,7 @@
 	cursor: grab;
 	will-change: transform;
 	touch-action: none;
-	padding-block: var(--m-space-sm);
+	padding-block: var(--m-sp-sm);
 	z-index: 1;
 
 	@media (min-width: 600px) {
@@ -130,14 +130,14 @@
 .swipeHandleBar {
 	height: 4px;
 	width: 100%;
-	@apply --mx-bg(var(--m-color-neutral));
-	border-radius: var(--m-radius-lg);
+	@apply --mx-bg(var(--m-gray));
+	border-radius: var(--m-rd-lg);
 }
 
 .close {
 	position: absolute;
-	right: var(--m-space-sm);
-	top: var(--m-space-sm);
+	right: var(--m-sp-sm);
+	top: var(--m-sp-sm);
 	z-index: 101;
 	display: flex;
 
@@ -149,25 +149,25 @@
 }
 
 .title {
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	font-size: var(--m-prose-primary-size);
 	font-weight: var(--m-prose-primary-weight);
 	line-height: var(--m-prose-primary-lineHeight);
-	margin-block-end: var(--m-space-xs);
+	margin-block-end: var(--m-sp-xs);
 	margin-block-start: 0;
 }
 
 .description {
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	margin: 0;
-	margin-block-end: var(--m-space-xs);
+	margin-block-end: var(--m-sp-xs);
 }
 
 .actions {
 	position: sticky;
-	bottom: var(--m-space-md);
+	bottom: var(--m-sp-md);
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
@@ -179,10 +179,10 @@
 	@apply --mx-shadow;
 	/* override blur in case user turned it off */
 	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
-		var(--m-shadow-md-spread) var(--m-color-neutral-paper);
+		var(--m-shadow-md-spread) var(--m-gray-paper);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-bg-faded(50%);
-	margin-block-start: var(--m-space-md);
-	gap: var(--m-space-sm);
-	border-radius: var(--m-surface-radius);
+	margin-block-start: var(--m-sp-md);
+	gap: var(--m-sp-sm);
+	border-radius: var(--m-surface-rd);
 }

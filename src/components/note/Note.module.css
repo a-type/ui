@@ -3,14 +3,14 @@
 
 	&:has(input:focus[data-focus-clicked]),
 	&:has(textarea:focus[data-focus-clicked]) {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-tint-light));
 		@apply --mx-bg-lighter(3);
-		--mx-ring-value: --fn-ring(var(--m-color-main-light), 4px);
+		--mx-ring-value: --fn-ring(var(--m-tint-light), 4px);
 	}
 
 	&:has(input:focus-visible),
 	&:has(textarea:focus-visible) {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-tint-light));
 		@apply --mx-bg-lighter(3);
 		--mx-ring-value: --fn-focus-ring();
 	}
@@ -24,17 +24,17 @@
 .content {
 	position: relative;
 	flex: 1;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: var(--m-prose-ambient-weight);
 	font-style: italic;
 
-	@apply --mx-fg(var(--m-color-neutral-ink));
-	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-fg(var(--m-gray-ink));
+	@apply --mx-bg(var(--m-tint-wash));
 	@apply --mx-bg-heavier(1);
-	@apply --mx-borderColor(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-tint-heavy));
 	border-right-width: 0;
 
 	& input,
@@ -61,9 +61,9 @@
 	width: 20px;
 	flex: 0 0 20px;
 
-	@apply --mx-borderColor(var(--m-color-main-heavy));
-	border-bottom-width: var(--m-lineWidth-md);
-	border-left-width: var(--m-lineWidth-md);
+	@apply --mx-borderColor(var(--m-tint-heavy));
+	border-bottom-width: var(--m-lw-md);
+	border-left-width: var(--m-lw-md);
 	border-top-width: 0;
 	border-right-width: 0;
 }
@@ -76,7 +76,7 @@
 	right: 0;
 	transform-origin: right bottom;
 
-	@apply --mx-borderColor(var(--m-color-main-wash));
+	@apply --mx-borderColor(var(--m-tint-wash));
 	@apply --mx-borderColor-heavier(1);
 	border-width: 9.5px;
 	border-style: solid;
@@ -94,16 +94,16 @@
 	transform-origin: center center;
 	transform: rotate(-45deg);
 
-	@apply --mx-bg(var(--m-color-main-heavy));
+	@apply --mx-bg(var(--m-tint-heavy));
 }
 
 .foldBottom {
 	flex: 1;
-	@apply --mx-borderColor(var(--m-color-main-heavy));
-	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-borderColor(var(--m-tint-heavy));
+	@apply --mx-bg(var(--m-tint-wash));
 	@apply --mx-bg-heavier(1);
-	border-right-width: var(--m-lineWidth-md);
-	border-bottom-width: var(--m-lineWidth-md);
+	border-right-width: var(--m-lw-md);
+	border-bottom-width: var(--m-lw-md);
 	border-left-width: 0;
 	border-top-width: 0;
 }

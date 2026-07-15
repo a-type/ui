@@ -47,7 +47,7 @@ export const Default: Story = {
 				display: 'flex',
 				flexDirection: 'row',
 				alignItems: 'stretch',
-				gap: 'var(--m-space-md)',
+				gap: 'var(--m-sp-md)',
 			}}
 		>
 			<CardRoot {...args} style={{ minHeight: '20vh' }}>
@@ -285,7 +285,7 @@ export const CardsInBox: Story = {
 					width: '100%',
 					display: 'flex',
 					flexDirection: 'row',
-					gap: 'var(--m-space-lg)',
+					gap: 'var(--m-sp-lg)',
 				}}
 			>
 				<div style={{ flex: 1 }}>

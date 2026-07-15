@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 }
 
 .trigger {
@@ -13,17 +13,17 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-xs);
-	padding: var(--m-action-padding);
+	gap: var(--m-sp-xs);
+	padding: var(--m-action-p);
 
 	cursor: pointer;
 	user-select: none;
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 
 	text-align: center;
 	white-space: nowrap;
 
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	font-size: var(--m-prose-secondary-size);
 	font-weight: var(--m-prose-secondary-weight);
 	line-height: 1;
@@ -36,11 +36,11 @@
 	flex-shrink: 0;
 
 	background: transparent;
-	border: var(--m-lineWidth-sm) solid transparent;
-	border-radius: var(--m-radius-lg);
+	border: var(--m-lw-sm) solid transparent;
+	border-radius: var(--m-rd-lg);
 
 	&[aria-selected='false']:hover {
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
@@ -49,7 +49,7 @@
 	}
 
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 		--mx-ring-value: --fn-focus-ring();
 		outline: none;
 	}
@@ -68,8 +68,8 @@
 	height: 100%;
 	width: var(--active-tab-width);
 	transition-property: transform, width, color;
-	transition-duration: var(--m-duration);
-	transition-timing-function: var(--m-easing);
+	transition-duration: var(--m-dur);
+	transition-timing-function: var(--m-ease);
 	transform: translateX(
 			calc(
 				var(--active-tab-left, 0px) + var(--scroll-area-overflow-x-start, 0px)
@@ -99,13 +99,13 @@
 	@apply --mx-shadow(var(--m-shadow-sm));
 	@apply --mx-surface-ambient;
 	padding: 0;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 }
 
 .moreLeftIcon {
 	pointer-events: none;
 	position: absolute;
-	left: var(--m-space-xs);
+	left: var(--m-sp-xs);
 	top: 50%;
 	z-index: 10;
 	height: --fn-literal(16px);
@@ -117,13 +117,13 @@
 		round(min(1, calc(var(--scroll-area-overflow-x-start, 0px) / 10px)))
 	);
 
-	@apply --mx-fg(--fn-color-faded(var(--m-color-neutral-heavy), 50%));
+	@apply --mx-fg(--fn-color-faded(var(--m-gray-heavy), 50%));
 }
 
 .moreRightIcon {
 	pointer-events: none;
 	position: absolute;
-	right: var(--m-space-xs);
+	right: var(--m-sp-xs);
 	top: 50%;
 	z-index: 10;
 	height: --fn-literal(16px);
@@ -135,5 +135,5 @@
 		round(min(1, calc(var(--scroll-area-overflow-x-end, 0px) / 10px)))
 	);
 
-	@apply --mx-fg(--fn-color-faded(var(--m-color-neutral-heavy), 50%));
+	@apply --mx-fg(--fn-color-faded(var(--m-gray-heavy), 50%));
 }

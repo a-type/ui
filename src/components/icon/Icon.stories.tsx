@@ -36,7 +36,7 @@ export const All: Story = {
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(6, 1fr)',
-					gap: 'var(--m-space-xs)',
+					gap: 'var(--m-sp-xs)',
 				}}
 			>
 				{iconNames.map((name) => (

@@ -178,7 +178,7 @@ export const VirtualKeyboard: Story = {
 						right: 0,
 						height: 'var(--mock-virtual-keyboard-height,0)',
 						width: '100%',
-						transition: 'height var(--m-duration) var(--m-easing)',
+						transition: 'height var(--m-dur) var(--m-ease)',
 					}}
 				/>
 			</Provider>

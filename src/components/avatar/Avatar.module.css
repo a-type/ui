@@ -10,17 +10,17 @@
 	justify-content: center;
 	overflow: hidden;
 
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-bg(var(--m-gray-paper));
 
-	border-width: var(--m-lineWidth-sm);
+	border-width: var(--m-lw-sm);
 	border-style: solid;
-	border-color: var(--m-color-neutral-ink);
+	border-color: var(--m-gray-ink);
 
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 
 	&[data-empty='true'] {
 		border-style: dashed;
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 	}
 }
 

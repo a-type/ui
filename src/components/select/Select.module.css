@@ -1,10 +1,10 @@
 .trigger {
 	display: inline-flex;
 	font-weight: normal;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 
 	&[data-placeholder] {
-		color: var(--m-color-neutral-heavy);
+		color: var(--m-gray-heavy);
 	}
 }
 
@@ -14,7 +14,7 @@
 }
 
 .groupLabel {
-	padding-inline: var(--m-space-lg);
+	padding-inline: var(--m-sp-lg);
 }
 
 .icon {

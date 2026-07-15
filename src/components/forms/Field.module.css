@@ -33,21 +33,19 @@
 .label {
 	grid-area: label;
 	@apply --mx-prose-ambient;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
-	font-weight: var(--m-text-weight-bold);
-	margin-bottom: var(--m-space-xs);
-	margin-left: calc(var(--m-global-shape-roundness) * var(--m-space-md));
+	@apply --mx-fg(var(--m-gray-heavy));
+	font-weight: var(--m-fw-bold);
+	margin-bottom: var(--m-sp-xs);
+	margin-left: calc(var(--m-global-shape-roundness) * var(--m-sp-md));
 
 	[data-horizontal] & {
-		@apply --mx-fg(var(--m-color-neutral-ink));
-		font-weight: var(--m-text-weight-normal);
+		@apply --mx-fg(var(--m-gray-ink));
+		font-weight: var(--m-fw-normal);
 		margin-block-start: --fn-literal(5px);
 
 		[data-reverse] & {
 			margin-inline-start: 0;
-			margin-inline-end: calc(
-				var(--m-global-shape-roundness) * var(--m-space-md)
-			);
+			margin-inline-end: calc(var(--m-global-shape-roundness) * var(--m-sp-md));
 		}
 	}
 }
@@ -55,8 +53,8 @@
 .description {
 	grid-area: description;
 	@apply --mx-prose-ambient;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	font-style: italic;
-	margin-top: var(--m-space-sm);
-	margin-left: calc(var(--m-global-shape-roundness) * var(--m-space-md));
+	margin-top: var(--m-sp-sm);
+	margin-left: calc(var(--m-global-shape-roundness) * var(--m-sp-md));
 }

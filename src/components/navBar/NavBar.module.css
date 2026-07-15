@@ -6,9 +6,9 @@
 	justify-items: center;
 	overflow: clip;
 	border-radius: 0;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 	z-index: 50;
-	padding-bottom: calc(var(--m-space-sm) + env(safe-area-inset-bottom, 0px));
+	padding-bottom: calc(var(--m-sp-sm) + env(safe-area-inset-bottom, 0px));
 
 	@media (min-width: 768px) {
 		height: min-content;
@@ -16,11 +16,11 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: start;
-		gap: var(--m-space-sm);
+		gap: var(--m-sp-sm);
 		overflow-x: clip;
 		overflow-y: auto;
 		border-radius: 0;
-		padding-bottom: var(--m-space-xl);
+		padding-bottom: var(--m-sp-xl);
 		box-shadow: none;
 		@apply --mx-bg(transparent);
 		border: none;
@@ -36,13 +36,13 @@
 	user-select: none;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 	white-space: nowrap;
-	padding: var(--m-action-padding);
-	transition: all var(--m-duration) var(--m-easing);
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	padding: var(--m-action-p);
+	transition: all var(--m-dur) var(--m-ease);
+	@apply --mx-fg(var(--m-gray-ink));
 	@apply --mx-bg(transparent);
-	border-radius: var(--m-radius-sm);
+	border-radius: var(--m-rd-sm);
 	border: none;
 	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
@@ -76,8 +76,8 @@
 		flex-direction: row-reverse;
 		justify-content: end;
 		align-items: center;
-		gap: var(--m-space-md);
-		padding: var(--m-action-padding);
+		gap: var(--m-sp-md);
+		padding: var(--m-action-p);
 		overflow: visible;
 		font-size: var(--m-prose-secondary-size);
 		&:active {
@@ -97,10 +97,10 @@
 	}
 
 	@media (min-width: 768px) {
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 		@apply --mx-bg-faded(50%);
-		padding: var(--m-space-sm);
-		border-radius: var(--m-action-radius);
+		padding: var(--m-sp-sm);
+		border-radius: var(--m-action-rd);
 
 		[data-active='true'] & {
 			@apply --mx-bg(inherit);
@@ -109,7 +109,7 @@
 }
 
 .itemText {
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
 	font-weight: inherit;
@@ -126,18 +126,18 @@
 	@apply --mx-fg(inherit);
 
 	[data-active='true'] & {
-		@apply --mx-fill(var(--m-color-main));
+		@apply --mx-fill(var(--m-tint));
 	}
 }
 
 .pip {
 	position: absolute;
-	top: var(--m-space-sm);
-	right: var(--m-space-sm);
+	top: var(--m-sp-sm);
+	right: var(--m-sp-sm);
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
-	background-color: var(--m-color-main);
+	background-color: var(--m-tint);
 	@apply --mx-shadow;
 	--mx-shadow-value: var(--m-shadow-sm);
 }

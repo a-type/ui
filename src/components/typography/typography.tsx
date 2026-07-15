@@ -11,7 +11,6 @@ export interface TypographyProps extends useRender.ComponentProps<'span'> {
 	underline?: boolean;
 	strikethrough?: boolean;
 	bold?: boolean;
-	thin?: boolean;
 	normal?: boolean;
 	uppercase?: boolean;
 	truncate?: boolean;
@@ -29,7 +28,6 @@ export function Text({
 	render,
 	className,
 	bold,
-	thin,
 	truncate,
 	dim,
 	color,
@@ -52,7 +50,6 @@ export function Text({
 			underline: underline ? true : undefined,
 			strikethrough: strikethrough ? true : undefined,
 			bold: bold ? true : undefined,
-			thin: thin ? true : undefined,
 			truncate: truncate ? true : undefined,
 			dim: dim ? true : undefined,
 			color: color ? color : undefined,

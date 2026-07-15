@@ -72,7 +72,7 @@ export const Default: Story = {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
-					backgroundColor: 'var(--m-color-neutral-ink)',
+					backgroundColor: 'var(--m-gray-ink)',
 				}}
 			>
 				<div
@@ -82,7 +82,7 @@ export const Default: Story = {
 						flexDirection: 'column',
 						flex: 1,
 						alignItems: 'stretch',
-						backgroundColor: 'var(--m-color-neutral-paper)',
+						backgroundColor: 'var(--m-gray-paper)',
 					}}
 				>
 					<Button
@@ -99,7 +99,7 @@ export const Default: Story = {
 					</Button>
 					<HorizontalList
 						style={{
-							borderTop: '1px solid var(--m-color-neutral)',
+							borderTop: '1px solid var(--m-gray)',
 							maxHeight: 200,
 						}}
 						openDirection="up"
@@ -125,13 +125,13 @@ export const CantOpen: Story = {
 					flexDirection: 'column',
 					alignItems: 'stretch',
 					justifyContent: 'flex-end',
-					backgroundColor: 'var(--m-color-neutral-paper)',
+					backgroundColor: 'var(--m-gray-paper)',
 				}}
 			>
 				<HorizontalList
 					style={{
 						maxHeight: 200,
-						borderTop: '1px solid var(--m-color-neutral)',
+						borderTop: '1px solid var(--m-gray)',
 					}}
 					openDirection="up"
 					{...args}

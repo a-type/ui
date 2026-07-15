@@ -30,12 +30,12 @@
 	height: var(--size);
 	flex-grow: 1;
 	user-select: none;
-	transition: background-color var(--m-duration) var(--m-easing);
+	transition: background-color var(--m-dur) var(--m-ease);
 	box-sizing: border-box;
 
 	@apply --mx-bg(transparent);
-	border-radius: var(--m-radius-lg);
-	@apply --mx-ring(--fn-ring(var(--m-color-neutral-ink), 1px));
+	border-radius: var(--m-rd-lg);
+	@apply --mx-ring(--fn-ring(var(--m-gray-ink), 1px));
 
 	&[data-orientation='vertical'] {
 		height: 100%;
@@ -46,9 +46,9 @@
 
 .range {
 	box-sizing: border-box;
-	transition: background-color var(--m-duration) var(--m-easing);
-	@apply --mx-bg(var(--m-color-main));
-	border-radius: var(--m-radius-lg);
+	transition: background-color var(--m-dur) var(--m-ease);
+	@apply --mx-bg(var(--m-tint));
+	border-radius: var(--m-rd-lg);
 }
 
 .thumb {
@@ -63,24 +63,24 @@
 	line-height: 1;
 	touch-action: none;
 	transition:
-		background-color var(--m-duration) var(--m-easing),
-		box-shadow var(--m-duration) var(--m-easing);
+		background-color var(--m-dur) var(--m-ease),
+		box-shadow var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow;
 	--mx-shadow-value: var(--m-shadow-sm);
 
-	@apply --mx-borderColor(var(--m-color-neutral-ink));
-	border-width: var(--m-lineWidth-md);
+	@apply --mx-borderColor(var(--m-gray-ink));
+	border-width: var(--m-lw-md);
 
 	@apply --mx-bg(var(--m-control-bg));
-	border-radius: var(--m-control-radius);
+	border-radius: var(--m-control-rd);
 
 	&:hover {
 		--mx-shadow-value: var(--m-shadow-md);
 	}
 
 	&:active {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-tint-light));
 		--mx-shadow-value: var(--m-shadow-lg);
 		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
@@ -90,7 +90,7 @@
 	}
 
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-tint-light));
 		--mx-shadow-value: var(--m-shadow-lg);
 		--mx-ring-value: --fn-focus-ring();
 	}

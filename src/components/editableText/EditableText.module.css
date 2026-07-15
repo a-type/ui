@@ -19,13 +19,13 @@
 	@apply --mx-bg(transparent);
 	@apply --mx-borderColor(transparent);
 
-	padding: var(--m-control-padding);
-	gap: var(--m-space-sm);
-	border-radius: var(--m-control-radius);
+	padding: var(--m-control-p);
+	gap: var(--m-sp-sm);
+	border-radius: var(--m-control-rd);
 
 	&:hover,
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-neutral-light));
+		@apply --mx-bg(var(--m-gray-light));
 		@apply --mx-bg-faded(80%);
 	}
 
@@ -40,5 +40,5 @@
 .icon {
 	opacity: 80%;
 	font-size: 1rem;
-	@apply --mx-stroke(var(--m-color-main-heavy));
+	@apply --mx-stroke(var(--m-tint-heavy));
 }

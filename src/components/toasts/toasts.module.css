@@ -4,8 +4,8 @@
 }
 
 .toast {
-	--gap: var(--m-space-sm);
-	--peek: var(--m-space-sm);
+	--gap: var(--m-sp-sm);
+	--peek: var(--m-sp-sm);
 	--scale: calc(max(0, 1 - var(--toast-index) * 0.1));
 	--height: var(--toast-frontmost-height, var(--toast-height));
 	--shrink: calc(1 - var(--scale));
@@ -17,7 +17,7 @@
 	/* basic positioning */
 	position: fixed;
 	left: auto;
-	top: var(--m-space-xs);
+	top: var(--m-sp-xs);
 	z-index: calc(100000 - var(--toast-index));
 	margin-right: 0;
 	width: 100%;
@@ -27,7 +27,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 
 	/* styling happens in content element */
 
@@ -43,9 +43,9 @@
 		)
 		scale(var(--scale));
 	transition:
-		transform var(--m-duration) var(--m-easing),
-		opacity var(--m-duration) var(--m-easing),
-		height var(--m-duration-short) var(--m-easing);
+		transform var(--m-dur) var(--m-ease),
+		opacity var(--m-dur) var(--m-ease),
+		height var(--m-dur-short) var(--m-ease);
 
 	&::after {
 		position: absolute;
@@ -100,7 +100,7 @@
 	pointer-events: auto;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 
 	&[data-behind]:not([data-expanded]) {
 		pointer-events: none;
@@ -115,10 +115,10 @@
 	@apply --mx-shadow(var(--m-shadow-md));
 	@apply --mx-surface-secondary;
 
-	padding-inline-start: var(--m-space-md);
-	padding-inline-end: var(--m-space-sm);
-	padding-block: var(--m-space-sm);
-	gap: var(--m-space-sm);
+	padding-inline-start: var(--m-sp-md);
+	padding-inline-end: var(--m-sp-sm);
+	padding-block: var(--m-sp-sm);
+	gap: var(--m-sp-sm);
 
 	[data-behind]:not([data-expanded]) & {
 		max-height: var(--height);
@@ -130,10 +130,10 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 	@apply --mx-fg(inherit);
 
-	transition: opacity var(--m-duration) var(--m-easing);
+	transition: opacity var(--m-dur) var(--m-ease);
 
 	/* Hide content when not in front */
 	[data-behind]:not([data-expanded]) & {
@@ -148,20 +148,20 @@
 .toastMainBodyContent {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 	@apply --mx-fg(inherit);
 }
 
 .toastTitle {
 	@apply --mx-fg(inherit);
 	@apply --mx-prose-secondary;
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 	margin: 0;
 }
 
 .toastDescriptionRow {
 	display: flex;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .icon {
@@ -187,13 +187,13 @@
 	margin-inline-start: auto;
 	display: flex;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 
 	font-size: var(--m-prose-ambient-size);
 	line-height: var(--m-prose-ambient-lineHeight);
 	font-weight: var(--m-prose-ambient-weight);
 
-	transition: opacity var(--m-duration) var(--m-easing);
+	transition: opacity var(--m-dur) var(--m-ease);
 
 	[data-behind]:not([data-expanded]) & {
 		opacity: 0;

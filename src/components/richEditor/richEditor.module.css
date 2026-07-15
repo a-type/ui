@@ -18,14 +18,14 @@
 	& h1 {
 		@apply --mx-prose-primary;
 		&:not(:first-child) {
-			margin-top: var(--m-space-xl);
+			margin-top: var(--m-sp-xl);
 		}
 	}
 	& h2 {
 		@apply --mx-prose-secondary;
 		font-weight: var(--m-prose-primary-weight);
 		&:not(:first-child) {
-			margin-top: var(--m-space-lg);
+			margin-top: var(--m-sp-lg);
 		}
 	}
 	& h3 {
@@ -33,19 +33,19 @@
 		font-weight: var(--m-prose-primary-weight);
 		text-transform: uppercase;
 		&:not(:first-child) {
-			margin-top: var(--m-space-md);
+			margin-top: var(--m-sp-md);
 		}
 	}
 	& h4 {
 		@apply --mx-prose-ambient;
 		font-weight: var(--m-prose-primary-weight);
 		&:not(:first-child) {
-			margin-top: var(--m-space-md);
+			margin-top: var(--m-sp-md);
 		}
 	}
 	& p {
 		@apply --mx-prose-secondary;
-		margin-bottom: var(--m-space-md);
+		margin-bottom: var(--m-sp-md);
 	}
 	& a {
 		text-decoration: underline;
@@ -55,13 +55,13 @@
 		@apply --mx-focus;
 	}
 	& blockquote {
-		border-left: 4px solid var(--m-color-neutral-heavy);
-		padding-left: var(--m-space-md);
+		border-left: 4px solid var(--m-gray-heavy);
+		padding-left: var(--m-sp-md);
 		font-style: italic;
-		margin-block: var(--m-space-md);
-		margin-inline-start: var(--m-space-md);
-		padding-inline: var(--m-space-md);
-		@apply --mx-bg(var(--m-color-neutral-wash));
+		margin-block: var(--m-sp-md);
+		margin-inline-start: var(--m-sp-md);
+		padding-inline: var(--m-sp-md);
+		@apply --mx-bg(var(--m-gray-wash));
 	}
 	& ul {
 		list-style: disc;
@@ -71,25 +71,25 @@
 	}
 	& ul,
 	& ol {
-		padding-inline-start: var(--m-space-lg);
-		margin-block: var(--m-space-md);
+		padding-inline-start: var(--m-sp-lg);
+		margin-block: var(--m-sp-md);
 	}
 	& li {
-		margin-block-end: var(--m-space-xs);
+		margin-block-end: var(--m-sp-xs);
 	}
 	& mark {
-		@apply --mx-bg(var(--m-color-main-wash));
+		@apply --mx-bg(var(--m-tint-wash));
 	}
 	& strong {
-		font-weight: var(--m-text-weight-bold);
+		font-weight: var(--m-fw-bold);
 	}
 	& em {
 		font-style: italic;
 	}
 	& hr {
 		border: none;
-		border-top: var(--m-lineWidth) solid var(--m-color-neutral-heavy);
-		margin-block: var(--m-space-lg);
+		border-top: var(--m-lw) solid var(--m-gray-heavy);
+		margin-block: var(--m-sp-lg);
 	}
 }
 

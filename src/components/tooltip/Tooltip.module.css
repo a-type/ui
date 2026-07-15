@@ -3,8 +3,8 @@
 	display: flex;
 	user-select: none;
 
-	padding: var(--m-surface-padding);
-	border-radius: var(--m-surface-radius);
+	padding: var(--m-surface-p);
+	border-radius: var(--m-surface-rd);
 
 	font-size: var(--m-prose-ambient-size);
 
@@ -18,22 +18,22 @@
 	--mx-shadow-value: var(--m-shadow-sm);
 
 	&[data-color='contrast'] {
-		@apply --mx-fg(var(--m-color-neutral-paper));
-		@apply --mx-bg(var(--m-color-neutral-ink));
+		@apply --mx-fg(var(--m-gray-paper));
+		@apply --mx-bg(var(--m-gray-ink));
 	}
 
 	&[data-color='white'],
 	&[data-color='neutral'] {
-		@apply --mx-fg(var(--m-color-neutral-ink));
-		@apply --mx-bg(var(--m-color-neutral-paper));
-		@apply --mx-borderColor(var(--m-color-neutral));
+		@apply --mx-fg(var(--m-gray-ink));
+		@apply --mx-bg(var(--m-gray-paper));
+		@apply --mx-borderColor(var(--m-gray));
 		border-style: solid;
-		border-width: var(--m-lineWidth-sm);
+		border-width: var(--m-lw-sm);
 	}
 
 	&[data-color='attention'] {
-		@apply --mx-bg(var(--m-color-main-heavy));
-		@apply --mx-fg(var(--m-color-neutral-paper));
+		@apply --mx-bg(var(--m-tint-heavy));
+		@apply --mx-fg(var(--m-gray-paper));
 	}
 
 	opacity: 0;

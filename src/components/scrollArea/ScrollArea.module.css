@@ -15,7 +15,7 @@
 		outline: none;
 	}
 	&:focus-visible {
-		--mx-ring-value: --fn-ring(var(--m-color-main-ink), 1px);
+		--mx-ring-value: --fn-ring(var(--m-tint-ink), 1px);
 	}
 }
 
@@ -37,7 +37,7 @@
 		display: block;
 		height: min(40px, var(--scroll-area-overflow-y-start, 40px));
 		width: 100%;
-		transition: height var(--m-duration) var(--m-easing);
+		transition: height var(--m-dur) var(--m-ease);
 
 		background: linear-gradient(
 			to bottom,
@@ -56,7 +56,7 @@
 		display: block;
 		height: min(40px, var(--scroll-area-overflow-y-end, 40px));
 		width: 100%;
-		transition: height var(--m-duration) var(--m-easing);
+		transition: height var(--m-dur) var(--m-ease);
 
 		background: linear-gradient(to top, var(--mx-bg-ref) 0%, transparent 100%);
 	}
@@ -80,7 +80,7 @@
 		display: block;
 		height: 100%;
 		width: min(40px, var(--scroll-area-overflow-x-start, 40px));
-		transition: width var(--m-duration) var(--m-easing);
+		transition: width var(--m-dur) var(--m-ease);
 
 		background: linear-gradient(
 			to right,
@@ -99,7 +99,7 @@
 		display: block;
 		height: 100%;
 		width: min(40px, var(--scroll-area-overflow-x-end, 40px));
-		transition: width var(--m-duration) var(--m-easing);
+		transition: width var(--m-dur) var(--m-ease);
 
 		background: linear-gradient(to left, var(--mx-bg-ref) 0%, transparent 100%);
 	}
@@ -118,7 +118,7 @@
 .thumb {
 	@apply --mx-bg(var(--mx-fg-ref));
 	@apply --mx-bg-faded(25%);
-	border-radius: var(--m-radius-full);
+	border-radius: var(--m-rd-full);
 
 	&[data-orientation='vertical'] {
 		width: 100%;
@@ -135,12 +135,12 @@
 	display: flex;
 	user-select: none;
 	opacity: 0;
-	border-radius: var(--m-radius-full);
+	border-radius: var(--m-rd-full);
 	touch-action: none;
 	transition:
 		opacity,
 		height,
-		width var(--m-duration) var(--m-easing);
+		width var(--m-dur) var(--m-ease);
 
 	@apply --mx-bg(var(--mx-fg-ref));
 	@apply --mx-bg-faded(5%);

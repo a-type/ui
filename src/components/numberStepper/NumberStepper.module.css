@@ -9,8 +9,8 @@
 
 	@apply --mx-bg(var(--m-control-bg));
 	@apply --mx-fg(var(--m-control-fg));
-	@apply --mx-borderColor(var(--m-control-borderColor));
-	border-radius: var(--m-control-radius);
+	@apply --mx-borderColor(var(--m-control-b-color));
+	border-radius: var(--m-control-rd);
 
 	&:disabled,
 	&[data-disabled='true'] {
@@ -21,8 +21,8 @@
 	}
 
 	&[data-emphasis='primary'] {
-		@apply --mx-bg(var(--m-color-main-wash));
-		@apply --mx-fg(var(--m-color-main-ink));
+		@apply --mx-bg(var(--m-tint-wash));
+		@apply --mx-fg(var(--m-tint-ink));
 	}
 }
 

@@ -2,7 +2,7 @@
 	display: flex;
 	flex-grow: 1;
 	user-select: auto;
-	padding: var(--m-control-padding-block) 0px;
+	padding: var(--m-control-p-block) 0px;
 	min-width: 60px;
 
 	@apply --mx-fg(inherit);
@@ -14,7 +14,7 @@
 	line-height: inherit;
 
 	&::placeholder {
-		@apply --mx-fg(var(--m-color-neutral-heavy));
+		@apply --mx-fg(var(--m-gray-heavy));
 	}
 
 	/* Focus visuals handled by wrapper */
@@ -24,12 +24,12 @@
 	}
 
 	/* &:first-child {
-		padding-left: var(--m-control-padding-inline);
+		padding-left: var(--m-control-p-inline);
 		border-top-left-radius: inherit;
 		border-bottom-left-radius: inherit;
 	}
 	&:last-child {
-		padding-right: var(--m-control-padding-inline);
+		padding-right: var(--m-control-p-inline);
 		border-top-right-radius: inherit;
 		border-bottom-right-radius: inherit;
 	} */
@@ -39,19 +39,19 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 	width: max-content;
 	overflow: clip;
 
-	transition: box-shadow var(--m-duration) var(--m-easing);
+	transition: box-shadow var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow;
 	--mx-shadow-value: inset var(--m-shadow-sm);
 
 	@apply --mx-fg(var(--m-control-fg));
 	@apply --mx-bg(var(--m-control-bg));
-	@apply --mx-borderColor(var(--m-control-borderColor));
-	border-radius: var(--m-control-radius);
+	@apply --mx-borderColor(var(--m-control-b-color));
+	border-radius: var(--m-control-rd);
 
 	font-size: var(--m-prose-secondary-size);
 	line-height: var(--m-prose-secondary-lineHeight);
@@ -77,7 +77,7 @@
 	&:has(input:focus),
 	&:has(textarea:focus) {
 		@apply --mx-bg-lighter(3);
-		--mx-ring-value: --fn-ring(var(--m-color-main-light), 4px);
+		--mx-ring-value: --fn-ring(var(--m-tint-light), 4px);
 	}
 
 	&:has(input:hover:not(:disabled):not(:focus)),
@@ -87,14 +87,14 @@
 	}
 
 	& > [data-icon] {
-		margin-inline: var(--m-space-sm);
+		margin-inline: var(--m-sp-sm);
 	}
 
-	padding-inline: var(--m-control-padding-inline);
+	padding-inline: var(--m-control-p-inline);
 	& > [data-input-border-flush]:first-child {
-		margin-left: calc(-1 * var(--m-control-padding-inline));
+		margin-left: calc(-1 * var(--m-control-p-inline));
 	}
 	& > [data-input-border-flush]:last-child {
-		margin-right: calc(-1 * var(--m-control-padding-inline));
+		margin-right: calc(-1 * var(--m-control-p-inline));
 	}
 }

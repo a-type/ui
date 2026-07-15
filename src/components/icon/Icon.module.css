@@ -7,7 +7,7 @@
 	height: var(--size);
 
 	&[data-filled] {
-		fill: var(--m-color-main);
+		fill: var(--m-tint);
 	}
 }
 

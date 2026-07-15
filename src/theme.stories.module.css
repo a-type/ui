@@ -1,7 +1,7 @@
 .grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: var(--m-space-lg);
+	gap: var(--m-sp-lg);
 	width: 100%;
 	min-width: 0;
 	flex: 1 0 auto;

@@ -22,7 +22,7 @@ export const Default: Story = {
 				style={{
 					display: 'grid',
 					gridTemplateColumns: 'repeat(4, 1fr)',
-					gap: 'var(--m-space-xl)',
+					gap: 'var(--m-sp-xl)',
 				}}
 			>
 				<Box surface border p elevated="sm">

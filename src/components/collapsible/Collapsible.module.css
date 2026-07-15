@@ -1,6 +1,6 @@
 .root {
 	overflow: clip;
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 
 	&[data-horizontal],
 	&[data-both] {
@@ -29,7 +29,7 @@
 }
 
 .icon {
-	transition: transform var(--m-duration) var(--m-easing);
+	transition: transform var(--m-dur) var(--m-ease);
 	[data-panel-open] & {
 		transform: rotate(180deg);
 	}

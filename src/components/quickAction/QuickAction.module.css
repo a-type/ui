@@ -1,14 +1,14 @@
 .trigger {
 	position: relative;
 	justify-content: center;
-	padding: var(--m-space-xs);
-	border-radius: var(--m-action-radius);
+	padding: var(--m-sp-xs);
+	border-radius: var(--m-action-rd);
 }
 
 .popup {
 	transition-property: all;
-	transition-duration: var(--m-duration);
-	transition-timing-function: var(--m-easing-loose);
+	transition-duration: var(--m-dur);
+	transition-timing-function: var(--m-ease-loose);
 
 	position: fixed;
 	contain: layout;
