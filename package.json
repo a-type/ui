@@ -49,7 +49,7 @@
 		"test": "vitest",
 		"test:unit": "vitest --project=unit",
 		"test:snapshots": "pnpm build && vitest --project=snapshots",
-		"test:arbor": "arbor validate ./src/**/*.css",
+		"test:arbor": "arbor validate ./src/*/*.css ./src/*/*/*.css",
 		"typecheck": "tsc --noEmit",
 		"test:browser": "vitest --config=vitest.browser.config.ts",
 		"lint": "eslint **/*.{ts,tsx} --fix",
