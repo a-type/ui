@@ -75,8 +75,8 @@
 		"valtio": "^2.1.4"
 	},
 	"devDependencies": {
-		"@arbor-css/core": "^0.0.144",
-		"@arbor-css/postcss": "^0.0.144",
+		"@arbor-css/core": "^0.0.145",
+		"@arbor-css/postcss": "^0.0.145",
 		"@eslint/js": "^9.39.2",
 		"@storybook/addon-links": "10.4.0",
 		"@storybook/react-vite": "10.4.0",
