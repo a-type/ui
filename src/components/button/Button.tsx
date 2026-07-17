@@ -96,7 +96,6 @@ export function ButtonRoot({
 		'data-align': align,
 		className: clsx(
 			emphasis === 'unstyled' ? cls.unstyled : cls.root,
-			emphasis === 'ghost' && '@mode-bold',
 			size === 'small' ? '@mode-dense' : '',
 			color ? `@mode-${color}` : '',
 			className,

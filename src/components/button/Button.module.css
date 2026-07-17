@@ -32,6 +32,7 @@
 		@apply --mx-action-ambient;
 		--mx-ring-value: 0 0 0 0 transparent;
 		--mx-shadow-value: 0 0 0 0 transparent;
+		font-weight: var(--m-fw-bold);
 
 		&:hover,
 		&:focus {
