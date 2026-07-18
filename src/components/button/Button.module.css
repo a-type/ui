@@ -35,7 +35,7 @@
 		font-weight: var(--m-fw-bold);
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			--mx-bg-applied: inherit;
 			--mx-bg-ref: --fn-color-heavier(
 				color-mix(var(--mx-bg-applied), var(--m-tint-light) 20%),
