@@ -13,6 +13,7 @@ export interface NavBarItemProps extends UseRenderComponentProps<'button'> {
 	active?: boolean;
 	color?: 'primary' | 'neutral' | 'accent';
 	render?: ReactElement | (() => ReactElement);
+	nativeButton?: boolean;
 }
 
 export const NavBarItem = function NavBarItem({
