@@ -301,11 +301,11 @@ export const MultiSelect: Story = {
 					</ExampleCombobox.MultiValue>
 				</ExampleCombobox.Chips>
 				<ExampleCombobox.Content arrow={arrow}>
-					<ExampleCombobox.List>
+					<ExampleCombobox.List render={<ExampleCombobox.GroupItemList />}>
 						{(item) => (
-							<ExampleCombobox.Item key={item.id} value={item}>
+							<ExampleCombobox.GroupItem key={item.id} value={item}>
 								{item.label}
-							</ExampleCombobox.Item>
+							</ExampleCombobox.GroupItem>
 						)}
 					</ExampleCombobox.List>
 					<ExampleCombobox.Empty>No results found.</ExampleCombobox.Empty>

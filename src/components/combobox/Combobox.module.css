@@ -11,38 +11,6 @@
 	font-weight: var(--m-prose-ambient-weight);
 }
 
-.group {
-	display: flex;
-	flex-direction: column;
-	overflow: clip;
-	padding: var(--m-sp-md);
-	gap: var(--m-sp-xs);
-}
-
-.groupItem {
-	@apply --mx-ring;
-	&[data-highlighted] {
-		@apply --mx-ring(--fn-ring(var(--m-tint-mid), 2px));
-	}
-}
-
-.groupItemList {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: var(--m-sp-xs);
-}
-
-.groupLabel {
-	text-transform: uppercase;
-	width: 100%;
-	@apply --mx-fg(var(--m-gray-heavy));
-	padding-inline: var(--m-sp-xs);
-	font-size: var(--m-prose-ambient-size);
-	line-height: var(--m-prose-ambient-lineHeight);
-	font-weight: var(--m-prose-ambient-weight);
-}
-
 .icon {
 	display: flex;
 	align-items: center;
@@ -149,6 +117,7 @@
 }
 
 .multiValue {
+	width: 100%;
 	max-width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -167,4 +136,41 @@
 	@apply --mx-prose-ambient;
 	@apply --mx-fg(var(--m-gray-heavy));
 	padding: var(--m-sp-md);
+}
+
+.group {
+	display: flex;
+	flex-direction: column;
+	overflow: clip;
+	padding: var(--m-sp-md);
+	gap: var(--m-sp-xs);
+}
+
+.groupItem {
+	@apply --mx-ring;
+	&[data-highlighted] {
+		@apply --mx-ring(--fn-ring(var(--m-tint-mid), 2px));
+	}
+}
+
+.groupItemList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--m-sp-sm);
+}
+
+/* When composing list and groupItemList, add padding */
+.list.groupItemList {
+	padding: var(--m-sp-md);
+}
+
+.groupLabel {
+	text-transform: uppercase;
+	width: 100%;
+	@apply --mx-fg(var(--m-gray-heavy));
+	padding-inline: var(--m-sp-xs);
+	font-size: var(--m-prose-ambient-size);
+	line-height: var(--m-prose-ambient-lineHeight);
+	font-weight: var(--m-prose-ambient-weight);
 }
