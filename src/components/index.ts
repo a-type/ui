@@ -20,6 +20,7 @@ export * from './editableText/EditableText.js';
 export * from './emojiPicker/EmojiPicker.js';
 export * from './errorBoundary/index.js';
 export * from './forms/index.js';
+export * from './globalErrorFallback/GlobalErrorFallback.js';
 export * from './horizontalList/HorizontalList.js';
 export * from './icon/index.js';
 export * from './imageUploader/index.js';
