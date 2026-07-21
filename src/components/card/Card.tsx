@@ -20,6 +20,7 @@ export interface CardRootProps extends HTMLAttributes<HTMLDivElement> {
 		emphasis?: 'ambient' | 'secondary' | 'primary';
 		size?: CardSize;
 	}>;
+	ref?: Ref<HTMLDivElement>;
 }
 
 export function CardRoot({
