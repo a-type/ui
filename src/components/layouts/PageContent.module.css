@@ -7,9 +7,9 @@
 	anchor-name: --page-content;
 	flex: 1;
 
-	gap: var(--m-sp-md);
+	gap: var(--m-sp-lg);
 
-	padding: var(--m-sp-md);
+	padding: var(--m-sp-lg);
 	@media (min-width: 768px) {
 		padding: var(--m-sp-lg);
 	}

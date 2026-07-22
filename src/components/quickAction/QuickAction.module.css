@@ -13,7 +13,7 @@
 	position: fixed;
 	contain: layout;
 
-	@apply --mx-shadow(var(--m-shadow-lg));
+	@apply --mx-shadow(var(--m-shadow-md));
 	@apply --mx-surface-ambient;
 	padding: 0;
 

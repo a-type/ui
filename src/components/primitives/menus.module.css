@@ -7,7 +7,7 @@
 
 	transition: all var(--m-dur) var(--m-ease);
 
-	@apply --mx-shadow(var(--m-shadow-lg));
+	@apply --mx-shadow(var(--m-shadow-md));
 	@apply --mx-surface-ambient;
 	padding: 0;
 

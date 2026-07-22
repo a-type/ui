@@ -81,7 +81,7 @@
 
 	&:active {
 		@apply --mx-bg(var(--m-tint-light));
-		--mx-shadow-value: var(--m-shadow-lg);
+		--mx-shadow-value: var(--m-shadow-md);
 		--mx-ring-value: --fn-ring(var(--mx-bg-ref), 4px);
 	}
 
@@ -91,7 +91,7 @@
 
 	&:focus-visible {
 		@apply --mx-bg(var(--m-tint-light));
-		--mx-shadow-value: var(--m-shadow-lg);
+		--mx-shadow-value: var(--m-shadow-md);
 		--mx-ring-value: --fn-focus-ring();
 	}
 

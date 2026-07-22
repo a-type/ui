@@ -26,8 +26,8 @@
 	transition: all var(--m-dur) var(--m-ease);
 	--shadow-dir: 1;
 	@apply --mx-shadow;
-	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-xl-y))
-		var(--m-shadow-xl-blur) var(--m-shadow-xl-spread) var(--m-shadow-xl-color);
+	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-lg-y))
+		var(--m-shadow-lg-blur) var(--m-shadow-lg-spread) var(--m-shadow-lg-color);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-borderColor(var(--m-gray-heavy));
 
