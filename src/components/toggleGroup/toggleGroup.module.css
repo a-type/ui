@@ -20,7 +20,7 @@
 	padding: var(--m-action-p);
 
 	@apply --mx-borderColor(transparent);
-	border-radius: var(--m-rd-lg);
+	border-radius: var(--m-action-rd);
 
 	&[data-pressed] {
 		@apply --mx-shadow;
