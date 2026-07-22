@@ -4,8 +4,15 @@ import {
 	DialogRootProps,
 } from '@base-ui/react/dialog';
 import clsx from 'clsx';
-import { createContext, RefObject, useContext, useId, useRef } from 'react';
-import { useSize } from '../../hooks.js';
+import {
+	createContext,
+	RefObject,
+	useCallback,
+	useContext,
+	useEffect,
+	useId,
+	useRef,
+} from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
 import {
 	useMonitor,
@@ -17,21 +24,44 @@ import cls from './QuickAction.module.css';
 
 const QuickActionIdContext = createContext<string>('qab');
 
-const TriggerSizeContext = createContext<
-	ValueMonitor<{ width: number; height: number }>
->(new ValueMonitor({ width: 0, height: 0 }));
+const TriggerSizeContext = createContext<{
+	monitor: ValueMonitor<{ width: number; height: number }>;
+	onRemeasure: (cb: () => void) => () => void;
+}>({
+	monitor: new ValueMonitor({ width: 0, height: 0 }),
+	onRemeasure: () => () => {},
+});
 
 export const QuickActionRoot = ({
 	children,
+	onOpenChange,
 	...props
 }: Omit<DialogRootProps, 'children'> & {
 	children?: React.ReactNode;
 }) => {
 	const id = useId();
 	const triggerSizeMonitor = useValueMonitor({ width: 0, height: 0 });
+	const remeasureListener = useRef<() => void>(() => {});
+	const onRemeasure = useCallback((cb: () => void) => {
+		remeasureListener.current = cb;
+		return () => {
+			remeasureListener.current = () => {};
+		};
+	}, []);
 	return (
-		<TriggerSizeContext.Provider value={triggerSizeMonitor}>
-			<Dialog.Root {...props}>
+		<TriggerSizeContext.Provider
+			value={{
+				monitor: triggerSizeMonitor,
+				onRemeasure,
+			}}
+		>
+			<Dialog.Root
+				onOpenChange={(open, details) => {
+					remeasureListener.current();
+					onOpenChange?.(open, details);
+				}}
+				{...props}
+			>
 				<QuickActionIdContext.Provider value={id.replace(/:/g, '')}>
 					{children}
 				</QuickActionIdContext.Provider>
@@ -49,10 +79,20 @@ const QuickActionTrigger = ({
 	...props
 }: QuickActionTriggerProps) => {
 	const layoutId = useContext(QuickActionIdContext);
-	const sizeMonitor = useContext(TriggerSizeContext);
-	const measureRef = useSize((size) => {
-		sizeMonitor.set(size);
-	});
+	const { monitor: sizeMonitor, onRemeasure } = useContext(TriggerSizeContext);
+	const measureRef = useRef<HTMLButtonElement>(null);
+	useEffect(
+		() =>
+			onRemeasure(() => {
+				const el = measureRef.current;
+				if (el) {
+					console.log('remeasuring trigger size', el.getBoundingClientRect());
+					const rect = el.getBoundingClientRect();
+					sizeMonitor.set({ width: rect.width, height: rect.height });
+				}
+			}),
+		[onRemeasure, sizeMonitor],
+	);
 	const finalRef = useMergedRef(ref, measureRef);
 	return (
 		<Dialog.Trigger
@@ -93,7 +133,7 @@ const QuickActionContent = ({
 	const innerRef = useRef<HTMLDivElement>(null);
 	const finalRef = useMergedRef(innerRef, ref);
 	const layoutId = useContext(QuickActionIdContext);
-	const triggerSizeMonitor = useContext(TriggerSizeContext);
+	const { monitor: triggerSizeMonitor } = useContext(TriggerSizeContext);
 	useMonitor(triggerSizeMonitor, (size) => {
 		if (innerRef.current) {
 			const style = innerRef.current.style;

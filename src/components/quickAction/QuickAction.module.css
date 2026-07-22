@@ -11,7 +11,7 @@
 	transition-timing-function: var(--m-ease-loose);
 
 	position: fixed;
-	contain: layout;
+	contain: content;
 
 	@apply --mx-shadow(var(--m-shadow-md));
 	@apply --mx-surface-ambient;
