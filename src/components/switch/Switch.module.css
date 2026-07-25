@@ -1,13 +1,14 @@
 .root {
 	all: unset;
 	position: relative;
-	height: --fn-literal(20px);
-	width: --fn-literal(42px);
+	height: --fn-literal(26px);
+	width: --fn-literal(48px);
 	display: flex;
 	flex-shrink: 0;
 	cursor: pointer;
 	appearance: none;
 	padding: --fn-literal(3px);
+	box-sizing: border-box;
 
 	transition: all var(--m-dur) var(--m-ease);
 
