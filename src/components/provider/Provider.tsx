@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext } from 'react';
+import { $ } from '../../arbor/tokens.js';
 import {
 	useThemedTitleBar,
 	useVirtualKeyboardFocusBehavior,
@@ -38,7 +39,7 @@ export function Provider({
 			? virtualKeyboardBehavior
 			: 'displace';
 	useVirtualKeyboardBehavior(supportedVirtualKeyboardBehavior);
-	useThemedTitleBar('--m-tint-paper', disableTitleBarColor);
+	useThemedTitleBar($.mode.tint.paper.name, disableTitleBarColor);
 	const otherStuff = (
 		<>
 			<IconSpritesheet />

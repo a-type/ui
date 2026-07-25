@@ -46,11 +46,11 @@ importers:
         version: 2.1.4(@types/react@19.0.1)(react@19.0.0)
     devDependencies:
       '@arbor-css/core':
-        specifier: ^0.0.145
-        version: 0.0.145
+        specifier: ^0.0.146
+        version: 0.0.146
       '@arbor-css/postcss':
-        specifier: ^0.0.145
-        version: 0.0.145(@arbor-css/core@0.0.145)
+        specifier: ^0.0.146
+        version: 0.0.146(@arbor-css/core@0.0.146)
       '@eslint/js':
         specifier: ^9.39.2
         version: 9.39.2
@@ -180,35 +180,35 @@ packages:
   '@adobe/css-tools@4.4.1':
     resolution: {integrity: sha512-12WGKBQzjUAI4ayyF4IAtfw2QR/IDoqk6jTddXDhtYTJF9ASmoE1zst7cVtP0aL/F1jUJL5r+JxKXKEgHNbEUQ==}
 
-  '@arbor-css/core@0.0.145':
-    resolution: {integrity: sha512-7wk8GEWfSdl/Z6t94uRVoKnPh0ikIFtDFseRvKF2I1r/8Z4EQ2twIqL02AAprwmk51z8HoSvrtZvOEnrp6Zniw==}
+  '@arbor-css/core@0.0.146':
+    resolution: {integrity: sha512-bKO+K6AaA0/ZD5h10lGrMkKtYz8bJTGdvgQVvf9MngiFuuGJmQO0Qb2DxIjAQhCefj4erkzrxas50T6WkkBxgQ==}
     hasBin: true
 
-  '@arbor-css/css-eval@0.0.145':
-    resolution: {integrity: sha512-AUAY/bRnCBC56jQh6nUfw8pknBCynsD8+tqETfGJUbPZ9VnEDtPnQukKa9v1Yt5zTCuRxRqPmKeia8Uym7dK+w==}
+  '@arbor-css/css-eval@0.0.146':
+    resolution: {integrity: sha512-rl0ASCIKmGHLgxpARJH+1FNBI2j7ekfOSjLuZWwDHw6+XCH7xd5Q1XPfeI6xEU7wyzeYGXbrA9e7taflyZ1ngA==}
 
-  '@arbor-css/functions@0.0.145':
-    resolution: {integrity: sha512-lzm8XL0VBwHPQfFhdNSLARYhaopp/DtcOSLXgauy6gfbUh74kUM2TvvkakqAOVnj03b2LF+Wqot6IM7KLUo/5A==}
+  '@arbor-css/functions@0.0.146':
+    resolution: {integrity: sha512-4+EYOp/6N12TC/1YAWXcqeADd2Kn2Su8fLcbe4mz8c1PuojfFIHj0gXMnWof06Xtr3JuBbTYwd3h6lhzeN6ekg==}
 
-  '@arbor-css/globals@0.0.145':
-    resolution: {integrity: sha512-9BFrTjQbZcaRzPEFxO3/sXAyN12VZZkI4Q6RP8tA9al8EnmBcH8X05AzVPdJGJ4BWIZWM3kbas50VZAmyjUx0A==}
+  '@arbor-css/globals@0.0.146':
+    resolution: {integrity: sha512-sgd+KtYt4HIuKTR/kkiAdHLIz7W/lWD3Adopa3DfN7jLOYzIuWN6rAgJAJiUJG2Izjb0//sRfKjL6dk5fuERMg==}
 
-  '@arbor-css/modes@0.0.145':
-    resolution: {integrity: sha512-0RC8MMfwqUUT7y4agiqoEsxfBL5LYQ1gaA3LIfQ41TZpR1K5eKA2yGTbrxz5jwPw66KubK5kwyXrqUnU4oGXNQ==}
+  '@arbor-css/modes@0.0.146':
+    resolution: {integrity: sha512-20VbhuatyxdfchwRFsHXofnj09tPeCpZX2nniFgy2D4cc9yminIbn3+8FkUhnW2mNCVfq6/H1Ga4yyRNeXsanA==}
 
-  '@arbor-css/postcss@0.0.145':
-    resolution: {integrity: sha512-DnFKAeVgw/zRq2n95I0gtT98jWOkIXC/k5SiYre1g/ttiSaDjX7+uZHt1Hcln9nSCdZnOJSeIZzhgA2rPlarDw==}
+  '@arbor-css/postcss@0.0.146':
+    resolution: {integrity: sha512-cXMOmQffkg5ihclrGqgWdAucYyhm3uv9VXyYof7UjmWFxAAPbVUmIo9aDb2cfsQFHHJvYdIELuKU/av1i2HqjQ==}
     peerDependencies:
       '@arbor-css/core': '*'
 
-  '@arbor-css/preset@0.0.145':
-    resolution: {integrity: sha512-ZAW5Bi+X92IvfZW0/ffHg/vvAoozinLv1qiRf/H06gVsV34QIw68k6BIlQ7CgZdu2uvrm3FaU2UtYH3IOllGbw==}
+  '@arbor-css/preset@0.0.146':
+    resolution: {integrity: sha512-ydsVt0/gAAWQN/OxeoTbjww89ytLLvzL7n6B8NI0rE14U90fKH9ZMcKj7w3kOIo6dd6ZoXaj6uAKJDYqjiZgRw==}
 
-  '@arbor-css/tokens@0.0.145':
-    resolution: {integrity: sha512-qX664IRp3FR9I6fql781zMYj1gUT66t8APnaeoIXwAOoL8y1HGcIZyDH+loXDhX2INdn1KL/oFB0XO4vPrztng==}
+  '@arbor-css/tokens@0.0.146':
+    resolution: {integrity: sha512-2vT7XMv+RN0WoPtlP3pAtrBLASA1hMW8CQujg1eq20aJ3l7pCMMSKySLveDz9OJFd7rirCQ95gm9cqJZ61VFmQ==}
 
-  '@arbor-css/util@0.0.145':
-    resolution: {integrity: sha512-6h3x/KaTNrLRhwAQw44XQD1WaqEabCLoScGYEafFhXL1I2ZbrAMgAFB1lazSNYitbXi9RvJs1je8SFOHkpIyqg==}
+  '@arbor-css/util@0.0.146':
+    resolution: {integrity: sha512-j/Q0frvq/iJzAL4KOAJzPJaGTmEfrTFowy8c+Imny8ByQAn4NgNpDh5bFEMAp/i3iKjGp1IqO6yVhZfwPKjXMA==}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -3677,67 +3677,67 @@ snapshots:
 
   '@adobe/css-tools@4.4.1': {}
 
-  '@arbor-css/core@0.0.145':
+  '@arbor-css/core@0.0.146':
     dependencies:
-      '@arbor-css/css-eval': 0.0.145
-      '@arbor-css/functions': 0.0.145
-      '@arbor-css/globals': 0.0.145
-      '@arbor-css/modes': 0.0.145
-      '@arbor-css/preset': 0.0.145
-      '@arbor-css/tokens': 0.0.145
-      '@arbor-css/util': 0.0.145
+      '@arbor-css/css-eval': 0.0.146
+      '@arbor-css/functions': 0.0.146
+      '@arbor-css/globals': 0.0.146
+      '@arbor-css/modes': 0.0.146
+      '@arbor-css/preset': 0.0.146
+      '@arbor-css/tokens': 0.0.146
+      '@arbor-css/util': 0.0.146
       design-tokens-format-module: 0.11.2
       jiti: 2.6.1
       lil-gui: 0.21.0
       lit-element: 4.2.2
       yargs: 18.0.0
 
-  '@arbor-css/css-eval@0.0.145':
+  '@arbor-css/css-eval@0.0.146':
     dependencies:
-      '@arbor-css/tokens': 0.0.145
-      '@arbor-css/util': 0.0.145
+      '@arbor-css/tokens': 0.0.146
+      '@arbor-css/util': 0.0.146
       lightningcss: 1.32.0
 
-  '@arbor-css/functions@0.0.145':
+  '@arbor-css/functions@0.0.146':
     dependencies:
-      '@arbor-css/css-eval': 0.0.145
-      '@arbor-css/tokens': 0.0.145
+      '@arbor-css/css-eval': 0.0.146
+      '@arbor-css/tokens': 0.0.146
 
-  '@arbor-css/globals@0.0.145':
+  '@arbor-css/globals@0.0.146':
     dependencies:
-      '@arbor-css/functions': 0.0.145
-      '@arbor-css/tokens': 0.0.145
+      '@arbor-css/functions': 0.0.146
+      '@arbor-css/tokens': 0.0.146
 
-  '@arbor-css/modes@0.0.145':
+  '@arbor-css/modes@0.0.146':
     dependencies:
-      '@arbor-css/css-eval': 0.0.145
-      '@arbor-css/globals': 0.0.145
-      '@arbor-css/tokens': 0.0.145
-      '@arbor-css/util': 0.0.145
+      '@arbor-css/css-eval': 0.0.146
+      '@arbor-css/globals': 0.0.146
+      '@arbor-css/tokens': 0.0.146
+      '@arbor-css/util': 0.0.146
 
-  '@arbor-css/postcss@0.0.145(@arbor-css/core@0.0.145)':
+  '@arbor-css/postcss@0.0.146(@arbor-css/core@0.0.146)':
     dependencies:
-      '@arbor-css/core': 0.0.145
-      '@arbor-css/css-eval': 0.0.145
-      '@arbor-css/functions': 0.0.145
-      '@arbor-css/globals': 0.0.145
-      '@arbor-css/tokens': 0.0.145
-      '@arbor-css/util': 0.0.145
+      '@arbor-css/core': 0.0.146
+      '@arbor-css/css-eval': 0.0.146
+      '@arbor-css/functions': 0.0.146
+      '@arbor-css/globals': 0.0.146
+      '@arbor-css/tokens': 0.0.146
+      '@arbor-css/util': 0.0.146
       jiti: 2.6.1
       postcss: 8.5.16
 
-  '@arbor-css/preset@0.0.145':
+  '@arbor-css/preset@0.0.146':
     dependencies:
-      '@arbor-css/css-eval': 0.0.145
-      '@arbor-css/functions': 0.0.145
-      '@arbor-css/globals': 0.0.145
-      '@arbor-css/modes': 0.0.145
-      '@arbor-css/tokens': 0.0.145
-      '@arbor-css/util': 0.0.145
+      '@arbor-css/css-eval': 0.0.146
+      '@arbor-css/functions': 0.0.146
+      '@arbor-css/globals': 0.0.146
+      '@arbor-css/modes': 0.0.146
+      '@arbor-css/tokens': 0.0.146
+      '@arbor-css/util': 0.0.146
 
-  '@arbor-css/tokens@0.0.145': {}
+  '@arbor-css/tokens@0.0.146': {}
 
-  '@arbor-css/util@0.0.145': {}
+  '@arbor-css/util@0.0.146': {}
 
   '@babel/code-frame@7.27.1':
     dependencies:
