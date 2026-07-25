@@ -312,9 +312,9 @@
 }
 
 @property --shadow-inset {
-	syntax: 'inset';
+	syntax: 'inset | outset';
 	inherits: false;
-	initial-value:;
+	initial-value: outset;
 }
 
 @property --padding {
