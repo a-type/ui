@@ -1,9 +1,9 @@
 import { css, definePreset } from '@arbor-css/core';
 import {
-	ArborPresetConfig,
+	PresetV1Config,
 	compileSingleColor,
-	presetArbor,
-} from '@arbor-css/core/preset-v2';
+	presetV1,
+} from '@arbor-css/core/preset-v1';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
 const defaultColors = {
@@ -48,7 +48,7 @@ export type DefaultColorRangeName = keyof typeof defaultColors.ranges;
 
 export type ATypeConfig<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
-> = Partial<ArborPresetConfig<TColors>> & {
+> = Partial<PresetV1Config<TColors>> & {
 	mainColor?: TColors;
 	defaultAccentColor?: TColors;
 	fallbackAccentColor?: TColors;
@@ -61,7 +61,7 @@ export function presetAtype<
 >(config?: ATypeConfig<TColors>) {
 	const defaultAccent = config?.defaultAccentColor || 'leek';
 	const fallbackAccent = config?.fallbackAccentColor || 'lemon';
-	const base = presetArbor({
+	const base = presetV1({
 		...config,
 		color: {
 			globalSaturation: 0.5,
