@@ -2,6 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Autocomplete } from '../autocomplete/Autocomplete.js';
 
 import clsx from 'clsx';
+import {
+	NavBar,
+	NavBarItem,
+	NavBarItemIcon,
+	NavBarItemText,
+	PageNav,
+} from '../../index.js';
 import { Box } from '../box/Box.js';
 import { Icon } from '../icon/Icon.js';
 import { PageContent } from '../layouts/PageContent.js';
@@ -101,6 +108,14 @@ export const Default: Story = {
 						</QuickAction>
 					</PageNowPlaying>
 				</PageContent>
+				<PageNav>
+					<NavBar>
+						<NavBarItem>
+							<NavBarItemIcon name="home" />
+							<NavBarItemText>Home</NavBarItemText>
+						</NavBarItem>
+					</NavBar>
+				</PageNav>
 			</PageRoot>
 		);
 	},

@@ -18,6 +18,8 @@
 	padding: 0;
 
 	clip-path: inset(-50px -50px -50px -50px);
+	transform: translate(0px, 0px) scale(1);
+	will-change: transform;
 
 	bottom: anchor(bottom);
 	&[data-align='center'] {
@@ -32,24 +34,15 @@
 
 	&[data-starting-style],
 	&[data-ending-style] {
+		clip-path: inset(200px 200px 200px 200px);
 		&[data-align='center'] {
-			clip-path: inset(
-				calc(100% - var(--trigger-height, 0px))
-					calc((100% - var(--trigger-width, 0px)) / 2) 0
-					calc((100% - var(--trigger-width, 0px)) / 2) round 200px
-			);
+			transform: translate(0px, 60px) scale(0.8);
 		}
 		&[data-align='start'] {
-			clip-path: inset(
-				calc(100% - var(--trigger-height, 0px))
-					calc(100% - var(--trigger-width, 0px)) 0 0 round 200px
-			);
+			transform: translate(-60px, 60px) scale(0.8);
 		}
 		&[data-align='end'] {
-			clip-path: inset(
-				calc(100% - var(--trigger-height, 0px)) 0 0
-					calc(100% - var(--trigger-width, 0px)) round 200px
-			);
+			transform: translate(60px, 60px) scale(0.8);
 		}
 	}
 
