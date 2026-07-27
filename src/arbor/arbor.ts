@@ -253,17 +253,6 @@ export function presetAtype<
 				hue: 0,
 				saturation: 1,
 			},
-			primitive: {
-				color: {
-					user: compileSingleColor(
-						{
-							hue: $.mode.user.hue,
-							saturation: $.mode.user.saturation,
-						},
-						$.mode.global,
-					),
-				},
-			},
 		}),
 		modeSchema: {
 			accent: base.modeSchema.tint,
