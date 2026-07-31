@@ -1,11 +1,11 @@
 .root {
 	align-items: stretch;
-	justify-content: center;
 	min-height: 100dvh;
 	flex-shrink: 1;
 	flex-grow: 1;
 	flex-basis: auto;
 	height: max-content;
+	justify-content: end;
 
 	display: flex;
 	flex-direction: column;

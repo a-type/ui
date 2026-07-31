@@ -233,3 +233,40 @@ export const WithVirtualKeyboard: Story = {
 		);
 	},
 };
+
+export const NoContent: Story = {
+	render: () => {
+		return (
+			<PageRoot>
+				<PageNav>
+					<NavBarRoot>
+						<NavBarItem>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon name="cart" />
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 1 long</NavBarItemText>
+						</NavBarItem>
+						<NavBarItem active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon name="book" />
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Item 2</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+						<NavBarItem color="neutral" active={true}>
+							<NavBarItemIconWrapper>
+								<NavBarItemIcon
+									render={(_, { size }) => (
+										<Avatar name="Grant Forrest" size={size} />
+									)}
+								/>
+							</NavBarItemIconWrapper>
+							<NavBarItemText>Neutral</NavBarItemText>
+							<NavBarItemPip />
+						</NavBarItem>
+					</NavBarRoot>
+				</PageNav>
+			</PageRoot>
+		);
+	},
+};
