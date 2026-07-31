@@ -72,10 +72,6 @@ function DateRangePickerRoot({
 
 	const onDisplayChange = useCallback(
 		({ month: newMonth, year: newYear }: { month: number; year: number }) => {
-			// Ignore movement from the first to the second visible month
-			if (newMonth === month + 1 && newYear === year) {
-				return;
-			}
 			setDisplay({
 				month: newMonth,
 				year: newYear,

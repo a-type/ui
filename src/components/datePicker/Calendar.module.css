@@ -51,7 +51,11 @@
 	cursor: pointer;
 	align-items: center;
 	justify-content: center;
-	transition: all var(--m-dur) var(--m-ease);
+	transition:
+		color,
+		background-color,
+		border-color,
+		border-radius var(--m-dur) var(--m-ease);
 
 	@apply --mx-shadow;
 	--mx-shadow-value: var(--m-shadow-sm);
