@@ -9,11 +9,15 @@ on:
 
 permissions:
   contents: write
+  deployments: write
 
 jobs:
   publish-preview:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    environment:
+      name: pr-preview-${{ github.event.pull_request.number }}
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v4
         with:
