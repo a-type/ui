@@ -2,8 +2,6 @@
 	position: fixed;
 	inset: 0;
 	@apply --mx-shadow;
-	/* --mx-shadow-value: inset 0 30px 60px 0px
-		--fn-color-faded(var(--m-tint-ink), 20%); */
 	@apply --mx-bg(var(--m-gray-ink));
 	@apply --mx-bg-faded(5%);
 	border-top: var(--m-lw) solid var(--m-gray);
@@ -16,43 +14,50 @@
 	}
 }
 
-.content {
+.popup {
 	pointer-events: auto;
 	position: fixed;
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
 	overflow: clip;
-	transition: all var(--m-dur) var(--m-ease);
+	transition: transform var(--m-dur) var(--m-ease),
+		opacity var(--m-dur) var(--m-ease);
+	--shadow-dir: -1;
 	@apply --mx-shadow;
-	--mx-shadow-value: 0 var(--m-shadow-lg-y) var(--m-shadow-lg-blur)
-		var(--m-shadow-lg-spread) var(--m-shadow-lg-color);
+	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-lg-y))
+		var(--m-shadow-lg-blur) var(--m-shadow-lg-spread) var(--m-shadow-lg-color);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-borderColor(var(--m-gray-heavy));
 
-	left: 50%;
-	top: 50%;
-	max-height: 85vh;
-	max-width: 450px;
-	width: 90vw;
-	border-radius: var(--m-surface-rd);
-	transform: translate3d(-50%, -50%, 0);
-	will-change: transform, opacity;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	max-width: unset;
+	height: min-content;
+	width: 100vw;
+	border-radius: var(--m-surface-rd) var(--m-surface-rd) 0 0;
+	border-bottom-width: 0;
+	padding-bottom: env(safe-area-inset-bottom);
+	padding-top: var(--m-sp-lg);
+
+	/* Use drawer's built-in swipe movement for animation */
+	transform: translateY(
+		calc(
+			var(--drawer-swipe-movement-y, 0px) +
+				var(--drawer-snap-point-offset, 0px)
+		)
+	);
+
+	/* Disable transitions while swiping so movement is immediate */
+	&[data-swiping] {
+		transition: none;
+	}
 
 	&[data-starting-style],
 	&[data-ending-style] {
 		opacity: 0;
-		transform: translate3d(-50%, -45%, 0) scale(0.95);
-	}
-
-	&[data-width='lg'] {
-		max-width: 800px;
-	}
-	&[data-width='md'] {
-		max-width: 600px;
-	}
-	&[data-width='sm'] {
-		max-width: 300px;
+		transform: translateY(100%);
 	}
 }
 
@@ -66,6 +71,27 @@
 	flex-direction: column;
 	gap: var(--m-sp-md);
 	padding: var(--m-surface-p);
+}
+
+.swipeHandle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%) scale(1);
+	width: 20%;
+	cursor: grab;
+	will-change: transform;
+	touch-action: none;
+	padding-block: var(--m-sp-sm);
+	z-index: 1;
+}
+
+.swipeHandleBar {
+	height: 4px;
+	width: 100%;
+	@apply --mx-bg(var(--m-gray));
+	border-radius: var(--m-rd-lg);
 }
 
 .close {
@@ -105,7 +131,6 @@
 	align-self: end;
 	padding-bottom: 1px;
 	@apply --mx-shadow;
-	/* override blur in case user turned it off */
 	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
 		var(--m-shadow-md-spread) var(--m-gray-paper);
 	@apply --mx-bg(var(--m-surface-ambient-bg));

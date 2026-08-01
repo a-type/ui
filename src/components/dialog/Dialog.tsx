@@ -5,17 +5,14 @@ import {
 	DialogRootProps,
 	DialogTriggerProps,
 } from '@base-ui/react/dialog';
+import { Drawer as BaseDrawer, DrawerRootProps } from '@base-ui/react/drawer';
 import { Radio as BaseRadio } from '@base-ui/react/radio';
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
-import { useDrag } from '@use-gesture/react';
 import clsx from 'clsx';
 import {
 	ComponentPropsWithoutRef,
-	createContext,
 	Ref,
-	TouchEvent,
 	useCallback,
-	useContext,
 	useRef,
 	useState,
 } from 'react';
@@ -30,57 +27,19 @@ import menuCls from '../primitives/menus.module.css';
 import { useConfig } from '../provider/Provider.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import { selectTriggerClassName } from '../select/index.js';
+import drawerCls from '../drawer/Drawer.module.css';
 import cls from './Dialog.module.css';
 
 const StyledOverlay = withClassName(BaseDialog.Backdrop, cls.overlay);
 
 const StyledContent = withClassName(BaseDialog.Popup, cls.content);
 
-function sheetCloseGestureLogic(
-	swipeY: number,
-	dy: number,
-	last: boolean,
-	close: () => void,
-	content: HTMLElement,
-) {
-	const contentHeight = content.clientHeight;
+const StyledDrawerOverlay = withClassName(
+	BaseDrawer.Backdrop,
+	drawerCls.overlay,
+);
 
-	const shouldClose = last && (swipeY === 1 || dy > contentHeight / 2);
-	if (shouldClose) {
-		close();
-	}
-	const gestureY = last ? (shouldClose ? -1000 : 0) : -Math.max(0, dy);
-	content.style.setProperty('--gesture-y', `${gestureY}px`);
-	content.style.setProperty('transition', last ? 'bottom 0.2s' : '');
-}
-
-// filter out gestures that are within scrollable descendants
-// if those elements are not scrolled to the top already
-function filterScrollables(
-	target: HTMLElement,
-	root: HTMLElement,
-	dy: number,
-	vy: number,
-) {
-	// always allow upward swipes
-	if (vy < 0) {
-		return false;
-	}
-
-	let cur: HTMLElement | null = target;
-	while (cur) {
-		if (cur === root) return false;
-		cur = cur.parentElement;
-		if (
-			cur &&
-			cur.scrollHeight > cur.clientHeight &&
-			cur.scrollTop !== 0 &&
-			vy >= 0
-		)
-			return true;
-	}
-	return false;
-}
+const StyledDrawerPopup = withClassName(BaseDrawer.Popup, drawerCls.popup);
 
 export interface DialogContentProps extends DialogPopupProps {
 	width?: 'sm' | 'md' | 'lg';
@@ -91,8 +50,6 @@ export interface DialogContentProps extends DialogPopupProps {
 	ref?: Ref<HTMLDivElement>;
 	innerClassName?: string;
 }
-
-const SWIPE_VELOCITY_THRESHOLD = 1.5;
 
 export const Content = function Content({
 	ref,
@@ -107,16 +64,15 @@ export const Content = function Content({
 }: DialogContentProps) {
 	const particles = useParticles();
 	const wasOpenRef = useRef(false);
+	const isSmall = useMediaQuery('(max-width: 600px)');
+	const useDrawer = isSmall && !disableSheet;
+
 	const openRef = useCallback(
 		(element: HTMLDivElement | null) => {
 			if (!wasOpenRef.current && element?.hasAttribute('data-open')) {
 				wasOpenRef.current = true;
 
-				const matchesSmall =
-					!disableSheet &&
-					typeof window !== 'undefined' &&
-					!window.matchMedia('(min-width:600px)').matches;
-				if (!matchesSmall) return;
+				if (!useDrawer) return;
 
 				setTimeout(() => {
 					particles?.addParticles(
@@ -151,27 +107,49 @@ export const Content = function Content({
 				wasOpenRef.current = false;
 			}
 		},
-		[particles, disableSheet],
+		[particles, useDrawer],
 	);
 
-	const { gestureRef, onTouchStart, onTouchMove, onTouchEnd } =
-		useDialogInherentSwipe({ disableSheet });
-	const finalRef = useMergedRef(ref, openRef, gestureRef);
+	const finalRef = useMergedRef(ref, openRef);
 
 	const { virtualKeyboardBehavior } = useConfig();
+
+	if (useDrawer) {
+		return (
+			<BaseDrawer.Portal>
+				<StyledDrawerOverlay />
+				<StyledDrawerPopup
+					ref={finalRef}
+					{...(props as ComponentPropsWithoutRef<typeof StyledDrawerPopup>)}
+					className={clsx(outerClassName || className)}
+				>
+					{!disableDefaultClose && <DialogDefaultClose showOnMobile />}
+					<DialogSwipeHandle />
+					<ScrollArea
+						direction="vertical"
+						className={drawerCls.contentScrollArea}
+					>
+						<ScrollArea.Content
+							className={clsx(
+								drawerCls.contentScrollAreaContent,
+								innerClassName,
+							)}
+							style={{ minWidth: undefined }}
+						>
+							{children}
+						</ScrollArea.Content>
+					</ScrollArea>
+				</StyledDrawerPopup>
+			</BaseDrawer.Portal>
+		);
+	}
 
 	return (
 		<BaseDialog.Portal>
 			<StyledOverlay />
 			<StyledContent
-				data-dialog-content
 				ref={finalRef}
 				{...props}
-				onTouchStart={onTouchStart}
-				onTouchMove={onTouchMove}
-				onTouchEnd={onTouchEnd}
-				onTouchCancel={onTouchEnd}
-				data-disable-sheet={disableSheet ? 'true' : undefined}
 				data-keyboard-behavior={virtualKeyboardBehavior}
 				data-width={width}
 				className={clsx(outerClassName || className)}
@@ -179,7 +157,6 @@ export const Content = function Content({
 				{!disableDefaultClose && (
 					<DialogDefaultClose showOnMobile={disableSheet} />
 				)}
-				{!disableSheet && <DialogSwipeHandle />}
 				<ScrollArea direction="vertical" className={cls.contentScrollArea}>
 					<ScrollArea.Content
 						className={clsx(cls.contentScrollAreaContent, innerClassName)}
@@ -195,100 +172,6 @@ export const Content = function Content({
 	);
 };
 
-function useDialogInherentSwipe({ disableSheet }: { disableSheet?: boolean }) {
-	const gestureRef = useRef<HTMLDivElement>(null);
-
-	const close = useContext(DialogCloseContext);
-	const isSmall = useMediaQuery('(max-width: 640px)');
-
-	const gestureState = useRef({
-		sy: 0,
-		dy: 0,
-		vy: 0,
-		active: false,
-		timeStamp: 0,
-		filtered: false,
-	});
-
-	const onTouchStart = useCallback(
-		(event: TouchEvent) => {
-			if (!isSmall || disableSheet) return;
-			const touch = event.touches[0];
-			gestureState.current.sy = touch.clientY;
-			gestureState.current.timeStamp = event.timeStamp;
-		},
-		[isSmall, disableSheet],
-	);
-	const onTouchMove = useCallback(
-		(event: TouchEvent) => {
-			if (!isSmall || disableSheet) return;
-
-			const touch = event.touches[0];
-			const dy = touch.clientY - gestureState.current.sy;
-			const vy =
-				(dy - gestureState.current.dy) /
-				(event.timeStamp -
-					(gestureState.current.timeStamp ?? event.timeStamp - 1));
-
-			gestureState.current.dy = dy;
-			gestureState.current.vy = vy;
-
-			if (
-				gestureState.current.filtered ||
-				filterScrollables(
-					event.target as HTMLElement,
-					gestureRef.current!,
-					dy,
-					vy,
-				)
-			) {
-				gestureState.current.filtered = true;
-				return;
-			}
-			if (!gestureState.current.active) {
-				gestureState.current.active = true;
-				gestureState.current.sy = touch.clientY;
-			}
-
-			if (gestureRef.current && gestureRef.current.scrollTop < 3) {
-				sheetCloseGestureLogic(
-					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
-					dy,
-					false,
-					close,
-					gestureRef.current,
-				);
-			}
-
-			gestureState.current.timeStamp = event.timeStamp;
-		},
-		[isSmall, disableSheet, close],
-	);
-	const onTouchEnd = useCallback(
-		(event: TouchEvent) => {
-			if (gestureState.current.active && gestureRef.current) {
-				const { vy, dy } = gestureState.current;
-				sheetCloseGestureLogic(
-					Math.abs(vy) > SWIPE_VELOCITY_THRESHOLD ? Math.sign(vy) : 0,
-					dy,
-					true,
-					close,
-					gestureRef.current,
-				);
-			}
-			gestureState.current.active = false;
-			gestureState.current.filtered = false;
-			gestureState.current.timeStamp = event.timeStamp;
-			gestureState.current.vy = 0;
-			gestureState.current.dy = 0;
-			gestureState.current.sy = 0;
-		},
-		[close],
-	);
-
-	return { gestureRef, onTouchStart, onTouchMove, onTouchEnd };
-}
-
 export function DialogSwipeHandle({
 	ref,
 	className,
@@ -296,36 +179,16 @@ export function DialogSwipeHandle({
 }: ComponentPropsWithoutRef<'div'> & {
 	ref?: React.Ref<HTMLDivElement>;
 }) {
-	const close = useContext(DialogCloseContext);
-	const innerRef = useRef<HTMLDivElement>(null);
-	useDrag(
-		({ swipe: [, swipeY], movement: [, dy], last }) => {
-			const content = findParentDialogContent(innerRef.current);
-			if (!content) return;
-			sheetCloseGestureLogic(swipeY, dy, last, close, content);
-		},
-		{
-			target: innerRef,
-			axis: 'y',
-		},
-	);
-	const finalRef = useMergedRef(ref, innerRef);
 	return (
-		<div ref={finalRef} {...props} className={clsx(cls.swipeHandle, className)}>
-			<div className={cls.swipeHandleBar} />
+		<div
+			ref={ref}
+			{...props}
+			className={clsx(drawerCls.swipeHandle, className)}
+		>
+			<div className={drawerCls.swipeHandleBar} />
 		</div>
 	);
 }
-
-function findParentDialogContent(
-	element: HTMLElement | null,
-): HTMLElement | null {
-	if (!element) return null;
-	if (element.getAttribute('data-dialog-content')) return element;
-	return findParentDialogContent(element.parentElement);
-}
-
-const DialogCloseContext = createContext<() => void>(() => {});
 
 export const DialogDefaultClose = function DialogDefaultClose({
 	ref,
@@ -358,7 +221,7 @@ const StyledDescription = withClassName(
 );
 
 // Exports
-const DialogRoot = (props: DialogRootProps) => {
+const DialogRoot = (props: DialogRootProps & { disableSheet?: boolean }) => {
 	const [innerOpen, innerOnOpenChange] = useState(props.defaultOpen || false);
 	const open = props.open ?? innerOpen;
 	const onOpenChange = useCallback<
@@ -371,23 +234,23 @@ const DialogRoot = (props: DialogRootProps) => {
 		[props.onOpenChange],
 	);
 
-	const close = useCallback(() => {
-		onOpenChange(false, {
-			allowPropagation() {},
-			cancel() {},
-			isCanceled: false,
-			event: null as any,
-			isPropagationAllowed: true,
-			preventUnmountOnClose() {},
-			reason: 'imperative-action',
-			trigger: undefined,
-		});
-	}, [onOpenChange]);
+	const isSmall = useMediaQuery('(max-width: 600px)');
+	const { disableSheet, ...rootProps } = props;
+	const useDrawer = isSmall && !disableSheet;
+
+	if (useDrawer) {
+		return (
+			<BaseDrawer.Root
+				{...(rootProps as DrawerRootProps)}
+				open={open}
+				onOpenChange={onOpenChange as DrawerRootProps['onOpenChange']}
+				swipeDirection="down"
+			/>
+		);
+	}
 
 	return (
-		<DialogCloseContext.Provider value={close}>
-			<BaseDialog.Root {...props} open={open} onOpenChange={onOpenChange} />
-		</DialogCloseContext.Provider>
+		<BaseDialog.Root {...rootProps} open={open} onOpenChange={onOpenChange} />
 	);
 };
 
