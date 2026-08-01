@@ -1,0 +1,40 @@
+name: Cleanup Storybook PR preview
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Remove preview from gh-pages
+        run: |
+          set -euo pipefail
+          PREVIEW_PATH="pr-${{ github.event.pull_request.number }}"
+          if [ ! -d "${PREVIEW_PATH}" ]; then
+            echo "No preview directory found"
+            exit 0
+          fi
+
+          rm -rf "${PREVIEW_PATH}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A "${PREVIEW_PATH}"
+
+          if git diff --cached --quiet; then
+            echo "No cleanup changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Remove Storybook preview for PR #${{ github.event.pull_request.number }}"
+          git push origin gh-pages
