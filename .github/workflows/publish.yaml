@@ -1,36 +1,69 @@
-# Workflow name
 name: Build and Publish Storybook to GitHub Pages
 
 on:
-  # Event for the workflow to run on
   push:
     branches:
       - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# List of jobs
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      # Manual Checkout
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      # Set up Node
+
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: Install pnpm
-        run: npm install -g pnpm@latest
-      #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
-      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+
+      - uses: pnpm/action-setup@v3
         with:
-          install_command: pnpm i --frozen-lockfile
-          build_command: pnpm build-storybook # default: npm run build-storybook
-          path: storybook-static # default: dist/storybook
+          run_install: true
+          version: 11.3.0
+
+      - name: Build Storybook
+        run: pnpm build-storybook
+        env:
+          STORYBOOK_BASE_PATH: /${{ github.event.repository.name }}/
+
+      - uses: actions/checkout@v4
+        with:
+          path: gh-pages
+
+      - name: Publish Storybook to gh-pages
+        run: |
+          set -euo pipefail
+          cd gh-pages
+
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages
+            git checkout -B gh-pages origin/gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf . >/dev/null 2>&1 || true
+            find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          fi
+
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name .git \
+            ! -name 'pr-*' \
+            -exec rm -rf {} +
+
+          cp -R ../storybook-static/. .
+          touch .nojekyll
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No Storybook changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Publish Storybook"
+          git push origin gh-pages

@@ -15,11 +15,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: gh-pages
+          path: gh-pages
 
       - name: Remove preview from gh-pages
         run: |
           set -euo pipefail
+          cd gh-pages
+
+          if ! git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "No gh-pages branch found"
+            exit 0
+          fi
+
+          git fetch origin gh-pages
+          git checkout -B gh-pages origin/gh-pages
+
           PREVIEW_PATH="pr-${{ github.event.pull_request.number }}"
           if [ ! -d "${PREVIEW_PATH}" ]; then
             echo "No preview directory found"
@@ -29,7 +39,8 @@ jobs:
           rm -rf "${PREVIEW_PATH}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A "${PREVIEW_PATH}"
+          touch .nojekyll
+          git add -A .nojekyll "${PREVIEW_PATH}"
 
           if git diff --cached --quiet; then
             echo "No cleanup changes to commit"
