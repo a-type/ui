@@ -1,0 +1,3 @@
+import{dd as i,de as r}from"./iframe-BTd0T825.js";import{df as f,dg as g,dh as P,di as y,dj as v}from"./iframe-BTd0T825.js";import"./preload-helper-99ckj_8D.js";import"https://esm.sh/lightningcss-wasm@1.32.0";async function u(t,e={simplifierPasses:1,tokenPurpose:"other"}){const s=getComputedStyle(e.target??document.documentElement).getPropertyValue(t).trim();return s?(await i({passes:e.simplifierPasses??1}))(r`
+			${s}
+		`,{purpose:e.tokenPurpose}):null}export{f as connect,g as getContext,P as getEnvValues,y as getPreset,i as loadSimplifier,u as resolveRuntimeValue,v as subscribeToEnvChanges};
