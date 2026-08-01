@@ -1,0 +1,56 @@
+name: Publish Storybook PR preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: write
+
+jobs:
+  publish-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: pnpm/action-setup@v3
+        with:
+          run_install: true
+          version: 11.3.0
+
+      - name: Build Storybook for preview
+        run: pnpm build && pnpm build-storybook
+        env:
+          STORYBOOK_BASE_PATH: /${{ github.event.repository.name }}/pr-${{ github.event.pull_request.number }}/
+
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Publish preview to gh-pages
+        run: |
+          set -euo pipefail
+          PREVIEW_PATH="pr-${{ github.event.pull_request.number }}"
+          rm -rf "gh-pages/${PREVIEW_PATH}"
+          mkdir -p "gh-pages/${PREVIEW_PATH}"
+          cp -R storybook-static/. "gh-pages/${PREVIEW_PATH}/"
+
+          cd gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "${PREVIEW_PATH}"
+
+          if git diff --cached --quiet; then
+            echo "No preview changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Update Storybook preview for PR #${{ github.event.pull_request.number }}"
+          git push origin gh-pages
