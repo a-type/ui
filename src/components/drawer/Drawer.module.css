@@ -89,7 +89,6 @@
 
 	&[data-starting-style],
 	&[data-ending-style] {
-		opacity: 0;
 		transform: translateY(100%);
 		padding-bottom: 0;
 	}
@@ -121,6 +120,8 @@
 	cursor: grab;
 	touch-action: none;
 	padding-block: var(--m-sp-lg);
+	user-select: none;
+	flex-shrink: 0;
 }
 
 .swipeHandleBar {
