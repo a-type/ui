@@ -1,12 +1,5 @@
 import { useCallback, useState } from 'react';
-import {
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
-} from '../dialog/index.js';
+import { Dialog } from '../dialog/index.js';
 import { P } from '../typography/index.js';
 import { Button, ButtonProps } from './Button.js';
 
@@ -55,14 +48,14 @@ export function ConfirmedButton({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger render={<Button />} {...rest} />
-			<DialogContent>
-				<DialogTitle>{confirmTitle}</DialogTitle>
+			<Dialog.Trigger render={<Button />} {...rest} />
+			<Dialog.Content>
+				<Dialog.Title>{confirmTitle}</Dialog.Title>
 				<P>{confirmText}</P>
-				<DialogActions>
-					<DialogClose render={<Button emphasis="default" />}>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button emphasis="default" />}>
 						{cancelAction}
-					</DialogClose>
+					</Dialog.Close>
 					<Button
 						loading={loading}
 						onClick={confirm}
@@ -71,8 +64,8 @@ export function ConfirmedButton({
 					>
 						{confirmAction}
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

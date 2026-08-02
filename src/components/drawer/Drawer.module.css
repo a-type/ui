@@ -15,43 +15,72 @@
 }
 
 .viewport {
+	--bleed: 100px;
+
 	position: fixed;
 	inset: 0;
 	display: flex;
 	align-items: flex-end;
-	pointer-events: none;
+	justify-content: center;
+	touch-action: none;
+
+	&::after {
+		content: '';
+		position: fixed;
+		inset-inline: 0;
+		bottom: 0;
+		height: var(--bleed);
+		@apply --mx-bg(var(--m-surface-ambient-bg));
+		pointer-events: none;
+	}
+
+	&[data-closed]::after {
+		opacity: 0;
+	}
 }
 
 .popup {
-	pointer-events: auto;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	max-width: unset;
+	width: 100%;
+	max-height: 85svh;
+
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	overflow: clip;
-	transition: transform var(--m-dur) var(--m-ease),
+
+	touch-action: none;
+
+	overflow: visible;
+
+	transition:
+		transform var(--m-dur) var(--m-ease),
 		opacity var(--m-dur) var(--m-ease);
+
 	--shadow-dir: -1;
 	@apply --mx-shadow;
 	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-lg-y))
 		var(--m-shadow-lg-blur) var(--m-shadow-lg-spread) var(--m-shadow-lg-color);
+
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-borderColor(var(--m-gray-heavy));
 
-	max-width: unset;
-	width: 100%;
-	max-height: 85svh;
 	border-radius: var(--m-surface-rd) var(--m-surface-rd) 0 0;
 	border-bottom-width: 0;
-	padding-bottom: env(safe-area-inset-bottom);
-	padding-top: var(--m-sp-lg);
+	padding-bottom: max(
+		0px,
+		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
+	);
 
 	/* Use drawer's built-in swipe movement for animation */
 	transform: translateY(
 		calc(
-			var(--drawer-swipe-movement-y, 0px) +
-				var(--drawer-snap-point-offset, 0px)
+			var(--drawer-swipe-movement-y, 0px) + var(--drawer-snap-point-offset, 0px)
 		)
 	);
+	will-change: transform;
 
 	/* Disable transitions while swiping so movement is immediate */
 	&[data-swiping] {
@@ -62,12 +91,18 @@
 	&[data-ending-style] {
 		opacity: 0;
 		transform: translateY(100%);
+		padding-bottom: 0;
+	}
+	&[data-ending-style] {
+		transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
 	}
 }
 
 .contentScrollArea {
 	width: 100%;
 	height: 100%;
+	flex: 1 1 auto;
+	min-height: 0;
 }
 
 .contentScrollAreaContent {
@@ -78,22 +113,19 @@
 }
 
 .swipeHandle {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%) scale(1);
-	width: 20%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 	cursor: grab;
-	will-change: transform;
 	touch-action: none;
-	padding-block: var(--m-sp-sm);
-	z-index: 1;
+	padding-block: var(--m-sp-lg);
 }
 
 .swipeHandleBar {
-	height: 4px;
-	width: 100%;
+	height: --fn-literal(4px);
+	width: 20%;
 	@apply --mx-bg(var(--m-gray));
 	border-radius: var(--m-rd-lg);
 }
@@ -133,7 +165,7 @@
 	align-items: center;
 	justify-content: end;
 	align-self: end;
-	padding-bottom: 1px;
+	padding-bottom: --fn-literal(1px);
 	@apply --mx-shadow;
 	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
 		var(--m-shadow-md-spread) var(--m-gray-paper);
@@ -142,4 +174,5 @@
 	margin-block-start: var(--m-sp-md);
 	gap: var(--m-sp-sm);
 	border-radius: var(--m-surface-rd);
+	transition: bottom var(--m-dur) var(--m-ease);
 }

@@ -1,20 +1,22 @@
-import { Drawer as BaseDrawer } from '@base-ui/react/drawer';
 import {
+	Drawer as BaseDrawer,
 	DrawerCloseProps,
 	DrawerPopupProps,
 	DrawerRootProps,
 	DrawerTriggerProps,
 } from '@base-ui/react/drawer';
 import clsx from 'clsx';
-import { ComponentPropsWithoutRef, Ref } from 'react';
+import { ComponentPropsWithoutRef, Ref, useCallback, useRef } from 'react';
+import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
+import { useParticles } from '../particles/ParticleContext.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import cls from './Drawer.module.css';
 
-export const DrawerOverlay = withClassName(BaseDrawer.Backdrop, cls.overlay);
+const DrawerOverlay = withClassName(BaseDrawer.Backdrop, cls.overlay);
 
 const StyledPopup = withClassName(BaseDrawer.Popup, cls.popup);
 
@@ -24,7 +26,7 @@ export interface DrawerContentProps extends DrawerPopupProps {
 	innerClassName?: string;
 }
 
-export const DrawerContent = function DrawerContent({
+const DrawerContent = function DrawerContent({
 	ref,
 	children,
 	className,
@@ -32,11 +34,57 @@ export const DrawerContent = function DrawerContent({
 	innerClassName,
 	...props
 }: DrawerContentProps) {
+	const particles = useParticles();
+	const wasOpenRef = useRef(false);
+
+	const openRef = useCallback(
+		(element: HTMLDivElement | null) => {
+			if (!wasOpenRef.current && element?.hasAttribute('data-open')) {
+				wasOpenRef.current = true;
+
+				setTimeout(() => {
+					particles?.addParticles(
+						particles.elementExplosion({
+							count: 20,
+							margin: 40,
+							borders: ['top'],
+							color: [
+								{
+									space: 'rgb',
+									values: [0, 0, 0],
+									opacity: 0.02,
+								},
+								{
+									space: 'rgb',
+									values: [0, 0, 0],
+									opacity: 0,
+								},
+							],
+							element,
+							startRadius: 15,
+							endRadius: 0,
+							lifespan: 1000,
+							force: 0.5,
+							drag: 0.01,
+							forceFuzz: 0.5,
+							angleFuzz: 0.1,
+						}),
+					);
+				}, 180);
+			} else if (!element?.hasAttribute('data-open')) {
+				wasOpenRef.current = false;
+			}
+		},
+		[particles],
+	);
+
+	const finalRef = useMergedRef(ref, openRef);
+
 	return (
 		<BaseDrawer.Portal>
 			<DrawerOverlay />
 			<BaseDrawer.Viewport className={cls.viewport}>
-				<StyledPopup ref={ref} {...props} className={className}>
+				<StyledPopup ref={finalRef} {...props} className={className}>
 					{!disableDefaultClose && <DrawerDefaultClose />}
 					<DrawerSwipeHandle />
 					<ScrollArea direction="vertical" className={cls.contentScrollArea}>
@@ -53,7 +101,7 @@ export const DrawerContent = function DrawerContent({
 	);
 };
 
-export function DrawerSwipeHandle({
+function DrawerSwipeHandle({
 	ref,
 	className,
 	...props
@@ -67,7 +115,7 @@ export function DrawerSwipeHandle({
 	);
 }
 
-export const DrawerDefaultClose = function DrawerDefaultClose({
+function DrawerDefaultClose({
 	ref,
 	className,
 	...props
@@ -85,23 +133,45 @@ export const DrawerDefaultClose = function DrawerDefaultClose({
 			<Icon name="x" />
 		</DrawerClose>
 	);
-};
+}
 
-export const DrawerTitle = withClassName(BaseDrawer.Title, cls.title);
-export const DrawerDescription = withClassName(
+const DrawerTitle = withClassName(BaseDrawer.Title, cls.title);
+const DrawerDescription = withClassName(
 	BaseDrawer.Description,
 	cls.description,
 );
 
-const DrawerRoot = (props: DrawerRootProps) => {
-	return <BaseDrawer.Root swipeDirection="down" {...props} />;
+// TODO: support swipeDirection
+export interface DrawerProps
+	extends Omit<DrawerRootProps, 'children' | 'swipeDirection'> {
+	children: React.ReactNode;
+}
+const defaultSnapPoints = [0.75, 1];
+const DrawerRoot = ({
+	children,
+	defaultSnapPoint = 0.5,
+	snapPoints = defaultSnapPoints,
+	...props
+}: DrawerProps) => {
+	return (
+		<BaseDrawer.Root
+			swipeDirection="down"
+			defaultSnapPoint={defaultSnapPoint}
+			snapPoints={snapPoints}
+			{...props}
+		>
+			<BaseDrawer.VirtualKeyboardProvider>
+				{children}
+			</BaseDrawer.VirtualKeyboardProvider>
+		</BaseDrawer.Root>
+	);
 };
 
-export const DrawerTrigger = ({ render, ...props }: DrawerTriggerProps) => (
+const DrawerTrigger = ({ render, ...props }: DrawerTriggerProps) => (
 	<BaseDrawer.Trigger render={render || <Button />} {...props} />
 );
 
-export const DrawerClose = function DrawerClose({
+function DrawerClose({
 	children,
 	render,
 	...props
@@ -116,11 +186,9 @@ export const DrawerClose = function DrawerClose({
 			{children ?? 'Close'}
 		</BaseDrawer.Close>
 	);
-};
+}
 
-export const DrawerActions = withClassName(Box, cls.actions);
-
-export type { DrawerRootProps as DrawerProps } from '@base-ui/react/drawer';
+const DrawerActions = withClassName(Box, cls.actions);
 
 export const Drawer = Object.assign(DrawerRoot, {
 	Trigger: DrawerTrigger,

@@ -1,3 +1,4 @@
+import { UseRenderRenderProp } from '@base-ui/react';
 import {
 	Dialog as BaseDialog,
 	DialogCloseProps,
@@ -5,166 +6,70 @@ import {
 	DialogRootProps,
 	DialogTriggerProps,
 } from '@base-ui/react/dialog';
-import { Drawer as BaseDrawer, DrawerRootProps } from '@base-ui/react/drawer';
+import { DrawerRootProps } from '@base-ui/react/drawer';
 import { Radio as BaseRadio } from '@base-ui/react/radio';
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
 import clsx from 'clsx';
-import {
-	ComponentPropsWithoutRef,
-	Ref,
-	useCallback,
-	useRef,
-	useState,
-} from 'react';
+import { ComponentPropsWithoutRef, Ref, useCallback, useState } from 'react';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
-import useMergedRef from '../../hooks/useMergedRef.js';
 import { withClassName } from '../../hooks/withClassName.js';
+import { createWithContextVariant } from '../../hooks/withContextVariant.js';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
+import { Drawer } from '../drawer/Drawer.js';
+import drawerCls from '../drawer/Drawer.module.css';
 import { Icon } from '../icon/Icon.js';
-import { useParticles } from '../particles/index.js';
 import menuCls from '../primitives/menus.module.css';
-import { useConfig } from '../provider/Provider.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import { selectTriggerClassName } from '../select/index.js';
-import drawerCls from '../drawer/Drawer.module.css';
 import cls from './Dialog.module.css';
 
+const { Context: MobileDrawerContext, withContextVariant } =
+	createWithContextVariant();
+
+// baseline Dialog-specific component implementations
 const StyledOverlay = withClassName(BaseDialog.Backdrop, cls.overlay);
-
 const StyledContent = withClassName(BaseDialog.Popup, cls.content);
-
-const StyledDrawerOverlay = withClassName(
-	BaseDrawer.Backdrop,
-	drawerCls.overlay,
-);
-
-const StyledDrawerPopup = withClassName(BaseDrawer.Popup, drawerCls.popup);
-
-export interface DialogContentProps extends DialogPopupProps {
+export interface DialogContentProps
+	extends Omit<DialogPopupProps, 'className' | 'style' | 'render'> {
 	width?: 'sm' | 'md' | 'lg';
-	disableSheet?: boolean;
 	disableDefaultClose?: boolean;
 	/** @deprecated */
 	outerClassName?: string;
 	ref?: Ref<HTMLDivElement>;
 	innerClassName?: string;
+	className?: string;
+	style?: React.CSSProperties;
+	// minimal state overlap between drawer and dialog primitives
+	render?: UseRenderRenderProp<{ open: boolean }>;
 }
-
-export const Content = function Content({
+const FunctionalContent = function Content({
 	ref,
 	children,
 	width,
 	outerClassName,
 	className,
-	disableSheet,
 	disableDefaultClose,
 	innerClassName,
 	...props
 }: DialogContentProps) {
-	const particles = useParticles();
-	const wasOpenRef = useRef(false);
-	const isSmall = useMediaQuery('(max-width: 600px)');
-	const useDrawer = isSmall && !disableSheet;
-
-	const openRef = useCallback(
-		(element: HTMLDivElement | null) => {
-			if (!wasOpenRef.current && element?.hasAttribute('data-open')) {
-				wasOpenRef.current = true;
-
-				if (!useDrawer) return;
-
-				setTimeout(() => {
-					particles?.addParticles(
-						particles.elementExplosion({
-							count: 20,
-							margin: 40,
-							borders: ['top'],
-							color: [
-								{
-									space: 'rgb',
-									values: [0, 0, 0],
-									opacity: 0.02,
-								},
-								{
-									space: 'rgb',
-									values: [0, 0, 0],
-									opacity: 0,
-								},
-							],
-							element,
-							startRadius: 15,
-							endRadius: 0,
-							lifespan: 1000,
-							force: 0.5,
-							drag: 0.01,
-							forceFuzz: 0.5,
-							angleFuzz: 0.1,
-						}),
-					);
-				}, 180);
-			} else if (!element?.hasAttribute('data-open')) {
-				wasOpenRef.current = false;
-			}
-		},
-		[particles, useDrawer],
-	);
-
-	const finalRef = useMergedRef(ref, openRef);
-
-	const { virtualKeyboardBehavior } = useConfig();
-
-	if (useDrawer) {
-		return (
-			<BaseDrawer.Portal>
-				<StyledDrawerOverlay />
-				<BaseDrawer.Viewport className={drawerCls.viewport}>
-					<StyledDrawerPopup
-						ref={finalRef}
-						{...(props as ComponentPropsWithoutRef<typeof StyledDrawerPopup>)}
-						className={clsx(outerClassName || className)}
-					>
-						{!disableDefaultClose && <DialogDefaultClose showOnMobile />}
-						<DialogSwipeHandle />
-						<ScrollArea
-							direction="vertical"
-							className={drawerCls.contentScrollArea}
-						>
-							<ScrollArea.Content
-								className={clsx(
-									drawerCls.contentScrollAreaContent,
-									innerClassName,
-								)}
-								style={{ minWidth: undefined }}
-							>
-								{children}
-							</ScrollArea.Content>
-						</ScrollArea>
-					</StyledDrawerPopup>
-				</BaseDrawer.Viewport>
-			</BaseDrawer.Portal>
-		);
-	}
-
 	return (
 		<BaseDialog.Portal>
 			<StyledOverlay />
 			<StyledContent
-				ref={finalRef}
+				ref={ref}
 				{...props}
-				data-keyboard-behavior={virtualKeyboardBehavior}
 				data-width={width}
 				className={clsx(outerClassName || className)}
 			>
-				{!disableDefaultClose && (
-					<DialogDefaultClose showOnMobile={disableSheet} />
-				)}
-				<ScrollArea direction="vertical" className={cls.contentScrollArea}>
+				{!disableDefaultClose && <DialogDefaultClose />}
+				<ScrollArea
+					direction="vertical"
+					className={drawerCls.contentScrollArea}
+				>
 					<ScrollArea.Content
-						className={clsx(cls.contentScrollAreaContent, innerClassName)}
-						style={{
-							minWidth: undefined,
-						}}
+						className={clsx(drawerCls.contentScrollAreaContent, innerClassName)}
+						style={{ minWidth: undefined }}
 					>
 						{children}
 					</ScrollArea.Content>
@@ -173,26 +78,7 @@ export const Content = function Content({
 		</BaseDialog.Portal>
 	);
 };
-
-export function DialogSwipeHandle({
-	ref,
-	className,
-	...props
-}: ComponentPropsWithoutRef<'div'> & {
-	ref?: React.Ref<HTMLDivElement>;
-}) {
-	return (
-		<div
-			ref={ref}
-			{...props}
-			className={clsx(drawerCls.swipeHandle, className)}
-		>
-			<div className={drawerCls.swipeHandleBar} />
-		</div>
-	);
-}
-
-export const DialogDefaultClose = function DialogDefaultClose({
+const DialogDefaultClose = function DialogDefaultClose({
 	ref,
 	className,
 	showOnMobile,
@@ -214,55 +100,15 @@ export const DialogDefaultClose = function DialogDefaultClose({
 		</DialogClose>
 	);
 };
-
-const StyledTitle = withClassName(BaseDialog.Title, cls.title);
-
+const StyledDialogTitle = withClassName(BaseDialog.Title, cls.title);
 const StyledDescription = withClassName(
 	BaseDialog.Description,
 	cls.description,
 );
-
-// Exports
-const DialogRoot = (props: DialogRootProps & { disableSheet?: boolean }) => {
-	const [innerOpen, innerOnOpenChange] = useState(props.defaultOpen || false);
-	const open = props.open ?? innerOpen;
-	const onOpenChange = useCallback<
-		Exclude<DialogRootProps['onOpenChange'], undefined>
-	>(
-		(open, eventDetails) => {
-			innerOnOpenChange(open);
-			props.onOpenChange?.(open, eventDetails);
-		},
-		[props.onOpenChange],
-	);
-
-	const isSmall = useMediaQuery('(max-width: 600px)');
-	const { disableSheet, ...rootProps } = props;
-	const useDrawer = isSmall && !disableSheet;
-
-	if (useDrawer) {
-		return (
-			<BaseDrawer.Root
-				{...(rootProps as DrawerRootProps)}
-				open={open}
-				onOpenChange={onOpenChange as DrawerRootProps['onOpenChange']}
-				swipeDirection="down"
-			/>
-		);
-	}
-
-	return (
-		<BaseDialog.Root {...rootProps} open={open} onOpenChange={onOpenChange} />
-	);
-};
-
-export const DialogTrigger = ({ render, ...props }: DialogTriggerProps) => (
+const StyledTrigger = ({ render, ...props }: DialogTriggerProps) => (
 	<BaseDialog.Trigger render={render || <Button />} {...props} />
 );
-export const DialogContent = Content;
-export const DialogTitle = StyledTitle;
-export const DialogDescription = StyledDescription;
-export const DialogClose = function DialogClose({
+const StyledClose = function DialogClose({
 	children,
 	render,
 	...props
@@ -278,12 +124,70 @@ export const DialogClose = function DialogClose({
 		</BaseDialog.Close>
 	);
 };
+const StyledActions = withClassName(Box, cls.actions);
 
-export type { DialogRootProps as DialogProps } from '@base-ui/react/dialog';
+// Variant Dialog/Drawer component wrappers
+const DialogContent = withContextVariant<DialogContentProps>(
+	Drawer.Content,
+	FunctionalContent,
+);
+const DialogTitle = withContextVariant(Drawer.Title, StyledDialogTitle);
+const DialogDescription = withContextVariant(
+	Drawer.Description,
+	StyledDescription,
+);
 
-export const DialogActions = withClassName(Box, cls.actions);
+export interface DialogProps extends Omit<DialogRootProps, 'children'> {
+	children: React.ReactNode;
+	disableSheet?: boolean;
+}
+const DialogRoot = ({
+	children,
+	defaultOpen,
+	disableSheet,
+	...rootProps
+}: DialogProps) => {
+	const [innerOpen, innerOnOpenChange] = useState(defaultOpen || false);
+	const open = rootProps.open ?? innerOpen;
+	const onOpenChange = useCallback<
+		Exclude<DialogRootProps['onOpenChange'], undefined>
+	>(
+		(open, eventDetails) => {
+			innerOnOpenChange(open);
+			rootProps.onOpenChange?.(open, eventDetails);
+		},
+		[rootProps.onOpenChange],
+	);
 
-export const DialogSelectTrigger = function DialogSelectTrigger({
+	const isSmall = useMediaQuery('(max-width: 600px)');
+	const useDrawer = isSmall && !disableSheet;
+
+	if (useDrawer) {
+		return (
+			<MobileDrawerContext.Provider value={true}>
+				<Drawer
+					{...rootProps}
+					open={open}
+					onOpenChange={onOpenChange as DrawerRootProps['onOpenChange']}
+				>
+					{children}
+				</Drawer>
+			</MobileDrawerContext.Provider>
+		);
+	}
+
+	return (
+		<BaseDialog.Root {...rootProps} open={open} onOpenChange={onOpenChange}>
+			{children}
+		</BaseDialog.Root>
+	);
+};
+const DialogTrigger = withContextVariant(Drawer.Trigger, StyledTrigger);
+const DialogClose = withContextVariant(Drawer.Close, StyledClose);
+const DialogActions = withContextVariant(Drawer.Actions, StyledActions);
+
+// "Select" stuff - deprecate soon?
+const DialogSelectTrigger = function DialogSelectTrigger({
 	children,
 	className,
 	...props
@@ -291,21 +195,18 @@ export const DialogSelectTrigger = function DialogSelectTrigger({
 	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	return (
-		<BaseDialog.Trigger
+		<DialogTrigger
 			className={clsx(selectTriggerClassName, className)}
 			{...props}
 		>
 			<span>{children}</span>
 			<Icon name="chevron" />
-		</BaseDialog.Trigger>
+		</DialogTrigger>
 	);
 };
-
-export const DialogSelectList = withClassName(BaseRadioGroup, menuCls.itemList);
-
-export const DialogSelectItemRoot = withClassName(BaseRadio.Root, menuCls.item);
-
-export const DialogSelectItem = function DialogSelectItem({
+const DialogSelectList = withClassName(BaseRadioGroup, menuCls.itemList);
+const DialogSelectItemRoot = withClassName(BaseRadio.Root, menuCls.item);
+const DialogSelectItem = function DialogSelectItem({
 	children,
 	...props
 }: ComponentPropsWithoutRef<typeof DialogSelectItemRoot> & {
@@ -323,9 +224,9 @@ export const DialogSelectItem = function DialogSelectItem({
 
 export const Dialog = Object.assign(DialogRoot, {
 	Trigger: DialogTrigger,
-	Content,
-	Title: StyledTitle,
-	Description: StyledDescription,
+	Content: DialogContent,
+	Title: DialogTitle,
+	Description: DialogDescription,
 	Close: DialogClose,
 	Actions: DialogActions,
 	SelectTrigger: DialogSelectTrigger,
