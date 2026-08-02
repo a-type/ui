@@ -14,6 +14,7 @@ export * from './combobox/Combobox.js';
 export * from './contextMenu/contextMenu.js';
 export * from './datePicker/index.js';
 export * from './dialog/index.js';
+export * from './drawer/index.js';
 export * from './divider/index.js';
 export * from './dropdownMenu/index.js';
 export * from './editableText/EditableText.js';
