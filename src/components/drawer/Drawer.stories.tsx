@@ -1,14 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../button/index.js';
 import { H1, P } from '../typography/index.js';
-import {
-	Drawer,
-	DrawerActions,
-	DrawerClose,
-	DrawerContent,
-	DrawerTitle,
-	DrawerTrigger,
-} from './Drawer.js';
+import { Drawer } from './Drawer.js';
 
 const meta: any = {
 	title: 'Components/Drawer',
@@ -43,15 +36,15 @@ export const Default: Story = {
 	args: {
 		children: (
 			<>
-				<DrawerTrigger render={<Button />}>Open</DrawerTrigger>
-				<DrawerContent>
-					<DrawerTitle>Hello world</DrawerTitle>
+				<Drawer.Trigger render={<Button />}>Open</Drawer.Trigger>
+				<Drawer.Content>
+					<Drawer.Title>Hello world</Drawer.Title>
 					<DummyContent />
-					<DrawerActions>
-						<DrawerClose />
+					<Drawer.Actions>
+						<Drawer.Close />
 						<Button emphasis="primary">Accept</Button>
-					</DrawerActions>
-				</DrawerContent>
+					</Drawer.Actions>
+				</Drawer.Content>
 			</>
 		),
 	},
@@ -61,14 +54,14 @@ export const NoDefaultClose: Story = {
 	args: {
 		children: (
 			<>
-				<DrawerTrigger render={<Button />}>Open</DrawerTrigger>
-				<DrawerContent disableDefaultClose>
-					<DrawerTitle>No default close</DrawerTitle>
+				<Drawer.Trigger render={<Button />}>Open</Drawer.Trigger>
+				<Drawer.Content disableDefaultClose>
+					<Drawer.Title>No default close</Drawer.Title>
 					<DummyContent />
-					<DrawerActions>
-						<DrawerClose />
-					</DrawerActions>
-				</DrawerContent>
+					<Drawer.Actions>
+						<Drawer.Close />
+					</Drawer.Actions>
+				</Drawer.Content>
 			</>
 		),
 	},
