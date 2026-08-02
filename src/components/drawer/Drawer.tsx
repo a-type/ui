@@ -35,18 +35,20 @@ export const DrawerContent = function DrawerContent({
 	return (
 		<BaseDrawer.Portal>
 			<DrawerOverlay />
-			<StyledPopup ref={ref} {...props} className={className}>
-				{!disableDefaultClose && <DrawerDefaultClose />}
-				<DrawerSwipeHandle />
-				<ScrollArea direction="vertical" className={cls.contentScrollArea}>
-					<ScrollArea.Content
-						className={clsx(cls.contentScrollAreaContent, innerClassName)}
-						style={{ minWidth: undefined }}
-					>
-						{children}
-					</ScrollArea.Content>
-				</ScrollArea>
-			</StyledPopup>
+			<BaseDrawer.Viewport className={cls.viewport}>
+				<StyledPopup ref={ref} {...props} className={className}>
+					{!disableDefaultClose && <DrawerDefaultClose />}
+					<DrawerSwipeHandle />
+					<ScrollArea direction="vertical" className={cls.contentScrollArea}>
+						<ScrollArea.Content
+							className={clsx(cls.contentScrollAreaContent, innerClassName)}
+							style={{ minWidth: undefined }}
+						>
+							{children}
+						</ScrollArea.Content>
+					</ScrollArea>
+				</StyledPopup>
+			</BaseDrawer.Viewport>
 		</BaseDrawer.Portal>
 	);
 };

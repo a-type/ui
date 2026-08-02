@@ -118,28 +118,30 @@ export const Content = function Content({
 		return (
 			<BaseDrawer.Portal>
 				<StyledDrawerOverlay />
-				<StyledDrawerPopup
-					ref={finalRef}
-					{...(props as ComponentPropsWithoutRef<typeof StyledDrawerPopup>)}
-					className={clsx(outerClassName || className)}
-				>
-					{!disableDefaultClose && <DialogDefaultClose showOnMobile />}
-					<DialogSwipeHandle />
-					<ScrollArea
-						direction="vertical"
-						className={drawerCls.contentScrollArea}
+				<BaseDrawer.Viewport className={drawerCls.viewport}>
+					<StyledDrawerPopup
+						ref={finalRef}
+						{...(props as ComponentPropsWithoutRef<typeof StyledDrawerPopup>)}
+						className={clsx(outerClassName || className)}
 					>
-						<ScrollArea.Content
-							className={clsx(
-								drawerCls.contentScrollAreaContent,
-								innerClassName,
-							)}
-							style={{ minWidth: undefined }}
+						{!disableDefaultClose && <DialogDefaultClose showOnMobile />}
+						<DialogSwipeHandle />
+						<ScrollArea
+							direction="vertical"
+							className={drawerCls.contentScrollArea}
 						>
-							{children}
-						</ScrollArea.Content>
-					</ScrollArea>
-				</StyledDrawerPopup>
+							<ScrollArea.Content
+								className={clsx(
+									drawerCls.contentScrollAreaContent,
+									innerClassName,
+								)}
+								style={{ minWidth: undefined }}
+							>
+								{children}
+							</ScrollArea.Content>
+						</ScrollArea>
+					</StyledDrawerPopup>
+				</BaseDrawer.Viewport>
 			</BaseDrawer.Portal>
 		);
 	}
