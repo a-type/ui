@@ -15,7 +15,7 @@ import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/ParticleContext.js';
 import cls from './Drawer.module.css';
 
-const DrawerOverlay = withClassName(BaseDrawer.Backdrop, cls.overlay);
+const DrawerBackdrop = withClassName(BaseDrawer.Backdrop, cls.overlay);
 
 const StyledPopup = withClassName(BaseDrawer.Popup, cls.popup);
 
@@ -82,7 +82,7 @@ const DrawerContent = function DrawerContent({
 	return (
 		<BaseDrawer.VirtualKeyboardProvider>
 			<BaseDrawer.Portal>
-				<DrawerOverlay />
+				<DrawerBackdrop data-role="backdrop" />
 				<BaseDrawer.Viewport className={cls.viewport}>
 					<StyledPopup ref={finalRef} {...props} className={className}>
 						{!disableDefaultClose && <DrawerDefaultClose />}
@@ -146,17 +146,11 @@ export interface DrawerProps extends Omit<DrawerRootProps, 'swipeDirection'> {}
 const defaultSnapPoints = [0.75, 1];
 const DrawerRoot = ({
 	children,
-	defaultSnapPoint = 0.5,
 	snapPoints = defaultSnapPoints,
 	...props
 }: DrawerProps) => {
 	return (
-		<BaseDrawer.Root
-			swipeDirection="down"
-			defaultSnapPoint={defaultSnapPoint}
-			snapPoints={snapPoints}
-			{...props}
-		>
+		<BaseDrawer.Root swipeDirection="down" snapPoints={snapPoints} {...props}>
 			{children}
 		</BaseDrawer.Root>
 	);

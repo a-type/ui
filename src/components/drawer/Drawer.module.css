@@ -1,16 +1,33 @@
 .overlay {
+	--bleed: 3rem;
+	--swipe-opacity: 0.2;
+
 	position: fixed;
+	min-height: 100dvh;
 	inset: 0;
-	@apply --mx-shadow;
+
 	@apply --mx-bg(var(--m-gray-ink));
-	@apply --mx-bg-faded(5%);
+	opacity: calc(
+		0.2 + var(--swipe-opacity) * (1 - var(--drawer-swipe-progress, 0))
+	);
+
 	border-top: var(--m-lw) solid var(--m-gray);
-	transition: all var(--m-dur) var(--m-ease);
+
+	transition: all var(--m-dur-long) var(--m-ease);
+
 	backdrop-filter: blur(2px);
 
 	&[data-starting-style],
 	&[data-ending-style] {
 		opacity: 0;
+	}
+
+	&[data-swiping] {
+		transition-duration: 0ms;
+	}
+
+	&[data-ending-style] {
+		transition-duration: calc(var(--drawer-swipe-strength) * var(--m-dur-long));
 	}
 }
 
@@ -58,6 +75,10 @@
 	max-height: calc(100% - var(--top-gap) + var(--bleed));
 	height: calc(100% - var(--top-gap) + var(--bleed));
 	margin-bottom: calc(-1 * var(--bleed));
+	padding-bottom: max(
+		0px,
+		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
+	);
 
 	display: flex;
 	flex-direction: column;
@@ -71,8 +92,8 @@
 	overflow: visible;
 
 	transition:
-		transform var(--m-dur) var(--m-ease),
-		box-shadow var(--m-dur) var(--m-ease);
+		transform var(--m-dur-long) var(--m-ease),
+		box-shadow var(--m-dur-long) var(--m-ease);
 
 	--shadow-dir: -1;
 	@apply --mx-shadow;
@@ -81,14 +102,11 @@
 
 	border-radius: var(--m-surface-rd) var(--m-surface-rd) 0 0;
 	border-bottom-width: 0;
-	padding-bottom: max(
-		0px,
-		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
-	);
 
 	transform: translateY(
 		calc(
-			var(--drawer-swipe-movement-y, 0px) + var(--drawer-snap-point-offset, 0px)
+			var(--drawer-swipe-movement-y) + var(--drawer-snap-point-offset) -
+				var(--bleed)
 		)
 	);
 	will-change: transform;
@@ -101,12 +119,23 @@
 
 	&[data-starting-style],
 	&[data-ending-style] {
-		transform: translateY(100%);
+		transform: translateY(calc(100% - var(--bleed)));
 		padding-bottom: 0;
+		box-shadow: 0 0 0 transparent;
 	}
 
 	&[data-ending-style] {
-		transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+		transition-duration: calc(var(--drawer-swipe-strength) * var(--m-dur-long));
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset-inline: 0;
+		top: 100%;
+		height: var(--bleed);
+		background-color: inherit;
+		pointer-events: none;
 	}
 }
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from '../button/index.js';
+import { Input } from '../input/Input.js';
 import { H1, P } from '../typography/index.js';
 import { Drawer } from './Drawer.js';
 
@@ -25,9 +26,49 @@ function DummyContent() {
 				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
 				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi.
 			</P>
-			<Button disabled color="primary">
-				Click me
-			</Button>
+			<Input placeholder="Type something..." />
+			<P>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
+				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi.
+			</P>
+			<Input placeholder="Type something..." />
+			<P>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
+				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi. Lorem
+				ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+				sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula accumsan,
+				sit amet ullamcorper nunc ultricies. Nulla facilisi.
+			</P>
+			<Input placeholder="Type something..." />
+			<P>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
+				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi. Lorem
+				ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+				sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula accumsan,
+				sit amet ullamcorper nunc ultricies. Nulla facilisi.
+			</P>
+			<Input placeholder="Type something..." />
+			<P>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
+				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi. Lorem
+				ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+				sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula accumsan,
+				sit amet ullamcorper nunc ultricies. Nulla facilisi.
+			</P>
+			<Input placeholder="Type something..." />
+			<P>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at
+				porttitor sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula
+				accumsan, sit amet ullamcorper nunc ultricies. Nulla facilisi. Lorem
+				ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor
+				sem. Aliquam erat volutpat. Donec fermentum tortor eget ligula accumsan,
+				sit amet ullamcorper nunc ultricies. Nulla facilisi.
+			</P>
+			<Input placeholder="Type something..." />
 		</div>
 	);
 }
