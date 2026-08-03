@@ -1,5 +1,6 @@
-import { Box, BoxProps, Heading, P } from '@a-type/ui';
 import { useLocalStorage } from '../../hooks.js';
+import { Box, type BoxProps } from '../box/Box.js';
+import { Heading, P } from '../typography/typography.js';
 
 export function GlobalErrorFallback({ children, ...rest }: BoxProps) {
 	const hadRecentError = useHadRecentError();
