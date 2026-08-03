@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{n as t,t as n}from"./clsx-BB58Nicv.js";import{t as r}from"./jsx-runtime-BdxMnOeJ.js";function i(e,...t){return r=>{let{className:i,...o}=r;return(0,a.jsx)(e,{...o,className:n(t,i)})}}var a;function o(){return(o=e((()=>{t(),a=r()})))()}export{i as n,o as t};

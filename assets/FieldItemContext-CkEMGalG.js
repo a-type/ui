@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./rolldown-runtime-C0FnF6B9.js";import{t as n}from"./react-DBQkIwQ0.js";function r(){return i.useContext(a)}var i,a;function o(){return(o=e((()=>{i=t(n(),1),a=i.createContext({disabled:!1})})))()}export{r as n,o as t};

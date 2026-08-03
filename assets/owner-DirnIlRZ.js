@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{u as t}from"./floating-ui.utils.dom-CkLP5C3m.js";function n(e){return e?.ownerDocument||document}function r(){return(r=e((()=>{t()})))()}export{n,r as t};

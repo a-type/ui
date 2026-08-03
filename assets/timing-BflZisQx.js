@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";function t(e,t){let n;return((...r)=>{n!==void 0&&clearTimeout(n),n=setTimeout(()=>{n=void 0,e(...r)},t)})}function n(){return(n=e((()=>{})))()}export{n,t};
