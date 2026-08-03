@@ -1,0 +1,7 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./jsx-runtime-BdxMnOeJ.js";import{n,t as r}from"./Icon-CPvdzLAz.js";import{n as i,t as a}from"./Box-CFmvJLRd.js";import{i as o,n as s,r as c,t as l}from"./ActionButton-BCKMJtca.js";var u,d,f,p,m;function h(){return(h=e((()=>{i(),n(),o(),s(),u=t(),d={title:`Components/ActionBar`,component:c,argTypes:{},args:{children:[(0,u.jsx)(l,{children:(0,u.jsx)(r,{name:`plus`})},`1`),(0,u.jsxs)(l,{children:[(0,u.jsx)(r,{name:`pencil`}),`Edit`]},`2`),(0,u.jsxs)(l,{color:`accent`,emphasis:`primary`,children:[(0,u.jsx)(r,{name:`globe`}),`Publish`]},`3`),(0,u.jsxs)(l,{children:[(0,u.jsx)(r,{name:`placeholder`}),`Overflow 1`]},`3`),(0,u.jsxs)(l,{children:[(0,u.jsx)(r,{name:`placeholder`}),`Overflow 2`]},`4`),(0,u.jsxs)(l,{toggled:!0,children:[(0,u.jsx)(r,{name:`placeholder`}),`Overflow 3`]},`5`)]},parameters:{controls:{expanded:!0}}},f={},p={render:e=>(0,u.jsx)(a,{color:`accent`,surface:`primary`,overflow:`hidden`,children:(0,u.jsx)(c,{...e})})},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{}`,...f.parameters?.docs?.source}}},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
+  render: args => {
+    return <Box color="accent" surface="primary" overflow="hidden">
+                <ActionBar {...args} />
+            </Box>;
+  }
+}`,...p.parameters?.docs?.source}}},m=[`Default`,`OnBackground`]})))()}h();export{f as Default,p as OnBackground,m as __namedExportsOrder,d as default};
