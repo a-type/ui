@@ -26,9 +26,7 @@ jobs:
           version: 11.3.0
 
       - name: Build Storybook
-        run: pnpm build-storybook
-        env:
-          STORYBOOK_BASE_PATH: /${{ github.event.repository.name }}/
+        run: pnpm build && pnpm build-storybook
 
       - uses: actions/checkout@v4
         with:
