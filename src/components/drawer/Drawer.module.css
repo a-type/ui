@@ -15,7 +15,7 @@
 }
 
 .viewport {
-	--bleed: 100px;
+	--bleed: 3rem;
 
 	position: fixed;
 	inset: 0;
@@ -37,19 +37,34 @@
 	&[data-closed]::after {
 		opacity: 0;
 	}
+
+	/* While swiping, the popup's own bleed covers the bottom edge, so hide the
+     fixed fill — otherwise it paints white over the backdrop once the popup is
+     dragged far enough down. */
+	&:has([data-swiping])::after {
+		opacity: 0;
+	}
 }
 
 .popup {
+	--bleed: 3rem;
+	--top-gap: 1rem;
+
 	box-sizing: border-box;
 	position: relative;
 	z-index: 1;
 	max-width: unset;
 	width: 100%;
-	max-height: 85svh;
+	max-height: calc(100% - var(--top-gap) + var(--bleed));
+	height: calc(100% - var(--top-gap) + var(--bleed));
+	margin-bottom: calc(-1 * var(--bleed));
 
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
+
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 
 	touch-action: none;
 
@@ -57,15 +72,12 @@
 
 	transition:
 		transform var(--m-dur) var(--m-ease),
-		opacity var(--m-dur) var(--m-ease);
+		box-shadow var(--m-dur) var(--m-ease);
 
 	--shadow-dir: -1;
 	@apply --mx-shadow;
 	--mx-shadow-value: 0 calc(var(--shadow-dir, 1) * var(--m-shadow-lg-y))
 		var(--m-shadow-lg-blur) var(--m-shadow-lg-spread) var(--m-shadow-lg-color);
-
-	@apply --mx-bg(var(--m-surface-ambient-bg));
-	@apply --mx-borderColor(var(--m-gray-heavy));
 
 	border-radius: var(--m-surface-rd) var(--m-surface-rd) 0 0;
 	border-bottom-width: 0;
@@ -74,7 +86,6 @@
 		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
 	);
 
-	/* Use drawer's built-in swipe movement for animation */
 	transform: translateY(
 		calc(
 			var(--drawer-swipe-movement-y, 0px) + var(--drawer-snap-point-offset, 0px)
@@ -85,6 +96,7 @@
 	/* Disable transitions while swiping so movement is immediate */
 	&[data-swiping] {
 		transition: none;
+		user-select: none;
 	}
 
 	&[data-starting-style],
@@ -92,17 +104,18 @@
 		transform: translateY(100%);
 		padding-bottom: 0;
 	}
+
 	&[data-ending-style] {
 		transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
 	}
 }
 
 .contentScrollArea {
-	width: 100%;
-	height: 100%;
 	flex: 1 1 auto;
 	min-height: 0;
 	overscroll-behavior: contain;
+	touch-action: auto;
+	overflow-y: auto;
 }
 
 .contentScrollAreaContent {
@@ -110,7 +123,6 @@
 	flex-direction: column;
 	gap: var(--m-sp-md);
 	padding: var(--m-surface-p);
-	overscroll-behavior: contain;
 }
 
 .swipeHandle {

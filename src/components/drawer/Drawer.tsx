@@ -13,7 +13,6 @@ import { Box } from '../box/Box.js';
 import { Button } from '../button/index.js';
 import { Icon } from '../icon/Icon.js';
 import { useParticles } from '../particles/ParticleContext.js';
-import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import cls from './Drawer.module.css';
 
 const DrawerOverlay = withClassName(BaseDrawer.Backdrop, cls.overlay);
@@ -81,23 +80,24 @@ const DrawerContent = function DrawerContent({
 	const finalRef = useMergedRef(ref, openRef);
 
 	return (
-		<BaseDrawer.Portal>
-			<DrawerOverlay />
-			<BaseDrawer.Viewport className={cls.viewport}>
-				<StyledPopup ref={finalRef} {...props} className={className}>
-					{!disableDefaultClose && <DrawerDefaultClose />}
-					<DrawerSwipeHandle />
-					<ScrollArea direction="vertical" className={cls.contentScrollArea}>
-						<ScrollArea.Content
-							className={clsx(cls.contentScrollAreaContent, innerClassName)}
-							style={{ minWidth: undefined }}
-						>
-							{children}
-						</ScrollArea.Content>
-					</ScrollArea>
-				</StyledPopup>
-			</BaseDrawer.Viewport>
-		</BaseDrawer.Portal>
+		<BaseDrawer.VirtualKeyboardProvider>
+			<BaseDrawer.Portal>
+				<DrawerOverlay />
+				<BaseDrawer.Viewport className={cls.viewport}>
+					<StyledPopup ref={finalRef} {...props} className={className}>
+						{!disableDefaultClose && <DrawerDefaultClose />}
+						<DrawerSwipeHandle />
+						<div className={cls.contentScrollArea}>
+							<div
+								className={clsx(cls.contentScrollAreaContent, innerClassName)}
+							>
+								{children}
+							</div>
+						</div>
+					</StyledPopup>
+				</BaseDrawer.Viewport>
+			</BaseDrawer.Portal>
+		</BaseDrawer.VirtualKeyboardProvider>
 	);
 };
 
@@ -142,10 +142,7 @@ const DrawerDescription = withClassName(
 );
 
 // TODO: support swipeDirection
-export interface DrawerProps
-	extends Omit<DrawerRootProps, 'children' | 'swipeDirection'> {
-	children: React.ReactNode;
-}
+export interface DrawerProps extends Omit<DrawerRootProps, 'swipeDirection'> {}
 const defaultSnapPoints = [0.75, 1];
 const DrawerRoot = ({
 	children,
@@ -160,9 +157,7 @@ const DrawerRoot = ({
 			snapPoints={snapPoints}
 			{...props}
 		>
-			<BaseDrawer.VirtualKeyboardProvider>
-				{children}
-			</BaseDrawer.VirtualKeyboardProvider>
+			{children}
 		</BaseDrawer.Root>
 	);
 };
