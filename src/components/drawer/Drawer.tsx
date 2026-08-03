@@ -87,12 +87,8 @@ const DrawerContent = function DrawerContent({
 					<StyledPopup ref={finalRef} {...props} className={className}>
 						{!disableDefaultClose && <DrawerDefaultClose />}
 						<DrawerSwipeHandle />
-						<div className={cls.contentScrollArea}>
-							<div
-								className={clsx(cls.contentScrollAreaContent, innerClassName)}
-							>
-								{children}
-							</div>
+						<div className={clsx(cls.contentScrollArea, innerClassName)}>
+							{children}
 						</div>
 					</StyledPopup>
 				</BaseDrawer.Viewport>

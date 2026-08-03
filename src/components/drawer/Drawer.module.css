@@ -145,13 +145,10 @@
 	overscroll-behavior: contain;
 	touch-action: auto;
 	overflow-y: auto;
-}
-
-.contentScrollAreaContent {
+	padding: var(--m-surface-p);
 	display: flex;
 	flex-direction: column;
 	gap: var(--m-sp-md);
-	padding: var(--m-surface-p);
 }
 
 .swipeHandle {
@@ -201,7 +198,7 @@
 
 .actions {
 	position: sticky;
-	bottom: var(--m-sp-md);
+	bottom: calc(-1 * var(--m-sp-lg));
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
