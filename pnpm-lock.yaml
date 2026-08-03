@@ -21,8 +21,8 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1
       calendar-blocks:
-        specifier: ^0.4.0
-        version: 0.4.0(react@19.0.0)
+        specifier: ^0.5.3
+        version: 0.5.3(react@19.0.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1597,8 +1597,8 @@ packages:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
 
-  calendar-blocks@0.4.0:
-    resolution: {integrity: sha512-W5OIg9EhTmBD9pOb/ZpmbKeMJr8zGcHB7GFIYlcHGNc8W9WDncU4CDG9ZA2RS0Ykxegboo9WES4+AkLR3rV46Q==}
+  calendar-blocks@0.5.3:
+    resolution: {integrity: sha512-CrJoDSIpXkAGdUynugL7Li4WNvV1SECqqWf4KGtPpWJpNFPceOn83lzYFP7D1aO704d3y9wiJBk+y00a9YIWHw==}
     peerDependencies:
       react: '*'
 
@@ -5023,7 +5023,7 @@ snapshots:
 
   cac@6.7.14: {}
 
-  calendar-blocks@0.4.0(react@19.0.0):
+  calendar-blocks@0.5.3(react@19.0.0):
     dependencies:
       react: 19.0.0
 

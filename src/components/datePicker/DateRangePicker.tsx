@@ -71,7 +71,24 @@ function DateRangePickerRoot({
 	}));
 
 	const onDisplayChange = useCallback(
-		({ month: newMonth, year: newYear }: { month: number; year: number }) => {
+		(
+			{ month: newMonth, year: newYear }: { month: number; year: number },
+			source: 'keyboard' | 'programmatic',
+		) => {
+			/**
+			 * Important UX consideration:
+			 *
+			 * since we are displaying 2 months at once, we don't
+			 * always want to change our view if the user's cursor
+			 * date moves from one month to another. Specifically,
+			 * if they move from the first visible month to the
+			 * second visible month, we don't need to change the view,
+			 * since they are still within the visible range.
+			 * So, we write logic to ignore that case!
+			 */
+			if (source === 'keyboard' && newMonth === month + 1 && newYear === year) {
+				return;
+			}
 			setDisplay({
 				month: newMonth,
 				year: newYear,

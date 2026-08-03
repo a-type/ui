@@ -5,6 +5,7 @@ onlyBuiltDependencies:
 minimumReleaseAgeExclude:
   - '@arbor-css/*'
   - '@a-type/*'
+  - calendar-blocks
 
 allowBuilds:
   '@parcel/watcher': true
