@@ -107,3 +107,39 @@ export const NoDefaultClose: Story = {
 		),
 	},
 };
+
+export const Small: Story = {
+	args: {
+		children: (
+			<>
+				<Drawer.Trigger render={<Button />}>Open</Drawer.Trigger>
+				<Drawer.Content>
+					<Drawer.Title>Small drawer</Drawer.Title>
+					<Drawer.Actions>
+						<Drawer.Close />
+						<Button emphasis="primary">Accept</Button>
+					</Drawer.Actions>
+				</Drawer.Content>
+			</>
+		),
+	},
+};
+
+export const SnapPoints: Story = {
+	args: {
+		snapPoints: [0.5, 1],
+		children: (
+			<>
+				<Drawer.Trigger render={<Button />}>Open</Drawer.Trigger>
+				<Drawer.Content>
+					<Drawer.Title>Snap points</Drawer.Title>
+					<DummyContent />
+					<Drawer.Actions>
+						<Drawer.Close />
+						<Button emphasis="primary">Accept</Button>
+					</Drawer.Actions>
+				</Drawer.Content>
+			</>
+		),
+	},
+};

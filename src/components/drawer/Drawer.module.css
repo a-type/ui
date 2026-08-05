@@ -72,12 +72,17 @@
 	z-index: 1;
 	max-width: unset;
 	width: 100%;
-	max-height: calc(100% - var(--top-gap) + var(--bleed));
-	height: calc(100% - var(--top-gap) + var(--bleed));
-	margin-bottom: calc(-1 * var(--bleed));
+	max-height: calc(100% - var(--top-gap));
+	min-height: 0;
+	/*
+		This padding is what defines the actual height of the drawer.
+	*/
 	padding-bottom: max(
 		0px,
-		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
+		calc(
+			var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px) -
+				var(--top-gap)
+		)
 	);
 
 	display: flex;
@@ -105,22 +110,17 @@
 	border-bottom-width: 0;
 
 	transform: translateY(
-		calc(
-			var(--drawer-swipe-movement-y) + var(--drawer-snap-point-offset) -
-				var(--bleed)
-		)
+		calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y))
 	);
 	will-change: transform;
 
-	/* Disable transitions while swiping so movement is immediate */
 	&[data-swiping] {
-		transition: none;
 		user-select: none;
 	}
 
 	&[data-starting-style],
 	&[data-ending-style] {
-		transform: translateY(calc(100% - var(--bleed)));
+		transform: translateY(calc(100% + 2px));
 		padding-bottom: 0;
 		box-shadow: 0 0 0 transparent;
 	}
@@ -199,7 +199,7 @@
 
 .actions {
 	position: sticky;
-	bottom: 0;
+	bottom: calc(-1 * var(--m-sp));
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
@@ -207,11 +207,9 @@
 	align-items: center;
 	justify-content: end;
 	align-self: end;
-	@apply --mx-shadow;
-	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
-		var(--m-shadow-md-spread) var(--m-gray-paper);
-	@apply --mx-bg(var(--m-surface-ambient-bg));
-	@apply --mx-bg-faded(50%);
+	box-shadow: 0 0 24px 10px var(--m-gray-paper);
+	@apply --mx-bg(var(--m-gray-paper));
+	@apply --mx-bg-faded(80%);
 	margin-block-start: var(--m-sp-md);
 	gap: var(--m-sp-sm);
 	border-radius: var(--m-surface-rd);
