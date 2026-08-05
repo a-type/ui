@@ -138,7 +138,7 @@ const DialogDescription = withContextVariant(
 );
 
 export interface DialogProps extends Omit<DialogRootProps, 'children'> {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	disableSheet?: boolean;
 }
 const DialogRoot = ({
