@@ -76,12 +76,20 @@
 	min-height: 0;
 	/*
 		This padding is what defines the actual height of the drawer.
+
+		Movement is added to expand the bottom padding while swiping upward using
+		snap points. Movement contribution is capped at 0 (only negative is included)
+		to make sure a downward swipe to close a drawer is respected (downward swipe
+		means positive movement value; if we added this to padding in real time, we
+		would be increasing the height of the drawer exactly commensurate to the
+		attempted downward movement, making it "stuck" - if this behavior resurfaces,
+		this is the line to inspect...
 	*/
 	padding-bottom: max(
 		0px,
 		calc(
-			var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px) -
-				var(--top-gap)
+			var(--drawer-snap-point-offset, 0px) +
+				min(0px, var(--drawer-swipe-movement-y)) - var(--top-gap)
 		)
 	);
 
