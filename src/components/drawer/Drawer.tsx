@@ -139,14 +139,9 @@ const DrawerDescription = withClassName(
 
 // TODO: support swipeDirection
 export interface DrawerProps extends Omit<DrawerRootProps, 'swipeDirection'> {}
-const defaultSnapPoints = [0.75, 1];
-const DrawerRoot = ({
-	children,
-	snapPoints = defaultSnapPoints,
-	...props
-}: DrawerProps) => {
+const DrawerRoot = ({ children, ...props }: DrawerProps) => {
 	return (
-		<BaseDrawer.Root swipeDirection="down" snapPoints={snapPoints} {...props}>
+		<BaseDrawer.Root swipeDirection="down" {...props}>
 			{children}
 		</BaseDrawer.Root>
 	);
