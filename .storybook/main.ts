@@ -11,6 +11,9 @@ const config: StorybookConfig = {
 	},
 
 	staticDirs: ['../storybook-public'],
+	core: {
+		allowedHosts: ['localhost', 'blacktop-wsl.sardine-census.ts.net'],
+	},
 	async viteFinal(baseConfig) {
 		const logger = createLogger();
 		const baseWarn = logger.warn;

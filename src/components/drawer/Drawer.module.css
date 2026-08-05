@@ -93,7 +93,8 @@
 
 	transition:
 		transform var(--m-dur-long) var(--m-ease),
-		box-shadow var(--m-dur-long) var(--m-ease);
+		box-shadow var(--m-dur-long) var(--m-ease),
+		padding-bottom var(--m-dur-long) var(--m-ease);
 
 	--shadow-dir: -1;
 	@apply --mx-shadow;
@@ -198,7 +199,7 @@
 
 .actions {
 	position: sticky;
-	bottom: calc(-1 * var(--m-sp-lg));
+	bottom: 0;
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
@@ -206,7 +207,6 @@
 	align-items: center;
 	justify-content: end;
 	align-self: end;
-	padding-bottom: --fn-literal(1px);
 	@apply --mx-shadow;
 	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
 		var(--m-shadow-md-spread) var(--m-gray-paper);
@@ -216,4 +216,12 @@
 	gap: var(--m-sp-sm);
 	border-radius: var(--m-surface-rd);
 	transition: bottom var(--m-dur) var(--m-ease);
+
+	/*
+		Hide the actions when the keyboard is open.
+		Done by moving them downward behind it.
+		This both fixes a bug with the positioning, and
+		gives the user more room to see.
+	*/
+	transform: translateY(calc(var(--drawer-keyboard-inset, 0px)));
 }
