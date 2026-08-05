@@ -223,5 +223,13 @@
 		This both fixes a bug with the positioning, and
 		gives the user more room to see.
 	*/
-	transform: translateY(calc(var(--drawer-keyboard-inset, 0px)));
+	transform: translateY(calc(2 * var(--drawer-keyboard-inset, 0px)));
+	/*
+		Same but with modern CSS if()
+	*/
+	@supports (
+		display: if(style(--drawer-keyboard-inset > 0px): none; else: flex;)
+	) {
+		display: if(style(--drawer-keyboard-inset > 0px): none; else: flex;);
+	}
 }
