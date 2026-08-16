@@ -2,7 +2,11 @@
 	user-select: none;
 	appearance: none;
 	cursor: pointer;
-	transition: all var(--m-dur) var(--m-ease);
+	transition:
+		background-color,
+		color,
+		border-color,
+		opacity var(--m-dur) var(--m-ease);
 
 	display: flex;
 	flex-direction: row;
