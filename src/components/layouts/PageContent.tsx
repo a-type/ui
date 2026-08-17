@@ -9,6 +9,8 @@ export function PageContent({ children, className, ref, ...rest }: BoxProps) {
 			render={<main />}
 			className={classNames(cls.root, className)}
 			ref={ref}
+			data-page-content
+			id="page--main-content"
 			{...rest}
 		>
 			{children}
