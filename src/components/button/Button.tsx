@@ -3,7 +3,6 @@ import {
 	ButtonProps as BaseButtonProps,
 } from '@base-ui/react/button';
 import { clsx } from 'clsx';
-import { AnimatePresence, motion } from 'motion/react';
 import { ButtonHTMLAttributes, memo, Ref } from 'react';
 import {
 	IconWrapper,
@@ -110,20 +109,15 @@ export function ButtonRoot({
 	return (
 		<IconLoadingProvider value={isLoading}>
 			<BaseButton {...buttonProps}>
-				<AnimatePresence>
-					{isLoading && !disableDefaultLoadingIndicator && (
-						<motion.div
-							key="spinner"
-							initial={{ width: 0, marginLeft: '-0.5rem' }}
-							animate={{ width: 'auto', marginLeft: 0 }}
-							exit={{ width: 0, marginLeft: '-0.5rem' }}
-							className={cls.defaultSpinner}
-							data-default-loader
-						>
-							<Spinner size={15} className="inline-block h-1em w-1em" />
-						</motion.div>
-					)}
-				</AnimatePresence>
+				<Spinner
+					size={null}
+					className={cls.defaultSpinner}
+					data-default-loader
+					data-active={
+						(isLoading && !disableDefaultLoadingIndicator) || undefined
+					}
+					aria-hidden={!(isLoading && !disableDefaultLoadingIndicator)}
+				/>
 				{toggled !== undefined &&
 					(toggleMode === 'indicator' ||
 						toggleMode === 'color-and-indicator') && (

@@ -147,8 +147,19 @@
 	display: flex;
 	flex-shrink: 0;
 	overflow: clip;
+	transition:
+		width var(--m-dur) var(--m-ease),
+		margin-left var(--m-dur) var(--m-ease);
 
 	[data-has-icon='true'] & {
 		display: none;
+	}
+
+	min-width: 0;
+	width: 0px;
+	margin-left: calc(-1 * var(--m-sp-sm));
+	&[data-active] {
+		width: --fn-literal(1em);
+		margin-left: --fn-literal(-0.5em);
 	}
 }
