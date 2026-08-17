@@ -1,7 +1,7 @@
 import classNames from 'clsx';
-import { ReactNode, useEffect, useRef } from 'react';
-import { useStableCallback } from '../../hooks.js';
+import { ReactNode } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import { useOnVisible } from '../../hooks/useOnVisible.js';
 
 export interface InfiniteLoadTriggerProps {
 	className?: string;
@@ -17,20 +17,7 @@ export const InfiniteLoadTrigger = function InfiniteLoadTrigger({
 }: InfiniteLoadTriggerProps & {
 	ref?: React.Ref<HTMLDivElement>;
 }) {
-	const innerRef = useRef<HTMLDivElement>(null);
-
-	const stableOnVisible = useStableCallback(onVisible);
-	useEffect(() => {
-		const observer = new IntersectionObserver((entries) => {
-			if (entries[0].isIntersecting) {
-				stableOnVisible();
-			}
-		});
-		observer.observe(innerRef.current!);
-		return () => {
-			observer.disconnect();
-		};
-	}, [stableOnVisible]);
+	const innerRef = useOnVisible(onVisible);
 
 	return (
 		<div
