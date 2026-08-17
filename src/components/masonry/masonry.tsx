@@ -259,6 +259,7 @@ const initialStyle: CSSProperties = {
 	position: 'relative',
 	overflow: 'hidden',
 	visibility: 'hidden',
+	flexShrink: 0,
 };
 
 export function Masonry({

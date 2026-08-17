@@ -3,6 +3,7 @@
 	position: sticky;
 	bottom: 0;
 	z-index: var(--z-nav);
+	anchor-name: --page-nav;
 
 	padding-block-end: calc(0.25rem + env(safe-area-inset-bottom, 0px));
 

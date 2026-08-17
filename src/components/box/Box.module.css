@@ -235,10 +235,9 @@
 		}
 
 		@apply --mx-shadow;
-		--mx-shadow-value: var(--shadow-inset) var(--shadow-x, 0)
+		--mx-shadow-value: var(--shadow-x, 0)
 			calc(var(--shadow-y, 0) * var(--shadow-invert, 1)) var(--shadow-blur, 0)
 			var(--shadow-spread, 0) var(--shadow-color, transparent);
-		--shadow-inset: ;
 		&[data-elevated='sm'] {
 			--shadow-x: var(--m-shadow-sm-x);
 			--shadow-y: var(--m-shadow-sm-y);
@@ -272,7 +271,9 @@
 			--shadow-invert: -1;
 		}
 		&[data-shadow-inset='true'] {
-			--shadow-inset: inset;
+			--mx-shadow-value: inset var(--shadow-x, 0)
+				calc(var(--shadow-y, 0) * var(--shadow-invert, 1)) var(--shadow-blur, 0)
+				var(--shadow-spread, 0) var(--shadow-color, transparent);
 		}
 
 		&[data-container='true'] {

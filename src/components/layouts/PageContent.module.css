@@ -4,15 +4,14 @@
 	align-items: stretch;
 	justify-content: start;
 	width: 100%;
-	anchor-name: --page-content;
 	flex: 1;
+	min-height: 0;
+
+	overflow-x: clip;
+	overflow-y: auto;
 
 	gap: var(--m-sp-lg);
-
 	padding: var(--m-sp-lg);
-	@media (min-width: 768px) {
-		padding: var(--m-sp-lg);
-	}
 
 	margin-inline: auto;
 	max-width: 100%;
@@ -20,6 +19,11 @@
 
 	container-type: inline-size;
 	container-name: --page-content;
-
 	grid-area: content;
+	anchor-name: --page-content;
+
+	@media (min-width: 768px) {
+		padding: var(--m-sp-lg);
+		overflow: clip;
+	}
 }

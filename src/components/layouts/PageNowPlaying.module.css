@@ -11,7 +11,10 @@
 	left: anchor(left);
 	right: anchor(right);
 	top: auto;
-	bottom: --fn-literal(var(--nav-height, env(safe-area-inset-bottom, 0px)));
+	--bottom: --fn-literal(
+		calc(anchor(bottom) + env(safe-area-inset-bottom, 0px))
+	);
+	bottom: var(--bottom);
 
 	@media (min-width: 768px) {
 		bottom: var(--m-sp-md);
@@ -29,7 +32,7 @@
 			&[data-virtual-keyboard-behavior='overlay'] {
 				bottom: max(
 					var(--mock-virtual-keyboard-height, env(keyboard-inset-height, 0px)),
-					var(--nav-height, env(safe-area-inset-bottom, 0px))
+					var(--bottom)
 				);
 			}
 			&[data-virtual-keyboard-behavior='displace'] {
@@ -38,7 +41,7 @@
 						--mock-virtual-keyboard-height,
 						var(--viewport-bottom-offset, 0px)
 					),
-					var(--nav-height, env(safe-area-inset-bottom, 0px))
+					var(--bottom)
 				);
 			}
 		}

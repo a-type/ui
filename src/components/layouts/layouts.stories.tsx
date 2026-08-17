@@ -55,11 +55,15 @@ export const Default: Story = {
 							))}
 						</Card.Grid>
 					)}
-					<PageNowPlaying>
-						<Box surface="ambient" elevated="lg" full p>
-							Now playing
-						</Box>
-					</PageNowPlaying>
+					<Box
+						render={<PageNowPlaying />}
+						surface="ambient"
+						elevated="lg"
+						p
+						border
+					>
+						Now playing
+					</Box>
 				</PageContent>
 				<PageNav>
 					<NavBarRoot>

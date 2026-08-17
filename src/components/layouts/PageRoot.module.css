@@ -3,12 +3,13 @@
 	min-height: 100dvh;
 	flex-shrink: 1;
 	flex-grow: 1;
-	flex-basis: auto;
-	height: max-content;
+	flex-basis: 100dvh;
 	justify-content: end;
 
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-areas: 'content' 'nav';
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr auto;
 
 	@apply --mx-bg(var(--m-tint-paper));
 
