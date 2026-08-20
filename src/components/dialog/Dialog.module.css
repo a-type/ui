@@ -96,6 +96,7 @@
 .actions {
 	position: sticky;
 	bottom: var(--m-sp-md);
+	margin-block-start: var(--m-sp-lg);
 	z-index: 100;
 	display: flex;
 	flex-direction: row;
@@ -103,14 +104,13 @@
 	align-items: center;
 	justify-content: end;
 	align-self: end;
-	padding-bottom: 1px;
+	padding-bottom: --fn-literal(1px);
 	@apply --mx-shadow;
 	/* override blur in case user turned it off */
 	--mx-shadow-value: 0 calc(-1 * var(--m-shadow-md-y)) 16px
 		var(--m-shadow-md-spread) var(--m-gray-paper);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	@apply --mx-bg-faded(50%);
-	margin-block-start: var(--m-sp-md);
 	gap: var(--m-sp-sm);
 	border-radius: var(--m-surface-rd);
 }

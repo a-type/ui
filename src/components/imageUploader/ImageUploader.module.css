@@ -29,8 +29,8 @@
 	top: var(--m-sp-sm);
 	right: var(--m-sp-sm);
 	z-index: 10;
-	height: 32px;
-	width: 32px;
+	height: --fn-literal(32px);
+	width: --fn-literal(32px);
 	cursor: pointer;
 	padding: var(--m-sp-sm);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
@@ -49,8 +49,6 @@
 }
 
 .emptyControls {
-	position: absolute;
-	inset: 0;
 	min-height: 120px;
 	display: flex;
 	flex-direction: column;
