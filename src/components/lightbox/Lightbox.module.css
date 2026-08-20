@@ -1,23 +1,14 @@
 .trigger {
 	cursor: pointer;
-
-	&:focus {
-		outline: none;
-	}
-
-	&:focus-visible {
-		@apply --mx-shadow;
-		--mx-ring-value: --fn-focus-ring();
-		border-radius: var(--m-action-rd);
-	}
+	@apply --mx-focus;
 }
 
 .title {
 	position: absolute;
-	width: 1px;
-	height: 1px;
+	width: --fn-literal(1px);
+	height: --fn-literal(1px);
 	padding: 0;
-	margin: -1px;
+	margin: --fn-literal(-1px);
 	overflow: hidden;
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
@@ -40,7 +31,8 @@
 	@apply --mx-bg(var(--m-gray-ink));
 	@apply --mx-bg-faded(50%);
 
-	&[data-state='closed'] {
+	&[data-starting-style],
+	&[data-ending-style] {
 		opacity: 0;
 	}
 }
@@ -70,7 +62,8 @@
 		opacity 0.2s ease,
 		transform 0.2s ease;
 
-	&[data-state='closed'] {
+	&[data-starting-style],
+	&[data-ending-style] {
 		opacity: 0;
 		transform: translate(-50%, -45%) scale(0.95);
 	}

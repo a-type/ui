@@ -53,7 +53,7 @@ function LightboxDefault({
 }) {
 	return (
 		<Dialog.Root>
-			<Dialog.Trigger render={children}></Dialog.Trigger>
+			<Dialog.Trigger nativeButton={false} render={children}></Dialog.Trigger>
 			<Dialog.Portal>
 				<LightboxOverlay />
 				<LightboxContent>{children}</LightboxContent>
