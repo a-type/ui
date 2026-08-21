@@ -70,7 +70,6 @@
 		"date-fns": "^4.1.0",
 		"formik": "^2.4.6",
 		"frimousse": "^0.2.0",
-		"motion": "^12.23.6",
 		"pluralize": "^8.0.0",
 		"valtio": "^2.1.4"
 	},

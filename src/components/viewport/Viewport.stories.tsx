@@ -10,6 +10,10 @@ const meta = {
 	parameters: {
 		controls: { expanded: true },
 	},
+	args: {
+		onCenterChange: undefined,
+		onZoomChange: undefined,
+	},
 } satisfies Meta<typeof Viewport>;
 
 export default meta;
@@ -20,7 +24,12 @@ const CenterButton = () => {
 	const viewport = useViewport();
 
 	return (
-		<Button emphasis="ghost" size="small" onClick={() => viewport.recenter()}>
+		<Button
+			emphasis="ghost"
+			size="small"
+			onClick={() => viewport.recenter()}
+			aria-label="Center"
+		>
 			<Icon name="locate" />
 		</Button>
 	);

@@ -5,4 +5,33 @@
 	user-select: none;
 	overflow: visible;
 	overscroll-behavior: none;
+	transition: transform var(--m-dur-long) var(--m-ease-out-loose);
+	will-change: transform;
+
+	--zoom: 1;
+	--center-x: 0px;
+	--center-y: 0px;
+	transform: translate3d(
+			calc(var(--root-width, 0px) / 2),
+			calc(var(--root-height, 0px) / 2),
+			0
+		)
+		translate3d(-50%, -50%, 0) scale(var(--zoom))
+		translate3d(var(--center-x), var(--center-y), 0);
+}
+
+@property --zoom {
+	syntax: '<number>';
+	initial-value: 1;
+	inherits: false;
+}
+@property --center-x {
+	syntax: '<length>';
+	initial-value: 0px;
+	inherits: false;
+}
+@property --center-y {
+	syntax: '<length>';
+	initial-value: 0px;
+	inherits: false;
 }

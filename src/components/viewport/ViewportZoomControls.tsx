@@ -1,3 +1,4 @@
+import { stopPropagation } from '@a-type/utils';
 import clsx from 'clsx';
 import { Box, BoxProps } from '../box/Box.js';
 import { Button } from '../button/Button.js';
@@ -30,19 +31,42 @@ export function ViewportZoomControls({
 		viewport.fitEverythingOnScreen({ origin: 'control' });
 	};
 	return (
-		<Box gap col className={clsx(className)} {...props}>
+		<Box
+			gap
+			col
+			className={clsx(className)}
+			onPointerDown={stopPropagation}
+			onPointerMove={stopPropagation}
+			onPointerUp={stopPropagation}
+			{...props}
+		>
 			{fit && (
-				<Button emphasis="ghost" size="small" onClick={reset}>
+				<Button
+					emphasis="ghost"
+					size="small"
+					onClick={reset}
+					aria-label="Fit to screen"
+				>
 					<Icon name="maximize" />
 				</Button>
 			)}
 			{zoomIn && (
-				<Button emphasis="ghost" size="small" onClick={doZoomIn}>
+				<Button
+					emphasis="ghost"
+					size="small"
+					onClick={doZoomIn}
+					aria-label="Zoom in"
+				>
 					<Icon name="zoomIn" />
 				</Button>
 			)}
 			{zoomOut && (
-				<Button emphasis="ghost" size="small" onClick={doZoomOut}>
+				<Button
+					emphasis="ghost"
+					size="small"
+					onClick={doZoomOut}
+					aria-label="Zoom out"
+				>
 					<Icon name="zoomOut" />
 				</Button>
 			)}

@@ -601,7 +601,6 @@ export class ViewportState extends EventSubscriber<ViewportEvents> {
 			gestureComplete?: boolean;
 		},
 	) => {
-		console.log('Setting pan to:', worldPosition);
 		// worldPosition.x += this.contentOffset.x;
 		// worldPosition.y += this.contentOffset.y;
 		this.rawPan(worldPosition, details);
