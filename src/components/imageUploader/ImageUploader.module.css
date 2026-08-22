@@ -60,7 +60,7 @@
 
 .altTextDialogImage {
 	width: 100%;
-	max-height: --fn-literal(280px);
+	max-height: 280px;
 	object-fit: contain;
 	border-radius: var(--m-rd-md);
 	@apply --mx-bg(var(--m-surface-ambient-bg));

@@ -8,6 +8,7 @@ import {
 	useContext,
 	useEffect,
 	useId,
+	useRef,
 	useState,
 } from 'react';
 import { Button, ButtonProps } from '../button/index.js';
@@ -330,17 +331,32 @@ export function ImageUploaderAltText({
 	const finalOnAltText = onAltText ?? contextOnAltText;
 	const enabled = finalAltText !== undefined || !!finalOnAltText;
 	const [open, setOpen] = useState(false);
-	const [innerAltText, setInnerAltText] = useState(finalAltText ?? '');
+	const [innerAltText, setInnerAltText] = useState('');
+	const skipCloseResetRef = useRef(false);
 	const readOnly = !finalOnAltText;
 
 	useEffect(() => {
+		if (open) return;
 		setInnerAltText(finalAltText ?? '');
-	}, [finalAltText]);
+	}, [finalAltText, open]);
 
 	if (!enabled || !value) return null;
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen} disableSheet>
+		<Dialog
+			open={open}
+			onOpenChange={(isOpen) => {
+				setOpen(isOpen);
+				if (!isOpen) {
+					if (skipCloseResetRef.current) {
+						skipCloseResetRef.current = false;
+						return;
+					}
+					setInnerAltText(finalAltText ?? '');
+				}
+			}}
+			disableSheet
+		>
 			<Dialog.Trigger
 				className={clsx('@mode-inverted', cls.altTextButton, className)}
 				render={<Button emphasis="light" size="small" />}
@@ -359,7 +375,7 @@ export function ImageUploaderAltText({
 					rows={4}
 					value={innerAltText}
 					readOnly={readOnly}
-					onValueChange={(value) => setInnerAltText(value)}
+					onValueChange={readOnly ? undefined : setInnerAltText}
 				/>
 				{finalOnAltText && (
 					<Dialog.Actions>
@@ -368,6 +384,7 @@ export function ImageUploaderAltText({
 							emphasis="primary"
 							onClick={() => {
 								finalOnAltText(innerAltText);
+								skipCloseResetRef.current = true;
 								setOpen(false);
 							}}
 						>
