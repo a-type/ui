@@ -8,6 +8,7 @@ import {
 	useContext,
 	useEffect,
 	useId,
+	useRef,
 	useState,
 } from 'react';
 import { Button, ButtonProps } from '../button/index.js';
@@ -17,12 +18,17 @@ import {
 	CameraRoot,
 	CameraShutterButton,
 } from '../camera/index.js';
+import { Dialog } from '../dialog/index.js';
+import { Field } from '../forms/index.js';
 import { Icon } from '../icon/index.js';
+import { TextArea } from '../textArea/index.js';
 import cls from './ImageUploader.module.css';
 
 export interface ImageUploaderProps {
 	value: string | null;
 	onChange: (value: File | null) => void;
+	altText?: string;
+	onAltText?: (value: string) => void;
 	className?: string;
 	style?: CSSProperties;
 	maxDimension?: number;
@@ -37,6 +43,8 @@ export interface ImageUploaderProps {
 export function ImageUploaderRoot({
 	value,
 	onChange: handleChange,
+	altText,
+	onAltText,
 	maxDimension,
 	children,
 	className,
@@ -134,7 +142,15 @@ export function ImageUploaderRoot({
 
 	return (
 		<ImageUploaderContext.Provider
-			value={{ inputId, dragging, draggingOver, value, onChange }}
+			value={{
+				inputId,
+				dragging,
+				draggingOver,
+				value,
+				onChange,
+				altText,
+				onAltText,
+			}}
 		>
 			<div
 				className={classNames('@mode-neutral', cls.root, className)}
@@ -166,6 +182,8 @@ const ImageUploaderContext = createContext<{
 	draggingOver: boolean;
 	value: string | null;
 	onChange: (file: File | null) => void;
+	altText?: string;
+	onAltText?: (value: string) => void;
 } | null>(null);
 function useUploaderContext() {
 	const context = useContext(ImageUploaderContext);
@@ -188,6 +206,9 @@ function ImageUploaderPrebuilt({
 	return (
 		<ImageUploaderRoot {...props}>
 			<ImageUploaderDisplay crossOrigin={crossOrigin} />
+			{(props.altText !== undefined || props.onAltText) && (
+				<ImageUploaderAltText />
+			)}
 
 			<ImageUploaderEmptyControls>
 				<ImageUploaderFileButton />
@@ -291,6 +312,101 @@ export function ImageUploaderDisplay({
 	) : null;
 }
 
+export interface ImageUploaderAltTextProps {
+	className?: string;
+	altText?: string;
+	onAltText?: (value: string) => void;
+}
+
+export function ImageUploaderAltText({
+	className,
+	altText,
+	onAltText,
+}: ImageUploaderAltTextProps) {
+	const {
+		value,
+		altText: contextAltText,
+		onAltText: contextOnAltText,
+	} = useUploaderContext();
+	const finalAltText = altText ?? contextAltText;
+	const finalOnAltText = onAltText ?? contextOnAltText;
+	const enabled = finalAltText !== undefined || !!finalOnAltText;
+	const [open, setOpen] = useState(false);
+	const [innerAltText, setInnerAltText] = useState('');
+	const skipCloseResetRef = useRef(false);
+	const readOnly = !finalOnAltText;
+	const altTextFieldId = useId();
+
+	useEffect(() => {
+		if (open) return;
+		setInnerAltText(finalAltText ?? '');
+	}, [finalAltText, open]);
+
+	if (!enabled || !value) return null;
+
+	return (
+		<Dialog
+			open={open}
+			onOpenChange={(isOpen) => {
+				setOpen(isOpen);
+				if (!isOpen) {
+					if (skipCloseResetRef.current) {
+						skipCloseResetRef.current = false;
+						return;
+					}
+					setInnerAltText(finalAltText ?? '');
+				}
+			}}
+			disableSheet
+		>
+			<Dialog.Trigger
+				className={clsx(cls.altTextButton, className)}
+				render={<Button emphasis="light" size="small" />}
+				aria-label={readOnly ? 'View alt text' : 'Edit alt text'}
+			>
+				ALT
+			</Dialog.Trigger>
+			<Dialog.Content
+				className={cls.altTextDialog}
+				innerClassName={cls.altTextDialogInner}
+			>
+				<Dialog.Title>Alt text</Dialog.Title>
+				<img src={value} alt="" className={cls.altTextDialogImage} />
+				<Field stretch id={altTextFieldId} className={cls.altTextField}>
+					<Field.Label>Alt text</Field.Label>
+					<Field.Control
+						render={
+							<TextArea
+								autoSize={false}
+								rows={4}
+								value={innerAltText}
+								readOnly={readOnly}
+								onValueChange={readOnly ? undefined : setInnerAltText}
+								className={cls.altTextInput}
+							/>
+						}
+					/>
+				</Field>
+				{finalOnAltText && (
+					<Dialog.Actions>
+						<Dialog.Close>Cancel</Dialog.Close>
+						<Button
+							emphasis="primary"
+							onClick={() => {
+								skipCloseResetRef.current = true;
+								finalOnAltText(innerAltText);
+								setOpen(false);
+							}}
+						>
+							Save
+						</Button>
+					</Dialog.Actions>
+				)}
+			</Dialog.Content>
+		</Dialog>
+	);
+}
+
 export function ImageUploaderEmptyControls({
 	children,
 	className,
@@ -317,5 +433,6 @@ export const ImageUploader = Object.assign(ImageUploaderPrebuilt, {
 	FileButton: ImageUploaderFileButton,
 	RemoveButton: ImageUploaderRemoveButton,
 	Display: ImageUploaderDisplay,
+	AltText: ImageUploaderAltText,
 	EmptyControls: ImageUploaderEmptyControls,
 });
