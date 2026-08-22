@@ -393,8 +393,8 @@ export function ImageUploaderAltText({
 						<Button
 							emphasis="primary"
 							onClick={() => {
-								finalOnAltText(innerAltText);
 								skipCloseResetRef.current = true;
+								finalOnAltText(innerAltText);
 								setOpen(false);
 							}}
 						>
