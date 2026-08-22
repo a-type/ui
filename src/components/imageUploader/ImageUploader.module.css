@@ -40,6 +40,32 @@
 	border: none;
 }
 
+.altTextButton {
+	position: absolute;
+	right: var(--m-sp-sm);
+	bottom: var(--m-sp-sm);
+	z-index: 10;
+	font-weight: var(--m-fw-bold);
+}
+
+.altTextDialog {
+	max-width: min(560px, 90vw);
+}
+
+.altTextDialogInner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-sp-md);
+}
+
+.altTextDialogImage {
+	width: 100%;
+	max-height: --fn-literal(280px);
+	object-fit: contain;
+	border-radius: var(--m-rd-md);
+	@apply --mx-bg(var(--m-surface-ambient-bg));
+}
+
 .imagePreview {
 	width: 100%;
 	height: 100%;
