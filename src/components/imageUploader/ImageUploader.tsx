@@ -19,6 +19,7 @@ import {
 	CameraShutterButton,
 } from '../camera/index.js';
 import { Dialog } from '../dialog/index.js';
+import { Field } from '../forms/index.js';
 import { Icon } from '../icon/index.js';
 import { TextArea } from '../textArea/index.js';
 import cls from './ImageUploader.module.css';
@@ -334,6 +335,7 @@ export function ImageUploaderAltText({
 	const [innerAltText, setInnerAltText] = useState('');
 	const skipCloseResetRef = useRef(false);
 	const readOnly = !finalOnAltText;
+	const altTextFieldId = useId();
 
 	useEffect(() => {
 		if (open) return;
@@ -358,7 +360,7 @@ export function ImageUploaderAltText({
 			disableSheet
 		>
 			<Dialog.Trigger
-				className={clsx('@mode-inverted', cls.altTextButton, className)}
+				className={clsx(cls.altTextButton, className)}
 				render={<Button emphasis="light" size="small" />}
 				aria-label={readOnly ? 'View alt text' : 'Edit alt text'}
 			>
@@ -370,13 +372,21 @@ export function ImageUploaderAltText({
 			>
 				<Dialog.Title>Alt text</Dialog.Title>
 				<img src={value} alt="" className={cls.altTextDialogImage} />
-				<TextArea
-					autoSize={false}
-					rows={4}
-					value={innerAltText}
-					readOnly={readOnly}
-					onValueChange={readOnly ? undefined : setInnerAltText}
-				/>
+				<Field stretch id={altTextFieldId} className={cls.altTextField}>
+					<Field.Label>Alt text</Field.Label>
+					<Field.Control
+						render={
+							<TextArea
+								autoSize={false}
+								rows={4}
+								value={innerAltText}
+								readOnly={readOnly}
+								onValueChange={readOnly ? undefined : setInnerAltText}
+								className={cls.altTextInput}
+							/>
+						}
+					/>
+				</Field>
 				{finalOnAltText && (
 					<Dialog.Actions>
 						<Dialog.Close>Cancel</Dialog.Close>

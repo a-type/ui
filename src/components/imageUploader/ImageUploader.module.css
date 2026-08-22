@@ -58,6 +58,14 @@
 	gap: var(--m-sp-md);
 }
 
+.altTextField {
+	width: 100%;
+}
+
+.altTextInput {
+	width: 100%;
+}
+
 .altTextDialogImage {
 	width: 100%;
 	max-height: 280px;
