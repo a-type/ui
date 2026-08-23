@@ -1,7 +1,8 @@
 .root {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--m-sp-md);
+	--gap: var(--m-sp-md);
+	gap: var(--gap);
 	white-space: nowrap;
 
 	@apply --mx-bg(var(--m-gray-paper));
@@ -11,12 +12,12 @@
 	border-width: var(--m-lw-sm);
 	border-radius: var(--m-action-rd);
 
-	font-size: var(--m-prose-ambient-size);
 	line-height: normal;
 	font-weight: var(--m-prose-ambient-weight);
 	font-family: var(--m-prose-ambient-font);
 
 	&& {
+		font-size: var(--m-prose-ambient-size);
 		padding: var(--m-sp-sm) var(--m-sp-md);
 	}
 

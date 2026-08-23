@@ -13,7 +13,8 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: start;
-	gap: var(--m-sp-sm);
+	--gap: var(--m-sp-sm);
+	gap: var(--gap);
 
 	position: relative;
 	overflow: visible;
@@ -138,7 +139,7 @@
 		width: --fn-literal(15px);
 	}
 	&[data-open='false'] {
-		margin-left: calc(-1 * var(--m-sp-sm));
+		margin-left: calc(-1 * var(--gap, var(--m-sp-sm)));
 	}
 }
 
@@ -157,7 +158,7 @@
 
 	min-width: 0;
 	width: 0px;
-	margin-left: calc(-1 * var(--m-sp-sm));
+	margin-left: calc(-1 * var(--gap, var(--m-sp-sm)));
 	&[data-active] {
 		width: --fn-literal(1em);
 		margin-left: --fn-literal(-0.5em);
