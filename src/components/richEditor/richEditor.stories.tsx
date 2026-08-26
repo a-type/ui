@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import clsx from 'clsx';
+import { Input } from '../input/Input.js';
 import { tipTapClassName, tipTapReadonlyClassName } from './index.js';
 
 const meta = {
@@ -19,49 +20,52 @@ type Story = StoryObj<{ readonly: boolean }>;
 export const Default: Story = {
 	render(args) {
 		return (
-			<div
-				className={clsx(
-					tipTapClassName,
-					args.readonly && tipTapReadonlyClassName,
-				)}
-			>
-				<div className="ProseMirror">
-					<p>{paragraphText}</p>
-					<h1>Heading 1</h1>
-					<p>{paragraphText}</p>
-					<h2>Heading 2</h2>
-					<p>{paragraphText}</p>
-					<p>{paragraphText}</p>
-					<hr />
-					<p>{paragraphText}</p>
+			<Input.Border>
+				<div
+					contentEditable={true}
+					className={clsx(
+						tipTapClassName,
+						args.readonly && tipTapReadonlyClassName,
+					)}
+				>
+					<div className="ProseMirror">
+						<p>{paragraphText}</p>
+						<h1>Heading 1</h1>
+						<p>{paragraphText}</p>
+						<h2>Heading 2</h2>
+						<p>{paragraphText}</p>
+						<p>{paragraphText}</p>
+						<hr />
+						<p>{paragraphText}</p>
 
-					<blockquote>{paragraphText}</blockquote>
-					<h3>Heading 3</h3>
-					<ul>
-						<li>{paragraphText}</li>
-						<li>{paragraphText}</li>
-					</ul>
-					<p>{paragraphText}</p>
-					<ol>
-						<li>{paragraphText}</li>
-						<li>{paragraphText}</li>
-					</ol>
-					<h4>Heading 4</h4>
-					<p>{paragraphText}</p>
-					<p>
-						<mark>Highlighted</mark> text
-					</p>
-					<p>
-						<a href="#">Link</a>
-					</p>
-					<p>
-						<strong>Bold</strong> text
-					</p>
-					<p>
-						<em>Italic</em> text
-					</p>
+						<blockquote>{paragraphText}</blockquote>
+						<h3>Heading 3</h3>
+						<ul>
+							<li>{paragraphText}</li>
+							<li>{paragraphText}</li>
+						</ul>
+						<p>{paragraphText}</p>
+						<ol>
+							<li>{paragraphText}</li>
+							<li>{paragraphText}</li>
+						</ol>
+						<h4>Heading 4</h4>
+						<p>{paragraphText}</p>
+						<p>
+							<mark>Highlighted</mark> text
+						</p>
+						<p>
+							<a href="#">Link</a>
+						</p>
+						<p>
+							<strong>Bold</strong> text
+						</p>
+						<p>
+							<em>Italic</em> text
+						</p>
+					</div>
 				</div>
-			</div>
+			</Input.Border>
 		);
 	},
 };

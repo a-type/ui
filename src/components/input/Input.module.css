@@ -58,7 +58,8 @@
 	font-weight: var(--m-prose-secondary-weight);
 
 	&:has(input:disabled),
-	&:has(textarea:disabled) {
+	&:has(textarea:disabled),
+	&:has([contenteditable]:disabled) {
 		--mx-shadow-value: 0 0 0 0 transparent;
 		@apply --mx-bg(transparent);
 		@apply --mx-borderColor-lighter(2);
@@ -70,18 +71,26 @@
 	}
 
 	&:has(input:focus-visible[data-focus-clicked='false']),
-	&:has(textarea:focus-visible[data-focus-clicked='false']) {
+	&:has(textarea:focus-visible[data-focus-clicked='false']),
+	&:has([contenteditable]:focus-visible[data-focus-clicked='false']) {
 		@apply --mx-bg-lighter(3);
 		--mx-ring-value: --fn-focus-ring();
 	}
 	&:has(input:focus),
-	&:has(textarea:focus) {
+	&:has(textarea:focus),
+	&:has([contenteditable]:focus) {
 		@apply --mx-bg-lighter(3);
 		--mx-ring-value: --fn-ring(var(--m-tint-light), 4px);
 	}
+	& input:focus,
+	& textarea:focus,
+	& [contenteditable]:focus {
+		outline: none;
+	}
 
 	&:has(input:hover:not(:disabled):not(:focus)),
-	&:has(textarea:hover:not(:disabled):not(:focus)) {
+	&:has(textarea:hover:not(:disabled):not(:focus)),
+	&:has([contenteditable]:hover:not(:disabled):not(:focus)) {
 		@apply --mx-bg-lighter(2);
 		@apply --mx-borderColor-heavier(2);
 	}
