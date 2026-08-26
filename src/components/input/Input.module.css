@@ -63,7 +63,7 @@
 		@apply --mx-bg(transparent);
 		@apply --mx-borderColor-lighter(2);
 
-		& input:placeholder,
+		& input::placeholder,
 		& textarea::placeholder {
 			@apply --mx-fg-lighter(2);
 		}
