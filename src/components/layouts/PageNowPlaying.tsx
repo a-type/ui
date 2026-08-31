@@ -1,7 +1,7 @@
 import classNames from 'clsx';
 import { HTMLAttributes } from 'react';
 import { createPortal } from 'react-dom';
-import { useConfig } from '../provider/Provider.js';
+import { useConfig } from '../../systems/config.js';
 import cls from './PageNowPlaying.module.css';
 
 export function PageNowPlaying({

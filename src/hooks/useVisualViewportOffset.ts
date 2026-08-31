@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useConfig } from '../components/provider/Provider.js';
+import { useConfig } from '../systems/config.js';
 import { useStableCallback } from './useStableCallback.js';
 
 /**
