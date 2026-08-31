@@ -1,7 +1,7 @@
 import { Slider as BaseSlider, SliderRootProps } from '@base-ui/react/slider';
 import clsx from 'clsx';
 import { Ref } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import cls from './Slider.module.css';
 
 export const SliderRoot = withClassName(BaseSlider.Root, cls.root);

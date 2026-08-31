@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ComponentProps } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import cls from './lists.module.css';
 
 export interface OlProps extends ComponentProps<'ol'> {

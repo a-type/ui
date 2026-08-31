@@ -10,8 +10,9 @@ import {
 	useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { useSizeCssVars, useStableCallback } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import { useSizeCssVars } from '../../hooks/useSize.js';
+import { useStableCallback } from '../../hooks/useStableCallback.js';
 import { Box, BoxProps } from '../box/Box.js';
 import {
 	useKeyboardControls,

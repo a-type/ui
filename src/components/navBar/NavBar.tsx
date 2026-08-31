@@ -2,8 +2,8 @@ import { Button } from '@base-ui/react/button';
 import { UseRenderComponentProps } from '@base-ui/react/use-render';
 import classNames, { clsx } from 'clsx';
 import { ReactElement, ReactNode, Ref } from 'react';
-import { withClassName } from '../../hooks.js';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Icon, IconProps } from '../icon/index.js';
 import cls from './NavBar.module.css';
 

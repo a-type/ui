@@ -4,7 +4,7 @@ import {
 	DialogPopupProps,
 } from '@base-ui/react/dialog';
 import { ReactElement, ReactNode } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
 import cls from './Lightbox.module.css';

@@ -1,7 +1,7 @@
 import classNames from 'clsx';
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Input, InputProps } from '../input/Input.js';
 import cls from './TextArea.module.css';
 

@@ -10,7 +10,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Button } from '../button/Button.js';
 import { ButtonProps } from '../button/index.js';
 import { Chip, ChipProps } from '../chip/Chip.js';

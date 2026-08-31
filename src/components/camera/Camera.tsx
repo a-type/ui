@@ -13,7 +13,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Box } from '../box/Box.js';
 import { Button, ButtonProps } from '../button/index.js';
 import { Icon } from '../icon/index.js';

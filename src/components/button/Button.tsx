@@ -8,8 +8,8 @@ import {
 	IconWrapper,
 	useIconOnlyDataAttributes,
 } from '../../behaviors/iconOnly.js';
-import { withClassName } from '../../hooks.js';
 import useMergedRef from '../../hooks/useMergedRef.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { DropdownMenuTriggerIcon } from '../dropdownMenu/DropdownMenu.js';
 import { useIsDropdownTrigger } from '../dropdownMenu/DropdownTriggerContext.js';
 import { IconLoadingProvider } from '../icon/IconLoadingContext.js';

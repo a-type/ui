@@ -5,7 +5,7 @@ import {
 	ScrollAreaScrollbarProps,
 } from '@base-ui/react/scroll-area';
 import { Ref } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import cls from './ScrollArea.module.css';
 
 export type * from '@base-ui/react/scroll-area';

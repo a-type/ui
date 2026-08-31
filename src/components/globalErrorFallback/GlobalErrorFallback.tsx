@@ -1,4 +1,4 @@
-import { useLocalStorage } from '../../hooks.js';
+import { useLocalStorage } from '../../hooks/useStorage.js';
 import { Box, type BoxProps } from '../box/Box.js';
 import { Heading, P } from '../typography/typography.js';
 

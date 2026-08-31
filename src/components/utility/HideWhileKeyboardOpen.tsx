@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
-import { useIsKeyboardOpen } from '../../hooks.js';
+import { useIsKeyboardOpen } from '../../hooks/useVisualViewportOffset.js';
 import { SlotDiv } from './SlotDiv.js';
 
 export interface HideWhileKeyboardOpenProps

@@ -1,11 +1,12 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 import { $ } from '../../arbor/tokens.js';
+import { useThemedTitleBar } from '../../hooks/useTitleBarColor.js';
+import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
 import {
-	useThemedTitleBar,
 	useVirtualKeyboardFocusBehavior,
 	useVisualViewportOffset,
-} from '../../hooks.js';
-import { useVirtualKeyboardBehavior } from '../../hooks/useVirtualKeyboardBehavior.js';
+} from '../../hooks/useVisualViewportOffset.js';
+import { ConfigContext } from '../../systems/config.js';
 import { IconSpritesheet } from '../icon/index.js';
 import { ParticleLayer } from '../particles/index.js';
 import { PwaInstall } from '../pwaInstall/PwaInstall.js';
@@ -78,14 +79,4 @@ export function Provider({
 			</DefaultToastProvider>
 		</ConfigContext.Provider>
 	);
-}
-
-export const ConfigContext = createContext<{
-	virtualKeyboardBehavior: 'overlay' | 'displace';
-}>({
-	virtualKeyboardBehavior: 'displace',
-});
-
-export function useConfig() {
-	return useContext(ConfigContext);
 }

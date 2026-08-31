@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { Children, ComponentProps, useEffect, useState } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import cls from './marquee.module.css';
 

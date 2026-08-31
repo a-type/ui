@@ -15,7 +15,7 @@ import {
 } from '@base-ui/react/combobox';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Button } from '../button/Button.js';
 import { Chip, ChipProps } from '../chip/Chip.js';
 import {

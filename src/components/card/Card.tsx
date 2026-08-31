@@ -7,7 +7,7 @@ import {
 	ReactNode,
 	Ref,
 } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { Masonry, MasonryProps } from '../masonry/masonry.js';
 import { Text } from '../typography/typography.js';
 import { SlotDiv } from '../utility/SlotDiv.js';

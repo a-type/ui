@@ -1,4 +1,4 @@
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { SlotDiv } from '../utility/SlotDiv.js';
 import cls from './SplashScreen.module.css';
 

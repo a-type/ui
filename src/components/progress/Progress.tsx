@@ -4,7 +4,7 @@ import {
 	ProgressValueProps,
 } from '@base-ui/react/progress';
 import clsx from 'clsx';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import cls from './Progress.module.css';
 
 export const ProgressRoot = withClassName(ProgressPrimitive.Root, cls.root);

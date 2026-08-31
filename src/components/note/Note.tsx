@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
-import { withClassName } from '../../hooks.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { TextArea } from '../textArea/TextArea.js';
 import cls from './Note.module.css';
 

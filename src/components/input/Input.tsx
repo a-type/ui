@@ -4,8 +4,8 @@ import {
 } from '@base-ui/react/input';
 import clsx from 'clsx';
 import { CSSProperties, Ref } from 'react';
-import { withClassName } from '../../hooks.js';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
+import { withClassName } from '../../hooks/withClassName.js';
 import { inputInfo } from '../../systems/inputs.js';
 import cls from './Input.module.css';
 

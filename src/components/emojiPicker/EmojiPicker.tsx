@@ -8,8 +8,9 @@ import {
 	EmojiPickerViewportProps,
 	useSkinTone,
 } from 'frimousse';
-import { withClassName, withProps } from '../../hooks.js';
 import { useLocalStorage } from '../../hooks/useStorage.js';
+import { withClassName } from '../../hooks/withClassName.js';
+import { withProps } from '../../hooks/withProps.js';
 import { Box, BoxProps } from '../box/Box.js';
 import { Button } from '../button/Button.js';
 import { Icon } from '../icon/Icon.js';
