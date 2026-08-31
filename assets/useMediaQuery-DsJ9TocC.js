@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-CIURYGHw.js";function n(e){let[t,n]=(0,r.useState)(!1);return(0,r.useEffect)(()=>{let t=window.matchMedia(e),r=e=>{n(e.matches)};return n(t.matches),t.addEventListener(`change`,r),()=>{t.removeEventListener(`change`,r)}},[e]),t}var r;function i(){return(i=e((()=>{r=t()})))()}export{n,i as t};

@@ -1,1 +1,0 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,t as n}from"./useRender-D1Rn_ZSX.js";var r;function i(){return(i=e((()=>{n(),r=function({ref:e,render:n,...r}){return t({defaultTagName:`div`,props:r,ref:e,render:n})}})))()}export{i as n,r as t};

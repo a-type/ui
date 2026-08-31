@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{W as t}from"./createBaseUIEventDetails-Bawrw3Wt.js";function n(e){return e?.ownerDocument||document}function r(){return(r=e((()=>{t()})))()}export{n,r as t};

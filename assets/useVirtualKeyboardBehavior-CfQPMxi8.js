@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-CIURYGHw.js";function n(e){(0,r.useEffect)(()=>{`virtualKeyboard`in navigator&&(navigator.virtualKeyboard.overlaysContent=e===`overlay`)},[e])}var r;function i(){return(i=e((()=>{r=t()})))()}export{n,i as t};
