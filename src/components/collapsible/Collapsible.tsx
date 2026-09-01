@@ -1,8 +1,4 @@
-import {
-	Collapsible as BaseCollapsible,
-	CollapsiblePanelProps,
-	CollapsibleRootProps,
-} from '@base-ui/react/collapsible';
+import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible';
 import { Ref } from 'react';
 import { withClassName } from '../../hooks/withClassName.js';
 import cls from './Collapsible.module.css';
@@ -15,7 +11,7 @@ export const CollapsibleContent = function CollapsibleContent({
 	horizontal,
 	both,
 	...props
-}: CollapsiblePanelProps & {
+}: BaseCollapsible.Panel.Props & {
 	horizontal?: boolean;
 	both?: boolean;
 	ref?: Ref<HTMLDivElement>;
@@ -37,7 +33,7 @@ export const CollapsibleSimple = ({
 	both,
 	children,
 	...props
-}: CollapsibleRootProps & {
+}: BaseCollapsible.Root.Props & {
 	horizontal?: boolean;
 	both?: boolean;
 }) => (
@@ -55,4 +51,5 @@ export const Collapsible = Object.assign(CollapsibleRoot, {
 	Trigger: CollapsibleTrigger,
 	Simple: CollapsibleSimple,
 	Icon: CollapsibleIcon,
+	Unstyled: BaseCollapsible,
 });
