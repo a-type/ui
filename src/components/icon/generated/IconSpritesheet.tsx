@@ -1,5 +1,6 @@
 // WARNING: generated file! See 'scripts/generateIcons'. Do not modify!
-export const IconSpritesheet = (props: any) => (
+import { memo } from 'react';
+export const IconSpritesheet = memo((props: any) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		style={{ display: 'none' }}
@@ -1355,4 +1356,4 @@ export const IconSpritesheet = (props: any) => (
 			</symbol>
 		</defs>
 	</svg>
-);
+));

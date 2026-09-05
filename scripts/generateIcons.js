@@ -133,9 +133,10 @@ ${icons.map(renderIconDef).join('\n')}
 		path.join(baseDir, 'IconSpritesheet.tsx'),
 		await prettier.format(
 			`// WARNING: generated file! See 'scripts/generateIcons'. Do not modify!
-export const IconSpritesheet = (props: any) => (
+import { memo } from 'react';
+export const IconSpritesheet = memo((props: any) => (
   ${spritesheetSvg}
-);
+));
 `,
 			prettierConfig,
 		),
