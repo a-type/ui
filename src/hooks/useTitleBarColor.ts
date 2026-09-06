@@ -28,7 +28,6 @@ function changeThemeColor(color: string) {
 		document.head.appendChild(metaThemeColor);
 	}
 	metaThemeColor?.setAttribute('content', color);
-	console.log('set title bar color', color);
 }
 
 export function useTitleBarColor(
