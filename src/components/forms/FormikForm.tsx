@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { CheckboxField } from './CheckboxField.js';
 import { EmojiField } from './EmojiField.js';
 import { Form } from './Form.js';
+import { FormError } from './FormError.js';
 import { NumberStepperField } from './NumberStepperField.js';
 import { SubmitButton } from './SubmitButton.js';
 import { SwitchField } from './SwitchField.js';
@@ -66,4 +67,6 @@ export const FormikForm = Object.assign(FormikFormRoot, {
 	SwitchField,
 	ToggleGroupField,
 	EmojiField,
+
+	Error: FormError,
 });
