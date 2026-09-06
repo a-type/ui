@@ -4,8 +4,10 @@
 	@apply --mx-fg(inherit);
 
 	resize: vertical;
+	min-height: 100%;
 	&[data-auto-size='true'] {
 		resize: none;
+		height: auto;
 	}
 }
 

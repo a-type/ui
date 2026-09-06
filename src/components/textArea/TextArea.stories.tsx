@@ -50,3 +50,10 @@ export const ControlledFromOnChange: Story = {
 		);
 	},
 };
+
+export const Sized: Story = {
+	args: {
+		style: { height: 400 },
+		placeholder: 'This text area has a fixed height of 400px',
+	},
+};

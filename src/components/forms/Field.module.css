@@ -1,6 +1,8 @@
 .root {
 	display: grid;
 	grid-template-areas: 'label' 'control' 'description' 'error';
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto auto;
 	justify-content: start;
 	border: none;
 	padding: 0;
@@ -11,6 +13,7 @@
 		align-items: center;
 		grid-template-areas: 'control label' 'description description' 'error error';
 		grid-template-columns: auto 1fr;
+		grid-template-rows: auto auto auto;
 		&[data-reverse] {
 			grid-template-areas: 'label control' 'description description' 'error error';
 			grid-template-columns: auto 1fr;
