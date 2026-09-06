@@ -2,6 +2,9 @@
 	display: grid;
 	grid-template-areas: 'label' 'control' 'description';
 	justify-content: start;
+	border: none;
+	padding: 0;
+	margin: 0;
 
 	&[data-horizontal] {
 		flex-direction: row;

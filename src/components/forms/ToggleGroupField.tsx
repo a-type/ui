@@ -34,8 +34,8 @@ function ToggleGroupFieldDefault({
 	const [fieldProps, _, tools] = useField({ name, required, ...props });
 
 	return (
-		<Field id={id} className={className} style={style}>
-			{label && <Field.Label>{label}</Field.Label>}
+		<Field id={id} className={className} style={style} render={<fieldset />}>
+			{label && <Field.Label render={<legend />}>{label}</Field.Label>}
 			<Field.Control
 				render={
 					<ToggleGroup

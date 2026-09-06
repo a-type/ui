@@ -1,3 +1,4 @@
+import { useRender, UseRenderComponentProps } from '@base-ui/react';
 import clsx from 'clsx';
 import {
 	ComponentProps,
@@ -8,10 +9,10 @@ import {
 	useState,
 } from 'react';
 import useMergedRef from '../../hooks/useMergedRef.js';
-import { SlotDiv } from '../utility/SlotDiv.js';
+import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 import cls from './Field.module.css';
 
-export interface FieldRootProps extends ComponentProps<'div'> {
+export interface FieldRootProps extends SlotDivProps {
 	horizontal?: boolean;
 	stretch?: boolean;
 	reverse?: boolean;
@@ -89,14 +90,31 @@ function FieldControl({
 	);
 }
 
-function FieldLabel({ className, ...props }: ComponentProps<'label'>) {
+function FieldLabel({
+	className,
+	ref,
+	render,
+	...props
+}: UseRenderComponentProps<'label'>) {
 	const { id } = useContext(FieldContext);
-	return (
-		<label className={clsx(cls.label, className)} htmlFor={id} {...props} />
-	);
+	return useRender({
+		defaultTagName: 'label',
+		props: {
+			htmlFor: id,
+			className: clsx(cls.label, className),
+			...props,
+		},
+		ref,
+		render,
+	});
 }
 
-function FieldDescription({ className, ...props }: ComponentProps<'div'>) {
+function FieldDescription({
+	className,
+	render,
+	ref,
+	...props
+}: UseRenderComponentProps<'div'>) {
 	const { id, events } = useContext(FieldContext);
 
 	useEffect(() => {
@@ -109,13 +127,17 @@ function FieldDescription({ className, ...props }: ComponentProps<'div'>) {
 			);
 		};
 	}, [events]);
-	return (
-		<div
-			className={clsx('@mode-dense', cls.description, className)}
-			id={id ? `${id}-description` : undefined}
-			{...props}
-		/>
-	);
+
+	return useRender({
+		defaultTagName: 'div',
+		props: {
+			className: clsx('@mode-dense', cls.description, className),
+			id: id ? `${id}-description` : undefined,
+			...props,
+		},
+		render,
+		ref,
+	});
 }
 
 export const Field = Object.assign(FieldRoot, {

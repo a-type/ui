@@ -40,6 +40,7 @@ export function EmojiField({
 							id={`${id}-trigger`}
 							aria-label="Select emoji"
 							size="wrapper"
+							emphasis="ghost"
 							{...rest}
 						>
 							<Button.Icon className={cls.triggerIcon}>
