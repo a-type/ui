@@ -46,7 +46,7 @@ export const TextField = function TextField({
 	description,
 	...rest
 }: TextFieldProps) {
-	const [props] = useField({
+	const [props, meta] = useField({
 		name,
 		onChange,
 		onFocus,
@@ -63,8 +63,16 @@ export const TextField = function TextField({
 		}
 	}, [autoFocusDelay]);
 
+	const showError = meta.touched && !!meta.error && meta.error.length > 0;
+
 	return (
-		<Field className={className} style={style} stretch ref={ref} id={id}>
+		<Field
+			className={clsx(showError && '@mode-attention', className)}
+			style={style}
+			stretch
+			ref={ref}
+			id={id}
+		>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
@@ -74,10 +82,12 @@ export const TextField = function TextField({
 						autoFocus={autoFocus}
 						className={clsx(cls.input, inputClassName)}
 						ref={useMergedRef(innerInputRef, inputRef || emptyRef)}
+						aria-invalid={showError}
 					/>
 				}
 			/>
 			{description && <Field.Description>{description}</Field.Description>}
+			<Field.Error fieldName={name} />
 		</Field>
 	);
 };
@@ -110,7 +120,7 @@ export function TextAreaField({
 	ref,
 	...rest
 }: TextAreaFieldProps) {
-	const [props] = useField(name);
+	const [props, meta] = useField(name);
 	const { submitForm } = useFormikContext();
 	const onKeyDownInner = useCallback(
 		(e: KeyboardEvent<HTMLInputElement>) => {
@@ -125,7 +135,13 @@ export function TextAreaField({
 	const id = useIdOrGenerated(providedId);
 
 	return (
-		<Field stretch className={className} style={style} ref={ref} id={id}>
+		<Field
+			stretch
+			className={clsx(meta.error && '@mode-attention', className)}
+			style={style}
+			ref={ref}
+			id={id}
+		>
 			{label && <Field.Label>{label}</Field.Label>}
 			<Field.Control
 				render={
@@ -139,6 +155,7 @@ export function TextAreaField({
 				}
 			/>
 			{description && <Field.Description>{description}</Field.Description>}
+			<Field.Error fieldName={name} />
 		</Field>
 	);
 }

@@ -1,6 +1,6 @@
 .root {
 	display: grid;
-	grid-template-areas: 'label' 'control' 'description';
+	grid-template-areas: 'label' 'control' 'description' 'error';
 	justify-content: start;
 	border: none;
 	padding: 0;
@@ -9,10 +9,10 @@
 	&[data-horizontal] {
 		flex-direction: row;
 		align-items: center;
-		grid-template-areas: 'control label' 'description description';
+		grid-template-areas: 'control label' 'description description' 'error error';
 		grid-template-columns: auto 1fr;
 		&[data-reverse] {
-			grid-template-areas: 'label control' 'description description';
+			grid-template-areas: 'label control' 'description description' 'error error';
 			grid-template-columns: auto 1fr;
 		}
 	}
@@ -57,6 +57,13 @@
 	grid-area: description;
 	@apply --mx-prose-ambient;
 	@apply --mx-fg(var(--m-gray-heavy));
+	font-style: italic;
+	margin-top: var(--m-sp-sm);
+	margin-left: calc(var(--m-global-shape-roundness) * var(--m-sp-md));
+}
+
+.error {
+	grid-area: error;
 	font-style: italic;
 	margin-top: var(--m-sp-sm);
 	margin-left: calc(var(--m-global-shape-roundness) * var(--m-sp-md));

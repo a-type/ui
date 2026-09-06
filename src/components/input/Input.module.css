@@ -57,6 +57,16 @@
 	line-height: var(--m-prose-secondary-lineHeight);
 	font-weight: var(--m-prose-secondary-weight);
 
+	&:has(input:invalid:not(:focus)),
+	&:has(textarea:invalid:not(:focus)),
+	&:has([contenteditable]:invalid:not(:focus)),
+	&:has(input[aria-invalid='true']:not(:focus)),
+	&:has(textarea[aria-invalid='true']:not(:focus)),
+	&:has([contenteditable][aria-invalid='true']:not(:focus)) {
+		@apply --mx-borderColor(var(--m-color-attention-heavy));
+		@apply --mx-bg(var(--m-color-attention-wash));
+	}
+
 	&:has(input:disabled),
 	&:has(textarea:disabled),
 	&:has([contenteditable]:disabled) {

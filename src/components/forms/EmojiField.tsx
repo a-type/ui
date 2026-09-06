@@ -69,6 +69,7 @@ export function EmojiField({
 			</Popover>
 			{label && <Field.Label>{label}</Field.Label>}
 			{description && <Field.Description>{description}</Field.Description>}
+			<Field.Error fieldName={name} />
 		</Field>
 	);
 }

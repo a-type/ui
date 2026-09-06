@@ -39,6 +39,11 @@ export const Default: Story = {
 					plan: 'basic',
 					emoji: '',
 				}}
+				validate={(values) => {
+					if (!values.email.endsWith('.com')) {
+						return { email: 'Email must end with .com' };
+					}
+				}}
 				{...args}
 			>
 				<TextField
@@ -51,6 +56,7 @@ export const Default: Story = {
 					name="password"
 					type="password"
 					label="Password"
+					minLength={8}
 					description="Make it a good one"
 				/>
 				<NumberStepperField

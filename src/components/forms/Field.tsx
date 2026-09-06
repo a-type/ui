@@ -11,6 +11,7 @@ import {
 import useMergedRef from '../../hooks/useMergedRef.js';
 import { SlotDiv, SlotDivProps } from '../utility/SlotDiv.js';
 import cls from './Field.module.css';
+import { FormError, FormErrorProps } from './FormError.js';
 
 export interface FieldRootProps extends SlotDivProps {
 	horizontal?: boolean;
@@ -80,6 +81,26 @@ function FieldControl({
 		};
 	}, [events, id]);
 
+	useEffect(() => {
+		if (!id) return;
+
+		function onErrorVisible(event: CustomEvent) {
+			if (event.detail === true) {
+				innerRef.current?.setAttribute('aria-errormessage', `${id}-error`);
+			} else {
+				innerRef.current?.removeAttribute('aria-errormessage');
+			}
+		}
+
+		events.addEventListener('error-visible', onErrorVisible as EventListener);
+		return () => {
+			events.removeEventListener(
+				'error-visible',
+				onErrorVisible as EventListener,
+			);
+		};
+	}, [events, id]);
+
 	return (
 		<SlotDiv
 			className={clsx(cls.control, className)}
@@ -140,8 +161,29 @@ function FieldDescription({
 	});
 }
 
+function FieldError({ className, ...props }: FormErrorProps) {
+	const { id, events } = useContext(FieldContext);
+
+	useEffect(() => {
+		events.dispatchEvent(new CustomEvent('error-visible', { detail: true }));
+		return () => {
+			events.dispatchEvent(new CustomEvent('error-visible', { detail: false }));
+		};
+	}, [events]);
+
+	return (
+		<FormError
+			className={clsx(cls.error, className)}
+			id={id ? `${id}-error` : undefined}
+			inputId={id}
+			{...props}
+		/>
+	);
+}
+
 export const Field = Object.assign(FieldRoot, {
 	Label: FieldLabel,
 	Description: FieldDescription,
 	Control: FieldControl,
+	Error: FieldError,
 });
