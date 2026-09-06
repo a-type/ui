@@ -186,21 +186,24 @@
 		}
 
 		&[data-surface='ambient'],
-		&[data-surface='true'] {
+		&[data-surface='true'],
+		&[data-emphasis='ambient'] {
 			@apply --mx-bg(var(--m-surface-ambient-bg));
 			@apply --mx-fg(var(--m-surface-ambient-fg));
 			&[data-border='true'] {
 				@apply --mx-borderColor(var(--m-surface-ambient-b-color));
 			}
 		}
-		&[data-surface='secondary'] {
+		&[data-surface='secondary'],
+		&[data-emphasis='secondary'] {
 			@apply --mx-bg(var(--m-surface-secondary-bg));
 			@apply --mx-fg(var(--m-surface-secondary-fg));
 			&[data-border='true'] {
 				@apply --mx-borderColor(var(--m-surface-secondary-b-color));
 			}
 		}
-		&[data-surface='primary'] {
+		&[data-surface='primary'],
+		&[data-emphasis='primary'] {
 			@apply --mx-bg(var(--m-surface-primary-bg));
 			@apply --mx-fg(var(--m-surface-primary-fg));
 			&[data-border='true'] {

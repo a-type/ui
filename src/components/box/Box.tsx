@@ -64,6 +64,10 @@ export interface BoxProps extends Omit<SlotDivProps, 'wrap'> {
 	 */
 	surface?: boolean | 'ambient' | 'secondary' | 'primary';
 	/**
+	 * Overlaps with 'surface' - use surface as a boolean when provided.
+	 */
+	emphasis?: 'ambient' | 'secondary' | 'primary';
+	/**
 	 * Add a default border
 	 */
 	border?: boolean;
@@ -123,6 +127,7 @@ export function Box({
 	style,
 	container,
 	surface,
+	emphasis,
 	color,
 	border,
 	full,
@@ -173,6 +178,7 @@ export function Box({
 			data-dim={dim}
 			data-squish={squish}
 			data-m={m}
+			data-emphasis={emphasis}
 		/>
 	);
 

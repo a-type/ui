@@ -225,15 +225,19 @@ export function presetAtype<
 								.mode.action.light.b.color}
 						`,
 						width: $.mode.lw.$root,
-						color: $.mixins.fg.ref,
+						color: $.mode.tint.heavy,
 						style: 'solid',
 					},
 				},
 				primary: {
-					borderColor: $.mixins.fg.ref,
+					b: {
+						color: $.mixins.fg.ref,
+					},
 				},
 				secondary: {
-					borderColor: $.mixins.fg.ref,
+					b: {
+						color: $.mode.gray.heavy,
+					},
 				},
 			},
 			control: {
@@ -247,6 +251,16 @@ export function presetAtype<
 			surface: {
 				config: {
 					roundness: 1,
+				},
+				ambient: {
+					b: {
+						color: $.mode.gray.mid,
+					},
+				},
+				secondary: {
+					b: {
+						color: $.mode.tint.mid,
+					},
 				},
 			},
 			user: {
@@ -340,11 +354,15 @@ export function presetAtype<
 					definition: (css) => css`
 						&&:disabled,
 						&&[data-disabled='true'] {
-							cursor: default;
+							cursor: not-allowed;
 							box-shadow: none;
 							${base.mixins.bgDesaturated.apply({ '--step': 8 })}
 							${base.mixins.fgFaded.apply({
 								'--opacity': 0.65,
+								'--source': $.mode.gray.ink,
+							})}
+							${base.mixins.borderColorFaded.apply({
+								'--opacity': 0.35,
 								'--source': $.mode.gray.ink,
 							})}
 						}
