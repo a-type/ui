@@ -19,17 +19,14 @@
 		@apply --mx-surface-ambient;
 		padding: 0;
 		@apply --mx-bg(--fn-color-saturated(var(--m-surface-ambient-bg), 9));
-		@apply --mx-borderColor-faded(50%);
 	}
 	&[data-emphasis='secondary'] {
 		@apply --mx-surface-secondary;
 		padding: 0;
-		@apply --mx-borderColor-faded(50%);
 	}
 	&[data-emphasis='primary'] {
 		@apply --mx-surface-primary;
 		padding: 0;
-		@apply --mx-borderColor-faded(50%);
 	}
 }
 
