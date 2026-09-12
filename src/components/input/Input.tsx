@@ -3,7 +3,7 @@ import {
 	InputProps as BaseInputProps,
 } from '@base-ui/react/input';
 import clsx from 'clsx';
-import { CSSProperties, Ref } from 'react';
+import { CSSProperties, Ref, useState } from 'react';
 import { useRotatingShuffledValue } from '../../hooks/useRotatingShuffledValue.js';
 import { withClassName } from '../../hooks/withClassName.js';
 import { inputInfo } from '../../systems/inputs.js';
@@ -23,6 +23,7 @@ const InnerInput = function InnerInput({
 
 	...props
 }: InputProps) {
+	const [touched, setTouched] = useState(false);
 	const handleFocus: BaseInputProps['onFocus'] = (ev) => {
 		if (autoSelect) {
 			ev.target.select();
@@ -40,6 +41,7 @@ const InnerInput = function InnerInput({
 	const handleBlur: BaseInputProps['onBlur'] = (ev) => {
 		onBlur?.(ev);
 		ev.currentTarget.removeAttribute('data-focus-clicked');
+		setTouched(true);
 	};
 	const randomPlaceholder = useRotatingShuffledValue(
 		placeholders ?? [],
@@ -53,6 +55,7 @@ const InnerInput = function InnerInput({
 			onValueChange={onValueChange}
 			onBlur={handleBlur}
 			className={clsx(cls.input, className)}
+			data-touched={touched || undefined}
 			{...props}
 		/>
 	);
