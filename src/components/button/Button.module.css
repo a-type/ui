@@ -2,12 +2,10 @@
 	user-select: none;
 	appearance: none;
 	cursor: pointer;
-	transition:
-		background-color,
-		color,
-		border-color,
-		opacity,
-		box-shadow var(--m-dur) var(--m-ease);
+	transition-property: background-color, color, border-color, opacity,
+		box-shadow;
+	transition-duration: var(--m-dur);
+	transition-timing-function: var(--m-ease);
 
 	display: flex;
 	flex-direction: row;
