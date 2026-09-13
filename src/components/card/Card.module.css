@@ -5,6 +5,10 @@
 	flex-direction: column;
 	overflow: clip;
 
+	transition-property: background, box-shadow;
+	transition-duration: var(--m-dur);
+	transition-timing-function: var(--m-ease);
+
 	@apply --mx-shadow(var(--m-shadow-sm));
 	border-width: var(--m-lw-sm);
 	border-radius: var(--m-surface-rd);
@@ -28,6 +32,21 @@
 		@apply --mx-surface-primary;
 		padding: 0;
 	}
+
+	&:has(.main[data-interactive]:hover),
+	&:has(.main[data-interactive]:focus-visible),
+	&:has(.main[data-interactive][data-focus-visible]) {
+		@apply --mx-fg(var(--m-gray-ink));
+		background-color: --fn-color-faded(var(--m-tint), 7%);
+	}
+	&:has(.main[data-interactive]:active) {
+		@apply --mx-fg(var(--m-gray-ink));
+		background-color: --fn-color-faded(var(--m-tint), 15%);
+	}
+	&:has(.main[data-interactive]:focus-visible),
+	&:has(.main[data-interactive][data-focus-visible]) {
+		@apply --mx-ring(0 0 0 2px var(--m-tint-heavy));
+	}
 }
 
 .main {
@@ -46,7 +65,7 @@
 	font-weight: var(--m-prose-ambient-weight);
 
 	padding: var(--m-sp-md);
-	padding-bottom: var(--m-sp-xs);
+	padding-bottom: var(--m-sp-sm);
 	gap: var(--m-sp-sm);
 
 	transition: all var(--m-dur) var(--m-ease);
@@ -62,25 +81,18 @@
 	&[data-interactive] {
 		cursor: pointer;
 
-		&:hover,
-		&:focus-visible,
-		&[data-focus-visible] {
-			@apply --mx-fg(var(--m-gray-ink));
-			background-color: --fn-color-faded(var(--m-gray-ink), 10%);
-		}
-
 		&:focus {
 			outline: none;
-		}
-		&:focus-visible,
-		&[data-focus-visible] {
-			@apply --mx-ring(inset 0 0 0 2px var(--m-gray-ink));
 		}
 
 		&:disabled,
 		&[data-disabled] {
 			cursor: default;
 		}
+	}
+
+	&:last-child {
+		padding-bottom: var(--m-sp-md);
 	}
 }
 

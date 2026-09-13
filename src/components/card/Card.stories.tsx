@@ -338,3 +338,31 @@ export const CardsInBox: Story = {
 		);
 	},
 };
+
+export const EdgeCases: Story = {
+	render(args) {
+		return (
+			<Box p gap grow>
+				<CardRoot {...args}>
+					<CardMain onClick={() => {}}>
+						<CardTitle>Card Title</CardTitle>
+						<CardContent>Other stuff</CardContent>
+					</CardMain>
+					<CardFooter>
+						<CardActions>
+							<Button size="small">Button</Button>
+							<Button emphasis="ghost" size="small">
+								<Icon name="placeholder" />
+							</Button>
+						</CardActions>
+					</CardFooter>
+				</CardRoot>
+				<CardRoot {...args}>
+					<CardMain onClick={() => {}}>
+						<CardTitle>Card Title</CardTitle>
+					</CardMain>
+				</CardRoot>
+			</Box>
+		);
+	},
+};
