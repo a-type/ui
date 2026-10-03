@@ -79,6 +79,7 @@ export function useThemedTitleBar(colorToken: string, skip?: boolean) {
 
 	useEffect(() => {
 		if (skip) return;
+		if (typeof document === 'undefined') return;
 		const previousColor = getCurrentColor();
 
 		async function update() {
