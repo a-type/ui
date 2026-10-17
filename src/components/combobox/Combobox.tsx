@@ -147,9 +147,10 @@ function matchItem(
 }
 
 export interface ComboboxProps<
-	TItem,
+	TValue,
 	Multiple extends boolean | undefined = false,
-> extends BaseCombobox.ComboboxRootProps<TItem, Multiple> {
+	TItem = TValue,
+> extends BaseCombobox.ComboboxRootProps<TValue, Multiple, TItem> {
 	onCreate?: (value: string) => void;
 	showCreatableItem?: boolean;
 }
@@ -186,16 +187,16 @@ const ComboboxRoot = ({
 	const inputValue = (
 		userInputValue === undefined ? internalInputValue : userInputValue
 	).toString();
+	const arrayItems = Array.isArray(userItems) ? userItems : undefined;
 	const canCreate = !!(
 		showCreatableItem &&
 		onCreate &&
 		inputValue &&
-		!matchItem(userItems ?? [], userItemToStringLabel, inputValue)
+		(userItems === undefined || arrayItems) &&
+		!matchItem(arrayItems ?? [], userItemToStringLabel, inputValue)
 	);
 	const items = canCreate
-		? userItems
-			? [...userItems, makeCreatableItem(inputValue)]
-			: [makeCreatableItem(inputValue)]
+		? [...(arrayItems ?? []), makeCreatableItem(inputValue)]
 		: userItems;
 
 	const anchorRef = useRef<HTMLDivElement>(null);
@@ -584,45 +585,45 @@ const baseSubComponents = {
 	Details,
 };
 
-function createCombobox<TItem>() {
+function createCombobox<TValue>() {
 	function TypedRoot(
-		props: Omit<ComboboxProps<TItem, false>, 'items'> & {
-			items?: readonly TItem[];
+		props: Omit<ComboboxProps<TValue, false>, 'items'> & {
+			items?: readonly TValue[];
 		},
 	) {
 		return <ComboboxRoot {...props} />;
 	}
 	function TypedMultiRoot(
-		props: Omit<ComboboxProps<TItem, true>, 'items'> & {
-			items?: readonly TItem[];
+		props: Omit<ComboboxProps<TValue, true>, 'items'> & {
+			items?: readonly TValue[];
 		},
 	) {
 		return <ComboboxRoot multiple {...props} />;
 	}
 	function TypedList(
 		props: Omit<BaseCombobox.ComboboxListProps, 'children'> & {
-			children?: ReactNode | ((item: TItem, index: number) => ReactNode);
+			children?: ReactNode | ((item: TValue, index: number) => ReactNode);
 		},
 	) {
 		return <ComboboxList {...props} />;
 	}
 	function TypedItem(
 		props: Omit<ComboboxItemProps, 'value'> & {
-			value: TItem;
+			value: TValue;
 		},
 	) {
 		return <ComboboxItem {...props} />;
 	}
 	function TypedValue(
 		props: Omit<BaseCombobox.ComboboxValueProps, 'children'> & {
-			children?: ReactNode | ((item: TItem | null) => ReactNode);
+			children?: ReactNode | ((item: TValue | null) => ReactNode);
 		},
 	) {
 		return <BaseCombobox.Combobox.Value {...props} />;
 	}
 	function TypedMultiValue(
 		props: Omit<ComboboxMultiValueProps, 'children'> & {
-			children?: ReactNode | ((items: TItem[]) => ReactNode);
+			children?: ReactNode | ((items: TValue[]) => ReactNode);
 		},
 	) {
 		return <ComboboxMultiValue {...props} />;

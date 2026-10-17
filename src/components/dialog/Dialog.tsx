@@ -141,6 +141,13 @@ export interface DialogProps extends Omit<DialogRootProps, 'children'> {
 	children?: React.ReactNode;
 	disableSheet?: boolean;
 }
+const DrawerDialogTrigger = (props: DialogTriggerProps) => (
+	<Drawer.Trigger
+		{...props}
+		handle={props.handle as DrawerRootProps['handle']}
+	/>
+);
+const DialogTrigger = withContextVariant(DrawerDialogTrigger, StyledTrigger);
 const DialogRoot = ({
 	children,
 	defaultOpen,
@@ -167,6 +174,7 @@ const DialogRoot = ({
 			<MobileDrawerContext.Provider value={true}>
 				<Drawer
 					{...rootProps}
+					handle={rootProps.handle as DrawerRootProps['handle']}
 					open={open}
 					onOpenChange={onOpenChange as DrawerRootProps['onOpenChange']}
 				>
@@ -182,7 +190,6 @@ const DialogRoot = ({
 		</BaseDialog.Root>
 	);
 };
-const DialogTrigger = withContextVariant(Drawer.Trigger, StyledTrigger);
 const DialogClose = withContextVariant(Drawer.Close, StyledClose);
 const DialogActions = withContextVariant(Drawer.Actions, StyledActions);
 
@@ -233,7 +240,9 @@ export const Dialog = Object.assign(DialogRoot, {
 	SelectList: DialogSelectList,
 	SelectItem: DialogSelectItem,
 	Unstyled: BaseDialog as DialogParts,
-	createHandle: BaseDialog.createHandle,
+	// Drawer version is used as it is a subclass of Dialog version; so instanceof
+	// checks should pass in either case.
+	createHandle: Drawer.createHandle as typeof BaseDialog.createHandle,
 });
 
 export type DialogParts = typeof BaseDialog;

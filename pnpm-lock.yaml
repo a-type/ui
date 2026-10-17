@@ -12,8 +12,8 @@ importers:
         specifier: ^1.1.9
         version: 1.1.9
       '@base-ui/react':
-        specifier: ^1.6.0
-        version: 1.6.0(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.9.0
+        version: 1.9.0(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@use-gesture/react':
         specifier: ^10.3.1
         version: 10.3.1(react@19.0.0)
@@ -331,8 +331,8 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@base-ui/react@1.6.0':
-    resolution: {integrity: sha512-/jzjTWJYXhRFO45Bev9lc3cHbmjzCMpUqbMZ2AgKy/z25mY9B6shGSNcXcjQar9n5doM0KYW1W8fcFv2jZBuMw==}
+  '@base-ui/react@1.9.0':
+    resolution: {integrity: sha512-S8CSYosASBKtpL8SWUfS78rFElfLijiCgA7oHOK22jCJ95FULsYyKwBNFOgudt0RA+/7yNc7F81bOvQnRgbBiQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@date-fns/tz': ^1.2.0
@@ -348,8 +348,8 @@ packages:
       date-fns:
         optional: true
 
-  '@base-ui/utils@0.3.1':
-    resolution: {integrity: sha512-gFFiltORVmW/N6IILTGxizP3PBpVpysqML1ALY5Vk0mH+7faVkCknOU31goYHN5Aoek2dkjxva1XOD2Ce9WuIg==}
+  '@base-ui/utils@0.5.0':
+    resolution: {integrity: sha512-dYGGcEttjkYiMoa5nHm8vLaJ2UcuTWxo3BFAwOYXeRg/q7UVVvA6cacEIXEs3FgBfK1CGtW1ptElqs7wsx+t9A==}
     peerDependencies:
       '@types/react': ^17 || ^18 || ^19
       react: ^17 || ^18 || ^19
@@ -570,20 +570,20 @@ packages:
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@floating-ui/core@1.7.5':
-    resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
+  '@floating-ui/core@1.8.0':
+    resolution: {integrity: sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==}
 
-  '@floating-ui/dom@1.7.6':
-    resolution: {integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==}
+  '@floating-ui/dom@1.8.0':
+    resolution: {integrity: sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==}
 
-  '@floating-ui/react-dom@2.1.8':
-    resolution: {integrity: sha512-cC52bHwM/n/CxS87FH0yWdngEZrjdtLW/qVruo68qg+prK7ZQ4YGdut2GyDVpoGeAYe/h899rVeOVm6Oi40k2A==}
+  '@floating-ui/react-dom@2.1.9':
+    resolution: {integrity: sha512-JDjEFGCpImxDCA7JJKviA0M9+RtmJdj0m/NVU5IMgBK+AmZouAQQ7/+2GLH0GXXY0YMw9oXPB8hKdbPYg5QLYg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@floating-ui/utils@0.2.11':
-    resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+  '@floating-ui/utils@0.2.12':
+    resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3169,8 +3169,8 @@ packages:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
 
-  reselect@5.2.0:
-    resolution: {integrity: sha512-AgZ3UOZm3YndfrJ4OYjgrT7bmCm/1iqkjvEfH/oYjzh6PD2qw4QuT3jjnXIrpdt4MTpMXclMT3lXbmRY+XRakw==}
+  reselect@5.3.0:
+    resolution: {integrity: sha512-XGoLeRAVzUTcJ1qkxPQhDJyIZ5d6zzZD9nT7AEZOaaU9UbWclhycElmhO+VD5bFeLuzhPBaOV2oXC8uG35ZSpg==}
 
   reserved-words@0.1.2:
     resolution: {integrity: sha512-0S5SrIUJ9LfpbVl4Yzij6VipUdafHrOTzvmfazSw/jeZrZtQK303OPZW+obtkaw7jQlTQppy0UvZWm9872PbRw==}
@@ -3564,6 +3564,11 @@ packages:
 
   use-sync-external-store@1.6.0:
     resolution: {integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  use-sync-external-store@1.7.0:
+    resolution: {integrity: sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -4022,27 +4027,27 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@base-ui/react@1.6.0(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@base-ui/react@1.9.0(@types/react@19.0.1)(date-fns@4.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@base-ui/utils': 0.3.1(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@floating-ui/react-dom': 2.1.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@floating-ui/utils': 0.2.11
+      '@base-ui/utils': 0.5.0(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@floating-ui/react-dom': 2.1.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@floating-ui/utils': 0.2.12
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      use-sync-external-store: 1.6.0(react@19.0.0)
+      use-sync-external-store: 1.7.0(react@19.0.0)
     optionalDependencies:
       '@types/react': 19.0.1
       date-fns: 4.1.0
 
-  '@base-ui/utils@0.3.1(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@base-ui/utils@0.5.0(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@floating-ui/utils': 0.2.11
+      '@floating-ui/utils': 0.2.12
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      reselect: 5.2.0
-      use-sync-external-store: 1.6.0(react@19.0.0)
+      reselect: 5.3.0
+      use-sync-external-store: 1.7.0(react@19.0.0)
     optionalDependencies:
       '@types/react': 19.0.1
 
@@ -4202,22 +4207,22 @@ snapshots:
       '@eslint/core': 0.17.0
       levn: 0.4.1
 
-  '@floating-ui/core@1.7.5':
+  '@floating-ui/core@1.8.0':
     dependencies:
-      '@floating-ui/utils': 0.2.11
+      '@floating-ui/utils': 0.2.12
 
-  '@floating-ui/dom@1.7.6':
+  '@floating-ui/dom@1.8.0':
     dependencies:
-      '@floating-ui/core': 1.7.5
-      '@floating-ui/utils': 0.2.11
+      '@floating-ui/core': 1.8.0
+      '@floating-ui/utils': 0.2.12
 
-  '@floating-ui/react-dom@2.1.8(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@floating-ui/react-dom@2.1.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@floating-ui/dom': 1.7.6
+      '@floating-ui/dom': 1.8.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@floating-ui/utils@0.2.11': {}
+  '@floating-ui/utils@0.2.12': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -6839,7 +6844,7 @@ snapshots:
 
   require-directory@2.1.1: {}
 
-  reselect@5.2.0: {}
+  reselect@5.3.0: {}
 
   reserved-words@0.1.2: {}
 
@@ -7357,6 +7362,10 @@ snapshots:
       punycode: 2.3.1
 
   use-sync-external-store@1.6.0(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+
+  use-sync-external-store@1.7.0(react@19.0.0):
     dependencies:
       react: 19.0.0
 
