@@ -21,6 +21,7 @@ const meta = {
 		visuallyDisabled: false,
 		disabled: false,
 		visuallyFocused: false,
+		align: 'start',
 	},
 } satisfies Meta<typeof Button>;
 

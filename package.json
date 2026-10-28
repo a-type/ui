@@ -77,6 +77,7 @@
 		"@arbor-css/core": "^0.0.149",
 		"@arbor-css/postcss": "^0.0.149",
 		"@eslint/js": "^9.39.2",
+		"@storybook/addon-docs": "10.4.0",
 		"@storybook/addon-links": "10.4.0",
 		"@storybook/react-vite": "10.4.0",
 		"@testing-library/react": "^16.3.2",

@@ -13,6 +13,7 @@ const preset = createPreset();
 connect(preset);
 
 const preview: Preview = {
+	tags: ['autodocs'],
 	parameters: {
 		actions: { argTypesRegex: '^on[A-Z].*' },
 		controls: {

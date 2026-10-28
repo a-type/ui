@@ -59,15 +59,11 @@
 		):not([data-size='wrapper']),
 	&[data-force-icon-mode='true']:not([data-size='wrapper']) {
 		padding: var(--m-sp-md);
+		align-items: center;
+		justify-content: center;
 
 		&[data-size='small'] {
 			padding: var(--m-sp-sm);
-		}
-
-		&:not([aria-pressed='true']) {
-			aspect-ratio: 1/1;
-			align-items: center;
-			justify-content: center;
 		}
 	}
 
