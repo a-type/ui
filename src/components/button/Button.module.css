@@ -69,6 +69,7 @@
 
 	&[data-size='small'] {
 		min-height: --fn-literal(28px);
+		min-width: --fn-literal(28px);
 	}
 	&[data-size='wrapper'] {
 		padding: 0;
