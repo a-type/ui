@@ -3,6 +3,9 @@
 	display: flex;
 	flex-direction: column;
 }
+#storybook-root[hidden='true'] {
+	display: none;
+}
 
 body,
 html {
