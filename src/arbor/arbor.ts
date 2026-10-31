@@ -6,7 +6,7 @@ import {
 } from '@arbor-css/core/preset-v1';
 import { $userColorHue, $userColorSaturation } from './props.js';
 
-const defaultColors = {
+export const defaultColors = {
 	ranges: {
 		lemon: {
 			hue: 86,
