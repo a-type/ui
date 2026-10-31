@@ -212,3 +212,41 @@ export const InitialOpen: Story = {
 		);
 	},
 };
+
+export const CanOpenChangesDynamically: Story = {
+	render: (args) => {
+		const [itemCount, setItemCount] = useState(1);
+		return (
+			<div
+				style={{
+					width: '300px',
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'stretch',
+					justifyContent: 'flex-end',
+					backgroundColor: 'var(--m-gray-paper)',
+					border: `1px solid var(--m-gray)`,
+				}}
+			>
+				<HorizontalList
+					style={{
+						maxHeight: 200,
+						borderTop: '1px solid var(--m-gray)',
+					}}
+					openDirection="up"
+					{...args}
+				>
+					{new Array(itemCount).fill(null).map((_, i) => (
+						<Button key={i} size="small">
+							Item {i + 1}
+						</Button>
+					))}
+					<Button size="small" onClick={() => setItemCount(itemCount + 1)}>
+						Add Item
+					</Button>
+				</HorizontalList>
+			</div>
+		);
+	},
+};

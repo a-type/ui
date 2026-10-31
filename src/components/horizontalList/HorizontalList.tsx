@@ -46,7 +46,9 @@ export function HorizontalList({
 	const justMounted = useJustMounted();
 
 	const [internalOpen, setInternalOpen] = useState(false);
-	const open = externalOpen ?? internalOpen;
+
+	const [internalCanOpen, setInternalCanOpen] = useState(false);
+	const open = internalCanOpen && (externalOpen ?? internalOpen);
 	const toggleOpen = useCallback(() => {
 		if (externalOpen === undefined) {
 			setInternalOpen((prev) => !prev);
@@ -54,7 +56,6 @@ export function HorizontalList({
 		onOpenChange?.(!open);
 	}, [externalOpen, onOpenChange, open]);
 
-	const [internalCanOpen, setInternalCanOpen] = useState(false);
 	const applyCanOpen = useCallback(
 		(canOpen: boolean) => {
 			if (canOpen !== lastCanOpenChangeEmitted.current) {
