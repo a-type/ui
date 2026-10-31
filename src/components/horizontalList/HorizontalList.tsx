@@ -1,7 +1,15 @@
 import clsx from 'clsx';
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import {
+	ReactNode,
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from 'react';
+import { useJustMounted } from '../../hooks/useJustMounted.js';
+import useMergedRef from '../../hooks/useMergedRef.js';
 import { Button } from '../button/index.js';
-import { CollapsibleSimple } from '../collapsible/Collapsible.js';
 import { Icon } from '../icon/index.js';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import cls from './HorizontalList.module.css';
@@ -16,6 +24,7 @@ export interface HorizontalListProps {
 	openDirection?: 'up' | 'down';
 	disableInternalOpenToggle?: boolean;
 	style?: React.CSSProperties;
+	ref?: React.Ref<HTMLDivElement>;
 }
 
 export function HorizontalList({
@@ -27,12 +36,14 @@ export function HorizontalList({
 	onCanOpenChange,
 	openDirection = 'down',
 	disableInternalOpenToggle,
+	ref: userRef,
 	...rest
 }: HorizontalListProps) {
 	const contentRef = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const rememberedWidth = useRef<number>(0);
 	const lastCanOpenChangeEmitted = useRef<boolean | undefined>(undefined);
+	const justMounted = useJustMounted();
 
 	const [internalOpen, setInternalOpen] = useState(false);
 	const open = externalOpen ?? internalOpen;
@@ -44,18 +55,21 @@ export function HorizontalList({
 	}, [externalOpen, onOpenChange, open]);
 
 	const [internalCanOpen, setInternalCanOpen] = useState(false);
-	const emitCanOpenChange = useCallback(
+	const applyCanOpen = useCallback(
 		(canOpen: boolean) => {
 			if (canOpen !== lastCanOpenChangeEmitted.current) {
 				lastCanOpenChangeEmitted.current = canOpen;
 				setInternalCanOpen(canOpen);
 				onCanOpenChange?.(canOpen);
+				if (containerRef.current) {
+					containerRef.current.dataset.canOpen = canOpen ? 'true' : 'false';
+				}
 			}
 		},
 		[onCanOpenChange],
 	);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const content = contentRef.current;
 		const container = containerRef.current;
 		if (!content || !container) {
@@ -64,55 +78,68 @@ export function HorizontalList({
 		const contentWidth = content.scrollWidth;
 		const containerHeight = container.offsetHeight;
 		const containerWidth = container.offsetWidth;
-		if (open && contentWidth > containerWidth) {
+
+		const hasOverflow = contentWidth > containerWidth;
+
+		// open case: open state is set and content overflows container width
+		if (open && hasOverflow) {
 			// measure content width and animate to container width
 			rememberedWidth.current = contentWidth;
 			content.style.setProperty('width', `${containerWidth}px`);
 			content.style.setProperty('flex-wrap', 'wrap');
 			// force measure to get the new height
 			const contentHeight = content.offsetHeight;
-			container
-				.animate(
-					[
-						{ height: `${containerHeight}px` },
-						{ height: `${contentHeight}px` },
-					],
-					{
-						easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-						duration: 200,
-					},
-				)
-				.finished.then(() => {
-					emitCanOpenChange(true);
-				});
+			if (justMounted.current) {
+				applyCanOpen(true);
+			} else {
+				container
+					.animate(
+						[
+							{ height: `${containerHeight}px` },
+							{ height: `${contentHeight}px` },
+						],
+						{
+							easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+							duration: 200,
+						},
+					)
+					.finished.then(() => {
+						applyCanOpen(true);
+					});
+			}
 		} else {
+			// force measure to get new height
 			content.style.setProperty('width', `max-content`);
 			content.style.setProperty('flex-wrap', 'nowrap');
-			// force measure to get new height
 			const contentHeight = content.offsetHeight;
-			container
-				.animate(
-					[
+			if (justMounted.current) {
+				applyCanOpen(hasOverflow);
+			} else {
+				container
+					.animate(
+						[
+							{
+								height: `${containerHeight}px`,
+							},
+							{
+								height: `${contentHeight}px`,
+							},
+						],
 						{
-							height: `${containerHeight}px`,
+							easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
+							duration: 200,
 						},
-						{
-							height: `${contentHeight}px`,
-						},
-					],
-					{
-						easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-						duration: 200,
-					},
-				)
-				.finished.then(() => {
-					requestAnimationFrame(() => {
-						const canOpen = container.scrollWidth > container.offsetWidth;
-						emitCanOpenChange(canOpen);
+					)
+					.finished.then(() => {
+						requestAnimationFrame(() => {
+							// remeasure overflow now that container is closed
+							const canOpen = container.scrollWidth > container.offsetWidth;
+							applyCanOpen(canOpen);
+						});
 					});
-				});
+			}
 		}
-	}, [open, contentRef, containerRef]);
+	}, [open, contentRef, containerRef, justMounted]);
 
 	useEffect(() => {
 		if (!containerRef.current || !contentRef.current) {
@@ -127,7 +154,7 @@ export function HorizontalList({
 				return;
 			}
 			const canOpen = container.scrollWidth > container.offsetWidth;
-			emitCanOpenChange(canOpen);
+			applyCanOpen(canOpen);
 		});
 		resizeObserver.observe(containerRef.current);
 		resizeObserver.observe(contentRef.current);
@@ -138,27 +165,51 @@ export function HorizontalList({
 
 	const chevronFlip = openDirection === 'down' ? open : !open;
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const mergedRef = useMergedRef(rootRef, userRef);
+
+	// disable animations while the component is first setting up
+	useLayoutEffect(() => {
+		setTimeout(() => {
+			if (rootRef.current) {
+				rootRef.current.dataset.disableAnimation = 'false';
+			}
+		}, 100);
+	}, []);
+
 	return (
 		<ScrollArea.Root
 			className={clsx(cls.root, className)}
+			ref={mergedRef}
 			data-state={open ? 'open' : 'closed'}
+			data-disable-animation="true"
+			data-hl-role="root"
 			{...rest}
 		>
-			<ScrollArea.Viewport ref={containerRef}>
-				<div className={clsx(cls.content, contentClassName)} ref={contentRef}>
-					<CollapsibleSimple
-						horizontal
-						open={internalCanOpen && !disableInternalOpenToggle}
-						data-can-open={internalCanOpen}
-						data-disabled={disableInternalOpenToggle ? '' : undefined}
-						className={cls.toggleButtonWrapper}
-					>
+			<ScrollArea.Viewport
+				ref={containerRef}
+				data-can-open={internalCanOpen}
+				data-toggle-hidden={!internalCanOpen || disableInternalOpenToggle}
+				data-open={open && internalCanOpen}
+				data-hl-role="container"
+			>
+				<div
+					className={clsx(cls.content, contentClassName)}
+					ref={contentRef}
+					data-hl-role="content"
+				>
+					<div className={cls.toggleButtonWrapper}>
 						<Button
 							onClick={toggleOpen}
 							emphasis="ghost"
 							className={clsx(cls.toggleButton)}
-							data-open={open}
 							aria-label={open ? 'Collapse list' : 'Expand list'}
+							data-disable-animation="true"
+							ref={(el) => {
+								if (el) {
+									el.dataset.disableAnimation = 'false';
+								}
+							}}
 						>
 							<Icon
 								name="chevron"
@@ -166,7 +217,7 @@ export function HorizontalList({
 								data-flip={chevronFlip}
 							/>
 						</Button>
-					</CollapsibleSimple>
+					</div>
 					{children}
 				</div>
 			</ScrollArea.Viewport>

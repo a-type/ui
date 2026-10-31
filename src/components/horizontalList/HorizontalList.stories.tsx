@@ -181,3 +181,34 @@ export const CantOpen: Story = {
 		);
 	},
 };
+
+export const InitialOpen: Story = {
+	render: (args) => {
+		const [open, setOpen] = useState(true);
+		return (
+			<div
+				style={{
+					width: '300px',
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'stretch',
+					justifyContent: 'flex-end',
+					backgroundColor: 'var(--m-gray-paper)',
+					border: `1px solid var(--m-gray)`,
+				}}
+			>
+				<HorizontalList
+					style={{
+						maxHeight: 200,
+						borderTop: '1px solid var(--m-gray)',
+					}}
+					openDirection="up"
+					{...args}
+					open={open}
+					onOpenChange={setOpen}
+				/>
+			</div>
+		);
+	},
+};

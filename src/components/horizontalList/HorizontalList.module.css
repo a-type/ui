@@ -3,6 +3,12 @@
 	max-height: 300px;
 	display: flex;
 	flex-direction: column;
+
+	&[data-disable-animation='true'] .toggleButtonWrapper,
+	&[data-disable-animation='true'] .content {
+		transition: none;
+		animation: none;
+	}
 }
 
 .viewport {
@@ -18,10 +24,24 @@
 	align-items: center;
 	gap: var(--m-sp-sm);
 	padding: var(--m-sp-sm) var(--m-sp-sm) var(--m-sp-md) var(--m-sp-sm);
+	interpolate-size: allow-keywords;
 }
 
-.toggleButton {
-	&[data-open='false'] {
+.toggleButtonWrapper {
+	position: sticky;
+	box-sizing: border-box;
+	overflow: clip;
+	left: 0;
+	height: 100%;
+	top: var(--m-sp-sm);
+	z-index: 1;
+	flex-shrink: 0;
+	@apply --mx-bg(inherit);
+	transition: width var(--m-dur) var(--m-ease);
+
+	width: --fn-literal(36px);
+
+	.root[data-state='closed'] & {
 		height: 100%;
 		border-inline-end: var(--m-lw) solid var(--m-gray);
 		border-top-left-radius: var(--m-rd-sm);
@@ -29,16 +49,11 @@
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
-}
-
-.toggleButtonWrapper {
-	position: sticky;
-	left: 0;
-	height: 100%;
-	top: var(--m-sp-sm);
-	z-index: 1;
-	flex-shrink: 0;
-	@apply --mx-bg(inherit);
+	.container[data-can-open='false'] &,
+	.container[data-toggle-hidden] & {
+		width: 0px;
+		border: none;
+	}
 }
 
 .chevronIcon {

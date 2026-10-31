@@ -29,6 +29,10 @@
 	animation: spinner-rotate 1400ms linear infinite;
 	@apply --mx-fg(inherit);
 	opacity: 50%;
+
+	&[data-play-state='stopped'] {
+		animation: none;
+	}
 }
 
 .svg {

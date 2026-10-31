@@ -116,6 +116,9 @@ export function ButtonRoot({
 					data-active={
 						(isLoading && !disableDefaultLoadingIndicator) || undefined
 					}
+					data-play-state={
+						isLoading && !disableDefaultLoadingIndicator ? 'running' : 'stopped'
+					}
 					aria-hidden={!(isLoading && !disableDefaultLoadingIndicator)}
 				/>
 				{toggled !== undefined &&
