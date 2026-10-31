@@ -1,0 +1,77 @@
+{
+  "v": 0,
+  "docs": {
+    "components-divider--docs": {
+      "id": "components-divider--docs",
+      "name": "Docs",
+      "path": "./src/components/divider/Divider.mdx",
+      "title": "Components/Divider",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/Divider\" />\n\n# Divider\n\nUse `Divider` to separate sections of content.\n\n```tsx\nimport { Divider } from '@a-type/ui';\n\n<Divider padded />;\n```\n\n`padded` adds vertical spacing. `compensate` (0-6) insets the divider by\nquarter-rem increments on each side.\n",
+      "summary": "# Divider Use `Divider` to separate sections of content. ```tsx ; ``` `padded` adds vertic..."
+    },
+    "components-errorboundary--docs": {
+      "id": "components-errorboundary--docs",
+      "name": "Docs",
+      "path": "./src/components/errorBoundary/ErrorBoundary.mdx",
+      "title": "Components/ErrorBoundary",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/ErrorBoundary\" />\n\n# ErrorBoundary\n\nWrap a subtree to show a fallback if a descendant throws while rendering.\n\n```tsx\nimport { ErrorBoundary } from '@a-type/ui';\n\n<ErrorBoundary\n\tfallback={({ error, clearError }) => (\n\t\t<div>\n\t\t\t<p>{error.message}</p>\n\t\t\t<button type=\"button\" onClick={clearError}>\n\t\t\t\tTry again\n\t\t\t</button>\n\t\t</div>\n\t)}\n>\n\t<App />\n</ErrorBoundary>;\n```\n\n`fallback` can also be a React node. Without one, the boundary renders nothing\nafter an error. React error boundaries do not catch errors in event handlers.\n",
+      "summary": "# ErrorBoundary Wrap a subtree to show a fallback if a descendant throws while rendering. ..."
+    },
+    "components-globalerrorfallback--docs": {
+      "id": "components-globalerrorfallback--docs",
+      "name": "Docs",
+      "path": "./src/components/globalErrorFallback/GlobalErrorFallback.mdx",
+      "title": "Components/GlobalErrorFallback",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/GlobalErrorFallback\" />\n\n# GlobalErrorFallback\n\nUse `GlobalErrorFallback` as a full-page error message, for example as an\n`ErrorBoundary` fallback.\n\n```tsx\nimport { ErrorBoundary, GlobalErrorFallback } from '@a-type/ui';\n\n<ErrorBoundary fallback={<GlobalErrorFallback />}>\n\t<App />\n</ErrorBoundary>;\n```\n\nIt includes a refresh button and changes its message after a recent refresh\nattempt. Pass children to include actions such as a bug-report link. The\n`ReloadButton` is also exported for use on its own.\n",
+      "summary": "# GlobalErrorFallback Use `GlobalErrorFallback` as a full-page error message, for example ..."
+    },
+    "components-img--docs": {
+      "id": "components-img--docs",
+      "name": "Docs",
+      "path": "./src/components/img/Img.mdx",
+      "title": "Components/Img",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/Img\" />\n\n# Img\n\n`Img` is an image element with convenient sizing and object-fit props.\n\n```tsx\nimport { Img } from '@a-type/ui';\n\n<Img src=\"/photo.jpg\" alt=\"A mountain landscape\" full=\"width\" fit=\"cover\" />;\n```\n\n`full` can fill the width, height, or both. Use `fit` and `position` to control\nhow the image is cropped within its dimensions, and provide appropriate alt\ntext.\n",
+      "summary": "# Img `Img` is an image element with convenient sizing and object-fit props. ```tsx ; ``` ..."
+    },
+    "components-infiniteloadtrigger--docs": {
+      "id": "components-infiniteloadtrigger--docs",
+      "name": "Docs",
+      "path": "./src/components/infiniteLoadTrigger/InfiniteLoadTrigger.mdx",
+      "title": "Components/InfiniteLoadTrigger",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/InfiniteLoadTrigger\" />\n\n# InfiniteLoadTrigger\n\nPlace `InfiniteLoadTrigger` after a list to request more content when the\ntrigger becomes visible.\n\n```tsx\nimport { InfiniteLoadTrigger } from '@a-type/ui';\n\nfunction LoadMoreTrigger({\n\thasNextPage,\n\tisLoading,\n\tloadNextPage,\n}: {\n\thasNextPage: boolean;\n\tisLoading: boolean;\n\tloadNextPage: () => void;\n}) {\n\tif (!hasNextPage || isLoading) return null;\n\treturn <InfiniteLoadTrigger onVisible={loadNextPage} />;\n}\n```\n\nIt uses an `IntersectionObserver` and may call `onVisible` again when the\ntrigger re-enters the viewport or remounts. The caller must handle loading,\npagination, and duplicate requests.\n",
+      "summary": "# InfiniteLoadTrigger Place `InfiniteLoadTrigger` after a list to request more content whe..."
+    },
+    "components-navbar--docs": {
+      "id": "components-navbar--docs",
+      "name": "Docs",
+      "path": "./src/components/navBar/NavBar.mdx",
+      "title": "Components/NavBar",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/NavBar\" />\n\n# NavBar\n\nCompose a navigation bar from `NavBar` and its item parts.\n\n```tsx\nimport { NavBar } from '@a-type/ui';\n\n<nav aria-label=\"Primary\">\n\t<NavBar>\n\t\t<NavBar.Item\n\t\t\tactive\n\t\t\trender={<a href=\"/\" aria-current=\"page\" />}\n\t\t\tnativeButton={false}\n\t\t>\n\t\t\t<NavBar.ItemIcon name=\"home\" />\n\t\t\t<NavBar.ItemText>Home</NavBar.ItemText>\n\t\t</NavBar.Item>\n\t</NavBar>\n</nav>;\n```\n\n`active` changes the item's appearance; routing and the current-page state are\nthe caller's responsibility. `NavBar.ItemPip` can display a notification marker.\nUse `PageNav` to place the bar in the page layout.\n",
+      "summary": "# NavBar Compose a navigation bar from `NavBar` and its item parts. ```tsx Home ; ``` `act..."
+    },
+    "components-provider--docs": {
+      "id": "components-provider--docs",
+      "name": "Docs",
+      "path": "./src/components/provider/Provider.mdx",
+      "title": "Components/Provider",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/Provider\" />\n\n# Provider\n\nImport the library stylesheet and wrap your application in `Provider`.\n\n```tsx\nimport '@a-type/ui/main.css';\nimport { Provider } from '@a-type/ui';\n\n<Provider>\n\t<App />\n</Provider>;\n```\n\nThe provider supplies the icon spritesheet, toast and tooltip providers,\nparticle layer, and PWA install dialog. It also manages viewport and virtual\nkeyboard behavior.\n\n- The install dialog loads `/manifest.json` by default. Pass `manifestPath` to\n  change the path, or `manifestPath={false}` to disable the dialog.\n- `disableParticles` omits the particle layer. Otherwise, its children render\n  after the client mounts.\n- `virtualKeyboardBehavior` accepts `displace` (the default) or `overlay` on\n  supported browsers. `disableViewportOffset` and `disableTitleBarColor` opt\n  out of those global updates.\n",
+      "summary": "# Provider Import the library stylesheet and wrap your application in `Provider`. ```tsx ;..."
+    },
+    "components-hidewhilekeyboardopen--docs": {
+      "id": "components-hidewhilekeyboardopen--docs",
+      "name": "Docs",
+      "path": "./src/components/utility/HideWhileKeyboardOpen.mdx",
+      "title": "Components/HideWhileKeyboardOpen",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/HideWhileKeyboardOpen\" />\n\n# HideWhileKeyboardOpen\n\nWrap content that should be hidden while the on-screen keyboard is open.\n\n```tsx\nimport { HideWhileKeyboardOpen } from '@a-type/ui';\n\n<HideWhileKeyboardOpen>\n\t<nav aria-label=\"Primary\">Navigation</nav>\n</HideWhileKeyboardOpen>;\n```\n\nIt uses the configured virtual-keyboard behavior and a viewport-size heuristic\nwhere appropriate, so detection depends on browser support. `PageNav` uses this\ncomponent automatically.\n",
+      "summary": "# HideWhileKeyboardOpen Wrap content that should be hidden while the on-screen keyboard is..."
+    },
+    "components-slotdiv--docs": {
+      "id": "components-slotdiv--docs",
+      "name": "Docs",
+      "path": "./src/components/utility/SlotDiv.mdx",
+      "title": "Components/SlotDiv",
+      "content": "import { Meta } from '@storybook/addon-docs/blocks';\n\n<Meta title=\"Components/SlotDiv\" />\n\n# SlotDiv\n\n`SlotDiv` renders a `div` by default and can render another element through the\nBase UI `render` prop.\n\n```tsx\nimport { SlotDiv } from '@a-type/ui';\n\n<SlotDiv render={<a href=\"/settings\" />}>Settings</SlotDiv>;\n```\n\nProps and the ref are merged into the rendered element. Components such as\n`Box` build on the same pattern.\n",
+      "summary": "# SlotDiv `SlotDiv` renders a `div` by default and can render another element through the ..."
+    }
+  }
+}

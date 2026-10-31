@@ -1,0 +1,5 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,t as n}from"./NumberStepper-flHQlfh4.js";var r,i,a;function o(){return(o=e((()=>{t(),r={title:`Components/NumberStepper`,component:n,argTypes:{},parameters:{controls:{expanded:!0},docs:{description:{component:"`NumberStepper` is controlled with a numeric `value` and `onChange`. Use `increment` for a fixed step or `steps` for a list of allowed values; the current value should be in that list.\n\n`min` and `max` disable buttons at the boundaries but do not clamp a step that crosses them."}}}},i={args:{value:0}},a=[`Default`],i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`{
+  args: {
+    value: 0
+  }
+}`,...i.parameters?.docs?.source}}}})))()}o();export{i as Default,a as __namedExportsOrder,r as default};

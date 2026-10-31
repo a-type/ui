@@ -1,0 +1,7 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./jsx-runtime-DeHZSEgm.js";import{n,t as r}from"./Note-CzaCqAGY.js";var i,a,o,s,c;function l(){return(l=e((()=>{n(),i=t(),a={title:`Components/Note`,component:r,args:{children:`This is a note`},parameters:{controls:{expanded:!0},docs:{description:{component:"`Note` renders its children in a folded-note surface. Use `Note.Input` for an editable, auto-sizing text area inside it.\n\n`Note.Input` is the input itself rather than a complete labeled field, so provide a label when editing."}}}},o={},s={render(e){return(0,i.jsx)(r,{...e,children:(0,i.jsx)(r.Input,{})})}},c=[`Default`,`Editable`],o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{}`,...o.parameters?.docs?.source}}},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  render(args) {
+    return <Note {...args}>
+                <Note.Input />
+            </Note>;
+  }
+}`,...s.parameters?.docs?.source}}}})))()}l();export{o as Default,s as Editable,c as __namedExportsOrder,a as default};
