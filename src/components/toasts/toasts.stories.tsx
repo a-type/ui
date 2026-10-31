@@ -1,20 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../box/Box.js';
 import { Button } from '../button/Button.js';
-import { toast } from './toasts.js';
+import { toast, Toaster } from './toasts.js';
 
+/**
+ * Call `toast`, `toast.success`, or `toast.error` to show a message. `toast.promise` tracks a promise, and `toast.loading` returns a `complete` function for a later update.
+ *
+ * `Provider` mounts the toast provider and `Toaster`. Use `timeout` in milliseconds and `data.actions` for optional actions.
+ */
 const meta = {
 	title: 'Components/toasts',
+	component: Toaster,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Call `toast`, `toast.success`, or `toast.error` to show a message. `toast.promise` tracks a promise, ' +
-					'and `toast.loading` returns a `complete` function for a later update.\n\n' +
-					'`Provider` mounts the toast provider and `Toaster`. Use `timeout` in milliseconds and `data.actions` for optional actions.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

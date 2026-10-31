@@ -3,19 +3,16 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Slider } from './Slider.js';
 
+/**
+ * Use `Slider` with `defaultValue`, or control it with `value` and `onValueChange`; configure `min`, `max`, and `step` as needed. `Slider.getSingle` extracts one value from a number or value array.
+ *
+ * For a labeled thumb or a displayed value, compose `Slider.Root`, `Slider.Ui`, and `Slider.Value`.
+ */
 const meta = {
 	title: 'Components/Slider',
 	component: Slider,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Slider` with `defaultValue`, or control it with `value` and `onValueChange`; configure `min`, `max`, and `step` as needed. ' +
-					'`Slider.getSingle` extracts one value from a number or value array.\n\n' +
-					'For a labeled thumb or a displayed value, compose `Slider.Root`, `Slider.Ui`, and `Slider.Value`.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Slider>;

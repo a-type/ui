@@ -2,19 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../box/Box.js';
 import { Heading, HeroText, Text } from './typography.js';
 
+/**
+ * Use `Text`, `Heading`, `HeroText`, `P`, and `TextLink` for styled typography. Props such as `emphasis`, `bold`, `dim`, and `truncate` adjust presentation.
+ *
+ * `Heading` renders a span by default: use `render={<h2 />}` (or another heading level) for semantic headings. The `H1` through `H5` helpers are deprecated.
+ */
 const meta = {
 	title: 'Components/typography',
+	component: Text,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Text`, `Heading`, `HeroText`, `P`, and `TextLink` for styled typography. ' +
-					'Props such as `emphasis`, `bold`, `dim`, and `truncate` adjust presentation.\n\n' +
-					'`Heading` renders a span by default: use `render={<h2 />}` (or another heading level) for semantic headings. ' +
-					'The `H1` through `H5` helpers are deprecated.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

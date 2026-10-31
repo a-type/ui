@@ -4,6 +4,11 @@ import { Button } from '../button/index.js';
 import { Icon } from '../icon/index.js';
 import { HorizontalList } from './HorizontalList.js';
 
+/**
+ * `HorizontalList` displays a scrolling row and can expand overflowing items into a wrapped layout. It manages its own open state, or accepts `open` and `onOpenChange`.
+ *
+ * Use `onCanOpenChange` to observe whether content overflows and `disableInternalOpenToggle` to supply your own toggle.
+ */
 const meta = {
 	title: 'Components/HorizontalList',
 	component: HorizontalList,
@@ -53,14 +58,6 @@ const meta = {
 		onCanOpenChange: () => {},
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`HorizontalList` displays a scrolling row and can expand overflowing items into a wrapped layout. ' +
-					'It manages its own open state, or accepts `open` and `onOpenChange`.\n\n' +
-					'Use `onCanOpenChange` to observe whether content overflows and `disableInternalOpenToggle` to supply your own toggle.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof HorizontalList>;

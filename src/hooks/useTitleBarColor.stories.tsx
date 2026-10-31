@@ -5,6 +5,7 @@ import { useThemedTitleBar, useTitleBarColor } from './useTitleBarColor.js';
 
 const meta = {
 	title: 'Hooks/useTitleBarColor',
+	tags: ['!manifest'],
 	argTypes: {},
 	parameters: {
 		controls: { expanded: true },

@@ -3,18 +3,14 @@ import { Box } from '../box/Box.js';
 import { P } from '../typography/typography.js';
 import { Peek } from './Peek.js';
 
+/**
+ * `Peek` initially shows a limited height of its children and provides a toggle when the content overflows. Set `peekHeight` in pixels; it defaults to 120. The expanded state is managed internally.
+ */
 const meta = {
 	title: 'Components/Peek',
 	component: Peek,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`Peek` initially shows a limited height of its children and provides a toggle when the content overflows. ' +
-					'Set `peekHeight` in pixels; it defaults to 120. The expanded state is managed internally.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Peek>;

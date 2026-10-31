@@ -2,18 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { CollapsibleSimple } from './Collapsible.js';
 
+/**
+ * Compose `Collapsible` with `Collapsible.Trigger` and `Collapsible.Content`, or use `Collapsible.Simple` when the open state is managed elsewhere.
+ *
+ * Content animates vertically by default; set `horizontal` or `both` for other directions.
+ */
 const meta = {
 	title: 'Components/CollapsibleSimple',
 	component: CollapsibleSimple,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Compose `Collapsible` with `Collapsible.Trigger` and `Collapsible.Content`, or use `Collapsible.Simple` when the open state is managed elsewhere.\n\n' +
-					'Content animates vertically by default; set `horizontal` or `both` for other directions.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof CollapsibleSimple>;

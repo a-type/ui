@@ -19,18 +19,16 @@ import { PageNav } from './PageNav.js';
 import { PageNowPlaying } from './PageNowPlaying.js';
 import { PageRoot } from './PageRoot.js';
 
+/**
+ * Build a page with `PageRoot`, `PageContent`, and optionally `PageNav`; `PageSection` and `PageSectionGrid` organize content. `PageFixedArea` provides a fixed area, while `PageNowPlaying` is useful for floating controls.
+ *
+ * `PageNav` hides while the keyboard is open. `PageNowPlaying` portals to the body by default; set `disablePortal` to keep it in place.
+ */
 const meta = {
 	title: 'Components/Layouts',
+	component: PageRoot,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Build a page with `PageRoot`, `PageContent`, and optionally `PageNav`; `PageSection` and `PageSectionGrid` organize content. ' +
-					'`PageFixedArea` provides a fixed area, while `PageNowPlaying` is useful for floating controls.\n\n' +
-					'`PageNav` hides while the keyboard is open. `PageNowPlaying` portals to the body by default; set `disablePortal` to keep it in place.',
-			},
-		},
 		controls: { expanded: true },
 		layout: 'fullscreen',
 	},

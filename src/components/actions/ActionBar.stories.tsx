@@ -4,6 +4,11 @@ import { Icon } from '../icon/Icon.js';
 import { ActionBar } from './ActionBar.js';
 import { ActionButton } from './ActionButton.js';
 
+/**
+ * Use `ActionBar` to arrange actions in a horizontally scrolling row. Place `ActionButton` components inside it; their `visible` prop animates them in and out.
+ *
+ * Set `wrap` to allow wrapping, or `disableShadow` to remove the overflow fades.
+ */
 const meta = {
 	title: 'Components/ActionBar',
 	component: ActionBar,
@@ -36,14 +41,6 @@ const meta = {
 		],
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `ActionBar` to arrange actions in a horizontally scrolling row. ' +
-					'Place `ActionButton` components inside it; their `visible` prop animates them in and out.\n\n' +
-					'Set `wrap` to allow wrapping, or `disableShadow` to remove the overflow fades.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof ActionBar>;

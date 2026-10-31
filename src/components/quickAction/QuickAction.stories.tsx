@@ -16,6 +16,11 @@ import { PageNowPlaying } from '../layouts/PageNowPlaying.js';
 import { PageRoot } from '../layouts/PageRoot.js';
 import { QuickAction } from './QuickAction.js';
 
+/**
+ * Compose `QuickAction` with `QuickAction.Trigger` and `QuickAction.Content` for an action panel anchored to its trigger. Set `align` on the content to `start`, `center`, or `end`.
+ *
+ * The popup is portaled and uses CSS anchor positioning, so positioning depends on browser support.
+ */
 const meta = {
 	title: 'Components/QuickAction',
 	argTypes: {
@@ -28,14 +33,6 @@ const meta = {
 		},
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Compose `QuickAction` with `QuickAction.Trigger` and `QuickAction.Content` for an action panel anchored to its trigger. ' +
-					'Set `align` on the content to `start`, `center`, or `end`.\n\n' +
-					'The popup is portaled and uses CSS anchor positioning, so positioning depends on browser support.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

@@ -10,6 +10,7 @@ import { useVirtualKeyboardBehavior } from './hooks/useVirtualKeyboardBehavior.j
 
 const meta = {
 	title: 'Virtual Keyboard Test',
+	tags: ['!manifest'],
 	argTypes: {},
 	parameters: {
 		controls: { expanded: false },

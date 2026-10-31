@@ -1,0 +1,70 @@
+library:
+  name: "@a-type/ui"
+  version: 6.1.56
+generated_from:
+  domain_map: skills/_artifacts/domain_map.yaml
+  skill_spec: skills/_artifacts/skill_spec.md
+skills:
+  [
+    {
+        name: list-components,
+        slug: list-components,
+        domain: components,
+        path: skills/list-components/SKILL.md,
+        description: "Use when choosing which @a-type/ui React component fits a UI need,
+          checking whether the library already provides a component, or getting
+          an overview of available components before building UI. For one known
+          component's props and usage, use lookup-component-docs.",
+        sources: [ src/components/index.ts, .storybook/main.ts ],
+        requires: [],
+        purpose: List the components exported by @a-type/ui and map UI needs to the
+          right component.
+      },
+    {
+        name: lookup-component-docs,
+        slug: lookup-component-docs,
+        domain: components,
+        path: skills/lookup-component-docs/SKILL.md,
+        description: "Use when writing or reviewing code that uses a specific @a-type/ui
+          React component and you need its props, composition parts, usage
+          examples, or caveats, from the installed package or the published
+          Storybook manifest. To find which component fits a need, use
+          list-components first.",
+        sources:
+          [
+            src/components/**/*.stories.tsx,
+            src/components/**/*.mdx,
+            .storybook/main.ts
+          ],
+        requires: [],
+        purpose: "Find usage notes, props, parts, and examples for an @a-type/ui
+          component, preferring documentation that matches the installed
+          version."
+      },
+    {
+        name: author-arbor-css,
+        slug: author-arbor-css,
+        domain: styling,
+        path: skills/author-arbor-css/SKILL.md,
+        description: "Use when writing new CSS for a React app or component built on
+          @a-type/ui, such as a new CSS module, variant styles, color or density
+          variations, or styles that must follow the Arbor theme (light/dark,
+          user colors, density modes). Covers project setup, tokens, mixins,
+          @mode classes, and validation with the arbor CLI. Not for migrating
+          existing CSS to Arbor.",
+        sources:
+          [
+            src/arbor/arbor.ts,
+            src/css/*.css,
+            src/components/**/*.module.css,
+            src/hooks/withClassName.tsx,
+            postcss.config.ts,
+            arbor.config.ts
+          ],
+        requires: [],
+        purpose: "Author new CSS that uses the Arbor theme tokens, mixins, and modes
+          the same way @a-type/ui components do."
+      }
+  ]
+distribution:
+  mode: none

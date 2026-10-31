@@ -4,6 +4,11 @@ import { Button } from '../button/Button.js';
 import { Input } from '../input/Input.js';
 import { ScrollArea } from './ScrollArea.js';
 
+/**
+ * Give `ScrollArea` a constrained size and choose `direction` (`vertical`, `horizontal`, or `both`). Put the scrollable children in `ScrollArea.Content`.
+ *
+ * Fades are included by default; set `disableFades` to remove them. Use `Root`, `Viewport`, and `Scrollbar` for a custom composition.
+ */
 const meta = {
 	title: 'Components/ScrollArea',
 	argTypes: {
@@ -16,15 +21,6 @@ const meta = {
 		direction: 'vertical',
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Give `ScrollArea` a constrained size and choose `direction` (`vertical`, `horizontal`, or `both`). ' +
-					'Put the scrollable children in `ScrollArea.Content`.\n\n' +
-					'Fades are included by default; set `disableFades` to remove them. ' +
-					'Use `Root`, `Viewport`, and `Scrollbar` for a custom composition.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<{ direction: 'vertical' | 'horizontal' | 'both' }>;

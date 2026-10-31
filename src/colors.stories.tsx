@@ -7,6 +7,7 @@ import { Box } from './components/index.js';
 
 const meta = {
 	title: 'System/Colors',
+	tags: ['!manifest'],
 	argTypes: {
 		customHue: {
 			control: {

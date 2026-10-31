@@ -8,20 +8,16 @@ import { SwitchField } from './SwitchField.js';
 import { TextField } from './TextField.js';
 import { ToggleGroupField } from './ToggleGroupField.js';
 
+/**
+ * `FormikForm` wraps Formik and a styled form. Provide `initialValues` and `onSubmit`, then use named fields such as `FormikForm.TextField`, `FormikForm.CheckboxField`, and `FormikForm.SubmitButton`. It also exposes `TextAreaField`, `NumberStepperField`, `SwitchField`, `ToggleGroupField`, and `EmojiField`.
+ *
+ * Field names must match the Formik values. `Field` exposes `Label`, `Control`, `Description`, and `Error` for custom layouts.
+ */
 const meta = {
 	title: 'Components/Form',
 	component: FormikForm,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`FormikForm` wraps Formik and a styled form. Provide `initialValues` and `onSubmit`, then use named fields such as ' +
-					'`FormikForm.TextField`, `FormikForm.CheckboxField`, and `FormikForm.SubmitButton`. ' +
-					'It also exposes `TextAreaField`, `NumberStepperField`, `SwitchField`, `ToggleGroupField`, and `EmojiField`.\n\n' +
-					'Field names must match the Formik values. `Field` exposes `Label`, `Control`, `Description`, and `Error` for custom layouts.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof FormikForm>;

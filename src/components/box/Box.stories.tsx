@@ -9,6 +9,11 @@ import { ToggleGroup } from '../toggleGroup/toggleGroup.js';
 import { Text } from '../typography/typography.js';
 import { Box } from './Box.js';
 
+/**
+ * `Box` is a flex layout wrapper: it defaults to a row, and `col` switches to a column. Use `gap`, `p`, `items`, `justify`, and `surface` for common layout and styling needs.
+ *
+ * Use the `render` prop to render a different element while retaining the Box styles.
+ */
 const meta = {
 	title: 'Components/Box',
 	component: Box,
@@ -88,14 +93,6 @@ const meta = {
 		},
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`Box` is a flex layout wrapper: it defaults to a row, and `col` switches to a column. ' +
-					'Use `gap`, `p`, `items`, `justify`, and `surface` for common layout and styling needs.\n\n' +
-					'Use the `render` prop to render a different element while retaining the Box styles.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Box>;

@@ -1,19 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Checkbox } from './Checkbox.js';
 
+/**
+ * Use `Checkbox` with a label and, when controlled, `checked` and `onCheckedChange`. Set `checkedMode="faded"` to de-emphasize checked items, such as completed tasks.
+ *
+ * For custom composition, use `Checkbox.Root` and `Checkbox.Indicator`.
+ */
 const meta = {
 	title: 'Components/Checkbox',
 	component: Checkbox,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Checkbox` with a label and, when controlled, `checked` and `onCheckedChange`. ' +
-					'Set `checkedMode="faded"` to de-emphasize checked items, such as completed tasks.\n\n' +
-					'For custom composition, use `Checkbox.Root` and `Checkbox.Indicator`.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Checkbox>;

@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { Heading } from '../typography/typography.js';
 import { EditableText } from './EditableText.js';
 
+/**
+ * `EditableText` displays text that can be clicked to edit. Pass `value` and `onValueChange`; changes are reported as the user types.
+ *
+ * Editing ends on Enter or blur. Pass `editing` and `onEditingChange` to control the editing state.
+ */
 const meta = {
 	title: 'Components/EditableText',
 	component: EditableText,
@@ -11,13 +16,6 @@ const meta = {
 		value: 'Hello, world!',
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`EditableText` displays text that can be clicked to edit. Pass `value` and `onValueChange`; changes are reported as the user types.\n\n' +
-					'Editing ends on Enter or blur. Pass `editing` and `onEditingChange` to control the editing state.',
-			},
-		},
 		controls: { expanded: true },
 		layout: 'centered',
 	},

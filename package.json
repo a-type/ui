@@ -10,7 +10,10 @@
 	},
 	"files": [
 		"/dist",
-		"/src"
+		"/src",
+		"skills/list-components",
+		"skills/lookup-component-docs",
+		"skills/author-arbor-css"
 	],
 	"sideEffects": [
 		".*\\.css$"
@@ -77,9 +80,10 @@
 		"@arbor-css/core": "^0.0.149",
 		"@arbor-css/postcss": "^0.0.149",
 		"@eslint/js": "^9.39.2",
-		"@storybook/addon-docs": "10.4.0",
-		"@storybook/addon-links": "10.4.0",
-		"@storybook/react-vite": "10.4.0",
+		"@storybook/addon-docs": "10.6.5",
+		"@storybook/addon-links": "10.6.5",
+		"@storybook/react-vite": "10.6.5",
+		"@tanstack/intent": "^0.5.6",
 		"@testing-library/react": "^16.3.2",
 		"@types/dom-chromium-installation-events": "^101.0.4",
 		"@types/node": "^24.13.2",
@@ -98,7 +102,7 @@
 		"dotenv": "^16.3.1",
 		"eslint": "^9.39.2",
 		"eslint-plugin-react": "^7.37.5",
-		"eslint-plugin-storybook": "10.4.0",
+		"eslint-plugin-storybook": "10.6.5",
 		"fs-extra": "^11.1.1",
 		"globals": "^17.0.0",
 		"husky": "^9.1.7",
@@ -110,7 +114,7 @@
 		"prettier": "^3.0.3",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
-		"storybook": "10.4.0",
+		"storybook": "10.6.5",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.53.0",
 		"typescript-plugin-css-modules": "^5.2.0",
@@ -123,5 +127,8 @@
 			"prettier --write --cache",
 			"eslint --fix --cache"
 		]
-	}
+	},
+	"keywords": [
+		"tanstack-intent"
+	]
 }

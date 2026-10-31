@@ -3,6 +3,7 @@ import { Box } from './components/index.js';
 
 const meta = {
 	title: 'System/Shadows',
+	tags: ['!manifest'],
 	args: {
 		opacity: 0.1,
 	},

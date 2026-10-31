@@ -3,19 +3,16 @@ import { useState } from 'react';
 import { Box } from '../box/Box.js';
 import { Masonry } from './masonry.js';
 
+/**
+ * `Masonry` arranges its direct children into columns based on their measured heights. Set `columns` to a number or a function of container width, and `gap` to a pixel value.
+ *
+ * Set `data-span` on a child, or spread `masonrySpan(n)`, to span multiple columns.
+ */
 const meta = {
 	title: 'Components/Masonry',
 	component: Masonry,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`Masonry` arranges its direct children into columns based on their measured heights. ' +
-					'Set `columns` to a number or a function of container width, and `gap` to a pixel value.\n\n' +
-					'Set `data-span` on a child, or spread `masonrySpan(n)`, to span multiple columns.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Masonry>;

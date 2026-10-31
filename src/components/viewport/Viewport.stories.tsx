@@ -4,19 +4,15 @@ import { Icon } from '../icon/Icon.js';
 import { Viewport } from './Viewport.js';
 import { useViewport } from './ViewportContext.js';
 
+/**
+ * `Viewport` provides pan and zoom for its children. Give it a constrained size and add `Viewport.Control` with `Viewport.ZoomControls` for visible controls.
+ *
+ * Configure `minZoom`, `maxZoom`, and the default center or zoom as needed. Use `viewportRef` outside the viewport or `useViewport()` in a descendant for programmatic control.
+ */
 const meta = {
 	title: 'Components/Viewport',
 	component: Viewport,
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`Viewport` provides pan and zoom for its children. Give it a constrained size and add `Viewport.Control` ' +
-					'with `Viewport.ZoomControls` for visible controls.\n\n' +
-					'Configure `minZoom`, `maxZoom`, and the default center or zoom as needed. ' +
-					'Use `viewportRef` outside the viewport or `useViewport()` in a descendant for programmatic control.',
-			},
-		},
 		controls: { expanded: true },
 	},
 	args: {

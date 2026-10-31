@@ -7,18 +7,15 @@ import { TextSkeleton } from '../skeletons/skeletons.js';
 import { Button, ButtonProps } from './Button.js';
 import { ConfirmedButton } from './ConfirmedButton.js';
 
+/**
+ * Use `emphasis`, `size`, and `color` to style a `Button`. `loading` disables it, while `toggled` exposes a pressed state. Give icon-only buttons an accessible label.
+ *
+ * `ConfirmedButton` opens a confirmation dialog before calling `onConfirm`; `skip` bypasses the dialog.
+ */
 const meta = {
 	title: 'Components/Button',
 	component: Button,
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `emphasis`, `size`, and `color` to style a `Button`. `loading` disables it, while `toggled` exposes a pressed state. ' +
-					'Give icon-only buttons an accessible label.\n\n' +
-					'`ConfirmedButton` opens a confirmation dialog before calling `onConfirm`; `skip` bypasses the dialog.',
-			},
-		},
 		controls: { expanded: true },
 	},
 	args: {

@@ -10,6 +10,9 @@ const config: StorybookConfig = {
 		options: {},
 	},
 	staticDirs: ['../storybook-public'],
+	features: {
+		componentsManifest: true,
+	},
 	core: {
 		allowedHosts: ['localhost', 'blacktop-wsl.sardine-census.ts.net'],
 	},

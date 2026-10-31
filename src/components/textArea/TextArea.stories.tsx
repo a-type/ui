@@ -2,19 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { TextArea } from './TextArea.js';
 
+/**
+ * `TextArea` is a multiline input with the same `onValueChange` and placeholder options as `Input`. It auto-sizes by default; set `autoSize={false}` to use a fixed number of `rows`.
+ *
+ * Use `TextArea.Border` and `TextArea.Input` for custom composition, and provide an associated label.
+ */
 const meta = {
 	title: 'Components/TextArea',
 	component: TextArea,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`TextArea` is a multiline input with the same `onValueChange` and placeholder options as `Input`. ' +
-					'It auto-sizes by default; set `autoSize={false}` to use a fixed number of `rows`.\n\n' +
-					'Use `TextArea.Border` and `TextArea.Input` for custom composition, and provide an associated label.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof TextArea>;

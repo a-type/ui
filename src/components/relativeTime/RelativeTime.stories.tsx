@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RelativeTime } from './RelativeTime.js';
 
+/**
+ * Pass a timestamp in milliseconds as `value` to display a relative time. Use `abbreviate` for shorter units or `disableRelativeText` to omit "ago" and "from now".
+ *
+ * The text updates every minute; `countdownSeconds` updates once per second for future times less than a minute away.
+ */
 const meta = {
 	title: 'Components/RelativeTime',
 	component: RelativeTime,
@@ -10,14 +15,6 @@ const meta = {
 		abbreviate: false,
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Pass a timestamp in milliseconds as `value` to display a relative time. ' +
-					'Use `abbreviate` for shorter units or `disableRelativeText` to omit "ago" and "from now".\n\n' +
-					'The text updates every minute; `countdownSeconds` updates once per second for future times less than a minute away.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof RelativeTime>;

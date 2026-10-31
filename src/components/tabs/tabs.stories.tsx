@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import { TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs.js';
+import { Tabs, TabsContent, TabsList, TabsRoot, TabsTrigger } from './tabs.js';
 
-const meta = {
+/**
+ * Compose `Tabs` with `Tabs.List`, `Tabs.Trigger`, and matching `Tabs.Content` values. Use `value` and `onValueChange` to control the active tab.
+ *
+ * The tab list scrolls horizontally when its triggers do not fit.
+ */
+const meta: Meta = {
 	title: 'Components/Tabs',
+	component: Tabs,
 	argTypes: {
 		color: {
 			control: 'select',
@@ -11,17 +17,9 @@ const meta = {
 		},
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Compose `Tabs` with `Tabs.List`, `Tabs.Trigger`, and matching `Tabs.Content` values. ' +
-					'Use `value` and `onValueChange` to control the active tab.\n\n' +
-					'The tab list scrolls horizontally when its triggers do not fit.',
-			},
-		},
 		controls: { expanded: true },
 	},
-} satisfies Meta;
+};
 
 export default meta;
 

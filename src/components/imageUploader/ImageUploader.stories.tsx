@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { ImageUploader } from './ImageUploader.js';
 
+/**
+ * `ImageUploader` takes an image URL or null as `value` and reports a `File | null` through `onChange`. It supports file selection, drag and drop, camera capture, and optional `altText`/`onAltText`.
+ *
+ * `maxDimension` resizes selected or dropped files; camera captures bypass that resize. The caller is responsible for storing the file and updating the URL.
+ */
 const meta = {
 	title: 'Components/ImageUploader',
 	component: ImageUploader,
@@ -11,15 +16,6 @@ const meta = {
 		maxDimension: { control: { type: 'number' } },
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`ImageUploader` takes an image URL or null as `value` and reports a `File | null` through `onChange`. ' +
-					'It supports file selection, drag and drop, camera capture, and optional `altText`/`onAltText`.\n\n' +
-					'`maxDimension` resizes selected or dropped files; camera captures bypass that resize. ' +
-					'The caller is responsible for storing the file and updating the URL.',
-			},
-		},
 		controls: { expanded: true },
 	},
 	args: {

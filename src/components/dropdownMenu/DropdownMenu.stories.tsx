@@ -4,19 +4,16 @@ import { Button } from '../button/Button.js';
 import { Icon } from '../icon/index.js';
 import { DropdownMenu } from './DropdownMenu.js';
 
+/**
+ * Compose `DropdownMenu` with a `Trigger`, `Content`, and `Item` children. Use the trigger `render` prop to supply a `Button`, and use checkbox or radio items for selectable options.
+ *
+ * Content is portaled and includes an arrow; positioning options such as `side` and `align` are passed to `Content`.
+ */
 const meta: Meta<typeof DropdownMenu> = {
 	title: 'Components/DropdownMenu',
 	component: DropdownMenu,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Compose `DropdownMenu` with a `Trigger`, `Content`, and `Item` children. ' +
-					'Use the trigger `render` prop to supply a `Button`, and use checkbox or radio items for selectable options.\n\n' +
-					'Content is portaled and includes an arrow; positioning options such as `side` and `align` are passed to `Content`.',
-			},
-		},
 		controls: { expanded: true },
 	},
 };

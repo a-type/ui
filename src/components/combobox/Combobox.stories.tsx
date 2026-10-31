@@ -11,6 +11,11 @@ interface Args {
 	highlightItemOnHover?: boolean;
 }
 
+/**
+ * Use `Combobox.create<Item>()` or `Combobox.createGrouped<Group>()` to select from typed items. Compose `Input`, `Content`, `List`, and `Item`; control selection with `value` and `onValueChange`.
+ *
+ * The search text can be controlled separately with `inputValue` and `onInputValueChange`. Use `onCreate` and optionally `showCreatableItem` to offer new values.
+ */
 const meta = {
 	title: 'Components/Combobox',
 	argTypes: {
@@ -45,15 +50,6 @@ const meta = {
 		creatable: false,
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Combobox.create<Item>()` or `Combobox.createGrouped<Group>()` to select from typed items. ' +
-					'Compose `Input`, `Content`, `List`, and `Item`; control selection with `value` and `onValueChange`.\n\n' +
-					'The search text can be controlled separately with `inputValue` and `onInputValueChange`. ' +
-					'Use `onCreate` and optionally `showCreatableItem` to offer new values.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<Args>;

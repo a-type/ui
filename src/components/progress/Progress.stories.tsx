@@ -2,19 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../box/Box.js';
 import { Progress } from './Progress.js';
 
+/**
+ * Pass `value` and optionally `max` to `Progress` to show completion; `max` defaults to 100. Use `Progress.Labeled` with a `label` for a visible label and value.
+ *
+ * The `Root`, `Track`, `Indicator`, `Label`, and `Value` parts are available for custom composition.
+ */
 const meta = {
 	title: 'Components/Progress',
 	component: Progress,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Pass `value` and optionally `max` to `Progress` to show completion; `max` defaults to 100. ' +
-					'Use `Progress.Labeled` with a `label` for a visible label and value.\n\n' +
-					'The `Root`, `Track`, `Indicator`, `Label`, and `Value` parts are available for custom composition.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Progress>;

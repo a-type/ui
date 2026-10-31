@@ -5,19 +5,16 @@ import { Spinner } from '../spinner/Spinner.js';
 import { DatePicker } from './DatePicker.js';
 import { DateRangePicker } from './DateRangePicker.js';
 
+/**
+ * `DatePicker` is controlled with a `Date | null` value and `onChange`. `DateRangePicker` uses the same pattern with `{ start, end }`, where each date may be null.
+ *
+ * Both start by displaying the current month. Use their `Root` and calendar parts to customize the layout.
+ */
 const meta = {
 	title: 'Components/DatePicker',
 	component: DatePicker,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'`DatePicker` is controlled with a `Date | null` value and `onChange`. ' +
-					'`DateRangePicker` uses the same pattern with `{ start, end }`, where each date may be null.\n\n' +
-					'Both start by displaying the current month. Use their `Root` and calendar parts to customize the layout.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof DatePicker>;

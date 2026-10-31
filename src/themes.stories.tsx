@@ -50,7 +50,7 @@ const meta = {
 		controls: { expanded: true },
 		layout: 'fullscreen',
 	},
-	tags: [],
+	tags: ['!manifest'],
 } satisfies Meta;
 
 export default meta;

@@ -1,18 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SplashScreen } from './SplashScreen.js';
 
+/**
+ * Use `SplashScreen` as a startup surface that fills its container, and place an image or logo inside `SplashScreen.Icon`. Both parts accept `render` when a different underlying element is needed.
+ */
 const meta = {
 	title: 'Components/SplashScreen',
 	component: SplashScreen,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `SplashScreen` as a startup surface that fills its container, and place an image or logo inside `SplashScreen.Icon`. ' +
-					'Both parts accept `render` when a different underlying element is needed.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof SplashScreen>;

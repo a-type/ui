@@ -10,20 +10,16 @@ import { Tooltip } from '../tooltip/Tooltip.js';
 import { H1, P } from '../typography/index.js';
 import { Dialog } from './Dialog.js';
 
+/**
+ * Compose `Dialog` with `Dialog.Trigger`, `Dialog.Content`, and a `Dialog.Title`; add `Description`, `Actions`, or `Close` as needed. Control it with `open` and `onOpenChange`, or use `defaultOpen`.
+ *
+ * On screens at most 600px wide, it becomes a drawer unless `disableSheet` is set. Content includes a close button by default; use `disableDefaultClose` to remove it.
+ */
 const meta: any = {
 	title: 'Components/Dialog',
 	component: Dialog,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Compose `Dialog` with `Dialog.Trigger`, `Dialog.Content`, and a `Dialog.Title`; add `Description`, `Actions`, or `Close` as needed. ' +
-					'Control it with `open` and `onOpenChange`, or use `defaultOpen`.\n\n' +
-					'On screens at most 600px wide, it becomes a drawer unless `disableSheet` is set. ' +
-					'Content includes a close button by default; use `disableDefaultClose` to remove it.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Dialog>;

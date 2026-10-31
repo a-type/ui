@@ -12,8 +12,14 @@ interface Args {
 	highlightItemOnHover?: boolean;
 }
 
-const meta = {
+/**
+ * Use `Autocomplete.create<Item>()` for typed suggestions, or `Autocomplete.createGrouped<Group>()` for groups with an `items` array. Compose `Input`, `Content`, `List`, and `Item`, and use `value` and `onValueChange` to control the input text.
+ *
+ * `Content` renders in a portal and accepts `arrow` and `positioner` options.
+ */
+const meta: Meta<Args> = {
 	title: 'Components/Autocomplete',
+	component: Autocomplete,
 	argTypes: {
 		arrow: {
 			control: 'boolean',
@@ -46,17 +52,9 @@ const meta = {
 		highlightItemOnHover: true,
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Autocomplete.create<Item>()` for typed suggestions, or `Autocomplete.createGrouped<Group>()` for groups with an `items` array. ' +
-					'Compose `Input`, `Content`, `List`, and `Item`, and use `value` and `onValueChange` to control the input text.\n\n' +
-					'`Content` renders in a portal and accepts `arrow` and `positioner` options.',
-			},
-		},
 		controls: { expanded: true },
 	},
-} satisfies Meta<Args>;
+};
 
 export default meta;
 

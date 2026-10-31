@@ -1,0 +1,44 @@
+library:
+  name: "@a-type/ui"
+  version: 6.1.56
+domains:
+  - name: components
+    description: Discovering @a-type/ui React components and reading their docs from the installed package or the published Storybook manifests.
+  - name: styling
+    description: Writing new CSS with the Arbor theme (tokens, mixins, @mode classes) the same way library components do.
+skills:
+  [
+    {
+        name: list-components,
+        slug: list-components,
+        domain: components,
+        description: "Use when choosing which @a-type/ui React component fits a UI need, checking whether the library already provides a component, or getting an overview of available components before building UI. For one known component's props and usage, use lookup-component-docs.",
+        tasks:
+          [
+            Find which @a-type/ui component covers a UI need,
+            List every exported @a-type/ui component
+          ],
+        covers: []
+      },
+    {
+        name: lookup-component-docs,
+        slug: lookup-component-docs,
+        domain: components,
+        description: "Use when writing or reviewing code that uses a specific @a-type/ui React component and you need its props, composition parts, usage examples, or caveats, from the installed package or the published Storybook manifest. To find which component fits a need, use list-components first.",
+        tasks: [ "Look up props, parts, and examples for an @a-type/ui component" ],
+        covers: []
+      },
+    {
+        name: author-arbor-css,
+        slug: author-arbor-css,
+        domain: styling,
+        description: "Use when writing new CSS for a React app or component built on @a-type/ui, such as a new CSS module, variant styles, color or density variations, or styles that must follow the Arbor theme (light/dark, user colors, density modes). Covers project setup, tokens, mixins, @mode classes, and validation with the arbor CLI. Not for migrating existing CSS to Arbor.",
+        tasks:
+          [
+            Style a new component with Arbor CSS tokens and mixins,
+            "Add emphasis, size, and color variants to a component"
+          ],
+        covers: []
+      }
+  ]
+gaps: []

@@ -1,18 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Ol, Ul } from './lists.js';
 
+/**
+ * Use `Ol` or `Ul` with their `Item` parts for styled ordered or unordered lists. They render semantic list elements and accept normal list props.
+ *
+ * Set `unstyled` to remove markers and default spacing.
+ */
 const meta = {
 	title: 'Components/lists',
+	component: Ul,
 	argTypes: {},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `Ol` or `Ul` with their `Item` parts for styled ordered or unordered lists. ' +
-					'They render semantic list elements and accept normal list props.\n\n' +
-					'Set `unstyled` to remove markers and default spacing.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

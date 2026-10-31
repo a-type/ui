@@ -6,21 +6,15 @@ import { Icon } from '../icon/index.js';
 import { useParticles } from './ParticleContext.js';
 import { ParticleLayer } from './ParticleLayer.js';
 
+/**
+ * `ParticleLayer` provides a canvas and particle state to descendants; use `useParticles()` to create effects. `Provider` already includes a layer unless `disableParticles` is set.
+ *
+ * The canvas is portaled to the body by default; `noPortal` keeps it in place. The layer and its children render after the client mounts, not during server rendering.
+ */
 const meta = {
 	title: 'Components/ParticleLayer',
 	component: ParticleLayer,
 	argTypes: {},
-	parameters: {
-		docs: {
-			description: {
-				component:
-					'`ParticleLayer` provides a canvas and particle state to descendants; use `useParticles()` to create effects. ' +
-					'`Provider` already includes a layer unless `disableParticles` is set.\n\n' +
-					'The canvas is portaled to the body by default; `noPortal` keeps it in place. ' +
-					'The layer and its children render after the client mounts, not during server rendering.',
-			},
-		},
-	},
 } satisfies Meta<typeof ParticleLayer>;
 
 export default meta;

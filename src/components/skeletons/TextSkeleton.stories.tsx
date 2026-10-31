@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Box } from '../index.js';
 import { TextSkeleton } from './skeletons.js';
 
+/**
+ * Use `TextSkeleton` as a placeholder for text while content loads. Pass `maxLength` to influence its randomly chosen width, which stays fixed for that mount.
+ *
+ * Provide loading status separately for assistive technology.
+ */
 const meta = {
 	title: 'Components/TextSkeleton',
 	component: TextSkeleton,
@@ -15,14 +20,6 @@ const meta = {
 		maxLength: 20,
 	},
 	parameters: {
-		docs: {
-			description: {
-				component:
-					'Use `TextSkeleton` as a placeholder for text while content loads. ' +
-					'Pass `maxLength` to influence its randomly chosen width, which stays fixed for that mount.\n\n' +
-					'Provide loading status separately for assistive technology.',
-			},
-		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof TextSkeleton>;
