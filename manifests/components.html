@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/54 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/54 info</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">10/54 without API description</a><span class="filter-pill ok" aria-disabled="true">140 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">7/140 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">9 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/54 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/54 info</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">10/54 without API description</a><span class="filter-pill ok" aria-disabled="true">141 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">7/141 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">9 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>2.7s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>2.1s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -4486,7 +4486,7 @@ style?: React.CSSProperties</code></pre>
       <div class="badges">
         <label for="c-20-components-horizontallist-props" class="badge ok as-toggle">10 prop types</label>
         
-        <label for="c-20-components-horizontallist-stories" class="badge ok as-toggle">3 stories</label>
+        <label for="c-20-components-horizontallist-stories" class="badge ok as-toggle">4 stories</label>
         
         
       </div>
@@ -4782,6 +4782,48 @@ import { Icon } from '../icon/index.js';</code></pre>
                         &lt;Icon name=&quot;plus&quot; /&gt;
                     &lt;/Button&gt;
                 &lt;/&gt;&lt;/HorizontalList&gt;
+        &lt;/div&gt;
+    );
+};</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">Can Open Changes Dynamically</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const CanOpenChangesDynamically = () =&gt; {
+    const [itemCount, setItemCount] = useState(1);
+
+    return (
+        &lt;div
+            style={{
+                width: &#39;300px&#39;,
+                height: &#39;100%&#39;,
+                display: &#39;flex&#39;,
+                flexDirection: &#39;column&#39;,
+                alignItems: &#39;stretch&#39;,
+                justifyContent: &#39;flex-end&#39;,
+                backgroundColor: &#39;var(--m-gray-paper)&#39;,
+                border: `1px solid var(--m-gray)`,
+            }}&gt;
+            &lt;HorizontalList
+                style={{
+                    maxHeight: 200,
+                    borderTop: &#39;1px solid var(--m-gray)&#39;,
+                }}
+                openDirection=&quot;up&quot;
+                onCanOpenChange={() =&gt; {}}&gt;
+                {new Array(itemCount).fill(null).map((_, i) =&gt; (
+                    &lt;Button key={i} size=&quot;small&quot;&gt;
+                        Item {i + 1}
+                    &lt;/Button&gt;
+                ))}
+                &lt;Button size=&quot;small&quot; onClick={() =&gt; setItemCount(itemCount + 1)}&gt;Add Item
+                                        &lt;/Button&gt;
+            &lt;/HorizontalList&gt;
         &lt;/div&gt;
     );
 };</code></pre>
