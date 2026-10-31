@@ -8,6 +8,14 @@ const meta = {
 	component: Slider,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `Slider` with `defaultValue`, or control it with `value` and `onValueChange`; configure `min`, `max`, and `step` as needed. ' +
+					'`Slider.getSingle` extracts one value from a number or value array.\n\n' +
+					'For a labeled thumb or a displayed value, compose `Slider.Root`, `Slider.Ui`, and `Slider.Value`.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Slider>;

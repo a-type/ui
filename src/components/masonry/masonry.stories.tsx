@@ -8,6 +8,14 @@ const meta = {
 	component: Masonry,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`Masonry` arranges its direct children into columns based on their measured heights. ' +
+					'Set `columns` to a number or a function of container width, and `gap` to a pixel value.\n\n' +
+					'Set `data-span` on a child, or spread `masonrySpan(n)`, to span multiple columns.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Masonry>;

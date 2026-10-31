@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/GlobalErrorFallback" />
+
+# GlobalErrorFallback
+
+Use `GlobalErrorFallback` as a full-page error message, for example as an
+`ErrorBoundary` fallback.
+
+```tsx
+import { ErrorBoundary, GlobalErrorFallback } from '@a-type/ui';
+
+<ErrorBoundary fallback={<GlobalErrorFallback />}>
+	<App />
+</ErrorBoundary>;
+```
+
+It includes a refresh button and changes its message after a recent refresh
+attempt. Pass children to include actions such as a bug-report link. The
+`ReloadButton` is also exported for use on its own.

@@ -7,6 +7,14 @@ const meta = {
 	component: LiveUpdateTextField,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `LiveUpdateTextField` with `value` and `onChange` for optimistic, debounced updates. ' +
+					'The default debounce is 500ms; set `debounceMs` to change it, or `textArea` for multiline input.\n\n' +
+					'External value changes are ignored while focused. Blur sends an edited value immediately, even if a debounced update was already sent.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof LiveUpdateTextField>;

@@ -9,6 +9,14 @@ const meta: any = {
 	component: Drawer,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Drawer` with `Trigger`, `Content`, `Title`, and optional `Description` and `Actions` parts. ' +
+					'Use `open` and `onOpenChange` when controlling it externally.\n\n' +
+					'The drawer swipes downward. Content includes a swipe handle and close button; `disableDefaultClose` removes the button.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Drawer>;

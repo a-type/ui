@@ -5,6 +5,14 @@ const meta = {
 	title: 'Components/lists',
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `Ol` or `Ul` with their `Item` parts for styled ordered or unordered lists. ' +
+					'They render semantic list elements and accept normal list props.\n\n' +
+					'Set `unstyled` to remove markers and default spacing.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

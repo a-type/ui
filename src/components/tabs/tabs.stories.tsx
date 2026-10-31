@@ -11,6 +11,14 @@ const meta = {
 		},
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Tabs` with `Tabs.List`, `Tabs.Trigger`, and matching `Tabs.Content` values. ' +
+					'Use `value` and `onValueChange` to control the active tab.\n\n' +
+					'The tab list scrolls horizontally when its triggers do not fit.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

@@ -8,6 +8,15 @@ const meta = {
 	component: Select,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Select` with `Select.Trigger`, `Select.Content`, and `Select.Item` elements. ' +
+					'Use `value` and `onValueChange` for a controlled selection, or `defaultValue` for an initial value.\n\n' +
+					'The trigger displays the selected value and a chevron by default. ' +
+					'Use `itemToStringLabel` when values need a custom display label.',
+			},
+		},
 		controls: { expanded: true },
 	},
 	args: {

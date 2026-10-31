@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/ErrorBoundary" />
+
+# ErrorBoundary
+
+Wrap a subtree to show a fallback if a descendant throws while rendering.
+
+```tsx
+import { ErrorBoundary } from '@a-type/ui';
+
+<ErrorBoundary
+	fallback={({ error, clearError }) => (
+		<div>
+			<p>{error.message}</p>
+			<button type="button" onClick={clearError}>
+				Try again
+			</button>
+		</div>
+	)}
+>
+	<App />
+</ErrorBoundary>;
+```
+
+`fallback` can also be a React node. Without one, the boundary renders nothing
+after an error. React error boundaries do not catch errors in event handlers.

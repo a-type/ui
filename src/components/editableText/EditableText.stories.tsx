@@ -11,6 +11,13 @@ const meta = {
 		value: 'Hello, world!',
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`EditableText` displays text that can be clicked to edit. Pass `value` and `onValueChange`; changes are reported as the user types.\n\n' +
+					'Editing ends on Enter or blur. Pass `editing` and `onEditingChange` to control the editing state.',
+			},
+		},
 		controls: { expanded: true },
 		layout: 'centered',
 	},

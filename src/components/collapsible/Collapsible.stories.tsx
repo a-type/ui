@@ -7,6 +7,13 @@ const meta = {
 	component: CollapsibleSimple,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Collapsible` with `Collapsible.Trigger` and `Collapsible.Content`, or use `Collapsible.Simple` when the open state is managed elsewhere.\n\n' +
+					'Content animates vertically by default; set `horizontal` or `both` for other directions.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof CollapsibleSimple>;

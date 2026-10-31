@@ -11,6 +11,15 @@ const meta = {
 		disabled: { control: 'boolean' },
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`Input` is a styled text input. Use `value` and `onValueChange` for a controlled value, ' +
+					'and `startAccessory` or `endAccessory` for content inside its border.\n\n' +
+					'`autoSelect` selects text on focus; `placeholders` can rotate placeholder text. ' +
+					'Associate the input with a label, or use a form field.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Input>;

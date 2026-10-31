@@ -1,0 +1,17 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/SlotDiv" />
+
+# SlotDiv
+
+`SlotDiv` renders a `div` by default and can render another element through the
+Base UI `render` prop.
+
+```tsx
+import { SlotDiv } from '@a-type/ui';
+
+<SlotDiv render={<a href="/settings" />}>Settings</SlotDiv>;
+```
+
+Props and the ref are merged into the rendered element. Components such as
+`Box` build on the same pattern.

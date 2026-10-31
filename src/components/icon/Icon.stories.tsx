@@ -15,6 +15,14 @@ const meta = {
 		name: 'placeholder',
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Render `Icon` with a supported `name` and optional pixel `size`; the All story lists the available names. ' +
+					'Icons need the spritesheet provided by `Provider`, or a manually mounted `IconSpritesheet`.\n\n' +
+					'Icons inside a loading `Button` show a spinner unless `loading={false}` is passed.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Icon>;

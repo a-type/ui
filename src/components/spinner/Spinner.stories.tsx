@@ -6,6 +6,14 @@ const meta = {
 	component: Spinner,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `Spinner` to indicate ongoing work and provide an accessible label such as `aria-label="Loading"`. ' +
+					'`size` is in pixels and defaults to 40; pass `null` to size it with CSS.\n\n' +
+					'`FullScreenSpinner` centers a spinner while filling the available flex space.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Spinner>;

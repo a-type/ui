@@ -9,6 +9,14 @@ const meta: Meta<typeof DropdownMenu> = {
 	component: DropdownMenu,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `DropdownMenu` with a `Trigger`, `Content`, and `Item` children. ' +
+					'Use the trigger `render` prop to supply a `Button`, and use checkbox or radio items for selectable options.\n\n' +
+					'Content is portaled and includes an arrow; positioning options such as `side` and `align` are passed to `Content`.',
+			},
+		},
 		controls: { expanded: true },
 	},
 };

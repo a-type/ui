@@ -23,6 +23,14 @@ const meta = {
 	title: 'Components/Layouts',
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Build a page with `PageRoot`, `PageContent`, and optionally `PageNav`; `PageSection` and `PageSectionGrid` organize content. ' +
+					'`PageFixedArea` provides a fixed area, while `PageNowPlaying` is useful for floating controls.\n\n' +
+					'`PageNav` hides while the keyboard is open. `PageNowPlaying` portals to the body by default; set `disablePortal` to keep it in place.',
+			},
+		},
 		controls: { expanded: true },
 		layout: 'fullscreen',
 	},

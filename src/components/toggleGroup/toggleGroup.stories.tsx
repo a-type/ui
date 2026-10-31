@@ -10,6 +10,14 @@ const meta = {
 		},
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `ToggleGroup` with `ToggleGroup.Item` children, each with a `value`. ' +
+					'The controlled `value` and `onValueChange` use an array, even for single selection.\n\n' +
+					'Set `multiple` to allow more than one item to be selected.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof ToggleGroup>;

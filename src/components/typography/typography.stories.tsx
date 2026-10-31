@@ -6,6 +6,15 @@ const meta = {
 	title: 'Components/typography',
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `Text`, `Heading`, `HeroText`, `P`, and `TextLink` for styled typography. ' +
+					'Props such as `emphasis`, `bold`, `dim`, and `truncate` adjust presentation.\n\n' +
+					'`Heading` renders a span by default: use `render={<h2 />}` (or another heading level) for semantic headings. ' +
+					'The `H1` through `H5` helpers are deprecated.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta;

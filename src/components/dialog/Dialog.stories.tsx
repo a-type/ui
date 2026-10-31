@@ -15,6 +15,15 @@ const meta: any = {
 	component: Dialog,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Dialog` with `Dialog.Trigger`, `Dialog.Content`, and a `Dialog.Title`; add `Description`, `Actions`, or `Close` as needed. ' +
+					'Control it with `open` and `onOpenChange`, or use `defaultOpen`.\n\n' +
+					'On screens at most 600px wide, it becomes a drawer unless `disableSheet` is set. ' +
+					'Content includes a close button by default; use `disableDefaultClose` to remove it.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Dialog>;

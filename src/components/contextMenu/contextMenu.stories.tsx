@@ -7,6 +7,14 @@ const meta = {
 	component: ContextMenu,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Wrap a target in `ContextMenu.Trigger` and put `ContextMenu.Item` elements inside `ContextMenu.Content`. ' +
+					'Use `onSelect` on items to handle actions.\n\n' +
+					'The menu opens from the context-menu gesture, renders in a portal, and stops click propagation from its content.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof ContextMenu>;

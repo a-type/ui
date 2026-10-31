@@ -32,6 +32,14 @@ const meta = {
 		},
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Card` with parts such as `Card.Main`, `Card.Title`, `Card.Content`, and `Card.Actions`. ' +
+					'Set `size` or `emphasis` on the root, and use `Card.Grid` for a responsive masonry layout.\n\n' +
+					'`Card.Main` becomes interactive when given `onClick` or `render`; use `nonInteractive` to prevent that.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof CardRoot>;

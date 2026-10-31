@@ -8,6 +8,15 @@ const meta = {
 	component: PwaInstallTrigger,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`PwaInstallTrigger` opens the install dialog supplied by `Provider` and hides when the app is already installed. ' +
+					'It renders an Install button by default and accepts custom children.\n\n' +
+					'The provider loads `/manifest.json` by default; use `manifestPath` to change it. ' +
+					'Setting `manifestPath={false}` removes the install dialog, so the trigger will not open one.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof PwaInstallTrigger>;

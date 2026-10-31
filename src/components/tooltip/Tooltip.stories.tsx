@@ -13,6 +13,14 @@ const meta: Meta = {
 		},
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Wrap one trigger element in `Tooltip` and provide its `content`. ' +
+					'Use `side`, `sideOffset`, or `color` to adjust the popup, and `disabled` to bypass the tooltip.\n\n' +
+					'Tooltips need a `TooltipProvider`; the library `Provider` already supplies one.',
+			},
+		},
 		controls: { expanded: true },
 	},
 	args: {

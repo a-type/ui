@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/NavBar" />
+
+# NavBar
+
+Compose a navigation bar from `NavBar` and its item parts.
+
+```tsx
+import { NavBar } from '@a-type/ui';
+
+<nav aria-label="Primary">
+	<NavBar>
+		<NavBar.Item
+			active
+			render={<a href="/" aria-current="page" />}
+			nativeButton={false}
+		>
+			<NavBar.ItemIcon name="home" />
+			<NavBar.ItemText>Home</NavBar.ItemText>
+		</NavBar.Item>
+	</NavBar>
+</nav>;
+```
+
+`active` changes the item's appearance; routing and the current-page state are
+the caller's responsibility. `NavBar.ItemPip` can display a notification marker.
+Use `PageNav` to place the bar in the page layout.

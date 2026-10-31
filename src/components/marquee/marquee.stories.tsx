@@ -6,6 +6,13 @@ const meta = {
 	component: Marquee,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Place `Marquee.Item` children inside `Marquee` to cycle through them one at a time. ' +
+					'The `timeout` prop controls the interval in milliseconds and defaults to 5000.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Marquee>;

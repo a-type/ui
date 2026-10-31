@@ -1,0 +1,19 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/HideWhileKeyboardOpen" />
+
+# HideWhileKeyboardOpen
+
+Wrap content that should be hidden while the on-screen keyboard is open.
+
+```tsx
+import { HideWhileKeyboardOpen } from '@a-type/ui';
+
+<HideWhileKeyboardOpen>
+	<nav aria-label="Primary">Navigation</nav>
+</HideWhileKeyboardOpen>;
+```
+
+It uses the configured virtual-keyboard behavior and a viewport-size heuristic
+where appropriate, so detection depends on browser support. `PageNav` uses this
+component automatically.

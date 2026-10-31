@@ -15,6 +15,14 @@ const meta = {
 		maxLength: 20,
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `TextSkeleton` as a placeholder for text while content loads. ' +
+					'Pass `maxLength` to influence its randomly chosen width, which stays fixed for that mount.\n\n' +
+					'Provide loading status separately for assistive technology.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof TextSkeleton>;

@@ -53,6 +53,14 @@ const meta = {
 		onCanOpenChange: () => {},
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`HorizontalList` displays a scrolling row and can expand overflowing items into a wrapped layout. ' +
+					'It manages its own open state, or accepts `open` and `onOpenChange`.\n\n' +
+					'Use `onCanOpenChange` to observe whether content overflows and `disableInternalOpenToggle` to supply your own toggle.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof HorizontalList>;

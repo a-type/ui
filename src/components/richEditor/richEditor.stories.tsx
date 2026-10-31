@@ -9,6 +9,14 @@ const meta = {
 		readonly: { control: 'boolean' },
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'This export provides styles, not an editor component. Apply `tipTapClassName` to the wrapper around a TipTap/ProseMirror editor, ' +
+					'and add `tipTapReadonlyClassName` for its read-only appearance.\n\n' +
+					'Configure the editor and its editable state separately.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<{ readonly: boolean }>;

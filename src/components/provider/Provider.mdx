@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Provider" />
+
+# Provider
+
+Import the library stylesheet and wrap your application in `Provider`.
+
+```tsx
+import '@a-type/ui/main.css';
+import { Provider } from '@a-type/ui';
+
+<Provider>
+	<App />
+</Provider>;
+```
+
+The provider supplies the icon spritesheet, toast and tooltip providers,
+particle layer, and PWA install dialog. It also manages viewport and virtual
+keyboard behavior.
+
+- The install dialog loads `/manifest.json` by default. Pass `manifestPath` to
+  change the path, or `manifestPath={false}` to disable the dialog.
+- `disableParticles` omits the particle layer. Otherwise, its children render
+  after the client mounts.
+- `virtualKeyboardBehavior` accepts `displace` (the default) or `overlay` on
+  supported browsers. `disableViewportOffset` and `disableTitleBarColor` opt
+  out of those global updates.

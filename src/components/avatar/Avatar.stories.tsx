@@ -6,6 +6,13 @@ const meta = {
 	component: Avatar,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Pass `name` and optionally `imageSrc` to `Avatar`. It falls back to the first initial, or a profile icon when both are absent.\n\n' +
+					'For overlapping avatars, use `AvatarList` with a `count` and an `index` on each `AvatarList.Item`.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Avatar>;

@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/InfiniteLoadTrigger" />
+
+# InfiniteLoadTrigger
+
+Place `InfiniteLoadTrigger` after a list to request more content when the
+trigger becomes visible.
+
+```tsx
+import { InfiniteLoadTrigger } from '@a-type/ui';
+
+function LoadMoreTrigger({
+	hasNextPage,
+	isLoading,
+	loadNextPage,
+}: {
+	hasNextPage: boolean;
+	isLoading: boolean;
+	loadNextPage: () => void;
+}) {
+	if (!hasNextPage || isLoading) return null;
+	return <InfiniteLoadTrigger onVisible={loadNextPage} />;
+}
+```
+
+It uses an `IntersectionObserver` and may call `onVisible` again when the
+trigger re-enters the viewport or remounts. The caller must handle loading,
+pagination, and duplicate requests.

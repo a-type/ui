@@ -1,0 +1,17 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Img" />
+
+# Img
+
+`Img` is an image element with convenient sizing and object-fit props.
+
+```tsx
+import { Img } from '@a-type/ui';
+
+<Img src="/photo.jpg" alt="A mountain landscape" full="width" fit="cover" />;
+```
+
+`full` can fill the width, height, or both. Use `fit` and `position` to control
+how the image is cropped within its dimensions, and provide appropriate alt
+text.

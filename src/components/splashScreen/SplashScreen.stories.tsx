@@ -6,6 +6,13 @@ const meta = {
 	component: SplashScreen,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `SplashScreen` as a startup surface that fills its container, and place an image or logo inside `SplashScreen.Icon`. ' +
+					'Both parts accept `render` when a different underlying element is needed.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof SplashScreen>;

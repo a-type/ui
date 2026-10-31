@@ -11,6 +11,13 @@ const meta = {
 		emphasis: 'default',
 	},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Use `Chip` for a compact label or piece of metadata. Choose `emphasis` to change its appearance.\n\n' +
+					'For an interactive chip, use `render` with a semantic button or link so it is keyboard accessible.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof Chip>;

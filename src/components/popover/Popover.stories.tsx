@@ -7,6 +7,14 @@ const meta: Meta = {
 	component: Popover,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'Compose `Popover` with `Popover.Trigger` and `Popover.Content`; add `Title`, `Description`, and `Close` as appropriate. ' +
+					'The trigger can render a custom button through `render`.\n\n' +
+					'Content is portaled and accepts positioning props such as `side` and `align`. Add `Popover.Arrow` explicitly if desired.',
+			},
+		},
 		controls: { expanded: true },
 	},
 };

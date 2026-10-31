@@ -10,6 +10,14 @@ const meta = {
 	component: DatePicker,
 	argTypes: {},
 	parameters: {
+		docs: {
+			description: {
+				component:
+					'`DatePicker` is controlled with a `Date | null` value and `onChange`. ' +
+					'`DateRangePicker` uses the same pattern with `{ start, end }`, where each date may be null.\n\n' +
+					'Both start by displaying the current month. Use their `Root` and calendar parts to customize the layout.',
+			},
+		},
 		controls: { expanded: true },
 	},
 } satisfies Meta<typeof DatePicker>;
