@@ -50,6 +50,7 @@ export type DefaultColorRangeName = keyof typeof defaultColors.ranges;
 export type ATypeConfig<
 	TColors extends DefaultColorRangeName = DefaultColorRangeName,
 > = Partial<PresetV1Config<TColors>> & {
+	/** @deprecated - use config.color.mainColor */
 	mainColor?: TColors;
 	defaultAccentColor?: TColors;
 	fallbackAccentColor?: TColors;
@@ -62,6 +63,8 @@ export function presetAtype<
 >(config?: ATypeConfig<TColors>) {
 	const defaultAccent = config?.defaultAccentColor || 'leek';
 	const fallbackAccent = config?.fallbackAccentColor || 'lemon';
+	const mainColor =
+		config?.mainColor ?? config?.color?.mainColor ?? defaultColors.mainColor;
 	const base = presetV1({
 		...config,
 		color: {
@@ -71,10 +74,7 @@ export function presetAtype<
 				...defaultColors.ranges,
 				...config?.color?.ranges,
 			},
-			mainColor:
-				config?.mainColor ||
-				config?.color?.mainColor ||
-				defaultColors.mainColor,
+			mainColor,
 		},
 		typography: {
 			defaultFontSize: '16px',
@@ -384,7 +384,7 @@ export function presetAtype<
 	});
 
 	preset.bundleMode('primary', {
-		tint: preset.$.mode.color[config?.mainColor ?? 'lemon'] as any,
+		tint: preset.$.mode.color[mainColor as 'lemon'] as any,
 	});
 	preset.bundleMode('accent', {
 		tint: preset.$.mode.accent,
