@@ -2481,6 +2481,19 @@
               "raw": "React.CSSProperties"
             },
             "description": ""
+          },
+          "ref": {
+            "required": false,
+            "tsType": {
+              "name": "ReactRef",
+              "raw": "React.Ref<HTMLDivElement>",
+              "elements": [
+                {
+                  "name": "HTMLDivElement"
+                }
+              ]
+            },
+            "description": ""
           }
         }
       },
@@ -2494,6 +2507,11 @@
           "id": "components-horizontallist--cant-open",
           "name": "Cant Open",
           "snippet": "const CantOpen = () => {\n    const [more, setMore] = useState(false);\n\n    return (\n        <div\n            style={{\n                width: '100%',\n                height: '100%',\n                display: 'flex',\n                flexDirection: 'column',\n                alignItems: 'stretch',\n                justifyContent: 'flex-end',\n                backgroundColor: 'var(--m-gray-paper)',\n            }}>\n            <HorizontalList\n                style={{\n                    maxHeight: 200,\n                    borderTop: '1px solid var(--m-gray)',\n                }}\n                openDirection=\"up\"\n                onCanOpenChange={() => {}}>\n                <Button size=\"small\" toggled={more} onClick={() => setMore(!more)}>More\n                                        </Button>\n                <Button size=\"small\">One</Button>\n                <Button size=\"small\">Two</Button>\n                {more && (\n                    <>\n                        <Button size=\"small\">Three</Button>\n                        <Button size=\"small\">Four</Button>\n                        <Button size=\"small\">Five</Button>\n                        <Button size=\"small\">Six</Button>\n                        <Button size=\"small\">Seven</Button>\n                        <Button size=\"small\">Eight</Button>\n                        <Button size=\"small\">Nine</Button>\n                        <Button size=\"small\">Ten</Button>\n                        <Button size=\"small\">Eleven</Button>\n                        <Button size=\"small\">Twelve</Button>\n                        <Button size=\"small\">Thirteen</Button>\n                        <Button size=\"small\">Fourteen</Button>\n                        <Button size=\"small\">Fifteen</Button>\n                    </>\n                )}\n                <Button\n                    color=\"primary\"\n                    style={{\n                        position: 'sticky',\n                        bottom: 8,\n                        right: 8,\n                        marginLeft: 'auto',\n                        flexShrink: 0,\n                        boxShadow: 'var(--m-shadow-sm)',\n                    }}>\n                    <Icon name=\"plus\" />\n                </Button>\n            </HorizontalList>\n        </div>\n    );\n};"
+        },
+        {
+          "id": "components-horizontallist--initial-open",
+          "name": "Initial Open",
+          "snippet": "const InitialOpen = () => {\n    const [open, setOpen] = useState(true);\n\n    return (\n        <div\n            style={{\n                width: '300px',\n                height: '100%',\n                display: 'flex',\n                flexDirection: 'column',\n                alignItems: 'stretch',\n                justifyContent: 'flex-end',\n                backgroundColor: 'var(--m-gray-paper)',\n                border: `1px solid var(--m-gray)`,\n            }}>\n            <HorizontalList\n                style={{\n                    maxHeight: 200,\n                    borderTop: '1px solid var(--m-gray)',\n                }}\n                openDirection=\"up\"\n                onCanOpenChange={() => {}}\n                open={open}\n                onOpenChange={setOpen}><>\n                    <Button size=\"small\">One</Button>\n                    <Button size=\"small\">Two</Button>\n                    <Button size=\"small\">Three</Button>\n                    <Button size=\"small\">Four but long</Button>\n                    <Button size=\"small\">Five</Button>\n                    <Button size=\"small\">Six</Button>\n                    <Button size=\"small\">Seven</Button>\n                    <Button size=\"small\">Eight</Button>\n                    <Button size=\"small\">Nine</Button>\n                    <Button size=\"small\">Ten</Button>\n                    <Button size=\"small\">Eleven</Button>\n                    <Button size=\"small\">Twelve</Button>\n                    <Button size=\"small\">Thirteen</Button>\n                    <Button size=\"small\">Fourteen and long</Button>\n                    <Button size=\"small\">Fifteen</Button>\n                    <Button size=\"small\">Sixteen</Button>\n                    <Button size=\"small\">Seventeen</Button>\n                    <Button size=\"small\">Eighteen</Button>\n                    <Button size=\"small\">Nineteen</Button>\n                    <Button size=\"small\">Twenty</Button>\n                    <Button size=\"small\">Twenty one</Button>\n                    <Button size=\"small\">Twenty two</Button>\n                    <Button size=\"small\">Twenty three</Button>\n                    <Button size=\"small\">Twenty four</Button>\n                    <Button\n                        emphasis=\"primary\"\n                        style={{\n                            position: 'sticky',\n                            bottom: 8,\n                            right: 8,\n                            marginLeft: 'auto',\n                            flexShrink: 0,\n                            boxShadow: 'var(--m-shadow-sm)',\n                        }}>\n                        <Icon name=\"plus\" />\n                    </Button>\n                </></HorizontalList>\n        </div>\n    );\n};"
         }
       ],
       "import": "import { Button, HorizontalList, Icon } from '@a-type/ui';\nimport { Button } from '../button/index.js';\nimport { Icon } from '../icon/index.js';"
@@ -5089,6 +5107,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 2213
+    "durationMs": 2591
   }
 }
