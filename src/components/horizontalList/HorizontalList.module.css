@@ -27,6 +27,10 @@
 	interpolate-size: allow-keywords;
 }
 
+.container {
+	display: flex;
+}
+
 .toggleButtonWrapper {
 	position: sticky;
 	box-sizing: border-box;
@@ -49,8 +53,9 @@
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
-	.container[data-can-open='false'] &,
-	.container[data-toggle-hidden] & {
+
+	.root[data-can-open='false'] &,
+	.root[data-toggle-hidden] & {
 		width: 0px;
 		border: none;
 	}

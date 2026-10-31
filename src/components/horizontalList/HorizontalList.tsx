@@ -100,7 +100,7 @@ export function HorizontalList({
 						],
 						{
 							easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-							duration: 200,
+							duration: 300,
 						},
 					)
 					.finished.then(() => {
@@ -127,7 +127,7 @@ export function HorizontalList({
 						],
 						{
 							easing: 'cubic-bezier(0.64, -0.25, 0.1, 1.4)',
-							duration: 200,
+							duration: 300,
 						},
 					)
 					.finished.then(() => {
@@ -184,15 +184,11 @@ export function HorizontalList({
 			data-state={open ? 'open' : 'closed'}
 			data-disable-animation="true"
 			data-hl-role="root"
+			data-can-open={internalCanOpen}
+			data-toggle-hidden={!internalCanOpen || disableInternalOpenToggle}
 			{...rest}
 		>
-			<ScrollArea.Viewport
-				ref={containerRef}
-				data-can-open={internalCanOpen}
-				data-toggle-hidden={!internalCanOpen || disableInternalOpenToggle}
-				data-open={open && internalCanOpen}
-				data-hl-role="container"
-			>
+			<ScrollArea.Viewport ref={containerRef} data-hl-role="container">
 				<div
 					className={clsx(cls.content, contentClassName)}
 					ref={contentRef}
