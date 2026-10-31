@@ -1,8 +1,15 @@
 import { useLocalStorage } from '../../hooks/useStorage.js';
 import { Box, type BoxProps } from '../box/Box.js';
+import { Button, ButtonProps } from '../button/Button.js';
+import { Icon } from '../icon/Icon.js';
 import { Heading, P } from '../typography/typography.js';
 
-export function GlobalErrorFallback({ children, ...rest }: BoxProps) {
+export interface GlobalErrorFallbackProps extends BoxProps {}
+
+export function GlobalErrorFallback({
+	children,
+	...rest
+}: GlobalErrorFallbackProps) {
 	const hadRecentError = useHadRecentError();
 
 	return (
@@ -20,9 +27,8 @@ export function GlobalErrorFallback({ children, ...rest }: BoxProps) {
 				<P>
 					Sorry about this. The app has crashed.{' '}
 					{hadRecentError
-						? `Looks like refreshing didn't work either... I recommend reporting a bug using the button below.`
-						: `You can try refreshing, but if
-					that doesn't work, use the button below to report the issue.`}
+						? `Looks like refreshing didn't work either...`
+						: `You can try refreshing.`}
 				</P>
 				{children}
 				<ReloadButton />
@@ -30,8 +36,6 @@ export function GlobalErrorFallback({ children, ...rest }: BoxProps) {
 		</Box>
 	);
 }
-
-import { Button, ButtonProps, Icon } from '@a-type/ui';
 
 export interface ReloadButtonProps extends ButtonProps {}
 
