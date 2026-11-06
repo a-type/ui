@@ -46,6 +46,10 @@
 				1
 			);
 		}
+		&:disabled,
+		&[data-disabled='true'] {
+			border-color: transparent;
+		}
 	}
 	&[data-emphasis='ghost'],
 	&[data-emphasis='default'] {
