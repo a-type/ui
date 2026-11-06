@@ -99,13 +99,17 @@ const AutocompleteContent = ({
 	positioner,
 	arrow,
 	children,
+	className,
 	...props
 }: AutocompletePopoupProps) => {
 	return (
 		<BaseAutocomplete.Portal>
 			<AutocompleteBackdrop />
 			<BaseAutocomplete.Positioner sideOffset={8} {...positioner}>
-				<AutocompletePopup className={menuCls.popup} {...props}>
+				<AutocompletePopup
+					className={clsx(menuCls.popup, className)}
+					{...props}
+				>
 					{arrow && <AutocompleteArrow />}
 					{children}
 				</AutocompletePopup>
