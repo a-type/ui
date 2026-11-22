@@ -12,7 +12,9 @@ export const iconNames = [
 	'scan',
 	'filter',
 	'add_note',
+	'addNote',
 	'drag_vertical',
+	'dragVertical',
 	'note',
 	'food',
 	'magic',
@@ -20,8 +22,10 @@ export const iconNames = [
 	'offline',
 	'profile',
 	'add_person',
+	'addPerson',
 	'gift',
 	'add_to_list',
+	'addToList',
 	'check',
 	'snowflake',
 	'clock',
@@ -29,6 +33,7 @@ export const iconNames = [
 	'x',
 	'refresh',
 	'new_window',
+	'newWindow',
 	'warning',
 	'upload',
 	'download',
@@ -128,6 +133,7 @@ export const iconNames = [
 	'hand',
 	'pin',
 	'pinFilled',
+	'highlight',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
