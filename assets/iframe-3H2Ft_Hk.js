@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-Co24lroh.js";e();
