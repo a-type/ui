@@ -1406,7 +1406,7 @@ export const IconSpritesheet = memo((props: any) => (
 					fill="currentColor"
 				/>
 			</symbol>
-			<symbol id="icon-highlight" viewBox="0 0 15 15">
+			<symbol id="icon-highlighter" viewBox="0 0 15 15">
 				<g clipPath="url(#clip0_1177_18)">
 					<path
 						d="M1 14H14M3 12H8L14 6L9 1L1 9L3 12Z"

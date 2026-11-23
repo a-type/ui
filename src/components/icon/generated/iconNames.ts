@@ -133,7 +133,7 @@ export const iconNames = [
 	'hand',
 	'pin',
 	'pinFilled',
-	'highlight',
+	'highlighter',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
