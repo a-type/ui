@@ -620,13 +620,13 @@
 <header>
   <div class="wrap">
     <h1>Manifest Debugger</h1>
-    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/54 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/54 info</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">10/54 without API description</a><span class="filter-pill ok" aria-disabled="true">141 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">7/141 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">9 docs ok</a></div>
+    <div class="summary"><a class="filter-pill all" data-k="all" href="#filter-all">All</a><a class="filter-pill err" data-k="errors" href="#filter-errors">1/54 API error</a><a class="filter-pill info" data-k="infos" href="#filter-infos">1/54 info</a><a class="filter-pill" data-k="no-api" href="#filter-no-api">10/54 without API description</a><span class="filter-pill ok" aria-disabled="true">142 stories ok</span><a class="filter-pill info" data-k="story-warnings" href="#filter-story-warnings">7/142 incomplete snippets</a><a class="filter-pill ok" data-k="docs" href="#filter-docs">9 docs ok</a></div>
   </div>
 </header>
 <main>
   <div class="wrap">
     <div class="note info" style="margin-bottom: 16px;">
-            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>2.1s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
+            <strong>Tip:</strong> You are using <code>react-docgen</code> (the default). Generation took <strong>2.8s</strong>. For higher quality prop types, consider switching to <code>react-docgen-typescript</code> in your <code>main.ts</code>:
             <pre><code>typescript: {
   reactDocgen: 'react-docgen-typescript',
 }</code></pre>
@@ -7367,7 +7367,7 @@ Fades are included by default; set `disableFades` to remove them. Use `Root`, `V
       <div class="badges">
         <label for="c-40-components-select-props" class="badge ok as-toggle">1 prop type</label>
         
-        <label for="c-40-components-select-stories" class="badge ok as-toggle">4 stories</label>
+        <label for="c-40-components-select-stories" class="badge ok as-toggle">5 stories</label>
         
         
       </div>
@@ -7530,6 +7530,60 @@ The trigger displays the selected value and a chevron by default. Use `itemToStr
             &lt;/Select&gt;
             &lt;Button size=&quot;small&quot;&gt;Button&lt;/Button&gt;
         &lt;/div&gt;
+    );
+};</code></pre>
+              
+            </div>
+            <div class="note ok">
+              <div class="row">
+                <span class="ex-name">With Groups</span>
+                <span class="badge ok">story ok</span>
+              </div>
+              
+              
+              <pre><code>const WithGroups = () =&gt; {
+    return (
+        &lt;Box full layout=&quot;center center&quot; style={{ minHeight: 200 }}&gt;
+            &lt;Select value=&quot;One&quot;&gt;
+                &lt;Select.Trigger /&gt;
+                &lt;Select.Content&gt;
+                    &lt;Select.Group&gt;
+                        &lt;Select.GroupLabel&gt;Group 1&lt;/Select.GroupLabel&gt;
+                        {[
+                            &#39;One&#39;,
+                            &#39;Two&#39;,
+                            &#39;Three&#39;,
+                            &#39;Four&#39;,
+                            &#39;Five&#39;,
+                            &#39;Six&#39;,
+                            &#39;Seven&#39;,
+                            &#39;Eight&#39;,
+                            &#39;Nine&#39;,
+                            &#39;Ten&#39;,
+                            &#39;Eleven&#39;,
+                            &#39;Twelve&#39;,
+                            &#39;Thirteen&#39;,
+                            &#39;Fourteen&#39;,
+                            &#39;Fifteen&#39;,
+                        ].map((item) =&gt; (
+                            &lt;Select.Item key={item} value={item}&gt;
+                                {item}
+                            &lt;/Select.Item&gt;
+                        ))}
+                    &lt;/Select.Group&gt;
+                    &lt;Select.Group&gt;
+                        &lt;Select.GroupLabel&gt;Group 2&lt;/Select.GroupLabel&gt;
+                        {[&#39;Sixteen&#39;, &#39;Seventeen&#39;, &#39;Eighteen&#39;, &#39;Nineteen&#39;, &#39;Twenty&#39;].map(
+                            (item) =&gt; (
+                                &lt;Select.Item key={item} value={item}&gt;
+                                    {item}
+                                &lt;/Select.Item&gt;
+                            ),
+                        )}
+                    &lt;/Select.Group&gt;
+                &lt;/Select.Content&gt;
+            &lt;/Select&gt;
+        &lt;/Box&gt;
     );
 };</code></pre>
               

@@ -4150,6 +4150,11 @@
           "id": "components-select--compare-select-and-button",
           "name": "Compare Select And Button",
           "snippet": "const CompareSelectAndButton = () => {\n    return (\n        <div style={{ display: 'flex', flexDirection: 'row' }}>\n            <Select value=\"One\">\n                <SelectTrigger />\n                <SelectContent>\n                    {['One', 'Two', 'Three'].map((item) => (\n                        <SelectItem key={item} value={item}>\n                            {item}\n                        </SelectItem>\n                    ))}\n                </SelectContent>\n            </Select>\n            <Button>Button</Button>\n            <Select value=\"One\">\n                <SelectTrigger size=\"small\" />\n                <SelectContent>\n                    {['One', 'Two', 'Three'].map((item) => (\n                        <SelectItem key={item} value={item}>\n                            {item}\n                        </SelectItem>\n                    ))}\n                </SelectContent>\n            </Select>\n            <Button size=\"small\">Button</Button>\n        </div>\n    );\n};"
+        },
+        {
+          "id": "components-select--with-groups",
+          "name": "With Groups",
+          "snippet": "const WithGroups = () => {\n    return (\n        <Box full layout=\"center center\" style={{ minHeight: 200 }}>\n            <Select value=\"One\">\n                <Select.Trigger />\n                <Select.Content>\n                    <Select.Group>\n                        <Select.GroupLabel>Group 1</Select.GroupLabel>\n                        {[\n                            'One',\n                            'Two',\n                            'Three',\n                            'Four',\n                            'Five',\n                            'Six',\n                            'Seven',\n                            'Eight',\n                            'Nine',\n                            'Ten',\n                            'Eleven',\n                            'Twelve',\n                            'Thirteen',\n                            'Fourteen',\n                            'Fifteen',\n                        ].map((item) => (\n                            <Select.Item key={item} value={item}>\n                                {item}\n                            </Select.Item>\n                        ))}\n                    </Select.Group>\n                    <Select.Group>\n                        <Select.GroupLabel>Group 2</Select.GroupLabel>\n                        {['Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'].map(\n                            (item) => (\n                                <Select.Item key={item} value={item}>\n                                    {item}\n                                </Select.Item>\n                            ),\n                        )}\n                    </Select.Group>\n                </Select.Content>\n            </Select>\n        </Box>\n    );\n};"
         }
       ],
       "import": "import { Box, Button, Select, SelectContent, SelectItem, SelectTrigger } from '@a-type/ui';"
@@ -5112,6 +5117,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 2070
+    "durationMs": 2819
   }
 }
