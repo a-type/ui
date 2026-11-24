@@ -119,3 +119,51 @@ export const CompareSelectAndButton: Story = {
 		);
 	},
 };
+
+export const WithGroups: Story = {
+	render(args) {
+		return (
+			<Box full layout="center center" style={{ minHeight: 200 }}>
+				<Select {...args}>
+					<Select.Trigger />
+					<Select.Content>
+						<Select.Group>
+							<Select.GroupLabel>Group 1</Select.GroupLabel>
+							{[
+								'One',
+								'Two',
+								'Three',
+								'Four',
+								'Five',
+								'Six',
+								'Seven',
+								'Eight',
+								'Nine',
+								'Ten',
+								'Eleven',
+								'Twelve',
+								'Thirteen',
+								'Fourteen',
+								'Fifteen',
+							].map((item) => (
+								<Select.Item key={item} value={item}>
+									{item}
+								</Select.Item>
+							))}
+						</Select.Group>
+						<Select.Group>
+							<Select.GroupLabel>Group 2</Select.GroupLabel>
+							{['Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'].map(
+								(item) => (
+									<Select.Item key={item} value={item}>
+										{item}
+									</Select.Item>
+								),
+							)}
+						</Select.Group>
+					</Select.Content>
+				</Select>
+			</Box>
+		);
+	},
+};

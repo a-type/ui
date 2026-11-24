@@ -45,7 +45,7 @@ export const SelectItemIndicator = (props: SelectItemIndicatorProps) => (
 	</SelectItemIndicatorRoot>
 );
 export const SelectItemText = withClassName(BaseSelect.ItemText, '');
-export const SelectGroup = BaseSelect.Group;
+export const SelectGroup = withClassName(BaseSelect.Group, cls.group);
 
 export const SelectRoot = BaseSelect.Root;
 export const selectTriggerClassName = classNames(buttonCls.root, cls.trigger);

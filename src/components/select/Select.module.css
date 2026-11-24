@@ -13,6 +13,13 @@
 	flex-direction: row;
 }
 
+.group {
+	& + & {
+		border-block-start: var(--m-lw) solid var(--m-gray);
+		padding-block-start: var(--m-sp-sm);
+	}
+}
+
 .groupLabel {
 	padding-inline: var(--m-sp-lg);
 }
