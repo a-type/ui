@@ -52,6 +52,7 @@ jobs:
             -exec rm -rf {} +
 
           cp -R ../storybook-static/. .
+          cp ../CNAME ./CNAME
           touch .nojekyll
 
           git config user.name "github-actions[bot]"
