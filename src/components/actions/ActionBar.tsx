@@ -1,9 +1,9 @@
 import classNames from 'clsx';
-import { CSSProperties, ReactNode, Suspense } from 'react';
+import { CSSProperties, HTMLAttributes, ReactNode, Suspense } from 'react';
 import { ScrollArea } from '../scrollArea/ScrollArea.js';
 import cls from './ActionBar.module.css';
 
-export interface ActionBarProps {
+export interface ActionBarProps extends HTMLAttributes<HTMLDivElement> {
 	children: ReactNode;
 	className?: string;
 	wrap?: boolean;
@@ -20,7 +20,7 @@ export function ActionBar({
 }: ActionBarProps) {
 	return (
 		<Suspense fallback={null}>
-			<div className={classNames(cls.root, className)} {...rest}>
+			<div className={classNames(cls.root, className)} role="group" {...rest}>
 				<ScrollArea disableFades={disableShadow} className={cls.scrollArea}>
 					<ScrollArea.Content
 						className={classNames(cls.scrollAreaContent)}
