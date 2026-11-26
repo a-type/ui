@@ -50,7 +50,10 @@
             },
             "description": ""
           }
-        }
+        },
+        "composes": [
+          "HTMLAttributes"
+        ]
       },
       "stories": [
         {
@@ -5117,6 +5120,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 1996
+    "durationMs": 2765
   }
 }
